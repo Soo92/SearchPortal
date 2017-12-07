@@ -1,0 +1,76 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+*{margin:0; padding:0;}
+body { font-family: 'Nanum Gothic', son-serif; background:#efefef;}
+	a{text-decoration:none;}
+#wrap{width:100%; margin:0 auto; }
+#wrap2{width:1100px; height:auto; margin:0 auto;}
+
+/*header*/
+#header{width:100%; height:55px; background:#ff4800;}
+#logo{width:150px; height:45px; background:#000; float:left; margin-top:5px;}
+#subject{float:left; margin:15px 0px 0px 10px;}
+#subject p{color:#fff; font-size:16px;}
+#subject span{font-weight:bold;letter-spacing:-1px; font-size:20px;}
+#login{float:right; margin-top:12px;}
+#login p{color:#fff; font-size:14px; text-align:center;}
+
+/*nav*/
+#nav{margin:0 auto;width:100%; height:30px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;padding-top:8px;
+				text-align:left; background:#fff;}
+#nav ul{list-style:none; text-align:left; float:left;}
+#nav a{text-decoration:none; color:gray;}
+#nav a:hover{color:#ff4800;}
+.ulul{margin-left:20px;}
+
+#aaa{color:lightgray;}
+
+#nav ul li{display:inline; text-transform:capitalize; font-size:13px;}
+#navLeft{float:left;}
+#navRight{float:right;}
+
+/*section*/
+
+#section{width:1045px; height:340px; background:gray; margin:0 auto; margin-bottom:10px; margin-top:50px;
+				clear:both;}
+
+#join{width:1045; height:auto; margin:0 auto;}
+#join p{font-size:18px; color:#ff4800; font-weight:bold;line-height:250px;}
+#join_1{width:250px; height:250px; background:#fff; float:left; text-align:center; border:1px #ff4800 solid;}
+#join_2{width:250px; height:250px; background:#fff; float:left; margin-left:10px;text-align:center; border:1px #ff4800 solid;}
+#join_3{width:250px; height:250px; background:#fff; float:left; margin-left:10px;text-align:center; border:1px #ff4800 solid;}
+#join_4{width:250px; height:250px; background:#fff; float:left; margin-left:10px;text-align:center; border:1px #ff4800 solid;}
+#join a div:hover {background-color:#ff4800; border-radius:30px; 
+							transition-property: width, border-radius, background-color; transition-duration:0.7s;
+							
+							}
+#join a div p:hover {color:#fff;}
+
+.blank{width:7px; height:7px; clear:both;}
+
+
+
+#foot{width:100%; height:auto; background:#fff;}
+#footer_{margin:0 auto;width:100%; height:50px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;
+				text-align:center;  background:#fff;}
+				
+#footerWrap{width:1100px; height:auto; background:yellow; margin:0 auto; margin-top:18px;
+					font-size:14px; font-weight:bold; background:#fff;
+}
+.a_{float:left; margin-left:10px;}
+.a__{float:right; margin-right:10px;}
+
+#footer{width:1100px; height:160px; margin:0 auto; margin-top:20px;position:relative; background:#fff;}
+
+#footer ul{list-style:none; text-align:left; margin-left:110px; margin-top:-20px;}
+
+#footer ul li{display:inline; text-transform:capitalize; font-size:12px;
+				 cursor:pointer; padding-left:10px; color:gray;
+				}
+				
+.Extra{font:bold 12px/20px Nanum; margin-top:10px; margin-left:10px;}
+.except{padding-left:0;}
+.aaa{color:lightgray;}
+#ul_except{width:100%; height: 10px; position:absolute; top:135px; left:-100px; }
+#ul-except ul{margin:0px;}

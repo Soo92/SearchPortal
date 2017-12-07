@@ -1,0 +1,115 @@
+#first {
+	width: 100%;
+	height: 190px;
+	margin-top: 50px;
+}
+
+#second {
+	width: 100%;
+	height: 190px;
+	margin-top: -15px;
+	
+}
+
+
+		#bb{margin-left:-1px;}
+		 #aa input[type="radio"]:not(old){
+			width:0px;
+			opacity :0;
+		}
+		
+		 #aa input[type="radio"]:not(old) + label{
+			display:inline-block;
+			background:url('../img/Male_off.png') no-repeat;
+			width:235px;
+			height:36px;
+			margin-top:-10px;
+		}
+		
+		 #aa input[type="radio"]:not(old):checked+label{
+			display:inline-block;
+			background:url('../img/Male_on.png') no-repeat;
+			width:235px;
+			height:36px;
+			
+		}
+		
+		#bb{margin-left:10px;}
+		
+		 #bb input[type="radio"]:not(old){
+			width:0px;
+			opacity :0;
+		}
+		
+		 #bb input[type="radio"]:not(old) + label{
+			display:inline-block;
+			background:url('../img/Female_off.png') no-repeat;
+			width:236px;
+			height:36px;
+			margin-top:-10px;
+		}
+		
+		 #bb input[type="radio"]:not(old):checked+label{
+			display:inline-block;
+			background:url('../img/Female_on.png') no-repeat;
+			width:236px;
+			height:36px;
+			
+		}
+
+#second_ {
+	width: 100%;
+	height: 300px;
+	margin-top: -15px;
+}
+
+select {
+	font-size: 16px;
+	width: 120px;
+	height: 30px;
+	border: 0px;
+}
+
+#third {
+	width: 100%;
+	height: 130px;
+	margin-top: 40px;
+}
+
+#click {
+	width: 100px;
+	height: 40px;
+	border: 1px lightgray solid;
+	float: right;
+	margin-right: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#click p {
+	font-size: 14px;
+	margin-top: 11px;
+}
+
+#join {
+	width: 100%;
+	height: 60px;
+	border: 1px #ff4800 solid;
+	background: #ff6d33;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 50px;
+}
+
+#join p {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 17px;
+}
+
+#fourth {
+	width: 100%;
+	height: auto;
+	margin-top: 10px;
+}
