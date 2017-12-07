@@ -1,18 +1,22 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
 <%
 		request.setCharacterEncoding("euc-kr");
+		String id = (String)session.getAttribute("idKey");	
+		String name = mgr.getMember(id).getName();
+		String email = mgr.getMember(id).getEmail();
 %>
 <!doctype>
 <!-- saved from url=(0047)http://localhost/Barcode1/movie/movie_home.html -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="imagetoolbar" content="no">
-<meta property="og:title" content="�ㅼ�대�">
-<meta property="og:description" content="������ ���� 紐⑤�� 寃�">
+<meta property="og:title" content="네이버">
+<meta property="og:description" content="영화에 대한 모든 것">
 <meta property="og:image" content="http://static.naver.net/m/movie/icons/OG_270_270.png">
 <meta property="og:type" content="article">
 <meta property="og:url" content="http://movie.naver.com"> 
-<title>諛�肄��� ����</title>
+<title>바코드 영화</title>
 <link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="./moviehomefiles/movie.all.css">
 <script type="text/javascript" src="../js/movie.home.js"></script>
@@ -25,8 +29,8 @@ a.gnb_my, .gnb_icon, #gnb .gnb_my_interface, #gnb .gnb_ico_num .gnb_ico_new, #gn
 .gnb_login_li, .gnb_my_li, .gnb_notice_li, .mail_li, .gnb_service_li{float:left;margin-right:2px;overflow:visible}
 .gnb_login_li a, .gnb_my_li a, .gnb_notice_li a, .mail_li a, .gnb_service_li a{position:relative;z-index:100}
 a.gnb_my, .gnb_icon{position:relative}
-#gnb{position:relative;z-index:2147483646;font-family:'����怨���',NanumGothic,'����',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important;color:#444;font-size:12px;letter-spacing:0 !important;line-height:normal !important;text-align:left !important}
-#gnb div, #gnb p, #gnb span, #gnb em, #gnb strong, #gnb h1, #gnb h2, #gnb h3, #gnb h4, #gnb h5, #gnb h6, #gnb ul, #gnb ol, #gnb li, #gnb dl, #gnb dt, #gnb dd, #gnb table, #gnb th, #gnb td, #gnb form, #gnb fieldset, #gnb legend, #gnb input, #gnb textarea, #gnb button, #gnb label{font-family:'����怨���',NanumGothic,'����',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important}
+#gnb{position:relative;z-index:2147483646;font-family:'나눔고딕',NanumGothic,'돋움',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important;color:#444;font-size:12px;letter-spacing:0 !important;line-height:normal !important;text-align:left !important}
+#gnb div, #gnb p, #gnb span, #gnb em, #gnb strong, #gnb h1, #gnb h2, #gnb h3, #gnb h4, #gnb h5, #gnb h6, #gnb ul, #gnb ol, #gnb li, #gnb dl, #gnb dt, #gnb dd, #gnb table, #gnb th, #gnb td, #gnb form, #gnb fieldset, #gnb legend, #gnb input, #gnb textarea, #gnb button, #gnb label{font-family:'나눔고딕',NanumGothic,'돋움',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important}
 #gnb a, #gnb label, #gnb button{cursor:pointer}
 #gnb a, #gnb a:visited, #gnb a:active, #gnb a:focus{color:#444}
 #gnb a:hover{color:#444;text-decoration:underline}
@@ -69,7 +73,7 @@ a.gnb_my:hover, a.gnb_my:active, a.gnb_my:visited, a.gnb_my:focus{text-decoratio
 a.gnb_my:hover .gnb_name{text-decoration:underline}
 a.gnb_my .ico_arrow{top:25px;margin-left:8px}
 .gnb_my_namebox a.gnb_emp{float:left;display:inline-block;height:28px;margin-left:3px;line-height:28px;font-size:11px;color:#777 !important}
-.gnb_my_lyr{display:none;position:absolute;top:26px;right:-8px;padding:9px 5px 4px 4px;width:316px;height:172px;background-position:-2px -1310px;z-index:10}
+.gnb_my_lyr{display:none;position:absolute;top:26px;right:-8px;padding:9px 5px 4px 4px;width:316px;height:100px;background-position:-2px -1310px;z-index:10}
 .gnb_my_lyr.gnb_groupid{height:144px;background-position:-2px -1500px}
 .gnb_my_lyr.gnb_groupid .gnb_my_content{height:80px}
 .gnb_my_lyr.gnb_groupid.gnb_longid1{height:144px;background-position:-2px -1664px}
@@ -124,7 +128,7 @@ a.gnb_my .ico_arrow{top:25px;margin-left:8px}
 .gnb_notice_li .svc_head{position:relative;height:36px;padding-left:15px;line-height:20px;border-bottom:1px solid #eaeaea;zoom:1}
 .gnb_notice_li .svc_head .gnb_tit{color:#6b6d70;margin-right:1px;line-height:36px}
 .gnb_notice_li .svc_head .task_right{position:absolute;right:8px;top:8px;font-size:0}
-.gnb_notice_li .svc_head .task_right button{height:20px;padding:0 6px;margin-left:4px;border:1px solid #ddd;color:#888;background-color:#fff;font-family:'����怨���', NanumGothic;font-size:12px;letter-spacing:-1px;line-height:18px;*line-height:16px;overflow:visible}
+.gnb_notice_li .svc_head .task_right button{height:20px;padding:0 6px;margin-left:4px;border:1px solid #ddd;color:#888;background-color:#fff;font-family:'나눔고딕', NanumGothic;font-size:12px;letter-spacing:-1px;line-height:18px;*line-height:16px;overflow:visible}
 .gnb_notice_li .svc_list .gnb_btn_remove i, .gnb_notice_li .svc_list .gnb_btn_remove span, .gnb_notice_li .svc_noti .gnb_ico_mail, .gnb_notice_li .svc_blank .svc_msg_box, .gnb_notice_li .svc_blank .gnb_v_guide{display:inline-block;*display:inline;*zoom:1}
 .gnb_notice_li .svc_list{margin-top:-1px}
 .gnb_notice_li .svc_list li{position:relative;padding:7px 34px 7px 15px;border-top:1px solid #eaeaea;line-height:18px}
@@ -200,7 +204,7 @@ a.gnb_my .ico_arrow{top:25px;margin-left:8px}
 .gnb_search_box.over{background-position:10px -230px}
 .gnb_search_box.fcs{background-position:10px -270px}
 .gnb_search_box.fcs input{width:200px;font-size:16px;font-weight:bold;color:#444;outline:0}
-.gnb_search_box input{float:left;display:block;width:210px;height:22px;margin-top:6px;padding-left:10px;font-family:'����怨���',NamumGothic;letter-spacing:-1px;color:#adadad;font-size:13px;border:0;line-height:22px;background:transparent}
+.gnb_search_box input{float:left;display:block;width:210px;height:22px;margin-top:6px;padding-left:10px;font-family:'나눔고딕',NamumGothic;letter-spacing:-1px;color:#adadad;font-size:13px;border:0;line-height:22px;background:transparent}
 .gnb_search_box .gnb_del_txt{position:absolute;top:8px;right:32px;display:block;width:17px;height:17px;background-position:-190px 0px}
 .gnb_search_box .gnb_del_txt:hover{background-position:-190px -20px}
 .gnb_search_box .gnb_pop_input{position:absolute;top:34px;left:10px;width:268px;height:170px;*height:172px;border:1px solid #cbc5c5;border-top:0;background:#fff;overflow-x:hidden;overflow-y:scroll;z-index:110}
@@ -341,6 +345,16 @@ a.gnb_service_all:hover, a.gnb_service_all:visited, a.gnb_service_all:active, a.
 <div id="wrap" class="basic">
 	<!-- GNB -->
 <script type="text/javascript">
+function logout(){
+<%	session.removeAttribute("idKey"); %>
+	window.location.reload();
+}
+function mypage() {
+	if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
+		document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
+	else
+		document.getElementById("gnb_my_layer").className = "gnb_my_li";
+}
 function delayed_submit(object) {
 	if (navigator.userAgent.indexOf('MSIE') == -1) {
 		var b = c = new Date();
@@ -370,39 +384,42 @@ function delayed_submit(object) {
 </script>
  <!-- skip navigation -->
 <div id="u_skip">
-         <a href="http://movie.naver.com/#header" onclick="document.getElementById(header).tabIndex=-1;document.getElementById('header').focus();return false;"><span>硫��� 硫��대� 諛�濡�媛�湲�</span></a>
-         <a href="http://movie.naver.com/#content" id="gnb_goContent" onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;"><span>蹂몃Ц�쇰� 諛�濡�媛�湲�</span></a>
+         <a href="http://movie.naver.com/#header" onclick="document.getElementById(header).tabIndex=-1;document.getElementById('header').focus();return false;"><span>메인 메뉴로 바로가기</span></a>
+         <a href="http://movie.naver.com/#content" id="gnb_goContent" onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;"><span>본문으로 바로가기</span></a>
 </div>
 <!-- //skip navigation -->
 <div class="gnb_container">
 	<div class="gnb_content">
 		<div class="gnb_box">
 			<div class="gnb_wrap">
-<!-- 				<div id="gnb" class="gnb_dark_type2"><strong class="blind">�ъ�⑹�� 留���</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">濡�洹몄��</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="gnbUserLayer.clickToggle(); return false;"><img id="gnb_profile_img" src="./moviehomefiles/myInfo.gif" width="26" height="26" alt="�� ��濡��� �대�몄�" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1">�대�遺�遺�</span><em class="blind">�댁��蹂� 蹂닿린</em><span class="ico_arrow"></span></a><a href="http://movie.naver.com/#" class="gnb_emp" id="gnb_emp" style="display: none;">(��吏�������)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="./moviehomefiles/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">��濡��� �ъ� 蹂�寃�</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType">����</a>��</span><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.logout?returl=http://movie.naver.com/index.nhn" id="gnb_logout_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">濡�洹몄����</span></a></p><a href="http://mail.naver.com/" class="gnb_mail_address">dltjdtn321@naver.com</a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">�댁��蹂�</a></li><li class="gnb_secure" id="gnb_secure_lnk"><a href="https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&amp;menu=security">蹂댁���ㅼ��</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>N Pay</em><a href="http://pay.naver.com/" id="gnb_pay_point"><span>�� ���댄�ъ�명��</span></a></p></div></div><div class="gnb_my_community"><a href="http://blog.naver.com/MyBlog.nhn" class="gnb_blog">�� 釉�濡�洹�</a><a href="http://section.cafe.naver.com/" class="gnb_cafe">媛����� 移댄��</a><a href="http://pay.naver.com/" class="gnb_pay"><span>N Pay</span></a></div><a href="http://movie.naver.com/#" class="gnb_my_interface" style="display:none"><span class="blind">��寃쎌�ㅼ��</span></a></div><iframe id="gnb_my_lyr_iframe" title="鍮� ������" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:320px;height:174px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource.html"></iframe></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="gnbNaverMeLayer.clickToggle(); return false;"><span class="blind">��由�</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">��泥� ��由�</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">�쎌�� ��由� ����</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">紐⑤�� ����</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>��由쇱�� 紐⑤�� ��������寃��듬��源�?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">����</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">痍⑥��</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>���댁�� �リ린</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">�� ��由� ��泥대낫湲�</a></div></div><iframe id="gnb_notice_lyr_iframe" title="鍮� ������" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource(1).html"></iframe></li></ul>
+<%if(id == null || id.equals("")){%>
+				<div id="gnb" class="gnb_dark_type2"> <strong class="blind">사용자 링크</strong> <ul class="gnb_lst" id="gnb_lst" style="display: block;"> <li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li> <iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 320px; height: 174px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="./moviehomefiles/saved_resource.html"></iframe></li> <li class="gnb_notice_li" id="gnb_notice_layer" style="display: none"><a href="javascript:;" class="gnb_notice" onclick="gnbNaverMeLayer.clickToggle(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a> <div class="gnb_notice_lyr" id="gnb_notice_lyr"> <div class="svc_noti svc_panel"> <div class="svc_scroll"> <div class="svc_head"> <strong class="gnb_tit">전체 알림</strong> <div class="task_right"> <button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button> <button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button> </div> </div> <div class="svc_body" id="gnb_naverme_layer"></div> </div> <div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"> <p class="gnb_msg"> <strong>알림을 모두 삭제하시겠습니까?</strong> </p> <div class="gnb_btns"> <button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button> <button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button> </div> <button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"> <i>레이어 닫기</i> </button> </div> <a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a> </div> </div> <iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="./moviehomefiles/saved_resource(1).html"></iframe></li> <li class="mail_li" id="gnb_mail_layer" style="display: none"><a href="http://mail.naver.com/" class="gnb_mail"><span class="blind">메일</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li> </ul>
 				</div>
- -->				<div id="gnb" class="gnb_dark_type2"><strong class="blind">�ъ�⑹�� 留���</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">濡�洹몄��</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display:none"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="gnbUserLayer.clickToggle(); return false;"><img id="gnb_profile_img" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" width="26" height="26" alt="�� ��濡��� �대�몄�"><span id="gnb_profile_filter_mask" class="filter_mask"></span> <span class="gnb_name" id="gnb_name1"></span><em class="blind">�댁��蹂� 蹂닿린</em><span class="ico_arrow"></span></a><a href="http://movie.naver.com/#" class="gnb_emp" id="gnb_emp">(��吏�������)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">��濡��� �ъ� 蹂�寃�</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType">_</a>��</span><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.logout?returl=http://movie.naver.com/index.nhn" id="gnb_logout_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">濡�洹몄����</span></a></p><a href="http://mail.naver.com/" class="gnb_mail_address">@naver.com</a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">�댁��蹂�</a></li><li class="gnb_secure" id="gnb_secure_lnk"><a href="https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&amp;menu=security">蹂댁���ㅼ��</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>N Pay</em><a href="http://pay.naver.com/" id="gnb_pay_point"><span>�� ���댄�ъ�명��</span></a></p></div></div><div class="gnb_my_community"><a href="http://blog.naver.com/MyBlog.nhn" class="gnb_blog">�� 釉�濡�洹�</a><a href="http://section.cafe.naver.com/" class="gnb_cafe">媛����� 移댄��</a><a href="http://pay.naver.com/" class="gnb_pay"><span>N Pay</span></a></div><a href="http://movie.naver.com/#" class="gnb_my_interface" style="display:none"><span class="blind">��寃쎌�ㅼ��</span></a></div><iframe id="gnb_my_lyr_iframe" title="鍮� ������" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:320px;height:174px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource.html"></iframe></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display:none"><a href="javascript:;" class="gnb_notice" onclick="gnbNaverMeLayer.clickToggle(); return false;"><span class="blind">��由�</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">��泥� ��由�</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">�쎌�� ��由� ����</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">紐⑤�� ����</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>��由쇱�� 紐⑤�� ��������寃��듬��源�?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">����</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">痍⑥��</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>���댁�� �リ린</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">�� ��由� ��泥대낫湲�</a></div></div><iframe id="gnb_notice_lyr_iframe" title="鍮� ������" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource(1).html"></iframe></li><li class="mail_li" id="gnb_mail_layer" style="display:none"><a href="http://mail.naver.com/" class="gnb_mail"><span class="blind">硫���</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li></ul>
+<%}else{%>
+ 				<div id="gnb" class="gnb_dark_type2"><strong class="blind">사용자 링크</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="mypage(); return false;"><img id="gnb_profile_img" src="./moviehomefiles/myInfo.gif" width="26" height="26" alt="내 프로필 이미지" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1"><%= name %></span><em class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a href="http://movie.naver.com/#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="./moviehomefiles/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">프로필 사진 변경</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"><%=name%> %></a>님</span><a class="gnb_btn_login" onclick="logout()" id="gnb_logout_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그아웃</span></a></p><a href="http://mail.naver.com/" class="gnb_mail_address"><%=email%></a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">내정보</a></li></ul></div></div><a href="http://movie.naver.com/#" class="gnb_my_interface" style="display:none"><span class="blind">환경설정</span></a></div><iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:320px;height:174px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource.html"></iframe></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="gnbNaverMeLayer.clickToggle(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">전체 알림</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>알림을 모두 삭제하시겠습니까?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>레이어 닫기</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a></div></div><iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)" src="./moviehomefiles/saved_resource(1).html"></iframe></li></ul>
 				</div>
+<%}%>
 			</div>
-			<!-- 寃���李� -->
+			<!-- 검색창 -->
 			<form id="jSearchForm" action="http://movie.naver.com/movie/search/result.nhn" method="get" style="margin:0;display:none;">
-				<input type="text" name="query" maxlength="100" title="����寃���">
+				<input type="text" name="query" maxlength="100" title="영화검색">
 				<input type="hidden" name="section" value="all">
 				<input type="hidden" name="ie" value="utf8">
 			</form>
 			<fieldset id="jSearchArea" class="srch_area">
-				<legend><span class="blind">����寃��� ����</span></legend>
+				<legend><span class="blind">영화검색 영역</span></legend>
 				<div class="srch_field_on _view">
 					<span class="ipt_srch">
-						<label for="ipt_tx_srch" id="search_placeholder">����寃���</label>
+						<label for="ipt_tx_srch" id="search_placeholder">영화검색</label>
 						<input type="text" id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100" accesskey="s" style="ime-mode:active;" autocomplete="off">
 						<span class="align"></span>
-						<span class="auto_tx"><a href="http://movie.naver.com/#" title="�������� �쇱�湲�"><img src="./moviehomefiles/srch_arrow_down.gif" width="7" height="4" title="�������� �쇱�湲�" alt="�������� �쇱�湲�"></a></span>
+						<span class="auto_tx"><a href="http://movie.naver.com/#" title="자동완성 펼치기"><img src="./moviehomefiles/srch_arrow_down.gif" width="7" height="4" title="자동완성 펼치기" alt="자동완성 펼치기"></a></span>
 					</span>
-					<button type="submit" title="寃���" class="btn_srch" onclick="clickcr(this,'GNB.search','','',event); delayed_submit(this);"><span class="blind">寃���</span></button>
-					 <!-- ���� ���� ������ #autocomplate_template-->
+					<button type="submit" title="검색" class="btn_srch" onclick="clickcr(this,'GNB.search','','',event); delayed_submit(this);"><span class="blind">검색</span></button>
+					 <!-- 자동 완성 영역임 #autocomplate_template-->
 				</div>
 			</fieldset>
-			<!-- //寃���李� -->
+			<!-- //검색창 -->
 		</div>
 	</div>
 </div>
@@ -412,10 +429,10 @@ function delayed_submit(object) {
 	<!-- header -->
 
 	<div id="header" style="bottom: 0px;">
-		<a href="http://movie.naver.com/#content" title="蹂몃Ц�쇰� �대��" class="blind">蹂몃Ц 諛�濡�媛�湲�</a>
+		<a href="http://movie.naver.com/#content" title="본문으로 이동" class="blind">본문 바로가기</a>
 		<h1 class="svc_name">
-			<a href="../index.jsp" title="naver濡� 諛�濡�媛�湲�" class="ci_logo" id="lnb_gonaver"><img src="./moviehomefiles/logo_ci.png" width="62" height="13" alt="NAVER"></a><!-- N=a:LNB.naver -->
-			<a href="http://movie.naver.com/" title="������鍮��ㅽ���쇰� 諛�濡�媛�湲�" class="svc_logo"><img src="./moviehomefiles/logo_svc.png" width="34" height="19" alt="����"></a><!-- N=a:LNB.movie -->
+			<a href="../index.jsp" title="naver로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="./moviehomefiles/logo_ci.png" width="62" height="13" alt="NAVER"></a><!-- N=a:LNB.naver -->
+			<a href="http://movie.naver.com/" title="영화서비스홈으로 바로가기" class="svc_logo"><img src="./moviehomefiles/logo_svc.png" width="34" height="19" alt="영화"></a><!-- N=a:LNB.movie -->
 		</h1>
 		<div id="scrollbar" class="scrollbar" style="width: 148px; height: 853px;">
 			<div class="scrollbar-box" style="width: 148px; height: 853px;">
@@ -423,22 +440,22 @@ function delayed_submit(object) {
                     <div class="in_scroll">
                         <ul class="navi">
                         <li>
-                            <a href="http://movie.naver.com/" title="������" class="menu01_on"><strong>������</strong></a><!-- N=a:LNB.home -->
+                            <a href="http://movie.naver.com/" title="영화홈" class="menu01_on"><strong>영화홈</strong></a><!-- N=a:LNB.home -->
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/running/current.nhn" title="������쨌������" class="menu02"><strong>������쨌������</strong></a><!-- N=a:LNB.movies -->
+                            <a href="http://movie.naver.com/movie/running/current.nhn" title="상영작·예정작" class="menu02"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
                             <ul class="navi_sub" id="navi_movie" style="display:none">
-                            <li><a href="http://movie.naver.com/movie/running/current.nhn" title="���� ��������" class="sub2_1"><em>���� ��������</em></a><!-- N=a:LNB.now --></li>
-                            <li><a href="http://movie.naver.com/movie/running/premovie.nhn" title="媛�遊� ��������" class="sub2_2"><em>媛�遊� ��������</em></a><!-- N=a:LNB.soon --></li>
-                            <li><a href="http://movie.naver.com/movie/running/weekendmovie.nhn" title="TV/DVD ����" class="sub2_3"><em>TV/DVD ����</em></a><!-- N=a:LNB.guide --></li>
-                            <li><a href="http://movie.naver.com/movie/running/movieclip.nhn" title="��怨���" class="sub2_4"><em>��怨���</em></a><!-- N=a:LNB.tailer --></li>
+                            <li><a href="http://movie.naver.com/movie/running/current.nhn" title="현재 상영영화" class="sub2_1"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
+                            <li><a href="http://movie.naver.com/movie/running/premovie.nhn" title="개봉 예정영화" class="sub2_2"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
+                            <li><a href="http://movie.naver.com/movie/running/weekendmovie.nhn" title="TV/DVD 영화" class="sub2_3"><em>TV/DVD 영화</em></a><!-- N=a:LNB.guide --></li>
+                            <li><a href="http://movie.naver.com/movie/running/movieclip.nhn" title="예고편" class="sub2_4"><em>예고편</em></a><!-- N=a:LNB.tailer --></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/sdb/rank/rmovie.nhn" title="��������" class="menu03"><strong>��������</strong></a><!-- N=a:LNB.db -->
+                            <a href="http://movie.naver.com/movie/sdb/rank/rmovie.nhn" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/bi/mi/reserve.nhn" title="��留�" class="menu05"><strong>��留�</strong></a><!-- N=a:LNB.ticket -->
+                            <a href="http://movie.naver.com/movie/bi/mi/reserve.nhn" title="예매" class="menu05"><strong>예매</strong></a><!-- N=a:LNB.ticket -->
                         </li>
                         
                         
@@ -459,11 +476,11 @@ function delayed_submit(object) {
 	</div>
 	
 	<script type="text/javascript">
-	if ("������" == "������쨌������"
-			|| "������" == "���� ��������"
-			|| "������" == "媛�遊� ��������"
-			|| "������" == "TV/DVD ����"
-			|| "������" == "��怨���") {
+	if ("영화홈" == "상영작·예정작"
+			|| "영화홈" == "현재 상영영화"
+			|| "영화홈" == "개봉 예정영화"
+			|| "영화홈" == "TV/DVD 영화"
+			|| "영화홈" == "예고편") {
 		jindo.$Element("navi_movie").show();
 	}
 	</script>
@@ -475,10 +492,10 @@ function delayed_submit(object) {
 <div id="content">
 	
 	<div class="article hh">
-		<!-- 臾대�李⑦�� -->
+		<!-- 무비차트 -->
 		<div class="mv_main" onmouseover="oTimer.abort();" onmouseout="movieChart.restartTimer();">
 			<div class="flick_nav">
-				<a href="http://movie.naver.com/#" id="flick_prev" class="btn_prev" onclick="clickcr(this, 'run.pre', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="�댁��"><em>�댁��</em></a><!-- N=a:run.pre -->
+				<a href="http://movie.naver.com/#" id="flick_prev" class="btn_prev" onclick="clickcr(this, 'run.pre', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="이전"><em>이전</em></a><!-- N=a:run.pre -->
 			</div>
 			<!-- flick area -->
 			<div id="mflick" class="flick_view_area flick-view">
@@ -486,14 +503,14 @@ function delayed_submit(object) {
 					<ul id="flick0" class="flick-ct home_list page0 flick-panel blind" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 0px); transition-property: -webkit-transform; left: 0%; z-index: 1;">
 	<li class="item1" data-id="152385" data-detail="152385" data-reserve="152385" onmouseover="jindo.$Element('reserveTooltip1').show();" onmouseout="jindo.$Element('reserveTooltip1').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" onfocus="jindo.$Element('reserveTooltip1').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip1').hide();movieChart.restartTimer();"><span class="rank"><em>1��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" onfocus="jindo.$Element('reserveTooltip1').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip1').hide();movieChart.restartTimer();"><span class="rank"><em>1위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image.jpg" alt="袁�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image.jpg" alt="꾼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num3"><em>3</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>6</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:1,i:152385 -->
@@ -502,7 +519,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">袁�</p>
+					<p class="mv_title">꾼</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -511,14 +528,14 @@ function delayed_submit(object) {
 
 	<li class="item2" data-id="160399" data-detail="160399" data-reserve="160399" onmouseover="jindo.$Element('reserveTooltip2').show();" onmouseout="jindo.$Element('reserveTooltip2').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=160399" onfocus="jindo.$Element('reserveTooltip2').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip2').hide();movieChart.restartTimer();"><span class="rank"><em>2��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=160399" onfocus="jindo.$Element('reserveTooltip2').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip2').hide();movieChart.restartTimer();"><span class="rank"><em>2위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(1).jpg" alt="湲곗�듭�� 諛�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(1).jpg" alt="기억의 밤" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_num3"><em>3</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:2,i:160399 -->
@@ -527,7 +544,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">湲곗�듭�� 諛�</p>
+					<p class="mv_title">기억의 밤</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -536,14 +553,14 @@ function delayed_submit(object) {
 
 	<li class="item3" data-id="154272" data-detail="154272" data-reserve="154272" onmouseover="jindo.$Element('reserveTooltip3').show();" onmouseout="jindo.$Element('reserveTooltip3').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=154272" onfocus="jindo.$Element('reserveTooltip3').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip3').hide();movieChart.restartTimer();"><span class="rank"><em>3��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=154272" onfocus="jindo.$Element('reserveTooltip3').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip3').hide();movieChart.restartTimer();"><span class="rank"><em>3위</em></span>
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(2).jpg" alt="�ㅻ━���� �밴� �댁��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(2).jpg" alt="오리엔트 특급 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num5"><em>5</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:3,i:154272 -->
@@ -552,7 +569,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�ㅻ━���� �밴� �댁��</p>
+					<p class="mv_title">오리엔트 특급 살인</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -561,14 +578,14 @@ function delayed_submit(object) {
 
 	<li class="item4" data-id="155411" data-detail="155411" data-reserve="155411" onmouseover="jindo.$Element('reserveTooltip4').show();" onmouseout="jindo.$Element('reserveTooltip4').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=155411" onfocus="jindo.$Element('reserveTooltip4').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip4').hide();movieChart.restartTimer();"><span class="rank"><em>4��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=155411" onfocus="jindo.$Element('reserveTooltip4').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip4').hide();movieChart.restartTimer();"><span class="rank"><em>4위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(3).jpg" alt="諛����� �〓����" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(3).jpg" alt="반드시 잡는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num8"><em>8</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num0"><em>0</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:4,i:155411 -->
@@ -577,7 +594,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">諛����� �〓����</p>
+					<p class="mv_title">반드시 잡는다</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -586,14 +603,14 @@ function delayed_submit(object) {
 
 	<li class="item5" data-id="39440" data-detail="39440" data-reserve="39440" onmouseover="jindo.$Element('reserveTooltip5').show();" onmouseout="jindo.$Element('reserveTooltip5').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=39440" onfocus="jindo.$Element('reserveTooltip5').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip5').hide();movieChart.restartTimer();"><span class="rank"><em>5��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=39440" onfocus="jindo.$Element('reserveTooltip5').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip5').hide();movieChart.restartTimer();"><span class="rank"><em>5위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(4).jpg" alt="�댄�� �⑤━" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(4).jpg" alt="이프 온리" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num3"><em>3</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:5,i:39440 -->
@@ -602,7 +619,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�댄�� �⑤━</p>
+					<p class="mv_title">이프 온리</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -611,14 +628,14 @@ function delayed_submit(object) {
 
 	<li class="item6" data-id="116866" data-detail="116866" data-reserve="116866" onmouseover="jindo.$Element('reserveTooltip6').show();" onmouseout="jindo.$Element('reserveTooltip6').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" onfocus="jindo.$Element('reserveTooltip6').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip6').hide();movieChart.restartTimer();"><span class="rank"><em>6��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" onfocus="jindo.$Element('reserveTooltip6').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip6').hide();movieChart.restartTimer();"><span class="rank"><em>6위</em></span>
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(5).jpg" alt="���ㅽ�곗�� 由ш렇" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(5).jpg" alt="저스티스 리그" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:6,i:116866 -->
@@ -627,7 +644,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">���ㅽ�곗�� 由ш렇</p>
+					<p class="mv_title">저스티스 리그</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -636,14 +653,14 @@ function delayed_submit(object) {
 
 	<li class="item7" data-id="144379" data-detail="144379" data-reserve="144379" onmouseover="jindo.$Element('reserveTooltip7').show();" onmouseout="jindo.$Element('reserveTooltip7').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=144379" onfocus="jindo.$Element('reserveTooltip7').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip7').hide();movieChart.restartTimer();"><span class="rank"><em>7��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=144379" onfocus="jindo.$Element('reserveTooltip7').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip7').hide();movieChart.restartTimer();"><span class="rank"><em>7위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(6).jpg" alt="�щ� 鍮��쇳��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(6).jpg" alt="러빙 빈센트" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num4"><em>4</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:7,i:144379 -->
@@ -652,7 +669,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�щ� 鍮��쇳��</p>
+					<p class="mv_title">러빙 빈센트</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -661,14 +678,14 @@ function delayed_submit(object) {
 
 	<li class="item8" data-id="134898" data-detail="134898" data-reserve="134898" onmouseover="jindo.$Element('reserveTooltip8').show();" onmouseout="jindo.$Element('reserveTooltip8').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" onfocus="jindo.$Element('reserveTooltip8').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip8').hide();movieChart.restartTimer();"><span class="rank"><em>8��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" onfocus="jindo.$Element('reserveTooltip8').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip8').hide();movieChart.restartTimer();"><span class="rank"><em>8위</em></span>
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(7).jpg" alt="��瑜�: �쇨렇��濡���" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(7).jpg" alt="토르: 라그나로크" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_num0"><em>0</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:8,i:134898 -->
@@ -677,7 +694,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">��瑜�: �쇨렇��濡���</p>
+					<p class="mv_title">토르: 라그나로크</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -686,14 +703,14 @@ function delayed_submit(object) {
 
 	<li class="item9" data-id="164932" data-detail="164932" data-reserve="164932" onmouseover="jindo.$Element('reserveTooltip9').show();" onmouseout="jindo.$Element('reserveTooltip9').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" onfocus="jindo.$Element('reserveTooltip9').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip9').hide();movieChart.restartTimer();"><span class="rank"><em>9��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" onfocus="jindo.$Element('reserveTooltip9').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip9').hide();movieChart.restartTimer();"><span class="rank"><em>9위</em></span>
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(8).jpg" alt="�댄�� �곗�ㅻ�곗��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(8).jpg" alt="해피 데스데이" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num0"><em>0</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:9,i:164932 -->
@@ -702,7 +719,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�댄�� �곗�ㅻ�곗��</p>
+					<p class="mv_title">해피 데스데이</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -711,14 +728,14 @@ function delayed_submit(object) {
 
 	<li class="item10" data-id="148995" data-detail="148995" data-reserve="148995" onmouseover="jindo.$Element('reserveTooltip10').show();" onmouseout="jindo.$Element('reserveTooltip10').hide();">
 		<div class="obj_off tab4">
-			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=148995" onfocus="jindo.$Element('reserveTooltip10').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip10').hide();movieChart.restartTimer();"><span class="rank"><em>10��</em></span>
+			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=148995" onfocus="jindo.$Element('reserveTooltip10').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip10').hide();movieChart.restartTimer();"><span class="rank"><em>10위</em></span>
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(9).jpg" alt="��留��ㅼ�� 移�援щ��: 洹몃���댄�� ���댁��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num0"><em>0</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num5"><em>5</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:10,i:148995 -->
@@ -727,7 +744,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">��留��ㅼ�� 移�援щ��: 洹몃���댄�� ���댁��</p>
+					<p class="mv_title">토마스와 친구들: 그레이트 레이스</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -739,12 +756,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=169523" onfocus="jindo.$Element('currentTooltip1').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip1').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(10).jpg" alt="�몃������痢� �곗��: �멸��� ��移④났" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(10).jpg" alt="인디펜던츠 데이: 외계의 대침공" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:0%"><em>0.00 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:0%"><em>0.00 점</em></span></span>
 					<strong class="l"><span class="char sc_num0"><em>0</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num0"><em>0</em></span><span class="char sc_num0"><em>0</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:1,i:169523 -->
@@ -753,7 +770,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�몃������痢� �곗��: �멸��� ��移④났</p>
+					<p class="mv_title">인디펜던츠 데이: 외계의 대침공</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -764,12 +781,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=148995" onfocus="jindo.$Element('currentTooltip2').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip2').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(9).jpg" alt="��留��ㅼ�� 移�援щ��: 洹몃���댄�� ���댁��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:88.4%"><em>8.84 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:88.4%"><em>8.84 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num8"><em>8</em></span><span class="char sc_num4"><em>4</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:2,i:148995 -->
@@ -778,7 +795,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">��留��ㅼ�� 移�援щ��: 洹몃���댄�� ���댁��</p>
+					<p class="mv_title">토마스와 친구들: 그레이트 레이스</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -789,12 +806,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=166807" onfocus="jindo.$Element('currentTooltip3').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip3').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(11).jpg" alt="鍮� 諛곕�� ����" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(11).jpg" alt="빅 배드 폭스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:88.5%"><em>8.85 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:88.5%"><em>8.85 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num8"><em>8</em></span><span class="char sc_num5"><em>5</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:3,i:166807 -->
@@ -803,7 +820,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">鍮� 諛곕�� ����</p>
+					<p class="mv_title">빅 배드 폭스</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -814,12 +831,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=159108" onfocus="jindo.$Element('currentTooltip4').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip4').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_18">泥����� 愿���遺�媛�</span>
+					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(12).jpg" alt="�곕━�� 媛��� 轅��� 袁쇰��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(12).jpg" alt="우리는 같은 꿈을 꾼다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:81.89999999999999%"><em>8.19 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:81.89999999999999%"><em>8.19 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num1"><em>1</em></span><span class="char sc_num9"><em>9</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:4,i:159108 -->
@@ -828,7 +845,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�곕━�� 媛��� 轅��� 袁쇰��</p>
+					<p class="mv_title">우리는 같은 꿈을 꾼다</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -839,12 +856,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=127466" onfocus="jindo.$Element('currentTooltip5').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip5').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(13).jpg" alt="�μ�� 梨�由곗�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(13).jpg" alt="딥씨 챌린지" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:75%"><em>7.50 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:75%"><em>7.50 점</em></span></span>
 					<strong class="l"><span class="char sc_num7"><em>7</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num5"><em>5</em></span><span class="char sc_num0"><em>0</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:5,i:127466 -->
@@ -853,7 +870,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�μ�� 梨�由곗�</p>
+					<p class="mv_title">딥씨 챌린지</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -864,12 +881,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=154183" onfocus="jindo.$Element('currentTooltip6').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip6').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(14).jpg" alt="���ㅼ��寃� 媛��� 湲�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(14).jpg" alt="아들에게 가는 길" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:92.2%"><em>9.22 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:92.2%"><em>9.22 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num2"><em>2</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:6,i:154183 -->
@@ -878,7 +895,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">���ㅼ��寃� 媛��� 湲�</p>
+					<p class="mv_title">아들에게 가는 길</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -889,12 +906,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=160702" onfocus="jindo.$Element('currentTooltip7').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip7').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(15).jpg" alt="���� ���ㅼ�� �щ����吏� ������" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(15).jpg" alt="나는 아들을 사랑하지 않는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:92.30000000000001%"><em>9.23 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:92.30000000000001%"><em>9.23 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num3"><em>3</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:7,i:160702 -->
@@ -903,7 +920,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">���� ���ㅼ�� �щ����吏� ������</p>
+					<p class="mv_title">나는 아들을 사랑하지 않는다</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -914,12 +931,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=149482" onfocus="jindo.$Element('currentTooltip8').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip8').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(16).jpg" alt="������" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(16).jpg" alt="프레스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:90%"><em>9.00 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:90%"><em>9.00 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num0"><em>0</em></span><span class="char sc_num0"><em>0</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:8,i:149482 -->
@@ -928,7 +945,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">������</p>
+					<p class="mv_title">프레스</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -939,12 +956,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=163783" onfocus="jindo.$Element('currentTooltip9').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip9').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(17).jpg" alt="�뱀��遺��� ����2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(17).jpg" alt="특수부대 전랑2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:82.2%"><em>8.22 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:82.2%"><em>8.22 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num2"><em>2</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:9,i:163783 -->
@@ -953,7 +970,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�뱀��遺��� ����2</p>
+					<p class="mv_title">특수부대 전랑2</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -964,12 +981,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=158091" onfocus="jindo.$Element('currentTooltip10').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip10').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_18">泥����� 愿���遺�媛�</span>
+					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(18).jpg" alt="�ㅼ�2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(18).jpg" alt="실종2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:66.2%"><em>6.62 ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:66.2%"><em>6.62 점</em></span></span>
 					<strong class="l"><span class="char sc_num6"><em>6</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num6"><em>6</em></span><span class="char sc_num2"><em>2</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:10,i:158091 -->
@@ -978,7 +995,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�ㅼ�2</p>
+					<p class="mv_title">실종2</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -990,12 +1007,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=144975" onfocus="jindo.$Element('commingTooltip1').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip1').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(19).jpg" alt="�⑦�곗��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(19).jpg" alt="패터슨" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:1,i:144975 -->
 		</div>
@@ -1003,7 +1020,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�⑦�곗��</p>
+					<p class="mv_title">패터슨</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1014,12 +1031,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=166583" onfocus="jindo.$Element('commingTooltip2').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip2').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(20).jpg" alt="�� 踰�吏� �댁��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(20).jpg" alt="세 번째 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num1"><em>1</em></span><span class="char rate_num4"><em>4</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num1"><em>1</em></span><span class="char rate_num4"><em>4</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:2,i:166583 -->
 		</div>
@@ -1027,7 +1044,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�� 踰�吏� �댁��</p>
+					<p class="mv_title">세 번째 살인</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1038,12 +1055,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=151715" onfocus="jindo.$Element('commingTooltip3').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip3').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(21).jpg" alt="�ㅼ� �щ��肉�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(21).jpg" alt="오직 사랑뿐" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:3,i:151715 -->
 		</div>
@@ -1051,7 +1068,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�ㅼ� �щ��肉�</p>
+					<p class="mv_title">오직 사랑뿐</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1062,12 +1079,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134963" onfocus="jindo.$Element('commingTooltip4').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip4').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(22).jpg" alt="�쇰�쇰����" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(22).jpg" alt="라라랜드" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:4,i:134963 -->
 		</div>
@@ -1075,7 +1092,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�쇰�쇰����</p>
+					<p class="mv_title">라라랜드</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1086,12 +1103,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134906" onfocus="jindo.$Element('commingTooltip5').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip5').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_18">泥����� 愿���遺�媛�</span>
+					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(23).jpg" alt="����由�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(23).jpg" alt="탠저린" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num3"><em>3</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num3"><em>3</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:5,i:134906 -->
 		</div>
@@ -1099,7 +1116,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">����由�</p>
+					<p class="mv_title">탠저린</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1110,12 +1127,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=159037" onfocus="jindo.$Element('commingTooltip6').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip6').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(24).jpg" alt="硫�由ъ�� 留����� 苑�" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(24).jpg" alt="메리와 마녀의 꽃" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:6,i:159037 -->
 		</div>
@@ -1123,7 +1140,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">硫�由ъ�� 留����� 苑�</p>
+					<p class="mv_title">메리와 마녀의 꽃</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1134,12 +1151,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=100205" onfocus="jindo.$Element('commingTooltip7').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip7').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_15">15�� 愿���媛�</span>
+					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(25).jpg" alt="�댁����: �� 鍮�湲곕��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(25).jpg" alt="어쌔신: 더 비기닝" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:7,i:100205 -->
 		</div>
@@ -1147,7 +1164,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�댁����: �� 鍮�湲곕��</p>
+					<p class="mv_title">어쌔신: 더 비기닝</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1158,12 +1175,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=169349" onfocus="jindo.$Element('commingTooltip8').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip8').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_all">��泥� 愿���媛�</span>
+					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(26).jpg" alt="戮�濡�濡� 洹뱀�ν�� 怨듬！�� ��紐⑦��" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(26).jpg" alt="뽀로로 극장판 공룡섬 대모험" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:8,i:169349 -->
 		</div>
@@ -1171,7 +1188,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">戮�濡�濡� 洹뱀�ν�� 怨듬！�� ��紐⑦��</p>
+					<p class="mv_title">뽀로로 극장판 공룡섬 대모험</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1182,12 +1199,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=165751" onfocus="jindo.$Element('commingTooltip9').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip9').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(27).jpg" alt="�ㅽ���댁�� 7" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(27).jpg" alt="스테이션 7" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:9,i:165751 -->
 		</div>
@@ -1195,7 +1212,7 @@ function delayed_submit(object) {
 			<div class="obj_on ">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">�ㅽ���댁�� 7</p>
+					<p class="mv_title">스테이션 7</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1206,12 +1223,12 @@ function delayed_submit(object) {
 		<div class="obj_off tab4">
 			<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=154594" onfocus="jindo.$Element('commingTooltip10').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip10').hide();movieChart.restartTimer();">
 				
-					<span class="ico_rating_12">12�� 愿���媛�</span>
+					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(28).jpg" alt="����" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="./moviehomefiles/movie_image(28).jpg" alt="은혼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>媛�遊�</em></span>
+					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
 			</a><!-- N=a:run.da,r:10,i:154594 -->
 		</div>
@@ -1219,7 +1236,7 @@ function delayed_submit(object) {
 			<div class="obj_on rt">
 				<div class="tooltip">
 					<span class="top"></span>
-					<p class="mv_title">����</p>
+					<p class="mv_title">은혼</p>
 					<span class="bottom"></span><span class="bottom_r"></span>
 				</div>
 			</div>
@@ -1230,38 +1247,38 @@ function delayed_submit(object) {
 			</div>
 			<!-- //flick area -->
 			<div class="flick_nav">
-				<a href="http://movie.naver.com/#" id="flick_next" class="btn_next" onclick="clickcr(this, 'run.next', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="�ㅼ��"><em>�ㅼ��</em></a><!-- N=a:run.next -->
+				<a href="http://movie.naver.com/#" id="flick_next" class="btn_next" onclick="clickcr(this, 'run.next', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="다음"><em>다음</em></a><!-- N=a:run.next -->
 			</div>
 		
 			<div class="running_tab">
 				<ul>
-					<li id="RESERVE_tab" class="item0"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(0);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>��留ㅼ��</em></a><!-- N=a:run.ticket --></li>
-					<li id="CURRENT_tab" class="item1 on"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(1);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>���ъ������</em></a><!-- N=a:run.now --></li>
-					<li id="COMMING_tab" class="item2"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(2);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>媛�遊�������</em></a><!-- N=a:run.coming --></li>
-					<li id="POINT_tab" class="item3"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(3);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>������</em></a><!-- N=a:run.bystar --></li>
-					<li id="BOXOFFICE_tab" class="item4"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(4);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>諛��ㅼ�ㅽ�쇱��</em></a><!-- N=a:run.box --></li>
-					<li id="DOWNLOAD_tab" class="item5"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(5);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>�ㅼ�대�����</em></a><!-- N=a:run.down --></li>
+					<li id="RESERVE_tab" class="item0"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(0);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>예매순</em></a><!-- N=a:run.ticket --></li>
+					<li id="CURRENT_tab" class="item1 on"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(1);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>현재상영작</em></a><!-- N=a:run.now --></li>
+					<li id="COMMING_tab" class="item2"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(2);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>개봉예정작</em></a><!-- N=a:run.coming --></li>
+					<li id="POINT_tab" class="item3"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(3);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>평점순</em></a><!-- N=a:run.bystar --></li>
+					<li id="BOXOFFICE_tab" class="item4"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(4);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>박스오피스</em></a><!-- N=a:run.box --></li>
+					<li id="DOWNLOAD_tab" class="item5"><a href="http://movie.naver.com/#" onclick="movieChart.fullSettingMovieChart(5);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" class="flickingTab"><em>다운로드순</em></a><!-- N=a:run.down --></li>
 				</ul>
-				<p href="#" class="all_view_go" style="display: block;"><a id="movieChartAllView" href="http://localhost/movie/running/current.nhn" onclick="clickcr(this, 'run.all', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="��泥대낫湲�" target="_self">��泥대낫湲�</a><!-- N=a:run.all --></p>
+				<p href="#" class="all_view_go" style="display: block;"><a id="movieChartAllView" href="http://localhost/movie/running/current.nhn" onclick="clickcr(this, 'run.all', '', '', event);" onfocus="oTimer.abort();" onblur="movieChart.restartTimer();" title="전체보기" target="_self">전체보기</a><!-- N=a:run.all --></p>
 			</div>
 		</div>
-		<!-- //臾대�李⑦��  -->
+		<!-- //무비차트  -->
 		<div class="section_group" id="homeReview">
 			<div class="obj_section">
 				<div class="main_review">
 					
 					<div class="title_area">
-						<h4 class="hh_review"><strong class="blind">����/由щ럭</strong></h4>
+						<h4 class="hh_review"><strong class="blind">평점/리뷰</strong></h4>
 					</div>
 					<div class="hh_review_area">
 						<div id="movieReview" class="hh_review_ct">
 							<ul class="lst_con first" data-index="0" style="display:block">
-							<!-- [D] ������ 寃쎌�� li�� class="on" 異�媛� -->
+							<!-- [D] 선택된 경우 li에 class="on" 추가 -->
 							
 							<li id="review1" data-index="0" class="_select_title on">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" class="thmb" onclick="clickcr(this, 'tvw.img', '152385', '1', event);"><img src="./moviehomefiles/movie_image(29).jpg" width="64" height="91" alt="袁�" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" class="thmb" onclick="clickcr(this, 'tvw.img', '152385', '1', event);"><img src="./moviehomefiles/movie_image(29).jpg" width="64" height="91" alt="꾼" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
-									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" onclick="clickcr(this, 'tvw.title', '152385', '1', event);" data-index="0" class="_select_title_anchor"><strong>袁�</strong>
+									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" onclick="clickcr(this, 'tvw.title', '152385', '1', event);" data-index="0" class="_select_title_anchor"><strong>꾼</strong>
 										<div class="star_score">
 											
 											
@@ -1271,7 +1288,7 @@ function delayed_submit(object) {
 													
 													
 													
-													<span class="st_off"><span class="st_on" style="width:79.2%">���� - 珥� 10�� 以�</span></span>
+													<span class="st_off"><span class="st_on" style="width:79.2%">평점 - 총 10점 중</span></span>
 													<span class="score">
 													<span class="char sc_num7"><em>7</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num9"><em>9</em></span><span class="char sc_num2"><em>2</em></span>
 												
@@ -1282,15 +1299,15 @@ function delayed_submit(object) {
 									<ul class="info">
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4582056&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4582056', '1', event);"><span class="tit">2017�� ���� &lt;袁�&gt; ��湲�/荑��ㅼ���� ��臾�</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4582056&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4582056', '1', event);"><span class="tit">2017년 영화 &lt;꾼&gt; 후기/쿠키영상 유무</span></a></li>
 											
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4581937&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4581937', '2', event);"><span class="tit">[���� 袁�] ��臾대�� 誘우�留���!</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4581937&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4581937', '2', event);"><span class="tit">[영화 꾼] 아무도 믿지마라!</span></a></li>
 											
 										
 											
-												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4580442&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4580442', '3', event);"><span class="tit">���� [袁�] ��湲� "���ъ�� �댁����耳�二쇰㈃ ������ ����" (��鍮�,��吏���,諛곗�깆��,����,諛��깆��,���명��)</span></a></li>
+												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4580442&amp;code=152385" onclick="clickcr(this, 'tvw.list', '4580442', '3', event);"><span class="tit">영화 [꾼] 후기 "의심은 해소시켜주면 확신이 된다" (현빈,유지태,배성우,나나,박성웅,안세하)</span></a></li>
 											
 										
 									</ul>
@@ -1298,9 +1315,9 @@ function delayed_submit(object) {
 							</li>
 							
 							<li id="review2" data-index="1" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" class="thmb" onclick="clickcr(this, 'tvw.img', '116866', '2', event);"><img src="./moviehomefiles/movie_image(30).jpg" width="64" height="91" alt="���ㅽ�곗�� 由ш렇" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" class="thmb" onclick="clickcr(this, 'tvw.img', '116866', '2', event);"><img src="./moviehomefiles/movie_image(30).jpg" width="64" height="91" alt="저스티스 리그" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
-									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" onclick="clickcr(this, 'tvw.title', '116866', '2', event);" data-index="1" class="_select_title_anchor"><strong>���ㅽ�곗�� 由ш렇</strong>
+									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" onclick="clickcr(this, 'tvw.title', '116866', '2', event);" data-index="1" class="_select_title_anchor"><strong>저스티스 리그</strong>
 										<div class="star_score">
 											
 											
@@ -1310,7 +1327,7 @@ function delayed_submit(object) {
 													
 													
 													
-													<span class="st_off"><span class="st_on" style="width:79.4%">���� - 珥� 10�� 以�</span></span>
+													<span class="st_off"><span class="st_on" style="width:79.4%">평점 - 총 10점 중</span></span>
 													<span class="score">
 													<span class="char sc_num7"><em>7</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num9"><em>9</em></span><span class="char sc_num4"><em>4</em></span>
 												
@@ -1321,15 +1338,15 @@ function delayed_submit(object) {
 									<ul class="info">
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579973&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4579973', '1', event);"><span class="tit">���� &lt;���ㅽ�곗�� 由ш렇&gt; 由щ럭</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579973&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4579973', '1', event);"><span class="tit">영화 &lt;저스티스 리그&gt; 리뷰</span></a></li>
 											
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579899&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4579899', '2', event);"><span class="tit">���ㅽ�곗�ㅻ━洹�,�대깽�몄�ㅻ낫�� �щ�몄���� �댁��(洹몃���� ���ㅻ���대���� �댁��洹몃�)</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579899&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4579899', '2', event);"><span class="tit">저스티스리그,어벤져스보다 재미있는 이유(그래도 잭스나이더는 이제그만)</span></a></li>
 											
 										
 											
-												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4583195&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4583195', '3', event);"><span class="tit">���ㅽ�곗�� 由ш렇 (Justice League) 愿���湲� [�쎌�ㅽ��]</span></a></li>
+												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4583195&amp;code=116866" onclick="clickcr(this, 'tvw.list', '4583195', '3', event);"><span class="tit">저스티스 리그 (Justice League) 관람기 [약스포]</span></a></li>
 											
 										
 									</ul>
@@ -1337,9 +1354,9 @@ function delayed_submit(object) {
 							</li>
 							
 							<li id="review3" data-index="2" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" class="thmb" onclick="clickcr(this, 'tvw.img', '164932', '3', event);"><img src="./moviehomefiles/movie_image(31).jpg" width="64" height="91" alt="�댄�� �곗�ㅻ�곗��" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" class="thmb" onclick="clickcr(this, 'tvw.img', '164932', '3', event);"><img src="./moviehomefiles/movie_image(31).jpg" width="64" height="91" alt="해피 데스데이" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
-									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" onclick="clickcr(this, 'tvw.title', '164932', '3', event);" data-index="2" class="_select_title_anchor"><strong>�댄�� �곗�ㅻ�곗��</strong>
+									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" onclick="clickcr(this, 'tvw.title', '164932', '3', event);" data-index="2" class="_select_title_anchor"><strong>해피 데스데이</strong>
 										<div class="star_score">
 											
 											
@@ -1349,7 +1366,7 @@ function delayed_submit(object) {
 													
 													
 													
-													<span class="st_off"><span class="st_on" style="width:83.5%">���� - 珥� 10�� 以�</span></span>
+													<span class="st_off"><span class="st_on" style="width:83.5%">평점 - 총 10점 중</span></span>
 													<span class="score">
 													<span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num3"><em>3</em></span><span class="char sc_num5"><em>5</em></span>
 												
@@ -1360,19 +1377,19 @@ function delayed_submit(object) {
 									<ul class="info">
 										
 
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4577048&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4577048', '1', event);"><span class="tit">[Theater] �댄�� �곗�ㅻ�곗�� / �щ�� ���쇰�곗��</span></a></li>
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579947&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4579947', '2', event);"><span class="tit">���� 異�泥� : �댄�� �곗�ㅻ�곗�� -遺��ろ���� 諛⑸��� ������-</span></a></li>
-												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4580191&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4580191', '3', event);"><span class="tit">�댄�� �곗�ㅻ�곗�� (Happy Death Day, 2017)</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4577048&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4577048', '1', event);"><span class="tit">[Theater] 해피 데스데이 / 재미 있으데이</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4579947&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4579947', '2', event);"><span class="tit">영화 추천 : 해피 데스데이 -부딪히는 방법에 대하여-</span></a></li>
+												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4580191&amp;code=164932" onclick="clickcr(this, 'tvw.list', '4580191', '3', event);"><span class="tit">해피 데스데이 (Happy Death Day, 2017)</span></a></li>
 									</ul>
 								</div>
 							</li>
 							
 							<li id="review4" data-index="3" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" class="thmb" onclick="clickcr(this, 'tvw.img', '134898', '4', event);"><img src="./moviehomefiles/movie_image(32).jpg" width="64" height="91" alt="��瑜�: �쇨렇��濡���" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" class="thmb" onclick="clickcr(this, 'tvw.img', '134898', '4', event);"><img src="./moviehomefiles/movie_image(32).jpg" width="64" height="91" alt="토르: 라그나로크" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
-									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" onclick="clickcr(this, 'tvw.title', '134898', '4', event);" data-index="3" class="_select_title_anchor"><strong>��瑜�: �쇨렇��濡���</strong>
+									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" onclick="clickcr(this, 'tvw.title', '134898', '4', event);" data-index="3" class="_select_title_anchor"><strong>토르: 라그나로크</strong>
 										<div class="star_score">
-													<span class="st_off"><span class="st_on" style="width:88.7%">���� - 珥� 10�� 以�</span></span>
+													<span class="st_off"><span class="st_on" style="width:88.7%">평점 - 총 10점 중</span></span>
 													<span class="score">
 													<span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num8"><em>8</em></span><span class="char sc_num7"><em>7</em></span>
 											</span>
@@ -1381,15 +1398,15 @@ function delayed_submit(object) {
 									<ul class="info">
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4574915&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4574915', '1', event);"><span class="tit">肄�誘밴낵 �≪���� �④� 媛�異� 由щ깽�몄�ㅼ�� 硫��몄�대깽��-��瑜�:�쇨렇��濡���</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4574915&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4574915', '1', event);"><span class="tit">코믹과 액션을 함께 갖춘 리벤져스의 메인이벤트-토르:라그나로크</span></a></li>
 											
 										
 											
-												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4581860&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4581860', '2', event);"><span class="tit">��瑜댁�� 留�吏�留� �쇰����  ��瑜� �쇨렇��濡��� _ 荑��ㅼ���� _ �ㅽ�ъ＜��</span></a></li>
+												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4581860&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4581860', '2', event);"><span class="tit">토르의 마지막 피날레  토르 라그나로크 _ 쿠키영상 _ 스포주의</span></a></li>
 											
 										
 											
-												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4572665&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4572665', '3', event);"><span class="tit">[����] ��瑜� - �쇨렇��濡��� / 留�釉��� 媛��깃낵 ������</span></a></li>
+												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4572665&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4572665', '3', event);"><span class="tit">[영화] 토르 - 라그나로크 / 마블의 개성과 안정성</span></a></li>
 											
 										
 									</ul>
@@ -1405,12 +1422,12 @@ function delayed_submit(object) {
 					<div class="section">
 						<div class="title_area">
 							<h4 class="hh_spotlight">
-								<strong class="blind">�ㅽ�ы�몃�쇱�댄��</strong>
+								<strong class="blind">스포트라이트</strong>
 							</h4>
 						</div>
 						<div class="hh_spot_area">
 							<a href="http://nstore.naver.com/event/details.nhn?eventNo=9543">
-								<img src="./moviehomefiles/�����ㅽ�ы�몃�쇱�댄��210X196.png" width="210" height="196" title="�ㅽ�ы�몃�쇱�댄�� 諛곕��" alt="�ㅽ�ы�몃�쇱�댄�� ���� ������." border="0">
+								<img src="./moviehomefiles/영화스포트라이트210X196.png" width="210" height="196" title="스포트라이트 배너" alt="스포트라이트 영역 입니다." border="0">
 							</a>
 						</div>
 					</div>
@@ -1422,55 +1439,55 @@ function delayed_submit(object) {
 			<div class="obj_section" id="homeTrailer">
 				<div class="main_prv">
 					<div class="title_area">
-						<h4 class="hh_preview"><strong class="blind">��怨���</strong></h4>
+						<h4 class="hh_preview"><strong class="blind">예고편</strong></h4>
 						<a href="http://movie.naver.com/movie/running/movieclip.nhn">
-							<span class="more"><span class="blind">��蹂닿린</span></span>
+							<span class="more"><span class="blind">더보기</span></span>
 						</a><!-- N=a:cms.more -->
 					</div>
 					<ul class="video_thumb">
 					
 					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3李� ��怨���" class="video_obj">
-							<span class="mask">������</span>
+						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3차 예고편" class="video_obj">
+							<span class="mask">동영상</span>
 							
 							<span class="video_ico first"></span>
-							<img src="./moviehomefiles/37018_20171204114403.gif" width="164" height="114" alt="3李� ��怨���" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="./moviehomefiles/37018_20171204114403.gif" width="164" height="114" alt="3차 예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:1,i:37018 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="紐ъ�ㅽ�� �⑤�由�">紐ъ�ㅽ�� �⑤�由�</a><!-- N=a:cms.title,r:1,i:37018 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3李� ��怨���">3李� ��怨���</a><!-- N=a:cms.desc,r:1,i:37018 --></p>
+						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="몬스터 패밀리">몬스터 패밀리</a><!-- N=a:cms.title,r:1,i:37018 --></p>
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3차 예고편">3차 예고편</a><!-- N=a:cms.desc,r:1,i:37018 --></p>
 					</li>
 					
 					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="臾댁���� ����" class="video_obj">
-							<span class="mask">������</span>
+						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무삭제 영상" class="video_obj">
+							<span class="mask">동영상</span>
 							
 							<span class="video_ico first"></span>
-							<img src="./moviehomefiles/37017_20171204114448.gif" width="164" height="114" alt="臾댁���� ����" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="./moviehomefiles/37017_20171204114448.gif" width="164" height="114" alt="무삭제 영상" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:2,i:37017 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="臾댁���� 轅�">臾댁���� 轅�</a><!-- N=a:cms.title,r:2,i:37017 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="臾댁���� ����">臾댁���� ����</a><!-- N=a:cms.desc,r:2,i:37017 --></p>
+						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무서운 꿈">무서운 꿈</a><!-- N=a:cms.title,r:2,i:37017 --></p>
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무삭제 영상">무삭제 영상</a><!-- N=a:cms.desc,r:2,i:37017 --></p>
 					</li>
 					
 					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="��怨���" class="video_obj">
-							<span class="mask">������</span>
+						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="예고편" class="video_obj">
+							<span class="mask">동영상</span>
 							
 							
-							<img src="./moviehomefiles/37033_20171205095959.jpg" width="164" height="114" alt="��怨���" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="./moviehomefiles/37033_20171205095959.jpg" width="164" height="114" alt="예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:3,i:37033 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="�ㅻ����쇱�대�">�ㅻ����쇱�대�</a><!-- N=a:cms.title,r:3,i:37033 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="��怨���">��怨���</a><!-- N=a:cms.desc,r:3,i:37033 --></p>
+						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="오버드라이브">오버드라이브</a><!-- N=a:cms.title,r:3,i:37033 --></p>
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="예고편">예고편</a><!-- N=a:cms.desc,r:3,i:37033 --></p>
 					</li>
 					
 					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="裕ㅼ�鍮�����" class="video_obj">
-							<span class="mask">������</span>
+						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="뮤직비디오" class="video_obj">
+							<span class="mask">동영상</span>
 							
 							
-							<img src="./moviehomefiles/37037_20171205105433.jpg" width="164" height="114" alt="裕ㅼ�鍮�����" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="./moviehomefiles/37037_20171205105433.jpg" width="164" height="114" alt="뮤직비디오" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:4,i:37037 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="�����⑤��">�����⑤��</a><!-- N=a:cms.title,r:4,i:37037 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="裕ㅼ�鍮�����">裕ㅼ�鍮�����</a><!-- N=a:cms.desc,r:4,i:37037 --></p>
+						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="돌아온다">돌아온다</a><!-- N=a:cms.title,r:4,i:37037 --></p>
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="뮤직비디오">뮤직비디오</a><!-- N=a:cms.desc,r:4,i:37037 --></p>
 					</li>
 					
 					</ul>
@@ -1484,80 +1501,80 @@ function delayed_submit(object) {
 			<div class="obj_section">
 				<div class="main_photo">
 					<div class="title_area">
-						<h4 class="hh_photo"><strong class="blind">�ы��</strong></h4>
+						<h4 class="hh_photo"><strong class="blind">포토</strong></h4>
 					</div>
 					<ul>
 					
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">
-								<img src="./moviehomefiles/movie_image(33).jpg" width="108" height="108" alt="��由щ� �щ��ㅽ��由�" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(33).jpg" width="108" height="108" alt="드리밍 러브스토리" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:1,i:6587886 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab"><strong class="tit">�곕━�� 媛��� 轅��� 袁쇰��</strong></a><!-- N=a:pho.list,r:1,i:6587886 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">��由щ� �щ��ㅽ��由�</a><!-- N=a:pho.tlist,r:1,i:6587886 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab"><strong class="tit">우리는 같은 꿈을 꾼다</strong></a><!-- N=a:pho.list,r:1,i:6587886 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">드리밍 러브스토리</a><!-- N=a:pho.tlist,r:1,i:6587886 --></p>
 					</li>
 					
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">
-								<img src="./moviehomefiles/movie_image(34).jpg" width="108" height="108" alt="�щ�쇱� �곗��" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(34).jpg" width="108" height="108" alt="사라진 연인" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:2,i:6583065 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab"><strong class="tit">���щ┸ ����</strong></a><!-- N=a:pho.list,r:2,i:6583065 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">�щ�쇱� �곗��</a><!-- N=a:pho.tlist,r:2,i:6583065 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab"><strong class="tit">시크릿 레터</strong></a><!-- N=a:pho.list,r:2,i:6583065 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">사라진 연인</a><!-- N=a:pho.tlist,r:2,i:6583065 --></p>
 					</li>
 					
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">
-								<img src="./moviehomefiles/movie_image(35).jpg" width="108" height="108" alt="媛�議깆�� �깆�ν��" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(35).jpg" width="108" height="108" alt="가족의 성장통" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:3,i:6586853 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab"><strong class="tit">���ㅼ��寃� 媛��� 湲�</strong></a><!-- N=a:pho.list,r:3,i:6586853 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">媛�議깆�� �깆�ν��</a><!-- N=a:pho.tlist,r:3,i:6586853 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab"><strong class="tit">아들에게 가는 길</strong></a><!-- N=a:pho.list,r:3,i:6586853 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">가족의 성장통</a><!-- N=a:pho.tlist,r:3,i:6586853 --></p>
 					</li>
 					
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">
-								<img src="./moviehomefiles/movie_image(36).jpg" width="108" height="108" alt="��濡��� �띠�� ����" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(36).jpg" width="108" height="108" alt="새로운 삶의 시작" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:4,i:6590331 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab"><strong class="tit">��怨쇳�④�-二��� 踰�</strong></a><!-- N=a:pho.list,r:4,i:6590331 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">��濡��� �띠�� ����</a><!-- N=a:pho.tlist,r:4,i:6590331 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab"><strong class="tit">신과함께-죄와 벌</strong></a><!-- N=a:pho.list,r:4,i:6590331 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">새로운 삶의 시작</a><!-- N=a:pho.tlist,r:4,i:6590331 --></p>
 					</li>
 					
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">
-								<img src="./moviehomefiles/movie_image(37).jpg" width="108" height="108" alt="源�怨� 吏���  濡�留⑥��" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(37).jpg" width="108" height="108" alt="깊고 진한  로맨스" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:5,i:6517442 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab"><strong class="tit">�ㅽ�≫��由��� 留�吏�留� �곗��</strong></a><!-- N=a:pho.list,r:5,i:6517442 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">源�怨� 吏���  濡�留⑥��</a><!-- N=a:pho.tlist,r:5,i:6517442 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab"><strong class="tit">스톡홀름의 마지막 연인</strong></a><!-- N=a:pho.list,r:5,i:6517442 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">깊고 진한  로맨스</a><!-- N=a:pho.tlist,r:5,i:6517442 --></p>
 					</li>
 					
 					<li class="last">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">
-								<img src="./moviehomefiles/movie_image(38).jpg" width="108" height="108" alt="嫄곕���� 鍮���臾쇱껜" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="./moviehomefiles/movie_image(38).jpg" width="108" height="108" alt="거대한 비행물체" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:6,i:6590265 -->
 						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab"><strong class="tit">�몃������痢� �곗��: �멸��� ��移④났</strong></a><!-- N=a:pho.list,r:6,i:6590265 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">嫄곕���� 鍮���臾쇱껜</a><!-- N=a:pho.tlist,r:6,i:6590265 --></p>
+						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab"><strong class="tit">인디펜던츠 데이: 외계의 대침공</strong></a><!-- N=a:pho.list,r:6,i:6590265 -->
+						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">거대한 비행물체</a><!-- N=a:pho.tlist,r:6,i:6590265 --></p>
 					</li>
 					
 					</ul>
@@ -1566,18 +1583,18 @@ function delayed_submit(object) {
 			<div class="obj_section">
 				<div class="main_event">
 					<div class="notice">
-						<a href="http://movie.naver.com/movie/other/gonggi.nhn" class="notice_more">怨듭��ы�� ��蹂닿린</a><!-- N=a:bnt.more -->
-						<div class="info"><a href="http://movie.naver.com/movie/other/gonggi.nhn?docID=10000000000030659300"><em>[怨듭�]</em>&nbsp; 濡��곗���ㅻ� ���ㅽ�� ��寃� ����</a><!-- N=a:bnt.list --></div>
-						<p><span class="page_info">��蹂�</span>蹂� ���댁��� ����湲�瑗댁�� 理����� ���댁���듬����. <a href="http://hangeul.naver.com/font" target="_blank" class="font_inst">����湲�瑗댁�ㅼ�<em class="arr"></em></a><!-- N=a:btm.nanumfont --></p>
+						<a href="http://movie.naver.com/movie/other/gonggi.nhn" class="notice_more">공지사항 더보기</a><!-- N=a:bnt.more -->
+						<div class="info"><a href="http://movie.naver.com/movie/other/gonggi.nhn?docID=10000000000030659300"><em>[공지]</em>&nbsp; 롯데시네마 시스템 점검 안내</a><!-- N=a:bnt.list --></div>
+						<p><span class="page_info">정보</span>본 페이지는 나눔글꼴에 최적화 되어있습니다. <a href="http://hangeul.naver.com/font" target="_blank" class="font_inst">나눔글꼴설치<em class="arr"></em></a><!-- N=a:btm.nanumfont --></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- [D] 留⑥��濡� 踰��� div id="content" 湲곗� top:342px �댁�� -->
+	<!-- [D] 맨위로 버튼 div id="content" 기준 top:342px 이상 -->
 	
 <div class="staticbanner" id="floatingTopAnchor" style="bottom: 638px;">
-    <a href="http://movie.naver.com/#" title="留⑥��濡�"><img alt="留⑥��濡�" src="./moviehomefiles/btn_top.png" width="33" height="35"></a><!-- N=a:btm.top -->
+    <a href="http://movie.naver.com/#" title="맨위로"><img alt="맨위로" src="./moviehomefiles/btn_top.png" width="33" height="35"></a><!-- N=a:btm.top -->
 </div>
 <script type="text/javascript">
 jindo.$Fn(function () {
@@ -1588,13 +1605,13 @@ jindo.$Fn(function () {
     var nMinY = 61;
     var oFloatingLayer = new jindo.FloatingLayer(welTopAnchor).attach({
         beforeMove: function (oEvent) {
-            // ���� limit
+            // 상단 limit
             nMaxY = welContent.height() - nTopMargin;
             if (oEvent.nY > nMaxY) {
                 oEvent.nY = nMaxY;
             }
 
-             // ���� limit
+             // 하단 limit
             if (oEvent.nY < nMinY) {
                 oEvent.nY = nMinY;
             }
@@ -1602,7 +1619,7 @@ jindo.$Fn(function () {
     });
 }).attach(window, 'load');
 </script>
-	<!-- //留⑥��濡� -->
+	<!-- //맨위로 -->
 
 </div>
 <!-- //content -->
@@ -1611,16 +1628,16 @@ jindo.$Fn(function () {
 {for index:movie in RESERVE}
 	<li class="item{=index +1}" data-id="{=movie.movieCode}" data-detail="{=movie.movieCode}" data-reserve="{=movie.movieCode}" onmouseover="jindo.$Element('reserveTooltip{=index+1}').show();" onmouseout="jindo.$Element('reserveTooltip{=index+1}').hide();">
 		<div class="obj_off tab4">
-			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('reserveTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}��</em></span>
+			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('reserveTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('reserveTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}위</em></span>
 				{if movie.adult}
-					<span class="ico_rating_19">泥����� ���대Ъ</span>
+					<span class="ico_rating_19">청소년 유해물</span>
 				{elseif movie.lastKoreanGrade != null}
 					{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 				{/if}
 				<span class="mask"></span>
 				<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_rate l"><em>��留ㅼ��</em></span>
+					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l">{js movieChart.numberFont(=movie.formattedReserveRatio, 'rate')}<span class="char rate_pct"><em>%</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
@@ -1644,14 +1661,14 @@ jindo.$Fn(function () {
 		<div class="obj_off tab4">
 			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('currentTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip{=index+1}').hide();movieChart.restartTimer();">
 				{if movie.adult}
-					<span class="ico_rating_19">泥����� ���대Ъ</span>
+					<span class="ico_rating_19">청소년 유해물</span>
 				{elseif movie.lastKoreanGrade != null}
 					{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 				{/if}
 				<span class="mask"></span>
 				<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:{=movie.point*10}%"><em>{=movie.point} ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:{=movie.point*10}%"><em>{=movie.point} 점</em></span></span>
 					<strong class="l">{js movieChart.numberFont(=movie.point, 'sc')}</strong>
 				</span>
 			</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
@@ -1675,14 +1692,14 @@ jindo.$Fn(function () {
 		<div class="obj_off tab4">
 			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('commingTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip{=index+1}').hide();movieChart.restartTimer();">
 				{if movie.adult}
-					<span class="ico_rating_19">泥����� ���대Ъ</span>
+					<span class="ico_rating_19">청소년 유해물</span>
 				{elseif movie.lastKoreanGrade != null}
 					{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 				{/if}
 				<span class="mask"></span>
 				<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<strong class="l">{js movieChart.numberFont(=movie.openDate, 'rate')}</strong>{if movie.openDate != ''}<span class="spr stic_open l"><em>媛�遊�</em>{/if}</span>
+					<strong class="l">{js movieChart.numberFont(=movie.openDate, 'rate')}</strong>{if movie.openDate != ''}<span class="spr stic_open l"><em>개봉</em>{/if}</span>
 				</span>
 			</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
 		</div>
@@ -1703,16 +1720,16 @@ jindo.$Fn(function () {
 {for index:movie in POINT}
 	<li class="item{=index +1}" data-id="{=movie.movieCode}" data-detail="{=movie.movieCode}" data-reserve="{=movie.movieCode}" onmouseover="jindo.$Element('pointTooltip{=index+1}').show();" onmouseout="jindo.$Element('pointTooltip{=index+1}').hide();">
 		<div class="obj_off tab4">
-			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('pointTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('pointTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}��</em></span>
+			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('pointTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('pointTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}위</em></span>
 				{if movie.adult}
-					<span class="ico_rating_19">泥����� ���대Ъ</span>
+					<span class="ico_rating_19">청소년 유해물</span>
 				{elseif movie.lastKoreanGrade != null}
 					{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 				{/if}
 				<span class="mask"></span>
 				<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="rank_star l"><span class="star_off"><em>蹂��� - 珥� 10�� 以�</em></span><span class="star_on" style="width:{=movie.point*10}%"><em>{=movie.point} ��</em></span></span>
+					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:{=movie.point*10}%"><em>{=movie.point} 점</em></span></span>
 					<strong class="l">{js movieChart.numberFont(=movie.point, 'sc')}</strong>
 				</span>
 			</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
@@ -1734,17 +1751,17 @@ jindo.$Fn(function () {
 {for index:movie in BOXOFFICE}
 	<li class="item{=index +1}" data-id="{=movie.movieCode}" data-detail="{=movie.movieCode}" data-reserve="{=movie.movieCode}" onmouseover="jindo.$Element('boxofficeTooltip{=index+1}').show();" onmouseout="jindo.$Element('boxofficeTooltip{=index+1}').hide();">
 		<div class="obj_off tab4">
-			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('boxofficeTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('boxofficeTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}��</em></span>
+			<a href="/movie/bi/mi/basic.nhn?code={=movie.movieCode}" onfocus="jindo.$Element('boxofficeTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('boxofficeTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}위</em></span>
 				{if movie.adult}
-					<span class="ico_rating_19">泥����� ���대Ъ</span>
+					<span class="ico_rating_19">청소년 유해물</span>
 				{elseif movie.lastKoreanGrade != null}
 					{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 				{/if}
 				<span class="mask"></span>
 				<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
-					<span class="spr stic_box l"><em>二쇰�愿�媛�</em></span>
-					<strong class="l">{js movieChart.numberFont(=movie.formattedWeekendAudience, 'cnt')}<span class="char cnt_per"><em>紐�</em></span></strong>
+					<span class="spr stic_box l"><em>주말관객</em></span>
+					<strong class="l">{js movieChart.numberFont(=movie.formattedWeekendAudience, 'cnt')}<span class="char cnt_per"><em>명</em></span></strong>
 				</span>
 			</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
 		</div>
@@ -1770,16 +1787,16 @@ jindo.$Fn(function () {
 	{for index:movie in DOWNLOAD}
 		<li class="item{=index +1}" data-id="{=movie.movieCode}" data-detail="{=movie.movieCode}" data-reserve="{=movie.movieCode}" onmouseover="jindo.$Element('downloadTooltip{=index+1}').show();" onmouseout="jindo.$Element('downloadTooltip{=index+1}').hide();">
 			<div class="obj_off tab4">
-				<a href="http://nstore.naver.com/tvstore/detail.nhn?mcode={=movie.movieCode}" target="_blank"  onfocus="jindo.$Element('downloadTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('downloadTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}��</em></span>
+				<a href="http://nstore.naver.com/tvstore/detail.nhn?mcode={=movie.movieCode}" target="_blank"  onfocus="jindo.$Element('downloadTooltip{=index+1}').show();oTimer.abort();" onblur="jindo.$Element('downloadTooltip{=index+1}').hide();movieChart.restartTimer();"><span class="rank"><em>{=index +1}위</em></span>
 					{if movie.adult}
-						<span class="ico_rating_19">泥����� ���대Ъ</span>
+						<span class="ico_rating_19">청소년 유해물</span>
 					{elseif movie.lastKoreanGrade != null}
 						{js movieChart.getGradeIcon(=movie.lastKoreanGrade.code)}
 					{/if}
-					<span class="mask"></span> {if movie.salePossibleYn == true}<span class="purchase">援щℓ</span>{/if} {if movie.lendingPossibleYn == true}<span class="rental">����</span>{/if}
+					<span class="mask"></span> {if movie.salePossibleYn == true}<span class="purchase">구매</span>{/if} {if movie.lendingPossibleYn == true}<span class="rental">대여</span>{/if}
 					<img src="{js movieChart.getPhotoInfraImageDomain()}{=movie.posterImageUrl}?type=f125" alt="{js movieChart.replaceDoubleQuotationForHTML(=movie.movieTitle)}" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 					<span class="baseplate r">
-						<span class="spr stic_down l"><em>��留ㅼ��</em></span>
+						<span class="spr stic_down l"><em>판매율</em></span>
 						<strong class="l">{js movieChart.numberFont(=movie.formattedSaleRate, 'rate')}<span class="char rate_pct"><em>%</em></span></strong>
 					</span>
 				</a><!-- N=a:run.da,r:{=index + 1},i:{=movie.movieCode} -->
@@ -1819,7 +1836,7 @@ var oFlicking = new jindo.m.CircularFlicking(jindo.$('mflick'),{
     bUseCss3d : bUseCss3d
 }).attach({
 
-	// ���대㉧ ��吏� 諛� 硫��� ���대�쇱�댄��
+	// 타이머 정지 및 메뉴 하이라이팅
 	'beforeFlicking' : function(oCustomEvt) {
 		oTimer.abort();
 
@@ -1839,13 +1856,13 @@ var oFlicking = new jindo.m.CircularFlicking(jindo.$('mflick'),{
 		this.getLeftPanelElement().removeClass('blind');
 	},
 	
-	// ��由ы�뱀�由� 諛� ���대㉧ �ъ����
+	// 플리킹처리 및 타이머 재시작
 	'afterFlicking' : function(oCustomEvt){
 		
 		if (oCustomEvt.bLeft) {
 			var type = movieChart.movieChartTab[oCustomEvt.nContentRightIndex];
 			
-			// ��由ы�� ���λ����� �대�� �곗�댄�곌� ���ㅻ㈃ ���λ��� �댁��, ���쇰㈃ Ajax Call.
+			// 플리킹 저장변수에 이미 데이터가 있다면 저장변수 이용, 없으면 Ajax Call.
 			if (flickContents[oCustomEvt.nContentRightIndex]) {
 				movieChart.movieChartJsonCallBack(null, flickContents[oCustomEvt.nContentRightIndex], type, oCustomEvt.nContentRightIndex, oCustomEvt.nPanelRightIndex);
 			} else {
@@ -1855,7 +1872,7 @@ var oFlicking = new jindo.m.CircularFlicking(jindo.$('mflick'),{
 		} else {
 			var type = movieChart.movieChartTab[oCustomEvt.nContentLeftIndex];
 			
-			// ��由ы�� ���λ����� �대�� �곗�댄�곌� ���ㅻ㈃ ���λ��� �댁��, ���쇰㈃ Ajax Call.
+			// 플리킹 저장변수에 이미 데이터가 있다면 저장변수 이용, 없으면 Ajax Call.
 			if (flickContents[oCustomEvt.nContentLeftIndex]) {
 				movieChart.movieChartJsonCallBack(null, flickContents[oCustomEvt.nContentLeftIndex], type, oCustomEvt.nContentLeftIndex, oCustomEvt.nPanelLeftIndex);
 			} else {
@@ -1871,7 +1888,7 @@ var oFlicking = new jindo.m.CircularFlicking(jindo.$('mflick'),{
 	}
 });
 
-//[MOVIEOP-5993] [紐⑤��쇱��] Android 怨듯�듬��湲� �댁��/�ㅼ�� 踰��� �대┃�� �ъ빱�� ��吏�(PC ��寃쎌������ Flicking ��吏� ����濡� ����.)
+//[MOVIEOP-5993] [모바일웹] Android 공통댓글 이전/다음 버튼 클릭시 포커싱 유지(PC 환경에서는 Flicking 되지 않도록 수정.)
 var osInfo = jindo.$Agent().os();
 if(osInfo.win || osInfo.mac || osInfo.linux) {
 	oFlicking.attach({
@@ -1900,23 +1917,23 @@ var movieChart = {
 				"http://nstore.naver.com/movie/top100List.nhn?rankingTypeCode=PC_D"
 		),
 
-		// 媛�遊������� 紐⑸��� 留�吏�留� ������ ����愿��� ���ㅻ㈃, ��留ㅼ�⑥�� 媛�遊����������� �곗�댄�곌� 遺�議깊�댁�� ����愿��� ���� �곗�댄�곕�� 梨����ｌ�� 寃쎌�곗�닿린 ��臾몄�� ��蹂닿린 留��� ��怨듯��吏� ����
+		// 개봉예정작 목록의 마지막 영화의 상영관이 없다면, 예매율순 개봉예정작에서 데이터가 부족해서 상영관이 없는 데이터도 채워넣은 경우이기 때문에 더보기 링크 제공하지 않음
 		hasCommingMovieAllViewUrl : true,
 		
-		// domready�� ����
+		// domready시 수행
 		init : function() {
 			movieChart.ajaxCall(movieChart.movieChartJsonUrl, movieChart.movieChartTab[0], 0, 0);
 			movieChart.setMenuHighlighting(0);
 			movieChart.startTimer();
 		},
 		
-		// load�� ����
+		// load시 수행
 		load : function() {
 			movieChart.ajaxCall(movieChart.movieChartJsonUrl, movieChart.movieChartTab[1], 1, 1);
 			movieChart.ajaxCall(movieChart.movieChartJsonUrl, movieChart.movieChartTab[movieChart.movieChartTab.length-1], movieChart.movieChartTab.length-1, 2);
 		},
 		
-		// ���대㉧ �ъ����
+		// 타이머 재시작
 		restartTimer : function() {
 			
 			if (oTimer.isRunning = true) {
@@ -1927,7 +1944,7 @@ var movieChart = {
 			movieChart.startTimer();
 		},
 		
-		// ���대㉧ ����
+		// 타이머 시작
 		startTimer : function() {
 			oTimer.start( function() {
 				oFlicking.moveNext();
@@ -1935,16 +1952,16 @@ var movieChart = {
 			}, 7000);
 		},
 		
-		// JSON API �몄�
+		// JSON API 호출
 		ajaxCall : function(url, type, index, targetAreaIndex) {
 			var ajax = new jindo.$Ajax(url, { 
 				method : "GET",
 				onload : function(response){
 					if (url == movieChart.movieChartDefaultJsonUrl) {
-						// ���명�� 
+						// 풀세팅 
 						movieChart.movieChartDefaultJsonCallBack(response, null, index);
 					} else {
-						// 媛�蹂��명��
+						// 개별세팅
 						movieChart.movieChartJsonCallBack(response, null, type, index, targetAreaIndex);
 					}
 				}
@@ -1953,7 +1970,7 @@ var movieChart = {
 		    ajax.request({"type":type});
 		},
 		
-		// 臾대�李⑦�� ���명�� CallBack �⑥��
+		// 무비차트 풀세팅 CallBack 함수
 		movieChartDefaultJsonCallBack : function(response, movieChartList, index) {
 			
 			if (movieChartList == null) {
@@ -1984,7 +2001,7 @@ var movieChart = {
 			oFlicking.getLeftPanelElement().addClass('blind');
 		},
 		
-		// ��由ы�� 諛� 醫��� �ㅻ�寃��댁�� 踰��� �대┃�� �곕Ⅸ CallBack �⑥��
+		// 플리킹 및 좌우 네비게이션 버튼 클릭에 따른 CallBack 함수
 		movieChartJsonCallBack : function(response, movieChartList, type, index, targetAreaIndex) {
 			
 			if (movieChartList == null) {
@@ -2005,14 +2022,14 @@ var movieChart = {
 			oFlicking.getLeftPanelElement().addClass('blind');
 		},
 		
-		// 臾대�李⑦�� ���명�� �몄�
+		// 무비차트 풀세팅 호출
 		fullSettingMovieChart : function(index) {
 			movieChart.setMenuHighlighting(index);
 			
 			var nextIndex = movieChart.getNextIndex(index);
 			var previousIndex = movieChart.getPreviousIndex(index);
 
-			// ���λ����� �곗�댄�곌� �대�� ���ㅻ㈃ ���λ��� �댁��, ����硫� Ajax Call.
+			// 저장변수에 데이터가 이미 있다면 저장변수 이용, 아니면 Ajax Call.
 			if (flickContents[index] && flickContents[nextIndex] && flickContents[previousIndex]) {
 				var movieChartList = new Array(flickContents[index], flickContents[nextIndex], flickContents[previousIndex]);
 				movieChart.movieChartDefaultJsonCallBack(null, movieChartList, index);
@@ -2021,25 +2038,25 @@ var movieChart = {
 			}
 		},
 		
-		// 硫��� ���대�쇱�댄�� 泥�由�
+		// 메뉴 하이라이팅 처리
 		setMenuHighlighting : function(index) {
 			
-			// ��硫��� ���대�쇱�댄��
+			// 탭메뉴 하이라이팅
 			for (i=0; i<movieChart.movieChartTab.length; i++) {
 				jindo.$Element(movieChart.movieChartTab[i] + "_tab").removeClass("on");
 			}
 			jindo.$Element(movieChart.movieChartTab[index] + "_tab").addClass("on");
 			
-			// ��泥대낫湲� URL �명��
+			// 전체보기 URL 세팅
 			jindo.$("movieChartAllView").href = movieChart.movieChartAllViewUrl[index];
 			
-			// [�ㅼ�대�����]�� 寃쎌��, ��泥대낫湲� ���댁��� �ㅻⅤ��. (��李�)
+			// [다운로드순]일 경우, 전체보기 아이콘이 다르다. (새창)
 			if (movieChart.movieChartTab[index] == "DOWNLOAD") {
 				jindo.$Element(jindo.$$.getSingle(".all_view_go")).show();
 				jindo.$("movieChartAllView").target = "_blank";
 				jindo.$Element(jindo.$$.getSingle(".all_view_go")).addClass("dwn");
 			}
-			// [媛�遊�������]�� 寃쎌�� ��留ㅼ�⑥�� 媛�遊����������� �곗�댄�곌� 遺�議깊�댁�� 梨����ｌ�� 寃쎌�곗�대㈃ ��泥� 蹂닿린 留��щ�� 蹂댁�ъ＜吏� ������. 
+			// [개봉예정작]일 경우 예매율순 개봉예정작에서 데이터가 부족해서 채워넣은 경우이면 전체 보기 링크를 보여주지 않는다. 
 			else if (movieChart.movieChartTab[index] == "COMMING" && !this.hasCommingMovieAllViewUrl) {
 				jindo.$Element(jindo.$$.getSingle(".all_view_go")).hide();
 			}
@@ -2051,13 +2068,13 @@ var movieChart = {
 			
 		},		
 		
-		// ��媛��� �ы���명���쇰��硫��몄�� 遺��고�댁�� ��怨� 
+		// 두개의 포토인프라도메인을 분산해서 제공 
 		getPhotoInfraImageDomain : function() {
 			var photoInfraImageDomains = new Array("http://movie.phinf.naver.net", "http://movie2.phinf.naver.net");
 			return photoInfraImageDomains[Math.floor((Math.random()*(2)))];   
 		},
 		
-		// �곗�댄�� escape 泥�由�
+		// 따옴표 escape 처리
 		replaceDoubleQuotationForHTML : function(title) {
 			if (title == null) {
 				return null;
@@ -2077,7 +2094,7 @@ var movieChart = {
 			return result;
 		},
 		
-		// �대�몄��고�� ����
+		// 이미지폰트 정의
 		numberFont : function(value, charName) {
 			var result = "";
 
@@ -2102,7 +2119,7 @@ var movieChart = {
 			return result;
 		},
 		
-		// �ъ�ㅽ�� �댄�� 湲몄�댁���� ����
+		// 포스터 툴팁 길이제한 확인
 		tooltipLengthOver : function(value) {
 			if (value != null && value.length > 18) {
 				return " br";
@@ -2110,7 +2127,7 @@ var movieChart = {
 			return "";
 		},
 		
-		// ��由ы�뱀���� �ㅼ�� index瑜� �삳����.
+		// 플리킹영역 다음 index를 얻는다.
 		getNextIndex : function(index) {
 			var nextIndex = index + 1;
 			if (nextIndex > movieChart.movieChartTab.length - 1) {
@@ -2119,7 +2136,7 @@ var movieChart = {
 			return nextIndex;
 		},
 		
-		// ��由ы�뱀���� �댁�� index瑜� �삳����.
+		// 플리킹영역 이전 index를 얻는다.
 		getPreviousIndex : function(index) {
 			var previousIndex = index - 1;
 			if (previousIndex < 0) {
@@ -2128,7 +2145,7 @@ var movieChart = {
 			return previousIndex;
 		}, 
 		
-		// 媛�遊��������� ��泥대낫湲� 踰��� �몄� �щ�
+		// 개봉예정작의 전체보기 버튼 노출 여부
 		setHasCommingMovieAllViewUrl : function(movieList) {
 			if (movieList.COMMING[movieList.COMMING.length - 1].theater == 0) {
 				this.hasCommingMovieAllViewUrl = false;	
@@ -2137,19 +2154,19 @@ var movieChart = {
 			}
 		},
 
-		// �깃� ���댁� html�� �삳����.
+		// 등급 아이콘 html을 얻는다.
 		getGradeIcon : function(gradeCode) {
 			var result = '<span class="ico_rating_';
 			if (gradeCode == "1001001") {
-				result += 'all">��泥� 愿���媛�'
+				result += 'all">전체 관람가'
 			} else if (gradeCode == "1001002") {
-				result += '12">12�� 愿���媛�'
+				result += '12">12세 관람가'
 			} else if (gradeCode == "1001003") {
-				result += '15">15�� 愿���媛�'
+				result += '15">15세 관람가'
 			} else if (gradeCode == "1001004") {
-				result += '18">泥����� 愿���遺�媛�'
+				result += '18">청소년 관람불가'
 			} else if (gradeCode == "1001005") {
-				result += 'restricted">���� ����媛�'
+				result += 'restricted">제한 상영가'
 			} else {
 				return "";
 			}
@@ -2188,7 +2205,7 @@ var HomeMovieReviewAccordion = jindo.$Class({
 	openReview : function (nIndex) {
 		var aEls = this._welList.queryAll("li ! li");
 		
-		// �대�뱁���� ��紐⑸� <li class="on">
+		// 해당하는 항목만 <li class="on">
 		for (var i = 0; i < aEls.length; i++) {
 			aEls[i].cssClass("on", nIndex == i);
 		}
@@ -2226,19 +2243,19 @@ var nsc = "movie.home";
 	<div class="in_footer">
 		<div class="foot_con">
 				<ul>
-					<li class="first"><a href="http://www.naver.com/rules/service.html" target="rules">�댁�⑹�쎄�</a><!-- N=a:fot.agreement --></li>		
-					<li><a href="http://www.naver.com/rules/privacy.html" target="rules"><strong>媛��몄��蹂댁�由щ갑移�</strong></a><!-- N=a:fot.privacy --></li>
-					<li><a href="http://www.naver.com/rules/disclaimer.html" target="rules">梨����� ��怨��� 踰���怨�吏�</a><!-- N=a:fot.disclaimer --></li>		
-					<li><a href="https://help.naver.com/support/service/main.nhn?serviceNo=800" target="customer">���� 怨�媛��쇳��</a><!-- N=a:fot.help --></li>
+					<li class="first"><a href="http://www.naver.com/rules/service.html" target="rules">이용약관</a><!-- N=a:fot.agreement --></li>		
+					<li><a href="http://www.naver.com/rules/privacy.html" target="rules"><strong>개인정보처리방침</strong></a><!-- N=a:fot.privacy --></li>
+					<li><a href="http://www.naver.com/rules/disclaimer.html" target="rules">책임의 한계와 법적고지</a><!-- N=a:fot.disclaimer --></li>		
+					<li><a href="https://help.naver.com/support/service/main.nhn?serviceNo=800" target="customer">영화 고객센터</a><!-- N=a:fot.help --></li>
 				</ul>
-				<p class="info">蹂� 肄���痢��� ����沅��� ����沅��� ���� ��怨듭��� ���쇰ŉ, �대�� 臾대�� �댁�⑺���� 寃쎌�� ����沅�踰� �깆�� �곕�� 踰��� 梨����� 吏� �� ���듬����.</p>
+				<p class="info">본 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</p>
 				<p class="info">
-					�ъ�����깅�踰��� : 220-81-62517<span>�듭����留ㅼ�� ��怨�踰���</span> : 寃쎄린�깅�� �� 2006 - 692��<span>�����댁�� : ���깆��</span><span><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">�ъ�����깅���蹂� ����</a><!-- N=a:fot.bizinfo --></span><br>
-					二쇱�� : 寃쎄린�� �깅�⑥�� 遺��밴뎄 遺���濡� 6 �ㅼ�대� 洹몃┛�⑺��由� <span>�������� : 1588-3820</span>
+					사업자등록번호 : 220-81-62517<span>통신판매업 신고번호</span> : 경기성남 제 2006 - 692호<span>대표이사 : 한성숙</span><span><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">사업자등록정보 확인</a><!-- N=a:fot.bizinfo --></span><br>
+					주소 : 경기도 성남시 분당구 불정로 6 네이버 그린팩토리 <span>대표전화 : 1588-3820</span>
 				</p> 
 				<address>
 					<a href="http://www.navercorp.com/" target="_blank" class="logo"><img src="./moviehomefiles/logo_naver.png" width="63" height="11" alt="NAVER"></a><!-- N=a:fot.nhn -->
-					<em>Copyright 짤</em>
+					<em>Copyright ©</em>
 					<a href="http://www.navercorp.com/" target="_blank">NAVER Corp.</a><!-- N=a:fot.corp -->
 					<span>All Rights Reserved.</span>
 				</address>
@@ -2257,7 +2274,7 @@ var nsc = "movie.home";
 
 if (false) {
 	var alertType = "NONE";
-	var koreanTitle = "��鍮��� ��臾쇱�ъ��";
+	var koreanTitle = "신비한 동물사전";
 	var movieCode = "115642";
 	var userReserveCount = "1";
 	var todayDatetime = "20171206093006";
@@ -2272,12 +2289,12 @@ if (false) {
 function openWriteActualPointAlert (alertType, koreanTitle, movieCode, count, today, endDate) {
 	if (alertType == "ONE") {
 		setCookieLastUserReserveDate(today, endDate);
-		if (confirm("愿������� " + koreanTitle + "��\n���� �깅� �� �ㅼ�대����� �ъ�명�� 500�� ��由�!\n吏�湲� �����곌린 硫��대� �대������寃��듬��源�?")) {
+		if (confirm("관람하신 " + koreanTitle + "에\n평점 등록 시 네이버페이 포인트 500원 적립!\n지금 평점쓰기 메뉴로 이동하시겠습니까?")) {
 			top.location.href = "http://movie.naver.com/movie/bi/mi/point.nhn?code=" + movieCode;
 		}
 	} else if (alertType == "MORE") {
 		setCookieLastUserReserveDate(today, endDate);
-		if (confirm("愿������� ������ ������ �깅��댁＜�몄��\n������ �ㅼ�대����� �ъ�명�� 500���� ��由�!\n���� 誘몃�깅��� 由ъ�ㅽ�몃�� ���명����寃��듬��源�?")) {
+		if (confirm("관람하신 작품에 평점을 등록해주세요\n작품당 네이버페이 포인트 500원씩 적립!\n평점 미등록작 리스트를 확인하시겠습니까?")) {
 			top.location.href = "http://ticket.movie.naver.com/Order/OverdueList.aspx";
 		}
 	}
@@ -2296,19 +2313,13 @@ function setCookieLastUserReserveDate(today, endDate) {
 
 </script>
 
-
-
-
-
-
-
 	<!-- //footer -->
 </div>
 <script type="text/javascript">
 
 jindo.$Fn(function (we) {
 
-	// ���� 寃�������
+	// 상단 검색영역
 	var oSearch = new nhn.movie.Search({
 		area : "jSearchArea",
 		autosearch : "http://auto.movie.naver.com/ac?q_enc=UTF-8&st=1&r_lt=1&n_ext=1&t_koreng=1&r_format=json&r_enc=UTF-8&r_unicode=0&r_escape=1&q=",
@@ -2316,13 +2327,13 @@ jindo.$Fn(function (we) {
 		peoplelink : "/movie/bi/pi/basic.nhn?code="
 	});
 
-    // 醫�痢� LNB
+    // 좌측 LNB
     var oLNB = new nhn.movie.LNB();
 	if( typeof oViewMode != "undefined") {
 		oViewMode.attach('change', jindo.$Fn(oLNB.update, oLNB).bind());
 	}
 
-    //����寃��� 寃곌낵���� �ъ빱�� ������ 寃쎌��, 寃��� 寃곌낵瑜� 吏��곕��濡� 蹂�寃�.
+    //영화검색 결과에서 포커스 아웃될 경우, 검색 결과를 지우도록 변경.
     jindo.$Element("lnb_gonaver").attach("focus",function(e){
     	
     	jindo.$Element('search_placeholder').attr({
@@ -2339,13 +2350,13 @@ jindo.$Fn(function (we) {
 }).attach(document, 'domready');
 </script>
 <script type="text/javascript">
-	//nClick 珥�湲고�� ����
-	//�대┃濡�洹� 吏�怨� 肄��� 異�媛�
+	//nClick 초기화 영역
+	//클릭로그 집계 코드 추가
 	var ccsrv="cc.naver.com";
 	var nclk_evt = 1;
 	
 	nclk_do();
-	//nClick 珥�湲고�� ���� ��
+	//nClick 초기화 영역 끝
 </script>
 
 </body></html>

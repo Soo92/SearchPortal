@@ -1,0 +1,1658 @@
+@charset "UTF-8";
+/* NTS UI Development 2Team PSJ 110803 */
+/* Common */
+.scrl {
+	scrollbar-face-color: #fff;
+	scrollbar-track-color: #f7f7f7;
+	scrollbar-arrow-color: #8d8d8d;
+	scrollbar-highlight-color: #fff;
+	scrollbar-3dlight-color: #e3e3e3;
+	scrollbar-shadow-color: #fff;
+	scrollbar-darkshadow-color: #e3e3e3;
+}
+
+/* 포인트 컬러 */
+.fc_point {
+	color: #2eb1d3 !important;
+}
+
+/* layout */
+#footer ul li a {
+	color: #333;
+}
+
+#footer ul li span {
+	color: #ededed;
+}
+
+#footer .contact span {
+	color: #ededed;
+}
+
+#footer address .logo {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -414px -1120px;
+}
+
+#footer a.service {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -1120px;
+}
+
+.widget_visitor ul li.frst {
+	border-color: #f2f2f2;
+}
+
+/* title */
+.title, .title2 {
+	color: #313131;
+}
+
+/* gnb */
+.gnb ul li a {
+	color: #757777;
+}
+
+.gnb ul li a span.bu {
+	*background-position: -430px -27px !important;
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -470px -28px;
+}
+
+.gnb ul li .bar {
+	color: #ededed;
+	*line-height: 12px !important;
+}
+
+/* seller profile */
+.sellershop_identity {
+	border-color: #313131;
+	border-bottom-color: #eaeaea;
+}
+
+.sellershop_identity .inner h1 a {
+	color: #191919;
+}
+
+.sellershop_identity .inner p a {
+	color: #8f8f8f;
+}
+
+.sellershop_identity .inner p .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -87px;
+}
+
+.sellershop_identity .inner p .bar {
+	color: #ededed;
+}
+
+.sellershop_identity .inner .ico_bookmark {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -500px;
+}
+
+.sellershop_identity .inner .ico_talk {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -150px -455px;
+}
+
+.sellershop_identity a.logo {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -1120px;
+}
+
+.seller_profile .info .thmb, .seller_profile .info .thmb_no {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -470px -640px;
+}
+
+.seller_profile .info .dsc a {
+	color: #555;
+}
+
+.seller_profile .info .lk a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -58px;
+}
+
+.seller_profile .info .lk .bar {
+	color: #ccc;
+}
+
+.seller_profile .subscribe p .bar {
+	color: #ccc;
+}
+
+.seller_profile .info .sns a.ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.seller_profile .info .sns a.blog {
+	background-position: -140px -30px;
+}
+
+.seller_profile .info .sns a.meto {
+	background-position: -210px -30px;
+}
+
+.seller_profile .info .sns .txt {
+	color: #555;
+}
+
+.seller_profile .info .sns .txt a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -58px;
+}
+
+.seller_profile .subscribe p a .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -57px;
+}
+
+.seller_profile .subscribe .cnt {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -580px;
+}
+
+.seller_profile .subscribe .cnt strong {
+	color: #000;
+}
+
+.seller_profile .subscribe .cnt a.on {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -380px -640px;
+}
+
+.title_banner .mask {
+	background: url(http://img.shop.naver.net/front/common/blank.gif) repeat 0 0;
+}
+
+/* search */
+.searchbar {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -160px;
+}
+
+.searchbar .ipt {
+	background: none;
+	color: #959595;
+}
+
+/* category */
+.category .norm_depth li a {
+	color: #191919;
+}
+
+.category .norm_depth li a.on {
+	color: #2eb1d3;
+}
+
+.category .norm_depth li a .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -460px -52px;
+}
+
+.category .norm_depth li a.on .bu {
+	background-position: -460px -82px;
+}
+
+.category .norm_depth ul li a {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -554px -56px;
+}
+
+.category .norm_depth ul li a .bu {
+	background-position: -460px -53px;
+}
+
+.category .norm_depth ul li a.on .bu {
+	background-position: -460px -83px;
+}
+
+.category .more a {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -510px -90px;
+}
+
+.category .more a.clse {
+	background-position: -555px -90px;
+}
+
+.cate_sub_depth .inner .lst {
+	border-color: #313131;
+	background: #fff;
+}
+
+.cate_sub_depth ul li a:hover, .cate_sub_depth ul li a:active, .cate_sub_depth ul li a:focus, .cate_sub_depth ul li a.on {
+	background: #f4f5f7;
+}
+
+.cate_sub_depth ul li a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -460px -52px;
+}
+
+.cate_full_menu ul li .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -160px;
+}
+
+.cate_full_menu ul li.on .bu {
+	background-position: 0 -190px;
+}
+
+/* component */
+.cpnt_notice .rolling_lst .lst li a {
+	color: #959595;
+}
+
+.cpnt_notice .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px 0;
+}
+
+.cpnt_notice a.unfd {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -206px -275px;
+}
+
+.cpnt_notice a.unfd:hover, .cpnt_notice a.unfd:active, .cpnt_notice a.unfd:focus {
+	background-position: -280px -280px;
+}
+
+.event_exhibition .showcase a.link {
+	background: url(http://img.shop.naver.net/front/common/blank.gif) repeat 0 0;
+}
+
+.event_exhibition .showcase .info {
+	background: #abacae;
+}
+
+.event_exhibition .showcase .info dl {
+	color: #fff;
+}
+
+.event_exhibition .showcase .info dl dd span {
+	color: #dddedf;
+}
+
+.best_review_product .over_menu .sns .inner p {
+	color: #b3b3b3;
+}
+
+.best_review_product .over_menu .sns .inner p a {
+	color: #b3b3b3;
+}
+
+.best_review_product .over_menu .sns .inner p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 4px -136px;
+}
+
+.best_review_product .over_menu .sns .inner p .thm {
+	color: #fff;
+}
+
+.best_review_product .over_menu .sns .inner p .bar {
+	color: #57585b;
+}
+
+.best_review_product .over_menu .side {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.best_review_product .tit a {
+	color: #313131;
+}
+
+.best_review_product .tit a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.best_review_product .price strong {
+	color: #313131;
+}
+
+.best_review_product dl dt .bar {
+	color: #f2f2f2;
+}
+
+.best_review_product a.more {
+	color: #b3b3b3;
+}
+
+.ranking_product {
+	border-color: #eee;
+}
+
+.ranking_product ol li .price {
+	color: #313131;
+}
+
+.special_product {
+	border-color: #eee;
+}
+
+.special_product .over_menu .sns .inner p {
+	color: #b3b3b3;
+}
+
+.special_product .over_menu .sns .inner p a {
+	color: #b3b3b3;
+}
+
+.special_product .over_menu .sns .inner p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 4px -136px;
+}
+
+.special_product .over_menu .sns .inner p .thm {
+	color: #fff;
+}
+
+.special_product .over_menu .sns .inner p .bar {
+	color: #57585b;
+}
+
+.special_product .over_menu .side {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.special_product .tit a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.special_product .date .bar {
+	color: #f2f2f2;
+}
+
+.special_product .price strong {
+	color: #313131;
+}
+
+.small_banner {
+	border-color: #eee;
+}
+
+.rolling {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px 0;
+}
+
+/* paginate */
+.paginate a, .paginate strong, .paginate span {
+	border-color: #edeeef;
+	border-color: #d1d2d6;
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) repeat-x 0 0;
+	color: #323232;
+}
+
+.paginate strong {
+	color: #2eb1d3 !important;
+	border-color: #999ba4;
+	background: #fff;
+}
+
+.paginate .pre {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -835px !important;
+}
+
+.paginate .next {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 100% -835px !important;
+}
+
+.paginate .pre_end {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -905px !important;
+}
+
+.paginate .next_end {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 100% -905px !important;
+}
+
+.paginate .pre, .paginate .next, .paginate .pre_end, .paginate .next_end {
+	color: #505050;
+}
+
+.paginate .pre:hover {
+	background-position: 0 -800px !important;
+}
+
+.paginate .next:hover {
+	background-position: 100% -800px !important;
+}
+
+.paginate .pre_end:hover {
+	background-position: 0 -870px !important;
+}
+
+.paginate .next_end:hover {
+	background-position: 100% -870px !important;
+}
+
+.paginate a.pre, .paginate a.next {
+	color: #323232;
+}
+
+.paginate a:hover {
+	background: #fff;
+	color: #2eb1d3;
+}
+
+/* button */
+a.btn_type {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -370px;
+	color: #5f5f5f;
+}
+
+a.btn_type span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 100% -370px;
+}
+
+/* 상품 기본 뷰타입 */
+.sec_dis_list {
+	border-color: #f2f2f2;
+}
+
+.sec_dis_list li {
+	border-color: #f2f2f2;
+}
+
+.sec_dis_list .over_menu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.sec_dis_list .info dt a {
+	color: #5f5f5f;
+}
+
+.sec_dis_list .info dt a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.sec_dis_list .info dt em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.sec_dis_list .info dt em.new {
+	background-position: -210px -140px;
+}
+
+.sec_dis_list .info dt em.best {
+	background-position: -140px -140px;
+}
+
+.sec_dis_list .info .price {
+	color: #5f5f5f;
+}
+
+.sec_dis_list .info .price strong {
+	color: #313131;
+}
+
+.sec_dis_list .side_area {
+	border-color: #f2f2f2;
+}
+
+.sec_dis_list .addit_info p .bar {
+	color: #f2f2f2;
+}
+
+.sec_dis_list .addit_info p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 3px -136px;
+}
+
+.sec_dis_list .addit_info p a:hover .arw, .sec_dis_list .addit_info p a.on .arw {
+	background-position: -70px -140px;
+}
+
+.sec_dis_list .benefit li {
+	border-color: #e5e5e5;
+	background: #fff;
+}
+
+.sec_dis_img .over_menu .sns .inner p {
+	color: #b3b3b3;
+}
+
+.sec_dis_img .over_menu .sns .inner p a {
+	color: #b3b3b3;
+}
+
+.sec_dis_img .over_menu .sns .inner p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 4px -136px;
+}
+
+.sec_dis_img .over_menu .sns .inner p .thm {
+	color: #fff;
+}
+
+.sec_dis_img .over_menu .sns .inner p .bar {
+	color: #57585b;
+}
+
+.sec_dis_img .over_menu .side {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.sec_dis_img .info dt a {
+	color: #5f5f5f;
+}
+
+.sec_dis_img .info dt a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.sec_dis_img .info dt em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.sec_dis_img .info dt em.new {
+	background-position: -210px -140px;
+}
+
+.sec_dis_img .info dt em.best {
+	background-position: -140px -140px;
+}
+
+.sec_dis_img .info .price {
+	color: #5f5f5f;
+}
+
+.sec_dis_img .info .price strong {
+	color: #313131;
+}
+
+.sec_dis_img .info .addit_info span.bar {
+	color: #f2f2f2;
+}
+
+.sec_dis_galry .lst li {
+	background: #fff;
+}
+
+.sec_dis_galry .over_menu .side {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.sec_dis_galry .info dt a {
+	color: #999;
+}
+
+.sec_dis_galry .info dt a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -50px -60px;
+}
+
+.sec_dis_galry .info dt em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.sec_dis_galry .info dt em.new {
+	background-position: -210px -140px;
+}
+
+.sec_dis_galry .info dt em.best {
+	background-position: -140px -140px;
+}
+
+.sec_dis_galry .info .price {
+	color: #f9f9f9;
+}
+
+.sec_dis_galry .info .price em {
+	color: #666;
+}
+
+.sec_dis_galry .info .price strong {
+	color: #fff;
+}
+
+.sec_dis_galry .info .addit_info p {
+	color: #b3b3b3;
+}
+
+.sec_dis_galry .info .addit_info p .bar {
+	color: #72706e;
+}
+
+.sec_dis_galry .info .addit_info p .meto {
+	color: #fff;
+}
+
+.sec_dis_galry .info .addit_info p a {
+	color: #b3b3b3;
+}
+
+.sec_dis_galry .info .addit_info p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 4px -136px;
+}
+
+/* 컬렉션 */
+.sec_dis_mosaic h3 {
+	background: #abacae;
+}
+
+.sec_dis_mosaic h3 .tit strong {
+	color: #fff;
+}
+
+.sec_dis_mosaic h3 .tit em {
+	color: #e1e1e1;
+}
+
+.sec_dis_mosaic .overwrap .info .tit {
+	color: #999;
+}
+
+.sec_dis_mosaic .overwrap .info .price {
+	color: #666;
+}
+
+.sec_dis_mosaic .overwrap .info .price2 {
+	color: #fff;
+}
+
+.sec_dis_mgz {
+	border-color: #ededed;
+	background: #fff;
+}
+
+.sec_dis_mgz .lst li .thmb a {
+	background: url(http://img.shop.naver.net/front/common/blank.gif) repeat 0 0;
+}
+
+.sec_dis_mgz .lst li .thmb a:hover, .sec_dis_mgz .lst li .thmb a.on {
+	border-color: #313131;
+}
+
+.sec_dis_mgz .lst li em {
+	color: #5f5f5f;
+}
+
+.sec_dis_mgz .zin_view {
+	background: #fff;
+}
+
+.sec_dis_mgz .zin_view .info {
+	background: #fff;
+}
+
+.sec_dis_mgz .zin_view .info p a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.sec_dis_mgz .zin_view .info strong {
+	color: #313131;
+}
+
+.sec_dis_fullimg {
+	border-color: #ededed;
+}
+
+.sec_dis_fullimg .viewer a.btn {
+	background: url(http://img.shop.naver.net/front/common/blank.gif) repeat 0 0;
+}
+
+.sec_dis_fullimg .lst ul li .info strong {
+	color: #313131;
+}
+
+.sec_dis_fullimg .lst ul li .info a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.sec_dis_fullimg .lst ul li .thmb a {
+	background: url(http://img.shop.naver.net/front/common/blank.gif) repeat 0 0;
+}
+
+.sec_dis_fullimg .lst ul li .thmb a:hover, .sec_dis_fullimg .lst ul li .thmb a.on {
+	border-color: #313131;
+}
+
+.sec_dis_coordicut .zin_view {
+	background: #fff;
+}
+
+.sec_dis_coordicut .zin_view .info {
+	background: #fff;
+}
+
+.sec_dis_coordicut .zin_view .info p a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.sec_dis_coordicut .zin_view .info strong {
+	color: #313131;
+}
+
+/* 상품수적은 경우 */
+.fewer_item ul li {
+	border-color: #ededed;
+}
+
+.fewer_item .thmb {
+	background: #fff;
+}
+
+.fewer_item .info .prd_name strong {
+	color: #313131;
+}
+
+.fewer_item .info .prd_name strong em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.fewer_item .info .prd_name strong em.new {
+	background-position: -210px -140px;
+}
+
+.fewer_item .info .prd_name strong em.best {
+	background-position: -140px -140px;
+}
+
+.fewer_item .info .prd_name .sub {
+	color: #b3b3b3;
+}
+
+.fewer_item .info .price .cost {
+	color: #b3b3b3;
+}
+
+.fewer_item .info .benefit ul {
+	color: #5f5f5f;
+}
+
+.fewer_item .info .benefit ul li .bar {
+	color: #e2e2e2;
+}
+
+.fewer_item .info .sft {
+	color: #5f5f5f;
+}
+
+.fewer_item .info .sft .thm {
+	color: #313131;
+}
+
+.fewer_item .info .sft .bar {
+	color: #f2f2f2;
+}
+
+.fewer_item .info .btn a {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.fewer_item .info .btn a.detail {
+	background-position: -350px -765px;
+}
+
+.fewer_item .info .btn a.scrap {
+	background-position: -470px -765px;
+}
+
+/* 판매 상품 없음 */
+.no_goods {
+	border-color: #e5e5e5;
+}
+
+/* 상품 상세 > 비행기 아이콘 */
+.overseas em .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -555px -30px;
+}
+
+/* 상품 상세 간편구매 */
+.group_ezbuy .ezbuy_memo .memo {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -680px;
+}
+
+/* sns */
+.sns_area .la, .sns_area .ra {
+	border-color: #f5f5f5;
+}
+
+.sns_area .buy_rating .lst ul li .bd_area {
+	border-color: #f2f2f2;
+}
+
+.sns_area .buy_rating .lst ul li .txt p {
+	color: #999;
+}
+
+.sns_area .buy_rating .lst ul li .txt p .inner strong {
+	color: #5f5f5f;
+}
+
+.sns_area .buy_rating .lst ul li .txt p .bar {
+	color: #f2f2f2;
+}
+
+.sns_area .la_v1 .buy_rating .lst ul li {
+	border-color: #f2f2f2;
+}
+
+/* 상품 상세 공통 */
+.prd_detail_common {
+	border-color: #ededed;
+}
+
+.prd_detail_common .goods_wrap, .prd_detail_common .ra {
+	border-color: #f5f5f5;
+}
+
+.prd_detail_common .sec_dis_img .info dt strong {
+	color: #313131;
+}
+
+.prd_detail_common .ra .sec_dis_img .info .date em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -60px;
+}
+
+.prd_detail_common .sec_dis_list .lst li ul li {
+	border-color: #f5f5f5;
+}
+
+.prd_detail_common .sec_dis_galry .info dt a {
+	color: #b3b3b3;
+}
+
+.prd_detail_common .sec_dis_galry .info .price {
+	color: #f9f9f9;
+}
+
+.detail_view {
+	border-color: #ededed;
+}
+
+.detail_view .tab .inner {
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) repeat-x 0 -50px;
+}
+
+.detail_view .tab ul {
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) no-repeat 0 -100px;
+}
+
+.detail_view .tab ul li.frst a {
+	background-position: 0 -150px;
+}
+
+.detail_view .tab ul li a {
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) no-repeat 0 -150px;
+	color: #fff;
+}
+
+.detail_view .tab ul li a span {
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) no-repeat 100% -150px;
+}
+
+.detail_view .tab ul li.on {
+	background: url(http://img.shop.naver.net/front/simple/normal/sp_hr_v2.gif) repeat-x 0 -200px;
+}
+
+.detail_view .tab ul li.on a {
+	background-position: 0 -250px;
+}
+
+.detail_view .tab ul li.on a span {
+	background-position: 100% -250px;
+}
+
+.detail_view .tab a.top {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -580px;
+	color: #fff;
+}
+
+.detail_view .notice dt {
+	color: #313131;
+}
+
+.detail_view .notice dd {
+	color: #5f5f5f;
+}
+
+.detail_view .p_qna a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -430px;
+}
+
+.buy_rating_lst ul, .buy_rating_lst li {
+	border-color: #ededed;
+}
+
+.buy_rating_lst dl dt {
+	color: #5f5f5f;
+}
+
+.buy_rating_lst dl .cont {
+	color: #999;
+}
+
+.buy_rating_lst dl .cont a {
+	color: #5f5f5f;
+}
+
+.buy_rating_lst dl .cont .bar {
+	color: #f2f2f2;
+}
+
+.buy_rating_lst dl .cont .view span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -30px;
+}
+
+.buy_rating_lst .thmb a.mj_img .num {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -580px;
+	color: #5f5f5f;
+}
+
+.buy_rating_lst .over_img img {
+	background: #fff;
+}
+
+.buy_rating_lst .zin_img img {
+	border-color: #313131;
+}
+
+.buy_rating_lst2 ul, .buy_rating_lst2 li {
+	border-color: #ededed;
+}
+
+.buy_rating_lst2 dl dt {
+	color: #5f5f5f;
+}
+
+.buy_rating_lst2 dl dt .bar {
+	color: #f2f2f2;
+}
+
+.buy_rating_lst2 dl .info .bar {
+	color: #f2f2f2;
+}
+
+.buy_rating_lst2 dl .info a {
+	color: #b3b3b3;
+}
+
+.return_exchange {
+	border-color: #f5f5f5;
+}
+
+.return_exchange dl dt, .return_exchange ol li .num {
+	color: #313131;
+}
+
+.seller_info .seller dt {
+	color: #5f5f5f;
+}
+
+.seller_info .seller dt strong {
+	color: #313131;
+}
+
+.seller_info .seller dt .bar {
+	color: #f2f2f2;
+}
+
+.seller_info .seller dt .blank {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px 0;
+}
+
+.seller_info .seller dd {
+	color: #5f5f5f;
+}
+
+.seller_info .nbp dt {
+	color: #5f5f5f;
+}
+
+.seller_info .nbp dd {
+	color: #b3b3b3;
+}
+
+.seller_info .notice2 dt {
+	color: #313131;
+}
+
+.seller_info .notice2 ul li.impt {
+	color: #5f5f5f;
+}
+
+.seller_info .notice2 ul li span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -51px;
+}
+
+.seller_info .bx {
+	border-color: #f5f5f5;
+	background: #fcfcfc;
+}
+
+.seller_info .bx dl.frst {
+	border-color: #ededed;
+}
+
+.seller_info .bx dl dt {
+	color: #313131;
+}
+
+.seller_info .bx dl dd .btn a {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -370px;
+}
+
+.seller_info .bx dl dd .btn a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 100% -370px;
+}
+
+.seller_intro .nbp {
+	color: #959595;
+}
+
+.seller_intro .cont {
+	border-color: #ededed;
+}
+
+.seller_intro .map dt {
+	color: #313131;
+}
+
+.seller_intro .map dt .blank {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px 0;
+}
+
+/* sub title */
+.h_area .loc .bar, .h_area .loc .bar2 {
+	color: #ddd;
+}
+
+.h_area .loc strong {
+	color: #5f5f5f;
+}
+
+.h_area .loc a.depth {
+	color: #5f5f5f;
+}
+
+.h_area .loc a .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -26px;
+}
+
+.h_area .loc .last_depth a {
+	color: #5f5f5f;
+}
+
+.h_area .loc a.more {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -427px -26px;
+}
+
+.h_area .loc .last_depth a.more {
+	background-position: -552px -186px;
+}
+
+.add_cate_lst {
+	border-color: #313131;
+	background: #fff;
+}
+
+.add_cate_lst a {
+	color: #5f5f5f;
+}
+
+.h_area .align label, .h_area .align select {
+	color: #959595;
+}
+
+.h_area .align2 select {
+	color: #959595;
+}
+
+.h_area .sort li a {
+	color: #757777;
+}
+
+.h_area .sort li a.on {
+	color: #5f5f5f;
+}
+
+.h_area .sort li span {
+	color: #f1f1f1;
+}
+
+.h_area a.submit {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -370px;
+}
+
+.h_area a.submit span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 100% -370px;
+}
+
+.h_area2 h3 {
+	color: #313131;
+}
+
+.h_area2 .tab span.on a {
+	color: #313131;
+}
+
+.h_area2 .tab .thm {
+	color: #b3b3b3;
+}
+
+.h_area2 .tab .bar {
+	color: #f2f2f2;
+}
+
+.h_area3 h3 {
+	color: #313131;
+}
+
+.h_area3 select {
+	color: #999;
+}
+
+.h_area3 .sort li a.on {
+	color: #5f5f5f;
+}
+
+.h_area3 .sort li span {
+	color: #f1f1f1;
+}
+
+/* 뷰타입 정렬 */
+.lst_align .sort li a.on {
+	color: #5f5f5f;
+}
+
+.lst_align .sort li span {
+	color: #f1f1f1;
+}
+
+.fnct_area .view_type {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.fnct_area .view_type li.type a.on {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -30px;
+}
+
+.fnct_area .view_type li.type2 a.on {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -28px -30px;
+}
+
+.fnct_area .view_type li.type3 a.on {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -56px -30px;
+}
+
+.fnct_area .view_type li.type4 a.on {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -84px -30px;
+}
+
+/* table */
+.tb_lst {
+	border-color: #ededed;
+}
+
+.tb_lst th {
+	border-color: #ededed;
+	background: #fafafa;
+	color: #313131;
+}
+
+.tb_lst td {
+	border-color: #ededed;
+}
+
+.tb_lst .impt .num {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -430px;
+}
+
+.tb_lst .q_info .tit em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 0;
+}
+
+.tb_lst .q_info .tit em.new {
+	background-position: -210px -140px;
+}
+
+.tb_lst .q_info .tit .ico {
+	background-position: -280px 0;
+}
+
+.tb_lst .q_info .tit .ico2 {
+	background-position: -280px -30px;
+}
+
+.tb_lst .q_info .cate {
+	color: #959595;
+}
+
+.tb_lst .qna_view {
+	border-color: #ededed;
+}
+
+.tb_lst .qna_view .an {
+	border-color: #f2f2f2;
+}
+
+.tb_lst .qna_view .an .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px 0;
+}
+
+.tb_lst .qna_view .btn .bar {
+	color: #f2f2f2;
+}
+
+.tb_lst .buy_rating dl .cate {
+	color: #959595;
+}
+
+.tb_lst .buy_rating dl .cate .bar {
+	color: #f2f2f2;
+}
+
+.tb_lst .buy_rating dl .opt {
+	color: #959595;
+}
+
+.tb_lst .buy_rating dl .cont {
+	color: #999;
+}
+
+.tb_lst .buy_rating dl .cont a {
+	color: #5f5f5f;
+}
+
+.tb_lst .buy_rating dl .cont .bar {
+	color: #f2f2f2;
+}
+
+.tb_lst .buy_rating dl .cont .date {
+	color: #b3b3b3;
+}
+
+.tb_lst .buy_rating dl .cont .view a {
+	color: #959595;
+}
+
+.tb_lst .buy_rating dl .cont .view span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -30px;
+}
+
+.tb_lst .buy_rating .thmb, .tb_lst .buy_rating .over_img {
+	background: #fff;
+}
+
+.tb_lst .buy_rating .thmb a.mj_img .num {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -580px;
+	color: #5f5f5f;
+}
+
+.tb_lst .review_info .review {
+	color: #5f5f5f;
+}
+
+.tb_lst .review_info .bm {
+	color: #959595;
+}
+
+.tb_lst .none {
+	color: #5f5f5f;
+}
+
+.tb_view dt {
+	border-color: #ededed;
+	color: #959595;
+}
+
+.tb_view dt .sbj {
+	color: #5f5f5f;
+}
+
+.tb_view dt .sbj .impt {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -430px;
+}
+
+.tb_view dt .info .bar {
+	color: #f2f2f2;
+}
+
+.tb_view dd.cont {
+	border-color: #ededed;
+	color: #999;
+}
+
+.tb_write {
+	border-color: #ededed;
+}
+
+.tb_write th, .tb_write td {
+	border-color: #ededed;
+}
+
+.tb_write th {
+	background: #fafafa;
+	color: #313131;
+}
+
+/* 검색 또는 데이터 없음 */
+.none_srch, .none_data {
+	border-color: #ededed;
+	color: #5f5f5f;
+}
+
+.none_data3 {
+	border-color: #e5e5e5;
+}
+
+.none_data3 dt {
+	color: #5c5f68;
+}
+
+.none_data3 dd ul li {
+	color: #9194a1;
+}
+
+.none_data4 {
+	border-color: #ededed;
+}
+
+.none_data5 {
+	border-color: #e5e5e5;
+	color: #5c5f68;
+}
+
+.none_data6 {
+	border-color: #ededed;
+	color: #b3b3b3;
+}
+
+.temp_error .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -250px;
+}
+
+.temp_error .blank {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px 0;
+}
+
+.temp_error_v2 {
+	border-color: #ededed;
+}
+
+.temp_error2 .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -250px;
+}
+
+.preview_lst li {
+	border-color: #ededed;
+	color: #959595;
+}
+
+.preview_lst li p a {
+	color: #5f5f5f;
+}
+
+/* 스페셜상품 */
+.prd_special h3 {
+	color: #313131;
+}
+
+.prd_special .sec_dis_img .info dt strong {
+	color: #313131;
+}
+
+.prd_special .sec_dis_img .info .term {
+	color: #b3b3b3;
+}
+
+/* 추천 상품 */
+.prd_recomm h2, .prd_recomm h3 {
+	color: #313131;
+}
+
+.prd_recomm .bd_area {
+	border-color: #ededed;
+}
+
+/* 기획전 */
+.promotion .tit_prom .inner h2 {
+	color: #111;
+}
+
+.promotion .tit_prom .inner em {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -350px -520px;
+}
+
+.promotion .tit_prom .inner p {
+	color: #91959e;
+}
+
+.promotion .tit_prom select {
+	color: #959595;
+}
+
+.promotion .banner .group {
+	border-color: #ededed;
+	border-bottom-color: #e1e1e1;
+}
+
+.promotion .banner .group ul li {
+	border-color: #f2f2f2;
+}
+
+.promotion .banner .group ul li a {
+	color: #565960;
+}
+
+.promotion .tit_group h3 {
+	color: #1c1c1c;
+}
+
+.promotion .tit_group h3 strong span {
+	background: url(http://img.shop.naver.net/front/common/sp_ico_png24.png) no-repeat 0 0;
+	_background: 0;
+	_filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://img.shop.naver.net/front/common/sp_ico_png24.png',sizingMethod='crop');
+}
+
+.promotion .tit_group a.top {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -190px;
+}
+
+.promotion .sec_dis_buy .over_menu .sns .inner p {
+	color: #b3b3b3;
+}
+
+.promotion .sec_dis_buy .over_menu .sns .inner p a {
+	color: #b3b3b3;
+}
+
+.promotion .sec_dis_buy .over_menu .sns .inner p a .arw {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 4px -136px;
+}
+
+.promotion .sec_dis_buy .over_menu .sns .inner p .thm {
+	color: #fff;
+}
+
+.promotion .sec_dis_buy .over_menu .sns .inner p .bar {
+	color: #57585b;
+}
+
+.promotion .sec_dis_buy .over_menu .side {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -90px;
+}
+
+.promotion .sec_dis_buy .tit a {
+	color: #313131;
+}
+
+.promotion .sec_dis_buy .tit a.scrap {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -140px -530px;
+}
+
+.promotion .sec_dis_buy .adult {
+	color: #959595;
+}
+
+.promotion .sec_dis_buy .price em {
+	color: #959595;
+}
+
+.promotion .sec_dis_buy .price strong {
+	color: #313131;
+}
+
+.promotion .sec_dis_buy .addit_info a, .promotion .sec_dis_buy .addit_info em {
+	color: #959595;
+}
+
+.promotion .sec_dis_buy dl dt .bar {
+	color: #f2f2f2;
+}
+
+.promotion .sec_dis_buy dl dd a {
+	color: #959595;
+}
+
+.promotion .seller_comment {
+	border-color: #efefef;
+}
+
+.promotion .seller_comment h3 strong {
+	color: #1c1c1c;
+}
+
+.promotion .seller_comment h3 .bar {
+	color: #e2e2e2;
+}
+
+.promotion .seller_comment h3 em {
+	color: #777;
+}
+
+.promotion .seller_comment h3 a {
+	color: #959595;
+}
+
+.promotion .seller_comment h3 a span {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -430px -57px;
+}
+
+.promotion .seller_comment p {
+	color: #8d8d8d;
+}
+
+.promotion .seller_comment p .quot {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -190px;
+}
+
+.promotion .seller_comment p .quot2 {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -220px;
+}
+
+.promotion .seller_comment p .bar {
+	color: #ededed;
+}
+
+.promotion .seller_comment p .date {
+	color: #959595;
+}
+
+.promotion .more_view a {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -280px -190px;
+}
+
+.promotion .more_view a.clse {
+	background-position: -280px -220px;
+}
+
+/* layer */
+.ly_ez_buy .btn_order .mask2 {
+	background: #fff;
+}
+
+.ly_bmk {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -1040px;
+}
+
+.ly_bmk_inp {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -1040px;
+}
+
+.ly_bmk_inp strong {
+	color: #fff;
+}
+
+.ly_bmk_inp input {
+	background: none;
+}
+
+.ly_bmk_inp p .btn a {
+	color: #b3b3b3;
+}
+
+.ly_bmk_inp p .btn .bar {
+	color: #ededed;
+}
+
+.ly_bmk_inp p .num {
+	color: #b3b3b3;
+}
+
+.ly_bmk_inp p .num em {
+	color: #5f5f5f;
+}
+
+.ly_bmk_txt {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -210px -1056px;
+}
+
+.ly_bmk_txt strong {
+	color: #fff;
+}
+
+.ly_bmk_txt p a.del {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -428px -248px;
+}
+
+.ly_bmk_ovr {
+	border-color: #313131;
+	background: #fff;
+}
+
+.ly_bmk_ovr a.del {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -428px -248px !important;
+}
+
+.ly_simple_view .info .delivery li.overseas em .ico {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -555px 0;
+}
+
+.ly_wrap_notice .inner {
+	border-color: #313131;
+	background: #fff;
+}
+
+.ly_wrap_notice .ly_footer a.clse {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -470px -220px;
+}
+
+.ly_shopon dd.view a .bu {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat -470px -140px;
+}
+
+/* error page */
+.error_area {
+	border-color: #e5e5e5;
+}
+
+/* 상품상세 > 친환경인증정보 링크 */
+.echo_cfm_wrap .line a.ct_box:hover .txt_ct .num em, .goods_tag li a {
+	color: #2eb1d3;
+}
+
+/* 상세상품태그 */
+/* 옵션 리스트 */
+.goods_option .option_flag {
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat;
+}
+
+/* theme */
+.theme_tag {
+	background-color: #abacae;
+}
+
+.theme_tag .tag_info h3 {
+	color: #fff;
+}
+
+.theme_tag .tag_num em {
+	color: #e1e1e1;
+}
+
+.theme_tag .tag_num em .bar {
+	color: #c6c7c8;
+}
+
+.menu .sell_privacy a:before {
+	content: '';
+	display: inline-block;
+	width: 10px;
+	height: 11px;
+	padding-right: 7px;
+	margin-left: 3px;
+	background: url(http://img.shop.naver.net/storefarm/front/simple/normal/sp_skin_170703.png) no-repeat 0 -220px;
+	vertical-align: -2px;
+}
+
+/*# sourceMappingURL=../map/simple/normal.css.map */
