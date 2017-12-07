@@ -68,31 +68,15 @@
   </head>
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-	<div id="map" style="width:100%;height:50%;"></div>
+    <div id="map"></div>
     <script>
     
       function initAutocomplete() {
-	  	var mapCanvas = document.getElementById("map");  
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 35.152, lng: 129.111},
+          center: {lat: -33.8688, lng: 151.2195},
           zoom: 13,
           mapTypeId: 'roadmap'
         });
-        
-        google.maps.event.addListener(map, 'click', function(event) {
-            placeMarker(map, event.latLng);
-          });
-
-        function placeMarker(map, location) {
-          var marker = new google.maps.Marker({
-            position: location,
-            map: map
-          });
-          var infowindow = new google.maps.InfoWindow({ // infowindow �궗�슜
-            content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
-          });  // �겢由��떆, 留덉빱�몴�떆�� �쐞�룄,寃쎈룄 �굹���궡湲�
-          infowindow.open(map,marker);
-        	}
 
     
         var input = document.getElementById('pac-input');

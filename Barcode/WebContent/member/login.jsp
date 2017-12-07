@@ -49,7 +49,6 @@
                      <tr>
                         <td height="60px">
 							<input type="password" name="pass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" placeholder="비밀번호">
-						   <input type="hidden" name="url" value=<%=url%>>
 					</td>
                      </tr>
 			   </table>
@@ -104,7 +103,9 @@
 						<li class="ulul2"><a href="#">회원정보 고객센터</a></li>
 					</ul>
 			 </div>
+            
          </div>
+            
          </div>
       </div>
       

@@ -8,10 +8,7 @@
 <meta charset="utf-8">
 <head>
 	<title>상품코너</title>
-	<link rel="stylesheet" href="../css/swiper.min.css" type="text/css">
-	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 	<link rel="stylesheet" href="../css/product_style.css" type="text/css">
-	<script type="text/javascript" src="../js/swiper.min.js"></script>
 		
 </head>
 <body>
@@ -46,6 +43,7 @@
 							<li><a href="product_new.jsp">신상품</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_used.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_review.jsp">솔직리뷰</a></li><li class="ulul" id="aaa">|</li>
+							<li class="ulul"><a href="product_plan.jsp">기획전</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_best100.jsp">베스트100</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>
@@ -53,7 +51,7 @@
 					</div>
 					<div id="navRight">
 						<ul>
-							<li><a href="basket.jsp">장바구니</a></li><li class="ulul" id="aaa">|</li>
+							<li><a href="#">장바구니</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="#">찜하기</a></li>
 						</ul>
 					</div>
@@ -77,49 +75,38 @@
 		</div>
 	</div>
 	
-
 	
 	<div id="recommend">
 		<div id="wrap2">
-			<div id="slider_wrap">
-				<div id="slider_aa">
-				    <div class="swiper-container">
-				        <div class="swiper-wrapper">
-				            <div class="swiper-slide" id="s_aaa"></div>
-				            <div class="swiper-slide" id="s_bbb"></div>
-				            <div class="swiper-slide" id="s_ccc"></div>
-				            <div class="swiper-slide" id="s_ddd"></div>
-				            <div class="swiper-slide" id="s_eee"></div>
-						</div>
-				        <!-- Add Pagination -->
-				        <div class="swiper-pagination"></div><!--하단버튼-->
-				        <!-- Add Arrows -->
-				        <div class="swiper-button-next"></div><!--다음-->
-				        <div class="swiper-button-prev"></div><!--전-->
-				    </div>
-					</div>
-					</div><!--슬라이드전체-->
-				
-				    <!-- Swiper JS -->
-				    <script src="swiper.min.js"></script>
-				
-				    <!-- Initialize Swiper -->
-				    <script>
-				    var swiper = new Swiper('.swiper-container', {
-				        pagination: '.swiper-pagination',
-				        nextButton: '.swiper-button-next',
-				        prevButton: '.swiper-button-prev',
-				        paginationClickable: true,
-				        spaceBetween: 30,
-				        centeredSlides: true,
-				        autoplay: 3000,
-				        autoplayDisableOnInteraction: false
-				    });
-				    </script>
+			<div id="slidebox">
+			<ul id="slider">
+				<li>
+					<div id="product"></div>
+				</li>
+				<li>
+					<div id="product_1"></div>
+				</li>
+				<li>
+					<div id="product_2"></div>
+				</li>
+				<li>
+					<div id="product_3"></div>
+				</li>
+			</ul>
+			
+			</div>
+			
+			<script text="text/javascript" src="../js/testScript.js"></script>
+			
+			<div id="slider_button">
+				<div id="_slider_button"></div>
+				<div id="_slider_button" class="space_"></div>
+				<div id="_slider_button" class="space_"></div>
+				<div id="_slider_button" class="space_"></div>
+			</div>
 		</div>
 	</div>
 	
-
 	
 	<div id="wrap">
 		<div id="wrap2">

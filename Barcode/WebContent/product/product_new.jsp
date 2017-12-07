@@ -50,7 +50,7 @@
 					</div>
 					<div id="navRight">
 						<ul>
-							<li><a href="basket.jsp">장바구니</a></li><li class="ulul" id="aaa">|</li>
+							<li><a href="#">장바구니</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="#">찜하기</a></li>
 						</ul>
 					</div>
@@ -76,8 +76,7 @@
 	
 </div>
 
-	<script type="text/javascript" src="../js/follower.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript" src="../js/follower.js">
 		$(document).ready(function(){
 				var speed = 500; //스크롤속도
 				$(".gotop").css("cursor","pointer").click(function(){
@@ -89,66 +88,19 @@
 		$(document).ready(function(){
 			$('#float').scrollFollower({
 				pageAlign:'center',
-				pageWidth:1000,
+				pageWidth:500,
 				type:'right',
 				topMargin:520,
 				minTop:100,
-				margin:80,
+				margin:380,
 				speed:500,
 				easing:'swing',
 				zindex:10
 			});
 		});
 	</script>
-	
 	<div id="float">
-		<div id="view_product">
-			<p>최근 본 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
-			</a>
-			<a href="#">
-			<div id="view_product_link" class="top_space"></div>
-			</a>
-			
-			<div id="button" class="top_space">
-				<table width="40" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							valign:center; margin-top:10px;">
-					<tr>
-						<td height="20px">
-							<a href="#">
-								<p><</p>
-							</a>
-						</td>
-						<td height="20px">
-							<a href="#">
-								<p>></p>
-							</a>
-						</td>
-					</tr>
-				</table>
-			</div>			
-		</div>
-		
-		<div id="recom_pro">
-			<p>추천 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
-			</a>
-
-		</div>
-		
-		<div id="google">
-			<p>광고 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
-			</a>
-
-		</div>
-		
 		<div id="top" onclick="scrolling()">
-			<p> ▲ Top</p>
 		</div>
 		
 		<script type="text/javascript">

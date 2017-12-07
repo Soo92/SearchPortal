@@ -9,7 +9,7 @@ body { font-family: 'Nanum Gothic', son-serif; }
 
 /*header*/
 #all{width:100%; height:auto; margin:0 auto; position:relative;}
-#header_{width:100%; height:auto;position:fixed; z-index:20;}
+#header_{width:100%; height:auto;position:fixed; z-index:8;}
 #header{width:100%; height:55px; background:#ff4800; }
 #logo{width:150px; height:45px; background:#000; float:left; margin-top:5px;}
 #subject{float:left; margin:15px 0px 0px 10px;}
@@ -18,15 +18,6 @@ body { font-family: 'Nanum Gothic', son-serif; }
 #login{float:right; margin-top:12px;}
 #login p{color:#fff; font-size:14px; text-align:center;}
 
-/*swiper*/
-		#s_aaa{width:100%; height:450px; background:#2d2d2d;}
-		#s_bbb{width:100%; height:450px; background:#565656;}
-		#s_ccc{width:100%; height:450px; background:#727272;}
-		#s_ddd{width:100%; height:450px; background:#858585;}
-		#s_eee{width:100%; height:450px; background:black;}
-		.swiper-button-next{background-color:#fff;}
-		.swiper-button-prev{background-color:#fff;}
-		.swiper-container{height:450px;}
 
 /*nav*/
 #nav{margin:0 auto;width:100%; height:30px;
@@ -44,6 +35,31 @@ body { font-family: 'Nanum Gothic', son-serif; }
 #navRight{float:right;}
 
 
+/***********slider*******************************/
+#slidebox {
+		position:relative;
+		width:1100px;
+		height:360px;
+		overflow:hidden;
+		white-space:nowrap;
+		margin-bottom:50px;
+	}
+	#slidebox ul#slider {
+		list-style:none;
+		margin:0;
+		padding:0;
+	}
+	#slidebox ul li {
+		position:absolute;
+		width:1100px;
+		height:300px;
+	}
+	#slidebox ul li img {
+		width:300px;
+		height:200px;
+	}
+
+/***********************************************/
 
 /*section*/
 #search{width:100%; height:150px; padding-top:190px;}
@@ -52,40 +68,13 @@ body { font-family: 'Nanum Gothic', son-serif; }
 					}
 #search_button{width:45px; height:40px; background:#ff4800; float:right;}
 
-/*scroll*/
+/*content*/
+
 #float{width: 120px; height:600px; background:#fff; border:1px lightgray solid;
 			position:absolute; top:120px; left:1500px;}
 #top{width:120px;  height:30px; background:#000;}
 
-#test{width:100%; height:auto; margin: 0 auto;}
-#test_{width:1000px; height:2000px; background:lightblue; margin:0 auto;}
-
-#float{width: 120px; height:600px; background:#fff; border:1px lightgray solid;
-			position:absolute; top:120px; left:1500px;}
-		
-#view_product{width:102px; height:auto; margin:0 auto;}
-#view_product p{font-size:12px; color:gray; line-height:30px; text-align:center;}
-#view_product_link{width:100px; height:100px; border:1px lightgray solid;}
-		
-#recom_pro{width:102px; height:auto; margin:0 auto;}
-#recom_pro p{font-size:12px; color:gray; line-height:30px; text-align:center;}
-
-#google{width:102px; height:auto; margin:0 auto;}
-#google p{font-size:12px; color:gray; line-height:30px; text-align:center;}
-		
-.top_space{margin-top:10px;}
-		
-#button{width:40px; height:auto; margin:0 auto;}
-#button p{line-height:20px;}
-#button a{text-decoration:none;}
-		
-		
-#top{width:120px;  height:40px; background:#ff4800; clear:both; margin:0 auto; cursor:pointer; margin-top:20px;}
-#top p{color:#fff; font-weight:bold; text-align:center; line-height:40px;}
-
-/*content*/
-
-#recommend{width:100%; height:500px; background:#454545; padding-top:50px; z-index:15;}
+#recommend{width:100%; height:500px; background:#454545;}
 #product{width:1090px; height:360px; background:lightgray; margin:0 auto; margin-top:50px; margin-bottom:35px;}
 #product_1{width:1090px; height:360px; background:lightblue; margin:0 auto; margin-top:50px; margin-bottom:35px;}
 #product_2{width:1090px; height:360px; background:lightyellow; margin:0 auto; margin-top:50px; margin-bottom:35px;}
@@ -183,24 +172,8 @@ body { font-family: 'Nanum Gothic', son-serif; }
 
 #review_box p{font-size:12px;}
 
-#basket{width:1100px; background:yellow; height:200px; margin:0 auto;}
-#basket_{width:1100px; height:200px; background:#fff; border:1px lightgray solid;
-				margin:0 auto; float:left;}
-#basket_ p{font-size:12px; line-height:20px;}
-#basket_ th{background:#efefef;}
 
-.order_button{
-						background-color:#ff4800; border:none; color:#fff;
-						padding: 5px 15px; text-align:center; text-decoration: none;
-						font-size:14px; cursor:pointer; 
-						font-family:'Nanum Gothic', son-serif; font-weight:bold;
-						}
-						
-.delete_button{
-						background-color:#282828; border:none; color:#fff;
-						padding: 5px 15px; text-align:center; text-decoration: none;
-						font-size:14px; cursor:pointer;
-						font-family:'Nanum Gothic', son-serif; font-weight:bold;
-						}
-#another{width:180px; height:180px; background:#fff; border:1px lightgray solid; float:left;
-				margin-left:10px; text-align:center; valign:center;}
+
+
+
+

@@ -5,6 +5,7 @@ CREATE TABLE `tblnomal` (
 	`name` CHAR(10) NOT NULL,
 	`gender` CHAR(1) NOT NULL,
 	`birth` CHAR(8) NOT NULL,
+	`phoneNum`CHAR(50) NOT NULL,
 	`email` CHAR(40) NOT NULL,
 	`zipcode` CHAR(7) NOT NULL,
 	`address` CHAR(50) NOT NULL,

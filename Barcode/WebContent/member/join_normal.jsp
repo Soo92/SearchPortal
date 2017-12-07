@@ -20,6 +20,35 @@
 		url = "idCheck.jsp?id=" + id;
 		window.open(url, "IDCheck", "width=300,height=150");
 	}
+	function repassCheck(){
+		if(document.regFrm.pass.value!=document.regFrm.repass.value){
+			document.regFrm.repass.style.backgroundColor='red';
+			document.regFrm.pass.style.backgroundColor='white';
+			return;
+		}else{
+			document.regFrm.repass.style.backgroundColor='yellow';
+			document.regFrm.pass.style.backgroundColor='yellow';
+			return;
+		}
+	}
+	function emailCheck(){
+	    var str=document.regFrm.email.value;	   
+	    var atPos = str.indexOf('@');
+	    var atLastPos = str.lastIndexOf('@');
+	    var dotPos = str.indexOf('.'); 
+	    var spacePos = str.indexOf(' ');
+	    var commaPos = str.indexOf(',');
+	    var eMailSize = str.length;
+	    if (atPos > 1 && atPos == atLastPos && 
+		   dotPos > 3 && spacePos == -1 && commaPos == -1 
+		   && atPos + 1 < dotPos && dotPos + 1 < eMailSize){
+	    	document.regFrm.email.style.backgroundColor='yellow';
+    	}
+	    else {
+	    	document.regFrm.email.style.backgroundColor='red';
+			return;
+	    }
+	}
 	function certification() {
 		alert("우선 1111");
 	}
@@ -55,7 +84,7 @@
 						 </tr>
 						 <tr>
 							<td height="55px">
-								<input type="password" name="repass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="비밀번호 재확인">
+								<input type="password" name="repass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="비밀번호 재확인" onblur="repassCheck()">
 							</td>
 						 </tr>
 				   </table>
@@ -120,7 +149,7 @@
 						 <tr>
 							<td height="55px;"colspan="9">
 							<input name="email" type="text" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center"
-							placeholder="본인확인 이메일(선택)">
+							placeholder="본인확인 이메일(선택)" onblur="emailCheck()">
 							</td>
 						 </tr>
 				   </table>
@@ -146,7 +175,7 @@
 			<table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 						 <tr>
 							<td height="65px">
-								<input name="zipcode" type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="우편번호">
+								<input name="zipcode" type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="우편번호" readonly=false>
 								<div id="click"><p onclick="zipCheck()">검색</p></div>
 							</td>
 						 </tr>

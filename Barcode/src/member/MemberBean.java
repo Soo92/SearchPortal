@@ -8,8 +8,18 @@ public class MemberBean {
 	private String gender;
 	private String birth;
 	private String email;
+	private String phonenum;
 	private String zipcode;
 	private String address;
+	
+	
+	
+	public String getPhonenum() {
+		return phonenum;
+	}
+	public void setPhonenum(String phonenum) {
+		this.phonenum = phonenum;
+	}
 	public String getId() {
 		return id;
 	}

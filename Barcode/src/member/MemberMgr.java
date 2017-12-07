@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
+import member.Gmail_Mail;
+import member.MemberBean;
+
 public class MemberMgr {
 	
 	private DBConnectionMgr pool;
@@ -13,7 +16,6 @@ public class MemberMgr {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
-	//ï¿½Î±ï¿½ï¿½ï¿½
 	public boolean loginMember(String id, String pass) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -37,8 +39,6 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-
-	//ID ï¿½ßºï¿½È®ï¿½ï¿½ - true ï¿½ßºï¿½
 	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -51,7 +51,7 @@ public class MemberMgr {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			flag = rs.next();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ false
+			flag = rs.next();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -59,9 +59,6 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	
-	//ï¿½ï¿½ï¿½ï¿½ï¿½È£ ï¿½Ë»ï¿½
-	//select * from tblzipcod where area3 like '%ï¿½ï¿½ï¿½ï¿½%'
 	public Vector<ZipcodeBean> zipcodeSearch(String area3){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -90,8 +87,6 @@ public class MemberMgr {
 		}
 		return vlist;
 	}
-	
-	//È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean insertMember(MemberBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -100,17 +95,18 @@ public class MemberMgr {
 		try {
 			con = pool.getConnection();
 			sql = "insert tblnomal(id,pass,name,gender,"
-					+ "birth,email,zipcode,address)"
-					+ "values(?,?,?,?,?,?,?,?)";
+					+ "birth,phonenum,email,zipcode,address)"
+					+ "values(?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getId());
 			pstmt.setString(2, bean.getPass());
 			pstmt.setString(3, bean.getName());
 			pstmt.setString(4, bean.getGender());
 			pstmt.setString(5, bean.getBirth());
-			pstmt.setString(6, bean.getEmail());
-			pstmt.setString(7, bean.getZipcode());
-			pstmt.setString(8, bean.getAddress());
+			pstmt.setString(6, bean.getPhonenum());
+			pstmt.setString(7, bean.getEmail());
+			pstmt.setString(8, bean.getZipcode());
+			pstmt.setString(9, bean.getAddress());
 			if(pstmt.executeUpdate()==1)
 				flag = true;
 		} catch (Exception e) {
@@ -120,4 +116,43 @@ public class MemberMgr {
 		}
 		return flag;
 	}
+	public MemberBean getMember(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		MemberBean regBean = new MemberBean();
+		try {
+			con = pool.getConnection();
+			sql = "select * from tblnomal where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				regBean.setId(rs.getString("id"));
+				regBean.setPass(rs.getString("pass"));
+				regBean.setName(rs.getString("name"));
+				regBean.setPhonenum(rs.getString("phonenum"));
+				regBean.setZipcode(rs.getString("zipcode"));
+				regBean.setAddress(rs.getString("address"));
+				regBean.setEmail(rs.getString("email"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return regBean;
+	}
+	//Send id, pass
+		public void sendAccount(String id) {
+			MemberBean bean = getMember(id);
+			String pass = bean.getPass();
+			String title = "OOO.com¿¡¼­ ¾ÆÀÌµð¿Í ºñ¹Ð¹øÈ£ Àü¼Û";
+			String content = "id : " + id + ", " + "pass : " + pass;
+			String toEmail = bean.getEmail();
+			Gmail_Mail.send(title, content, toEmail);
+		}
+	
 }

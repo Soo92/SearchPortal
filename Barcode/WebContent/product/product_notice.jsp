@@ -43,6 +43,7 @@
 							<li><a href="product_new.jsp">신상품</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_used.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_review.jsp">솔직리뷰</a></li><li class="ulul" id="aaa">|</li>
+							<li class="ulul"><a href="product_plan.jsp">기획전</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_best100.jsp">베스트100</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>
@@ -50,7 +51,7 @@
 					</div>
 					<div id="navRight">
 						<ul>
-							<li><a href="basket.jsp">장바구니</a></li><li class="ulul" id="aaa">|</li>
+							<li><a href="#">장바구니</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="#">찜하기</a></li>
 						</ul>
 					</div>
