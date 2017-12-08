@@ -5,9 +5,6 @@
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
-		String name1 = mgr.getMember(id).getAddress();
-		String name2 = mgr.getMember(id).getGender();
-		String name3 = mgr.getMember(id).getPass();
 %>
 <!doctype>
 <!-- saved from url=(0047)http://localhost/Barcode1/movie/movie_home.html -->
@@ -348,7 +345,6 @@ a.gnb_service_all:hover, a.gnb_service_all:visited, a.gnb_service_all:active, a.
 <div id="wrap" class="basic">
 	<!-- GNB -->
 <script type="text/javascript">
-alert(<%=id%>,<%=name%>,<%=email%>,<%=name1%>,<%=name2%>,<%=name3%>);
 function mypage() {
 	if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
 		document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";

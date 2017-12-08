@@ -132,7 +132,8 @@ public class MemberMgr {
 				regBean.setId(rs.getString("id"));
 				regBean.setPass(rs.getString("pass"));
 				regBean.setName(rs.getString("name"));
-				regBean.setPhonenum(rs.getString("phonenum"));
+				regBean.setGender(rs.getString("gender"));
+				regBean.setBirth(rs.getString("birth"));
 				regBean.setZipcode(rs.getString("zipcode"));
 				regBean.setAddress(rs.getString("address"));
 				regBean.setEmail(rs.getString("email"));

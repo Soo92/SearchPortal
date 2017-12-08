@@ -12,8 +12,6 @@ public class MemberBean {
 	private String zipcode;
 	private String address;
 	
-	
-	
 	public String getPhonenum() {
 		return phonenum;
 	}
