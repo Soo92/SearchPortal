@@ -8,7 +8,7 @@
 	.gnb_login_li a, .gnb_my_li a, .gnb_notice_li a, .mail_li a, .gnb_service_li a{position:relative;z-index:100}
 	a.gnb_my, .gnb_icon{position:relative}
 	#gnb{position:relative;z-index:2147483646;font-family:'³ª´®°íµñ',NanumGothic,'µ¸¿ò',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important;color:#444;font-size:12px;letter-spacing:0 !important;line-height:normal !important;text-align:left !important}
-	#gnb div, #gnb p, #gnb span, #gnb em, #gnb strong, #gnb h1, #gnb h2, #gnb h3, #gnb h4, #gnb h5, #gnb h6, #gnb ul, #gnb ol, #gnb li, #gnb dl, #gnb dt, #gnb dd, #gnb table, #gnb th, #gnb td, #gnb form, #gnb fieldset, #gnb legend, #gnb input, #gnb textarea, #gnb button, #gnb label{font-family:'³ª´®°íµñ',NanumGothic,'µ¸¿ò',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important;text-align:left;}
+	#gnb div, #gnb p, #gnb span, #gnb em, #gnb strong, #gnb h1, #gnb h2, #gnb h3, #gnb h4, #gnb h5, #gnb h6, #gnb ul, #gnb ol, #gnb li, #gnb dl, #gnb dt, #gnb dd, #gnb table, #gnb th, #gnb td, #gnb form, #gnb fieldset, #gnb legend, #gnb input, #gnb textarea, #gnb button, #gnb label{font-family:'³ª´®°íµñ',NanumGothic,'µ¸¿ò',Dotum,'Apple SD Gothic Neo',Helvetica,Sans-serif !important;}
 	#gnb a, #gnb label, #gnb button{cursor:pointer}
 	#gnb a, #gnb a:visited, #gnb a:active, #gnb a:focus{color:#444}
 	#gnb a:hover{color:#444;text-decoration:underline}
@@ -23,6 +23,7 @@
 	#gnb .gnb_ico_num .gnb_ico_new{height:15px;display:inline-block;background-position:-331px 0;zoom:1}
 	#gnb .gnb_ico_num .gnb_ico_new .gnb_count{position:relative;top:0;right:-5px;height:15px;margin:0;padding:0 4px 0 1px;display:inline-block;*display:inline;vertical-align:top;background-position:100% 0;text-indent:-2px;font-family:tahoma !important;font-weight:bold;color:#fff;zoom:1}
 	#gnb .gnb_ico_num .gnb_ico_new .plus{margin:1px -1px 0 2px;font-size:8px;display:inline-block;color:#fff;vertical-align:top}
+	#gnb_my_lyr p{text-align: left;}
 	:root #gnb .gnb_pad_lyr{opacity:1 !important;background:#fff}
 	.gnb_lst{margin:0;padding:0;zoom:1}
 	.gnb_lst:after{display:block;clear:both;content:''}

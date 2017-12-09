@@ -17,7 +17,6 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-
 	<div id="wrap">
 		<div id="header">
 			<div id="start">
