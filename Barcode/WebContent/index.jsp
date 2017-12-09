@@ -15,6 +15,22 @@
 <head>
 	<title>바코드</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<script>
+	function loginCheck() {
+		if (document.loginFrm.id.value == "") {
+			alert("아이디를 입력해 주세요.");
+			document.loginFrm.id.focus();
+			return;
+		}
+		if (document.loginFrm.pass.value == "") {
+			alert("비밀번호를 입력해 주세요.");
+			document.loginFrm.pass.focus();
+			return;
+		}
+		document.loginFrm.submit();
+	}
+</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -103,6 +119,7 @@
 					</div>
 			</div>
 			<!--우측영역-->
+			<form name="loginFrm" method="post" action="./member/loginProc.jsp">
 			<div id="section2">
 				<div id="login" class="section_option">
 					<div id="login_box">
@@ -110,12 +127,12 @@
 						<table width="223px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 							<tr>
 								<td height="35px">
-									<input type="text" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="아이디">
+									<input type="text" name="id" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="아이디">
 								</td>
 							</tr>
 							<tr>
 								<td height="35px">
-									<input type="password" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="비밀번호">
+									<input type="password" name="pass" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="비밀번호">
 								</td>
 							</tr>
 						</table>
@@ -124,7 +141,7 @@
 <%}%>
 					</div>
 					
-					<div id="login_button"> <p>로그인</p> </div>
+					<div id="login_button" onclick="loginCheck()"><p>로그인</p></div>
 					
 					<div id="login_other2">
 						<ul>
@@ -134,7 +151,6 @@
 						<li style="margin-left:5px;"><a href="member/join.jsp">회원가입</a></li>
 						<li class="ulul2">
 						<a href="member/findid.jsp">아이디</a>
-						/
 						<a href="member/findpw.jsp">비밀번호 찾기</a>
 						</li>
 					</div>
@@ -157,7 +173,7 @@
 				</div>
 				
 			</div>
-			
+			</form>			
 			<div class="blank"></div>
 		</div>
 		
