@@ -1,4 +1,10 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
+<%
+		request.setCharacterEncoding("euc-kr");
+		String id = (String)session.getAttribute("idKey");	
+		String name = mgr.getMember(id).getName();
+%>
 <%
 		request.setCharacterEncoding("euc-kr");
 %>
@@ -101,6 +107,7 @@
 			<div id="section2">
 				<div id="login" class="section_option">
 					<div id="login_box">
+<%if(id == null || id.equals("")){%>
 						<table width="223px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 							<tr>
 								<td height="35px">
@@ -113,6 +120,9 @@
 								</td>
 							</tr>
 						</table>
+<%}else{%>
+						<%=name%>´Ô
+<%}%>
 					</div>
 					
 					<div id="login_button"> <p>·Î±×ÀÎ</p> </div>
