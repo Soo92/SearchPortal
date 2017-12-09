@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%
-		request.setCharacterEncoding("euc-kr");
-%>
+<%@ page import="java.util.*, member.*"%>
+<jsp:useBean id="regMgr" class="member.MemberMgr" />
+<%request.setCharacterEncoding("euc-kr");%>
 <!doctype>
 <html>
 <meta charset="utf-8">
@@ -148,8 +148,15 @@
 							</td>
 						 <tr>
 							<td height="55px;"colspan="9">
+							<%Vector<MemberBean> vlist = regMgr.getMemberList();%>
 							<input name="email" type="text" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center"
 							placeholder="본인확인 이메일(선택)" onblur="emailCheck()">
+							<%
+							for(int i=0; i<vlist.size(); i++){
+							MemberBean regBean = vlist.get(i);
+							%>
+							<a href="SendAccount.jsp?id=<%=regBean.getId()%>">인증</a>
+							<%} %>
 							</td>
 						 </tr>
 				   </table>
@@ -159,7 +166,7 @@
 			<table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 						 <tr>
 							<td height="65px">
-								<input type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="휴대폰번호">
+								<input name="phonenum" type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="휴대폰번호">
 								<div id="click" onclick="certification()"><p>인증</p></div>
 							</td>
 						 </tr>

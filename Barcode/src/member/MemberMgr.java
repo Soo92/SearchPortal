@@ -134,6 +134,7 @@ public class MemberMgr {
 				regBean.setName(rs.getString("name"));
 				regBean.setGender(rs.getString("gender"));
 				regBean.setBirth(rs.getString("birth"));
+				regBean.setPhonenum(rs.getString("phonenum"));
 				regBean.setZipcode(rs.getString("zipcode"));
 				regBean.setAddress(rs.getString("address"));
 				regBean.setEmail(rs.getString("email"));
@@ -145,6 +146,63 @@ public class MemberMgr {
 			pool.freeConnection(con);
 		}
 		return regBean;
+	}
+	public int loginCheck(String id, String pass) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int mode = 0;
+		// 0-id false, 1-id true pass-false, 2-id&pass true
+		try {
+			if (!checkId(id))
+				return mode;
+			con = pool.getConnection();
+			sql = "select id, pass from tblnomal where id=? and pass=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				mode = 2;
+			else
+				mode = 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return mode;
+	}
+	
+	public Vector<MemberBean> getMemberList() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<MemberBean> vlist = new Vector<>();
+		try {
+			con = pool.getConnection();
+			sql = "select * from tblRegister";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberBean regBean = new MemberBean();
+				regBean.setId(rs.getString("id"));
+				regBean.setPass(rs.getString("pass"));
+				regBean.setName(rs.getString("name"));
+				regBean.setPhonenum(rs.getString("phonenum"));
+				regBean.setZipcode(rs.getString("zipcode"));
+				regBean.setAddress(rs.getString("address"));
+				regBean.setEmail(rs.getString("email"));
+				vlist.addElement(regBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
 	}
 	//Send id, pass
 		public void sendAccount(String id) {

@@ -1,15 +1,13 @@
 CREATE TABLE tblnomal(
 	`id`	char(20) NOT NULL,
 	`passWord` char(16) NOT NULL,
-	`name` char(10) NOT NULL,
-	`nickName` char(10) NOT NULL,	
+	`name` char(10) NOT NULL,	
 	`birth` char(8) NOT NULL,
+	`gender` char(1) NOT NULL,
 	`email` char(40) NOT NULL,
-	`phoneNum` int NOT NULL,
-	`certNum` int NOT NULL,
+	`phonenum` int NOT NULL,
 	`zipcode` char(7) NOT NULL,
 	`address` char(50) NOT NULL,
-	`gender` char(1) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 CREATE TABLE tblkids(

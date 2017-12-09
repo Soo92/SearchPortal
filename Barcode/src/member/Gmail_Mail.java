@@ -16,7 +16,7 @@ public class Gmail_Mail {
 	public static void send(String title, String content, String toEmail) {
 		
 		Properties p = new Properties();
-		p.put("mail.smtp.user", "djjung222@gmail.com"); 
+		p.put("mail.smtp.user", "oyroost123@gmail.com"); 
 		p.put("mail.smtp.host", "smtp.gmail.com");
 		p.put("mail.smtp.port", "465");
 		p.put("mail.smtp.starttls.enable", "true");
@@ -36,7 +36,7 @@ public class Gmail_Mail {
 			String message = content;
 			msg.setSubject(title);
 			
-			Address fromAddr = new InternetAddress("djjung222@gmail.com"); 
+			Address fromAddr = new InternetAddress("oyroost123@gmail.com"); 
 			msg.setFrom(fromAddr);
 			
 			Address toAddr = new InternetAddress(toEmail); 
@@ -52,7 +52,7 @@ public class Gmail_Mail {
 
 	private static class SMTPAuthenticator extends Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
-			return new PasswordAuthentication("djjung222", "090908sw");
+			return new PasswordAuthentication("oyroost123", "");
 		}
 	}
 	
