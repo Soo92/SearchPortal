@@ -85,12 +85,61 @@ span{font-weight:bold;}
 
 #detail_p_info{width:100%; height:5000px; background:#ffc980;}
 #detail_review{width:100%; height:1200px; background:#e8a074;}
-#detail_QnA{width:100%; height:800px; background:#ffa08d;}
+
+/*QnA*/
+#detail_QnA{width:100%; height:auto; background:#fff; padding-top:40px; padding-bottom:50px;}
+		#spaceBox{width:20px; height: 100px; float:left; background:#e8a074; margin-top:30px; margin-left:30px;}
+		#detail_QnA_header{width:95%; height:150px; position:relative; margin:0 auto;}
+			#detail_QnA_header h1{float:left; font-size:50px; margin-top:30px; margin-left:20px; color:#ff4800;}
+			#detail_QnA_header h3{ font-weight:bold;
+												float:left; font-size:18px; line-height:50px; margin-top:45px; margin-left:20px;}
+			#detail_QnA_header p{font-size:14px; position:absolute; top:100px; left:70px;}
+			#s_logo{width:300px; height:110px; background:lightgray; float:right; margin-right:20px; margin-top:20px;}
+		
+		
+		#detail_QnA_contents{width:95%; height:auto; margin:0 auto;}
+			#detail_QnA_contents td,th{font-size:12px; line-height:1.5; height:30px;}
+				
+			#bl_title_no,.bl_title_bl_icon,.bl_title_bl_product,.bl_title_bl_subject,.bl_title_bl_name,.bl_title_bl_date,.bl_title_bl_hits{
+				border-bottom:1px gray solid; 
+				border-top:1px gray solid; 
+			}
+			
+			.bl_evenline,.bl_oddline,.bl_noticeline{border-bottom:1px #dfdfdf solid;}
+
+			.bl_no{text-align:center;}
+			.bl_icon{text-align:center;}
+			.bl_product{text-align:center;}
+			
+			.bl_name{text-align:center;}
+			.bl_date{text-align:center;}
+			.bl_hits{text-align:center;}
+		
+		
+		#detail_QnA_bottom{width:100%; height:80px; background:yellow;}
+			#detail_QnA_nextNpre a:hover{text-decoration:none; color:#ff4800;}
+			#detail_QnA_radio{width:400px; height:30px; margin:0 auto; margin-top:22px; font-size:12px; text-align:center;}
+			#detail_QnA_radio input[type=radio]{margin-top:6px;}
+			.radioSpace{margin-right:15px; margin-left:5px;}
+			input[id=detail_QnA_radioButton]{position:relative; top:3px;}
+			
+			#QnAsearchBox{width:150px; height:25px; border:1px lightgray solid;}
+
+	
+
 #detail_s_info{width:100%; height:800px; background:#e87480;}
 
 /*nav_2*/
 
-#nav_2{width:1100px; height:80px; background:#282828; margin:0 auto;}
+#nav_2{width:1100px; height:50px; background:#282828; margin:0 auto;}
+#nav_2 ul{list-style:none; text-align:center;}
+#nav_2 ul li{display:inline; font-size:18px;line-height:50px;}
+#nav_2 a{text-decoration:none; color:gray;}
+#nav_2 a:hover{color:#fff;}
+#navSpace{color:lightgray; font-weight:100;}
+.nav_2_ul{margin-left:50px;}
+
+
 .unfixed{position:relative; z-index:auto;}
 .fixed{position:fixed; z-index:999; top:95px;left:50%;transform:translateX(-50%);}
 

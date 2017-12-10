@@ -1,0 +1,54 @@
+
+legend {visibility:hidden; width:0; height:0;}
+caption {overflow:hidden; width:0; height:0; font-size:0; line-height:0; }
+button {border:0; cursor:pointer;}
+
+a {text-decoration:none;}
+a:link {text-decoration:none; color:#5d5d5d;}
+a:visited {text-decoration:none; color:#5d5d5d;}
+a:hover {color:#8a8a8a; text-decoration:underline;}
+
+/* common */
+html {overflow-y:scroll;}
+body {text-align:left;}
+
+.clearFix:after {content:" "; display:block; height:0; clear:both; visibility:hidden;}
+
+
+/* form */
+.txtInp {height:18px; padding:5px 10px; font-size:12px; border:1px solid #bbb; color:#666; vertical-align:middle; font-family:dotum, dotumche, 'µ¸¿ò', 'µ¸¿òÃ¼', verdana, tahoma, sans-serif;}
+input.onInput, select.onInput {border:1px solid #444; color:#000;}
+input.offInput, select.offInput {border:1px solid #bbb; color:#666;}
+.txtRead {height:18px; padding:1px 10px; font-size:12px; border:1px solid #bbb; color:#666; background:#f5f5f5; vertical-align:middle;}
+
+input {outline-style:none;}
+input.check, input.radio {vertical-align:middle; margin-top:-3px;}
+select {outline-style:none; vertical-align:middle;}
+.select {border:1px solid #bbb; color:#666; font-size:12px; height:30px; outline-style:none; vertical-align:middle;}
+select.optSelect {border:1px solid #bbb; color:#666; font-size:11px; height:17px; outline-style:none; vertical-align:middle; font-family:dotum, dotumche, 'µ¸¿ò', 'µ¸¿òÃ¼', verdana, tahoma, sans-serif;}
+select.optSelect2 {border:1px solid #bbb; color:#666; font-size:11px; height:20px; outline-style:none; vertical-align:middle; font-family:dotum, dotumche, 'µ¸¿ò', 'µ¸¿òÃ¼', verdana, tahoma, sans-serif;}
+.und:hover {text-decoration:underline;}
+textarea {border:1px solid #bbb; color:#666; font-size:11px;outline-style:none; padding:5px;}
+input[type=image] {vertical-align:top;}
+
+/* etc */
+.overHidden {overflow:hidden;}
+.lt {text-align:left !important;}
+.ct {text-align:center !important;}
+.rt {text-align:right !important;}
+.ftLt {float:left !important;}
+.ftRt {float:right !important;}
+.ftNone {float:none !important;}
+
+.vTop {vertical-align:top;}
+.vMid {vertical-align:middle;}
+
+.tPad05 {padding-top:5px;}
+.tPad10 {padding-top:10px;}
+.tPad15 {padding-top:15px;}
+.tPad20 {padding-top:20px;}
+.tPad40 {padding-top:40px;}
+
+.tMar10 {margin-top:10px;}
+.tMar20 {margin-top:20px;}
+.tMar30 {margin-top:30px;}

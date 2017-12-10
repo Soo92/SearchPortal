@@ -8,9 +8,31 @@
 <meta charset="utf-8">
 <head>
 	<title>상품코너</title>
+		<link rel="stylesheet" href="../css/common.css" type="text/css">
+	<link rel="stylesheet" href="../css/default.css" type="text/css">
 	<link rel="stylesheet" href="../css/detail_style.css" type="text/css">
+
 	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
-	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  
+  $("a").on('click', function(event) {
+
+  
+    if (this.hash !== "") {
+  
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top-140
+      }, 800, function(){  
+        window.location.hash = hash;
+      });
+    }
+  });
+});
+</script>
 </head>
 <body id="w_rap"  onscroll="myFunction()">
 <div id="all"><!-- header -->
@@ -224,7 +246,12 @@
 	<!-- nav_2 -->
 
 <div id="nav_2">
-
+	<ul>
+		<li><a href="#detail_p_info">상품정보</a></li><li id="navSpace" class="nav_2_ul">|</li>
+		<li class="nav_2_ul"><a href="#detail_review">상품리뷰</a></li><li id="navSpace" class="nav_2_ul">|</li>
+		<li class="nav_2_ul"><a href="#detail_QnA">상품 QnA</a></li><li id="navSpace" class="nav_2_ul">|</li>
+		<li class="nav_2_ul"><a href="#detail_s_info">판매자 정보</a></li>
+	</ul>
 </div>
 
 
@@ -242,16 +269,250 @@
 		
 		}
 	</script>
-
+	
+<!-- contents -->
 <div id="detail_img">
-	<div id="detail_p_info"></div>
-	<div id="detail_review"></div>
-	<div id="detail_QnA"></div>
-	<div id="detail_s_info"></div>
+	<div id="detail_p_info">
+	
+	</div>
+	
+	<div id="detail_review">
+	
+	</div>
+	
+	<div id="detail_QnA">
+		<div id="detail_QnA_header">
+			<div id="spaceBox"></div>
+			<h1>QnA</h1>
+			<h3>현재 상품에 대한 문의</h3>
+			<div id="s_logo"></div>
+			<p>상품에 대해 궁금하신점이 있으시다면
+			<span style="font-weight:900">친절하게 답변</span>해 드리겠습니다 ^-^</p>
+		</div>
+		
+		<div id="detail_QnA_contents">
+			<table id="bl_table" border="0" cellpadding="0" cellspacing="0" width="95%" style="margin:0 auto;margin-top:30px;">
+				<tbody>
+					<tr>
+						<th id="bl_title_no" class="bl_title_bl_no">NO.</th>
+						<th class="bl_title_bl_icon">&nbsp;</th>
+						
+						<th class="bl_title_bl_product">Product</th>
+						
+						<th class="bl_title_bl_subject">CONTENT</th>
+						<th class="bl_title_bl_name">NAME</th>
+						
+						<th class="bl_title_bl_date">DATE</th>
+						
+						<th id="bl_title_hits" class="bl_title_bl_hits">HITS</th>
+				</tr>
+				<!-- INLINE NOTICE -->
+
+				<tr class="bl_noticeline">
+					<td class="bl_no">:::</td>
+					<td class="bl_icon"><img src="../img/b2_notice.gif"></td>
+					<td class="  lt" colspan="5">제품/배송 등의 문의사항을 남겨주세요! 전화보다 신속하게 답변드리도록 하겠습니다!</td>
+				</tr>
+
+				<!-- LIST REPEAT -->
+
+				<tr class="bl_noticeline">
+					<td class="bl_no">:::</td>
+					<td class="bl_icon"><img src="../img/b2_notice.gif"></td>
+					
+					
+					
+					<td class="bl_subject_lt" colspan="2"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=995513&amp;num2=00000&amp;lock=N&amp;flag=notice">교환/반품 시 꼭 확인해 주세요!</a>&nbsp;&nbsp;</td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;"><img src="../img/b2_adminimg.gif" border="0"></div></td>
+					
+					<td class="bl_date"><span class="bl_oldcontent">2016/06/02</span></td>
+					
+					<td class="bl_hits">1844</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">27003</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985887&amp;num2=00000&amp;lock=Y">주문취소</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">ne24285</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_oddline">
+					<td class="bl_no">27002</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class="bl_product"><a href="/shop/shopdetail.html?branduid=1187620"><img src="../img/0020040000063.jpg" border="0" height="70" align="center"></a></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><a class="BoardBrandName" href="/shop/shopdetail.html?branduid=1187620">[9부 반가발 내츄럴 지젤 롱 웨이브]</a><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985888&amp;num2=00000&amp;lock=Y">재입고</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">cj401124</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">27001</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class="bl_product"><a href="/shop/shopdetail.html?branduid=1121832"><img src="../img/0020050000013.jpg" border="0" height="70" align="center"></a></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><a class="BoardBrandName" href="/shop/shopdetail.html?branduid=1121832">[트리플 볼륨 원터치 붙임머리 루즈 컬]</a><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985890&amp;num2=00000&amp;lock=Y">다크브라운 언제 입고되나요</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">hill003</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">1</td>
+				</tr>
+
+				<tr class="bl_oddline">
+					<td class="bl_no">27000</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985891&amp;num2=00000&amp;lock=Y">주문취소</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">joyj0919</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">1</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">26999</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class="bl_product"><a href="/shop/shopdetail.html?branduid=1118806"><img src="../img/0020010000033.jpg" border="0" height="70" align="center"></a></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><a class="BoardBrandName" href="/shop/shopdetail.html?branduid=1118806">[엠마스 드림 롱 웨이브]</a><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985892&amp;num2=00000&amp;lock=Y">열처리 가능여부 가발망 여부</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">nae0919</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_oddline">
+					<td class="bl_no">26998</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985893&amp;num2=00000&amp;lock=Y">색상변경</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">tnals824</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">26997</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985894&amp;num2=00000&amp;lock=Y">9부반가발 착용가능한 길이인가요??</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">yuuuuj</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">1</td>
+				</tr>
+
+				<tr class="bl_oddline">
+					<td class="bl_no">26996</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985895&amp;num2=00000&amp;lock=Y">입고도 안되고 입금은 했는데 사이즈 교환 해주실수 있으신가요 ,,?</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">rhaehfdl4892</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">26995</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985896&amp;num2=00000&amp;lock=Y">배송전 주문취소부탁드려요</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">Shorty9949</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				<tr class="bl_oddline">
+					<td class="bl_no">26994</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985897&amp;num2=00000&amp;lock=Y">재입고 문의</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">tnals123</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">1</td>
+				</tr>
+
+				<!-- LIST REPEAT END -->
+				</tbody>
+			</table>
+			
+		<div id="detail_QnA_bottom">	
+			<div id="detail_QnA_nextNpre">
+				<table border="0" cellpadding="0" cellspacing="0" width="150px" style="margin:0 auto;margin-top:30px;">
+					<tr>
+						<td width="15px" style="text-align:center;"><a href="#">1</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">2</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">3</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">4</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">5</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">6</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">7</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">8</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">9</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">10</a></td>
+						<td><a href="#"><img src="../img/next.jpg" width="15px" height="15px"></a></td>
+					</tr>
+				</table>
+			</div>
+			
+			<div id="detail_QnA_radio">
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">제목</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">이름</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">내용</label>
+				<input type="text" id="QnAsearchBox">
+			</div>
+		</div>
+	</div>
+		
+	</div>
+	
+	<div id="detail_s_info">
+	
+	</div>
 </div>
 	
 	
 </div>
+
+<!-- scrolling -->
 
 	<script type="text/javascript">
 	(function($) {
