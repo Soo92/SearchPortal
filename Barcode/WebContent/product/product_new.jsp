@@ -12,7 +12,7 @@
 	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 </head>
 <body>
-	<div id="all">
+<div id="all">
 		<div id="header_">
 			<div id="header">
 				<div id="wrap2">
@@ -24,7 +24,7 @@
 					<div id="subject"><p><span>신상ㆍ중고</span> &nbsp;상품 Corner</p></div>
 					</a>
 					<div id="login">
-					<a href="../login.jsp">
+					<a href="../member/login.jsp">
 						<table width="70px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px #b73400 solid; background:background:#ff5b1b; margin-bottom:7px;">
 							<tr>
 								<td height="30px;"><p>로그인</p></td>
@@ -49,15 +49,17 @@
 						</ul>
 					</div>
 					<div id="navRight">
-						<ul>
-							<li><a href="#">장바구니</a></li><li class="ulul" id="aaa">|</li>
-							<li class="ulul"><a href="#">찜하기</a></li>
-						</ul>
+						<table border="0">
+							<tr>
+								<td><a href="basket.jsp">장바구니</a></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+</div>
 		
 		
 			<div id="wrap_">
@@ -76,7 +78,8 @@
 	
 </div>
 
-	<script type="text/javascript" src="../js/follower.js">
+	<script type="text/javascript" src="../js/follower.js"></script>
+	<script type="text/javascript">
 		$(document).ready(function(){
 				var speed = 500; //스크롤속도
 				$(".gotop").css("cursor","pointer").click(function(){
@@ -88,19 +91,66 @@
 		$(document).ready(function(){
 			$('#float').scrollFollower({
 				pageAlign:'center',
-				pageWidth:500,
+				pageWidth:1000,
 				type:'right',
 				topMargin:520,
 				minTop:100,
-				margin:380,
+				margin:80,
 				speed:500,
 				easing:'swing',
 				zindex:10
 			});
 		});
 	</script>
+	
 	<div id="float">
+		<div id="view_product">
+			<p>최근 본 상품</p>
+			<a href="#">
+			<div id="view_product_link"></div>
+			</a>
+			<a href="#">
+			<div id="view_product_link" class="top_space"></div>
+			</a>
+			
+			<div id="button" class="top_space">
+				<table width="40" cellpadding="5" cellspacing="0" border="1" align="center"
+							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
+							valign:center; margin-top:10px;">
+					<tr>
+						<td height="20px">
+							<a href="#">
+								<p><</p>
+							</a>
+						</td>
+						<td height="20px">
+							<a href="#">
+								<p>></p>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>			
+		</div>
+		
+		<div id="recom_pro">
+			<p>추천 상품</p>
+			<a href="#">
+			<div id="view_product_link"></div>
+			</a>
+
+		</div>
+		
+		<div id="google">
+			<p>광고 상품</p>
+			<a href="#">
+			<div id="view_product_link"></div>
+			</a>
+
+		</div>
+		
 		<div id="top" onclick="scrolling()">
+			<p> ▲ Top</p>
 		</div>
 		
 		<script type="text/javascript">

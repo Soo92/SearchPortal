@@ -64,12 +64,12 @@ zindex    : �������ㅻ㈃...
     $win.resize(resetXPosition);
     $win.scroll(function(){
       $top = $doc.scrollTop();
-      if ($top > minTop)
+      if ($top > 300)
         yPosition = $top + minTop;
       else
         yPosition = topMargin;
       $layer.animate({"top":yPosition }, {duration:speed, easing:easing, queue:false});
-    });
+    });	
   };
   $.fn.scrollFollower.defaults = {
     varType:'left',

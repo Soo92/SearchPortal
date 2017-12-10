@@ -12,7 +12,7 @@
 		
 </head>
 <body>
-	<div id="all">
+<div id="all">
 		<div id="header_">
 			<div id="header">
 				<div id="wrap2">
@@ -24,7 +24,7 @@
 					<div id="subject"><p><span>신상ㆍ중고</span> &nbsp;상품 Corner</p></div>
 					</a>
 					<div id="login">
-					<a href="../login.jsp">
+					<a href="../member/login.jsp">
 						<table width="70px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px #b73400 solid; background:background:#ff5b1b; margin-bottom:7px;">
 							<tr>
 								<td height="30px;"><p>로그인</p></td>
@@ -43,22 +43,23 @@
 							<li><a href="product_new.jsp">신상품</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_used.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_review.jsp">솔직리뷰</a></li><li class="ulul" id="aaa">|</li>
-							<li class="ulul"><a href="product_plan.jsp">기획전</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_best100.jsp">베스트100</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>
 						</ul>
 					</div>
 					<div id="navRight">
-						<ul>
-							<li><a href="#">장바구니</a></li><li class="ulul" id="aaa">|</li>
-							<li class="ulul"><a href="#">찜하기</a></li>
-						</ul>
+						<table border="0">
+							<tr>
+								<td><a href="basket.jsp">장바구니</a></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 				
 			</div>
 		</div>
+</div>
 		
 		
 			<div id="wrap_">
