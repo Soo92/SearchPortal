@@ -1,0 +1,392 @@
+@charset "UTF-8";
+/* NTS JMJ */
+.region .box_input{height:21px;padding:4px 0 0 4px;border:1px solid #dcdcdc;font-size:12px;color:#b4b4b4;line-height:15px}
+.region .box_input::-ms-clear{display:none}
+.region .box_input.action{color:#000 !important}
+.region .box_input.selected,.region .search_more.selected{border:1px solid #45c00c !important}
+.region .local_premium h3,.region .local_map h3{_display:inline;float:left;clear:none;margin:4px 0 13px 30px}
+.region .ad_desc{margin:0}
+.region .title_desc{margin-right:5px}
+.region .title_desc .btn{top:-4px;left:3px}
+.region .select_layer.tit{float:left;margin:-5px 0 4px}
+.region .select_layer.tit form{display:inline}
+.region .ol_num{margin:0 4px 0 0}
+.region em{color:#eb0c00}
+.region .zipcode{color:#000}
+.region .zipcode .txt{margin-right:-2px;color:#666}
+.region .type01{margin-bottom:-15px}
+.region .type01 li{margin-bottom:16px}
+.region .icon{position:static}
+.region .selectbox-label{font-size:12px}
+.region .charge_call{display:inline-block;padding:2px 1px 0 0;color:#eb0c00}
+.region .directory{color:#666}
+.region .directory strong{font-weight:normal}
+.region .directory a{color:#666}
+.region .star_point{display:inline-block;overflow:hidden;position:relative;_top:-3px;width:60px;height:12px;margin:0 5px 0 2px;background:url(../img/map_ico_point.gif) 0 0 repeat-x}
+.region .star_point span{display:inline-block;height:12px;background:url(../img/map_ico_point.gif) 0 -12px repeat-x}
+.region .info_basic{clear:both;position:relative;z-index:11;width:590px;margin:0 0 18px 10px}
+.region .info_basic:after{display:block;clear:both;content:''}
+.region .info_basic .thumb{float:left;margin-right:20px;border:1px solid #adadad}
+.region .info_basic .thumb img{vertical-align:top}
+.region .info_basic .thumb2{float:left;width:260px;margin-right:20px;border:1px solid #d5d5d5}
+.region .info_basic .thumb2 .map{height:175px}
+.region .info_basic .thumb2 .map_control{height:22px;padding:4px 7px;border-top:1px solid #dadddd;background-color:#f9f9f9;text-align:right}
+.region .info_basic .thumb2 img{vertical-align:top}
+.region .info_basic .txt_detail{float:left;position:relative;width:307px}
+.region .info_basic .txt_detail .title_select{height:auto;margin:4px 0 5px}
+.region .info_basic .txt_detail dl.basic{_margin-top:2px}
+.region .info_basic .txt_detail dl.basic dt .icon{margin:2px 0 3px;vertical-align:middle}
+.region .info_basic .txt_detail dd{font-size:12px}
+.region .info_basic .txt_detail .local_name{clear:both;width:308px;margin:0 0 10px}
+.region .info_basic .txt_detail .local_name.nomore h3{width:308px}
+.region .info_basic .txt_detail .local_name h3{margin:1px 0 9px -1px;font-size:14px;font-weight:bold;line-height:19px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;word-break:keep-all;word-wrap:break-word}
+.region .info_basic .txt_detail .local_name h3 a{text-decoration:underline}
+.region .info_basic .txt_detail .local_name .select_layer{float:right;width:195px;margin:0}
+.region .info_basic .txt_detail .local_name .select_layer *{font-size:12px}
+.region .info_basic .txt_detail .local_name .select_layer form{display:inline}
+.region .info_basic .txt_detail .local_name .btn_mapview{display:inline-block;margin:1px 0 -1px 2px;vertical-align:middle}
+.region .info_basic .txt_detail .local_name .btn_mapview img{margin:-2px 3px 2px 0;_margin:0 3px 0 0}
+.region .info_basic .txt_detail .local_name.morebtns h3{width:308px}
+.region .info_basic .txt_detail .local_name.morebtns .select_layer{clear:both;float:none;margin:2px 0 0 1px}
+.region .info_basic .txt_detail .type01{_width:100%;margin:0}
+.region .info_basic .txt_detail .type01 li{margin-bottom:15px}
+.region .info_basic .txt_detail .type01 .txt_desc{margin:4px 0 1px}
+.region .info_basic .addr{clear:both;margin-top:-7px;padding-bottom:4px;font-size:12px;line-height:19px;word-break:keep-all;word-wrap:break-word;zoom:1}
+.region .info_basic .addr:after{display:block;clear:both;content:''}
+.region .info_basic .addr .ico_addr_r,.region .info_basic .addr .ico_addr_o{float:left;display:inline-block;width:45px;height:16px;margin:1px 7px 0 0;border:0;background:url(../img/map_btn_loadname.png) no-repeat -42px 0;vertical-align:middle}
+.region .info_basic .addr .ico_addr_o{width:36px;background-position:0 -42px}
+.region .info_basic .addr.solo .ico_addr_r{width:36px;background-position:-65px -42px}
+.region .info_basic .addr.solo .ico_addr_o{width:26px;background-position:-65px -63px}
+.region .info_basic .addr em{position:absolute;left:-1px;top:-1px;overflow:hidden;height:0}
+.region .info_basic .addr .lst_addr_case{overflow:hidden;zoom:1}
+.region .info_basic .addr .lst_addr_case li{display:none;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif}
+.region .info_basic .addr .lst_addr_case li:first-child{display:block;color:#00c}
+.region .info_basic .addr.open .ico_addr_r{background-position:-42px -21px}
+.region .info_basic .addr.open .ico_addr_o{background-position:0 -63px}
+.region .info_basic .addr.open .lst_addr_case li{display:block}
+.region .info_basic .addr2{clear:both;padding-bottom:2px;font-size:12px;line-height:16px}
+.region .info_basic .addr2 .txt_add{margin-right:-2px}
+.region .detail_info{position:relative;_width:100%;margin:20px 0 0}
+.region .detail_info h3{clear:none;margin:0 0 3px;font-size:12px}
+.region .detail_info .add_more{position:absolute;top:0;right:0;font-weight:normal;font-size:12px;color:#666;letter-spacing:-1px;text-decoration:underline}
+.region .review{position:relative;_width:100%;margin:10px 0 0}
+.region .review *{font-size:12px}
+.region .review h3{display:inline}
+.region .review p{display:inline;margin:0 0 0 5px;color:#848484}
+.region .review p a{color:#848484}
+.region .review .add_more{position:absolute;top:1px;right:0;font-size:12px;color:#666;letter-spacing:-1px;text-decoration:underline}
+.region .review .array{margin:7px 0 0}
+.region dl.basic{overflow:hidden;_width:100%;line-height:19px}
+.region dl.basic dt{display:inline;clear:both;margin-right:5px}
+.region dl.basic dt a{text-decoration:underline}
+.region dl.basic dt a:visited{color:#99209b}
+.region dl.basic dt .icon{margin:0 0 0 1px;vertical-align:middle}
+.region dl.basic dd .icon{top:1px;margin:0}
+.region dl.basic .txt_inline,.region dl.basic .txt_desc,.region dl.basic .txt_block{font-size:12px;color:#666}
+.region dl.basic .txt_block a,.region dl.basic .txt_block a:visited,.region dl.basic .txt_desc a,.region dl.basic .txt_desc a:visited{color:#666}
+.region dl.basic .txt_desc em{color:#666}
+.region dl.basic .txt_desc{margin-top:3px}
+.region dl.row{clear:both;_width:100%;margin-bottom:11px;font-size:12px;line-height:19px;_zoom:1}
+.region dl.row dt{float:left;margin:0 11px 0 -1px;_margin-right:8px;color:#666}
+.region dl.row dd{overflow:hidden;margin-bottom:3px;color:#000}
+.region dl.row.short dd{margin-bottom:0}
+.region dl.row .box_input{width:87px;height:17px;margin-left:0;padding-top:2px}
+.region dl.row dd.traffic ul{_width:100%;margin:2px 0 -3px}
+.region dl.row dd.traffic li{margin-bottom:5px;font:12px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif}
+.region dl.row dd.traffic strong{margin:0 -2px 0 0;font:bold 11px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#848484}
+.region dl.row dd.traffic .icon{margin:0 -1px 3px 6px;vertical-align:middle}
+.region dl.row dd.traffic .cont_more{font-family:'굴림',gulim,'Apple SD Gothic NEO',helvetica,sans-serif}
+.region dl.row dd.around_array{overflow:visible}
+.region dl.row dd.around_array input{margin:-1px -1px 1px 0;vertical-align:middle}
+.region dl.row dd.temperature .weather{margin:-5px 0 -2px -2px;vertical-align:top}
+.region dl.row dd.temperature span{font:11px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#c7c7c7;letter-spacing:-1px}
+.region dl.row dd.temperature strong{letter-spacing:0}
+.region dl.row dd.temperature .low{color:#007e99}
+.region dl.row dd.temperature .maximum{color:#f60}
+.region dl.row dd.vicinity{position:relative;_float:left;_padding-left:3px;color:#00c}
+.region dl.row dd .more{margin-left:4px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;color:#666;letter-spacing:-1px;text-decoration:underline}
+.region ul.array{line-height:17px}
+.region ul.array li{position:relative;_width:100%;margin-bottom:6px;font-size:12px;line-height:14px}
+.region ul.array li a{color:#444}
+.region ul.array .user_id,ul.array .days{font:11px tahoma,helvetica,sans-serif;color:#444}
+.region ul.array .user_id{position:absolute;top:0;right:50px;width:95px}
+.region ul.array .days{position:absolute;top:0;right:0}
+.region .local_premium{clear:both;_width:100%;padding-bottom:13px}
+.region .local_premium .type01{margin-left:30px}
+.region .local_map{clear:both;width:740px;margin:2px 0 -2px}
+.region .local_map .info_basic{margin:0;padding:0}
+.region .local_map .info_basic .thumb{display:inline;float:left;clear:both;width:361px;margin:0 20px 0 30px;border:1px solid #adadad}
+.region .local_map .info_basic .type01{float:left;clear:none;width:300px;margin:0 0 -1px}
+.region .local_map .info_basic .type01 li{margin-bottom:18px}
+.region .local_map .layerpopup{position:static}
+.region .local_map .layerpopup.ex.full .shadow{_width:auto;_height:auto;background:none}
+.region .local_map .layerpopup.ex.full .border_type{_width:auto;border:1px solid #666;background-color:none}
+.region .local_map .layerpopup dl{width:133px;_width:150px;padding:7px 8px 5px 9px;font-size:12px;line-height:17px;word-break:break-all}
+.region .other_search{clear:both;width:711px;height:37px;margin:1px 0 12px 30px;background:url(../img/map_bg_search.gif) no-repeat}
+.region .other_search *{font-size:12px}
+.region .other_search form{padding:5px 0 0 2px}
+.region .other_search .box_input{width:200px;margin:2px 5px 0 10px}
+.region .other_search .input_btn{margin:0 0 0 6px;vertical-align:bottom}
+.region .other_search span{margin-left:15px;color:#666}
+.region .other_search span a{color:#666}
+.region .other_search.depth{clear:both;width:711px;height:37px;margin:1px 0 12px 30px;background:url(../img/map_bg_search_depth.gif) no-repeat}
+.region .other_search.depth form{margin-left:10px}
+.region .other_search.depth .input_btn{margin:3px 0 0 6px;vertical-align:bottom}
+.region .other_search.depth select{margin:4px 24px 0 0}
+.region .other_search.depth span{margin:8px 0 0 -18px;color:#666}
+.region .other_search.depth div,.region .other_search.depth span{float:left}
+.region .search_motive{clear:both;width:auto;max-width:688px;margin:1px 0 13px 30px;border:1px solid #e9e9e9;background-color:#fbfbfb;_width:708px}
+.region .search_motive p{width:100%;padding:11px 10px 8px;font-size:12px}
+.region .search_motive p span{margin-left:8px}
+.region .search_motive a{text-decoration:underline}
+.region .road_sch{clear:both;position:relative;width:308px;*width:auto;font-size:12px;_zoom:1}
+.region .road_sch .box_input{height:17px;background:none}
+.region .road_sch.express{width:564px;margin:10px 0 6px 10px;padding:9px 12px;border:1px solid #e9e9e9;background:#fafafa}
+.region .road_sch.express:after{clear:both;display:block;content:''}
+.region .road_sch.express .pop_layer01{top:33px;z-index:100}
+.region .pop_layer01 iframe{width:100%}
+.region .road_sch:after{display:block;clear:both;content:''}
+.region .road_sch strong{display:block;width:100%;margin:0 0 0 -1px;padding-bottom:8px;color:#444}
+.region .road_sch em{display:inline-block;color:#000}
+.region .road_sch .arrow{display:inline-block;width:27px;*width:30px;height:15px;*height:17px;background:url(../img/map_sp_bullet.png) 7px -54px no-repeat}
+.region .road_sch input{display:inline-block;margin:0 0 3px 2px;vertical-align:top}
+.region .road_sch .search_more{position:relative;float:left;width:120px;padding-right:14px;border:1px solid #dcdcdc;background:#fff url(../img/map_sp_bullet.png) 100% -82px no-repeat;cursor:pointer}
+.region .road_sch .search_more .box_input{width:113px;margin:0;padding-top:2px;padding-right:0;border:0 none;background:transparent}
+.region .road_sch.express .search_more{float:left;width:190px;background-position:100%-352px}
+.region .road_sch.express .arrow{float:left}
+.region .road_sch.express input{float:left}
+.region .road_sch.express .search_more .box_input{width:165px}
+.region .road_sch.express strong{float:left;width:auto;margin:5px 10px 0 0;font-weight:normal}
+.region .road_sch.express .select_layer{margin-right:5px}
+.region .road_info{clear:both;margin-left:10px}
+.region .road_info *{font-size:12px}
+.region .road_info h3{float:left;margin:0 0 4px;color:#444}
+.region .road_info .desc{color:#999;vertical-align:1px}
+.region .road_info a.space{float:right;margin-right:0;color:#666;letter-spacing:-1px;text-align:right}
+.region .road_info .row.short{margin:0 0 15px;line-height:16px}
+.region .road_info .row.short dd{margin-bottom:3px;color:#444}
+.region .road_info .row.short dd img{margin:1px 1px 4px 0;vertical-align:middle}
+.region .road_info .row em{color:#eb0c00}
+.region .road_info .relatime{overflow:hidden;clear:both;width:711px;margin:3px 0 0;padding-bottom:20px;border:1px solid #dcdde0}
+.region .road_info .relatime .course{overflow:hidden;height:25px;_height:35px;padding:10px 0 0 14px;background:url(../img/map_bg_line.gif) repeat-x;color:#444}
+.region .road_info .relatime .course span{margin:0 9px 0 8px}
+.region .road_info .relatime .course a{color:#666;text-decoration:underline}
+.region .road_info .relatime .course strong{color:#848484}
+.region .road_info .relatime .status{margin:0 0 0 15px}
+.region .road_info .relatime .flash{margin:23px 0 0;text-align:center}
+.region .road_info .relatime .notice{padding:33px 0 13px;color:#444;text-align:center}
+.region .road_info .relatime .notice strong{padding:3px 0 0 20px;background:url(../img/ico_notice.gif) no-repeat;font-weight:normal}
+.region .road_info .relatime .notice img{display:block;margin:0 auto;margin-top:9px;vertical-align:top}
+.region .pop_layer01{position:absolute;left:0;margin-top:2px;z-index:1001;width:322px;border:1px solid #888;background-color:#fff;font-size:12px;color:#666}
+.region .city_search.admin{width:377px}
+.region .city_search.post{width:444px}
+.region .city_search .title_area{position:relative;border-bottom:1px solid #f4f4f4;background-color:#f9f9f9}
+.region .city_search .title_area .close{position:absolute;top:6px;right:6px}
+.region .city_search .title_area h5{margin:0;padding:14px 0 11px 13px;font-size:12px}
+.region .city_search .title_area h5 strong{color:#eb0c00}
+.region .city_search .title_area h5 em{font-weight:normal;color:#eb0c00}
+.region .city_search .content_area{_width:100%;margin:0 0 15px}
+.region .city_search .content_area h5{margin:20px 15px 7px;padding-bottom:5px;border-bottom:1px solid #ddd;font-size:12px;line-height:14px;color:#666;letter-spacing:0;text-indent:4px}
+.region .city_search .content_area h5 span{margin-left:4px;font-weight:normal;color:#eb0c00}
+.region .city_search ul.line_data{margin:17px 15px 2px;font-size:12px}
+.region .city_search ul.line_data li{padding-left:0;line-height:25px}
+.region .city_search ul.line_data li a{color:#333;text-decoration:none;white-space:nowrap}
+.region .city_search ul.line_data li a:hover{text-decoration:underline}
+.region .city_search .result_area{overflow:auto;overflow-x:hidden;height:288px;margin:0 15px;padding-right:4px;scrollbar-face-color:#fff;scrollbar-highlight-color:#fff;scrollbar-shadow-color:#e1e1e1;scrollbar-3dlight-color:#e1e1e1;scrollbar-arrow-color:#a9a9a9;scrollbar-track-color:#f7f7f7;scrollbar-darkshadow-color:#fff;scrollbar-base-color:#fff}
+.region .city_search .content_area.traffic .result_area{margin:20px 15px 0}
+.region .city_search .result_area.post_list{height:200px}
+.region .city_search .result_area h6{margin:6px 0 0 5px;font-weight:normal;color:#2F9300}
+.region .city_search .result_area ul{width:100%;margin:2px 0 16px 5px}
+.region .city_search .result_area li{overflow:hidden;margin-bottom:1px;padding:6px 0 0 7px;line-height:15px;color:#333}
+.region .city_search .result_area li input{width:13px;height:13px;vertical-align:middle}
+.region .city_search .result_area li span{color:#666}
+.region .city_search .result_area li img{vertical-align:middle}
+.region .city_search .message{overflow:hidden;margin:30px 0 28px;padding-top:1px;color:#000;text-align:center}
+.region .city_search .message img{margin:-1px 2px 1px;vertical-align:middle}
+.region .city_search .message strong{color:#f60}
+.region .city_search .post_head{width:417px;margin:20px 0 5px 13px;border-collapse:collapse}
+.region .city_search .post_head.new{width:509px}
+.region .city_search .post_head th{padding-bottom:7px;border-bottom:1px solid #e2e2e2;font-size:12px;color:#333;text-align:left}
+.region .city_search .post_head .address{text-align:center}
+.region .city_search table.post{width:394px}
+.region .city_search table.post.new1{width:487px}
+.region .city_search table.post *{color:#333}
+.region .city_search table.post td{padding:3px 5px 5px 0;font-size:12px}
+.region .city_search .num,.region .city_search .post_num{font-family:tahoma,sans-serif;font-size:11px}
+.region .city_search .num{padding:2px 0 0;text-indent:5px}
+.region .city_search table.post strong{font-weight:normal;color:#eb0c00}
+.region .txt_desc .btn{margin:-2px -1px 0 0;vertical-align:text-top}
+.region .n1_info{margin-top:6px;padding:2px 0 1px 18px;background:#fff url(../img/map_sp_bullet.png) no-repeat 0 -16px;font-size:11px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#ababab;letter-spacing:-1px}
+/* 공통img */
+.greenmap .spmbu,.region .spmbu{display:inline-block;overflow:hidden;background:url(../img/map_sp_bullet.png) no-repeat 0 0}
+.greenmap .spmap,.region .spmap{display:inline-block;overflow:hidden;background:url(../img/spmap.png) no-repeat 0 0;font-size:0;color:transparent;line-height:0}
+.greenmap .btn_map_area .btn{display:inline-block;padding:4px 6px 1px;border:1px solid #d2d2d2;font-size:12px;color:#666;line-height:16px;vertical-align:top;text-decoration:none}
+.greenmap .btn_map_area .btn_reserve{border-color:#01b938;background-color:#00c73c;color:#fff}
+.greenmap .btn_map_area .ico_social{width:1px;height:12px;margin:-1px 3px 1px 1px;padding-left:13px;background-position:-1px -1px;vertical-align:middle}
+.greenmap .btn_map_area .ico_reserve{width:1px;height:13px;margin:-1px 3px 1px 1px;padding-left:11px;background-position:-16px -1px;vertical-align:middle}
+/* 상단 */
+.greenmap .section_head .go_rgt{float:right;display:block;margin:-4px 0 4px 4px;font-size:0;text-decoration:none}
+.greenmap .section_head .go_rgt .btn{display:block;padding:4px 4px 2px;border:1px solid #e6e8e9;border-radius:1px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;color:#444;letter-spacing:-1px;line-height:12px}
+.greenmap_local .section_head .link_rgt{float:right;_display:inline;margin:3px 35px -3px 0;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:12px;color:#666;text-decoration:underline}
+.greenmap_local .section_head .link_rgt .ico_arr{width:4px;height:6px;margin:-1px 0 1px 4px;background-position:-2px -105px;vertical-align:middle}
+/* 지도내부 */
+.greenmap .layer_wrap .layer{position:relative;width:200px;overflow:hidden}
+.greenmap .layer_wrap .layer dl{float:left;width:199px;padding:2px 0 1px 1px;background:url(../img/map_ly_top.png) no-repeat 0 0;font:12px/17px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif}
+.greenmap .layer_wrap .layer dt{position:relative;overflow:hidden;width:188px;padding:4px 5px 7px 5px;border-bottom:1px solid #f3f3f3;background-color:#fbfbfb;font-weight:bold;zoom:1}
+.greenmap .layer_wrap .layer dt img{margin-right:-2px;vertical-align:-3px}
+.greenmap .layer_wrap .layer dt a{margin-right:4px;text-decoration:underline}
+.greenmap .layer_wrap .layer dd{float:left;width:180px;padding:0 5px 0 8px;background-color:#fff;line-height:18px}
+.greenmap .layer_wrap .layer dd.m_addr{padding-top:10px}
+.greenmap .layer_wrap .layer dd.btm{padding-top:5px}
+.greenmap .layer_wrap .layer dd .charge_call{float:left;display:inline-block;position:relative;margin-right:4px;color:#eb0c00}
+.greenmap .layer_wrap .layer dd a.charge_call{text-decoration:underline;cursor:pointer}
+.greenmap .layer_wrap .layer dd .find{float:right;margin-top:2px;font:11px/14px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#7d7d7d;letter-spacing:-1px;text-decoration:underline}
+.greenmap .layer_wrap .layer dd .cpn_ar{float:right;margin-top:-1px}
+.greenmap .layer_wrap .layer dd .cpn_ar .find{float:none;margin-top:0}
+.greenmap .layer_wrap .layer dd .cpn_ar .btn_micons2 img{margin-bottom:0}
+.greenmap .layer_wrap .layer .notice{overflow:hidden;clear:both;width:171px;height:23px;padding:10px 0 0 31px;background:url(../img/map_ly_notice.png) no-repeat 0 0;font:11px/14px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#7d7d7d;letter-spacing:-1px}
+.greenmap .layer_wrap .layer .notice_no{overflow:hidden;clear:both;width:218px;height:20px;margin:0;background:url(../img/map_ly_notice_bottom.png) no-repeat}
+.greenmap .layer_wrap .layer .n_notice_no{overflow:hidden;clear:both;width:202px;height:11px;margin:0;background:url(../img/map_ly_bottom.png) no-repeat}
+.greenmap .layer_wrap .layer .btn_close{position:absolute;top:6px;right:5px;cursor:pointer}
+.greenmap .nmap_lay_htype1 .nmap_lay_c span a{color:#000}
+.greenmap .layer_wrap .layer .ico_head{float:left;margin:1px 4px -1px 0;_margin:1px -3px -1px 0}
+.greenmap .layer_wrap .layer .mlayer_tit{float:left;width:150px;margin:0 0 -2px 0;padding:0}
+.greenmap .layer_wrap .layer .mlayer_tit a{line-height:18px}
+.greenmap .layer_wrap .layer .mlayer_tit .btn_blc{display:inline-block;margin-right:-2px}
+.greenmap .layer_wrap .layer a.btn_micons{margin-right:2px}
+.greenmap .layer_wrap .layer a.btn_micons2{margin-right:3px}
+.greenmap .layer_wrap .layer .btn_micons img,.greenmap .layer_wrap .layer .btn_micons2 img{margin:-1px 0 1px 0;vertical-align:middle}
+.greenmap .layer_wrap .nums{overflow:hidden;float:left;position:relative;width:16px;height:16px;margin:1px 4px -1px 0;text-align:center;white-space:nowrap}
+.greenmap .layer_wrap .nums img{position:relative}
+/* 중복지역명 */
+.greenmap .search_motive{clear:both;width:auto;max-width:688px;margin:9px 0 15px 10px;_width:708px;border:1px solid #f6f6f6}
+.greenmap .search_motive ul{overflow:hidden;padding:8px 0 3px;background-color:#fafafa}
+.greenmap .search_motive li{margin:0 0 3px 15px;padding-left:7px;background:url(../img/map_sp_bullet.png) no-repeat -27px -13px;font-size:12px;line-height:17px}
+.greenmap .search_motive li.other{margin-left:12px;padding-left:0;background:none;line-height:26px}
+.greenmap .search_motive li.other .title_select{margin:-2px 6px 2px 0;vertical-align:middle}
+.greenmap .title_wrap{width:auto;padding:1px 0 7px 10px}
+.greenmap .title_wrap .title_desc{display:inline;float:none;margin:0 5px 0 0;line-height:21px}
+.greenmap .title_wrap .title_select{margin:-2px 6px 0 0;color:#151515}
+.greenmap .title_wrap .title_select2{margin:5px 0 5px 7px}
+/* 지도맵 */
+.greenmap .local_map{position:relative;z-index:11;min-height:381px;_height:381px;margin:0 0 5px;padding:4px 0 0 10px;zoom:1}
+.greenmap .local_map:after{clear:both;display:block;content:''}
+.greenmap .local_map_v1{min-height:290px;_height:290px}
+.greenmap .local_map .thumb_wrap{float:left;width:242px;margin-right:15px;border:1px solid #c2c3c6}
+.greenmap .local_map .detail{float:left;width:330px}
+.greenmap .local_map .thumb{overflow:visible;position:relative;width:242px;height:348px}
+.greenmap .local_map .thumb img{vertical-align:top}
+.greenmap .local_map_v1 .thumb{height:256px}
+/* 지도정답형 */
+.greenmap .local_map_correct{min-height:290px;_height:290px}
+.greenmap .local_map_correct .thumb{height:256px}
+.greenmap .correct_wrap{margin:7px 0 0 4px}
+.greenmap .correct_wrap .tit_area{margin-bottom:10px;line-height:21px}
+.greenmap .correct_wrap .tit_area .tit{margin-right:6px}
+.greenmap .correct_wrap .tit_area .etc{font-size:12px;color:#777}
+.greenmap .correct_wrap .row{padding-bottom:7px;font-size:12px;line-height:21px}
+.greenmap .correct_wrap .row dt{float:left;clear:both;margin-right:8px;color:#777}
+.greenmap .correct_wrap .row dd{overflow:hidden;margin-bottom:6px}
+.greenmap .correct_wrap .row dd .more{display:inline-block;margin:0 0 0 3px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;color:#999;line-height:18px;text-decoration:underline;vertical-align:middle}
+.greenmap .correct_wrap .row dd .ico_tv{width:1px;height:15px;margin:-1px 5px 1px 0;padding-left:24px;background-position:-1px -15px;vertical-align:middle}
+.greenmap .correct_wrap .row dd .ico_addr_o{width:1px;height:16px;margin:-1px 5px 1px 0;padding-left:27px;background-position:-1px -32px;vertical-align:middle}
+/* 지도맵 컨트롤 */
+.greenmap .local_map .map_control{position:relative;width:100%;height:30px;border-top:1px solid #dadddd;background-color:#f9f9f9;font:11px/14px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;letter-spacing:-1px}
+.greenmap .local_map .map_control .help{display:inline-block;margin:8px 0 0 6px;padding-right:15px;background:url(../img/map_sp_bullet.png) no-repeat 15px -40px;color:#444}
+.greenmap .local_map .map_control .btn_pr{position:absolute;top:4px;right:6px}
+.greenmap .map_control .tooltip{position:absolute;top:24px;left:30px;z-index:9999;padding-top:5px;border-bottom:1px solid #e5e5e5;background:url(../img/map_bg_tooltip.gif) no-repeat -175px 0}
+.greenmap .map_control .tooltip img{vertical-align:top}
+.greenmap .map_control .tooltip ul{width:185px;_width:211px;height:auto;padding:12px 12px 4px;border:1px solid #a3a3a3;border-top:0;background-color:#fff}
+.greenmap .map_control .tooltip li{clear:both;margin-bottom:7px;font:11px/13px '돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#666}
+.greenmap .map_control .tooltip ul li span{display:inline-block;vertical-align:middle}
+.greenmap .map_control .tooltip li span.map_num{position:static;margin-right:5px}
+.greenmap .map_control .tooltip li span.pin{margin:-1px 5px 0 0}
+.greenmap .map_control .tooltip .btn_close{display:inline-block;position:absolute;top:10px;right:5px;padding:3px;font-size:0;line-height:0}
+/* 리스트 */
+.greenmap .lst_map li{position:relative;*position:static;margin-top:13px;padding-left:24px;*padding:0;zoom:1}
+.greenmap .lst_map li:first-child{margin-top:9px}
+.greenmap .lst_map li:after{clear:both;display:block;content:''}
+.greenmap .lst_map li .bar{margin:-1px 1px 1px 2px}
+.greenmap .lst_map li .scial .bar{margin:-1px 5px 1px 2px}/*배포후제거*/
+.greenmap .lst_map li .scial .bt_scial2{margin:-1px 0 1px}
+.greenmap .lst_map li .etc{display:none}
+.greenmap .lst_map .info_area{line-height:19px}
+.greenmap .lst_map .info_area dt{display:inline;margin-right:1px;line-height:19px}
+.greenmap .lst_map .info_area dt .tit{display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:top;text-decoration:underline}
+.greenmap .lst_map .info_area dt .name{margin-left:9px;font-size:12px;color:#666}
+.greenmap .lst_map .info_area dd{margin-top:3px;font-size:12px;line-height:19px}
+.greenmap .lst_map .info_area dd.txt_inline{display:inline}
+/* 총선지도 */
+.greenmap .local_map .dsc_info{padding:21px 0 0 21px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;color:#999;line-height:16px}
+.greenmap .local_map .dsc_info em{display:block;float:left;overflow:hidden;width:1px;height:16px;margin:-2px 3px 0 -21px;padding-left:15px;background:url(../img/map_ico_vote.png) no-repeat 0 0}
+/* 리스트_아이콘A-G */
+.greenmap .map_num{position:absolute;top:0;left:0;*position:static;*float:left;*width:24px}
+.greenmap .map_num span{display:block;overflow:hidden;width:1px;height:27px;padding-left:17px;background:url(../img/map_ico_pin.png) no-repeat}
+.greenmap .map_num .pa{background-position:0 0}
+.greenmap .map_num .pb{background-position:0 -28px}
+.greenmap .map_num .pc{background-position:0 -56px}
+.greenmap .map_num .pd{background-position:0 -84px}
+.greenmap .map_num .pe{background-position:0 -112px}
+.greenmap .map_num .pf{background-position:0 -140px}
+.greenmap .map_num .pg{background-position:0 -168px}
+.greenmap .map_num .ph{background-position:0 -196px}
+.greenmap .map_num .pi{background-position:0 -224px}
+.greenmap .map_num .pj{background-position:0 -252px}
+.greenmap .map_num .pa2{background-position:-19px 0}
+.greenmap .map_num .pb2{background-position:-19px -28px}
+.greenmap .map_num .pc2{background-position:-19px -56px}
+.greenmap .map_num .pd2{background-position:-19px -84px}
+.greenmap .map_num .pe2{background-position:-19px -112px}
+.greenmap .map_num .pf2{background-position:-19px -140px}
+.greenmap .map_num .pg2{background-position:-19px -168px}
+.greenmap .map_num .ph2{background-position:-19px -196px}
+.greenmap .map_num .pi2{background-position:-19px -224px}
+.greenmap .map_num .pj2{background-position:-19px -252px}
+.greenmap .map_num .pno{height:20px;margin:0 3px 0 2px;padding-left:13px;background-position:-57px 0}
+/* 리스트_아이콘 */
+.greenmap .lst_map .info_area dd .btn_icon,.greenmap .lst_map .info_area dd .btn_icon2{display:inline-block;margin:0 2px 0 0;font-size:0;line-height:0;vertical-align:top}
+.greenmap .lst_map .info_area dd .btn_reserve{margin:0 -1px 0 3px}
+.greenmap .lst_map .info_area dd .btn_icon2{margin-left:-3px}
+.greenmap .lst_map .info_area dd .btn_icon2:first-child,.greenmap .lst_map .info_area dd .btn_icon+.btn_icon2{margin-left:0}
+.greenmap .lst_map .info_area dd .btn_closing{display:inline-block;margin:5px 7px -5px 2px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;line-height:11px;color:#888;letter-spacing:-1px;vertical-align:top}
+.greenmap .lst_map .info_area dd .btn_closing img{display:inline-block;margin:-1px 3px 1px 0;vertical-align:middle}
+.greenmap .lst_map .info_area dd .review{display:inline-block;margin:0 0 0 4px;color:#666}
+.greenmap .lst_map .info_area dd .cd_bene{display:inline-block;*display:inline;position:relative;margin:0 2px 0 0;font-size:0;line-height:0;vertical-align:top}
+.greenmap .lst_map .info_area dd .cd_bene .ly_bene{display:block;position:absolute;top:21px;right:2px;z-index:999;width:152px;padding:9px 8px 1px 9px;border:2px solid #888;background:#fff}
+.greenmap .lst_map .info_area dd .cd_bene .ly_bene dl{overflow:hidden}
+.greenmap .lst_map .info_area dd .cd_bene .ly_bene dt,.greenmap .lst_map .info_area dd .cd_bene .ly_bene dd{display:block;overflow:hidden;margin:0;line-height:14px;white-space:nowrap;text-overflow:ellipsis;word-break:normal;word-wrap:normal}
+.greenmap .lst_map .info_area dd .cd_bene .ly_bene dt{font-size:12px;color:#333}
+.greenmap .lst_map .info_area dd .cd_bene .ly_bene dd{padding:1px 0 7px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;color:#848484;letter-spacing:-1px}
+/* 리스트_번호주소 */
+.greenmap .lst_map .info_area dd .tell{margin-right:4px;color:#eb0c00}
+html[data-useragent*='chrome'] .greenmap .lst_map .info_area dd .tell{letter-spacing:-1px}
+.greenmap .lst_map .info_area dd .tell img{margin:-2px 0 2px 4px;vertical-align:top}
+.greenmap .lst_map .info_area dd .dsc{display:inline-block;overflow:hidden;max-width:200px;white-space:nowrap;text-overflow:ellipsis;vertical-align:top;*vertical-align:middle}
+.greenmap .lst_map .info_area dd .bt_open{display:inline-block;overflow:hidden;width:13px;height:13px;margin:-2px 0 2px 4px;background:url(../img/map_ico_pin.png) no-repeat 0 -280px;font-size:0;line-height:0;vertical-align:middle}
+.greenmap .lst_map .info_area dd .ly_load{position:relative;z-index:1}
+.greenmap .lst_map .info_area dd .ly_address{display:none;position:absolute;left:0;top:1px;max-width:470px;padding:7px 0 4px 2px;border:1px solid #8c8f94;background-color:#fff;z-index:10000}
+.greenmap .lst_map .info_area dd .bt_open:hover +.ly_load .ly_address,.greenmap .lst_map .info_area dd .bt_open:focus +.ly_load .ly_address{display:block;z-index:10}
+.greenmap .lst_map .info_area dd .ly_address .ad_txt{display:block;margin:0 9px 3px;font-size:12px;color:#5e5e5e;line-height:17px}
+.greenmap .lst_map .info_area dd .ly_address .ad_txt .ico{width:1px;height:16px;margin:0 5px 0 -1px;padding-left:25px;background-position:-1px -120px;vertical-align:top}
+/* 로컬링크 */
+.greenmap_local{margin:0;padding:25px 35px 25px 25px}
+.greenmap_local .lst_map .info_area dt .tit{display:inline;overflow:auto;text-decoration:none;white-space:normal}
+.greenmap_local .lst_map .info_area dt .tit:hover,.greenmap_local .lst_map .info_area dt .tit:focus,.greenmap_local .lst_map .info_area dt .tit:active{text-decoration:underline}
+.greenmap_local .section_local_map{margin:7px -35px 17px -25px;padding:22px 0 14px 25px;border-top:1px solid #edecdd;border-bottom:1px solid #edecdd;background-color:#fffef8}
+.greenmap_local .section_local_map .lst_map{margin-left:10px;padding-top:6px}
+.greenmap_local .section_local_map .map_num .pa{background-position:-38px 0}
+.greenmap_local .section_local_map .map_num .pb{background-position:-38px -28px}
+.greenmap_local .section_local_map .map_num .pc{background-position:-38px -56px}
+/* TV정보추가 */
+.greenmap .lst_map .info_area dd .bt_addinfo{display:inline;position:relative;margin:0 2px}
+.greenmap .lst_map .info_area dd .bt_addinfo .bt_add{display:inline-block;overflow:hidden;width:12px;height:12px;margin:2px 0 -1px;background-position:-8px -105px;font-size:0;line-height:0;vertical-align:top}
+.greenmap .lst_map .info_area dd .bt_addinfo .ly_info{display:none;position:absolute;top:-10px;right:24px;padding:9px 8px 6px 9px;border:1px solid #4a4a4a;background-color:#fff;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:12px;color:#777;line-height:16px;white-space:nowrap}
+.greenmap .lst_map .info_area dd .bt_addinfo .ly_info .arr{display:block;position:absolute;top:50%;right:-6px;width:6px;height:11px;margin-top:-5px;background-position:-22px -105px}
+.greenmap .lst_map .info_area dd .bt_addinfo .ly_info .bar{margin:-1px 3px 1px 6px}
+.greenmap .lst_map .info_area dd .bt_addinfo .ly_info .name{margin-left:3px;color:#0f69ce}
+.greenmap .lst_map .info_area dd .bt_addinfo .bt_add:hover,.greenmap .lst_map .info_area dd .bt_addinfo .bt_add:focus{z-index:1}
+.greenmap .lst_map .info_area dd .bt_addinfo .bt_add:hover+.ly_info,.greenmap .lst_map .info_area dd .bt_addinfo .bt_add:focus+.ly_info{display:block;z-index:10}
+/* 내비게이션 배너 */
+.greenmap .navi_banner{display:block;margin:18px 0 0 10px;border:1px solid #e5e4de;background:#f3f2ec url(../img/bg_navi_ban.png) no-repeat 100% 0;text-align:left}
+.greenmap .navi_banner img{vertical-align:top}
+/* EOF */

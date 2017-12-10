@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/* 모바일앱 검색 */
+.sp_mobile.section{padding-bottom:17px}
+.sp_mobile .go_relate{float:right;top:-3px;color:#777}
+.sp_mobile .go_relate img{margin:-1px 0 3px -1px;vertical-align:middle}
+.sp_mobile .type01{overflow:visible;margin:2px 0 0 10px}
+.sp_mobile .type01 .thumb{margin-right:17px}
+.sp_mobile .type01 .thumb img{vertical-align:top}
+.sp_mobile .type01 .thumb.noimg img{display:none}
+.sp_mobile .type01 .thumb.noimg{width:85px;height:85px;background-color:#f5f7f8}
+.sp_mobile .type01 .thumb.noimg a{display:block;width:62px;height:47px;background:url(../img/img_noimg2.png) no-repeat;margin:18px auto}
+.sp_mobile .type01 dl{float:left;max-width:483px;margin-top:10px}
+.sp_mobile .type01 dt{display:block;margin:0 0 3px}
+.sp_mobile .type01 dt a,.sp_mobile .type01 .cate,.sp_mobile .type01 .event{display:inline-block;overflow:hidden;max-width:454px;margin-top:-1px;vertical-align:middle;white-space:nowrap;text-overflow:ellipsis}
+.sp_mobile .type01 dd{margin:0;line-height:19px;word-wrap:normal;word-break:normal}
+.sp_mobile .type01 li{float:none;position:static;width:100%;min-width:580px;max-width:680px;min-height:0;height:85px;margin-bottom:20px}
+.sp_mobile .type01 .cate{margin-top:0;color:#777 !important;font-size:12px;font-family:'굴림',gulim,helvetica,sans-serif}
+.sp_mobile .type01 .cate .bar{margin:-1px 10px 1px 10px}
+.sp_mobile .type01 .grade{font-family:'돋움',dotum;font-size:11px;color:#777}
+.sp_mobile .type01 .grade img{margin:1px 0;vertical-align:middle}
+.sp_mobile .type01 .grade a img{margin:0 2px 0 0}
+.sp_mobile .type01 .grade .tx_event a{margin-left:8px}
+.sp_mobile .type01 li .ico_fee,.sp_mobile .type01 li .ico_discnt{margin-left:6px;vertical-align:-3px}
+.sp_mobile .type01 li .ico_discnt{margin-left:3px}
+.sp_mobile .type01 li .block a{max-width:430px}
+.sp_mobile .type01 li .block .ico_block{display:inline-block;overflow:hidden;width:14px;height:13px;background:url(../img/ico_block.gif) no-repeat;line-height:100px;vertical-align:middle}
+.sp_mobile .ico_mkt{position:relative;top:2px}
+.sp_mobile .section_more{padding-top:0;margin-top:-18px}
+.sp_mobile .go_other{display:inline-block;padding-top:3px;margin-right:12px;font-size:12px;text-decoration:underline;letter-spacing:-1px;color:#666}
+
+/* 타이틀 앞 아이콘 추가 */
+.sp_mobile dl .cate .ico_st{display:inline-block;width:15px;height:15px;margin:0 5px 4px 0;background:url(../img/sp_appico_v2.png) no-repeat 0 1px;vertical-align:middle;content:''}
+.sp_mobile dl .cate .ico_st.google{display:inline-block;width:9px;height:13px;margin:0 5px 4px 0;background:url(../img/sp_appico_v2.png) no-repeat -19px 0;vertical-align:middle;content:''}
+.sp_mobile dl .cate a{text-decoration:none}
+
+/* QR코드 레이어 */
+.sp_mobile .type01 .qr_area{clear:both;position:relative;top:0;left:103px;z-index:120}
+.sp_mobile .type01 .btn_qr_wrap{display:inline;overflow:hidden;position:absolute;top:-13px;left:-1px;z-index:100;width:222px;padding:14px 7px 14px 14px;border:2px solid #595e6b;background:#fff}
+.sp_mobile .type01 .btn_qr_wrap .ly_thumb{float:left;width:58px;height:58px;margin-right:9px;padding:10px;border:3px solid #36ae0c}
+.sp_mobile .type01 .btn_qr_wrap .ly_thumb img{vertical-align:top}
+.sp_mobile .type01 .btn_qr_wrap .ly_thumb.noimg img{display:none}
+.sp_mobile .type01 .btn_qr_wrap .ly_thumb.noimg span{display:block;width:49px;height:49px;margin:4px auto;background:url(../img/noimg_qr.png) no-repeat -4px -5px}
+.sp_mobile .type01 .btn_qr_wrap .ly_p_dsc{overflow:hidden;margin-bottom:4px;padding-top:8px;font-size:12px;line-height:16px;color:#777}
+.sp_mobile .type01 .btn_qr_wrap .qr_mr{font-family:'돋움',dotum,applegothic,sans-serif;font-size:11px;line-height:14px;color:#777;letter-spacing:-1px;text-decoration:underline}
+.sp_mobile .type01 .btn_qr_wrap .btn_ly_clse{position:absolute;top:8px;right:8px}
+.sp_mobile .type01 .btn_qr_wrap .btn_ly_clse img{display:block;vertical-align:top}
+.sp_mobile .go_other.v2{margin-right:0}

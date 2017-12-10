@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%
 		request.setCharacterEncoding("euc-kr");
 %>
@@ -7,17 +7,17 @@
 <!-- saved from url=(0128)file:///C:/Users/Soo/Desktop/%EC%95%84%EC%9D%B4%ED%8B%B0/%EB%B0%94%EC%BD%94%EB%93%9C%20%EA%B3%A0%EA%B0%9D%EC%84%BC%ED%84%B0.html -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
 <head>
-	<<meta charset="utf-8">
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="og:title" content="è«›ï¿½è‚„ï¿½ï¿½ï¿½ æ€¨ï¿½åª›ï¿½ï¿½ì‡³ï¿½ï¿½">
+<meta property="og:title" content="¹ÙÄÚµå °í°´¼¾ÅÍ">
 <meta property="og:description"
-	content="è«›ï¿½è‚„ï¿½ï¿½ï¿½ æ€¨ï¿½åª›ï¿½ï¿½ì‡³ï¿½ê³•ï¿½ï¿½ ï¿½ë“¯ï¿½ï¿½ åª›ï¿½ ï¿½ï¿½é®ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï§ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ëª…ï¿½ëŒ€ë‚«ï¿½ëª„ï¿½ï¿½.">
+	content="¹ÙÄÚµå °í°´¼¾ÅÍ¸¦ ÅëÇØ °¢ ¼­ºñ½º µµ¿ò¸»À» È®ÀÎÇØº¸¼¼¿ä.">
 <meta property="og:image"
 	content="http://static.naver.net/help/img/img_logo_naver_200X200.png">
 <meta property="og:image:secure_url"
 	content="https://ssl.pstatic.net/static/help/img/img_logo_naver_200X200.png">
 <meta property="og:type" content="website">
-<title>è«›ï¿½è‚„ï¿½ï¿½ï¿½ æ€¨ï¿½åª›ï¿½ï¿½ì‡³ï¿½ï¿½</title>
+<title>¹ÙÄÚµå °í°´¼¾ÅÍ</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="https://ssl.pstatic.net/static/help/common/favicon.ico">
 <link rel="stylesheet" type="text/css"
@@ -37,7 +37,7 @@ var gnb_searchbox = "off";
 var gnb_shortnick = "off";
 var gnb_brightness = 3;
 var gnb_one_naver = 1;
-var INIT_SEARCH_TEXT= "æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ã…»ãˆƒ ï¿½ï¿½ï¿½ï¿½ï§ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½.";
+var INIT_SEARCH_TEXT= "±Ã±ÝÇÑ Á¡ÀÌ ÀÖ´Ù¸é µµ¿ò¸»À» °Ë»öÇØ º¸¼¼¿ä.";
 jQuery().ready(function(){
 	if (jQuery('#searchText').val() == '') {
 		jQuery('#searchText').val(INIT_SEARCH_TEXT);
@@ -47,11 +47,11 @@ function openSearch(form) {
 	var searchText = form.searchText.value;
 	var url = "";
 	if (searchText == "" || searchText == INIT_SEARCH_TEXT) {
-		alert("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½ï¿½ äºŒì‡±ï¿½ëª„ï¿½ï¿½.");
+		alert("¿øÇÏ½Ã´Â °Ë»ö¾î¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
 		jQuery('#searchText').focus();
 		return false;
 	}
-	if ("ï¿½ï¿½å¯ƒâ‘¹ï¿½ï¿½ï¿½" == searchText) {
+	if ("¿ø°ÝÁö¿ø" == searchText) {
         url = 'https://help.naver.com' + "/support/contents/contents.nhn?serviceNo=1074&categoryNo=15260";
 		form.action = url;
 		form.method = "post";
@@ -68,7 +68,7 @@ function reSearchParamChange(){
 	var totalSearchForm = jQuery.find("#searchForm");
 	jQuery(totalSearchForm).find( "#serviceName" ).val('');
 	jQuery(totalSearchForm).find( "#searchText" ).val(jQuery("#searchKeyword").val());
-	if( jQuery("#searchKeyword").val()  == '' ) { //å¯ƒï¿½ï¿½ï¿½ï¿½ë‹¿ï¿½ ï¿½ï¿½ï¿½ï¿½ å¯ƒìŽŒï¿½ê³—ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½é®ï¿½ï¿½ã…»ï¿½ï¿½ï¿½ ï§žï¿½ï¿½ê³Œï¿½ è«›ï¿½ï¿½ï¿½
+	if( jQuery("#searchKeyword").val()  == '' ) { //°Ë»ö¾î°¡ ÀÖ´Â °æ¿ì¿¡´Â ¼­ºñ½º¸íÀ» Áö¿ì°í ¹Ý¿µ
 		jQuery(totalSearchForm).find( "#searchText" ).val( jQuery("#searchName").val() );
 	}
 	jQuery(totalSearchForm).submit();
@@ -78,21 +78,21 @@ function reSearchParamChange(){
 			<div class="gnb_area">
 				<div class="Ngnb">
 					<div class="Ngnb_inner">
-						<a href="https://help.naver.com/index.jsp" class="Nlogo_link"><span
+						<a href="../index.jsp" class="Nlogo_link"><span
 							class="Nlogo">BARCODE</span></a>
 						<h1 class="Ngnb_service">
 							<a href="https://help.naver.com/#" class="Nhome_link"><span
-								class="Nhome">æ€¨ï¿½åª›ï¿½ï¿½ì‡³ï¿½ï¿½</span></a>
+								class="Nhome">°í°´¼¾ÅÍ</span></a>
 						</h1>
 						<div class="Ngnb_common">
 							<div id="gnb" class="gnb_one">
-								<strong class="blind">ï¿½ÑŠï¿½â‘¹ï¿½ï¿½ ï§ï¿½ï¿½ï¿½</strong>
+								<strong class="blind">»ç¿ëÀÚ ¸µÅ©</strong>
 								<ul class="gnb_lst" id="gnb_lst" style="display: block;">
 									<li class="gnb_login_li" id="gnb_login_layer"
 										style="display: none;"><a class="gnb_btn_login"
 										href="https://nid.naver.com/nidlogin.login"
 										id="gnb_login_button"><span class="gnb_bg"></span><span
-											class="gnb_bdr"></span><span class="gnb_txt">æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½</span></a></li>
+											class="gnb_bdr"></span><span class="gnb_txt">·Î±×ÀÎ</span></a></li>
 									<li class="gnb_my_li" id="gnb_my_layer"
 										style="display: inline-block;"><div
 											class="gnb_my_namebox" id="gnb_my_namebox"
@@ -100,14 +100,14 @@ function reSearchParamChange(){
 											<a href="javascript:;" class="gnb_my"
 												onclick="gnbUserLayer.clickToggle(); return false;"><img
 												id="gnb_profile_img" src="./custom_home_files/myInfo.gif"
-												width="26" height="26" alt="ï¿½ï¿½ ï¿½ï¿½æ¿¡ï¿½ï¿½ï¿½ ï¿½ëŒ€ï¿½ëª„ï¿½"
+												width="26" height="26" alt="³» ÇÁ·ÎÇÊ ÀÌ¹ÌÁö"
 												style="display: inline-block;"><span
 												id="gnb_profile_filter_mask" class="filter_mask"
 												style="display: inline-block;"></span> <span
-												class="gnb_name" id="gnb_name1">ï¿½ï¿½ï¿½ï¿½</span><em class="blind">ï¿½ëŒï¿½ï¿½è¹‚ï¿½
-													è¹‚ë‹¿ë¦°</em><span class="ico_arrow"></span></a><a
+												class="gnb_name" id="gnb_name1">¼ö¼ö</span><em class="blind">³»Á¤º¸
+													º¸±â</em><span class="ico_arrow"></span></a><a
 												href="https://help.naver.com/#" class="gnb_emp" id="gnb_emp"
-												style="display: none;">(ï¿½ï¿½ï§žï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)</a>
+												style="display: none;">(ÀÓÁ÷¿øÇýÅÃ)</a>
 										</div>
 										<div class="gnb_my_lyr" id="gnb_my_lyr">
 											<div class="gnb_my_content">
@@ -116,42 +116,42 @@ function reSearchParamChange(){
 														src="./custom_home_files/myInfo.gif" width="80"
 														height="80" alt=""><a
 														href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"
-														class="gnb_change"><span class="blind">ï¿½ï¿½æ¿¡ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½
-															è¹‚ï¿½å¯ƒï¿½</span></a>
+														class="gnb_change"><span class="blind">ÇÁ·ÎÇÊ »çÁø
+															º¯°æ</span></a>
 												</div>
 												<div class="gnb_txt_area">
 													<p class="gnb_account">
 														<span class="gnb_name" id="gnb_name2"><a
 															class="gnb_nick"
-															href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType">ï¿½ï¿½ï¿½ï¿½</a>ï¿½ï¿½</span><a
+															href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType">¼ö¼ö</a>´Ô</span><a
 															class="gnb_btn_login"
 															href="https://nid.naver.com/nidlogin.logout?returl=https%3A%2F%2Fhelp.naver.com%2F"
 															id="gnb_logout_button"><span class="gnb_bg"></span><span
-															class="gnb_bdr"></span><span class="gnb_txt">æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½ï¿½ï¿½</span></a>
+															class="gnb_bdr"></span><span class="gnb_txt">·Î±×¾Æ¿ô</span></a>
 													</p>
 													<a href="http://mail.naver.com/" class="gnb_mail_address">dltjdtn321@naver.com</a>
 													<ul class="gnb_edit_lst">
 														<li class="gnb_info"><a
-															href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">ï¿½ëŒï¿½ï¿½è¹‚ï¿½</a></li>
+															href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">³»Á¤º¸</a></li>
 														<li class="gnb_secure" id="gnb_secure_lnk"><a
-															href="https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&amp;menu=security">è¹‚ëŒï¿½ï¿½ï¿½ã…¼ï¿½ï¿½</a></li>
+															href="https://nid.naver.com/user2/help/myInfo.nhn?m=viewSecurity&amp;menu=security">º¸¾È¼³Á¤</a></li>
 													</ul>
 													<p class="gnb_pay_check" id="gnb_pay_check">
 														<em>N Pay</em><a href="http://pay.naver.com/"
-															id="gnb_pay_point"><span>ï¿½ï¿½ ï¿½ï¿½ï¿½ëŒ„ï¿½ÑŠï¿½ëª…ï¿½ï¿½</span></a>
+															id="gnb_pay_point"><span>³» ÆäÀÌÆ÷ÀÎÆ®</span></a>
 													</p>
 												</div>
 											</div>
 											<div class="gnb_my_community">
-												<a href="http://blog.naver.com/MyBlog.nhn" class="gnb_blog">ï¿½ï¿½
-													é‡‰ï¿½æ¿¡ï¿½æ´¹ï¿½</a><a href="http://section.cafe.naver.com/"
-													class="gnb_cafe">åª›ï¿½ï¿½ï¿½ï¿½ï¿½ ç§»ëŒ„ï¿½ï¿½</a><a href="http://pay.naver.com/"
+												<a href="http://blog.naver.com/MyBlog.nhn" class="gnb_blog">³»
+													ºí·Î±×</a><a href="http://section.cafe.naver.com/"
+													class="gnb_cafe">°¡ÀÔÇÑ Ä«Æä</a><a href="http://pay.naver.com/"
 													class="gnb_pay"><span>N Pay</span></a>
 											</div>
 											<a href="https://help.naver.com/#" class="gnb_my_interface"
-												style="display: none"><span class="blind">ï¿½ï¿½å¯ƒìŽŒï¿½ã…¼ï¿½ï¿½</span></a>
+												style="display: none"><span class="blind">È¯°æ¼³Á¤</span></a>
 										</div>
-										<iframe id="gnb_my_lyr_iframe" title="é®ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+										<iframe id="gnb_my_lyr_iframe" title="ºó ÇÁ·¹ÀÓ"
 											class="gnb_pad_lyr" name="padding" width="0" height="0"
 											scrolling="no" frameborder="0"
 											style="top: 55px; right: 10px; width: 320px; height: 174px; display: none; opacity: 0;"
@@ -160,7 +160,7 @@ function reSearchParamChange(){
 										style="display: inline-block;"><a href="javascript:;"
 										class="gnb_notice"
 										onclick="gnbNaverMeLayer.clickToggle(); return false;"><span
-											class="blind">ï¿½ï¿½ç”±ï¿½</span><span class="gnb_icon"></span><em
+											class="blind">¾Ë¸²</span><span class="gnb_icon"></span><em
 											class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span
 												class="gnb_ico_new"><span class="gnb_count"
 													id="gnb_me_count" style="display: inline-block;"></span></span></em><span
@@ -169,13 +169,13 @@ function reSearchParamChange(){
 											<div class="svc_noti svc_panel">
 												<div class="svc_scroll">
 													<div class="svc_head">
-														<strong class="gnb_tit">ï¿½ï¿½ï§£ï¿½ ï¿½ï¿½ç”±ï¿½</strong>
+														<strong class="gnb_tit">ÀüÃ¼ ¾Ë¸²</strong>
 														<div class="task_right">
 															<button
 																onclick="gnbNaverMeLayer.deleteReadList(this, event);"
-																id="gnb_btn_read_noti_del">ï¿½ìŽŒï¿½ï¿½ ï¿½ï¿½ç”±ï¿½ ï¿½ï¿½ï¿½ï¿½</button>
+																id="gnb_btn_read_noti_del">ÀÐÀº ¾Ë¸² »èÁ¦</button>
 															<button onclick="gnbNaverMeLayer.showDeleteAlert();"
-																id="gnb_btn_all_noti_del">ï§â‘¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</button>
+																id="gnb_btn_all_noti_del">¸ðµÎ »èÁ¦</button>
 														</div>
 													</div>
 													<div class="svc_body" id="gnb_naverme_layer"></div>
@@ -183,23 +183,23 @@ function reSearchParamChange(){
 												<div class="gnb_ly_alert" id="gnb_ly_alert"
 													style="display: none;">
 													<p class="gnb_msg">
-														<strong>ï¿½ï¿½ç”±ì‡±ï¿½ï¿½ ï§â‘¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å¯ƒï¿½ï¿½ë“¬ï¿½ï¿½æºï¿½?</strong>
+														<strong>¾Ë¸²À» ¸ðµÎ »èÁ¦ÇÏ½Ã°Ú½À´Ï±î?</strong>
 													</p>
 													<div class="gnb_btns">
 														<button id="ly_alert_confirm"
-															onclick="gnbNaverMeLayer.deleteAllList(this, event);">ï¿½ï¿½ï¿½ï¿½</button>
-														<button onclick="gnbNaverMeLayer.hideDeleteAlert();">ç—â‘¥ï¿½ï¿½</button>
+															onclick="gnbNaverMeLayer.deleteAllList(this, event);">È®ÀÎ</button>
+														<button onclick="gnbNaverMeLayer.hideDeleteAlert();">Ãë¼Ò</button>
 													</div>
 													<button class="gnb_btn_close"
 														onclick="gnbNaverMeLayer.hideDeleteAlert();">
-														<i>ï¿½ï¿½ï¿½ëŒï¿½ï¿½ ï¿½ãƒªë¦°</i>
+														<i>·¹ÀÌ¾î ´Ý±â</i>
 													</button>
 												</div>
 												<a href="http://me.naver.com/box/noti.nhn"
-													class="gnb_notice_all">ï¿½ï¿½ ï¿½ï¿½ç”±ï¿½ ï¿½ï¿½ï§£ëŒ€ë‚«æ¹²ï¿½</a>
+													class="gnb_notice_all">³» ¾Ë¸² ÀüÃ¼º¸±â</a>
 											</div>
 										</div>
-										<iframe id="gnb_notice_lyr_iframe" title="é®ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+										<iframe id="gnb_notice_lyr_iframe" title="ºó ÇÁ·¹ÀÓ"
 											class="gnb_pad_lyr" name="padding" width="0" height="0"
 											scrolling="no" frameborder="0"
 											style="top: 55px; right: 10px; width: 299px; height: 332px; display: none; opacity: 0;"
@@ -208,32 +208,32 @@ function reSearchParamChange(){
 										style="display: inline-block;"><a href="javascript:;"
 										class="gnb_service"
 										onclick="gnbMoreLayer.clickToggle(); return false;"><span
-											class="blind">ï¿½ï¿½é®ï¿½ï¿½ï¿½ ï¿½ï¿½è¹‚ë‹¿ë¦°</span><span class="gnb_icon"></span><span
+											class="blind">¼­ºñ½º ´õº¸±â</span><span class="gnb_icon"></span><span
 											class="ico_arrow"></span></a>
 									<div class="gnb_service_lyr" id="gnb_service_lyr">
 											<div class="gnb_favorite_search" id="gnb_favorite_search">
 												<div class="gnb_favorite_area">
 													<div class="gnb_favorite_lstwrp">
 														<div class="gnb_first_visit" style="display: none">
-															<span class="blind">ï¿½ï¿½ï§ï¿½ï¿½ï¿½ ï§ï¿½å¯ƒâ‘¥ê°¼æ¹²ê³•ï¿½ï¿½ ç•°ï¿½åª›ï¿½ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½!</span><a
+															<span class="blind">³ª¸¸ÀÇ Áñ°ÜÃ£±â¸¦ Ãß°¡ÇØ º¸¼¼¿ä!</span><a
 																href="https://help.naver.com/#" class="gnb_close"><span
-																class="blind">ï¿½ãƒªë¦°</span></a>
+																class="blind">´Ý±â</span></a>
 														</div>
-														<strong class="blind">ï§ï¿½å¯ƒâ‘¥ê°¼ï¿½ï¿½ ï¿½ï¿½é®ï¿½ï¿½ï¿½</strong>
+														<strong class="blind">Áñ°ÜÃ£´Â ¼­ºñ½º</strong>
 														<ul class="gnb_favorite_lst" id="gnb_favorite_lst">
 															<li class="gnb_add"><a
-																href="https://help.naver.com/#"><span class="ic_add"></span>ç•°ï¿½åª›ï¿½</a></li>
+																href="https://help.naver.com/#"><span class="ic_add"></span>Ãß°¡</a></li>
 															<li class="gnb_add"><a
-																href="https://help.naver.com/#"><span class="ic_add"></span>ç•°ï¿½åª›ï¿½</a></li>
+																href="https://help.naver.com/#"><span class="ic_add"></span>Ãß°¡</a></li>
 															<li class="gnb_add"><a
-																href="https://help.naver.com/#"><span class="ic_add"></span>ç•°ï¿½åª›ï¿½</a></li>
+																href="https://help.naver.com/#"><span class="ic_add"></span>Ãß°¡</a></li>
 															<li class="gnb_add"><a
-																href="https://help.naver.com/#"><span class="ic_add"></span>ç•°ï¿½åª›ï¿½</a></li>
+																href="https://help.naver.com/#"><span class="ic_add"></span>Ãß°¡</a></li>
 														</ul>
 														<a href="https://help.naver.com/#"
 															class="gnb_my_interface"
 															onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span
-															class="blind">ï§ï¿½å¯ƒâ‘¥ê°¼æ¹²ï¿½ ï¿½ã…¼ï¿½ï¿½</span></a>
+															class="blind">Áñ°ÜÃ£±â ¼³Á¤</span></a>
 													</div>
 												</div>
 												<div class="gnb_search_area">
@@ -241,14 +241,14 @@ function reSearchParamChange(){
 														onmouseover="gnb_search.mouseOver(this);"
 														onmouseout="gnb_search.mouseOut(this);">
 														<input id="gnb_svc_search_input" type="text"
-															title="ï¿½ï¿½é®ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½" value="ï¿½ï¿½ ï§ï¿½ï¿½ï¿½ ï¿½ï¿½é®ï¿½ï¿½ã…»ï¿½ï¿½ åª›ï¿½ï¿½ëª…ï¿½ï¿½å¯ƒï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëª„ï¿½ï¿½!"
+															title="¼­ºñ½º °Ë»ö" value="´õ ¸¹Àº ¼­ºñ½º¸¦ °£ÆíÇÏ°Ô ½ÃÀÛÇÏ¼¼¿ä!"
 															onfocus="gnb_search.clearInput(this);"
 															onblur="gnb_search.resetInput(this);"
 															onkeydown="gnb_search.keyDown(event);"
 															onkeyup="gnb_search.keyUp(event);"><a
 															href="https://help.naver.com/#" class="gnb_del_txt"
 															id="gnb_del_txt" style="display: none"><span
-															class="blind">ï¿½ï¿½ï¿½ï¿½</span></a>
+															class="blind">»èÁ¦</span></a>
 														<div class="gnb_pop_input" id="gnb_pop_input" tabindex="0"
 															onfocus="gnb_search.searchPopOnMouse = true; return false;"
 															onfocusout="gnb_search.searchPopOnMouse = false; return false;"
@@ -261,224 +261,224 @@ function reSearchParamChange(){
 													<div class="gnb_search_lstwrp">
 														<ul class="gnb_search_lst gnb_first">
 															<li class="gnb_first"><a
-																href="http://cafe.naver.com/">ç§»ëŒ„ï¿½ï¿½</a></li>
-															<li><a href="http://news.naver.com/">ï¿½ëŒï¿½ï¿½</a></li>
-															<li><a href="http://map.naver.com/">ï§žï¿½ï¿½ï¿½</a></li>
-															<li><a href="http://sports.news.naver.com/">ï¿½ã…½ï¿½ÑŠï¿½</a></li>
-															<li><a href="http://game.naver.com/">å¯ƒï¿½ï¿½ï¿½</a></li>
+																href="http://cafe.naver.com/">Ä«Æä</a></li>
+															<li><a href="http://news.naver.com/">´º½º</a></li>
+															<li><a href="http://map.naver.com/">Áöµµ</a></li>
+															<li><a href="http://sports.news.naver.com/">½ºÆ÷Ã÷</a></li>
+															<li><a href="http://game.naver.com/">°ÔÀÓ</a></li>
 														</ul>
 														<ul class="gnb_search_lst">
 															<li class="gnb_first"><a
-																href="http://section.blog.naver.com/">é‡‰ï¿½æ¿¡ï¿½æ´¹ï¿½</a></li>
-															<li><a href="http://post.naver.com/main.nhn">ï¿½ÑŠï¿½ã…½ï¿½ï¿½</a></li>
-															<li><a href="http://dic.naver.com/">ï¿½ÑŠï¿½ï¿½</a></li>
-															<li><a href="http://kin.naver.com/">ï§žï¿½ï¿½ï¿½iN</a></li>
-															<li><a href="http://weather.naver.com/">ï¿½ï¿½ï¿½ï¿½</a></li>
+																href="http://section.blog.naver.com/">ºí·Î±×</a></li>
+															<li><a href="http://post.naver.com/main.nhn">Æ÷½ºÆ®</a></li>
+															<li><a href="http://dic.naver.com/">»çÀü</a></li>
+															<li><a href="http://kin.naver.com/">Áö½ÄiN</a></li>
+															<li><a href="http://weather.naver.com/">³¯¾¾</a></li>
 														</ul>
 														<ul class="gnb_search_lst">
 															<li class="gnb_first"><a
-																href="http://mail.naver.com/">ï§Žï¿½ï¿½ï¿½</a></li>
-															<li><a href="http://stock.naver.com/">ï§ï¿½æ²…ï¿½</a></li>
-															<li><a href="http://land.naver.com/">éºï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
-															<li><a href="http://music.naver.com/">è£•ã…¼ï¿½</a></li>
-															<li><a href="http://book.naver.com/">ï§¢ï¿½</a></li>
+																href="http://mail.naver.com/">¸ÞÀÏ</a></li>
+															<li><a href="http://stock.naver.com/">Áõ±Ç</a></li>
+															<li><a href="http://land.naver.com/">ºÎµ¿»ê</a></li>
+															<li><a href="http://music.naver.com/">¹ÂÁ÷</a></li>
+															<li><a href="http://book.naver.com/">Ã¥</a></li>
 														</ul>
 														<ul class="gnb_search_lst">
 															<li class="gnb_first"><a
-																href="http://shopping.naver.com/">ï¿½ì‡³ï¿½ï¿½</a></li>
-															<li><a href="http://comic.naver.com/">ï¿½ë±ï¿½ï¿½</a></li>
-															<li><a href="http://movie.naver.com/">ï¿½ï¿½ï¿½ï¿½</a></li>
-															<li><a href="http://cloud.naver.com/">ï¿½ëŒ€ï¿½ì‡±ï¿½ê³•ï¿½ï¿½</a></li>
-															<li><a href="http://auto.naver.com/">ï¿½ï¿½ï¿½ï¿½ï§¡ï¿½</a></li>
+																href="http://shopping.naver.com/">¼îÇÎ</a></li>
+															<li><a href="http://comic.naver.com/">À¥Å÷</a></li>
+															<li><a href="http://movie.naver.com/">¿µÈ­</a></li>
+															<li><a href="http://cloud.naver.com/">Å¬¶ó¿ìµå</a></li>
+															<li><a href="http://auto.naver.com/">ÀÚµ¿Â÷</a></li>
 														</ul>
 													</div>
 												</div>
 												<div class="gnb_banner">
 													<a href="http://campaign.naver.com/pointevent/"
 														class="gnb_service_event"><img id="gnb_promo"
-														alt="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ | 12ï¿½ï¿½ ï¿½ëŒ€ê¹½ï¿½ï¿½" width="265" height="47"
+														alt="¹ÙÄÚµåÆäÀÌ | 12¿ù ÀÌº¥Æ®" width="265" height="47"
 														src="./custom_home_files/promo_npay_1712.png"></a>
 												</div>
 												<div class="gnb_linkwrp">
 													<a href="http://www.naver.com/more.html"
-														class="gnb_service_all" id="gnb_service_all">ï¿½ï¿½ï§£ï¿½ ï¿½ï¿½é®ï¿½ï¿½ï¿½ è¹‚ë‹¿ë¦°</a>
+														class="gnb_service_all" id="gnb_service_all">ÀüÃ¼ ¼­ºñ½º º¸±â</a>
 												</div>
 											</div>
 											<div class="gnb_svc_more" id="gnb_svc_more"
 												style="display: none;">
-												<strong class="blind">è«›ï¿½è‚„ï¿½ï¿½ï¿½ äºŒì‡±ï¿½ï¿½ ï¿½ï¿½é®ï¿½ï¿½ï¿½</strong>
+												<strong class="blind">¹ÙÄÚµå ÁÖ¿ä ¼­ºñ½º</strong>
 												<div class="gnb_bg_top"></div>
 												<div class="gnb_svc_hd">
-													<strong class="gnb_svc_tit">è«›ï¿½æ¿¡ï¿½åª›ï¿½æ¹²ï¿½ ï¿½ã…¼ï¿½ï¿½</strong><span
+													<strong class="gnb_svc_tit">¹Ù·Î°¡±â ¼³Á¤</strong><span
 														class="link"><a
-														href="http://www.naver.com/more.html">ï¿½ï¿½ï§£ï¿½ ï¿½ï¿½é®ï¿½ï¿½ï¿½ è¹‚ë‹¿ë¦°</a></span>
+														href="http://www.naver.com/more.html">ÀüÃ¼ ¼­ºñ½º º¸±â</a></span>
 												</div>
 												<div class="gnb_svc_lstwrp">
 													<div class="gnb_svc_lst1">
 														<ul class="gnb_first">
 															<li><input type="checkbox" id="nsvc_game"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_game">å¯ƒï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_game">°ÔÀÓ</label></li>
 															<li><input type="checkbox" id="nsvc_weather"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_weather">ï¿½ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_weather">³¯¾¾</label></li>
 															<li><input type="checkbox" id="nsvc_shopping"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_shopping">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½</label></li>
+																<label for="nsvc_shopping">¹ÙÄÚµå¼îÇÎ</label></li>
 															<li><input type="checkbox" id="nsvc_navercast"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_navercast">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½</label></li>
+																<label for="nsvc_navercast">¹ÙÄÚµåÄ³½ºÆ®</label></li>
 															<li><input type="checkbox" id="nsvc_cloud"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_cloud">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ëŒ€ï¿½ì‡±ï¿½ê³•ï¿½ï¿½</label></li>
+																<label for="nsvc_cloud">¹ÙÄÚµåÅ¬¶ó¿ìµå</label></li>
 															<li class="gnb_event"><input type="checkbox"
 																id="nsvc_naverpay" name="selmenu"
 																class="gnb_input_check" value=""> <label
-																for="nsvc_naverpay">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</label><em class="ic_gnb_new">New</em></li>
+																for="nsvc_naverpay">¹ÙÄÚµåÆäÀÌ</label><em class="ic_gnb_new">New</em></li>
 															<li><input type="checkbox" id="nsvc_news"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_news">ï¿½ëŒï¿½ï¿½</label></li>
+																<label for="nsvc_news">´º½º</label></li>
 															<li><input type="checkbox" id="nsvc_comic"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_comic">ï§ï¿½ï¿½ï¿½/ï¿½ë±ï¿½ï¿½</label></li>
+																<label for="nsvc_comic">¸¸È­/À¥Å÷</label></li>
 															<li><input type="checkbox" id="nsvc_memo"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_memo">ï§Žï¿½ï§ï¿½</label></li>
+																<label for="nsvc_memo">¸Þ¸ð</label></li>
 															<li><input type="checkbox" id="nsvc_mail"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_mail">ï§Žï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_mail">¸ÞÀÏ</label></li>
 															<li><input type="checkbox" id="nsvc_music"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_music">è£•ã…¼ï¿½</label></li>
+																<label for="nsvc_music">¹ÂÁ÷</label></li>
 															<li><input type="checkbox" id="nsvc_land"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_land">éºï¿½ï¿½ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_land">ºÎµ¿»ê</label></li>
 															<li><input type="checkbox" id="nsvc_bookmark"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_bookmark">éºï¿½ï§ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_bookmark">ºÏ¸¶Å©</label></li>
 														</ul>
 														<ul class="">
 															<li><input type="checkbox" id="nsvc_blog"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_blog">é‡‰ï¿½æ¿¡ï¿½æ´¹ï¿½</label></li>
+																<label for="nsvc_blog">ºí·Î±×</label></li>
 															<li><input type="checkbox" id="nsvc_dic"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_dic">ï¿½ÑŠï¿½ï¿½</label></li>
+																<label for="nsvc_dic">»çÀü</label></li>
 															<li><input type="checkbox" id="nsvc_software"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_software">ï¿½ï¿½ï¿½ï¿½ï¿½ëª„ï¿½â‘¥ï¿½ï¿½</label></li>
+																<label for="nsvc_software">¼ÒÇÁÆ®¿þ¾î</label></li>
 															<li><input type="checkbox" id="nsvc_sports"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_sports">ï¿½ã…½ï¿½ÑŠï¿½</label></li>
+																<label for="nsvc_sports">½ºÆ÷Ã÷</label></li>
 															<li><input type="checkbox" id="nsvc_ya9"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_ya9">ï¿½ì‡¨ëŽ„9ï¿½ï¿½</label></li>
+																<label for="nsvc_ya9">¾ß±¸9´Ü</label></li>
 															<li><input type="checkbox" id="nsvc_movie"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_movie">ï¿½ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_movie">¿µÈ­</label></li>
 															<li><input type="checkbox" id="nsvc_office"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_office">ï¿½ã…½ï¿½ì‡±ï¿½ï¿½</label></li>
+																<label for="nsvc_office">¿ÀÇÇ½º</label></li>
 															<li><input type="checkbox" id="nsvc_novel"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_novel">ï¿½ë±€ï¿½ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_novel">À¥¼Ò¼³</label></li>
 															<li><input type="checkbox" id="nsvc_auto"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_auto">ï¿½ï¿½ï¿½ï¿½ï§¡ï¿½</label></li>
+																<label for="nsvc_auto">ÀÚµ¿Â÷</label></li>
 															<li><input type="checkbox" id="nsvc_contact"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_contact">äºŒì‡±ï¿½ï¿½æ¿¡ï¿½</label></li>
+																<label for="nsvc_contact">ÁÖ¼Ò·Ï</label></li>
 															<li><input type="checkbox" id="nsvc_finance"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_finance">ï§ï¿½æ²…ï¿½(æ¹²ï¿½ï¿½ï¿½)</label></li>
+																<label for="nsvc_finance">Áõ±Ç(±ÝÀ¶)</label></li>
 															<li><input type="checkbox" id="nsvc_map"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_map">ï§žï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_map">Áöµµ</label></li>
 															<li><input type="checkbox" id="nsvc_kin"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_kin">ï§žï¿½ï¿½ï¿½iN</label></li>
+																<label for="nsvc_kin">Áö½ÄiN</label></li>
 														</ul>
 														<ul class="">
 															<li><input type="checkbox" id="nsvc_terms"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_terms">ï§žï¿½ï¿½ï¿½è«›ê¹ƒë‚µ</label></li>
+																<label for="nsvc_terms">Áö½Ä¹é°ú</label></li>
 															<li><input type="checkbox" id="nsvc_book"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_book">ï§¢ï¿½</label></li>
+																<label for="nsvc_book">Ã¥</label></li>
 															<li><input type="checkbox" id="nsvc_cafe"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_cafe">ç§»ëŒ„ï¿½ï¿½</label></li>
+																<label for="nsvc_cafe">Ä«Æä</label></li>
 															<li><input type="checkbox" id="nsvc_calendar"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_calendar">ï§¦ï¿½ç”±ê³•ï¿½ï¿½</label></li>
+																<label for="nsvc_calendar">Ä¶¸°´õ</label></li>
 															<li><input type="checkbox" id="nsvc_photo"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_photo">ï¿½Ñ‹ï¿½ï¿½åª›ã…»ï¿½Ñ‰â”</label></li>
+																<label for="nsvc_photo">Æ÷Åä°¶·¯¸®</label></li>
 															<li><input type="checkbox" id="nsvc_nstore"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_nstore">Nï¿½ã…½ï¿½ï¿½ï¿½ï¿½</label></li>
+																<label for="nsvc_nstore">N½ºÅä¾î</label></li>
 															<li><input type="checkbox" id="nsvc_navertv"
 																name="selmenu" class="gnb_input_check" value="">
-																<label for="nsvc_navertv">è«›ï¿½è‚„ï¿½ï¿½ï¿½TV</label></li>
+																<label for="nsvc_navertv">¹ÙÄÚµåTV</label></li>
 														</ul>
 													</div>
 													<div class="svc_lst2">
 														<div class="svc_spc gnb_first">
-															<strong><a href="http://dic.naver.com/">ï¿½ëŒ„ï¿½ï¿½ï¿½ÑŠï¿½ï¿½</a></strong>
+															<strong><a href="http://dic.naver.com/">¾îÇÐ»çÀü</a></strong>
 															<ul class="">
 																<li><input type="checkbox" id="nsvc_krdic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_krdic">æ´ï¿½ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_krdic">±¹¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_endic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_endic">ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_endic">¿µ¾î/¿µ¿µ»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_hanja"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_hanja">ï¿½ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_hanja">ÇÑÀÚ»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_jpdic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_jpdic">ï¿½ì‡±ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_jpdic">ÀÏ¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_cndic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_cndic">ä»¥ï¿½æ´ï¿½ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_cndic">Áß±¹¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_frdic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_frdic">ï¿½ï¿½ï¿½ï¿½ï¿½ã…¼ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_frdic">ÇÁ¶û½º¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_dedic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_dedic">ï¿½ï¿½ï¿½ì‡±ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_dedic">µ¶ÀÏ¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_rudic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_rudic">ï¿½ÑŠï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_rudic">·¯½Ã¾Æ¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_vndic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_vndic">è¸°ï¿½ï¿½ëªƒï¿½â‘¥ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_vndic">º£Æ®³²¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_spdic"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_spdic">ï¿½ã…½ï¿½ï¿½ï¿½ëª„ï¿½ëŒï¿½ÑŠï¿½ï¿½</label></li>
+																	<label for="nsvc_spdic">½ºÆäÀÎ¾î»çÀü</label></li>
 																<li><input type="checkbox" id="nsvc_translate"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_translate">è¸°ï¿½ï¿½ï¿½æ¹²ï¿½</label></li>
+																	<label for="nsvc_translate">¹ø¿ª±â</label></li>
 															</ul>
 														</div>
 														<div class="svc_spc">
-															<strong>ï¿½ë©¸ë¦°/ï¿½ï¿½æ´¹ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½</strong>
+															<strong>ÀÎ±â/½Å±Ô¼­ºñ½º</strong>
 															<ul class="">
 																<li><input type="checkbox" id="nsvc_grafolio"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_grafolio">æ´¹ëªƒï¿½ì‡³ï¿½ëŒ€â”ï¿½ï¿½</label></li>
+																	<label for="nsvc_grafolio">±×¶óÆú¸®¿À</label></li>
 																<li><input type="checkbox" id="nsvc_post"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_post">ï¿½ÑŠï¿½ã…½ï¿½ï¿½</label></li>
+																	<label for="nsvc_post">Æ÷½ºÆ®</label></li>
 																<li><input type="checkbox" id="nsvc_luncherapp"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_luncherapp">ï¿½ï¿½ï¿½ï¿½ï¿½ê³—ï¿½</label></li>
+																	<label for="nsvc_luncherapp">µµµ¹·±Ã³</label></li>
 																<li><input type="checkbox" id="nsvc_band"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_band">è«›ëŒ€ï¿½ï¿½</label></li>
+																	<label for="nsvc_band">¹êµå</label></li>
 																<li><input type="checkbox" id="nsvc_line"
 																	name="selmenu" class="gnb_input_check" value="">
-																	<label for="nsvc_line">ï¿½ì‡±ï¿½ï¿½</label></li>
+																	<label for="nsvc_line">¶óÀÎ</label></li>
 															</ul>
 														</div>
 													</div>
@@ -487,27 +487,27 @@ function reSearchParamChange(){
 													<div class="svc_btns">
 														<button class="gnb_save"
 															onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;">
-															<strong class="blind">ï¿½ï¿½ï¿½ï¿½</strong>
+															<strong class="blind">È®ÀÎ</strong>
 														</button>
 														<button class="gnb_close"
 															onclick="gnbFavorite.cancel(); return false;">
-															<span class="blind">ç—â‘¥ï¿½ï¿½</span>
+															<span class="blind">Ãë¼Ò</span>
 														</button>
 														<button class="gnb_return"
 															onclick="gnbFavorite.resetService(); return false;">
-															<span class="blind">ç¥ï¿½æ¹²ï¿½ ï¿½ã…¼ï¿½ï¿½ï¿½ì‡°ï¿½ è¹‚ï¿½å¯ƒï¿½</span>
+															<span class="blind">ÃÊ±â ¼³Á¤À¸·Î º¯°æ</span>
 														</button>
 													</div>
 												</div>
 												<div class="gnb_bg_btm"></div>
 											</div>
 										</div>
-										<iframe id="gnb_service_lyr_iframe" title="é®ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+										<iframe id="gnb_service_lyr_iframe" title="ºó ÇÁ·¹ÀÓ"
 											class="gnb_pad_lyr" name="padding" width="0" height="0"
 											scrolling="no" frameborder="0"
 											style="display: none; top: 55px; right: 311px; width: 585px; height: 385px; opacity: 0;"
 											src="./custom_home_files/saved_resource(2).html"></iframe>
-										<iframe id="gnb_svc_more_iframe" title="é®ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+										<iframe id="gnb_svc_more_iframe" title="ºó ÇÁ·¹ÀÓ"
 											class="gnb_pad_lyr" name="padding" width="0" height="0"
 											scrolling="no" frameborder="0"
 											style="display: none; top: 55px; right: 10px; width: 295px; height: 385px; opacity: 0;"
@@ -525,21 +525,21 @@ function reSearchParamChange(){
 					onsubmit="clickcr(this, &#39;tsn.search&#39;, &#39;&#39;, &#39;&#39;, event);return openSearch(this);"
 					class="snb_search_box">
 					<fieldset>
-						<legend class="blind">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï§ï¿½ å¯ƒï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½</legend>
+						<legend class="blind">¹ÙÄÚµå µµ¿ò¸» °Ë»ö ¿µ¿ª</legend>
 						<div class="srch_area">
-							<span class="srch_box"> <span class="ipt_box"> <!-- [D] input ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÑŠë¹±ï¿½ã…ºï¿½ åª›ï¿½ å¯ƒìŽŒï¿½ï¿½ ï¿½ëŒ€ï¿½ï¿½ï¿½ï¿½ fcs ç•°ï¿½åª›ï¿½ è«›ï¿½ value ï¿½ï¿½ï¿½ï¿½ -->
+							<span class="srch_box"> <span class="ipt_box"> <!-- [D] input ¿ä¼Ò¿¡ Æ÷Ä¿½º°¡ °¥ °æ¿ì Å¬·¡½º fcs Ãß°¡ ¹× value »èÁ¦ -->
 									<input id="searchText" name="searchText" type="text"
-									title="ï¿½ï¿½ï¿½ï¿½ï§ï¿½ å¯ƒï¿½ï¿½ï¿½" accesskey="w" value="æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ã…»ãˆƒ ï¿½ï¿½ï¿½ï¿½ï§ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½."
+									title="µµ¿ò¸» °Ë»ö" accesskey="w" value="±Ã±ÝÇÑ Á¡ÀÌ ÀÖ´Ù¸é µµ¿ò¸»À» °Ë»öÇØ º¸¼¼¿ä."
 									onfocus="this.value = &#39;&#39;;"
-									onblur="if(this.value == &#39;&#39;) this.value = &#39;æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ã…»ãˆƒ ï¿½ï¿½ï¿½ï¿½ï§ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½.&#39;;"
+									onblur="if(this.value == &#39;&#39;) this.value = &#39;±Ã±ÝÇÑ Á¡ÀÌ ÀÖ´Ù¸é µµ¿ò¸»À» °Ë»öÇØ º¸¼¼¿ä.&#39;;"
 									class="srch_kwd">
 							</span>
-							<!-- [D] button ï¿½ëŒ€â”ƒï¿½ï¿½ å¯ƒìŽŒï¿½ï¿½ ï¿½ëŒ€ï¿½ï¿½ï¿½ï¿½ active ç•°ï¿½åª›ï¿½ -->
+							<!-- [D] button Å¬¸¯ÇÒ °æ¿ì Å¬·¡½º active Ãß°¡ -->
 							</span>
-							<button id="ischButton" type="submit" title="å¯ƒï¿½ï¿½ï¿½" class="btn_srch">
-								<span class="blind">å¯ƒï¿½ï¿½ï¿½</span>
+							<button id="ischButton" type="submit" title="°Ë»ö" class="btn_srch">
+								<span class="blind">°Ë»ö</span>
 							</button>
-							<!-- [D] ï¿½ï¿½é®ï¿½ï¿½ã…»ï¿½ inputï¿½ï¿½ ï¿½ï¿½ï¿½ã…½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ display:block è¹‚ï¿½å¯ƒï¿½ -->
+							<!-- [D] ¼­ºñ½º¸í input¿¡ ÅØ½ºÆ® ÀÔ·Â½Ã display:block º¯°æ -->
 							<div class="auto_kwd" style="display: none; z-index: 999999">
 								<ul>
 								</ul>
@@ -569,11 +569,11 @@ jQuery(function () {
 			<!-- ticker notice -->
 			<div class="spot_area">
 				<div class="spot">
-					<h3>æ€¨ë“­ï¿½ï¿½Ñ‹ï¿½ï¿½</h3>
+					<h3>°øÁö»çÇ×</h3>
 					<p>
 						<a href="https://help.naver.com/#"
-							onclick="clickcr(this, &#39;tsn.tick&#39;, &#39;&#39;, &#39;&#39;, event);">[ï¿½ï¿½ï¿½ï¿½
-							ä»¥ï¿½] ~12/27 (ï¿½ï¿½), 'è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½Ñ‹ï¿½ï¿½' ï¿½ï¿½é®ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.</a>
+							onclick="clickcr(this, &#39;tsn.tick&#39;, &#39;&#39;, &#39;&#39;, event);">[Á¦ÀÛ
+							Áß] ~12/27 (¼ö), '¹ÙÄÚµå Æ÷Å»' ¼­ºñ½º ¿Ï¼º ¿¹Á¤.</a>
 					</p>
 				</div>
 			</div>
@@ -583,107 +583,108 @@ jQuery(function () {
 				<div id="content">
 					<div class="m_section">
 						<h2>
-							<span class="blind">æ€¨ï¿½åª›ï¿½ï¿½ì‡³ï¿½ê³•ï¿½ï¿½ ï¿½ë“¯ï¿½ï¿½ æ²…ï¿½æ¹²ï¿½ï§ï¿½ï¿½ï¿½ ï¿½ë‹¿ê»ï¿½ï¿½ï¿½ëª„ï¿½ï¿½.</span>
+							<span class="blind">°í°´¼¾ÅÍ¸¦ ÅëÇØ ±Ã±ÝÁõÀ» ÇØ°áÇÏ¼¼¿ä.</span>
 						</h2>
-						<!-- [D] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ å¯ƒìŽŒï¿½ï¿½ li ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ëŒ€ï¿½ï¿½ï¿½ï¿½ on ï¿½ï¿½ï¿½ï¿½ -->
+						<!-- [D] ¼±ÅÃÅÇÀÇ °æ¿ì li ¿ä¼Ò¿¡ Å¬·¡½º on Àû¿ë -->
 						<div class="rep_area">
-							<h3 class="blind">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½</h3>
+							<h3 class="blind">´ëÇ¥¼­ºñ½º</h3>
 							<ul class="lst_rep_servs">
 								<li><a
-									href="https://help.naver.com/support/service/main.nhn?serviceNo=532"
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;icn.id&#39;, &#39;&#39;, &#39;&#39;, event)"
-									class="svs_ic">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½</a></li>
+									class="svs_ic">È¸¿øÁ¤º¸</a></li>
 								<li><a
-									href="https://help.naver.com/support/service/main.nhn?serviceNo=606"
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;icn.usrc&#39;, &#39;&#39;, &#39;&#39;, event)"
-									class="svs_ic6">ï¿½ë“¯ï¿½â‘·ï¿½ï¿½ï¿½</a></li>
-								<li><a href="http://help.pay.naver.com/"
+									class="svs_ic6">ÅëÇÕ°Ë»ö</a></li>
+								<li><a 
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;lst.checkout&#39;, &#39;&#39;, &#39;&#39;, event)"
-									target="_blank" class="svs_ic20">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+									target="_blank" class="svs_ic20">¹ÙÄÚµåÆäÀÌ</a></li>
 								<li><a
-									href="https://help.naver.com/support/service/main.nhn?serviceNo=747"
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;lst.shopping&#39;, &#39;&#39;, &#39;&#39;, event)"
-									class="svs_ic19">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½</a></li>
+									class="svs_ic19">¹ÙÄÚµå¼îÇÎ</a></li>
 								<li><a
-									href="https://help.naver.com/support/service/main.nhn?serviceNo=607"
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;icn.register&#39;, &#39;&#39;, &#39;&#39;, event)"
-									class="svs_ic14">è«›ï¿½è‚„ï¿½ï¿½ï¿½<br>ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ï¿½
+									class="svs_ic14">¹ÙÄÚµå<br>ÇÃ·¹ÀÌ½º
 								</a></li>
 								<li><a
-									href="https://help.naver.com/support/service/main.nhn?serviceNo=768"
+									href="./custom_detail.html"
 									onclick="clickcr(this, &#39;icn.map&#39;, &#39;&#39;, &#39;&#39;, event)"
-									class="svs_ic15">ï§žï¿½ï¿½ï¿½</a></li>
+									class="svs_ic15">Áöµµ</a></li>
 							</ul>
 						</div>
 						<div class="all_area" style="display: none">
-							<h3 class="blind">ï¿½ï¿½ï§£ëŒ€ë‚«æ¹²ï¿½ - åª›ï¿½ï¿½ï¿½ï¿½ã…¼ï¿½ï¿½</h3>
+							<h3 class="blind">ÀüÃ¼º¸±â - °¡³ª´Ù¼ø</h3>
 							<div class="lst_all_area">
 								<div class="lst_all">
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¡</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=744"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="åª›ï¿½æ€¨ï¿½éºï¿½">åª›ï¿½æ€¨ï¿½éºï¿½</a></li>
+											title="°¡°èºÎ">°¡°èºÎ</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17594"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="åª›ï¿½è«›ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½ OpenAPI">åª›ï¿½è«›ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½ OpenAPI</a></li>
+											title="°³¹ßÀÚ¼¾ÅÍ OpenAPI">°³¹ßÀÚ¼¾ÅÍ OpenAPI</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=958"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="å¯ƒï¿½ï¿½ï¿½ä»¥ï¿½ï¿½ï¿½">å¯ƒï¿½ï¿½ï¿½ä»¥ï¿½ï¿½ï¿½</a></li>
+											title="°Ô½ÃÁß´Ü">°Ô½ÃÁß´Ü</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=10576"
 											onclick="clickcr(this, &#39;1&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="æ´¹ëªƒï¿½ì‡³ï¿½ëŒ€â”ï¿½ï¿½">æ´¹ëªƒï¿½ì‡³ï¿½ëŒ€â”ï¿½ï¿½</a></li>
+											title="±×¶óÆú¸®¿À">±×¶óÆú¸®¿À</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=745"
 											onclick="clickcr(this, &#39;lst.finance&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="æ¹²ï¿½ï¿½ï¿½/ï§ï¿½æ²…ï¿½">æ¹²ï¿½ï¿½ï¿½/ï§ï¿½æ²…ï¿½</a></li>
+											title="±ÝÀ¶/Áõ±Ç">±ÝÀ¶/Áõ±Ç</a></li>
 									</ul>
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¤</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
 											onclick="clickcr(this, &#39;lst.weather&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="³¯¾¾">³¯¾¾</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=801"
 											onclick="clickcr(this, &#39;lst.game&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ PCå¯ƒï¿½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ PCå¯ƒï¿½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå PC°ÔÀÓ">¹ÙÄÚµå PC°ÔÀÓ</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1044"
 											onclick="clickcr(this, &#39;lst.qr&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ QRè‚„ï¿½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ QRè‚„ï¿½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå QRÄÚµå">¹ÙÄÚµå QRÄÚµå</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=18027"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ã…»ï¿½ï¿½ëªƒë‚«ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ã…»ï¿½ï¿½ëªƒë‚«ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå ½º¸¶Æ®º¸µå">¹ÙÄÚµå ½º¸¶Æ®º¸µå</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17063"
 											onclick="clickcr(this, &#39;lst.nearo&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½æ¿¡ï¿½ æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ëŒ€ï¿½ï¿½æ¿¡ï¿½ æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå ¾ÆÀÌµð·Î ·Î±×ÀÎ">¹ÙÄÚµå ¾ÆÀÌµð·Î ·Î±×ÀÎ</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1074"
 											onclick="clickcr(this, &#39;lst.general&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ï¿½è«›ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ï¿½è«›ï¿½</a></li>
+											title="¹ÙÄÚµå Àü¹Ý">¹ÙÄÚµå Àü¹Ý</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=636"
 											onclick="clickcr(this, &#39;lst.ndrive&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ëŒ€ï¿½ì‡±ï¿½ê³•ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ëŒ€ï¿½ì‡±ï¿½ê³•ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå Å¬¶ó¿ìµå">¹ÙÄÚµå Å¬¶ó¿ìµå</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;lst.cleaner&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ëŒ€â”ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ëŒ€â”ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå Å¬¸®³Ê">¹ÙÄÚµå Å¬¸®³Ê</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=705"
 											onclick="clickcr(this, &#39;lst.tvcast&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½TV">è«›ï¿½è‚„ï¿½ï¿½ï¿½TV</a></li>
+											title="¹ÙÄÚµåTV">¹ÙÄÚµåTV</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=984"
 											onclick="clickcr(this, &#39;lst.me&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½me">è«›ï¿½è‚„ï¿½ï¿½ï¿½me</a></li>
+											title="¹ÙÄÚµåme">¹ÙÄÚµåme</a></li>
 
 
 
@@ -699,7 +700,7 @@ jQuery(function () {
 
 										<li><a href="http://help.line.me/line/?lang=ko"
 											onclick="clickcr(this, &#39;lst.line&#39;, &#39;&#39;, &#39;&#39;, event);"
-											target="_blank" title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡±ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡±ï¿½ï¿½</a></li>
+											target="_blank" title="¹ÙÄÚµå¶óÀÎ">¹ÙÄÚµå¶óÀÎ</a></li>
 
 
 
@@ -719,39 +720,39 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;lst.vaccine&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½è«›ê¹†ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½è«›ê¹†ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¹é½Å">¹ÙÄÚµå¹é½Å</a></li>
 
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1035"
 											onclick="clickcr(this, &#39;lst.software&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëª„ï¿½â‘¥ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëª„ï¿½â‘¥ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¼ÒÇÁÆ®¿þ¾î">¹ÙÄÚµå¼ÒÇÁÆ®¿þ¾î</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=747"
 											onclick="clickcr(this, &#39;lst.shopping&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ì‡³ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¼îÇÎ">¹ÙÄÚµå¼îÇÎ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=12270"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¿¹¾à">¹ÙÄÚµå¿¹¾à</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11709"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ëªƒï¿½ï¿½ï¿½ì‡³ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ëªƒï¿½ï¿½ï¿½ì‡³ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¿¹¾à ÆÄÆ®³Ê¼¾ÅÍ">¹ÙÄÚµå¿¹¾à ÆÄÆ®³Ê¼¾ÅÍ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=643"
 											onclick="clickcr(this, &#39;lst.office&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ã…½ï¿½ì‡±ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ã…½ï¿½ì‡±ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµå¿ÀÇÇ½º">¹ÙÄÚµå¿ÀÇÇ½º</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=996"
 											onclick="clickcr(this, &#39;lst.cast&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµåÄ³½ºÆ®">¹ÙÄÚµåÄ³½ºÆ®</a></li>
 
 
 
@@ -770,7 +771,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;lst.capture&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï§¦â‰ªï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï§¦â‰ªï¿½</a></li>
+											title="¹ÙÄÚµåÄ¸Ã³">¹ÙÄÚµåÄ¸Ã³</a></li>
 
 
 
@@ -791,33 +792,33 @@ jQuery(function () {
 
 										<li><a href="http://help.pay.naver.com/"
 											onclick="clickcr(this, &#39;lst.checkout&#39;, &#39;&#39;, &#39;&#39;, event);"
-											target="_blank" title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+											target="_blank" title="¹ÙÄÚµåÆäÀÌ">¹ÙÄÚµåÆäÀÌ</a></li>
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=16738"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµåÆæ¼Ç¿¹¾à">¹ÙÄÚµåÆæ¼Ç¿¹¾à</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=729"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ã…½ï¿½ï¿½">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ã…½ï¿½ï¿½</a></li>
+											title="¹ÙÄÚµåÆ÷½ºÆ®">¹ÙÄÚµåÆ÷½ºÆ®</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17688"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ã…¼ï¿½ï¿½ç§»ëŒ€ï¿½ï¿½">ï¿½ã…¼ï¿½ï¿½ç§»ëŒ€ï¿½ï¿½</a></li>
+											title="³×ÀÓÄ«µå">³×ÀÓÄ«µå</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=997"
 											onclick="clickcr(this, &#39;lst.news&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒï¿½ï¿½">ï¿½ëŒï¿½ï¿½</a></li>
+											title="´º½º">´º½º</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=998"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒï¿½ï¿½ ï¿½ì‡±ï¿½ëŒ€ï¿½ï¿½Ñ‰â”">ï¿½ëŒï¿½ï¿½ ï¿½ì‡±ï¿½ëŒ€ï¿½ï¿½Ñ‰â”</a></li>
+											title="´º½º ¶óÀÌºê·¯¸®">´º½º ¶óÀÌºê·¯¸®</a></li>
 
 
 
@@ -837,7 +838,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤§</h4>
 									<ul>
 
 
@@ -847,7 +848,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=3609"
 											onclick="clickcr(this, &#39;lst.video&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="µ¿¿µ»ó">µ¿¿µ»ó</a></li>
 
 
 
@@ -863,7 +864,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤±</h4>
 									<ul>
 
 
@@ -873,27 +874,27 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=706"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§ã…ºêµ…ï§žï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½">ï§ã…ºêµ…ï§žï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½</a></li>
+											title="¸Å°ÅÁøÄ³½ºÆ®">¸Å°ÅÁøÄ³½ºÆ®</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=639"
 											onclick="clickcr(this, &#39;lst.memo&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§Žï¿½ï§ï¿½">ï§Žï¿½ï§ï¿½</a></li>
+											title="¸Þ¸ð">¸Þ¸ð</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=2342"
 											onclick="clickcr(this, &#39;lst.mail&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§Žï¿½ï¿½ï¿½">ï§Žï¿½ï¿½ï¿½</a></li>
+											title="¸ÞÀÏ">¸ÞÀÏ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=644"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è‡¾ëª„ï¿½ï¿½ï§Žï¿½ï¿½ï¿½ï§žï¿½">è‡¾ëª„ï¿½ï¿½ï§Žï¿½ï¿½ï¿½ï§žï¿½</a></li>
+											title="¹®ÀÚ¸Þ½ÃÁö">¹®ÀÚ¸Þ½ÃÁö</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=572"
 											onclick="clickcr(this, &#39;lst.music&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è£•ã…¼ï¿½">è£•ã…¼ï¿½</a></li>
+											title="¹ÂÁ÷">¹ÂÁ÷</a></li>
 
 
 
@@ -912,7 +913,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;lst.player&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="èª˜ëªƒï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ï¿½">èª˜ëªƒï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ï¿½</a></li>
+											title="¹Ìµð¾î ÇÃ·¹ÀÌ¾î">¹Ìµð¾î ÇÃ·¹ÀÌ¾î</a></li>
 
 
 
@@ -930,26 +931,26 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤²</h4>
 									<ul>
 
 
 
 										<li><a href="http://www.band.us/cs/#!/help"
 											onclick="clickcr(this, &#39;lst.band&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="è«›ëŒ€ï¿½ï¿½">è«›ëŒ€ï¿½ï¿½</a></li>
+											title="¹êµå">¹êµå</a></li>
 
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=746"
 											onclick="clickcr(this, &#39;lst.land&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="éºï¿½ï¿½ï¿½ï¿½ï¿½">éºï¿½ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="ºÎµ¿»ê">ºÎµ¿»ê</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=520"
 											onclick="clickcr(this, &#39;lst.blog&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="é‡‰ï¿½æ¿¡ï¿½æ´¹ï¿½">é‡‰ï¿½æ¿¡ï¿½æ´¹ï¿½</a></li>
+											title="ºí·Î±×">ºí·Î±×</a></li>
 
 
 
@@ -965,7 +966,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤µ</h4>
 									<ul>
 
 
@@ -975,27 +976,27 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1000"
 											onclick="clickcr(this, &#39;lst.dic&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ÑŠï¿½ï¿½">ï¿½ÑŠï¿½ï¿½</a></li>
+											title="»çÀü">»çÀü</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
 											onclick="clickcr(this, &#39;lst.life&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½</a></li>
+											title="»ýÈ°Çü¼­ºñ½º">»ýÈ°Çü¼­ºñ½º</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=607"
 											onclick="clickcr(this, &#39;icn.register&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ã…»ï¿½ï¿½ëª…ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ï¿½">ï¿½ã…»ï¿½ï¿½ëª…ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¿½ï¿½</a></li>
+											title="½º¸¶Æ®ÇÃ·¹ÀÌ½º">½º¸¶Æ®ÇÃ·¹ÀÌ½º</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1001"
 											onclick="clickcr(this, &#39;lst.sports&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ã…½ï¿½ÑŠï¿½">ï¿½ã…½ï¿½ÑŠï¿½</a></li>
+											title="½ºÆ÷Ã÷">½ºÆ÷Ã÷</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=964"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½æ€¨ï¿½ï¿½ì‡³ï¿½ï¿½">ï¿½ï¿½æ€¨ï¿½ï¿½ì‡³ï¿½ï¿½</a></li>
+											title="½Å°í¼¾ÅÍ">½Å°í¼¾ÅÍ</a></li>
 
 
 
@@ -1014,14 +1015,14 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½â‘¹ë­…ï¿½ï¿½">ï¿½ï¿½ï¿½â‘¹ë­…ï¿½ï¿½</a></li>
+											title="½Å¿ëÄ«µå">½Å¿ëÄ«µå</a></li>
 									</ul>
 
 
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤·</h4>
 									<ul>
 
 
@@ -1031,17 +1032,17 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=521"
 											onclick="clickcr(this, &#39;lst.item&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ëŒ„ï¿½ï¿½ï¿½â‘ºï¿½ï¿½ç”±ï¿½">ï¿½ï¿½ï¿½ëŒ„ï¿½ï¿½ï¿½â‘ºï¿½ï¿½ç”±ï¿½</a></li>
+											title="¾ÆÀÌÅÛÆÑÅä¸®">¾ÆÀÌÅÛÆÑÅä¸®</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1042"
 											onclick="clickcr(this, &#39;lst.analytics&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ç”±Ñ‹ï¿½ê¹†ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½ç”±Ñ‹ï¿½ê¹†ï¿½ï¿½</a></li>
+											title="¾Ö³Î¸®Æ½½º">¾Ö³Î¸®Æ½½º</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=726"
 											onclick="clickcr(this, &#39;lst.adpost&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ã…½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½ï¿½ÑŠï¿½ã…½ï¿½ï¿½</a></li>
+											title="¾ÖµåÆ÷½ºÆ®">¾ÖµåÆ÷½ºÆ®</a></li>
 
 
 
@@ -1061,53 +1062,53 @@ jQuery(function () {
 										<li><a
 											href="http://hgcs.game.sports.news.naver.com/spring/content/gamecc/openPopup?serviceCode=ya9_n"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											target="_blank" title="ï¿½ì‡¨ëŽ„9ï¿½ï¿½">ï¿½ì‡¨ëŽ„9ï¿½ï¿½</a></li>
+											target="_blank" title="¾ß±¸9´Ü">¾ß±¸9´Ü</a></li>
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=3181"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒ€â”›ï¿½ê³•ï¿½ï¿½">ï¿½ëŒ€â”›ï¿½ê³•ï¿½ï¿½</a></li>
+											title="¿­¸°¿¬´Ü">¿­¸°¿¬´Ü</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=800"
 											onclick="clickcr(this, &#39;lst.movie&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½">ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="¿µÈ­">¿µÈ­</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=16978"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ã…»ï¿½ï¿½ï¿½ã…½ï¿½ëŒ€â”°">ï¿½ã…»ï¿½ï¿½ï¿½ã…½ï¿½ëŒ€â”°</a></li>
+											title="¿Àµð¿ÀÅ¬¸³">¿Àµð¿ÀÅ¬¸³</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=724"
 											onclick="clickcr(this, &#39;lst.opencast&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ã…½ï¿½ï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½">ï¿½ã…½ï¿½ï¿½ï§¦ï¿½ï¿½ã…½ï¿½ï¿½</a></li>
+											title="¿ÀÇÂÄ³½ºÆ®">¿ÀÇÂÄ³½ºÆ®</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17568"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½â‘¥ï¿½ï¿½">ï¿½â‘¥ï¿½ï¿½</a></li>
+											title="¿þÀÏ">¿þÀÏ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=14882"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ë°¸ï¿½ï¿½ã…½ï¿½ê³•ï¿½ï¿½æ´ï¿½">ï¿½ë°¸ï¿½ï¿½ã…½ï¿½ê³•ï¿½ï¿½æ´ï¿½</a></li>
+											title="À¥¸¶½ºÅÍµµ±¸">À¥¸¶½ºÅÍµµ±¸</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=804"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ë±€ï¿½ï¿½ï¿½ï¿½">ï¿½ë±€ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="À¥¼Ò¼³">À¥¼Ò¼³</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=799"
 											onclick="clickcr(this, &#39;lst.comic&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ë±ï¿½ï¿½/ï§ï¿½ï¿½ï¿½">ï¿½ë±ï¿½ï¿½/ï§ï¿½ï¿½ï¿½</a></li>
+											title="À¥Å÷/¸¸È­">À¥Å÷/¸¸È­</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=548"
 											onclick="clickcr(this, &#39;lst.abuse&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒï¿½â‘¹ï¿½ï¿½ï¿½ï¿½">ï¿½ëŒï¿½â‘¹ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="ÀÌ¿ëÁ¦ÇÑ">ÀÌ¿ëÁ¦ÇÑ</a></li>
 
 
 
@@ -1127,7 +1128,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¸</h4>
 									<ul>
 
 
@@ -1135,7 +1136,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
 											onclick="clickcr(this, &#39;lst.auto&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï§¡ï¿½">ï¿½ï¿½ï¿½ï¿½ï§¡ï¿½</a></li>
+											title="ÀÚµ¿Â÷">ÀÚµ¿Â÷</a></li>
 
 
 
@@ -1156,24 +1157,24 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&amp;categoryNo=10027"
 											onclick="clickcr(this, &#39;lst.ends&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="é†«ï¿½çŒ·ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½">é†«ï¿½çŒ·ï¿½ï¿½ï¿½é®ï¿½ï¿½ï¿½</a></li>
+											title="Á¾·á¼­ºñ½º">Á¾·á¼­ºñ½º</a></li>
 
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=986"
 											onclick="clickcr(this, &#39;lst.contact&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="äºŒì‡±ï¿½ï¿½æ¿¡ï¿½">äºŒì‡±ï¿½ï¿½æ¿¡ï¿½</a></li>
+											title="ÁÖ¼Ò·Ï">ÁÖ¼Ò·Ï</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=768"
 											onclick="clickcr(this, &#39;lst.map&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§žï¿½ï¿½ï¿½">ï§žï¿½ï¿½ï¿½</a></li>
+											title="Áöµµ">Áöµµ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1003"
 											onclick="clickcr(this, &#39;lst.kin&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§žï¿½ï¿½ï¿½iN">ï§žï¿½ï¿½ï¿½iN</a></li>
+											title="Áö½ÄiN">Áö½ÄiN</a></li>
 
 
 
@@ -1192,7 +1193,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1000&amp;categoryNo=2728"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§žï¿½ï¿½ï¿½è«›ê¹ƒë‚µ">ï§žï¿½ï¿½ï¿½è«›ê¹ƒë‚µ</a></li>
+											title="Áö½Ä¹é°ú">Áö½Ä¹é°ú</a></li>
 
 
 
@@ -1210,7 +1211,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¹</h4>
 									<ul>
 
 
@@ -1220,7 +1221,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=987"
 											onclick="clickcr(this, &#39;lst.note&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§ŸìŽŒï¿½">ï§ŸìŽŒï¿½</a></li>
+											title="ÂÊÁö">ÂÊÁö</a></li>
 
 
 
@@ -1236,7 +1237,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤º</h4>
 									<ul>
 
 
@@ -1246,7 +1247,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=702"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§¢ï¿½">ï§¢ï¿½</a></li>
+											title="Ã¥">Ã¥</a></li>
 
 
 
@@ -1262,7 +1263,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤»</h4>
 									<ul>
 
 
@@ -1272,17 +1273,17 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=522"
 											onclick="clickcr(this, &#39;lst.cafe&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ç§»ëŒ„ï¿½ï¿½">ç§»ëŒ„ï¿½ï¿½</a></li>
+											title="Ä«Æä">Ä«Æä</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=635"
 											onclick="clickcr(this, &#39;lst.calender&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï§¦ï¿½ç”±ê³•ï¿½ï¿½">ï§¦ï¿½ç”±ê³•ï¿½ï¿½</a></li>
+											title="Ä¶¸°´õ">Ä¶¸°´õ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=18438"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒ€ï¿½è«›ï¿½">ï¿½ëŒ€ï¿½è«›ï¿½</a></li>
+											title="Å¬·Î¹Ù">Å¬·Î¹Ù</a></li>
 
 
 
@@ -1298,7 +1299,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¼</h4>
 									<ul>
 
 
@@ -1308,22 +1309,22 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11764"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½â‰«ï¿½â‰«ï¿½ï¿½ï¿½ëªƒï¿½ï¿½ï¿½ì‡³ï¿½ï¿½">ï¿½â‰«ï¿½â‰«ï¿½ï¿½ï¿½ëªƒï¿½ï¿½ï¿½ì‡³ï¿½ï¿½</a></li>
+											title="ÅåÅåÆÄÆ®³Ê¼¾ÅÍ">ÅåÅåÆÄÆ®³Ê¼¾ÅÍ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=606"
 											onclick="clickcr(this, &#39;lst.search&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ë“¯ï¿½â‘·ï¿½ï¿½ï¿½">ï¿½ë“¯ï¿½â‘·ï¿½ï¿½ï¿½</a></li>
+											title="ÅëÇÕ°Ë»ö">ÅëÇÕ°Ë»ö</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1036"
 											onclick="clickcr(this, &#39;lst.tool&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒ€ï¿½">ï¿½ëŒ€ï¿½</a></li>
+											title="Åø¹Ù">Åø¹Ù</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒï¿½">ï¿½ëŒï¿½</a></li>
+											title="ÅøÁî">ÅøÁî</a></li>
 
 
 
@@ -1339,7 +1340,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤½</h4>
 									<ul>
 
 
@@ -1349,7 +1350,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=802"
 											onclick="clickcr(this, &#39;lst.photo&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½Ñ‹ï¿½ï¿½åª›ã…»ï¿½Ñ‰â”">ï¿½Ñ‹ï¿½ï¿½åª›ã…»ï¿½Ñ‰â”</a></li>
+											title="Æ÷Åä°¶·¯¸®">Æ÷Åä°¶·¯¸®</a></li>
 
 
 
@@ -1368,24 +1369,24 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
 											onclick="clickcr(this, &#39;lst.photoviewer&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½Ñ‹ï¿½ï¿½é…‰ê³—ï¿½ï¿½">ï¿½Ñ‹ï¿½ï¿½é…‰ê³—ï¿½ï¿½</a></li>
+											title="Æ÷Åäºä¾î">Æ÷Åäºä¾î</a></li>
 
 
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=640"
 											onclick="clickcr(this, &#39;lst.photoprint&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½Ñ‹ï¿½ï¿½ï¿½ëª…ï¿½ï¿½">ï¿½Ñ‹ï¿½ï¿½ï¿½ëª…ï¿½ï¿½</a></li>
+											title="Æ÷ÅäÀÎÈ­">Æ÷ÅäÀÎÈ­</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11492"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒ€ï¿½ï¿½">ï¿½ëŒ€ï¿½ï¿½</a></li>
+											title="Æú¶ó">Æú¶ó</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1080"
 											onclick="clickcr(this, &#39;lst.privacy&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ì‡±ï¿½ëŒ€ï¿½ï¿½ï¿½ ï¿½ì‡³ï¿½ï¿½">ï¿½ï¿½ï¿½ì‡±ï¿½ëŒ€ï¿½ï¿½ï¿½ ï¿½ì‡³ï¿½ï¿½</a></li>
+											title="ÇÁ¶óÀÌ¹ö½Ã ¼¾ÅÍ">ÇÁ¶óÀÌ¹ö½Ã ¼¾ÅÍ</a></li>
 
 
 
@@ -1401,7 +1402,7 @@ jQuery(function () {
 
 
 
-									<h4>ï¿½ï¿½</h4>
+									<h4>¤¾</h4>
 									<ul>
 
 
@@ -1411,27 +1412,27 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1002"
 											onclick="clickcr(this, &#39;lst.academic&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½</a></li>
+											title="ÇÐ¼úÁ¤º¸">ÇÐ¼úÁ¤º¸</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11270"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½æ€¨ë“¦ï¿½">ï¿½ï¿½æ€¨ë“¦ï¿½</a></li>
+											title="Ç×°ø±Ç">Ç×°ø±Ç</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=770"
 											onclick="clickcr(this, &#39;lst.happybean&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëŒ„ï¿½ì‡°ï¿½">ï¿½ëŒ„ï¿½ì‡°ï¿½</a></li>
+											title="ÇØÇÇºó">ÇØÇÇºó</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=14445"
 											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ëª…ï¿½ï¿½">ï¿½ëª…ï¿½ï¿½</a></li>
+											title="È£ÅÚ">È£ÅÚ</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=532"
 											onclick="clickcr(this, &#39;lst.id&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½</a></li>
+											title="È¸¿øÁ¤º¸">È¸¿øÁ¤º¸</a></li>
 
 
 
@@ -1471,7 +1472,7 @@ jQuery(function () {
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=803"
 											onclick="clickcr(this, &#39;lst.nstore&#39;, &#39;&#39;, &#39;&#39;, event);"
-											title="Nï¿½ã…½ï¿½ï¿½ï¿½ï¿½">Nï¿½ã…½ï¿½ï¿½ï¿½ï¿½</a></li>
+											title="N½ºÅä¾î">N½ºÅä¾î</a></li>
 
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17996"
@@ -1509,56 +1510,56 @@ jQuery(function () {
 								<a
 									href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry"
 									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)"><span
-									class="blind">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ë‹¿ï¿½ç”±ï¿½</span></a>
+									class="blind">È¸¿øÁ¤º¸°ü¸®</span></a>
 							</h2>
 							<p>
-								<span class="blind">ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ëŒ€ï¿½ï¿½ ï¿½ìŽ„ï¿½ ï¿½ëª…ï¿½ï¿½å¯ƒï¿½ æ„¿ï¿½ç”±Ñ‹ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ë“¬ï¿½ï¿½ï¿½ï¿½.</span>
+								<span class="blind">³» È¸¿øÁ¤º¸¸¦ ½±°í ÆíÇÏ°Ô °ü¸®ÇÒ ¼ö ÀÖ½À´Ï´Ù.</span>
 							</p>
 							<ul class="lst_md">
 								<li><a
 									href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry"
-									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">é®ï¿½è«›ï¿½è¸°ï¿½ï¿½ï¿½/ID
-										ï§¡ì–˜ë¦°</a></li>
+									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">ºñ¹Ð¹øÈ£/ID
+										Ã£±â</a></li>
 								<li><a
 									href="https://nid.naver.com/user/help.nhn?todo=getNewPw"
-									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">é®ï¿½è«›ï¿½è¸°ï¿½ï¿½ï¿½
-										è¹‚ï¿½å¯ƒï¿½</a></li>
+									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">ºñ¹Ð¹øÈ£
+										º¯°æ</a></li>
 								<li><a
 									href="https://nid.naver.com/user/help.nhn?todo=changeMain&amp;menu=nid1_sub_m1"
-									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è¹‚ï¿½
-										ï¿½ï¿½ï¿½ï¿½</a></li>
+									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">È¸¿øÁ¤º¸
+										¼öÁ¤</a></li>
 								<li><a
 									href="https://nid.naver.com/user2/help/userLoginSafety.nhn?menu=nid2_sub_m8"
-									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">æ¿¡ï¿½æ´¹ëª„ï¿½ï¿½
-										è¹‚ëŒ„ï¿½ï¿½ ï¿½ã…¼ï¿½ï¿½</a></li>
+									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">·Î±×ÀÎ
+										º¸È£ ¼³Á¤</a></li>
 							</ul>
 						</div>
 						<div class="md_area">
 							<h2>
 								<a href="https://help.naver.com/#"
 									onclick="return PAGE.change(&#39;reportCenter/home.nhn&#39;)"><span
-									class="blind">ï¿½ï¿½æ€¨ï¿½ï¿½ì‡³ï¿½ï¿½</span></a>
+									class="blind">½Å°í¼¾ÅÍ</span></a>
 							</h2>
 							<p>
-								<span class="blind">ï¿½ï¿½ï¿½ë‹¿ï¿½ï¿½ï¿½è‡¾ï¿½ ï¿½ï¿½ï¿½ï¿½ æ²…ï¿½ç”±ÑŠë¬ ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½è‡¾ì‡±ï¿½ï¿½ è«›ï¿½å¯ƒï¿½ ï¿½ï¿½ è«›ï¿½æ¿¡ï¿½ ï¿½ï¿½æ€¨ï¿½ï¿½ï¿½ äºŒì‡±ï¿½ëª„ï¿½ï¿½.</span>
+								<span class="blind">À¯ÇØ°Ô½Ã¹° ¶Ç´Â ±Ç¸®Ä§ÇØ °Ô½Ã¹°Àº ¹ß°ß ½Ã ¹Ù·Î ½Å°íÇØ ÁÖ¼¼¿ä.</span>
 							</p>
 							<ul class="lst_md">
 								<li><a
 									href="https://help.naver.com/support/contents/contents.nhn?serviceNo=964&amp;categoryNo=2826"
-									onclick="clickcr(this, &#39;rpt.abuse&#39;, &#39;&#39;, &#39;&#39;, event)">ï¿½ï¿½ï¿½ï¿½
-										å¯ƒï¿½ï¿½ï¿½è‡¾ï¿½ ï¿½ï¿½æ€¨ï¿½</a></li>
+									onclick="clickcr(this, &#39;rpt.abuse&#39;, &#39;&#39;, &#39;&#39;, event)">À¯ÇØ
+										°Ô½Ã¹° ½Å°í</a></li>
 								<li><a
 									href="https://cpc.naver.com/cpc/claim.nhn?m=claimRequest"
-									onclick="clickcr(this, &#39;rpt.copyrp&#39;, &#39;&#39;, &#39;&#39;, event)">ï¿½ï¿½ï¿½ï¿½æ²…ï¿½
-										ç§»â‘¦ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½è‡¾ï¿½ ï¿½ï¿½æ€¨ï¿½</a></li>
+									onclick="clickcr(this, &#39;rpt.copyrp&#39;, &#39;&#39;, &#39;&#39;, event)">ÀúÀÛ±Ç
+										Ä§ÇØ °Ô½Ã¹° ½Å°í</a></li>
 								<li><a
 									href="https://help.naver.com/support/alias/contents2/naverhome/naverhome_2.naver"
-									onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event)">å¯ƒê³—ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-										ï¿½ï¿½æ€¨ï¿½</a></li>
+									onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event)">°áÁ¦µµ¿ë
+										½Å°í</a></li>
 								<li><a
 									href="http://inoti.naver.com/inoti/claim.nhn?m=purpose"
-									onclick="clickcr(this, &#39;rpt.honor&#39;, &#39;&#39;, &#39;&#39;, event)">ï§ï¿½ï¿½ï¿½ï¿½ì‡±ï¿½ï¿½
-										å¯ƒï¿½ï¿½ï¿½è‡¾ï¿½ ï¿½ï¿½æ€¨ï¿½</a></li>
+									onclick="clickcr(this, &#39;rpt.honor&#39;, &#39;&#39;, &#39;&#39;, event)">¸í¿¹ÈÑ¼Õ
+										°Ô½Ã¹° ½Å°í</a></li>
 							</ul>
 						</div>
 					</div>
@@ -1567,28 +1568,28 @@ jQuery(function () {
 
 					<div class="noti_section">
 						<h3>
-							<span class="blind">æ€¨ë“­ï¿½ï¿½Ñ‹ï¿½ï¿½</span>
+							<span class="blind">°øÁö»çÇ×</span>
 						</h3>
-						<!-- [D] æ€¨ë“­ï¿½ï¿½Ñ‹ï¿½ï¿½ ï§ï¿½ä»¥ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â‘¹ï¿½ì‡°ï¿½ ï¿½ï¿½ï§£ï¿½ ï¿½ï¿½ï§ï¿½ title ï¿½ï¿½ï¿½ê¹†ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -->
+						<!-- [D] °øÁö»çÇ× ¸»ÁÙÀÓ Àû¿ëÀ¸·Î ÀüÃ¼ Á¦¸ñ title ¼Ó¼º¿¡ ´ëÀÔ -->
 						<ul class="lst_noti">
 
 
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659166"
-								title="[è¹‚ë“¦ëŽ„ï¿½ï¿½çŒ·ï¿½] 11/26 (ï¿½ï¿½), &#39;éºï¿½ï¿½ï¿½ï¿½ï¿½&#39;..."
-								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[è¹‚ë“¦ëŽ„ï¿½ï¿½çŒ·ï¿½]
-									11/26 (ï¿½ï¿½), 'éºï¿½ï¿½ï¿½ï¿½ï¿½'...</a></li>
+								title="[º¹±¸¿Ï·á] 11/26 (ÀÏ), &#39;ºÎµ¿»ê&#39;..."
+								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[º¹±¸¿Ï·á]
+									11/26 (ÀÏ), 'ºÎµ¿»ê'...</a></li>
 
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659138"
-								title="[è¹‚ë“¦ëŽ„ï¿½ï¿½çŒ·ï¿½] 11/23 (æ¹²ï¿½), &#39;éºï¿½ï¿½ï¿½ï¿½ï¿½&#39;..."
-								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[è¹‚ë“¦ëŽ„ï¿½ï¿½çŒ·ï¿½]
-									11/23 (æ¹²ï¿½), 'éºï¿½ï¿½ï¿½ï¿½ï¿½'...</a></li>
+								title="[º¹±¸¿Ï·á] 11/23 (±Ý), &#39;ºÎµ¿»ê&#39;..."
+								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[º¹±¸¿Ï·á]
+									11/23 (±Ý), 'ºÎµ¿»ê'...</a></li>
 
 						</ul>
 						<a href="http://help.naver.com/support/bbs/notice.nhn"
 							onclick="clickcr(this, &#39;rnt.more&#39;, &#39;&#39;, &#39;&#39;, event);"
-							class="nt_more"><span class="blind">æ€¨ë“­ï¿½ï¿½Ñ‹ï¿½ï¿½</span> ï¿½ï¿½è¹‚ë‹¿ë¦°</a>
+							class="nt_more"><span class="blind">°øÁö»çÇ×</span> ´õº¸±â</a>
 					</div>
 
 
@@ -1604,7 +1605,7 @@ jQuery(function () {
 
 
 		<script type="text/javascript"
-			src="./custom_home_files/flashObject.js.ï¿½ã…¼ï¿½ëŒ€ï¿½ï¿½ï¿½"></script>
+			src="./custom_home_files/flashObject.js.´Ù¿î·Îµå"></script>
 		<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery("#kinParterBanner").click(function(event){
@@ -1625,8 +1626,8 @@ jQuery(function () {
 		<div id="kinPartnerLayout" class="ly_kin_partner"
 			style="display: none">
 			<div class="con">
-				<h1 class="blind">ï§žï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëªƒï¿½ï¿½ ï¿½ï¿½ï¿½ê¹Šï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½åª›ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</h1>
-				<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -->
+				<h1 class="blind">Áö½ÄÆÄÆ®³Ê È°¼ºÈ­¿ë ¼Ò°³ µ¿¿µ»ó</h1>
+				<!-- µ¿¿µ»ó¿µ¿ª -->
 				<div class="kin_mov">
 					<script type="text/javascript">
 				var param = {"flashVars" : "isautoplay=false&imgurl=https://ssl.pstatic.net/static/help/support/img_pnmov.jpg&flvurl=/support/static/kin_partner.flv&volume=0.2&contentWidth=720&contentHeight=405"};
@@ -1681,14 +1682,14 @@ jQuery(function () {
 							pluginspage="http://www.macromedia.com/go/getflashplayer">
 					</object>
 				</div>
-				<!-- //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -->
+				<!-- //µ¿¿µ»ó¿µ¿ª -->
 				<a
 					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
 					class="btn_drt"
 					onclick="clickcr(this, &#39;rbk.banner&#39;, &#39;&#39;, &#39;&#39;, event)"
-					target="_blank">ï§žï¿½ï¿½ï¿½in "è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½â‘¸ï¿½" è«›ï¿½æ¿¡ï¿½åª›ï¿½æ¹²ï¿½</a> <a
+					target="_blank">Áö½Äin "¹ÙÄÚµå »ç¿ë¹ý" ¹Ù·Î°¡±â</a> <a
 					id="kinParterPopupCloseButton" class="btn_close"><span
-					class="blind">ï¿½ï¿½ï¿½ï¿½ï§¡ï¿½ ï¿½ãƒªë¦°</span></a>
+					class="blind">ÆË¾÷Ã¢ ´Ý±â</span></a>
 			</div>
 		</div>
 
@@ -1702,30 +1703,30 @@ jQuery(function () {
 		<div class="ly_dim" style="display: none;"></div>
 		<div class="ly_kin_bridge" style="display: none">
 			<div class="con">
-				<h1 class="blind">ï¿½ëŒï¿½â‘¹ï¿½ï¿½ï¿½ã…»ï¿½ì‡°â” äºŒì‡¨ï¿½ è«›ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½â‘¸ï¿½</h1>
-				<p class="blind">ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ï¿½ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½æ€¨ï¿½ è‡¾ì‡±ï¿½ëŒ€ë‚«ï¿½ëª„ï¿½ï¿½!</p>
-				<h2 class="blind">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ï¿½ æ„¿ï¿½ï¿½â‘¦ï¿½ï¿½ æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ìŽ„ï¿½ ï§¡ì– ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ëŒï¿½ï¿½.</h2>
-				<p class="blind">è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ÑŠï¿½â‘¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï§žï¿½è‡¾ï¿½/ï¿½ë“¬ï¿½ï¿½ï¿½ è‡¾ëŒ€ï¿½ï¿½ 24ï§ï¿½åª›ï¿½!! ï¿½ï¿½çŒ·â‘¥ï¿½ï¿½ ï¿½ï¿½æ¿¡ï¿½ï¿½ï¿½ ï§žï¿½è‡¾ï¿½ ï¿½ë“¬ï¿½ï¿½ï¿½
-					200åª›ï¿½!! ï§žï¿½æ¹²ï¿½ è«›ï¿½æ¿¡ï¿½ ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ï¿½ï¿½ æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï§¡ì– ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½.</p>
+				<h1 class="blind">ÀÌ¿ëÀÚµé³¢¸® ÁÖ°í ¹Þ´Â »ý»ýÇÑ ¹ÙÄÚµå »ç¿ë¹ý</h1>
+				<p class="blind">Áö½ÄiN¿¡¼­ °Ë»öÇÏ°í ¹°¾îº¸¼¼¿ä!</p>
+				<h2 class="blind">¹ÙÄÚµå¿Í °ü·ÃÇÑ ±Ã±ÝÇÑ Á¡À» ½±°Ô Ã£À» ¼ö ÀÖ¾î¿ä.</h2>
+				<p class="blind">¹ÙÄÚµå»ç¿ë¹ý¿¡ ´ëÇÑ Áú¹®/´äº¯ÀÌ ¹«·Á 24¸¸°³!! ÇÏ·ç¿¡ »õ·Î¿î Áú¹® ´äº¯ÀÌ
+					200°³!! Áö±Ý ¹Ù·Î Áö½ÄiN¿¡¼­ ±Ã±ÝÇÑ Á¡À» Ã£¾Æ º¸¼¼¿ä.</p>
 				<a
 					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
 					onclick="clickcr(this, &#39;kbr.search&#39;, &#39;&#39;, &#39;&#39;, event)"
-					class="srch" target="_blank"><span class="blind">ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ï¿½ï¿½
-						è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½â‘¸ï¿½ å¯ƒï¿½ï¿½ï¿½ï¿½ï¿½æ¹²ï¿½</span></a>
-				<h2 class="blind">ï§¡ì– ï¿½ì‡±ï¿½ï¿½ï¿½ï¿½ ï¿½ëŒï¿½â‘¹ï¿½ï¿½ ï¿½ï¿½ï¿½ã…»ãˆƒ ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ è‡¾ì‡±ï¿½ëŒ€ë‚«ï¿½ëª„ï¿½ï¿½.</h2>
-				<p class="blind">ï¿½ã…»â…¨ ï¿½ëŒï¿½â‘¹ï¿½ï¿½ï¿½ï¿½ ï§žï¿½ï¿½ï¿½iN æ€¨ï¿½ï¿½ï¿½ï¿½ï¿½, è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï§žï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëªƒï¿½ï¿½åª›ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ€¨ï¿½ é®ï¿½ç‘œë‹¿ï¿½ ï¿½ë“¬ï¿½ï¿½â‘¸ï¿½ï¿½ï¿½ï¿½.
-					æ²…ï¿½æ¹²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì‡±ï¿½ï¿½ï§Žï¿½ ï§žï¿½æ¹²ï¿½ è«›ï¿½æ¿¡ï¿½ ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ï¿½ï¿½ ï§žï¿½è‡¾ëª…ï¿½ï¿½ è¹‚ëŒï¿½ëª„ï¿½ï¿½.</p>
+					class="srch" target="_blank"><span class="blind">Áö½ÄiN¿¡¼­
+						¹ÙÄÚµå »ç¿ë¹ý °Ë»öÇÏ±â</span></a>
+				<h2 class="blind">Ã£À¸½Ã´Â ³»¿ëÀÌ ¾ø´Ù¸é Áö½ÄiN¿¡ ¹°¾îº¸¼¼¿ä.</h2>
+				<p class="blind">´Ù¸¥ ÀÌ¿ëÀÚ¿Í Áö½ÄiN °í¼öµé, ¹ÙÄÚµå Áö½ÄÆÄÆ®³Ê°¡ Á¤È®ÇÏ°í ºü¸£°Ô ´äº¯ÇÕ´Ï´Ù.
+					±Ã±ÝÇÑ Á¡ÀÌ ÀÖÀ¸½Ã¸é Áö±Ý ¹Ù·Î Áö½ÄiN¿¡¼­ Áú¹®ÇØ º¸¼¼¿ä.</p>
 				<a
 					href="http://kin.naver.com/qna/question.nhn?dirId=10601&amp;d1Id=1"
 					onclick="clickcr(this, &#39;kbr.ask&#39;, &#39;&#39;, &#39;&#39;, event)"
-					class="ask" target="_blank"><span class="blind">ï§žï¿½ï¿½ï¿½iNï¿½ï¿½ï¿½ï¿½
-						è«›ï¿½è‚„ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½â‘¸ï¿½ ï§žï¿½è‡¾ëª…ï¿½ï¿½æ¹²ï¿½</span></a>
-				<p class="blind">ï§žï¿½è‡¾ï¿½ ï¿½ëŒï¿½â‘¹ï¿½ï¿½ ï¿½ê¹…ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ÑŠï¿½â‘¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ëŒï¼œï¿½ï¿½ï§Žï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ€¨ï¿½ é®ï¿½ç‘œë‹¿ï¿½ ï¿½ë“¬ï¿½
-					è«›ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ëŒï¿½ï¿½.</p>
-				<p class="blind">ï¿½ï¿½) ï§žï¿½ï¿½ï¿½Q&amp;A &gt; è€ŒëŒ„ï¿½â‘¦ï¿½ê³ ï¿½ë“­ï¿½ï¿½ &gt; ï¿½ëª…ï¿½ê³•ï¿½ï¿½ &gt; è«›ï¿½è‚„ï¿½ï¿½ï¿½ï¿½ÑŠï¿½â‘¸ï¿½
-					&gt; OOO (ï¿½ï¿½é®ï¿½ï¿½ï¿½ ï§ï¿½)</p>
+					class="ask" target="_blank"><span class="blind">Áö½ÄiN¿¡¼­
+						¹ÙÄÚµå »ç¿ë¹ý Áú¹®ÇÏ±â</span></a>
+				<p class="blind">Áú¹® ³»¿ëÀ» µî·ÏÇÏ½Å ÈÄ ¡®¹ÙÄÚµå»ç¿ë¹ý¡¯À» ¼±ÅÃÇØÁÖ½Ã¸é ´õ¿í Á¤È®ÇÏ°í ºü¸£°Ô ´äº¯
+					¹ÞÀ» ¼ö ÀÖ¾î¿ä.</p>
+				<p class="blind">¿¹) Áö½ÄQ&amp;A &gt; ÄÄÇ»ÅÍÅë½Å &gt; ÀÎÅÍ³Ý &gt; ¹ÙÄÚµå»ç¿ë¹ý
+					&gt; OOO (¼­ºñ½º ¸í)</p>
 				<a id="closeKinPopup" href="https://help.naver.com/#" class="close"><span
-					class="blind">ï¿½ãƒªë¦°</span></a>
+					class="blind">´Ý±â</span></a>
 			</div>
 		</div>
 		<!-- //layer kin bridge -->
@@ -1733,7 +1734,7 @@ jQuery(function () {
 jQuery(document).ready(function(){
 	
 	/**
-	 * ï§žï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÑŠï¿½â‘¸ï¿½ ï¿½ï¿½ï¿½ëª…ï¿½ï¿½ è¹‚ë‹¿ë¦°
+	 * Áö½ÄÀÎ »ç¿ë¹ý ÀÚ¼¼È÷ º¸±â
 	 */
 	var $ly_dim   = jQuery(".ly_dim");
 	var $ly_kin_bridge = jQuery(".ly_kin_bridge");	 
@@ -1757,28 +1758,60 @@ jQuery(document).ready(function(){
 });
 </script>
 		<!-- footer -->
-		<div id="footer">
-			<div class="rel_area"></div>
-
-
-
-
-
-
-
-
-
-
-
-		</div>
+<div id="footer_">
+	<div id="footerWrap">
+		<p class="a_">°øÁö»çÇ×</p>
+		<p class="a__">¼­ºñ½º ÀüÃ¼º¸±â</p>
+	</div>
+</div>
+<div id="footer">
+	<p class="Extra">Creators</p>
+	
+	<ul>
+		<li>Å©¸®¿¡ÀÌÅÍ</li><li class="aaa">|</li>
+		<li>½º¸ôºñÁî´Ï½º</li>
+	</ul>
+	
+	<p class="Extra">Partners</p>
+	<ul>
+		<li>ÀÌ¼º¼ö</li><li class="aaa">|</li>
+		<li>±è¹ÎÁ¤</li><li class="aaa">|</li>
+		<li>¹ÚÁØ¿µ</li><li class="aaa">|</li>
+		<li>À°µ¿ÁÖ</li><li class="aaa">|</li>
+		<li>Á¶¼º¼ö</li>
+	</ul>
+	
+	<p class="Extra">Developers</p>
+	<ul>
+		<li>¹ÙÄÚµå °³¹ß¼¾ÅÍ</li><li class="aaa">|</li>
+		<li>¿ÀÇÂAPI</li><li class="aaa">|</li>
+		<li>¿ÀÇÂ¼Ò½º</li><li class="aaa">|</li>
+		<li>¹ÙÄÚµå D2</li><li class="aaa">|</li>
+		<li>¹ÙÄÚµå ·¦½º</li>
+	</ul>
+	
+	<div id="ul_except">
+		<ul>
+			<li style="padding:0;">È¸»ç¼Ò°³</li><li class="aaa">|</li>
+			<li>ÀÎÀçÃ¤¿ë</li><li class="aaa">|</li>
+			<li>Á¦ÈÞÁ¦¾È</li><li class="aaa">|</li>
+			<li>ÀÌ¿ë¾à°ü</li><li class="aaa">|</li>
+			<li>°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</li><li class="aaa">|</li>
+			<li>Ã»¼Ò³âº¸È£Á¤Ã¥</li><li class="aaa">|</li>
+			<li>¹ÙÄÚµåÁ¤Ã¥</li><li class="aaa">|</li>
+			<li>°í°´¼¾ÅÍ</li><li class="aaa">|</li>
+			<li>¨ÏBarcode Crop.</li>
+		</ul>
+	</div>
+</div>
 		<!-- //footer -->
 	</div>
 
-	<script type="text/javascript" src="./custom_home_files/lcslog.js.ï¿½ã…¼ï¿½ëŒ€ï¿½ï¿½ï¿½"></script>
+	<script type="text/javascript" src="./custom_home_files/lcslog.js.´Ù¿î·Îµå"></script>
 	<script type="text/javascript">
 var nsc = "help.main";
 lcs_do();
 </script>
 
-body>
+</body>
 </html>

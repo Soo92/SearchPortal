@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%
 		request.setCharacterEncoding("euc-kr");
+		String url = request.getHeader("Referer");
 %>
 
 <!doctype>
@@ -48,6 +49,7 @@
                      <tr>
                         <td height="60px">
 							<input type="password" name="pass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" placeholder="비밀번호">
+						   <input type="hidden" name="url" value=<%=url%>>
 					</td>
                      </tr>
 			   </table>

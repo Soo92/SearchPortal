@@ -1,0 +1,61 @@
+var NAVER_SEARCH_AD = NAVER_SEARCH_AD || {};
+
+if (!NAVER_SEARCH_AD.EVENT_TRACKER) {
+  NAVER_SEARCH_AD.EVENT_TRACKER = {};
+
+  (function () {
+    var visitUrl = function (url) {
+      var image = new Image();
+      image.src = url;
+    };
+
+    var addEventListener = window.addEventListener ?  window.addEventListener : window.attachEvent;
+    var removeEventListener = window.removeEventListener ? window.removeEventListener : window.detachEvent;
+
+    var addImpressionEventListener = function (target, pixels) {
+      var impressionEventUrl = target.getAttribute("impression-event-url");
+      var targetId = target.getAttribute('id');
+      if (typeof localStorage !== 'undefined') {
+          if(localStorage.getItem("impression-event-url" + targetId) === impressionEventUrl) {
+            return;
+          } else {
+            localStorage.setItem("impression-event-url" + targetId, impressionEventUrl);
+          }
+      }
+      var debounceTimer;
+
+      var handleImpression = function () {
+        debounceTimer && clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function() {
+          var viewportTop = window.pageYOffset;
+          var viewportBottom = window.pageYOffset + window.innerHeight;
+          var targetBoundClientRect = target.getBoundingClientRect();
+          var targetTop = viewportTop + targetBoundClientRect.top;
+          var adsAreaHeight = targetBoundClientRect.height;
+
+          if (viewportBottom - targetTop >= pixels) {
+            removeEventListener('scroll', handleImpression);
+            visitUrl(impressionEventUrl + "&yCoordinateInPixels=" + Math.round(targetTop) +
+            "&adsAreaHeight=" + Math.round(adsAreaHeight));
+          }
+        }, 500);
+      };
+
+      addEventListener('scroll', handleImpression);
+      handleImpression();
+    };
+
+    var pixels = 50;
+
+    addEventListener('load', function () {
+      var ids = ['power_link_body', 'biz_site_body', 'power_contents_body'];
+
+      for(var i = 0; i < ids.length; i++){
+        var targetBody = document.getElementById(ids[i]);
+        if(targetBody){
+          addImpressionEventListener(targetBody, pixels);
+        }
+      }
+    });
+  }());
+}

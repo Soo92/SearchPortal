@@ -43,7 +43,7 @@
 			<input type="text" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
 								placeholder="°Ë»öÇØº¸¼¼¿ë!">
 				
-				<div id="search_button"><img src="img/search_icon.png"></div>
+				<div id="search_button"><img src="img/search_icon.png" onclick="location.href='./search/search.html'"></div>
 				<div id="place"><img src="img/place_icon.png"></div>
 			</div>
 			<a href="map/MapPr.jsp">
@@ -138,7 +138,7 @@
 						</table>
 <%}else{%>
 						<%=name%>´Ô
-						<a href="/member/logout.jsp">·Î±×¾Æ¿ô</a>
+						<a href="./member/logout.jsp">·Î±×¾Æ¿ô</a>
 <%}%>
 					</div>
 					

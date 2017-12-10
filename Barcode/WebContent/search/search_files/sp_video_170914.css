@@ -1,0 +1,179 @@
+@charset "utf-8";
+/* NTS PHY */
+/* 공통 */
+.sp_video .spmv{display:inline-block;overflow:hidden;background:url(../img/video_sp_v3.png) no-repeat;white-space:nowrap;vertical-align:middle}
+.sp_video .mask{display:block;position:absolute;top:0;left:0;width:100%;height:100%;background-color:#000;opacity:.1;filter:alpha(opacity=10)}
+.sp_video .thum_v{display:inline-block;height:100%;vertical-align:middle}
+.sp_video{position:relative}
+.sp_video .video_thum{display:block;position:relative;width:128px;height:72px;text-align:center;text-decoration:none;_zoom:1}
+.sp_video .video_thum img{display:inline;vertical-align:middle}
+.sp_video .runtime{display:block;position:absolute;right:5px;bottom:5px;padding:3px 2px 0;background-color:rgba(0,0,0,.25);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#25000000,endColorstr=#25000000);font-size:12px;color:#fff;line-height:11px}
+.sp_video .video_item .ico{display:block;position:absolute;left:5px;bottom:5px;width:24px;height:24px;font-size:0;line-height:0}
+.sp_video .video_item .ico.play{display:none;background-position:0 0}
+.sp_video .video_item .ico.play_lk{background-position:-26px 0}
+.sp_video .video_item.video_on .ico.play{display:block}
+.sp_video .video_item.video_on .ico.play_lk{display:none}
+.sp_video .video_item .ico_live{position:absolute;top:5px;left:6px;width:1px;height:17px;padding-left:42px;background-position:-40px -58px;color:transparent}
+.sp_video .video_info{height:83px;padding-bottom:17px;line-height:15px}
+.sp_video .video_info .tit{width:128px;margin-bottom:6px;padding-top:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal}
+.sp_video .video_info .cate{overflow:hidden;padding-top:3px;white-space:nowrap;text-overflow:ellipsis}
+.sp_video .video_info .sub_info{display:block;overflow:hidden}
+.sp_video .video_info .sub_info .bar{float:left;margin:1px 6px 0 6px}
+.sp_video .video_info .sub_info .date{float:left;font-size:12px}
+.sp_video .video_info .sub_info .lnk_cite{float:left;display:block;overflow:hidden;max-width:65px;padding-right:1px;white-space:nowrap;text-overflow:ellipsis;color:#00c;font-size:12px;font-family:'굴림',gulim,helvetica,sans-serif}
+.sp_video .video_info .sub_info:after{content:'';clear:both;display:block}
+.sp_video .video_player{display:none;z-index:2}
+.sp_video .video_player .flash_player{padding:56px 0 25px;font-size:0;text-align:center}
+.sp_video .video_player .flash_player iframe{margin:0 auto}
+.sp_video .video_player .play_data{position:absolute;top:0;left:0;width:100%;padding:8px 0;border-bottom:1px solid #060608;background-color:#19191f;line-height:22px}
+.sp_video .video_player .play_data .tit{display:inline-block;overflow:hidden;max-width:330px;padding-left:20px;color:#b5b4b9;white-space:nowrap;text-overflow:ellipsis;vertical-align:top}
+.sp_video .video_player .play_data .pd_time,.sp_video .video_player .play_data .pd_date{padding-left:7px;font-size:12px;color:#606067}
+.sp_video .video_player .play_data .pd_date{padding:0}
+.sp_video .video_player .play_data .view img{vertical-align:top;*vertical-align:middle}
+.sp_video .video_player .play_data .bar{border-color:#3b3b41}
+.sp_video .video_player .close_btn{position:absolute;top:7px;right:7px;z-index:1}
+.sp_video .video_player .close_btn a{display:block;width:15px;height:15px;margin:5px}
+.sp_video .video_item.selected{z-index:900}
+.sp_video .video_item.selected .video_player{display:block}
+/* 프로야구 구단 선택 */
+.sp_video .team_select{clear:both;width:100%;min-width:600px;max-width:700px}
+.sp_video .team_select .team_lst{padding:0 0 12px 10px}
+.sp_video .team_select .team_lst ul{height:31px;zoom:1}
+.sp_video .team_select .team_lst li{float:left;width:11.11%;min-width:11%;margin:0}
+.sp_video .team_select .team_lst a{display:block;padding:5px 1px;line-height:19px;border:1px solid #e4e6e7;border-width:1px 0;background-color:#f5f6f7;background-image:url(../img/video_bg_vertbar.gif);background-repeat:no-repeat;background-position:0 50%;color:#2c2c2d;font-size:12px;text-align:center}
+.sp_video .team_select .team_lst:first-child a{padding-left:0;border-left-width:1px;border-top-left-radius:2px;border-bottom-left-radius:2px;background-image:none}
+.sp_video .team_select .team_lst .last{width:10.5%;min-width:10.5%}
+.sp_video .team_select .team_lst .last a{padding-right:0;border-right-width:1px;border-top-right-radius:2px;border-bottom-right-radius:2px}
+.sp_video .team_select .team_lst .spmv{height:18px;margin:0 2px 0 0}
+.sp_video .team_select .team_lst .team_ss .spmv{width:19px;background-position:-105px 0}
+.sp_video .team_select .team_lst .team_sk .spmv{width:16px;background-position:-105px -30px}
+.sp_video .team_select .team_lst .team_lt .spmv{width:19px;background-position:-105px -60px}
+.sp_video .team_select .team_lst .team_ht .spmv{width:22px;background-position:-105px -90px}
+.sp_video .team_select .team_lst .team_ob .spmv{width:19px;background-position:-105px -120px}
+.sp_video .team_select .team_lst .team_lg .spmv{width:19px;background-position:-105px -150px}
+.sp_video .team_select .team_lst .team_hh .spmv{width:24px;background-position:-105px -180px}
+.sp_video .team_select .team_lst .team_wo .spmv{width:20px;background-position:-105px -210px}
+.sp_video .team_select .team_lst .team_nc .spmv{width:22px;background-position:-105px -240px}
+.sp_video .team_select .team_lst .on{position:relative;margin-right:-1px;font-weight:bold;color:#2e2e2e}
+.sp_video .team_select .team_lst .on a{padding-left:0;padding-right:0;border:1px solid #cecfd1;background-color:#e5e6e6;background-image:none}
+.sp_video .team_select .team_lst .on.last{margin-right:0}
+.sp_video .video_info .count{margin-top:3px;font-size:12px;color:#777}
+.sp_video .video_info .count .spmv{display:inline-block;overflow:hidden;color:transparent;font-size:0;line-height:0;vertical-align:top}
+.sp_video .video_info .count .spmv.play{margin:0 2px 0 1px;width:10px;height:12px;background-position:-1px -25px}
+.sp_video .video_info .count .spmv.like{margin:1px 2px 0 2px;width:12px;height:11px;background-position:-14px -25px}
+/* tv채널 */
+.sp_video .video_channel{overflow:hidden;margin-bottom:8px}
+.sp_video .video_channel .channel_thum{float:left;position:relative;margin-right:9px}
+.sp_video .video_channel .channel_thum img{vertical-align:top;border-radius:50%}
+.sp_video .video_channel .channel_thum .mask_round{display:block;position:absolute;top:0;left:0;width:35px;height:35px;background-position:-1px -40px}
+.sp_video .video_channel .channel_info{overflow:hidden;padding:1px 0 0;white-space:nowrap;text-overflow:ellipsis}
+.sp_video .video_channel .channel_info .info_sub{font-size:12px;color:#777;padding:7px 0 0}
+.sp_video .video_channel .channel_info .ico_channel{display:inline-block;width:30px;height:16px;margin:-1px 3px 1px 1px;font-size:0;line-height:0;color:transparent;vertical-align:top;background-position:-40px -40px}
+.sp_video .video_channel .channel_info .info_tit{margin-right:4px;font-size:14px;font-family:'돋움',Dotum,AppleGothic,sans-serif}
+.sp_video .video_channel .channel_info .info_tit .url{margin-left:4px}
+.sp_video .video_channel .channel_info .ico_new{display:inline-block;margin:-2px 0 2px;font-size:10px;font-family:verdana,sans-serif;color:#fb5151;vertical-align:top}
+.sp_video .video_channel .channel_info .info_sub .bar{margin:-1px 7px 1px 8px}
+.sp_video .video_channel .channel_info .info_sub .ico_heart{margin:0 2px;width:12px;height:11px;background-position:-14px -25px;vertical-align:top}
+.sp_video .video_channel .channel_snippet{clear:both;padding:8px 0 0;font-size:12px;line-height:18px}
+.sp_video .channel_group .video_lst .video_info{height:62px}
+.sp_video .channel_group .video_lst .video_info .count{margin-top:0}
+.sp_video .channel_group .video_lst .video_info .tit{margin-bottom:1px;padding-top:10px;line-height:18px;text-overflow:clip;white-space:normal}
+/* 신고하기 */
+.sp_video .report_i{display:none;position:absolute;top:0;left:5px;height:25px}
+.sp_video .report_on li .report_i{display:block}
+.sp_video .btn_extend .ly_report_mv{display:none;position:absolute;top:25px;right:0}
+.sp_video .btn_extend .ly_report_mv p{width:184px;padding:11px 0 9px 13px;border:2px solid #5a5e6e;background-color:#fff;font-size:12px;line-height:19px;color:#3c3c3c}
+.sp_video .btn_extend .ly_report_mv .btn_close{width:15px;height:15px;position:absolute;top:6px;right:6px;background-position:-51px 1px;font-size:0;line-height:0}
+/* tablet접속시 안내문구 */
+.sp_video .dsc_tablet{display:block;float:left;margin-top:3px;padding-left:10px;font-family:'돋움',Dotum,AppleGothic,sans-serif;font-size:12px;color:#444;letter-spacing:-1px}
+.tabsch_video .sp_video .video_lst_vertical+.dsc_tablet{margin-top:30px}
+.tabsch_video .main_pack .sp_video ._au_wrap_list+.dsc_tablet{float:none;overflow:hidden;margin:10px 0 27px}
+.tabsch_video .main_pack .sp_video .video_lst+.dsc_tablet{margin-top:10px}
+.sub_pack .sp_video .dsc_tablet{float:none;margin:5px 0 17px;padding-left:0}
+.sub_pack .sp_video .video_paging+.dsc_tablet{margin-top:25px}
+/* 1단 */
+.main_pack .sp_video .video_lst{width:616px;margin-left:10px;zoom:1}
+.main_pack .sp_video .video_lst:after{content:'';display:block;clear:both}
+.main_pack .sp_video .video_item{float:left;position:relative;width:128px;margin-right:26px}
+.main_pack .sp_video .video_player{position:relative;width:590px;margin-bottom:20px;background-color:#292932}
+.main_pack .sp_video .item2 .video_player{left:-154px}
+.main_pack .sp_video .item3 .video_player{left:-308px}
+.main_pack .sp_video .item4 .video_player{left:-462px}
+.main_pack .sp_video .btn_extend{position:absolute;top:20px;right:0;_z-index:2}
+.main_pack .sp_video .btn_extend .report_mv em,.main_pack .sp_video .btn_extend .report_mv strong{display:inline-block;margin:4px 4px 0 0;font-size:12px;letter-spacing:-1px;font-weight:normal;vertical-align:top}
+.main_pack .sp_video .btn_extend .report_mv .btn_report,.main_pack .sp_video .btn_extend .report_mv .btn_confirm,.main_pack .sp_video .btn_extend .report_mv .btn_cancel{display:inline-block;padding:4px 4px 3px;border:1px solid #e6e8e9;border-radius:2px;font-family:'돋움',Dotum,AppleGothic,sans-serif;font-size:11px;color:#666;line-hight:12px;letter-spacing:-1px;text-decoration:none}
+/* 2단 */
+.sub_pack .sp_video{padding-bottom:5px}
+.sub_pack .sp_video .video_lst{width:408px;margin-left:0;zoom:1}
+.sub_pack .sp_video .video_info .tit{font-size:12px}
+.sub_pack .sp_video .video_lst:after{content:'';display:block;clear:both}
+.sub_pack .sp_video .video_item{float:left;position:relative;width:128px;margin-right:8px}
+.sub_pack .sp_video .video_player{position:absolute;right:0;width:590px;background-color:#292932}
+.sub_pack .sp_video .item1 .video_player{right:-272px}
+.sub_pack .sp_video .item2 .video_player{right:-136px}
+.sub_pack .sp_video .btn_extend{position:absolute;top:25px;right:1px}
+.sub_pack .sp_video .btn_extend .bar{height:10px;margin-right:3px;border-color:#e5e5e5}
+.sub_pack .sp_video .btn_extend .report_mv,.sub_pack .sp_video .btn_extend .alert_mv{display:inline}
+.sub_pack .sp_video .btn_extend .report_mv strong,.sub_pack .sp_video .btn_extend .report_mv span,.sub_pack .sp_video .btn_extend a{font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;letter-spacing:-1px;text-decoration:none;font-weight:normal;color:#999}
+.sub_pack .sp_video .btn_extend .alert_mv{position:relative}
+.sub_pack .sp_video .btn_extend .alert_mv .ico_alert{width:1px;height:14px;padding-left:13px;background-position:-70px -15px;vertical-align:top}
+.sub_pack .sp_video .btn_extend .alert_mv .ly_alert_mv{position:absolute;top:24px;right:0;z-index:999;margin-right:-56px;border:1px solid #595e6b;background-color:#fff;white-space:nowrap}
+.sub_pack .sp_video .btn_extend .alert_mv .ly_alert_mv .ico_arr{display:block;position:absolute;top:-6px;right:73px;width:9px;height:6px;background-position:-70px -32px}
+.sub_pack .sp_video .btn_extend .alert_mv .ly_alert_mv p{margin:10px 12px 7px;font-size:12px;color:#666;line-height:18px;letter-spacing:-1px}
+.sub_pack .sp_video .btn_extend .alert_mv .ly_alert_mv em{color:#06b33a}
+.sub_pack .sp_video .section_more{padding:0 0 18px}
+/* 동영상탭검 */
+.tabsch_video .main_pack .sp_video .dsc_condition{float:left;font-size:12px;color:#666;line-height:14px;letter-spacing:-1px}
+.tabsch_video .main_pack .sp_video .dsc_condition .spmv{width:14px;height:14px;margin:-1px 3px 1px 0;background-position:-70px -15px;vertical-align:top}
+.tabsch_video .main_pack .sp_video .btn_extend{position:relative;top:26px;right:0}
+.tabsch_video .main_pack .sp_video .btn_extend .report_mv{position:absolute;bottom:10px;right:0;_zoom:1}
+.tabsch_video .main_pack .sp_video .btn_extend .ly_report_mv{top:auto;bottom:35px;right:0}
+/* 보기옵션_이미지 */
+.tabsch_video .main_pack .video_lst li.item1{clear:both}
+/* 리스트세로형 */
+.tabsch_video .sp_video .video_lst_vertical .video_player{clear:both;top:20px}
+.tabsch_video .sp_video .video_lst_vertical{margin-left:10px;padding-top:5px;_zoom:1}
+.tabsch_video .sp_video .video_lst_vertical .video_item{float:none;overflow:hidden;width:auto;margin:20px 0 0}
+.tabsch_video .sp_video .video_lst_vertical .video_item.first{margin-top:0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_thum{float:left;margin-right:14px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info{overflow:hidden;height:auto;padding:1px 0 0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .tit{float:left;width:auto;max-width:420px;margin:0 9px 3px 0;padding:0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info.sub_video .tit{max-width:250px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .sub_info{margin-top:3px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .bar{margin:1px 9px 0 10px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .date{float:left;margin:0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .cate{overflow:visible;float:left;padding:0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .cate .bar{margin:-2px 6px 0 10px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .dsc{clear:both;font-size:12px;color:#000;line-height:18px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .video_screen{clear:both}
+.tabsch_video .sp_video .video_lst_vertical .video_item .video_info .lnk_cite{max-width:80px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .sub_info span[class^=count]{float:left;margin-top:0;font-size:12px;color:#777}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen{overflow:hidden;padding-top:4px;_zoom:1}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen li{float:left;margin-right:1px;font-size:0;line-height:0}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen .screen_thum{display:block;position:relative;width:80px;height:45px;background-color:#e9e9e9;text-align:center}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen .screen_thum img{vertical-align:middle}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen .screen_thum .mask{display:none;opacity:.5;filter:alpha(opacity=50)}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen .screen_thum .txt_time{display:none;position:absolute;top:0;left:0;width:100%;font-family:tahoma,sans-serif;font-size:11px;color:#fff;line-height:13px;text-align:center}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen .screen_thum .txt_time .spmv{display:block;width:10px;height:10px;margin:12px auto 6px;background-position:-85px -1px}
+.tabsch_video .sp_video .video_lst_vertical .video_item .lst_screen a.screen_thum:hover .mask,.main_pack .sp_video .video_lst_vertical .video_item .lst_screen a.screen_thum:hover .txt_time{display:block}
+/* 2단 */
+.tabsch_video .sub_pack .sp_video .video_paging{height:25px;margin-bottom:20px;text-align:center}
+.tabsch_video .sub_pack .sp_video .video_paging a{display:inline-block;overflow:hidden;width:36px;height:23px;margin:0 7px;border:1px solid #ccced0;border-radius:2px;background-color:#fdfdfd;vertical-align:top}
+.tabsch_video .sub_pack .sp_video .video_paging a .spmv{width:1px;height:9px;margin-top:7px;padding-left:5px;background-position:-85px -25px}
+.tabsch_video .sub_pack .sp_video .video_paging a.next .spmv{background-position:-94px -25px}
+.tabsch_video .sub_pack .sp_video .video_paging a:hover .spmv{background-position:-85px -36px}
+.tabsch_video .sub_pack .sp_video .video_paging a.next:hover .spmv{background-position:-94px -36px}
+.tabsch_video .sub_pack .sp_video .video_paging a.dim{cursor:default}
+.tabsch_video .sub_pack .sp_video .video_paging a.dim:hover .spmv{background-position:-85px -25px;cursor:default}
+.tabsch_video .sub_pack .sp_video .video_paging a.next.dim:hover .spmv{background-position:-94px -25px;cursor:default}
+.tabsch_video .sub_pack .sp_video .video_paging em{display:inline-block;margin:9px 1px -9px;vertical-align:top}
+.tabsch_video .sub_pack .sp_video .video_paging em{width:1px;height:7px;padding-left:6px;background-position:-85px -15px}
+.tabsch_video .sub_pack .sp_video .video_paging em.now{background-position:-93px -15px}
+/* tv채널 */
+.tabsch_video .sp_video .channel_group{padding-top:19px}
+.tabsch_video .sp_video .section_head+.channel_group{padding-top:5px}
+.tabsch_video .sp_video .channel_group+.dsc_tablet{margin-top:30px}
+.tabsch_video .sp_video .video_channel{margin:0 0 10px 10px}
+.tabsch_video .sp_video .video_channel .channel_info .info_tit{font-size:13px;font-family:'굴림',gulim,helvetica,sans-serif;text-decoration:underline}
+/* 초등교과단원 */
+.sp_video .homework_group .video_lst .video_info{height:65px}

@@ -1,0 +1,167 @@
+@charset "utf-8";
+/* NTS UIT MJH 140521 */
+
+/* sprite image */
+.ad_section .sp_ad{background:url(../img/sp_ad.png) no-repeat}
+.ad_section .sp_ad_mall{background:url(../img/sp_ad_mall.png) no-repeat}
+.ad_section .sp_ad_map{background:url(../img/sp_ad_map.png) no-repeat}
+.ad_section .sp_ad_local{background:url(../img/sp_ad_local.png) no-repeat}
+/* default */
+.ad_section{position:relative;margin:0 0 -1px;padding:25px 0 5px;border-bottom:1px solid #edecdd;background-color:#fffef8}
+.ad_section .section_head{width:auto;padding:0 35px 0 25px}
+.ad_section .section_head h2{margin-bottom:7px;*margin-bottom:-7px}
+.ad_section .section_more{padding:2px 35px 18px}
+.ad_section .ad_area{margin:1px 0 12px}
+.ad_section .lst_type .lst .inner{position:relative;padding:9px 0 0 35px}
+.ad_section .lst_type .lst1 .inner{*z-index:104}
+.ad_section .lst_type .lst .lnk_tit{font-weight:bold;white-space:nowrap}
+.ad_section .lst_type .lst .lnk_tit,
+.ad_section .lst_type .lst .lnk_tit:hover{display:inline-block;border-bottom:1px solid #00c;text-decoration:none;line-height:12px;*line-height:14px}
+.ad_section .lst_type .lst .lnk_tit:active,
+.ad_section .lst_type .lst .lnk_tit:visited{border-bottom:1px solid #99209b}
+.ad_section .lst_type .lst .lnk_tit:visited{color:#99209b}
+.ad_section .lst_type .lst .lnk_url{margin:0 4px 0 1px;font-size:12px;color:#218d44;text-decoration:none}
+.ad_section .lst_type .lst .lnk_url,
+.ad_section .lst_type .lst .lnk_url:hover{text-decoration:none}
+.ad_section .lst_type .lst .lnk_url:hover{border-bottom:1px solid #218D44}
+.ad_section .lst_type .lst .ad_dsc{padding-top:7px;font-size:12px;color:#000;text-decoration:none}
+.ad_section .lst_type .lst a.ad_dsc{display:inline-block}
+.ad_section .lst_type .lst6{*overflow:hidden;padding-top:8px}
+.ad_section .lst_type .line{height:1px;margin:4px 25px 11px;background-color:#f4f3e8}
+.ad_section .lst_type_v1 .lst6{padding-top:0}
+.ad_section .ico_19{display:inline-block;overflow:hidden;width:15px;height:15px;margin-left:2px;background-position:-180px 0;vertical-align:top;line-height:100px}
+.nx_power .lst_type .lst .inner{height:41px}
+/* 로컬링크 */
+.ad_section .lst_type .lst_v1 .inner{margin:9px 0 0 35px;padding:0 0 0 8px;background-position:-58px -10px}
+.ad_section .lst_type .lst_v1 .lnk_tit{font-weight:normal}
+.ad_section .lst_v1 .ad_option{display:inline-block;margin-bottom:-1px;padding-top:1px;font-size:12px;color:#666;vertical-align:top}
+.ad_section .lst_v1 .ico_homepage{display:inline-block;overflow:hidden;width:52px;height:18px;margin:-3px 3px 0 0;background-position:0 -66px;line-height:100px;vertical-align:top}
+.ad_section .lst_v1 .ad_txt{margin-right:4px}
+.ad_section .lst_v1 .ad_dot{display:inline-block;width:2px;height:2px;*margin-right:4px;background-position:-58px 0;vertical-align:3px;*vertical-align:5px}
+.ad_section .lst_v1 .ad_bar{display:inline-block;width:1px;height:11px;margin:-2px 2px 0 0;*margin-right:6px;border-left:1px solid #d8d8d8;text-align:center;vertical-align:middle}
+.ad_section .lst_v1 .dsc_area .ad_bar{margin:-2px 3px 0 0;*margin-right:7px}
+.ad_section .lst_v1 .dsc_area .ad_dsc{margin-right:2px;padding-top:5px}
+.ad_section .lst_v1 .lnk_tit{margin-right:6px}
+.ad_section .lst_v1 .ico_19{margin:0 6px 0 -4px}
+.ad_section .lst_v1 .map_open,
+.ad_section .lst_v1 .map_close{display:inline-block;padding:0 13px 0 15px;color:#666;font-size:12px;line-height:19px;text-decoration:none}
+.ad_section .lst_v1 .map_open{background-position:0 2px}
+.ad_section .lst_v1 .map_close{background-position:0 -31px}
+.ad_section .ly_map_local,
+.ad_section .lst_v1 .ad_section .ly_map{position:absolute;z-index:151}
+.ad_section .ly_map_local .ly_inner,
+.ad_section .ly_map_local .ly_bd{position:absolute;z-index:20;border:2px solid #595e6b;background:#fff}
+/* 이사 */
+.ad_section .ad_move{position:relative;min-width:573px;margin:10px 35px 11px;padding:11px 0 10px;border:1px solid #efefef;background-color:#fafafa;font-size:12px;line-height:15px}
+.ad_section .ad_move p{display:inline-block;margin:0 13px;font-size:12px}
+.ad_section .ad_move em{color:#eb0c00}
+.ad_section .ad_move a{display:block;position:absolute;top:6px;right:6px;padding:4px 6px 3px 7px;border:1px solid #e1e1e1;border-bottom-color:#d2d2d2;background-color:#fff;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:11px;letter-spacing:-1px;color:#666}
+.ad_section .ad_move a,
+.ad_section .ad_move a:hover{text-decoration:none}
+.ad_section .ad_move .ico_calendar{display:inline-block;width:13px;height:12px;margin-right:4px;background-position:-160px 0;vertical-align:middle}
+.ad_section .ad_move{border-color:#eaeae5;background-color:#f6f6ef}
+/* 미리보기 */
+.ad_section .lst_type .ad_hover .inner{z-index:103}
+.ad_section .lst_type_v1 .ad_hover .inner,
+.ad_section .lst_type_v2 .ad_hover .inner{background-color:#f8fae8}
+.ad_section .lst_type .ad_view{display:block;overflow:hidden;position:absolute;right:-1px;top:0;width:62px;line-height:999px;cursor:pointer}
+.ad_section .lst_type .ad_view.selected{z-index:103}
+/* 네이버 페이 아이콘 */
+.ad_section .sp_ad.ico_npay{display:inline-block;overflow:hidden;width:32px;height:13px;margin:-2px 7px 0 0;background-position:0 0;line-height:999px;vertical-align:top}
+.ad_section .sp_ad.ico_nlogin{display:inline-block;overflow:hidden;width:39px;height:13px;margin:-2px 7px 0 0;background-position:-40px 0;line-height:999px;vertical-align:top}
+.ad_section .sp_ad.ico_talktalk{display:inline-block;overflow:hidden;width:15px;height:15px;margin:-2px 7px 0 0;background-position:-85px 0;line-height:999px;vertical-align:top}
+.ad_section .sp_ad.ico_nreserve{display:inline-block;overflow:hidden;width:38px;height:14px;margin:-3px 7px 0 0;background-position:-146px -38px;line-height:999px;vertical-align:top}
+.ad_section .lst_type .ico_area{display:inline-block;font-size:0;vertical-align:middle}
+.ad_section .lst_type .ico_area .ico{display:inline-block;position:relative;vertical-align:top}
+.ad_section .lst_type .ico_area .ly_ad{display:block;*display:none !important;position:absolute;top:10px;padding-top:9px;color:#000;text-decoration:none;white-space:nowrap;z-index:100}
+.ad_section .lst_type .ico_area .ly_box{display:block;padding:9px 9px 6px;border:1px solid #a3a3a3;background-color:#fff}
+.ad_section .lst_type .ico_area .ly_tail{position:absolute;top:5px;left:50%;width:10px;height:5px;margin-left:-5px;background-position: -130px 0}
+.ad_section .sp_ad.ico_npay +.ly_ad{left:-63px;width:159px}
+.ad_section .sp_ad.ico_nlogin +.ly_ad{left:-75px;width:190px}
+.ad_section .sp_ad.ico_talktalk +.ly_ad{left:-102px;width:220px;}
+.ad_section .lst_type .ico_area .ly_ad,
+.ad_section .lst_type .ico_area .ly_ad:hover{text-decoration:none}
+.ad_section .lst_type .ico_area .ly_ad p{font-size:11px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;line-height:15px;letter-spacing:-1px}
+.ad_section .lst_type .ico_area .ly_ad p span{padding:0 2px;font-family:tahoma,geneva,sans-serif;font-weight:bold;letter-spacing:0}
+.ad_section .lst_type .ico_area .ly_ad .ly_ad_go{padding-top:1px;color:#41b608}
+.ad_section .lst_type .ico_area .ly_ad .ly_ad_go .bu{display:inline-block;width:4px;height:6px;margin-left:2px;background-position:-148px 0;vertical-align:1px}
+/* 마일리지 안내 배너 */
+.ad_section .ad_banner{display:block;overflow:hidden;clear:both;position:relative;min-width:558px;margin:0 35px 15px;padding:14px 15px 12px;border:1px solid #ecebe1;background-color:#fffffd;font-size:12px;color:#000;line-height:20px;zoom:1}
+.ad_section .ad_banner .ico_npay,.ad_section .ad_banner .ico_nlogin{margin:0 7px 3px 1px;vertical-align:middle;zoom:1}
+.ad_section .ad_banner .more_mileage{float:right;margin-bottom:1px;*margin-top:-20px;font-size:11px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;color:#979794;letter-spacing:-1px;text-decoration:underline;line-height:19px}
+/* 쇼핑몰 미리보기 */
+.ad_section .lst_type_v1 .lst .inner{height:23px;margin-top:0}
+.ad_section .lst_type_v1 .ad_view{height:31px;background-position:0 0}
+.ad_section .lst_type_v1 .ad_hover .ad_view{background-position:0 -35px}
+.ad_section .lst_type_v1 .ad_view.selected{background-position:0 -70px}
+.ad_section .ly_mall{position:absolute;right:-427px;z-index:102;width:375px;height:590px;padding:25px;border:1px solid #b4b4b4;background-color:#fcfcfc}
+.ad_section .ly_mall .tit_area{position:relative;margin:-2px 0 0 -1px;line-height:18px}
+.ad_section .ly_mall .tit_area .tit{margin-bottom:0}
+.ad_section .ly_mall .tit_area .m_url{margin-top:5px}
+.ad_section .ly_mall .tit_area .tit .txt,
+.ad_section .ly_mall .tit_area .m_url .txt{display:inline-block;overflow:hidden;height:18px;font-size:12px;vertical-align:top}
+.ad_section .ly_mall .tit_area .tit .txt{max-width:360px;font-size:13px;font-weight:bold;color:#444548}
+.ad_section .ly_mall .tit_area .m_url .txt{max-width:375px;color:#218d44;white-space:nowrap;text-overflow:ellipsis;word-break:normal;word-wrap:normal}
+.ad_section .ly_mall .tit_area .m_dsc{display:inline-block;overflow:hidden;max-height:36px;margin-top:9px;font-size:12px;color:#6c6d70;vertical-align:top}
+.ad_section .ly_mall .img_area{position:relative;margin-top:8px}
+.ad_section .ly_mall .img_area .thumb{display:block;overflow:hidden;width:375px;margin:0 auto}
+.ad_section .ly_mall .img_area span.thumb{border:0}
+.ad_section .ly_mall .img_area img{width:auto;height:auto;vertical-align:middle}
+.ad_section .ly_mall .img_area .pv_loading,
+.ad_section .ly_mall .img_area .noti{display:block;overflow:hidden;height:495px;border:1px solid #e5e5e5;color:transparent;box-sizing:border-box}
+.ad_section .ly_mall .img_area .pv_loading{background:#fff url(../img/ico_lod.gif) no-repeat 50% 50%}
+.ad_section .ly_mall .img_area .no_img{background:#fff url(../img/bg_no_img.png) no-repeat 50% 50%}
+.ad_section .ly_mall .img_area .prepare_img{background:#fff url(../img/bg_prepare_img.png) no-repeat 50% 50%}
+.ad_section .ly_mall .btn_clse{display:block;overflow:hidden;position:absolute;top:12px;right:16px;width:15px;height:15px;padding:4px;background-position:4px -102px;line-height:999px}
+/* 지도 미리보기 */
+.ad_section .lst_type_v2{margin-bottom:-5px}
+.ad_section .lst_type_v2 .lst .inner{margin-top:0}
+.ad_section .lst_type_v2 .ad_view{height:50px;background-position:0 0}
+.ad_section .lst_type_v2 .ad_hover .ad_view{background-position:0 -55px}
+.ad_section .lst_type_v2 .ad_view.selected{background-position:0 -110px}
+.ad_section .ly_map{position:absolute;right:-427px;z-index:102;width:375px;height:489px;padding:17px 25px 25px;border:1px solid #b4b4b4;background-color:#fcfcfc}
+.ad_section .ly_map .m_tit{overflow:hidden;width:67px;height:12px;background-position:0 -235px;line-height:999px}
+.ad_section .ly_map .tit_area{position:relative;height:120px;padding:15px 20px;border:1px solid #d9d9d9;border-top:none;background:#fff;line-height:20px}
+.ad_section .ly_map .tit_area .tit_sec{overflow:hidden;clear:both}
+.ad_section .ly_map .tit_area .tit{overflow:hidden;position:relative;padding-top:7px}
+.ad_section .ly_map .tit_area .m_url{margin-top:3px}
+.ad_section .ly_map .tit_area .tit .txt,
+.ad_section .ly_map .tit_area .m_url .txt,
+.ad_section .ly_map .info_sec .txt{display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;word-break:normal;word-wrap:normal}
+.ad_section .ly_map .tit_area .tit .txt{float:left;max-width:210px;height:18px;margin-right:10px;font-weight:bold;font-size:13px}
+.ad_section .ly_map .tit_area .m_url .txt{max-width:270px;height:18px;font-size:12px;color:#218d44}
+.ad_section .ly_map .tit_area .m_dsc{display:inline-block;overflow:hidden;max-height:72px;margin-top:9px;font-size:12px;color:#6c6d70;vertical-align:top}
+.ad_section .ly_map .tit_area .thumb{float:left;overflow:hidden;position:relative;width:49px;height:55px;margin-right:12px;text-align:center;white-space:nowrap;word-break:normal;word-wrap:normal}
+.ad_section .ly_map .tit_area .thumb img{width:49px;vertical-align:middle}
+.ad_section .ly_map .tit_area .thumb .v{display:inline-block;height:100%;vertical-align:middle}
+.ad_section .ly_map .info_sec{margin-top:10px;padding-top:12px;border-top:1px solid #f2f2f2}
+.ad_section .ly_map .info_sec .txt{display:block;max-width:330px;height:19px;font-size:12px}
+.ad_section .ly_map .info_sec .address .txt + .txt{padding-top:3px}
+.ad_section .ly_map .info_sec .dsc{padding-top:9px}
+.ad_section .ly_map .info_sec .dsc .txt{color:#666}
+.ad_section .ly_map .info_sec .dsc .option{}
+.ad_section .ly_map .info_sec .dsc .bar{display:inline-block;width:1px;height:11px;margin:0 3px 0 1px;border-left:1px solid #e6e6e6}
+.ad_section .ly_map .map_area{position:relative;width:375px;height:312px;margin:15px auto 0}
+.ad_section .ly_map .map_area .btn_map{display:block;position:absolute;right:10px;bottom:23px;z-index:2;width:30px;height:28px;background-position:0 -250px;color:transparent;cursor:pointer}
+.ad_section .ly_map .btn_clse{display:block;overflow:hidden;position:absolute;top:12px;right:16px;width:15px;height:15px;padding:4px;background-position:4px -102px;line-height:999px}
+.ad_section .ly_map .ico_find_road{overflow:hidden;float:right;width:47px;height:20px;background-position:0 -190px;line-height:999px}
+.ad_section .ly_map .ico_road_name{display:inline-block;overflow:hidden;width:58px;height:16px;margin-right:5px;*margin-top:-2px;background-position:0 -215px;vertical-align:top;line-height:999px}
+.ad_section .ly_mall .thumb .bd,
+.ad_section .ly_map .thumb .bd{position:absolute;top:0;right:0;bottom:0;left:0;z-index:1;border:1px solid #000;opacity:.1;filter:alpha(opacity=10);filter:alpha(opacity=10)}
+.ad_section .ly_map .bd .bd_top,
+.ad_section .ly_map .bd .bd_rgt,
+.ad_section .ly_map .bd .bd_lft{opacity:.1;filter:alpha(opacity=10);filter:alpha(opacity=10)}
+.ad_section .ly_map .bd .bd_top{position:absolute;top:0;left:0;width:100%;height:1px;border-top:1px solid #000}
+.ad_section .ly_map .bd .bd_btm{position:absolute;bottom:0;left:0;width:100%;height:1px;border-bottom:1px solid #000;opacity:.3;filter:alpha(opacity=30);filter:alpha(opacity=30)}
+.ad_section .ly_map .bd .bd_rgt{position:absolute;top:0;right:0;width:1px;height:100%;border-right:1px solid #000}
+.ad_section .ly_map .bd .bd_lft{position:absolute;top:0;left:0;width:1px;height:100%;border-left:1px solid #000}
+.ad_section .lst_type .ly_ad_txt{display:block;overflow:hidden;position:absolute;top:2px;right:66px;z-index:200;width:143px;height:29px;background-position:0 -20px;font-family:'돋움',dotum,'Apple SD Gothic NEO',helvetica,sans-serif;font-size:12px;letter-spacing:-1px;line-height:28px}
+.ad_section .lst_type .ly_ad_txt span{display:block;margin-left:10px}
+.ad_section .ly_p_top{top:-1px}
+.ad_section .ly_p_btm{bottom:-1px}
+
+/* se검색 */
+.sch_se .ad_section{margin:-1px 0 -2px 10px;padding:19px 0 5px 12px}
+.sch_se .ad_section .section_head{padding:0}
+.sch_se .ad_section .ad_area{margin-top:-4px}
+.sch_se .ad_section .lst_type .lst .inner{padding:9px 0 0 10px}
