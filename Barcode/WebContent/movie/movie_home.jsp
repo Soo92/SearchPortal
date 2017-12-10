@@ -18,8 +18,9 @@
 <meta property="og:url" content="http://movie.naver.com"> 
 <title>바코드 영화</title>
 <link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="./moviehomefiles/movie.all.css">
 <script type="text/javascript" src="../js/movie.home.js"></script>
+<script type="text/javascript" src="../js/clickcrd.js"></script>
+<link rel="stylesheet" type="text/css" href="../css//movie.all.css">
 <link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 <div id="wrap" class="basic">
 	<!-- GNB -->
@@ -80,7 +81,7 @@ function delayed_submit(object) {
 		<div class="gnb_box">
 			<div class="gnb_wrap">
 <%if(id == null || id.equals("")){%>
-				<div id="gnb" class="gnb_dark_type2"> <strong class="blind">사용자 링크</strong> <ul class="gnb_lst" id="gnb_lst" style="display: block;"> <li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li> <iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 320px; height: 174px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="./moviehomefiles/saved_resource.html"></iframe></li> <li class="gnb_notice_li gnb_lyr_opened" id="gnb_notice_layer" style="display: none"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a> <div class="gnb_notice_lyr" id="gnb_notice_lyr"> <div class="svc_noti svc_panel"> <div class="svc_scroll"> <div class="svc_head"> <strong class="gnb_tit">전체 알림</strong> <div class="task_right"> <button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button> <button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button> </div> </div> <div class="svc_body" id="gnb_naverme_layer"></div> </div> <div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"> <p class="gnb_msg"> <strong>알림을 모두 삭제하시겠습니까?</strong> </p> <div class="gnb_btns"> <button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button> <button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button> </div> <button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"> <i>레이어 닫기</i> </button> </div> <a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a> </div> </div> <iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="./moviehomefiles/saved_resource(1).html"></iframe></li> <li class="mail_li" id="gnb_mail_layer" style="display: none"><a href="http://mail.naver.com/" class="gnb_mail"><span class="blind">메일</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li> </ul>
+				<div id="gnb" class="gnb_dark_type2"> <strong class="blind">사용자 링크</strong> <ul class="gnb_lst" id="gnb_lst" style="display: block;"> <li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li> <iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 320px; height: 174px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource.html"></iframe></li> <li class="gnb_notice_li gnb_lyr_opened" id="gnb_notice_layer" style="display: none"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a> <div class="gnb_notice_lyr" id="gnb_notice_lyr"> <div class="svc_noti svc_panel"> <div class="svc_scroll"> <div class="svc_head"> <strong class="gnb_tit">전체 알림</strong> <div class="task_right"> <button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button> <button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button> </div> </div> <div class="svc_body" id="gnb_naverme_layer"></div> </div> <div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"> <p class="gnb_msg"> <strong>알림을 모두 삭제하시겠습니까?</strong> </p> <div class="gnb_btns"> <button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button> <button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button> </div> <button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"> <i>레이어 닫기</i> </button> </div> <a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a> </div> </div> <iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource(1).html"></iframe></li> <li class="mail_li" id="gnb_mail_layer" style="display: none"><a href="http://mail.naver.com/" class="gnb_mail"><span class="blind">메일</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li> </ul>
 				</div>
 <%}else{%>
 				<div id="gnb" class="gnb_dark_type2"><strong class="blind">사용자 링크</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="mypage()"><img id="gnb_profile_img" src="http://static.naver.net/common/myarea/myInfo.gif" width="26" height="26" alt="내 프로필 이미지" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1"><%=name %></span><em class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a href="#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="http://static.naver.net/common/myarea/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">프로필 사진 변경</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"><%=name %></a>님</span><a class="gnb_btn_login" href="../member/logout.jsp"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그아웃</span></a></p><a href="http://mail.naver.com" class="gnb_mail_address"><%=email %></a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">내정보</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>B Pay</em><a href="http://pay.naver.com" id="gnb_pay_point"><span>내 페이포인트</span><strong>63,035원</strong></a></p></div></div><a href="#" class="gnb_my_interface" style="display:none"><span class="blind">환경설정</span></a></div></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">전체 알림</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>알림을 모두 삭제하시겠습니까?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>레이어 닫기</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a></div></div><iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li><li class="gnb_service_li" id="gnb_service_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_service" onclick="service(); return false;"><span class="blind">서비스 더보기</span><span class="gnb_icon"></span><span class="ico_arrow"></span></a><div class="gnb_service_lyr" id="gnb_service_lyr"><div class="gnb_favorite_search" id="gnb_favorite_search"><div class="gnb_favorite_area"><div class="gnb_favorite_lstwrp"><div class="gnb_first_visit" style="display:none"><span class="blind">나만의 즐겨찾기를 추가해 보세요!</span><a href="#" class="gnb_close"><span class="blind">닫기</span></a></div><strong class="blind">즐겨찾는 서비스</strong><ul class="gnb_favorite_lst" id="gnb_favorite_lst"><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li></ul><a href="#" class="gnb_my_interface" onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span class="blind">즐겨찾기 설정</span></a></div></div><div class="gnb_search_area"><div class="gnb_search_box" onmouseover="gnb_search.mouseOver(this);" onmouseout="gnb_search.mouseOut(this);"><input id="gnb_svc_search_input" type="text" title="서비스 검색" value="더 많은 서비스를 간편하게 시작하세요!" onfocus="gnb_search.clearInput(this);" onblur="gnb_search.resetInput(this);" onkeydown="gnb_search.keyDown(event);" onkeyup="gnb_search.keyUp(event);"><a href="#" class="gnb_del_txt" id="gnb_del_txt" style="display:none"><span class="blind">삭제</span></a><div class="gnb_pop_input" id="gnb_pop_input" tabindex="0" onfocus="gnb_search.searchPopOnMouse = true; return false;" onfocusout="gnb_search.searchPopOnMouse = false; return false;" onmouseover="gnb_search.searchPopOnMouse = true; return false;" onmouseout="gnb_search.searchPopOnMouse = false; return false;" style="display:none"><ul class="gnb_pop_lst"></ul></div></div><div class="gnb_search_lstwrp"><ul class="gnb_search_lst gnb_first"><li class="gnb_first"><a href="http://cafe.naver.com/">카페</a></li><li><a href="http://news.naver.com/">뉴스</a></li><li><a href="http://map.naver.com/">지도</a></li><li><a href="http://sports.news.naver.com/">스포츠</a></li><li><a href="http://game.naver.com/">게임</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://section.blog.naver.com/">블로그</a></li><li><a href="http://post.naver.com/main.nhn">포스트</a></li><li><a href="http://dic.naver.com/">사전</a></li><li><a href="http://kin.naver.com/">지식iN</a></li><li><a href="http://weather.naver.com/">날씨</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://mail.naver.com/">메일</a></li><li><a href="http://stock.naver.com/">증권</a></li><li><a href="http://land.naver.com/">부동산</a></li><li><a href="http://music.naver.com/">뮤직</a></li><li><a href="http://book.naver.com">책</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://shopping.naver.com/">쇼핑</a></li><li><a href="http://comic.naver.com/">웹툰</a></li><li><a href="http://movie.naver.com/">영화</a></li><li><a href="http://cloud.naver.com/">클라우드</a></li><li><a href="http://auto.naver.com/">자동차</a></li></ul></div></div><div class="gnb_banner"><a href="http://campaign.naver.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="네이버페이 | 12월 이벤트" width="265" height="47" src="http://static.naver.net/common/gnb/banner/promo_npay_1712.png"></a></div><div class="gnb_linkwrp"><a href="http://www.naver.com/more.html" class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a></div></div><div class="gnb_svc_more" id="gnb_svc_more" style="display: none;"><strong class="blind">네이버 주요 서비스</strong><div class="gnb_bg_top"></div><div class="gnb_svc_hd"><strong class="gnb_svc_tit">바로가기 설정</strong><span class="link"><a href="http://www.naver.com/more.html">전체 서비스 보기</a></span></div><div class="gnb_svc_lstwrp"><div class="gnb_svc_lst1"><ul class="gnb_first"><li><input type="checkbox" id="nsvc_game" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_game">게임</label></li><li><input type="checkbox" id="nsvc_weather" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_weather">날씨</label></li><li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">네이버쇼핑</label></li><li><input type="checkbox" id="nsvc_navercast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navercast">네이버캐스트</label></li><li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">네이버클라우드</label></li><li class="gnb_event"><input type="checkbox" id="nsvc_naverpay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_naverpay">네이버페이</label><em class="ic_gnb_new">New</em></li><li><input type="checkbox" id="nsvc_news" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_news">뉴스</label></li><li><input type="checkbox" id="nsvc_comic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_comic">만화/웹툰</label></li><li><input type="checkbox" id="nsvc_memo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_memo">메모</label></li><li><input type="checkbox" id="nsvc_mail" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_mail">메일</label></li><li><input type="checkbox" id="nsvc_music" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_music">뮤직</label></li><li><input type="checkbox" id="nsvc_land" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_land">부동산</label></li><li><input type="checkbox" id="nsvc_bookmark" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_bookmark">북마크</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_blog" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_blog">블로그</label></li><li><input type="checkbox" id="nsvc_dic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dic">사전</label></li><li><input type="checkbox" id="nsvc_software" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_software">소프트웨어</label></li><li><input type="checkbox" id="nsvc_sports" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_sports">스포츠</label></li><li><input type="checkbox" id="nsvc_ya9" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_ya9">야구9단</label></li><li><input type="checkbox" id="nsvc_movie" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_movie">영화</label></li><li><input type="checkbox" id="nsvc_office" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_office">오피스</label></li><li><input type="checkbox" id="nsvc_novel" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_novel">웹소설</label></li><li><input type="checkbox" id="nsvc_auto" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_auto">자동차</label></li><li><input type="checkbox" id="nsvc_contact" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_contact">주소록</label></li><li><input type="checkbox" id="nsvc_finance" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_finance">증권(금융)</label></li><li><input type="checkbox" id="nsvc_map" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_map">지도</label></li><li><input type="checkbox" id="nsvc_kin" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_kin">지식iN</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_terms" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_terms">지식백과</label></li><li><input type="checkbox" id="nsvc_book" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_book">책</label></li><li><input type="checkbox" id="nsvc_cafe" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cafe">카페</label></li><li><input type="checkbox" id="nsvc_calendar" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_calendar">캘린더</label></li><li><input type="checkbox" id="nsvc_photo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_photo">포토갤러리</label></li><li><input type="checkbox" id="nsvc_nstore" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_nstore">N스토어</label></li><li><input type="checkbox" id="nsvc_navertv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navertv">네이버TV</label></li></ul></div><div class="svc_lst2"><div class="svc_spc gnb_first"><strong><a href="http://dic.naver.com/">어학사전</a></strong><ul class=""><li><input type="checkbox" id="nsvc_krdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_krdic">국어사전</label></li><li><input type="checkbox" id="nsvc_endic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_endic">영어/영영사전</label></li><li><input type="checkbox" id="nsvc_hanja" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_hanja">한자사전</label></li><li><input type="checkbox" id="nsvc_jpdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_jpdic">일어사전</label></li><li><input type="checkbox" id="nsvc_cndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cndic">중국어사전</label></li><li><input type="checkbox" id="nsvc_frdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_frdic">프랑스어사전</label></li><li><input type="checkbox" id="nsvc_dedic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dedic">독일어사전</label></li><li><input type="checkbox" id="nsvc_rudic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_rudic">러시아어사전</label></li><li><input type="checkbox" id="nsvc_vndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_vndic">베트남어사전</label></li><li><input type="checkbox" id="nsvc_spdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_spdic">스페인어사전</label></li><li><input type="checkbox" id="nsvc_translate" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_translate">번역기</label></li></ul></div><div class="svc_spc"><strong>인기/신규서비스</strong><ul class=""><li><input type="checkbox" id="nsvc_grafolio" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_grafolio">그라폴리오</label></li><li><input type="checkbox" id="nsvc_post" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_post">포스트</label></li><li><input type="checkbox" id="nsvc_luncherapp" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_luncherapp">도돌런처</label></li><li><input type="checkbox" id="nsvc_band" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_band">밴드</label></li><li><input type="checkbox" id="nsvc_line" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_line">라인</label></li></ul></div></div></div><div class="svc_btnwrp"><div class="svc_btns"><button class="gnb_save" onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;"><strong class="blind">확인</strong></button><button class="gnb_close" onclick="gnbFavorite.cancel(); return false;"><span class="blind">취소</span></button><button class="gnb_return" onclick="gnbFavorite.resetService(); return false;"><span class="blind">초기 설정으로 변경</span></button></div></div><div class="gnb_bg_btm"></div></div></div><iframe id="gnb_service_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:297px;width:585px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe><iframe id="gnb_svc_more_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:-4px;width:295px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li></ul>
@@ -100,7 +101,7 @@ function delayed_submit(object) {
 						<label for="ipt_tx_srch" id="search_placeholder">영화검색</label>
 						<input type="text" id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100" accesskey="s" style="ime-mode:active;" autocomplete="off">
 						<span class="align"></span>
-						<span class="auto_tx"><a href="http://movie.naver.com/#" title="자동완성 펼치기"><img src="./moviehomefiles/srch_arrow_down.gif" width="7" height="4" title="자동완성 펼치기" alt="자동완성 펼치기"></a></span>
+						<span class="auto_tx"><a href="http://movie.naver.com/#" title="자동완성 펼치기"><img src="../img/movie/srch_arrow_down.gif" width="7" height="4" title="자동완성 펼치기" alt="자동완성 펼치기"></a></span>
 					</span>
 					<button type="submit" title="검색" class="btn_srch" onclick="clickcr(this,'GNB.search','','',event); delayed_submit(this);"><span class="blind">검색</span></button>
 					 <!-- 자동 완성 영역임 #autocomplate_template-->
@@ -118,8 +119,8 @@ function delayed_submit(object) {
 	<div id="header" style="bottom: 0px;">
 		<a href="http://movie.naver.com/#content" title="본문으로 이동" class="blind">본문 바로가기</a>
 		<h1 class="svc_name">
-			<a href="../index.jsp" title="naver로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="./moviehomefiles/logo_ci.png" width="62" height="13" alt="NAVER"></a><!-- N=a:LNB.naver -->
-			<a href="http://movie.naver.com/" title="영화서비스홈으로 바로가기" class="svc_logo"><img src="./moviehomefiles/logo_svc.png" width="34" height="19" alt="영화"></a><!-- N=a:LNB.movie -->
+			<a href="../index.jsp" title="naver로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="../img/movie/logo_ci.png" width="62" height="13" alt="NAVER"></a><!-- N=a:LNB.naver -->
+			<a href="http://movie.naver.com/" title="영화서비스홈으로 바로가기" class="svc_logo"><img src="../img/movie/logo_svc.png" width="34" height="19" alt="영화"></a><!-- N=a:LNB.movie -->
 		</h1>
 		<div id="scrollbar" class="scrollbar" style="width: 148px; height: 853px;">
 			<div class="scrollbar-box" style="width: 148px; height: 853px;">
@@ -195,7 +196,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image.jpg" alt="꾼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image.jpg" alt="꾼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num3"><em>3</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>6</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -220,7 +221,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(1).jpg" alt="기억의 밤" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(1).jpg" alt="기억의 밤" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_num3"><em>3</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -245,7 +246,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(2).jpg" alt="오리엔트 특급 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(2).jpg" alt="오리엔트 특급 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num5"><em>5</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -270,7 +271,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(3).jpg" alt="반드시 잡는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(3).jpg" alt="반드시 잡는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num8"><em>8</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num0"><em>0</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -295,7 +296,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(4).jpg" alt="이프 온리" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(4).jpg" alt="이프 온리" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num3"><em>3</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -320,7 +321,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(5).jpg" alt="저스티스 리그" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(5).jpg" alt="저스티스 리그" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -345,7 +346,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(6).jpg" alt="러빙 빈센트" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(6).jpg" alt="러빙 빈센트" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num4"><em>4</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -370,7 +371,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(7).jpg" alt="토르: 라그나로크" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(7).jpg" alt="토르: 라그나로크" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span><span class="char rate_num0"><em>0</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -395,7 +396,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(8).jpg" alt="해피 데스데이" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(8).jpg" alt="해피 데스데이" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num0"><em>0</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num9"><em>9</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -420,7 +421,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="spr stic_rate l"><em>예매율</em></span>
 					<strong class="l"><span class="char rate_num0"><em>0</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num5"><em>5</em></span><span class="char rate_num6"><em>6</em></span><span class="char rate_pct"><em>%</em></span></strong>
@@ -446,7 +447,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(10).jpg" alt="인디펜던츠 데이: 외계의 대침공" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(10).jpg" alt="인디펜던츠 데이: 외계의 대침공" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:0%"><em>0.00 점</em></span></span>
 					<strong class="l"><span class="char sc_num0"><em>0</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num0"><em>0</em></span><span class="char sc_num0"><em>0</em></span></strong>
@@ -471,7 +472,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(9).jpg" alt="토마스와 친구들: 그레이트 레이스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:88.4%"><em>8.84 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num8"><em>8</em></span><span class="char sc_num4"><em>4</em></span></strong>
@@ -496,7 +497,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(11).jpg" alt="빅 배드 폭스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(11).jpg" alt="빅 배드 폭스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:88.5%"><em>8.85 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num8"><em>8</em></span><span class="char sc_num5"><em>5</em></span></strong>
@@ -521,7 +522,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(12).jpg" alt="우리는 같은 꿈을 꾼다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(12).jpg" alt="우리는 같은 꿈을 꾼다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:81.89999999999999%"><em>8.19 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num1"><em>1</em></span><span class="char sc_num9"><em>9</em></span></strong>
@@ -546,7 +547,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(13).jpg" alt="딥씨 챌린지" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(13).jpg" alt="딥씨 챌린지" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:75%"><em>7.50 점</em></span></span>
 					<strong class="l"><span class="char sc_num7"><em>7</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num5"><em>5</em></span><span class="char sc_num0"><em>0</em></span></strong>
@@ -571,7 +572,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(14).jpg" alt="아들에게 가는 길" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(14).jpg" alt="아들에게 가는 길" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:92.2%"><em>9.22 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num2"><em>2</em></span></strong>
@@ -596,7 +597,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(15).jpg" alt="나는 아들을 사랑하지 않는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(15).jpg" alt="나는 아들을 사랑하지 않는다" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:92.30000000000001%"><em>9.23 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num3"><em>3</em></span></strong>
@@ -621,7 +622,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(16).jpg" alt="프레스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(16).jpg" alt="프레스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:90%"><em>9.00 점</em></span></span>
 					<strong class="l"><span class="char sc_num9"><em>9</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num0"><em>0</em></span><span class="char sc_num0"><em>0</em></span></strong>
@@ -646,7 +647,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(17).jpg" alt="특수부대 전랑2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(17).jpg" alt="특수부대 전랑2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:82.2%"><em>8.22 점</em></span></span>
 					<strong class="l"><span class="char sc_num8"><em>8</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num2"><em>2</em></span><span class="char sc_num2"><em>2</em></span></strong>
@@ -671,7 +672,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(18).jpg" alt="실종2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(18).jpg" alt="실종2" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<span class="rank_star l"><span class="star_off"><em>별점 - 총 10점 중</em></span><span class="star_on" style="width:66.2%"><em>6.62 점</em></span></span>
 					<strong class="l"><span class="char sc_num6"><em>6</em></span><span class="char sc_dot"><em>.</em></span><span class="char sc_num6"><em>6</em></span><span class="char sc_num2"><em>2</em></span></strong>
@@ -697,7 +698,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(19).jpg" alt="패터슨" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(19).jpg" alt="패터슨" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -721,7 +722,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(20).jpg" alt="세 번째 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(20).jpg" alt="세 번째 살인" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num1"><em>1</em></span><span class="char rate_num4"><em>4</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -745,7 +746,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(21).jpg" alt="오직 사랑뿐" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(21).jpg" alt="오직 사랑뿐" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -769,7 +770,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(22).jpg" alt="라라랜드" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(22).jpg" alt="라라랜드" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num8"><em>8</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -793,7 +794,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_18">청소년 관람불가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(23).jpg" alt="탠저린" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(23).jpg" alt="탠저린" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num3"><em>3</em></span><span class="char rate_num1"><em>1</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -817,7 +818,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(24).jpg" alt="메리와 마녀의 꽃" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(24).jpg" alt="메리와 마녀의 꽃" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -841,7 +842,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_15">15세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(25).jpg" alt="어쌔신: 더 비기닝" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(25).jpg" alt="어쌔신: 더 비기닝" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -865,7 +866,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_all">전체 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(26).jpg" alt="뽀로로 극장판 공룡섬 대모험" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(26).jpg" alt="뽀로로 극장판 공룡섬 대모험" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -889,7 +890,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(27).jpg" alt="스테이션 7" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(27).jpg" alt="스테이션 7" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -913,7 +914,7 @@ function delayed_submit(object) {
 					<span class="ico_rating_12">12세 관람가</span>
 				
 				<span class="mask"></span>
-				<img src="./moviehomefiles/movie_image(28).jpg" alt="은혼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+				<img src="../img/movie/movie_image(28).jpg" alt="은혼" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 				<span class="baseplate r">
 					<strong class="l"><span class="char rate_num1"><em>1</em></span><span class="char rate_num2"><em>2</em></span><span class="char rate_dot"><em>.</em></span><span class="char rate_num7"><em>7</em></span></strong><span class="spr stic_open l"><em>개봉</em></span>
 				</span>
@@ -963,7 +964,7 @@ function delayed_submit(object) {
 							<!-- [D] 선택된 경우 li에 class="on" 추가 -->
 							
 							<li id="review1" data-index="0" class="_select_title on">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" class="thmb" onclick="clickcr(this, 'tvw.img', '152385', '1', event);"><img src="./moviehomefiles/movie_image(29).jpg" width="64" height="91" alt="꾼" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" class="thmb" onclick="clickcr(this, 'tvw.img', '152385', '1', event);"><img src="../img/movie/movie_image(29).jpg" width="64" height="91" alt="꾼" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
 									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=152385" onclick="clickcr(this, 'tvw.title', '152385', '1', event);" data-index="0" class="_select_title_anchor"><strong>꾼</strong>
 										<div class="star_score">
@@ -1002,7 +1003,7 @@ function delayed_submit(object) {
 							</li>
 							
 							<li id="review2" data-index="1" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" class="thmb" onclick="clickcr(this, 'tvw.img', '116866', '2', event);"><img src="./moviehomefiles/movie_image(30).jpg" width="64" height="91" alt="저스티스 리그" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" class="thmb" onclick="clickcr(this, 'tvw.img', '116866', '2', event);"><img src="../img/movie/movie_image(30).jpg" width="64" height="91" alt="저스티스 리그" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
 									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=116866" onclick="clickcr(this, 'tvw.title', '116866', '2', event);" data-index="1" class="_select_title_anchor"><strong>저스티스 리그</strong>
 										<div class="star_score">
@@ -1041,7 +1042,7 @@ function delayed_submit(object) {
 							</li>
 							
 							<li id="review3" data-index="2" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" class="thmb" onclick="clickcr(this, 'tvw.img', '164932', '3', event);"><img src="./moviehomefiles/movie_image(31).jpg" width="64" height="91" alt="해피 데스데이" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" class="thmb" onclick="clickcr(this, 'tvw.img', '164932', '3', event);"><img src="../img/movie/movie_image(31).jpg" width="64" height="91" alt="해피 데스데이" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
 									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=164932" onclick="clickcr(this, 'tvw.title', '164932', '3', event);" data-index="2" class="_select_title_anchor"><strong>해피 데스데이</strong>
 										<div class="star_score">
@@ -1072,7 +1073,7 @@ function delayed_submit(object) {
 							</li>
 							
 							<li id="review4" data-index="3" class="_select_title">
-								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" class="thmb" onclick="clickcr(this, 'tvw.img', '134898', '4', event);"><img src="./moviehomefiles/movie_image(32).jpg" width="64" height="91" alt="토르: 라그나로크" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" class="thmb" onclick="clickcr(this, 'tvw.img', '134898', '4', event);"><img src="../img/movie/movie_image(32).jpg" width="64" height="91" alt="토르: 라그나로크" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
 								<div class="detail">
 									<a href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=134898" onclick="clickcr(this, 'tvw.title', '134898', '4', event);" data-index="3" class="_select_title_anchor"><strong>토르: 라그나로크</strong>
 										<div class="star_score">
@@ -1114,7 +1115,7 @@ function delayed_submit(object) {
 						</div>
 						<div class="hh_spot_area">
 							<a href="http://nstore.naver.com/event/details.nhn?eventNo=9543">
-								<img src="./moviehomefiles/영화스포트라이트210X196.png" width="210" height="196" title="스포트라이트 배너" alt="스포트라이트 영역 입니다." border="0">
+								<img src="../img/movie/영화스포트라이트210X196.png" width="210" height="196" title="스포트라이트 배너" alt="스포트라이트 영역 입니다." border="0">
 							</a>
 						</div>
 					</div>
@@ -1138,7 +1139,7 @@ function delayed_submit(object) {
 							<span class="mask">동영상</span>
 							
 							<span class="video_ico first"></span>
-							<img src="./moviehomefiles/37018_20171204114403.gif" width="164" height="114" alt="3차 예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="../img/movie/37018_20171204114403.gif" width="164" height="114" alt="3차 예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:1,i:37018 -->
 						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="몬스터 패밀리">몬스터 패밀리</a><!-- N=a:cms.title,r:1,i:37018 --></p>
 						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3차 예고편">3차 예고편</a><!-- N=a:cms.desc,r:1,i:37018 --></p>
@@ -1149,7 +1150,7 @@ function delayed_submit(object) {
 							<span class="mask">동영상</span>
 							
 							<span class="video_ico first"></span>
-							<img src="./moviehomefiles/37017_20171204114448.gif" width="164" height="114" alt="무삭제 영상" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="../img/movie/37017_20171204114448.gif" width="164" height="114" alt="무삭제 영상" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:2,i:37017 -->
 						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무서운 꿈">무서운 꿈</a><!-- N=a:cms.title,r:2,i:37017 --></p>
 						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무삭제 영상">무삭제 영상</a><!-- N=a:cms.desc,r:2,i:37017 --></p>
@@ -1160,7 +1161,7 @@ function delayed_submit(object) {
 							<span class="mask">동영상</span>
 							
 							
-							<img src="./moviehomefiles/37033_20171205095959.jpg" width="164" height="114" alt="예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="../img/movie/37033_20171205095959.jpg" width="164" height="114" alt="예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:3,i:37033 -->
 						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="오버드라이브">오버드라이브</a><!-- N=a:cms.title,r:3,i:37033 --></p>
 						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="예고편">예고편</a><!-- N=a:cms.desc,r:3,i:37033 --></p>
@@ -1171,7 +1172,7 @@ function delayed_submit(object) {
 							<span class="mask">동영상</span>
 							
 							
-							<img src="./moviehomefiles/37037_20171205105433.jpg" width="164" height="114" alt="뮤직비디오" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
+							<img src="../img/movie/37037_20171205105433.jpg" width="164" height="114" alt="뮤직비디오" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
 						</a><!-- N=a:cms.img,r:4,i:37037 -->
 						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="돌아온다">돌아온다</a><!-- N=a:cms.title,r:4,i:37037 --></p>
 						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="뮤직비디오">뮤직비디오</a><!-- N=a:cms.desc,r:4,i:37037 --></p>
@@ -1195,7 +1196,7 @@ function delayed_submit(object) {
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">
-								<img src="./moviehomefiles/movie_image(33).jpg" width="108" height="108" alt="드리밍 러브스토리" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(33).jpg" width="108" height="108" alt="드리밍 러브스토리" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:1,i:6587886 -->
@@ -1207,7 +1208,7 @@ function delayed_submit(object) {
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">
-								<img src="./moviehomefiles/movie_image(34).jpg" width="108" height="108" alt="사라진 연인" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(34).jpg" width="108" height="108" alt="사라진 연인" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:2,i:6583065 -->
@@ -1219,7 +1220,7 @@ function delayed_submit(object) {
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">
-								<img src="./moviehomefiles/movie_image(35).jpg" width="108" height="108" alt="가족의 성장통" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(35).jpg" width="108" height="108" alt="가족의 성장통" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:3,i:6586853 -->
@@ -1231,7 +1232,7 @@ function delayed_submit(object) {
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">
-								<img src="./moviehomefiles/movie_image(36).jpg" width="108" height="108" alt="새로운 삶의 시작" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(36).jpg" width="108" height="108" alt="새로운 삶의 시작" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:4,i:6590331 -->
@@ -1243,7 +1244,7 @@ function delayed_submit(object) {
 					<li class="">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">
-								<img src="./moviehomefiles/movie_image(37).jpg" width="108" height="108" alt="깊고 진한  로맨스" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(37).jpg" width="108" height="108" alt="깊고 진한  로맨스" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:5,i:6517442 -->
@@ -1255,7 +1256,7 @@ function delayed_submit(object) {
 					<li class="last">
 						<p class="thmb">
 							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">
-								<img src="./moviehomefiles/movie_image(38).jpg" width="108" height="108" alt="거대한 비행물체" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
+								<img src="../img/movie/movie_image(38).jpg" width="108" height="108" alt="거대한 비행물체" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
 								
 								
 							</a><!-- N=a:pho.img,r:6,i:6590265 -->
@@ -1281,7 +1282,7 @@ function delayed_submit(object) {
 	<!-- [D] 맨위로 버튼 div id="content" 기준 top:342px 이상 -->
 	
 <div class="staticbanner" id="floatingTopAnchor" style="bottom: 638px;">
-    <a href="http://movie.naver.com/#" title="맨위로"><img alt="맨위로" src="./moviehomefiles/btn_top.png" width="33" height="35"></a><!-- N=a:btm.top -->
+    <a href="http://movie.naver.com/#" title="맨위로"><img alt="맨위로" src="../img/movie/btn_top.png" width="33" height="35"></a><!-- N=a:btm.top -->
 </div>
 <script type="text/javascript">
 jindo.$Fn(function () {
@@ -1941,7 +1942,7 @@ var nsc = "movie.home";
 					주소 : 경기도 성남시 분당구 불정로 6 네이버 그린팩토리 <span>대표전화 : 1588-3820</span>
 				</p> 
 				<address>
-					<a href="http://www.navercorp.com/" target="_blank" class="logo"><img src="./moviehomefiles/logo_naver.png" width="63" height="11" alt="NAVER"></a><!-- N=a:fot.nhn -->
+					<a href="http://www.navercorp.com/" target="_blank" class="logo"><img src="../img/movie/logo_naver.png" width="63" height="11" alt="NAVER"></a><!-- N=a:fot.nhn -->
 					<em>Copyright ©</em>
 					<a href="http://www.navercorp.com/" target="_blank">NAVER Corp.</a><!-- N=a:fot.corp -->
 					<span>All Rights Reserved.</span>
@@ -1949,13 +1950,6 @@ var nsc = "movie.home";
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
 
 <script type="text/javascript">
 

@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+/* background image */
+.u_likeit_module{*display:inline}
+.u_likeit_module .u_likeit_btn .u_ico,
+.u_likeit_module .u_likeit_btn .u_arw{background-image:url(https://ssl.pstatic.net/static/common/likeit/map/sp_likeit.png)}
+
+/* 좋아요 버튼 */
+.u_likeit_module .u_likeit_btn{overflow:hidden;display:inline-block;min-width:0;height:22px;padding:0 7px;border:1px solid #c0c0c0;background-color:#fff;line-height: 22px;vertical-align:top;text-align:center}
+.local_info_act .u_likeit_module .u_likeit_btn{height:20px;border-color:#d5d6d6;padding:0 6px}
+.u_likeit_module .u_likeit_btn .u_cnt{line-height: 23px;font-size:12px;color:#000;font-family:'돋움',AppleSDGothicNeo,sans-serif;font-weight:normal;vertical-align: top}
+.local_info_act .u_likeit_module .u_likeit_btn .u_cnt{line-height:21px}
+.u_likeit_module .u_likeit_btn .u_ico{display:inline-block;overflow:hidden;width:14px;height:12px;margin:5px 4px 0 0;vertical-align:top;line-height:0;font-size:0}
+.local_info_act .u_likeit_module .u_likeit_btn .u_ico{margin-top:4px}
+.u_likeit_module .u_likeit_btn .u_cnt,.u_likeit_module .u_likeit_btn .u_txt,.u_likeit_module .u_likeit_btn .u_cnt:active,.u_likeit_module .u_likeit_btn .u_txt:active{color:#222}
+.u_likeit_module .u_likeit_btn .u_ico{background-position:0 0}
+.u_likeit_module .u_likeit_btn.on .u_ico{background-position:0 100%}

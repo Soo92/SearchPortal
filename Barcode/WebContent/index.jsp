@@ -38,7 +38,7 @@
 			<div id="start">
 				<a href="#"><p>바코드를 시작페이지로&nbsp;&nbsp;<span>></span></p></a>
 			</div>
-			<div id="logo"></div>
+			<div id="logo"><img src="./img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
 			<div id="search">
 			<input type="text" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
 								placeholder="검색해보세용!">
@@ -119,7 +119,7 @@
 					</div>
 			</div>
 			<!--우측영역-->
-			<form name="loginFrm" method="post" action="./member/loginProc.jsp">
+			<form name="loginFrm" method="post" action="./member/loginProc.jsp?url=index.jsp">
 			<div id="section2">
 				<div id="login" class="section_option">
 					<div id="login_box">
@@ -138,6 +138,7 @@
 						</table>
 <%}else{%>
 						<%=name%>님
+						<a href="/member/logout.jsp">로그아웃</a>
 <%}%>
 					</div>
 					

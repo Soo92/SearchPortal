@@ -14,7 +14,7 @@
 		}else if(mode==2){
 			session.setAttribute("idKey",id);
 			url = request.getParameter("url");
-			if(url.equals("null") || url.substring(url.indexOf(".")-10, url.indexOf(".")).equals("memberProc") || 
+			if(url.equals("null") || url.length()<10 || url.substring(url.indexOf(".")-10, url.indexOf(".")).equals("memberProc") || 
 					url.substring(url.indexOf(".")-10, url.indexOf(".")).equals("/loginProc")|| 
 					url.substring(url.indexOf(".")-10, url.indexOf(".")).equals("ember/join")){
 				url="../index.jsp";

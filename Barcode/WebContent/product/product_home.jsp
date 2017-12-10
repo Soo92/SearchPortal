@@ -49,7 +49,7 @@
 		<div id="header_">
 			<div id="header">
 				<div id="wrap2">
-					<div id="logo" onclick="location.href='../index.jsp'"></div>
+					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
 					<div id="subject"><p><span>신상ㆍ중고</span> &nbsp;상품 Corner</p></div>
 					<div id="login">
 <%if(id == null || id.equals("")){%>

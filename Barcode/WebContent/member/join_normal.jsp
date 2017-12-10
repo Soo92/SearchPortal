@@ -8,7 +8,7 @@
 <head>
 <link rel="stylesheet" href="../css/login_style.css" type="text/css">
 <link rel="stylesheet" href="../css/join_normal_style.css" type="text/css">
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="../js/join.js"></script>
 <script type="text/javascript">
 	function idCheck(id) {
 		frm = document.regFrm;
