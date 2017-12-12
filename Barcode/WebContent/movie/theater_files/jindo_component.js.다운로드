@@ -1,0 +1,6578 @@
+/**
+	jindo.ScrollBar 상하버튼 인터랙션 개선 패치 - 1248라인 (2014. 4. 22)
+	jindo.ScrollBar 세로스크롤바가 없는 상태에서 세로스크를 시도했을때 에러 패치 - 1085라인 (2014. 4. 24)
+	jindo.ScrollBar 가로스크롤바가 없는 상태에서 가로스크를 시도했을때 에러 패치 - 1109라인 (2014. 4. 24)
+	jindo.ScrollBar 휠 delta 가 0 이 나왔을 때 발생하는 에러 패치 - 1200라인 (2014. 4. 24)
+**/
+
+/**
+ * Core_Component (0.3.3)
+ * Core_UIComponent (0.1.2)
+ * Core_HTMLComponent (0.2.2)
+ * ScrollBar (0.2.3)
+ * Slider (0.4.1)
+ * RolloverArea (0.5.1)
+ * Transition (0.5.3)
+ * DragArea (0.5.4)
+ * Effect (0.4)
+ * Timer (0.4.1)
+ * LayerManager (0.5.7)
+ * LayerPosition (0.2.3)
+ * RolloverClick (0.1.3)
+ * CheckBox (0.5.2)
+ * ScrollBox (0.2)
+ * SelectBox (0.2.5)
+ */
+
+/**
+ * @fileOverview 컴포넌트에 상속되어 사용되는 Component Core 
+ * @author gony, hooriza, senxation
+ * @see http://wiki.nhncorp.com/display/lsuit/nhn.Component
+ * @version 0.3.3
+ */
+
+jindo.Component = jindo.$Class({
+	/** @lends jindo.Component.prototype */
+
+	_htEventHandler : null,
+	_htOption : null,
+
+	/**
+	 * 모든 진도 컴포넌트는 jindo.Component를 상속받아 구현한다.
+	 * @class 다른 컴포넌트가 상속해 사용하는 Jindo Component의 Core
+	 * @constructs  
+	 */
+	$init : function() {
+		var aInstance = this.constructor.getInstance();
+		aInstance.push(this);
+		this._htEventHandler = {};
+		this._htOption = {};
+		this._htOption._htSetter = {};
+	},
+	
+	/**
+	 * 옵션값을 설정하거나 가져온다.
+	 * attach() 메소드를 사용하지 않고 커스텀이벤트핸들러를 등록할 수 있다.
+	 * @param {String} sName 옵션의 이름
+	 * @param {String} sValue 옵션의 값
+	 * @return {this} 컴포넌트 객체 자신
+	 * @example
+var MyComponent = $Class({
+	method : function() {
+		alert(this._option.foo);
+	}
+}).extend(jindo.Component);
+
+var oInst = new MyComponent();
+oInst.option('foo', 123); // 또는 oInst.option({ foo : 123 });
+oInst.method(); // 결과 123
+	 * @example
+//커스텀이벤트핸들러를 등록예제
+oInst.option("htCustomEventHandler", {
+	test : function(oCustomEvent) {
+	
+	}
+});
+
+//이미 "htCustomEventHandler" 옵션이 설정되어있는 경우에는 무시된다.
+oInst.option("htCustomEventHandler", {
+	change : function(oCustomEvent) {
+	
+	}
+}); 
+	 */
+	option : function(sName, vValue) {
+		switch (typeof sName) {
+			case "undefined" :
+				return this._htOption;
+			case "string" : 
+				if (typeof vValue != "undefined") {
+					if (sName == "htCustomEventHandler") {
+						if (typeof this._htOption[sName] == "undefined") {
+							this.attach(vValue);
+						} else {
+							return this;
+						}
+					}
+					
+					this._htOption[sName] = vValue;
+					if (typeof this._htOption._htSetter[sName] == "function") {
+						this._htOption._htSetter[sName](vValue);	
+					}
+				} else {
+					return this._htOption[sName];
+				}
+				break;
+			case "object" :
+				for(var sKey in sName) {
+					if (sKey == "htCustomEventHandler") {
+						if (typeof this._htOption[sKey] == "undefined") {
+							this.attach(sName[sKey]);
+						} else {
+							continue;
+						}
+					}
+					
+					this._htOption[sKey] = sName[sKey];
+					if (typeof this._htOption._htSetter[sKey] == "function") {
+						this._htOption._htSetter[sKey](sName[sKey]);	
+					}
+				}
+				break;
+		}
+		return this;
+	},
+	
+	/**
+	 * 옵션의 setter 함수를 설정하거나 가져온다. 
+	 * @param {String} sName setter의 이름
+	 * @param {Function} fSetter setter 함수
+	 * @return {this} 컴포넌트 객체 자신
+	 */
+	optionSetter : function(sName, fSetter) {
+		switch (typeof sName) {
+			case "undefined" :
+				return this._htOption._htSetter;
+			case "string" : 
+				if (typeof fSetter != "undefined") {
+					this._htOption._htSetter[sName] = jindo.$Fn(fSetter, this).bind();
+				} else {
+					return this._htOption._htSetter[sName];
+				}
+				break;
+			case "object" :
+				for(var sKey in sName) {
+					this._htOption._htSetter[sKey] = jindo.$Fn(sName[sKey], this).bind();
+				}
+				break;
+		}
+		return this;
+	},
+	
+	/**
+	 * 이벤트를 발생시킨다.
+	 * @param {Object} sEvent 커스텀이벤트명
+	 * @param {Object} oEvent 커스텀이벤트 핸들러에 전달되는 객체.
+	 * @return {Boolean} 핸들러의 커스텀이벤트객체에서 stop메소드가 수행되면 false를 리턴
+	 * @example
+//커스텀 이벤트를 발생시키는 예제
+var MyComponent = $Class({
+	method : function() {
+		this.fireEvent('happened', {
+			sHello : 'world',
+			sAbc : '123'
+		});
+	}
+}).extend(jindo.Component);
+
+var oInst = new MyComponent().attach({
+	happened : function(oCustomEvent) {
+		alert(eCustomEvent.sHello + '/' + oCustomEvent.nAbc); // 결과 : world/123
+	}
+};
+
+<button onclick="oInst.method(event);">Click me</button> 
+	 */
+	fireEvent : function(sEvent, oEvent) {
+		oEvent = oEvent || {};
+		var fInlineHandler = this['on' + sEvent],
+			aHandlerList = this._htEventHandler[sEvent] || [],
+			bHasInlineHandler = typeof fInlineHandler == "function",
+			bHasHandlerList = aHandlerList.length > 0;
+			
+		if (!bHasInlineHandler && !bHasHandlerList) {
+			return true;
+		}
+		aHandlerList = aHandlerList.concat(); //fireEvent수행시 핸들러 내부에서 detach되어도 최초수행시의 핸들러리스트는 모두 수행
+		
+		oEvent.sType = sEvent;
+		if (typeof oEvent._aExtend == 'undefined') {
+			oEvent._aExtend = [];
+			oEvent.stop = function(){
+				if (oEvent._aExtend.length > 0) {
+					oEvent._aExtend[oEvent._aExtend.length - 1].bCanceled = true;
+				}
+			};
+		}
+		oEvent._aExtend.push({
+			sType: sEvent,
+			bCanceled: false
+		});
+		
+		var aArg = [oEvent], 
+			i, nLen;
+			
+		for (i = 2, nLen = arguments.length; i < nLen; i++){
+			aArg.push(arguments[i]);
+		}
+		
+		if (bHasInlineHandler) {
+			fInlineHandler.apply(this, aArg);
+		}
+	
+		if (bHasHandlerList) {
+			var fHandler;
+			for (i = 0, fHandler; (fHandler = aHandlerList[i]); i++) {
+				fHandler.apply(this, aArg);
+			}
+		}
+		
+		return !oEvent._aExtend.pop().bCanceled;
+	},
+
+	/**
+	 * 커스텀 이벤트 핸들러를 등록한다.
+	 * @param {Object} sEvent
+	 * @param {Object} fHandlerToAttach
+	 * @return {this} 컴포넌트 객체 자신
+	 * @example
+//이벤트 등록 방법 예제
+//아래처럼 등록하면 appear 라는 사용자 이벤트 핸들러는 총 3개가 등록되어 해당 이벤트를 발생시키면 각각의 핸들러 함수가 모두 실행됨.
+//attach 을 통해 등록할때는 이벤트명에 'on' 이 빠지는 것에 유의.
+function fpHandler1(oEvent) { .... };
+function fpHandler2(oEvent) { .... };
+
+var oInst = new MyComponent();
+oInst.onappear = fpHandler1; // 직접 등록
+oInst.attach('appear', fpHandler1); // attach 함수를 통해 등록
+oInst.attach({
+	appear : fpHandler1,
+	more : fpHandler2
+});
+	 */
+	attach : function(sEvent, fHandlerToAttach) {
+		if (arguments.length == 1) {
+
+			jindo.$H(arguments[0]).forEach(jindo.$Fn(function(fHandler, sEvent) {
+				this.attach(sEvent, fHandler);
+			}, this).bind());
+		
+			return this;
+		}
+
+		var aHandler = this._htEventHandler[sEvent];
+
+		if (typeof aHandler == 'undefined'){
+			aHandler = this._htEventHandler[sEvent] = [];
+		}
+
+		aHandler.push(fHandlerToAttach);
+
+		return this;
+	},
+	
+	/**
+	 * 커스텀 이벤트 핸들러를 해제한다.
+	 * @param {Object} sEvent
+	 * @param {Object} fHandlerToDetach
+	 * @return {this} 컴포넌트 객체 자신
+	 * @example
+//이벤트 해제 예제
+oInst.onappear = null; // 직접 해제
+oInst.detach('appear', fpHandler1); // detach 함수를 통해 해제
+oInst.detach({
+	appear : fpHandler1,
+	more : fpHandler2
+});
+	 */
+	detach : function(sEvent, fHandlerToDetach) {
+		if (arguments.length == 1) {
+			jindo.$H(arguments[0]).forEach(jindo.$Fn(function(fHandler, sEvent) {
+				this.detach(sEvent, fHandler);
+			}, this).bind());
+		
+			return this;
+		}
+
+		var aHandler = this._htEventHandler[sEvent];
+		if (aHandler) {
+			for (var i = 0, fHandler; (fHandler = aHandler[i]); i++) {
+				if (fHandler === fHandlerToDetach) {
+					aHandler = aHandler.splice(i, 1);
+					break;
+				}
+			}
+		}
+
+		return this;
+	},
+	
+	/**
+	 * 등록된 모든 커스텀 이벤트 핸들러를 해제한다.
+	 * @param {Object} sEvent
+	 * @return {this} 컴포넌트 객체 자신
+	 */
+	detachAll : function(sEvent) {
+		var aHandler = this._htEventHandler;
+		
+		if (arguments.length) {
+			
+			if (typeof aHandler[sEvent] == 'undefined') {
+				return this;
+			}
+	
+			delete aHandler[sEvent];
+	
+			return this;
+		}	
+		
+		for (var o in aHandler) {
+			delete aHandler[o];
+		}
+		return this;				
+	}
+});
+
+/**
+ * 다수의 컴포넌트를 일괄 생성하는 Static Method
+ * @param {Object} aObject
+ * @param {Object} oOption
+ * @return {Array} 생성된 컴포넌트 객체 배열
+ * @example
+var Instance = jindo.Component.factory(
+	cssquery('li'),
+	{
+		foo : 123,
+		bar : 456
+	}
+);
+ */
+jindo.Component.factory = function(aObject, oOption) {
+	var aReturn = [],
+		oInstance;
+
+	if (typeof oOption == "undefined") {
+		oOption = {};
+	}
+	
+	for(var i = 0, el; (el = aObject[i]); i++) {
+		oInstance = new this(el, oOption);
+		aReturn[aReturn.length] = oInstance;
+	}
+
+	return aReturn;
+};
+
+/**
+ * 컴포넌트의 생성된 인스턴스를 리턴한다.
+ * @return {Array} 생성된 인스턴스에 배열
+ */
+jindo.Component.getInstance = function(){
+	if (typeof this._aInstance == "undefined") {
+		this._aInstance = [];
+	}
+	return this._aInstance;
+};
+/**
+ * @fileOverview UI Component에 상속되어 사용되는 Jindo Component의 Core
+ * @author senxation
+ * @version 0.1.2
+ */
+
+jindo.UIComponent = jindo.$Class({
+	/** @lends jindo.UIComponent.prototype */
+		
+	/**
+	 * UI 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class UI Component에 상속되어 사용되는 Jindo Component의 Core
+	 * @extends jindo.Component
+	 */
+	$init : function() {
+		this._bIsActivating = false; //컴포넌트의 활성화 여부
+	},
+
+	/**
+	 * 컴포넌트의 활성여부를 가져온다.
+	 * @return {Boolean}
+	 */
+	isActivating : function() {
+		return this._bIsActivating;
+	},
+
+	/**
+	 * 컴포넌트를 활성화한다.
+	 * _onActivate 메소드를 수행한다.
+	 * @return {this}
+	 * @remark 반드시 상속받는 클래스에 _onActivate 메소드가 정의되어야 한다.
+	 */
+	activate : function() {
+		if (this.isActivating()) {
+			return this;
+		}
+		this._bIsActivating = true;
+		
+		if (arguments.length > 0) {
+			this._onActivate.apply(this, arguments);
+		} else {
+			this._onActivate();
+		}
+				
+		return this;
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화한다.
+	 * _onDeactivate 메소드를 수행한다.
+	 * @return {this}
+	 * @remark 반드시 상속받는 클래스에 _onDeactivate 메소드가 정의되어야 한다.
+	 */
+	deactivate : function() {
+		if (!this.isActivating()) {
+			return this;
+		}
+		this._bIsActivating = false;
+		
+		if (arguments.length > 0) {
+			this._onDeactivate.apply(this, arguments);
+		} else {
+			this._onDeactivate();
+		}
+		
+		return this;
+	}
+}).extend(jindo.Component);	
+/**
+ * @fileOverview HTML 컴포넌트에 상속되어 사용되는 jindo.UIComponent.js
+ * @author gony, hooriza, senxation
+ * @version 0.2.2
+ */
+
+jindo.HTMLComponent = jindo.$Class({
+	/** @lends jindo.HTMLComponent */
+	sTagName : "",
+	
+	/**
+	 * HTML 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class HTML 컴포넌트에 상속되어 사용되는 jindo.UIComponent.js
+	 * @extends jindo.UIComponent
+	 */
+	$init : function() {
+	},
+	
+	/**
+	 * 컴포넌트를 새로 그려준다.
+	 * @remark 상속받는 클래스는 반드시 _onPaint() 메소드가 정의되어야 한다.
+	 */
+	paint : function() {
+		this._onPaint();
+	}
+}).extend(jindo.UIComponent);
+
+/**
+ * 다수의 컴포넌트의 paint 메소드를 일괄 수행하는 Static Method
+ */
+jindo.HTMLComponent.paint = function() {
+	var aInstance = this.getInstance();
+	for (var i = 0, oInstance; (oInstance = aInstance[i]); i++) {
+		oInstance.paint();
+	}
+};
+/**
+ * @fileOverview 이미지 스크롤바 컴포넌트
+ * @author senxation
+ * @version 0.2.3
+ */
+jindo.ScrollBar = new jindo.$Class({
+	/** @lends jindo.ScrollBar.prototype */
+
+	_bMouseEnter : false,
+	_bIsEventAttachedForCommon : false,
+	_bIsEventAttachedForVertical : false,
+	_bIsEventAttachedForHorizontal : false,
+	
+	/**
+	 * ScrollBar 컴포넌트는 정해진 크기의 박스내의 내용을 스크롤바를 이용해 이동하여 볼 수 있게합니다.
+	 * 스크롤바의 위치와 크기는 마크업의 정의에 따라 커스터마이징할 수 있습니다.
+	 * 박스내 내용이 고정되어있고 변하지 않는 경우에 사용합니다.
+	 * @constructs
+	 * @class 이미지 스크롤바 컴포넌트
+	 * @extends jindo.UIComponent
+	 * @requires jindo.Slider
+	 * @requires jindo.RolloverArea
+	 * @requires jindo.Transition
+	 * @param {HTMLElement} el
+	 * @param {Object} oOption
+	 * @example
+var oScrollBar = new jindo.ScrollBar("scroll", {
+	sClassPrefix : "scrollbar-", // (String) Class Prefix
+	nDelta : 16, // (Number) 스크롤 속도
+	sClassNameForRollover : "rollover", // (String) Rollover에 반응할 class 명
+	bActivateOnload : true
+}).attach({
+	scroll : function(oCustomEvent) {
+		//스크롤위치가 바뀔 때 마다 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	sDirection : (String) "left" 또는 "top"
+		//	nPosition : (Number) 스크롤된 위치
+		//}
+	}
+});
+	 */	
+	$init : function(el, oOption) {
+		
+		this.option({
+			sClassPrefix : "scrollbar-",
+			nDelta : 16, //스크롤 속도
+			sClassNameForRollover : "rollover", // (String) Rollover에 반응할 class 명
+			bActivateOnload : true
+		});
+		
+		this.option(oOption || {});
+		
+		this._el = jindo.$(el);
+		
+		this._oTimer = new jindo.Timer();
+		this._oTransition = new jindo.Transition().fps(30);
+		
+		this._wfOnMouseEnter = jindo.$Fn(this._onMouseEnter, this);
+		this._wfOnMouseLeave = jindo.$Fn(this._onMouseLeave, this);
+
+		this._wfOnWheel = jindo.$Fn(this._onWheel, this);
+		this._wfOnMouseUp = jindo.$Fn(this._onMouseUp, this);
+
+		this._assignHTMLElements();
+		
+		if (this.option("bActivateOnload")) {
+			this.activate();
+		}
+	},
+	
+	_assignHTMLElements : function(){
+		var el = this._el,
+			sClassPrefix = this.option("sClassPrefix");
+
+		this._elBox = jindo.$$.getSingle("."+sClassPrefix+"box", el);
+		this._elContent = jindo.$$.getSingle("."+sClassPrefix+"content", el);
+		
+		var welBox = jindo.$Element(this._elBox),
+			welContent = jindo.$Element(this._elContent);
+			
+		this._oBoxSize = {
+			nWidth: welBox.width(),
+			nHeight: welBox.height()
+		};
+		
+		this._oContentSize = {
+			nWidth: welContent.width(),
+			nHeight: welContent.height()
+		};
+
+		this._oHorizontal = {
+			elScrollBar : jindo.$$.getSingle("."+sClassPrefix+"h", el)
+		};
+		
+		var oH = this._oHorizontal;
+		if (oH.elScrollBar) {
+			oH.elTrack = jindo.$$.getSingle("." + sClassPrefix + "track", oH.elScrollBar);
+			oH.elThumb = jindo.$$.getSingle("." + sClassPrefix + "thumb", oH.elTrack);
+			oH.elThumbHead = jindo.$$.getSingle("."+sClassPrefix+"thumb-head", oH.elThumb);
+			oH.elThumbBody = jindo.$$.getSingle("."+sClassPrefix+"thumb-body", oH.elThumb);
+			oH.elThumbFoot = jindo.$$.getSingle("."+sClassPrefix+"thumb-foot", oH.elThumb);			
+			oH.elButtonLeft = jindo.$$.getSingle("." + sClassPrefix + "button-left", oH.elScrollBar);
+			oH.elButtonRight = jindo.$$.getSingle("." + sClassPrefix + "button-right", oH.elScrollBar);
+		}
+		
+		this._oVertical = {
+			elScrollBar : jindo.$$.getSingle("."+sClassPrefix+"v", el)
+		};
+		var oV = this._oVertical;
+		if (oV.elScrollBar) {
+			oV.elTrack = jindo.$$.getSingle("." + sClassPrefix + "track", oV.elScrollBar);
+			oV.elThumb = jindo.$$.getSingle("." + sClassPrefix + "thumb", oV.elTrack);
+			oV.elThumbHead = jindo.$$.getSingle("."+sClassPrefix+"thumb-head", oV.elThumb);
+			oV.elThumbBody = jindo.$$.getSingle("."+sClassPrefix+"thumb-body", oV.elThumb);
+			oV.elThumbFoot = jindo.$$.getSingle("."+sClassPrefix+"thumb-foot", oV.elThumb);
+			oV.elButtonUp = jindo.$$.getSingle("." + sClassPrefix + "button-up", oV.elScrollBar);
+			oV.elButtonDown = jindo.$$.getSingle("." + sClassPrefix + "button-down", oV.elScrollBar);
+		}
+	},
+	
+	/**
+	 * box 엘리먼트를 가져온다.
+	 * @return {HTMLElement}
+	 */
+	getBox : function() {
+		return this._elBox;
+	},
+	
+	/**
+	 * content 엘리먼트를 가져온다
+	 * @return {HTMLElement}
+	 */
+	getContent : function() {
+		return this._elContent;
+	},
+	
+	/**
+	 * 초기 로딩시 정해진 박스의 크기를 가져온다.
+	 * @return {Object}
+	 * @example
+var oSize = {
+	nWidth : (Number), 
+	nHeight : (Number)
+}
+	 */
+	getDefaultBoxSize : function() {
+		return this._oBoxSize;
+	},
+	
+	/**
+	 * 초기 로딩시 정해진 박스의 크기를 가져온다.
+	 * @return {Object}
+	 * @example
+var oSize = {
+	nWidth : (Number), 
+	nHeight : (Number)
+}
+	 */
+	getDefaultContentSize : function() {
+		return this._oContentSize;
+	},
+	
+	/**
+	 * 가로 스크롤바에 해당하는 HTMLElement 객체들을 가져온다.
+	 * @return {Object}
+	 * @example
+var oScrollBarHorizontal = {
+	elScrollBar : (HTMLElement),
+	elTrack : (HTMLElement),
+	elThumb : (HTMLElement),
+	elThumbHead : (HTMLElement),
+	elThumbBody : (HTMLElement),
+	elThumbFoot : (HTMLElement),	
+	elButtonLeft : (HTMLElement), 
+	elButtonRight : (HTMLElement)
+}
+	 */
+	getScrollBarHorizontal : function() {
+		return this._oHorizontal;
+	},
+	
+	/**
+	 * 세로 스크롤바에 해당하는 HTMLElement 객체들을 가져온다.
+	 * @return {Object}
+	 * @example
+var oScrollBarVertical = {
+	elScrollBar : (HTMLElement),
+	elTrack : (HTMLElement),
+	elThumb : (HTMLElement),
+	elThumbHead : (HTMLElement),
+	elThumbBody : (HTMLElement),
+	elThumbFoot : (HTMLElement),	
+	elButtonUp : (HTMLElement), 
+	elButtonDown : (HTMLElement)
+}
+	 */
+	getScrollBarVertical : function() {
+		return this._oVertical;
+	},
+	
+	/**
+	 * 가로 스크롤에 해당하는 슬라이더 객체를 가져온다.
+	 * @return {jindo.Slider}
+	 */
+	getSliderHorizontal : function() {
+		return this._oSliderHorizontal || null;
+	},
+	
+	/**
+	 * 세로 스크롤에 해당하는 슬라이더 객체를 가져온다.
+	 * @return {jindo.Slider}
+	 */
+	getSliderVertical : function() {
+		return this._oSliderVertical || null;
+	},
+	
+	/**
+	 * RolloverArea 객체를 가져온다.
+	 * @return {jindo.RolloverArea}
+	 */
+	getRolloverArea : function() {
+		return this._oRolloverArea;
+	},
+	
+	_attachEvent : function(sDirection) {
+		var sClassPrefix = this.option("sClassPrefix"),
+			self = this,
+			oH = this.getScrollBarHorizontal(),
+			oV = this.getScrollBarVertical();	
+		
+		function attach(o) {
+			if (o.elScrollBar) {
+				var sClassNameForRollover = self.option("sClassNameForRollover");
+				jindo.$Element(o.elTrack).addClass(sClassNameForRollover);
+				jindo.$Element(o.elThumb).addClass(sClassNameForRollover);
+				if (o.elButtonLeft) {
+					jindo.$Element(o.elButtonLeft).addClass(sClassNameForRollover);	
+				}
+				if (o.elButtonRight) {
+					jindo.$Element(o.elButtonRight).addClass(sClassNameForRollover);
+				}
+				if (o.elButtonUp) {
+					jindo.$Element(o.elButtonUp).addClass(sClassNameForRollover);
+				}
+				if (o.elButtonDown) {
+					jindo.$Element(o.elButtonDown).addClass(sClassNameForRollover);
+				}
+			}
+		}
+		
+		function attachH() {
+			if (!self._bIsEventAttachedForHorizontal) {
+				attach(oH);
+			}
+			self._bIsEventAttachedForHorizontal = true;
+		}
+		
+		function attachV() {
+			if (!self._bIsEventAttachedForVertical) {
+				attach(oV);
+			}
+			self._bIsEventAttachedForVertical = true;
+		}
+		
+		//공통 이벤트
+		if(!this._bIsEventAttachedForCommon) {
+			this._initSliders();
+			this._initRolloverArea();
+			
+			this._wfOnMouseEnter.attach(this._el, "mouseenter");
+			this._wfOnMouseLeave.attach(this._el, "mouseleave");
+
+			this._wfOnWheel.attach(document, "mousewheel");
+			this._wfOnMouseUp.attach(document, "mouseup");
+			this._bIsEventAttachedForCommon = true;
+			jindo.$Element(this._el).removeClass(sClassPrefix + "noscript");
+		}
+
+		//방향이 없으면 전부
+		if (!sDirection) {
+			attachH();
+			attachV();
+		}
+		if (sDirection == "horizontal") {
+			attachH();
+		}
+		if (sDirection == "vertical") {
+			attachV();
+		}
+	},
+	
+	_detachEvent : function(sDirection) {
+		var sClassPrefix = this.option("sClassPrefix"),
+			self = this,
+			oH = this.getScrollBarHorizontal(),
+			oV = this.getScrollBarVertical();	
+		
+		function detach(o) {
+			if (o.elScrollBar) {
+				var sClassNameForRollover = self.option("sClassNameForRollover");
+				jindo.$Element(o.elTrack).removeClass(sClassNameForRollover);
+				jindo.$Element(o.elThumb).removeClass(sClassNameForRollover);
+				if (o.elButtonLeft) {
+					jindo.$Element(o.elButtonLeft).removeClass(sClassNameForRollover);	
+				}
+				if (o.elButtonRight) {
+					jindo.$Element(o.elButtonRight).removeClass(sClassNameForRollover);
+				}
+				if (o.elButtonUp) {
+					jindo.$Element(o.elButtonUp).removeClass(sClassNameForRollover);
+				}
+				if (o.elButtonDown) {
+					jindo.$Element(o.elButtonDown).removeClass(sClassNameForRollover);
+				}
+			}
+		}
+		
+		function detachH() {
+			if (self._bIsEventAttachedForHorizontal) {
+				detach(oH);
+			}
+			self._bIsEventAttachedForHorizontal = false;
+		}
+		
+		function detachV() {
+			if (self._bIsEventAttachedForVertical) {
+				detach(oV);
+			}
+			self._bIsEventAttachedForVertical = false;
+		}
+
+		//방향이 없으면 전부
+		if (!sDirection) {
+			detachH();
+			detachV();
+		}
+		else if (sDirection == "horizontal") {
+			detachH();
+		}
+		else if (sDirection == "vertical") {
+			detachV();
+		}
+
+		//공통 이벤트
+		if(this._bIsEventAttachedForCommon && !this._bIsEventAttachedForHorizontal && !this._bIsEventAttachedForVertical) {
+			this._wfOnMouseEnter.detach(this._el, "mouseenter");
+			this._wfOnMouseLeave.detach(this._el, "mouseleave");
+			this._wfOnWheel.detach(document, "mousewheel");
+			this._wfOnMouseUp.detach(document, "mouseup");
+			this._bMouseEnter = false;
+			this._bIsEventAttachedForCommon = false;
+			this.getRolloverArea().deactivate();
+			jindo.$Element(this._el).addClass(sClassPrefix + "noscript");	
+		}
+	},
+	
+	_activateH : function() {
+		var oSliderH = this.getSliderHorizontal();
+		if (oSliderH) {
+			oSliderH.activate();
+			this.getBox().scrollLeft = 0;
+			this.setScrollLeft(0);
+		}
+	},
+	
+	_activateV : function() {
+		var oSliderV = this.getSliderVertical();
+		if (oSliderV) {
+			oSliderV.activate();
+			this.getBox().scrollTop = 0;
+			this.setScrollTop(0);
+		}
+	},
+	
+	/**
+	 * 스크롤바의 동작을 활성화한다.
+	 * @param {String} sDirection "vertical" || "horizontal" || null
+	 */
+	_onActivate : function(sDirection) {
+		this._attachEvent(sDirection || null);
+		
+		if(!sDirection) {
+			this._activateH();
+			this._activateV();
+			jindo.$Element(this._el).removeClass(this.option("sClassPrefix") + "noscript");
+			return;
+		}
+		if(sDirection == "horizontal") {
+			this._activateH();
+			return;
+		}
+		if(sDirection == "vertical") {
+			this._activateV();
+			return;
+		}
+	},
+	
+	_deactivateH : function() {
+		var oSliderH = this.getSliderHorizontal();
+		if (oSliderH) {
+			oSliderH.deactivate();
+			this.getContent().style.left = "0px";
+			this.getBox().scrollLeft = 0;
+		}
+	},
+	
+	_deactivateV : function() {
+		var oSliderV = this.getSliderVertical();
+		if (oSliderV) {
+			oSliderV.deactivate();
+			this.getContent().style.top = "0px";
+			this.getBox().scrollTop = 0;
+		}
+	},
+	
+	/**
+	 * 스크롤바의 동작을 비활성화한다.
+	 * @param {String} sDirection "vertical" || "horizontal" || null
+	 */
+	_onDeactivate : function(sDirection) {
+		this._detachEvent(sDirection || null);
+		
+		var oSliderH = this.getSliderHorizontal(),
+			oSliderV = this.getSliderVertical();
+		
+		if(!sDirection) {
+			this._deactivateH();
+			this._deactivateV();
+			jindo.$Element(this._el).addClass(this.option("sClassPrefix") + "noscript");
+			return;
+		}
+		if(sDirection == "horizontal") {
+			this._deactivateH();
+			return;
+		}
+		if(sDirection == "vertical") {
+			this._deactivateV();
+			return;
+		}
+	},
+	
+	_initSliders : function() {
+		var self = this,
+			sClassPrefix = this.option("sClassPrefix"),
+			oH = this.getScrollBarHorizontal(),
+			oV = this.getScrollBarVertical();		
+		
+		if (oH.elScrollBar) {
+
+			this._nScrollWidth = jindo.$Element(this._elContent).width() - jindo.$Element(this._elBox).width();
+			
+			this._oSliderHorizontal = new jindo.Slider(oH.elTrack, {
+				sClassPrefix: sClassPrefix,
+				bVertical: false,
+				nMinValue: 0,
+				nMaxValue: this._nScrollWidth
+			});
+			this._oSliderHorizontal._oTransition = new jindo.Transition().fps(30);
+			
+			this._oSliderHorizontal.attach({
+				beforeChange: function(oCustomEvent){
+					var nTrackWidth = jindo.$Element(this.getTrack()).width(),
+						nThumbWidth = jindo.$Element(this.getThumb(oCustomEvent.nIndex)).width(),
+						nAvailWidth = nTrackWidth - nThumbWidth;
+					
+					oCustomEvent.nPos = Math.min(oCustomEvent.nPos, nAvailWidth); 
+					oCustomEvent.nPos = Math.max(oCustomEvent.nPos, 0);
+
+					if (oCustomEvent.bJump) {
+						oCustomEvent.stop();
+						
+						this._oTransition.abort().start(200, this.getThumb(oCustomEvent.nIndex), {
+							"@left" : jindo.Effect.easeOut(oCustomEvent.nPos + 'px') 
+						}).attach({
+							playing : function(oCustomEvent2) {
+								self.setScrollLeft(self._oSliderHorizontal._getValue(0, parseInt(oCustomEvent2.sValue, 10)));
+							}
+						});
+					} else {
+						self.setScrollLeft(this._getValue(0, oCustomEvent.nPos));
+					}
+				}
+			});
+			
+		}
+		
+		if (oV.elScrollBar) {
+			this._nScrollHeight = jindo.$Element(this._elContent).height() - jindo.$Element(this._elBox).height();
+
+			this._oSliderVertical = new jindo.Slider(oV.elTrack, {
+				sClassPrefix: sClassPrefix,
+				bVertical: true,
+				nMinValue: 0,
+				nMaxValue: this._nScrollHeight
+			});
+			this._oSliderVertical._oTransition = new jindo.Transition().fps(30);
+			
+			this._oSliderVertical.attach({
+				beforeChange: function(oCustomEvent){
+					var nTrackHeight = jindo.$Element(this.getTrack()).height(),
+						nThumbHeight = jindo.$Element(this.getThumb(oCustomEvent.nIndex)).height(),
+						nAvailHeight = nTrackHeight - nThumbHeight;
+					
+					oCustomEvent.nPos = Math.min(oCustomEvent.nPos, nAvailHeight); 
+					oCustomEvent.nPos = Math.max(oCustomEvent.nPos, 0);
+
+					if (oCustomEvent.bJump) {
+						oCustomEvent.stop();
+						this._oTransition.abort().start(200, this.getThumb(oCustomEvent.nIndex), {
+							"@top" : jindo.Effect.easeOut(oCustomEvent.nPos + 'px') 
+						}).attach({
+							playing : function(oCustomEvent2) {
+								self.setScrollTop(self._oSliderVertical.values(0));
+							}
+						});
+					} else {
+						self.setScrollTop(this._getValue(0, oCustomEvent.nPos));
+					}
+				}
+			});
+			
+		}		
+		
+	},
+
+	_initRolloverArea : function(){
+		var self = this,
+			sClassPrefix = this.option("sClassPrefix"),
+			sClassNameForRollover = this.option("sClassNameForRollover");
+			
+		this._oRolloverArea = new jindo.RolloverArea(this._el, {
+			sClassName : sClassNameForRollover, // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+			sClassPrefix : sClassPrefix // (String) 컴포넌트가 적용될 엘리먼트에 붙게될 class명의 prefix. (prefix+"over|down")
+		}).attach({
+			over: function(oCustomEvent){
+				oCustomEvent.stop();
+				self._onRollover("over", oCustomEvent.element);
+			},
+			down: function(oCustomEvent){
+				oCustomEvent.stop();
+				self._onMouseDown(oCustomEvent.element);
+				self._onRollover("down", oCustomEvent.element);
+			},
+			up: function(oCustomEvent){
+				oCustomEvent.stop();
+				self._onMouseUp(oCustomEvent.element);
+				self._onRollover("up", oCustomEvent.element);
+			},
+			out: function(oCustomEvent){
+				oCustomEvent.stop();
+				self._onRollover("out", oCustomEvent.element);
+			}
+		});
+	},
+	
+	/**
+	 * content의 내용의 크기가 달라졌을때 스크롤바의 이동 값을 재설정해준다. 
+	 */	
+	reset : function() {
+		var oSliderH = this.getSliderHorizontal(),
+			oSliderV = this.getSliderVertical();
+		
+		if (oSliderH) {
+			this._nScrollWidth = jindo.$Element(this._elContent).width() - jindo.$Element(this._elBox).width();
+			oSliderH.option("nMaxValue", this._nScrollWidth);
+			this.setScrollLeft(0);
+		}
+		if (oSliderV) {
+			this._nScrollHeight = jindo.$Element(this._elContent).height() - jindo.$Element(this._elBox).height();
+			oSliderV.option("nMaxValue", this._nScrollHeight);
+			this.setScrollTop(0);			
+		}
+		
+		this._elBox.scrollLeft = 0;
+		this._elBox.scrollTop = 0;		
+	},
+	
+	/**
+	 * 가로 스크롤이 화면에 표시되었는지 여부를 가져온다.
+	 * @return {Boolean} 
+	 */
+	hasScrollBarHorizontal : function() {
+		var sClassPrefix = this.option("sClassPrefix"),
+			o = this.getScrollBarHorizontal();
+		
+		if (o.elScrollBar) {
+			var welScrollBar = jindo.$Element(o.elScrollBar);
+			return welScrollBar.visible() || welScrollBar.hasClass(sClassPrefix + "show");	
+		}
+		return false;
+		
+	},
+	
+	/**
+	 * 세로 스크롤이 화면에 표시되었는지 여부를 가져온다.
+	 * @return {Boolean} 
+	 */
+	hasScrollBarVertical : function() {
+		var sClassPrefix = this.option("sClassPrefix"),
+			o = this.getScrollBarVertical();
+		
+		if (o.elScrollBar) {
+			var welScrollBar = jindo.$Element(o.elScrollBar);
+			return welScrollBar.visible() || welScrollBar.hasClass(sClassPrefix + "show");
+		}
+		return false;
+	},
+	
+	/**
+	 * 세로 스크롤바의 포지션을 설정한다.
+	 * @param {Number} n
+	 * @remark 0.1.2 버전부터 slider 0.3.2버전 필요
+	 */
+	setScrollTop : function(n) {
+		n = Math.min(n, this._nScrollHeight || 0);
+		n = Math.max(n, 0);
+		n = Math.round(n);
+		
+		var htParam = {
+			sDirection : "top",
+			nPosition : n
+		}
+		
+		jindo.$Element(this._elContent).css("top", (htParam.nPosition * -1) + "px");
+		var oSliderV = this.getSliderVertical();
+		if (oSliderV) {
+			oSliderV.values(0, htParam.nPosition, false); //커스텀이벤트를 발생하지 않으면서 이동
+		}
+		
+		this._fireScrollEvent(htParam);
+	},
+
+	/**
+	 * 가로 스크롤바의 포지션을 설정한다.
+	 * @param {Number} n
+	 * @remark 0.1.2 버전부터 slider 0.3.2버전 필요
+	 */
+	setScrollLeft : function(n) {
+		n = Math.min(n, this._nScrollWidth || 0);
+		n = Math.max(n, 0);
+		n = Math.round(n);
+		
+		var htParam = {
+			sDirection : "left",
+			nPosition : n
+		}
+		
+		jindo.$Element(this._elContent).css("left", (htParam.nPosition * -1) +"px");
+		var oSliderH = this.getSliderHorizontal();
+		if (oSliderH) {
+			oSliderH.values(0, htParam.nPosition, false); //커스텀이벤트를 발생하지 않으면서 이동
+		}
+		
+		this._fireScrollEvent(htParam);
+	},
+	
+	/**
+	 * 세로 스크롤바의 포지션을 상대값으로 설정한다.
+	 * @param {Number} n
+	 */
+	setScrollTopBy : function(n) {
+		this.setScrollTop(this.getScrollTop()+n);		
+	},
+
+	/**
+	 * 가로 스크롤바의 포지션을 상대값으로 설정한다.
+	 * @param {Number} n
+	 */
+	setScrollLeftBy : function(n) {
+		this.setScrollLeft(this.getScrollLeft()+n);		
+	},
+
+	/**
+	 * 컨텐트 영역의 상/하 위치를 구한다.
+	 * @param {Number} n
+	 */
+	getScrollTop : function(n) {
+		return parseInt(jindo.$Element(this._elContent).css("top"), 10) * -1;
+	},
+	
+	/**
+	 * 컨텐트 영역의 좌/우 위치를 구한다.
+	 * @param {Object} n
+	 */
+	getScrollLeft : function(n) {
+		return parseInt(jindo.$Element(this._elContent).css("left"), 10) * -1;
+	},
+	
+	_getElementType : function(wel) {
+		var sClassPrefix = this.option("sClassPrefix");
+		
+		if (wel.hasClass(sClassPrefix+"track")) {
+			return "track";
+		}
+		else if (wel.hasClass(sClassPrefix+"thumb")) {
+			return "thumb";
+		}
+		else if (wel.hasClass(sClassPrefix+"button-up")) {
+			return "button-up";
+		}
+		else if (wel.hasClass(sClassPrefix+"button-up")) {
+			return "button-up";
+		}
+		else if (wel.hasClass(sClassPrefix+"button-down")) {
+			return "button-down";
+		}
+		else if (wel.hasClass(sClassPrefix+"button-left")) {
+			return "button-left";
+		}
+		else if (wel.hasClass(sClassPrefix+"button-right")) {
+			return "button-right";
+		}
+		else {
+			return false;
+		}
+	},
+	
+	_fireScrollEvent : function(htParam) {
+		this.fireEvent("scroll", htParam)
+	},
+	
+	_onWheel : function(we) {
+		if (!this._bMouseEnter) {
+			return;
+		}
+		we.stop(jindo.$Event.CANCEL_DEFAULT);
+		
+		var nDelta = we.mouse().delta,
+			nDirection  = nDelta / (Math.abs(nDelta) || 1) * -1,
+			n = Math.ceil(Math.abs(nDelta)) * nDirection * this.option("nDelta"),
+			bH = this.hasScrollBarHorizontal(),
+			bV = this.hasScrollBarVertical();
+			
+		if (!bH && !bV) {
+			return;
+		}
+		
+		if (this.hasScrollBarVertical() && this._bIsEventAttachedForVertical) {
+			this.setScrollTop(this.getScrollTop()+n);
+			return;
+		}
+		
+		this.setScrollLeft(this.getScrollLeft()+n);
+	},
+	
+	_onMouseDown : function(el) {
+
+		var wel = jindo.$Element(el),
+			self = this,
+			setScrollBy,
+			sElementType = this._getElementType(wel);
+		
+		switch (sElementType) {
+			case "button-up" :
+				setScrollBy = function (n){
+					self.setScrollTopBy(~~(n * -1));
+				};
+			break;
+			case "button-down" :
+				setScrollBy = function (n){
+					self.setScrollTopBy(n);
+				};
+			break;
+			case "button-left" :
+				setScrollBy = function (n){
+					self.setScrollLeftBy(~~(n * -1));
+				};
+			break;
+			case "button-right" :
+				setScrollBy = function (n){
+					self.setScrollLeftBy(n);
+				};
+			break;
+			default :
+			return;
+		}
+		
+		setScrollBy(16);
+		this._oTimer.start(function(){
+			setScrollBy(16);
+			return true;
+		}, 100);
+		
+	},
+	
+	_onMouseUp : function(el) {
+		this._oTimer.abort();
+	},
+	
+	_onMouseEnter : function(we) {
+		this._bMouseEnter = true;
+	},
+	
+	_onMouseLeave : function(we) {
+		this._bMouseEnter = false;
+	},
+	
+	_onRollover : function(sType, el) {
+		var wel = jindo.$Element(el),
+			sClassPrefix = this.option("sClassPrefix"),
+			sElementType = this._getElementType(wel);
+		
+		switch (sType) {
+			case "over" :
+				wel.addClass(sClassPrefix + sElementType + "-over");		
+			break;
+			case "down" :
+				wel.addClass(sClassPrefix + sElementType + "-hold");
+			break;
+			case "up" :
+				wel.removeClass(sClassPrefix + sElementType + "-hold");
+			break;
+			case "out" :
+				wel.removeClass(sClassPrefix + sElementType + "-over");
+			break;
+		}
+		
+	}
+	
+}).extend(jindo.UIComponent);
+/**
+ * @fileOverview 영역내의 값을 마우스 클릭 또는 드래그로 선택하는 슬라이더 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.4.1
+ */
+
+jindo.Slider = jindo.$Class({
+	/** @lends jindo.Slider.prototype */				
+	_elTrack : null,
+
+	_oDragArea : null,
+					
+	_aThumbs : null,
+	
+	_aPoses : null,
+	_htSwap : null,
+	
+	/**
+	 * Slider 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class 영역내의 값을 마우스 클릭 또는 드래그로 선택하는 슬라이더 컴포넌트
+	 * @param {String | HTMLElement} el Thumb이 움직이는 바탕이 되는 Track Element (id 혹은 엘리먼트 자체)
+	 * @param {Object} oOptions 옵션 객체
+	 * @extends jindo.UIComponent
+	 * @requires jindo.DragArea
+	 * @example
+var alpha = new jindo.Slider($('alpha'), {
+	 bVertical : false, //슬라이더 세로 여부
+	 bJump : true, 
+	 sClassPrefix : 'slider-',
+	 nMinValue : 0, 
+	 nMaxValue : 1,
+	 fAdjustValue : ,(Function) 값을 조절하기 위한 함수
+	 bActivateOnload : true //(Boolean) 컴포넌트 로드시 activate 여부
+}).attach({
+	beforeChange : function(oCustomEvent) {
+		//Thumb이 움직이기 전에 발생
+		//oCustomEvent.stop()을 실행하면 change 이벤트가 발생하지 않고 중단된다.
+	},
+	change : function(oCustomEvent) {
+		//Thumb을 Drop한 이후 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	nIndex : (Number)
+		//	nPos : (Number)
+		//	nValue : (Number)
+		//}
+	}
+});
+	 */
+	
+	$init : function(el, oOptions) {
+		
+		this.option({
+			bVertical : false,
+			bJump : true,
+			sClassPrefix : 'slider-',
+			fAdjustValue : null,
+			nMinValue : 0,
+			nMaxValue : 1,
+			bActivateOnload : true
+		});
+		
+		this.option(oOptions || {});
+		
+		if (!this.option('bVertical')) {
+			this._htSwap = {
+				y : 'nY',
+				x : 'nX',
+				clientX : 'clientX',
+				pageX : 'pageX',
+				offsetWidth : 'offsetWidth',
+				left : 'left'
+			};
+		} else {
+			this._htSwap = {
+				y : 'nX',
+				x : 'nY',
+				clientX : 'clientY',
+				pageX : 'pageY',
+				offsetWidth : 'offsetHeight',
+				left : 'top'
+			};
+		}
+		
+		this._sRand = 'S' + parseInt(Math.random() * 100000000);
+
+		this._elTrack = jindo.$(el);
+		// Thumbs 들과 각각의 값을 저장할 공간 만들기
+		this._aThumbs = jindo.$$('.' + this.option('sClassPrefix') + 'thumb', this._elTrack);
+		var thumbs = jindo.$ElementList(this._aThumbs);
+		thumbs.addClass(this._sRand);
+
+		this._aPoses = [];
+		
+		this._onTrackMouseDownFn = jindo.$Fn(this._onTrackMouseDown, this);
+		
+		this._initDragArea();
+		
+		if (this.option("bActivateOnload")){
+			this.activate();		
+			this._detectChange();
+		}
+	},
+	
+	/**
+	 * Track 엘리먼트를 구한다.
+	 * @return {HTMLElement} 
+	 */
+	getTrack : function() {
+		return this._elTrack;
+	},
+	
+	/**
+	 * n번째 Thumb 엘리먼트를 구한다.
+	 * @param {Number} nIndex
+	 * @return {HTMLElement} 
+	 */
+	getThumb : function(nIndex) {
+		return this._aThumbs[nIndex];
+	},
+	
+	_initDragArea : function() {
+		var self = this;
+		var htSwap = this._htSwap;
+		
+		// 컴퍼넌트 내부에서 사용하는 다른 컴퍼넌트 초기화
+		this._oDragArea = new jindo.DragArea(this._elTrack, { 
+			sClassName : this._sRand, 
+			bFlowOut : false 
+		}).attach({
+																								   
+			'beforeDrag' : function(oCustomEvent) {
+				var nIndex = self._getThumbIndex(oCustomEvent.elHandle)
+				
+				//var nAfterPos = 
+				var htParam = { 
+					nIndex : nIndex,
+					nPos : oCustomEvent[htSwap.x],
+					bJump : false
+				};
+				if (!self.fireEvent('beforeChange', htParam)) {
+					oCustomEvent.stop();
+					return false;
+				};
+				var nAfterPos = self._getAdjustedPos(nIndex, htParam.nPos);
+				if (nAfterPos === false) return e.stop();
+				
+				oCustomEvent[htSwap.x] = nAfterPos;
+				
+				oCustomEvent[htSwap.y] = null;
+			},
+			
+			'drag' : function(oCustomEvent) {
+											  
+				var nIndex = self._getThumbIndex(oCustomEvent.elHandle);
+				self._fireChangeEvent(nIndex);
+				
+			}
+		});
+	},
+	
+	/**
+	 * 적용된 DragArea 객체를 가져온다.
+	 * @return {jindo.DragArea}
+	 */
+	getDragArea : function() {
+		return this._oDragArea; 
+	},
+	
+	_fireChangeEvent : function(nIndex) {
+		var sAdjustBy = this.option('adjustBy');
+		
+		if (!this._detectChange()) return;
+		
+		var nPos = this._aPoses[nIndex];
+		
+		var htParam = {
+			nIndex : nIndex,
+			nPos : nPos,
+			nValue : this._getValue(nIndex, nPos)
+		};
+
+		this.fireEvent('change', htParam);
+	},
+
+	/**
+	 * 컴포넌트를 활성화시킨다.
+	 */
+	_onActivate : function() {
+		this.getDragArea().activate();
+		this._onTrackMouseDownFn.attach(this._elTrack, 'mousedown');
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화시킨다.
+	 */
+	_onDeactivate : function() {
+		this.getDragArea().deactivate();
+		this._onTrackMouseDownFn.detach(this._elTrack, 'mousedown');
+	},
+	
+	_onTrackMouseDown : function(e) {
+		var self = this;
+		if (!this.option('bJump')) return;
+		
+		// Thumb 이 하나일때만 동작
+		//if (this._aThumbs.length != 1) return;
+		
+		var nIndex = 0;
+		var htSwap = this._htSwap;
+
+		var el = e.element;
+		var sClass = '.' + this.option('sClassPrefix') + 'thumb';
+		var bThumb = jindo.$$.test(el, sClass) || jindo.$$.getSingle('! ' + sClass, el);
+
+		if (bThumb) return;
+
+		var nPos = e.pos()[htSwap.pageX]; // 클릭한 위치
+		nPos -= jindo.$Element(this._elTrack).offset()[htSwap.left];
+		
+		var nMaxDistance = 9999999;;
+		
+		// 가장 가까운 Thumb 찾기
+		for (var i = 0, oThumb; oThumb = this._aThumbs[i]; i++) {
+			
+			var nThumbPos = parseInt(jindo.$Element(oThumb).css(htSwap.left)) || 0;
+			nThumbPos += parseInt(oThumb[htSwap.offsetWidth] / 2);
+			
+			var nDistance  = Math.abs(nPos - nThumbPos);
+			
+			if (nDistance < nMaxDistance) {
+				nMaxDistance = nDistance;
+				nIndex = i;
+			}
+		}
+
+		var oThumb = this._aThumbs[nIndex];
+		nPos -= parseInt(oThumb[htSwap.offsetWidth] / 2);
+		
+		e.stop(jindo.$Event.CANCEL_DEFAULT);
+		this.positions(nIndex, nPos);
+	},
+	
+	_getTrackInfo : function(nIndex) {
+		var htSwap = this._htSwap;
+		var oThumb = this._aThumbs[nIndex];
+		
+		var nThumbSize = oThumb[htSwap.offsetWidth];
+		var nTrackSize = this._elTrack[htSwap.offsetWidth];
+		
+		var nMaxPos = nTrackSize - nThumbSize;
+
+		var nMax = this.option('nMaxValue');
+		var nMin = this.option('nMinValue');
+		
+		return {
+			maxPos : nMaxPos,
+			max : nMax,
+			min : nMin
+		};
+	},
+	
+	/**
+	 * 옵션의 fAdjustValue가 적용된 value를 구한다.
+	 * @param {Object} nIndex
+	 * @param {Object} nPos
+	 * @ignore
+	 */
+	_getValue : function(nIndex, nPos) {
+		if (typeof nPos == 'undefined') {
+			nPos = this._aPoses[nIndex];
+		}
+
+		var oInfo = this._getTrackInfo(nIndex);
+		var nValue = Math.min(Math.max(nPos * (oInfo.max - oInfo.min) / oInfo.maxPos + oInfo.min, oInfo.min), oInfo.max);
+
+		var fAdjust;
+		if (fAdjust = this.option('fAdjustValue'))
+			nValue = fAdjust.call(this, nValue);
+		
+		return nValue;
+	},
+	
+	/**
+	 * 옵션의 fAdjustValue가 적용된 포지션을 구한다.
+	 * @param {Object} nIndex
+	 * @param {Object} nPos
+	 * @ignore
+	 */
+	_getAdjustedPos : function(nIndex, nPos) {
+		var nAdjustedPos = nPos;
+		var oInfo = this._getTrackInfo(nIndex);
+
+		var fAdjust;
+		if (fAdjust = this.option('fAdjustValue')) {
+			
+			var nValue = Math.min(Math.max(nAdjustedPos * (oInfo.max - oInfo.min) / oInfo.maxPos + oInfo.min, oInfo.min), oInfo.max);
+			var nAfterValue = fAdjust.call(this, nValue);
+			
+			if (nValue != nAfterValue) {
+				nAdjustedPos = oInfo.maxPos * (nAfterValue - oInfo.min) / (oInfo.max - oInfo.min);
+			}
+			
+		}
+		
+		nAdjustedPos = Math.max(nAdjustedPos, 0);
+		nAdjustedPos = Math.min(nAdjustedPos, oInfo.maxPos);
+		
+		return nAdjustedPos;		
+	},
+	
+	_detectChange : function() {
+		var aPoses = this.positions();
+		var bDiff = false;
+		
+		for (var i = 0, len = aPoses.length; i < len; i++)
+			if (aPoses[i] !== this._aPoses[i]) bDiff = true;
+		
+		this._aPoses = aPoses;
+		return bDiff;
+	},
+	
+	_getThumbIndex : function(oThumb) {
+		for (var i = 0, len = this._aThumbs.length; i < len; i++)
+			if (this._aThumbs[i] == oThumb) return i;
+			
+		return -1;
+	},
+	/**
+	 * pixel단위로 Thumb의 위치값을 가져오거나 설정한다.
+	 * @param {Number} nIndex 위치값을 가져올 Thumb의 index (생략시 모든 Thumb의 위치값 배열을 리턴)
+	 * @param {Number} nPos 설정할 위치값(pixel단위)
+	 * @param {Boolean} bFireEvent 커스텀이벤트를 발생할지의 여부
+	 * @return {Number | Array | this} 설정시에는 객체 자체를 리턴
+	 * @example 
+	 * oSlider.positions(0);
+	 * oSlider.positions();
+	 * oSlider.positions(0, 100);
+	 */
+	positions : function(nIndex, nPos, bFireEvent) {
+		if (typeof bFireEvent == "undefined") {
+			bFireEvent = true;	
+		}
+		var htSwap = this._htSwap;
+
+		switch (arguments.length) {
+		case 0:
+			var aPoses = [];
+	
+			for (var i = 0, len = this._aThumbs.length; i < len; i++)
+				aPoses[i] = this.positions(i);
+			
+			return aPoses;
+			
+		case 1:
+			return parseInt(jindo.$Element(this._aThumbs[nIndex]).css(htSwap.left));
+			
+		default:
+			if (bFireEvent) {
+				
+				var htParam = { 
+					nIndex : nIndex,
+					nPos : nPos,
+					bJump : true
+				};
+				if (!this.fireEvent('beforeChange', htParam)) {
+					return false;
+				};
+				var nAfterPos = this._getAdjustedPos(nIndex, htParam.nPos);
+				if (nAfterPos === false) return this;
+				
+			    jindo.$Element(this._aThumbs[nIndex]).css(htSwap.left, nAfterPos + 'px');
+			    this._fireChangeEvent(nIndex);
+			    return this;	
+			}
+		
+			var nAfterPos = this._getAdjustedPos(nIndex, nPos);
+		    jindo.$Element(this._aThumbs[nIndex]).css(htSwap.left, nAfterPos + 'px');
+		    return this;
+		} 
+	},
+	/**
+	 * 옵션으로 설정한 nMinValue, nMaxValue에 대한 상대값으로 해당 Thumb의 위치값을 가져오거나 설정한다.
+	 * @param {Number} nIndex Value를 가져올 Thumb의 index (생략시 모든 Thumb의 위치값 배열을 리턴)
+	 * @param {Number} nValue 설정할 위치값
+	 * @param {Boolean} bFireEvent 커스텀이벤트를 발생할지의 여부
+	 * @return {Number | Array | this} 설정시에는 객체 자체를 리턴
+	 * @example 
+	 * oSlider.values(0);
+	 * oSlider.values();
+	 * oSlider.values(0, 0.5);
+	 */
+	values : function(nIndex, nValue, bFireEvent) {
+		if (typeof bFireEvent == "undefined") {
+			bFireEvent = true;	
+		}
+		
+		switch (arguments.length) {
+		case 0:
+			var aValues = [];
+			
+			for (var i = 0, len = this._aThumbs.length; i < len; i++)
+				aValues[i] = this._getValue(i);
+				
+			return aValues;
+			
+		case 1:
+			return this._getValue(nIndex, this.positions(nIndex)); //수정
+
+		default:
+			var oInfo = this._getTrackInfo(nIndex);
+			this.positions(nIndex, (nValue - oInfo.min) * oInfo.maxPos / (oInfo.max - oInfo.min), bFireEvent);
+			return this;
+		}
+	}
+}).extend(jindo.UIComponent);
+/**
+ * @fileOverview 마우스 이벤트에 따라 롤오버효과를 쉽게 처리할 수 있게 도와주는 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.5.1
+ */
+jindo.RolloverArea = jindo.$Class({
+	/** @lends jindo.RolloverArea */
+	  
+	/**
+	 * RolloverArea 컴포넌트를 생성한다.
+	 * RolloverArea 컴포넌트는 기준 엘리먼트의 자식들 중 특정 클래스명을 가진 엘리먼트에 마우스액션이 있을 경우 클래스명을 변경하는 이벤트를 발생시킨다.
+	 * @constructs 
+	 * @class 마우스 이벤트에 따라 롤오버효과를 쉽게 처리할 수 있게 도와주는 컴포넌트
+	 * @extends jindo.UIComponent
+	 * @param {HTMLElement} el 상위 기준 엘리먼트. 컴포넌트가 적용되는 영역(Area)이 된다.
+	 * @param {HashTable} htOption 옵션 객체
+	 * @example
+var oRolloverArea = new jindo.RolloverArea(document.body, {
+	sClassName : "rollover", // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+	sClassPrefix : "rollover-", // (String) 컴포넌트가 적용될 엘리먼트에 붙게될 class명의 prefix. (prefix+"over|down")
+	bCheckMouseDown : true, // (Boolean) mousedown과 mouseup이벤트 핸들링여부 선언
+	bActivateOnload : true, // (Boolean) 컴포넌트가 로드된 후 activate 여부
+	htStatus : {
+		sOver : "over", // (String) mouseover시 추가될 클래스명
+		sDown : "down" // (String) mousedown시 추가될 클래스명
+	}  
+}).attach({
+	over : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 커서가 올라갔을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mousedown 이벤트에 대한 $Event 객체  
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 추가하지 않음
+	},
+	down : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 버튼을 눌렀을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mousedown 이벤트에 대한 $Event 객체
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 추가하지 않음
+	},
+	up : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 버튼을 눌렀다 뗏을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement), 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mouseup 이벤트에 대한 $Event 객체  
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 제거하지 않음
+	},
+	out : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 커서가 벗어났을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mouseout 이벤트에 대한 $Event 객체  
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 제거하지 않음
+	}
+});
+	 */				  
+	$init : function(el, htOption) {
+		this.option({ 
+			sClassName : "rollover", 
+			sClassPrefix : "rollover-",
+			bCheckMouseDown : true,
+			bActivateOnload : true,
+			htStatus : {
+				sOver : "over",
+				sDown : "down"
+			} 
+		});
+		this.option(htOption || {});
+		
+		this._elArea = jindo.$(el);
+		this._aOveredElements = [];
+		this._aDownedElements = [];
+		this._wfMouseOver = jindo.$Fn(this._onMouseOver, this);
+		this._wfMouseOut = jindo.$Fn(this._onMouseOut, this);
+		this._wfMouseDown = jindo.$Fn(this._onMouseDown, this);
+		this._wfMouseUp = jindo.$Fn(this._onMouseUp, this);
+		
+		if (this.option("bActivateOnload")) {
+			this.activate();
+		}
+	},
+	
+	_addOvered : function(el) {
+		this._aOveredElements.push(el);
+	},
+	
+	_removeOvered : function(el) {
+		this._aOveredElements.splice(jindo.$A(this._aOveredElements).indexOf(el), 1);
+	},
+	
+	_addStatus : function(el, sStatus) {
+		jindo.$Element(el).addClass(this.option('sClassPrefix') + sStatus);
+	},
+	
+	_removeStatus : function(el, sStatus) {
+		jindo.$Element(el).removeClass(this.option('sClassPrefix') + sStatus);
+	},
+	
+	_isInnerElement : function(elParent, elChild) {
+		return elParent === elChild ? true : jindo.$Element(elParent).isParentOf(elChild);
+	},
+	
+	/**
+	 * RolloverArea를 활성화시킨다.
+	 * @return {this}
+	 */
+	_onActivate : function() {
+		this._wfMouseOver.attach(this._elArea, 'mouseover');
+		this._wfMouseOut.attach(this._elArea, 'mouseout');
+		if (this.option("bCheckMouseDown")) {
+			this._wfMouseDown.attach(this._elArea, 'mousedown');
+			this._wfMouseUp.attach(document, 'mouseup');
+		}
+	},
+	
+	/**
+	 * RolloverArea를 비활성화시킨다.
+	 * @return {this}
+	 */
+	_onDeactivate : function() {
+		this._wfMouseOver.detach(this._elArea, 'mouseover');
+		this._wfMouseOut.detach(this._elArea, 'mouseout');
+		this._wfMouseDown.detach(this._elArea, 'mousedown');
+		this._wfMouseUp.detach(document, 'mouseup');
+		
+		this._aOveredElements.length = 0;
+		this._aDownedElements.length = 0;
+	},
+	
+	_findRollover : function(el) {
+		var sClassName = this.option('sClassName');
+		return jindo.$$.test(el, '.' + sClassName) ? el : jindo.$$.getSingle('! .' + sClassName, el);
+	},
+	
+	_onMouseOver : function(we) {
+		var el = we.element,
+			elRelated = we.relatedElement,
+			htParam;
+		
+		for (; el = this._findRollover(el); el = el.parentNode) {
+			if (elRelated && this._isInnerElement(el, elRelated)) {
+				continue;
+			}
+			
+			this._addOvered(el);
+				
+			htParam = { 
+				element : el,
+				htStatus : this.option("htStatus"),
+				weEvent : we
+			};
+			
+			if (this.fireEvent('over', htParam)) {
+				this._addStatus(htParam.element, htParam.htStatus.sOver);
+			} 
+		}
+	},
+	
+	_onMouseOut : function(we) {
+		var el = we.element,
+			elRelated = we.relatedElement,
+			htParam;
+		
+		for (; el = this._findRollover(el); el = el.parentNode) {
+			if (elRelated && this._isInnerElement(el, elRelated)) {
+				continue;
+			} 
+			
+			this._removeOvered(el);
+				
+			htParam = { 
+				element : el,
+				htStatus : this.option("htStatus"),
+				weEvent : we
+			};
+			if (this.fireEvent('out', htParam)) {
+				this._removeStatus(htParam.element, htParam.htStatus.sOver);
+			} 
+		}
+	},
+	
+	_onMouseDown : function(we) {
+		var el = we.element,
+			htParam;
+			
+		while (el = this._findRollover(el)) {
+			htParam = { 
+				element : el,
+				htStatus : this.option("htStatus"),
+				weEvent : we
+			};
+			this._aDownedElements.push(el);
+			if (this.fireEvent('down', htParam)) {
+				this._addStatus(htParam.element, htParam.htStatus.sDown);
+			}
+			
+			el = el.parentNode;
+		}
+	},
+	
+	_onMouseUp : function(we) {
+		var el = we.element,
+			aTargetElementDatas = [],		
+			aDownedElements = this._aDownedElements,
+			htParam,
+			elMouseDown,
+			i;
+		
+		for (i = 0; elMouseDown = aDownedElements[i]; i++) {
+			aTargetElementDatas.push({ 
+				element : elMouseDown,
+				htStatus : this.option("htStatus"),
+				weEvent : we
+			});
+		}
+		
+		for (; el = this._findRollover(el); el = el.parentNode) {
+			if (jindo.$A(aDownedElements).indexOf(el) > -1) {
+				continue;
+			}
+			
+			aTargetElementDatas.push({ 
+				element : el,
+				htStatus : this.option("htStatus"),
+				weEvent : we
+			});
+		}
+		
+		for (i = 0; htParam = aTargetElementDatas[i]; i++) {
+			if (this.fireEvent('up', htParam)) {
+				this._removeStatus(htParam.element, htParam.htStatus.sDown);
+			}		
+		}
+		
+		this._aDownedElements = [];
+	}
+}).extend(jindo.UIComponent);
+
+/**
+ * @fileOverview 엘리먼트의 css style의 변화를 주어 움직이는 효과를 주는 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.5.3
+ */
+
+jindo.Transition = jindo.$Class({
+	/** @lends jindo.Transition.prototype */
+	_nFPS : 30,
+	
+	_aTaskQueue : null,
+	_oTimer : null,
+	
+	_bIsWaiting : true, // 큐의 다음 동작을 하길 기다리는 상태
+	_bIsPlaying : false, // 재생되고 있는 상태
+	
+	/**
+	 * Transition 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class 엘리먼트의 css style의 변화를 주어 움직이는 효과를 주는 컴포넌트
+	 * @param {HashTable} htOption 옵션 객체
+	 * @extends jindo.Component
+	 * @requires jindo.Effect
+	 * @requires jindo.Timer
+	 * @example 
+var oTransition = new jindo.Transition().fps(30).attach({
+	start : function() {
+		//Transition이 시작될 때 발생
+	},
+	playing : function(oCustomEvent) {
+		//Transition이 진행되는 매 단계에 발생
+		//이벤트 객체 oCustomEvent = { 
+		//	element : 변화되고있는 객체
+		//	sKey : 변화할 대상
+		//	sValue : 변화할 값
+		//	nStep : 현재의 Transition의 단계
+		//	nTotalStep : Transition이 완료되기까지 playing 커스텀이벤트가 발생할 횟수
+		//}
+	},
+	end : function() {
+		//Transition이 끝났을 때 발생
+	},
+	abort : function() {
+		//Transition이 중단되었을 때 발생
+	},
+	pause : function() {
+		//Transition이 일시정지되었을 때 발생
+	},
+	resume : function() {
+		//Transition이 재시작될 때 발생
+	},
+	sleep : function(oCustomEvent) {
+		//Transition이 휴면상태일 때 발생
+		//이벤트 객체 oCustomEvent = { 
+		//	nDuration : 휴면 시간
+		//}
+	},
+	awake : function() {
+		//Transition이 휴면상태에서 깨어났을 때 발생
+	},
+});
+	 */
+	$init : function(htOption) {
+		this._aTaskQueue = [];
+		this._oTimer = new jindo.Timer();
+		
+		this.option({ 
+			fEffect : jindo.Effect.linear, 
+			bCorrection : false 
+		});
+		this.option(htOption || {});
+	},
+
+	/**
+	 * 효과가 재생될 초당 frame rate를 설정하거나 가져온다.
+	 * @param {Number} nFPS (생략시 현재 frame rate 리턴)
+	 * @return {Number | this} 
+	 */
+	fps : function(nFPS) {
+		if (arguments.length > 0) {
+			this._nFPS = nFPS;
+			return this;
+		}
+		
+		return this._nFPS;
+	},
+	
+	/**
+	 * 트랜지션이 진행중인지 여부를 가져온다.
+	 * @return {Boolean}
+	 */
+	isPlaying : function() {
+		return this._bIsPlaying;
+	},
+	
+	/**
+	 * 진행되고 있는 Transition을 중지시킨다.
+	 * @return {this}
+	 */
+	abort : function() {
+		this._aTaskQueue = [];
+		this._oTimer.abort();
+		
+		if (this._bIsPlaying) {
+			this.fireEvent("abort");
+		}
+
+		this._bIsWaiting = true;
+		this._bIsPlaying = false;
+		
+		this._htTaskToDo = null;
+		return this;
+	},
+	
+	/**
+	 * Transition을 수행한다.
+	 * 파라메터를 지정(queue 메소드와 동일)하였을 경우에는 해당 동작을 바로 실행시키고, 파라메터가 생략되었을 때에는 지금까지 queue()로 지정된 동작들을 시작시킨다.
+	 * 파라메터는 function타입으로 지정하여 콜백을 수행할수 있다. (예제 참고)
+	 * @param {Number} nDuration Transition이 진행될 시간
+	 * @param {Array} aCommand 적용할 명령셋
+	 * @return {this}
+	 * @see jindo.Transition#queue
+	 * @example
+oTransition.start(1000, 
+	jindo.$("foo"), {
+		'@left' : '200px'
+	}
+));
+	 * @example
+oTransition.start(1000, [
+	[jindo.$("foo"), {
+		'@left' : '200px'
+	}],
+	
+	[jindo.$("bar"), {
+		'@top' : '200px'
+	}]
+]));
+	 * @example
+oTransition.queue(1000,
+	jindo.$("foo"), {
+		'@left' : '200px'
+	}
+));
+oTransition.start();
+	 */
+	start : function(nDuration, elTarget, htInfo) {
+		if (arguments.length > 0) {
+			this.queue.apply(this, arguments);
+		}
+		
+		this._prepareNextTask();
+		return this;
+	},
+	
+	/**
+	 * Transition을 큐에 담는다.
+	 * 여러 단계의 Transition을 담아두고 순차적으로 실행시킬때 사용한다. start() 메소드가 호출되기 전까지 수행되지 않는다.
+	 * @param {Number} nDuration Transition이 진행될 시간
+	 * @param {Array} aCommand 적용할 명령셋
+	 * @return {this}
+	 * @remark 파라메터 aCommand는 [(HTMLElement)엘리먼트, (HashTable)Transition정보]로 구성되어야 하고, 여러명령을 동시에 적용할 수 있다.
+	 * @remark 파라메터로 function을 지정하여 콜백을 등록할 수 있다.
+	 * @see jindo.Transition#start
+	 * @example 하나의 엘리먼트에 여러개의 명령을 지정하는 예제
+oTransition.queue(1000,
+	jindo.$("foo"), {
+		'@left' : '200px',
+		'@top' : '50px',
+		'@width' : '200px',
+		'@height' : '200px',
+		'@backgroundColor' : [ '#07f', 'rgb(255, 127, 127)' ]
+	}
+); 
+	 * @example 여러개의 엘리먼트에 명령을 지정하는 예 1
+oTransition.queue(1000,
+	jindo.$("foo"), {
+		"@left" : jindo.Effect.linear("200px")
+	},
+	jindo.$("bar"), {
+		"@top" : jindo.Effect.linear("200px")
+	}
+);
+	 * @example 여러개의 엘리먼트에 명령을 지정하는 예 2
+oTransition.queue(1000, [
+	[jindo.$("foo"), {
+		"@left" : jindo.Effect.linear("200px")
+	}],
+	[jindo.$("bar"), {
+		"@top" : jindo.Effect.linear("200px")
+	}]
+]);  
+	 * @example 엘리먼트를 getter / setter 함수로 지정하는 예  
+oTransition.queue(1000, [
+	[{
+		getter : function(sKey) {
+			return jindo.$Element("foo")[sKey]();
+		},
+		
+		setter : function(sKey, sValue) {
+			jindo.$Element("foo")[sKey](parseFloat(sValue));
+		}
+	}, {
+		'height' : jindo.Effect.easeIn(100)
+	}]
+]);  
+	 * @example 파라메터로 function을 지정하여 콜백을 수행하는 예제
+oTransition.start(function(){
+	alert("end")
+});
+	 */
+	queue : function(nDuration, aCommand) {
+		var htTask;
+		if (typeof arguments[0] == 'function') {
+			htTask = {
+				sType : "function",
+				fTask : arguments[0]
+			};
+		} else {
+			var a = [];
+			var nLength = arguments.length;
+			if (arguments[1] instanceof Array) {
+				a = arguments[1];
+			} else {
+				var aInner = [];
+				$A(arguments).forEach(function(v, i){
+					if (i > 0) {
+						aInner.push(v);
+						if (i % 2 == 0) {
+							a.push(aInner.concat());
+							aInner = [];
+						} 
+					}
+				});
+			}
+			
+			htTask = {
+				sType : "task",
+				nDuration : nDuration, 
+				aList : []
+			};
+			
+			for (var i = 0; i < a.length; i ++) {
+				var aValue = [];
+				var htArg = a[i][1];
+				var sEnd;
+				for (var sKey in htArg) {
+					sEnd = htArg[sKey];
+					if (/^(@|style\.)(\w+)/i.test(sKey)) {
+						aValue.push([ "style", RegExp.$2, sEnd ]);
+					} else {
+						aValue.push([ "attr", sKey, sEnd ]);
+					}
+				}
+				
+				htTask.aList.push({
+					elTarget : a[i][0],
+					aValue : aValue
+				});
+			}
+		}
+		this._queueTask(htTask);
+		
+		return this;
+	},
+	
+	/**
+	 * 진행되고 있는 Transition을 일시중지시킨다.
+	 * Transition이 진행중일때만 가능하다. (sleep 상태일 때에는 불가능)
+	 * @return {this}
+	 */
+	pause : function() {
+		if (this._oTimer.abort()) {
+			this.fireEvent("pause");
+		}
+		return this;
+	},
+	
+	/**
+	 * 일시중지된 Transition을 재시작시킨다.
+	 * @return {this}
+	 */
+	resume : function() {
+		if (this._htTaskToDo) {
+			if (this._bIsWaiting === false && this._bIsPlaying === true) {
+				this.fireEvent("resume");
+			}
+			
+			this._doTask();
+			
+			this._bIsWaiting = false;
+			this._bIsPlaying = true;
+		
+			var self = this;
+			this._oTimer.start(function() {
+				var bEnd = !self._doTask();
+				if (bEnd) {
+					self._bIsWaiting = true;
+					setTimeout(function() { 
+						self._prepareNextTask(); 
+					}, 0);
+				}
+				
+				return !bEnd;
+			}, this._htTaskToDo.nInterval);
+		}
+		return this;
+	},
+	
+	/**
+	 * 지정된 Transition이 종료된 이후에 또 다른 Transition 을 수행한다.
+	 * @return {this}
+	 * @remark start() 메소드는 더이상 현재 진행중인 Transition을 abort시키지 않는다.
+	 * @deprecated start();
+	 */
+	precede : function(nDuration, elTarget, htInfo) {
+		this.start.apply(this, arguments);
+		return this;
+	},
+	
+	/**
+	 * 현재의 Transition 종료 후 다음 Transition 진행하기전에 지정된 시간만큼 동작을 지연한다.
+	 * @param {Number} nDuration 지연할 시간
+	 * @param {Function} fCallback 지연이 시작될때 수행될 콜백함수 (생략가능)
+	 * @return {this}
+	 * @example
+oTransition.start(1000, jindo.$("foo"), {
+	"@left" : jindo.Effect[sEffect](oPos.pageX + "px")
+}).sleep(500).start(1000, jindo.$("bar"), {
+	"@top" : jindo.Effect[sEffect](oPos.pageY + "px")
+});
+	 */
+	sleep : function(nDuration, fCallback) {
+		if (typeof fCallback == "undefined") {
+			fCallback = function(){};
+		}
+		this._queueTask({
+			sType : "sleep",
+			nDuration : nDuration,
+			fCallback : fCallback 
+		});
+		this._prepareNextTask();
+		return this;
+	},
+	
+	_queueTask : function(v) {
+		this._aTaskQueue.push(v);
+	},
+	
+	_dequeueTask : function() {
+		var htTask = this._aTaskQueue.shift();
+		if (htTask) {
+			if (htTask.sType == "task") {
+				var aList = htTask.aList;
+				
+				for (var i = 0, nLength = aList.length; i < nLength; i++) {
+					var elTarget = aList[i].elTarget;
+					
+					for (var j = 0, aValue = aList[i].aValue, nJLen = aValue.length; j < nJLen; j++) {
+						var sType = aValue[j][0];
+						var fFunc = aValue[j][2];
+						
+						if (typeof fFunc != "function") {
+							if (fFunc instanceof Array) {
+								fFunc = this.option("fEffect")(fFunc[0], fFunc[1]);
+							} else {
+								fFunc = this.option("fEffect")(fFunc);
+							}
+						}
+						
+						if (fFunc.setStart) {
+							if (this._isHTMLElement(elTarget)) {
+								var welTarget = jindo.$Element(elTarget);
+								switch (sType) {
+									case "style":
+										fFunc.setStart(welTarget.css(aValue[j][1]));
+										break;
+										
+									case "attr":
+										fFunc.setStart(welTarget.$value()[aValue[j][1]]);
+										break;
+								}
+							} else {
+								fFunc.setStart(elTarget.getter(aValue[j][1]));
+							}
+						}
+						aValue[j][2] = fFunc;
+					}
+				}
+			}
+			return htTask;
+		} else {
+			return null;
+		}
+	},
+	
+	_prepareNextTask : function() {
+		if (this._bIsWaiting) {
+			var htTask = this._dequeueTask();
+			if (htTask) {
+				switch (htTask.sType) {
+					case "task":
+						if (!this._bIsPlaying) {
+							this.fireEvent("start");
+						}
+						var nInterval = 1000 / this._nFPS;
+						var nGap = nInterval / htTask.nDuration;
+						this._htTaskToDo = {
+							aList: htTask.aList,
+							nRatio: 0,
+							nInterval: nInterval,
+							nGap: nGap,
+							nStep: 0,
+							nTotalStep: Math.ceil(htTask.nDuration / nInterval)
+						};
+						
+						this.resume();
+						break;
+					case "function":
+						if (!this._bIsPlaying) {
+							this.fireEvent("start");
+						}
+						htTask.fTask();
+						this._prepareNextTask();
+						break;
+					case "sleep":
+						if (this._bIsPlaying) {
+							this.fireEvent("sleep", {
+								nDuration: htTask.nDuration
+							});
+							htTask.fCallback();
+						}
+						var self = this;
+						setTimeout(function(){
+							self.fireEvent("awake");
+							self._prepareNextTask();
+						}, htTask.nDuration);
+						break;
+				}
+			} else {
+				if (this._bIsPlaying) {
+					this._bIsPlaying = false;
+					this.abort();
+					this.fireEvent("end");
+				}
+			}
+		}
+	},
+	
+	_isHTMLElement : function(el) {
+		return ("tagName" in el);
+	},
+	
+	_doTask : function() {
+		var htTaskToDo = this._htTaskToDo,
+			nRatio = parseFloat(htTaskToDo.nRatio.toFixed(5), 1),
+			nStep = htTaskToDo.nStep,
+			nTotalStep = htTaskToDo.nTotalStep,
+			aList = htTaskToDo.aList,
+			htCorrection = {};
+		
+		var bCorrection = this.option("bCorrection");
+		for (var i = 0, nLength = aList.length; i < nLength; i++) {
+			var elTarget = aList[i].elTarget;
+			for (var j = 0, aValue = aList[i].aValue, nJLen = aValue.length; j < nJLen; j++) {
+				var sType = aValue[j][0],
+					sKey = aValue[j][1],
+					sValue = aValue[j][2](nRatio);
+				
+				if (this._isHTMLElement(elTarget)) {
+					var welTarget = jindo.$Element(elTarget);
+						
+					if (bCorrection) {
+						var sUnit = /[0-9]([^0-9]*)$/.test(sValue) && RegExp.$1 || "";
+						if (sUnit) {
+							var nValue = parseFloat(sValue);
+							var nFloor;
+							nValue += htCorrection[sKey] || 0;
+							nValue = parseFloat(nValue.toFixed(5));
+							if (i == nLength - 1) {
+								sValue = Math.round(nValue) + sUnit;
+							} else {
+								nFloor = parseFloat(/(\.[0-9]+)$/.test(nValue) && RegExp.$1 || 0);
+								sValue = parseInt(nValue, 10) + sUnit;
+	
+								htCorrection[sKey] = nFloor;
+							}
+						}
+					}
+				
+					switch (sType) {
+						case "style":
+							welTarget.css(sKey, sValue);
+							break;
+							
+						case "attr":
+							welTarget.$value()[sKey] = sValue;
+							break;
+					}
+				} else {
+					elTarget.setter(sKey, sValue);
+				}
+				
+				if (this._bIsPlaying) {
+					this.fireEvent("playing", {
+						element : elTarget,
+						sKey : sKey,
+						sValue : sValue,
+						nStep : nStep,
+						nTotalStep : nTotalStep
+					});
+				}
+			}
+		}
+		htTaskToDo.nRatio = Math.min(htTaskToDo.nRatio + htTaskToDo.nGap, 1);
+		htTaskToDo.nStep += 1;
+		return nRatio != 1;
+	}
+}).extend(jindo.Component);
+
+// jindo.$Element.prototype.css 패치
+(function() {
+	var b = jindo.$Element.prototype.css;
+	jindo.$Element.prototype.css = function(k, v) {
+		if (k == "opacity") {
+			return typeof v != "undefined" ? this.opacity(parseFloat(v)) : this.opacity();
+		} else {
+			return typeof v != "undefined" ? b.call(this, k, v) : b.call(this, k);
+		}
+	};
+})();
+/**
+ * @fileOverview HTML Element를 Drag할 수 있게 해주는 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.5.4
+ */
+
+jindo.DragArea = jindo.$Class({
+	/** @lends jindo.DragArea.prototype */
+	
+	/**
+	 * DragArea 컴포넌트를 생성한다.
+	 * DragArea 컴포넌트는 상위 기준 엘리먼트의 자식들 중 특정 클래스명을 가진 모든 엘리먼트를 Drag 가능하게 하는 기능을 한다.
+	 * @constructs
+	 * @class HTML Element를 Drag할 수 있게 해주는 컴포넌트
+	 * @extends jindo.UIComponent
+	 * @param {HTMLElement} el Drag될 엘리먼트들의 상위 기준 엘리먼트. 컴포넌트가 적용되는 영역(Area)이 된다.
+	 * @param {HashTable} htOption 옵션 객체
+	 * @example
+var oDragArea = new jindo.DragArea(document, {
+	"sClassName" : 'dragable', // (String) 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트는 Drag 가능하게 된다. 
+	"bFlowOut" : true, // (Boolean) 드래그될 엘리먼트가 상위 기준 엘리먼트의 영역을 벗어날 수 있는지의 여부. 상위 엘리먼트의 크기가 드래그되는 객체보다 크거나 같아야지만 동작하도록 수정. 작은 경우 document사이즈로 제한한다.
+	"bSetCapture" : true, //ie에서 setCapture 사용여부
+	"nThreshold" : 0 // (Number) 드래그가 시작되기 위한 최소 역치값(px) 
+}).attach({
+	handleDown : function(oCustomEvent) {
+		//드래그될 handle 에 마우스가 클릭되었을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 될 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 될 엘리먼트 (핸들을 드래그하여 레이어 전체를 드래그되도록 하고 싶으면 이 값을 설정한다. 아래 예제코드 참고)
+		//	weEvent : (jindo.$Event) mousedown시 발생되는 jindo.$Event 객체
+		//};
+		//oCustomEvent.stop(); 이 수행되면 dragStart 이벤트가 발생하지 않고 중단된다.
+	},
+	dragStart : function(oCustomEvent) {
+		//드래그가 시작될 때 발생 (마우스 클릭 후 첫 움직일 때 한 번)
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elArea : (HTMLElement) 기준 엘리먼트
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 될 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 될 엘리먼트 (핸들을 드래그하여 레이어 전체를 드래그되도록 하고 싶으면 이 값을 설정한다. 아래 예제코드 참고)
+		//	htDiff : (HashTable) handledown된 좌표와 dragstart된 좌표의 차이 htDiff.nPageX, htDiff.nPageY
+		//	weEvent : (jindo.$Event) 마우스 이동 중 (mousemove) 발생되는 jindo.$Event 객체
+		//};
+		//oCustomEvent.stop(); 이 수행되면 뒤따르는 beforedrag 이벤트가 발생하지 않고 중단된다.
+	},
+	beforeDrag : function(oCustomEvent) {
+		//드래그가 시작되고 엘리먼트가 이동되기 직전에 발생 (이동중 beforedrag, drag 순으로 연속적으로 발생)
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elArea : (HTMLElement) 기준 엘리먼트
+		//	elFlowOut : (HTMLElement) bFlowOut 옵션이 적용될 상위 기준 엘리먼트 (변경가능)
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 될 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 될 엘리먼트
+		//	weEvent : (jindo.$Event) 마우스 이동 중 (mousemove) 발생되는 jindo.$Event 객체
+		//	nX : (Number) 드래그 될 x좌표. 이 좌표로 엘리먼트가 이동 된다.
+		//	nY : (Number) 드래그 될 y좌표. 이 좌표로 엘리먼트가 이동 된다.
+		//	nGapX : (Number) 드래그가 시작된 x좌표와의 차이
+		//	nGapY : (Number) 드래그가 시작된 y좌표와의 차이
+		//};
+		//oCustomEvent.stop(); 이 수행되면 뒤따르는 drag 이벤트가 발생하지 않고 중단된다.
+		//oCustomEvent.nX = null; // 가로로는 안 움직이게
+		//oCustomEvent.nX = Math.round(oCustomEvent.nX / 20) * 20;
+		//oCustomEvent.nY = Math.round(oCustomEvent.nY / 20) * 20;
+		//if (oCustomEvent.nX < 0) oCustomEvent.nX = 0;
+		//if (oCustomEvent.nY < 0) oCustomEvent.nY = 0;
+	},
+	drag : function(oCustomEvent) {
+		//드래그 엘리먼트가 이동하는 중에 발생 (이동중 beforedrag, drag 순으로 연속적으로 발생)
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elArea : (HTMLElement) 기준 엘리먼트
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 될 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 될 엘리먼트
+		//	weEvent : (jindo.$Event) 마우스 이동 중 (mousemove) 발생되는 jindo.$Event 객체
+		//	nX : (Number) 드래그 된 x좌표. 이 좌표로 엘리먼트가 이동 된다.
+		//	nY : (Number) 드래그 된 y좌표. 이 좌표로 엘리먼트가 이동 된다.
+		//	nGapX : (Number) 드래그가 시작된 x좌표와의 차이
+		//	nGapY : (Number) 드래그가 시작된 y좌표와의 차이
+		//};
+	},
+	dragEnd : function(oCustomEvent) {
+		//드래그(엘리먼트 이동)가 완료된 후에 발생 (mouseup시 1회 발생. 뒤이어 handleup 발생)
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elArea : (HTMLElement) 기준 엘리먼트
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 될 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 된 엘리먼트
+		//	nX : (Number) 드래그 된 x좌표.
+		//	nY : (Number) 드래그 된 y좌표.
+		//}
+	},
+	handleUp : function(oCustomEvent) {
+		//드래그된 handle에 마우스 클릭이 해제됬을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	elHandle : (HTMLElement) 옵션의 className으로 설정된 드래그 된 핸들 엘리먼트 (mousedown된 엘리먼트)
+		//	elDrag : (HTMLElement) 실제로 드래그 된 엘리먼트
+		//	weEvent : (jindo.$Event) mouseup시 발생되는 jindo.$Event 객체 
+		//};
+	}
+});
+	 */
+	$init : function(el, htOption) {
+		this.option({
+			sClassName : 'draggable',
+			bFlowOut : true,
+			bSetCapture : true, //ie에서 bSetCapture 사용여부
+			nThreshold : 0
+		});
+		
+		this.option(htOption || {});
+		
+		this._el = el;
+		
+		this._bIE = jindo.$Agent().navigator().ie;
+		
+		this._htDragInfo = {
+			"bPrepare" : false //mousedown이 되었을때 true, 이동중엔 false
+		};
+		this._bHandleDown = false;
+		this._bIsDragging = false;
+
+		this._wfOnMouseDown = jindo.$Fn(this._onMouseDown, this);
+		this._wfOnMouseMove = jindo.$Fn(this._onMouseMove, this);
+		this._wfOnMouseUp = jindo.$Fn(this._onMouseUp, this);
+		
+		this._wfOnDragStart = jindo.$Fn(this._onDragStart, this);
+		this._wfOnSelectStart = jindo.$Fn(this._onSelectStart, this);
+		
+		this.activate();
+	},
+	
+	_findDraggableElement : function(el) {
+		if (jindo.$$.test(el, "input[type=text], textarea, select")){
+			return null;
+		} 
+		
+		var self = this;
+		var sClass = '.' + this.option('sClassName');
+		
+		var isChildOfDragArea = function(el) {
+			if (el === null) {
+				return false;
+			}
+			if (self._el === document || self._el === el) {
+				return true;
+			} 
+			return jindo.$Element(self._el).isParentOf(el);
+		};
+		
+		var elReturn = jindo.$$.test(el, sClass) ? el : jindo.$$.getSingle('! ' + sClass, el);
+		if (!isChildOfDragArea(elReturn)) {
+			elReturn = null;
+		}
+		return elReturn;
+	},
+	
+	/**
+	 * 레이어가 현재 드래그 되고 있는지 여부를 가져온다
+	 * @return {Boolean} 레이어가 현재 드래그 되고 있는지 여부
+	 */
+	isDragging : function() {
+		return this._bIsDragging && !this._htDragInfo.bPrepare;
+	},
+	
+	/**
+	 * 드래그를 강제 종료시킨다.
+	 */
+	stopDragging : function() {
+		this._wfOnMouseMove.detach(document, 'mousemove');
+		this._wfOnMouseUp.detach(document, 'mouseup');
+
+		var htInfo = this._htDragInfo;
+		
+		if (this.isDragging()) {
+			var welDrag = jindo.$Element(htInfo.elDrag);
+			
+			this.fireEvent('dragEnd', {
+				"elArea" : this._el,
+				"elHandle" : htInfo.elHandle,
+				"elDrag" : htInfo.elDrag,
+				"nX" : parseInt(welDrag.css("left"), 10) || 0,
+				"nY" : parseInt(welDrag.css("top"), 10) || 0
+			});
+		}
+		this._bIsDragging = false;
+		htInfo.bPrepare = false;
+		
+		if(this._bIE && this._elSetCapture) {
+			this._elSetCapture.releaseCapture();
+			this._elSetCapture = null;
+		}
+	},
+	
+	/**
+	 * DragArea 동작을 위한 mousedown, dragstart, selectstart 이벤트를 attach 한다. 
+	 */
+	_onActivate : function() {
+		this._wfOnMouseDown.attach(this._el, 'mousedown');
+		this._wfOnDragStart.attach(this._el, 'dragstart'); // for IE
+		this._wfOnSelectStart.attach(this._el, 'selectstart'); // for IE	
+	},
+	
+	/**
+	 * DragArea 동작을 위한 mousedown, dragstart, selectstart 이벤트를 detach 한다. 
+	 */
+	_onDeactivate : function() {
+		this._wfOnMouseDown.detach(this._el, 'mousedown');
+		this._wfOnDragStart.detach(this._el, 'dragstart'); // for IE
+		this._wfOnSelectStart.detach(this._el, 'selectstart'); // for IE
+	},
+	
+	/**
+	 * 이벤트를 attach한다.
+	 * @deprecated activate
+	 */
+	attachEvent : function() {
+		this.activate();
+	},
+	
+	/**
+	 * 이벤트를 detach한다.
+	 * @deprecated deactivate
+	 */
+	detachEvent : function() {
+		this.deactivate();
+	},
+	
+	/**
+	 * 이벤트의 attach 여부를 가져온다.
+	 * @deprecated isActivating
+	 */
+	isEventAttached : function() {
+		return this.isActivating();
+	},
+	
+	_onMouseDown : function(we) {
+		/*
+		if (this._bIsDragging || this._htDragInfo.bPrepare) {
+			return;
+		}
+		*/
+		
+		/* IE에서 네이버 툴바의 마우스제스처 기능 사용시 우클릭하면 e.mouse().right가 false로 들어오므로 left값으로만 처리하도록 수정 */
+		if (!we.mouse().left) {
+			return;
+		}
+		// 드래그 할 객체 찾기
+		var el = this._findDraggableElement(we.element);
+		if (el) {
+			var oPos = we.pos();
+			this._htDragInfo = {
+				bPrepare : true,
+				nButton : we._event.button,
+				elHandle : el,
+				elDrag : el,
+				nPageX : oPos.pageX,
+				nPageY : oPos.pageY
+			};
+			
+			this._bHandleDown = true;
+			if (this.fireEvent('handleDown', { 
+				elHandle : el, 
+				elDrag : el, 
+				weEvent : we 
+			})) {
+				this._wfOnMouseMove.attach(document, 'mousemove');
+			} 
+			this._wfOnMouseUp.attach(document, 'mouseup');
+	
+			we.stop(jindo.$Event.CANCEL_DEFAULT);			
+		}
+	},
+	
+	_onMouseMove : function(we) {
+		this._bIsDragging = true;
+		var htInfo = this._htDragInfo,
+			htParam, htRect,
+			oPos = we.pos();
+
+		if (htInfo.bPrepare) {
+			var nThreshold = this.option('nThreshold');
+			var htDiff = {};
+			
+			if (nThreshold) {
+				htDiff.nPageX = oPos.pageX - htInfo.nPageX;
+				htDiff.nPageY = oPos.pageY - htInfo.nPageY;
+				var nDistance = Math.sqrt(htDiff.nPageX * htDiff.nPageX + htDiff.nPageY * htDiff.nPageY);
+				if (nThreshold > nDistance){
+					return;
+				} 
+			}
+
+			if(this._bIE && this.option("bSetCapture")) {
+				this._elSetCapture = (this._el === document) ? document.body : this._findDraggableElement(we.element);
+				if (this._elSetCapture) {
+					this._elSetCapture.setCapture(false);
+				}
+			}
+			 
+			htParam = {
+				elArea : this._el,
+				elHandle : htInfo.elHandle,
+				elDrag : htInfo.elDrag,
+				htDiff : htDiff, //nThreshold가 있는경우 htDiff필요
+				weEvent : we //jindo.$Event
+			};
+			
+			if (this.fireEvent('dragStart', htParam)) {
+				var welDrag = jindo.$Element(htParam.elDrag);
+				htInfo.bPrepare = false;
+				htInfo.elHandle = htParam.elHandle;
+				htInfo.elDrag = htParam.elDrag;
+				htInfo.nX = parseInt(welDrag.css('left'), 10) || 0;
+				htInfo.nY = parseInt(welDrag.css('top'), 10) || 0;
+			} else {
+				this._bIsDragging = false;
+				return;
+			}
+		} 
+				
+		var htGap = {
+			"nX" : oPos.pageX - htInfo.nPageX,
+			"nY" : oPos.pageY - htInfo.nPageY
+		};
+		
+		htParam = {
+			"elArea" : this._el,
+			"elFlowOut" : htInfo.elDrag.parentNode, 
+			"elHandle" : htInfo.elHandle,
+			"elDrag" : htInfo.elDrag,
+			"weEvent" : we, 		 //jindo.$Event
+			"nX" : htInfo.nX + htGap.nX,
+			"nY" : htInfo.nY + htGap.nY,
+			"nGapX" : htGap.nX,
+			"nGapY" : htGap.nY
+		};
+		
+		if (this.fireEvent('beforeDrag', htParam)) {
+			var elDrag = htInfo.elDrag;
+			if (this.option('bFlowOut') === false) {
+				var elParent = htParam.elFlowOut,
+					aSize = [ elDrag.offsetWidth, elDrag.offsetHeight ],
+					nScrollLeft = 0, nScrollTop = 0;
+					
+				if (elParent == document.body) {
+					elParent = null;
+				}
+				
+				if (elParent && aSize[0] <= elParent.scrollWidth && aSize[1] <= elParent.scrollHeight) {
+					htRect = { 
+						nWidth : elParent.clientWidth, 
+						nHeight : elParent.clientHeight
+					};	
+					nScrollLeft = elParent.scrollLeft;
+					nScrollTop = elParent.scrollTop;
+				} else {
+					var	htClientSize = jindo.$Document().clientSize();
+						
+					htRect = {
+						nWidth : htClientSize.width, 
+						nHeight : htClientSize.height
+					};
+				}
+	
+				if (htParam.nX !== null) {
+					htParam.nX = Math.max(htParam.nX, nScrollLeft);
+					htParam.nX = Math.min(htParam.nX, htRect.nWidth - aSize[0] + nScrollLeft);
+				}
+				
+				if (htParam.nY !== null) {
+					htParam.nY = Math.max(htParam.nY, nScrollTop);
+					htParam.nY = Math.min(htParam.nY, htRect.nHeight - aSize[1] + nScrollTop);
+				}
+			}
+			if (htParam.nX !== null) {
+				elDrag.style.left = htParam.nX + 'px';
+			}
+			if (htParam.nY !== null) {
+				elDrag.style.top = htParam.nY + 'px';
+			}
+			this.fireEvent('drag', htParam);
+		} 
+	},
+	
+	_onMouseUp : function(we) {
+		this.stopDragging();
+		
+		var htInfo = this._htDragInfo;
+		if (this._bHandleDown) {
+			this._bHandleDown = false;
+			
+			this.fireEvent("handleUp", {
+				weEvent : we,
+				elHandle : htInfo.elHandle,
+				elDrag : htInfo.elDrag 
+			});
+		}
+	},
+	
+	_onDragStart : function(we) { 
+		we.stop(jindo.$Event.CANCEL_DEFAULT); 
+	},
+	
+	_onSelectStart : function(we) {
+		if (this._bIsDragging || this._findDraggableElement(we.element)) {
+			we.stop(jindo.$Event.CANCEL_DEFAULT);	
+		}
+	}
+	
+}).extend(jindo.UIComponent);
+/**
+ * @fileOverview 수치의 중간값을 쉽게 얻을 수 있게 하는 static 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.4
+ */
+ 
+/**
+ * 새로운 이펙트 생성 함수를 생성한다.
+ * @namespace
+ * @class 수치의 중간값을 쉽게 얻을 수 있게 하는 static 컴포넌트
+ * @param {Function} f	0~1 사이의 숫자를 인자로 받아 정해진 공식에 따라 0~1 사이의 값을 리턴하는 함수
+ * @return {Function} 이펙트 생성 함수. 이 함수는 시작값과 종료값을 입력하여 특정 시점에 해당하는 값을 구하는 함수를 생성한다.
+ */
+jindo.Effect = function(fEffect) {
+	if (this instanceof arguments.callee) {
+		throw new Error("You can't create a instance of this");
+	}
+	
+	var rxNumber = /^(\-?[0-9\.]+)(%|px|pt|em)?$/;
+	var rxRGB = /^rgb\(([0-9]+)\s?,\s?([0-9]+)\s?,\s?([0-9]+)\)$/i;
+	var rxHex = /^#([0-9A-F]{2})([0-9A-F]{2})([0-9A-F]{2})$/i;
+	var rx3to6 = /^#([0-9A-F])([0-9A-F])([0-9A-F])$/i;
+	
+	var getUnitAndValue = function(v) {
+		var nValue = v, sUnit;
+		
+		if (rxNumber.test(v)) {
+			nValue = parseFloat(v); 
+			sUnit = RegExp.$2;
+		} else if (rxRGB.test(v)) {
+			nValue = [parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10), parseInt(RegExp.$3, 10)];
+			sUnit = 'color';
+		} else if (rxHex.test(v = v.replace(rx3to6, '#$1$1$2$2$3$3'))) {
+			nValue = [parseInt(RegExp.$1, 16), parseInt(RegExp.$2, 16), parseInt(RegExp.$3, 16)];
+			sUnit = 'color';
+		} 
+				
+		return { 
+			nValue : nValue, 
+			sUnit : sUnit 
+		};
+	};
+	
+	return function(nStart, nEnd) {
+		var sUnit;
+		if (arguments.length > 1) {
+			nStart = getUnitAndValue(nStart);
+			nEnd = getUnitAndValue(nEnd);
+			sUnit = nEnd.sUnit;
+		} else {
+			nEnd = getUnitAndValue(nStart);
+			nStart = null;
+			sUnit = nEnd.sUnit;
+		} 
+		
+		// 두개의 단위가 다르면
+		if (nStart && nEnd && nStart.sUnit != nEnd.sUnit) {
+			throw new Error('unit error');
+		}
+		
+		nStart = nStart && nStart.nValue;
+		nEnd = nEnd && nEnd.nValue;
+		
+		var fReturn = function(p) {
+			var nValue = fEffect(p);
+			var getResult = function(s, d) { 
+				return (d - s) * nValue + s + sUnit; 
+			};
+			
+			if (sUnit == 'color') {
+				var r = parseInt(getResult(nStart[0], nEnd[0]), 10) << 16;
+				r |= parseInt(getResult(nStart[1], nEnd[1]), 10) << 8;
+				r |= parseInt(getResult(nStart[2], nEnd[2]), 10);
+				
+				r = r.toString(16).toUpperCase();
+				for (var i = 0; 6 - r.length; i++) {
+					r = '0' + r;
+				}
+					
+				return '#' + r;
+			}
+			return getResult(nStart, nEnd);
+		};
+		
+		if (nStart === null) {
+			fReturn.setStart = function(s) {
+				s = getUnitAndValue(s);
+				
+				if (s.sUnit != sUnit) {
+					throw new Error('unit eror');
+				}
+				nStart = s.nValue;
+			};
+		}
+		return fReturn;
+	};
+};
+
+/**
+ * 일정한 속도로 변화하는 형태의 이펙트 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark 시작 수치값과 종료 수치값으로는 다음과 같이 여러가지 단위와 표현을 사용할 수 있다
+ * <dl>
+ *	<dt>그냥 숫자</dt>
+ *	<dd>예) 100</dd>
+ *	<dt>px 단위</dt>
+ *	<dd>예) '200px'</dd>
+ *	<dt>% 단위</dt>
+ *	<dd>예) '50%'</dd>
+ *	<dt>em 단위</dt>
+ *	<dd>예) '2em'</dd>
+ *	<dt>색상 단위</dt>
+ *	<dd>
+ *		<dl>
+ *			<dt>rgb 표현</dt>
+ *			<dd>예) 'rgb(255, 127, 0)'</dd>
+ *			<dt>#RRGGBB 표현</dt>
+ *			<dd>예) '#FF7F00'</dd>
+ *			<dt>#RGB 표현</dt>
+ *			<dd>예) '#FA0'</dd>
+ *		</dl>
+ *	</dd>
+ * </dl>
+ * @remark 시작 수치값과 종료 수치값의 단위가 다르면 에러를 발생시킨다.
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @example
+// 100 과 200 사이를 일정하게 증가하는 중간값을 알려주는 함수를 리턴
+var f = jindo.Effect.linear(100, 200);
+
+// 리턴된 함수를 사용하여 중간값을 얻음
+console.log( f(0) ); // 결과 100
+console.log( f(0.5) ); // 결과 150
+console.log( f(1) ); // 결과 200
+ * @example
+//시작 값을 따로 지정하는 예제
+var f = jindo.Effect.linear(200);
+f.setStart(100);
+	
+console.log( f(0.5) ); // 결과 150
+ */
+jindo.Effect.linear = jindo.Effect(function(s) {
+	return s;
+});
+
+/**
+ * 점점 빨라지는 식으로 변화하는 형태의 이펙트 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.easeIn = jindo.Effect(function(s) {
+	return (1 - Math.sqrt(1 - (s * s)));
+});
+
+/**
+ * 점점 느려지는 식으로 변화하는 형태의 이펙트 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.easeOut = jindo.Effect(function(s) {
+	return Math.sqrt((2 - s) * s);
+});
+
+/**
+ * 튀기는 효과로 변화하는 형태의 이펙트 함수를 생성한다.
+ * @remark Script.aculo.us 의 코드 사용
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.bounce = jindo.Effect(function(s) {
+	if (s < (1 / 2.75)) {
+		return (7.5625 * s * s);
+	} else if (s < (2 / 2.75)) {
+		return (7.5625 * (s -= (1.5 / 2.75)) * s + 0.75);
+	} else if (s < (2.5 / 2.75)) {
+		return (7.5625 * (s -= (2.25 / 2.75)) * s + 0.9375);
+	} else {
+		return (7.5625 * (s -= (2.625 / 2.75)) * s + 0.984375);
+	} 
+});
+
+/**
+ * Cubic-Bezier curve
+ * @param {Number} x1
+ * @param {Number} y1
+ * @param {Number} x2
+ * @param {Number} y2
+ * @remark http://www.netzgesta.de/dev/cubic-bezier-timing-function.html
+ */
+jindo.Effect._cubicBezier = function(x1, y1, x2, y2){
+	return function(s){
+		var cx = 3.0 * x1, 
+			bx = 3.0 * (x2 - x1) - cx, 
+			ax = 1.0 - cx - bx, 
+			cy = 3.0 * y1, 
+			by = 3.0 * (y2 - y1) - cy, 
+			ay = 1.0 - cy - by;
+		
+		function sampleCurveX(s){
+			return ((ax * s + bx) * s + cx) * s;
+		}
+		function sampleCurveY(s){
+			return ((ay * s + by) * s + cy) * s;
+		}
+		function solveCurveX(x, epsilon){
+			var t0 = 0.0, t1 = 1.0, t2 = x, x2, d2;
+			for (var i = 0; i < 8; i++) {
+				x2 = sampleCurveX(t2) - x;
+				if (Math.abs(x2) < epsilon) {
+					return t2;
+				}
+				d2 = (3.0 * ax * t2 + 2.0 * bx) * t2 + cx;
+				if (Math.abs(d2) < 1e-6) {
+					break;
+				}
+				t2 = t2 - x2 / d2;
+			}
+			if (t2 < t0) {
+				return t0;
+			}
+			if (t2 > t1) {
+				return t1;
+			}
+			while (t0 < t1) {
+				x2 = sampleCurveX(t2);
+				if (Math.abs(x2 - x) < epsilon) {
+					return t2;
+				}
+				if (x > x2) {
+					t0 = t2;
+				} else {
+					t1 = t2;
+				}
+				t2 = (t1 - t0) * 0.5 + t0;
+			}
+			return t2; // Failure.
+		}
+		
+		return sampleCurveY(solveCurveX(s, (1 / 1000)));
+	};
+};
+
+/**
+ * Cubic-Bezier 함수를 생성한다.
+ * @see http://en.wikipedia.org/wiki/B%C3%A9zier_curve
+ * @param {Number} x1 control point 1의 x좌표
+ * @param {Number} y1 control point 1의 y좌표
+ * @param {Number} x2 control point 2의 x좌표
+ * @param {Number} y2 control point 2의 y좌표
+ * @return {jindo.Effect} 생성된 jindo.Effect 함수
+ */
+jindo.Effect.cubicBezier = function(x1, y1, x2, y2){
+	return jindo.Effect(jindo.Effect._cubicBezier(x1, y1, x2, y2));
+};
+
+/**
+ * 조금 넘어가는 식으로 변화하는 형태의 이펙트 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.overphase = jindo.Effect.cubicBezier(0.25, 0.75, 0.8, 1.3);
+
+/**
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.easeInOut = jindo.Effect.cubicBezier(0.75, 0.0, 0.25, 1.0);
+
+/**
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ */
+jindo.Effect.easeOutIn = jindo.Effect.cubicBezier(0.25, 0.75, 0.75, 0.25);
+
+/**
+ * CSS3 Transition Timing Function과 동일한 ease 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark jindo.Effect.cubicBezier(0.25, 0.1, 0.25, 1);
+ * @see http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag
+ */
+jindo.Effect.cubicEase = jindo.Effect.cubicBezier(0.25, 0.1, 0.25, 1);
+
+/**
+ * CSS3 Transition Timing Function과 동일한 easeIn 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark jindo.Effect.cubicBezier(0.42, 0, 1, 1);
+ * @see http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag
+ */
+jindo.Effect.cubicEaseIn = jindo.Effect.cubicBezier(0.42, 0, 1, 1);
+
+/**
+ * CSS3 Transition Timing Function과 동일한 easeOut 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark jindo.Effect.cubicBezier(0, 0, 0.58, 1);
+ * @see http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag
+ */
+jindo.Effect.cubicEaseOut = jindo.Effect.cubicBezier(0, 0, 0.58, 1);
+
+/**
+ * CSS3 Transition Timing Function과 동일한 easeInOut 함수를 생성한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark jindo.Effect.cubicBezier(0.42, 0, 0.58, 1);
+ * @see http://www.w3.org/TR/css3-transitions/#transition-timing-function_tag
+ */
+jindo.Effect.cubicEaseInOut = jindo.Effect.cubicBezier(0.42, 0, 0.58, 1);
+
+/**
+ * Cubic-Bezier 커브를 이용해 easeOutIn 함수를 구한다.
+ * @param {String | Number} nStart 시작 수치값
+ * @param {String | Number} nEnd 종료 수치값
+ * @return {Function} 해당이펙트의 특정 시점에 해당하는 값을 구하는 함수
+ * @remark jindo.Effect.cubicBezier(0, 0.42, 1, 0.58);
+ */
+jindo.Effect.cubicEaseOutIn = jindo.Effect.cubicBezier(0, 0.42, 1, 0.58);
+
+/**
+ * nPulse의 진동수를 가지는 cos 함수를 구한다.
+ * @param {Number} nPulse 진동수
+ * @return {jindo.Effect} 생성된 jindo.Effect 함수
+ * @example
+var f = jindo.Effect.pulse(3); //진동수 3을 가지는 함수를 리턴
+//시작 수치값과 종료 수치값을 설정해 jindo.Effect 함수를 생성
+var fEffect = f(0, 100);
+fEffect(0); => 0
+fEffect(1); => 100
+ */
+jindo.Effect.pulse = function(nPulse) {
+    return jindo.Effect(function(s){
+		return (-Math.cos((s * (nPulse - 0.5) * 2) * Math.PI) / 2) + 0.5;	
+	});
+};
+/**
+ * @fileOverview 타이머의 사용을 편리하게 해주는 컴포넌트. 함수를 지정한 시간이 지난 후에 실행한다.
+ * @author hooriza, modified by senxation
+ * @version 0.4.1
+ */
+
+jindo.Timer = jindo.$Class({
+	/** @lends jindo.Timer */
+
+	/**
+	 * Timer 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class 타이머의 사용을 편리하게 해주는 컴포넌트
+	 * @extends jindo.Component
+	 * @example
+var oTimer = new jindo.Timer().attach({
+	wait : function(oCustomEvent) {
+		//Timer의 수행을 기다리기 시작한 시점에 발생
+	},
+	abort : function(oCustomEvent) {
+		//Timer의 수행을 강제로 종료되었을 때 발생
+	},
+	run : function(oCustomEvent) {
+		//Timer의 동작이 수행될 때 발생
+	},
+	end : function(oCustomEvent) {
+		//Timer의 동작이 종료될 때 발생
+	}
+});
+	 * @example
+이벤트 목록
+wait : 함수가 실행될 때까지 지정한 시간만큼 기다리기 전에 발생한다
+abort : 인스턴스 외부에서 abort() 함수를 호출해 강제로 타이머를 종료시켰을때 발생한다
+run : 함수가 실행되기 직전에 발생한다
+end : 함수가 false 를 리턴해서 내부적으로 종료시켰을 때 발생한다
+ 	 */
+	$init : function() { 
+		this._nTimer = null;
+		this._nLatest = null;
+		this._nRemained = 0;
+		this._nDelay = null;
+		this._fRun = null;
+		this._bIsRunning = false;
+	},
+	
+	/**
+	 * 함수를 지정한 시간이 지난 후에 실행한다. 실행 함수가 true 를 리턴하면 setInterval 을 사용한 것처럼 계속 반복해서 수행된다.
+	 * @param {Function} fCallback	지정된 지연 시간 이후에 실행 될 함수
+	 * @param {Number} nDelay	msec 단위의 지연 시간
+	 * @return {Boolean} 항상 true
+	 * @example
+var o = new jindo.Timer();
+o.start(function() {
+	// ...
+	return true;
+}, 100);
+	 */
+ 	start : function(fRun, nDelay) {
+		this.abort();
+		
+		this._nRemained = 0;
+		this._nDelay = nDelay;
+		this._fRun = fRun;
+		
+		this._bIsRunning = true;
+		this._nLatest = this._getTime();
+		this.fireEvent('wait');
+		this._excute(this._nDelay, false);
+		
+		return true;
+	},
+	
+	/**
+	 * 타이머의 동작 여부를 가져온다.
+	 * @return {Boolean} 동작중이면 true, 그렇지 않으면 false
+	 */
+	isRunning : function() {
+		return this._bIsRunning;
+	},
+	
+	_getTime : function() {
+		return new Date().getTime();
+	},
+	
+	_clearTimer : function() {
+		var bFlag = false;
+		
+		if (this._nTimer) {
+			clearInterval(this._nTimer);
+			this._bIsRunning = false;
+			bFlag = true;
+		}
+		
+		this._nTimer = null;
+		return bFlag;
+	},
+	
+	/**
+	 * 현재 대기상태에 있는 타이머를 중단시킨다.
+	 * @return {Boolean} 이미 멈춰있었으면 false, 그렇지 않으면 true
+	 */
+	abort : function() {
+		var bReturn = this._clearTimer();
+		if (bReturn) {
+			this.fireEvent('abort');
+			this._fRun = null;
+		}
+		return bReturn;
+	},
+	
+	/**
+	 * 현재 동작하고 있는 타이머를 일시정지 시킨다.
+	 * @return {Boolean} 이미 멈춰있었으면 false, 그렇지 않으면 true
+	 */
+	pause : function() {
+		var nPassed = this._getTime() - this._nLatest;
+		this._nRemained = Math.max(this._nDelay - nPassed, 0);
+		
+		return this._clearTimer();
+	},
+	
+	_excute : function(nDelay, bResetDelay) {
+		var self = this;
+		this._clearTimer();
+	
+		this._bIsRunning = true;
+		this._nTimer = setInterval(function() {
+			if (self._nTimer) { //self._nTimer가 null일때도 간헐적으로 수행되는 버그가 있어 추가
+				self.fireEvent('run');
+				
+				var r = self._fRun();
+				self._nLatest = self._getTime();
+				
+				if (!r) {
+					clearInterval(self._nTimer);
+					self._nTimer = null;
+					self._bIsRunning = false;
+					self.fireEvent('end');
+					return;
+				}
+				
+				self.fireEvent('wait');
+				if (bResetDelay) {
+					self._excute(self._nDelay, false);
+				}
+			}							   
+		}, nDelay);
+	},
+	
+	/**
+	 * 일시정지 상태인 타이머를 재개시킨다.
+	 * @return {Boolean} 재개에 성공했으면 true, 그렇지 않으면 false
+	 */
+	resume : function() {
+		if (!this._fRun || this.isRunning()) {
+			return false;
+		}
+		
+		this._bIsRunning = true;
+		this.fireEvent('wait');
+		this._excute(this._nRemained, true);
+		this._nRemained = 0;
+		return true;
+	}
+}).extend(jindo.Component);
+
+/**
+ * @fileOverview 특정 엘리먼트와 지정한 엘리먼트 그룹에서 발생한 이벤트에 따라 레이어를 보여주고 숨겨주는 컴포넌트
+ * @author hooriza, modified by senxation
+ * @version 0.5.7
+ */
+
+jindo.LayerManager = jindo.$Class({
+	/** @lends jindo.LayerManager.prototype */
+	
+	_bIsActivating  : false,
+	_bIsLayerVisible : false,
+	_bIsHiding : false, //hide() 메소드가 Timer로 수행되고 있는지의 여부
+	_bIsShowing : false,
+	_aLink : null,
+	
+	/**
+	 * 새로운 jindo.LayerManager 객체를 생성한다
+	 * @constructs
+	 * @class 특정 엘리먼트와 지정한 엘리먼트 그룹에서 발생한 이벤트에 따라 레이어를 보여주고 숨겨주는 컴포넌트
+	 * @param {HTMLElement | String} el 숨기고자하는 레이어 엘리먼트 (혹은 id)
+	 * @param {HashTable} htOption 추가 옵션 (생략가능)
+	 * @extends jindo.UIComponent
+	 * @requires jindo.Timer
+	 * @requires jindo.Transition
+	 * @example
+var o = new jindo.LayerManager("layer", {
+	sCheckEvent : 'click', // {String} 어떤 이벤트가 발생했을 때 레이어를 닫아야 하는지 설정
+	nCheckDelay : 100, //{Number} sCheckEvent 발생시 지정된 시간 후에 레이어를 닫음. 이 시간 내에 다시 링크된 엘리먼트에 mouseover되는 경우 레이어가 숨기지 않도록 지정
+	nShowDelay : 0, //{Number} 보여주도록 명령을 한 뒤 얼마 이후에 실제로 보여질지 지연시간 지정 (ms)
+	nHideDelay : 100, //{Number} 숨기도록 명령을 한 뒤 얼마 이후에 실제로 숨겨지게 할지 지연시간 지정 (ms)
+	sMethod : "show", //{String} "fade", "slide" 보이고 숨길 방법 설정 (Transition 컴포넌트 사용)
+	nDuration : 200, //{Number} Transition이 진행될 시간,
+	Transition : { //jindo.Transition에 적용될 옵션들
+		fFadeIn : jindo.Effect.cubicEaseOut, //fadeIn()시 적용될 jindo.Effect
+		fFadeOut : jindo.Effect.cubicEaseIn, //fadeOut()시 적용될 jindo.Effect
+		fSlideDown : jindo.Effect.cubicEaseOut, //slideDown()시 적용될 jindo.Effect
+		fSlideUp : jindo.Effect.cubicEaseIn //slideUp()시 적용될 jindo.Effect
+	}
+}).attach({
+	'beforeShow' : function(oCustomEvent) {
+		//레이어를 보여주기 전 발생
+		//oCustomEvent.stop()을 수행시 레이어를 보여주지 않는다.
+	},
+	'appear' : function(oCustomEvent) {
+		//화면에 나타나기 시작한 시점에 발생.
+		//"fade", "slide"같은 트랜지션효과인 경우 appear와 show가 발생하는 시점이 다를 수 있다. 
+	},
+	'show' : function(oCustomEvent) {
+		//레이어를 보여준 후 발생
+	},
+	'ignore' : function(oCustomEvent) {
+		//이벤트가 발생했으나 레이어를 숨기지 않도록 무시된 경우 발생 
+		//oCustomEvent.sCheckEvent (String) 무시된 이벤트 타입
+	},
+	'beforeHide' : function(oCustomEvent) {
+		//레이어를 숨기기 전 발생
+		//oCustomEvent.stop()을 수행시 레이어를 숨기지 않는다.
+	},
+	'hide' : function(oCustomEvent) {
+		//레이어를 숨긴 후 발생
+	}
+}).link(elLayer).link(elBtn);
+	 */
+	$init: function(el, htOption){
+		this.option({
+			sCheckEvent: "click",
+			nCheckDelay: 100,
+			nShowDelay: 0,
+			nHideDelay: 100,
+			sMethod : "show", // "fade", "slide"
+			nDuration : 200,
+			Transition : {
+				fFadeIn : jindo.Effect.cubicEaseOut,
+				fFadeOut : jindo.Effect.cubicEaseIn,
+				fSlideDown : jindo.Effect.cubicEaseOut,
+				fSlideUp : jindo.Effect.cubicEaseIn
+			}
+		});
+		
+		this.option(htOption || {});
+		this.setLayer(el);
+		
+		this._aLink = [];
+		this._oShowTimer = new jindo.Timer();
+		this._oHideTimer = new jindo.Timer();
+		this._oEventTimer = new jindo.Timer();
+		this._wfOnEvent = jindo.$Fn(this._onEvent, this);
+		this.getVisible();
+		this.activate();
+	},
+	
+	/**
+	 * 컴포넌트를 활성화한다.
+	 */
+	_onActivate : function() {
+		this._wfOnEvent.attach(document, this.option("sCheckEvent"));
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화한다.
+	 */
+	_onDeactivate : function() {
+		this._wfOnEvent.detach(document, this.option("sCheckEvent"));
+	},
+	
+	/**
+	 * Layer가 보여지고 있는지 여부를 가져온다.
+	 * @return {Boolean}
+	 */
+	getVisible: function(){
+		return this._bIsLayerVisible = (this._wel.visible() && this._wel.opacity() > 0);
+	},
+	
+	_check: function(el){
+		var wel = jindo.$Element(el);
+		for (var i = 0, elLink; elLink = this._aLink[i]; i++) {
+			elLink = jindo.$Element(elLink).$value();
+			if (elLink && (el == elLink || wel.isChildOf(elLink))) {
+				return true;
+			} 
+		}
+		return false;
+	},
+	
+	_find: function(el){
+		for (var i = 0, elLink; (elLink = this._aLink[i]); i++) {
+			if (elLink == el) {
+				return i;
+			} 
+		}
+		return -1;
+	},
+	
+	/**
+	 * 보여주고 숨겨줄 레이어 객체를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getLayer : function() {
+		return this._el;
+	},
+	
+	/**
+	 * 보여주고 숨겨줄 레이어 객체를 설정한다.
+	 * @return {this} 
+	 */
+	setLayer : function(el) {
+		this._el = jindo.$(el);
+		this._wel = jindo.$Element(el);
+		
+		var elToMeasure = this._el.cloneNode(true);
+		var welToMeasure = jindo.$Element(elToMeasure);
+		welToMeasure.css({
+			position : "absolute",
+			left : "-5000px"
+		}).appendTo(this._el.parentNode);
+		
+		welToMeasure.show();
+		this._nLayerHeight = welToMeasure.height();
+		welToMeasure.height(this._nLayerHeight);
+		this._sLayerCSSHeight = welToMeasure.css("height");
+		this._sLayerCSSOverflowX = this._wel.css("overflowX");
+		this._sLayerCSSOverflowY = this._wel.css("overflowY");
+		welToMeasure.css("overflow", "hidden").height(0);
+		this._nSlideMinHeight = welToMeasure.height() + 1; 
+		welToMeasure.leave();
+			
+		return this;
+	},
+	
+	_transform : function(){
+		this._wel.css({
+			"overflowX": "hidden",
+			"overflowY": "hidden"
+		});
+	},
+	
+	_restore : function() {
+		this._wel.css({
+			"overflowX": this._sLayerCSSOverflowX,
+			"overflowY": this._sLayerCSSOverflowY
+		});
+	},
+	
+	/**
+	 * link된 엘리먼트 배열을 가져온다.
+	 * @return {Array}
+	 */
+	getLinks : function() {
+		return this._aLink;
+	},
+	
+	/**
+	 * link할 엘리먼트 배열을 설정한다.
+	 * @param {Array}
+	 * @return {this} 인스턴스 자신
+	 */
+	setLinks : function(a) {
+		this._aLink = jindo.$A(a).unique().$value();
+		return this;
+	},
+	
+	/**
+	 * 생성자의 옵션으로 지정한 이벤트가 발생해도 레이어를 닫지 않게 할 엘리먼트를 지정한다
+	 * @param {vElement} vElement 이벤트를 무시할 엘리먼트 또는 엘리먼트의 ID (인자를 여러개 주어서 다수 지정 가능)
+	 * @return {this} 인스턴스 자신
+	 * @example
+	 *	o.link(jindo.$("one"), "two", oEl);
+	 */
+	link: function(vElement){
+		if (arguments.length > 1) {
+			for (var i = 0, len = arguments.length; i < len; i++) {
+				this.link(arguments[i]);
+			}
+			return this;
+		}
+		
+		if (this._find(vElement) != -1) {
+			return this;
+		} 
+		
+		this._aLink.push(vElement);
+		return this;
+	},
+	
+	/**
+	 * 생성자의 옵션으로 지정한 이벤트가 발생해도 레이어를 닫지 않게 할 엘리먼트 지정한 것을 제거한다
+	 * @param {vElement} vElement 이벤트가 무시된 엘리먼트 또는 엘리먼트의 ID (인자를 여러개 주어서 다수 지정 가능)
+	 * @return {this} 인스턴스 자신
+	 * @example
+	 *	o.unlink(jindo.$("one"), "two", oEl);
+	 */
+	unlink: function(vElement){
+		if (arguments.length > 1) {
+			for (var i = 0, len = arguments.length; i < len; i++) {
+				this.unlink(arguments[i]);
+			}
+			return this;
+		}
+		
+		var nIndex = this._find(vElement);
+		if (nIndex > -1) {
+			this._aLink.splice(nIndex, 1);
+		}
+		
+		return this;
+	},
+	
+	_fireEventBeforeShow : function() {
+		this._transform();
+		return this.fireEvent("beforeShow", {
+			elLayer : this.getLayer(),
+			aLinkedElement : this.getLinks(),
+			sMethod : this.option("sMethod")
+		});
+	},
+	
+	_fireEventAppear : function() {
+		this.fireEvent("appear", {
+			elLayer : this.getLayer(),
+			aLinkedElement : this.getLinks(),
+			sMethod : this.option("sMethod")
+		});
+	},
+	
+	_fireEventShow : function() {
+		this._bIsShowing = false;
+		this._restore();
+		this.fireEvent("show", {
+			elLayer : this.getLayer(),
+			aLinkedElement : this.getLinks(),
+			sMethod : this.option("sMethod")
+		});
+	},
+	
+	
+	_fireEventBeforeHide : function() {
+		this._transform();
+		return this.fireEvent("beforeHide", {
+			elLayer : this.getLayer(),
+			aLinkedElement : this.getLinks(),
+			sMethod : this.option("sMethod")
+		});
+	},
+	
+	_fireEventHide : function() {
+		this._bIsHiding = false;
+		this._restore();
+		this.fireEvent("hide", {
+			elLayer : this.getLayer(),
+			aLinkedElement : this.getLinks(),
+			sMethod : this.option("sMethod")
+		});
+	},
+	
+	_show: function(fShow, nDelay){
+		this._oEventTimer.abort();
+		this._bIsShowing = true;
+		this._bIsHiding = false;
+		if (nDelay > 0) {
+			this._oShowTimer.start(fShow, nDelay);
+		} else {
+			this._oHideTimer.abort();
+			fShow();
+		}
+	},
+	
+	_hide: function(fHide, nDelay){
+		this._bIsShowing = false;
+		this._bIsHiding = true;
+		if (nDelay > 0) {
+			this._oHideTimer.start(fHide, nDelay);
+		} else {
+			this._oShowTimer.abort();
+			fHide();
+		}
+	},
+	
+	_getShowMethod : function() {
+		switch (this.option("sMethod")) {
+			case "show" :
+				return "showIn";
+			case "fade" :
+				return "fadeIn";
+			case "slide" :
+				return "slideDown";
+		}
+	},
+	
+	_getHideMethod : function() {
+		switch (this.option("sMethod")) {
+			case "show" :
+				return "hideOut";
+			case "fade" :
+				return "fadeOut";
+			case "slide" :
+				return "slideUp";
+		}
+	},
+	
+	/**
+	 * 레이어를 보여준다.
+	 * 레이어를 보여주는 방식은 sMethod 옵션에 따른다.
+	 * @param {Number} nDelay
+	 * @return {this}
+	 */
+	show : function(nDelay) {
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nShowDelay");
+		}
+		this[this._getShowMethod()](nDelay);
+		return this;
+	},
+	
+	/**
+	 * 레이어를 숨긴다.
+	 * 레이어를 숨기는 방식은 sMethod 옵션에 따른다.
+	 * @param {Number} nDelay
+	 * @return {this}
+	 */
+	hide : function(nDelay) {
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nHideDelay");
+		}
+		this[this._getHideMethod()](nDelay);
+		return this;
+	},
+	
+	/**
+	 * 레이어를 보여주도록 요청한다
+	 * @param {Number} nDelay 레이어를 보여줄 때의 지연시간을 지정 (생략시 옵션으로 지정한 nShowDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	showIn: function(nDelay){
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nShowDelay");
+		}
+		
+		var self = this;
+		this._show(function(){
+			self._sAppliedMethod = "show";
+			if (!self.getVisible()) {
+				if (self._fireEventBeforeShow()) {
+					self._wel.show();
+					self._fireEventAppear();
+					self._fireEventShow();
+				}
+			}
+		}, nDelay);
+		
+		return this;
+	},
+	
+	/**
+	 * 레이어를 숨기도록 요청한다
+	 * @param {Number} nDelay 레이어를 숨길 때의 지연시간을 지정 (생략시 옵션으로 지정한 nHideDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	hideOut: function(nDelay){
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nHideDelay");
+		}
+		var self = this;
+		this._hide(function(){
+			self._sAppliedMethod = "show";
+			if (self.getVisible()) {
+				if (self._fireEventBeforeHide()) {
+					self._wel.hide();
+					self._fireEventHide();
+				}
+			}
+		}, nDelay);
+		return this;
+	},
+	
+	/**
+	 * fade, slide를 위한 transition 객체를 가져온다.
+	 */
+	_getTransition : function() {
+		if (this._oTransition) {
+			return this._oTransition;	
+		} else {
+			return (this._oTransition = new jindo.Transition().fps(30));
+		}
+	},
+	
+	/**
+	 * 레이어를 보여주도록 요청한다
+	 * @param {Number} nDelay 레이어를 보여줄 때의 지연시간을 지정 (생략시 옵션으로 지정한 nShowDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	fadeIn : function(nDelay){
+		var oTransition = this._getTransition();
+		oTransition.detachAll().abort();
+		
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nShowDelay");
+		}
+		var nDuration = this.option("nDuration");
+		
+		var self = this;
+		this._show(function(){
+			self._sAppliedMethod = "fade";
+			var elLayer = self.getLayer();
+			
+			if (!self._wel.visible() || self._wel.opacity() != 1) {
+				//show
+				if (self._fireEventBeforeShow()) {
+					if (!self._wel.visible()) {
+						self._wel.opacity(0);
+						self._wel.show();
+					}
+					nDuration *= (1 - self._wel.opacity());
+					oTransition.attach({
+						playing: function(oCustomEvent){
+							if (oCustomEvent.nStep === 1) {
+								this.detach("playing", arguments.callee);
+								self._fireEventAppear();
+							}
+						},
+						end: function(oCustomEvent){
+							this.detach("end", arguments.callee);
+							self._fireEventShow();
+						}
+					}).start(nDuration, elLayer, {
+						"@opacity": self.option("Transition").fFadeIn.apply(null, [1])
+					});
+				}
+			}
+		}, nDelay);
+		
+		return this;
+	},
+	
+	/**
+	 * 레이어를 숨기도록 요청한다
+	 * @param {Number} nDelay 레이어를 숨길 때의 지연시간을 지정 (생략시 옵션으로 지정한 nHideDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	fadeOut: function(nDelay){
+		var oTransition = this._getTransition();
+		oTransition.detachAll().abort();
+		
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nHideDelay");
+		}
+		var nDuration = this.option("nDuration");
+		
+		var self = this;
+		this._hide(function(){
+			self._sAppliedMethod = "fade";
+			
+			if (self.getVisible()) {
+				var elLayer = self.getLayer();
+				if (self._fireEventBeforeHide()) {
+				
+					nDuration *= self._wel.opacity();
+					
+					oTransition.attach({
+						end: function(e){
+							this.detach("end", arguments.callee);
+							self._wel.hide();
+							self._wel.opacity(1);
+							self._fireEventHide();
+						}
+					}).start(nDuration, elLayer, {
+						"@opacity": self.option("Transition").fFadeOut.apply(null, [0])
+					});
+				}
+			}
+		}, nDelay);
+		return this;
+	},
+	
+	/**
+	 * 레이어를 보여주도록 요청한다
+	 * @param {Number} nDelay 레이어를 보여줄 때의 지연시간을 지정 (생략시 옵션으로 지정한 nShowDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	slideDown : function(nDelay){
+		var oTransition = this._getTransition();
+		oTransition.detachAll().abort();
+		
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nShowDelay");
+		}
+		var nDuration = this.option("nDuration");
+		
+		var self = this;
+		
+		this._show(function(){
+			self._sAppliedMethod = "slide";
+			var elLayer = self.getLayer();
+			
+			if (Math.ceil(self._wel.height()) < self._nLayerHeight) {
+				//show
+				if (self._fireEventBeforeShow()) {
+					if (!self.getVisible()) {
+						self._wel.height(0).show();
+					} else {
+						nDuration = Math.ceil(nDuration * ((self._nLayerHeight - self._wel.height()) / (self._nLayerHeight - self._nSlideMinHeight)));
+					}
+					oTransition.attach({
+						playing: function(oCustomEvent){
+							if (oCustomEvent.nStep === 1) {
+								this.detach("playing", arguments.callee);
+								self._fireEventAppear();
+							}
+						},
+						end: function(oCustomEvent){
+							this.detach("end", arguments.callee);
+							self._fireEventShow();
+						}
+					}).start(nDuration, {
+						getter: function(sKey){
+							return jindo.$Element(elLayer)[sKey]() + 1;
+						},
+						
+						setter: function(sKey, nValue){
+							jindo.$Element(elLayer)[sKey](parseFloat(nValue));
+						}
+					}, {
+						height: self.option("Transition").fSlideDown.apply(null, [self._nLayerHeight])
+					});
+				}
+			}
+		}, nDelay);
+		
+		return this;
+	},
+	
+	/**
+	 * 레이어를 숨기도록 요청한다
+	 * @param {Number} nDelay 레이어를 숨길 때의 지연시간을 지정 (생략시 옵션으로 지정한 nHideDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	slideUp: function(nDelay){
+		var oTransition = this._getTransition();
+		oTransition.detachAll().abort();
+		
+		if (typeof nDelay == "undefined") {
+			nDelay = this.option("nHideDelay");
+		}
+		var nDuration = this.option("nDuration");
+		
+		var self = this;
+		this._hide(function(){
+			self._sAppliedMethod = "slide";
+			var elLayer = self.getLayer();
+			
+			if (self.getVisible()) {
+				if (self._fireEventBeforeHide()) {
+					nDuration = Math.ceil(nDuration * (self._wel.height() / self._nLayerHeight));
+					oTransition.attach({
+						end: function(e){
+							self._wel.hide().css({
+								"height": self._sLayerCSSHeight
+							});
+							this.detach("end", arguments.callee);
+							
+							self._fireEventHide();
+						}
+					}).start(nDuration, {
+						getter: function(sKey){
+							return jindo.$Element(elLayer)[sKey]();
+						},
+						setter: function(sKey, nValue){
+							jindo.$Element(elLayer)[sKey](Math.ceil(nValue));
+						}
+					}, {
+						height: self.option("Transition").fSlideUp.apply(null, [self._nSlideMinHeight])
+					});
+				}
+			}
+		}, nDelay);
+		
+		return this;
+	},
+	
+	/**
+	 * 레이어를 보여주거나 숨기도록 요청한다
+	 * @param {Number} nDelay 레이어를 보여주거나 숨길 때의 지연시간을 지정 (생략시 옵션으로 지정한 showDelay/hideDelay 값을 따른다)
+	 * @return {this} 인스턴스 자신
+	 */
+	toggle: function(nDelay){
+		if (!this.getVisible() || this._bIsHiding) {
+			this.show(nDelay || this.option("nShowDelay"));
+		} else {
+			this.hide(nDelay || this.option("nHideDelay"));
+		}
+		return this;
+	},
+	
+	_onEvent : function(we){
+		var el = we.element,
+			self = this;
+		
+		this._oEventTimer.start(function() {
+			if (!self._bIsHiding && self.getVisible()) {
+				if (self._check(el)) { // hide()수행중이 아니고 links 객체들 안에서 발생한거면 무시
+					if (!self._bIsShowing) {
+						self.fireEvent("ignore", {
+							sCheckEvent : self.option("sCheckEvent")
+						});
+						self._oHideTimer.abort();
+						self._bIsHiding = false;
+					}
+				} else { //이벤트에 의해 hide()
+					//mousedown시 disabled된 input일 경우 el이 제대로 리턴되지 않는 IE버그 수정
+					if (typeof el.tagName != "undefined") {
+						self.hide();
+					}
+				}
+			}
+		}, this.option("nCheckDelay"));	//link된 레이어 내를 클릭해서 레이어를 닫으려하는 경우 처리
+	}
+	
+}).extend(jindo.UIComponent);
+/**
+ * @fileOverview 특정 엘리먼트로부터 상대적인 레이어의 위치를 구한다. 
+ * @author senxation
+ * @version 0.2.3
+ */
+
+jindo.LayerPosition = jindo.$Class({
+	/** @lends jindo.LayerPosition.prototype */
+
+	/**
+	 * 컴포넌트를 생성한다.
+	 * 위치를 설정할 레이어 엘리먼트는 document.body의 바로 아래에 존재해야야 한다.
+	 * 그렇지 않을 경우 강제로 document.body로 이동된다.
+	 * @constructs
+	 * @class 레이어를 지정된 엘리먼트에 상대적으로 위치시켜주는 컴포넌트 
+	 * @param {HTMLElement} el 기준이 되는 엘리먼트, document.body도 가능하다
+	 * @param {HTMLElement} elLayer 위치를 설정할 레이어 엘리먼트
+	 * @param {HashTable} htOption 옵션 객체
+	 * @extends jindo.Component
+	 * @example
+var oLayerPosition = new jindo.LayerPosition(jindo.$("center"), jindo.$("layer26"), { 
+	sPosition: "outside-bottom", //레이어를 띄울 위치. 총 17가지의 위치를 가질 수 있다.
+	sAlign: "left", //레이어의 위치가 top/bottom일 때 좌우 정렬 값 "left" || "center" || "middle" 
+	sValign: "", //레이어의 위치가 left/right일 때 상하 정렬 값 "top" || "middle" || "bottom"
+	nTop: 0, //기준 레이어와의 y좌표의 차이
+	nLeft: 0, //기준 레이어와의 x좌표의 차이
+	bAuto: false //자동정렬 여부. 스크롤과 브라우저창의 크기가 변경될 때 레이어 위치를 다시 조정한다.
+}).attach({
+	beforeAdjust : function(oCustomEvent){
+		//bAuto 옵션에 의해 자동으로 위치가 조정되기 전에 발생
+		//이벤트 객체 oCustomEvent = {
+		//	elLayer : {HTMLElement} 레이어 엘리먼트
+		//	htCurrentPosition : {HashTable} 현재 위치
+		//	htAdjustedPosition : {HashTable} 이동될 위치
+		//}
+		//oCustomEvent.stop(); 수행시 조정되지 않음
+	},
+	adjust : function(oCustomEvent){
+		//bAuto 옵션에 의해 자동으로 위치가 조정된 이후에 발생
+		//이벤트 객체 oCustomEvent = {
+		//	elLayer : {HTMLElement} 레이어 엘리먼트
+		//	htCurrentPosition : {HashTable} 조정된 현재 위치
+		//}
+	}
+});
+     * @example
+htOption.sPosition = "outside-top-left" || "outside-top" || "outside-top-right" || "outside-right" || "outside-bottom-right" || "outside-bottom" || "outside-bottom-left" || "outside-left" || "inside-top-left" || "inside-top" || "inside-top-right" || "inside-right" || "inside-bottom-right" || "inside-bottom" || "inside-bottom-left" || "inside-left" || "inside-center" 
+	 */
+	$init: function(el, elLayer, htOption){
+		this.option({
+			sPosition: "outside-bottom",
+			sAlign: "left",
+			sValign: "",
+			nTop: 0,
+			nLeft: 0,
+			bAuto: false
+		});
+		this.option(htOption || {});
+		this.setElement(el);
+		if (elLayer) {
+			this.setLayer(elLayer);
+		}
+		if (el && elLayer) {
+			this.setPosition();	
+		}
+		
+		this._wfSetPosition = jindo.$Fn(function(){
+			if (jindo.$Element(this.getLayer()).visible()){
+				var el = this.getLayer();
+				
+				if (this.fireEvent("beforeAdjust", {
+						elLayer : el,
+						htCurrentPosition : this.getCurrentPosition(),
+						htAdjustedPosition : this._adjustPosition(this.getCurrentPosition())					
+					})) {
+					this.setPosition();
+					this.fireEvent("adjust", {
+						elLayer : el,
+						htCurrentPosition : this.getCurrentPosition()
+					});
+				}
+			}
+		}, this);
+		
+		if (this.option("bAuto")) {
+			this._wfSetPosition.attach(window, "scroll").attach(window, "resize");				
+		}
+	},
+	
+	/**
+	 * 기준 엘리먼트를 구한다.
+	 * @return {HTMLElement}
+	 */
+	getElement : function() {
+		return this._el;
+	},
+	
+	/**
+	 * 기준 엘리먼트를 설정한다.
+	 * @param {HTMLElement}
+	 * @return {this} 인스턴스 자신
+	 */
+	setElement : function(el) {
+		this._el = jindo.$(el);
+		return this;
+	},
+	
+	/**
+	 * 레이어 엘리먼트를 구한다.
+	 * @return {HTMLElement}
+	 */
+	getLayer : function() {
+		return this._elLayer;
+	},
+	
+	/**
+	 * 레이어 엘리먼트를 설정한다. 설정된 엘리먼트는 document.body에 append된다.
+	 * @param {HTMLElement}
+	 * @return {this} 인스턴스 자신
+	 */
+	setLayer : function(elLayer) {
+		this._elLayer = jindo.$(elLayer);
+		document.body.appendChild(elLayer);
+		return this;
+	},
+	
+	_isPosition : function(htOption, sWord) {
+		if (htOption.sPosition.indexOf(sWord) > -1) {
+			return true;
+		}
+		return false;
+	},
+	
+	_setLeftRight : function (htOption, htPosition){
+		var el = this.getElement(),
+			elLayer = this.getLayer(),
+			nWidth = el.offsetWidth,// + parseInt(wel.css('marginLeft')) + parseInt(wel.css('marginRight'));
+			nLayerWidth = elLayer.offsetWidth;
+			
+		if (el == document.body) {
+			nWidth = jindo.$Document().clientSize().width;
+		}
+		
+		var bLeft = this._isPosition(htOption, "left"),
+			bRight = this._isPosition(htOption, "right"),
+			bInside = this._isPosition(htOption, "inside");
+		
+		
+		if (bLeft) {
+			if (bInside) {
+				htPosition.nLeft += htOption.nLeft;
+			} else {
+				htPosition.nLeft -= nLayerWidth;
+				htPosition.nLeft -= htOption.nLeft;					
+			}
+		} else if (bRight) {
+			htPosition.nLeft += nWidth;
+			if (bInside) {
+				htPosition.nLeft -= nLayerWidth;
+				htPosition.nLeft -= htOption.nLeft;
+			} else {
+				htPosition.nLeft += htOption.nLeft;
+			}
+		} else {
+			if (htOption.sAlign == "left") {
+				htPosition.nLeft += htOption.nLeft;	
+			}
+			
+			if (htOption.sAlign == "center") {
+				htPosition.nLeft += (nWidth - nLayerWidth) / 2;
+			}
+				
+			if (htOption.sAlign == "right") {
+				htPosition.nLeft += nWidth - nLayerWidth;
+				htPosition.nLeft -= htOption.nLeft;	
+			}
+		}
+		return htPosition;
+	},
+	
+	_setVerticalAlign : function (htOption, htPosition) {
+		var el = this.getElement(),
+			elLayer = this.getLayer(),
+			nHeight = el.offsetHeight,// + parseInt(wel.css('marginTop')) + parseInt(wel.css('marginBottom'));
+			nLayerHeight = elLayer.offsetHeight;
+			
+		if (el == document.body) {
+			nHeight = jindo.$Document().clientSize().height;
+		}
+		
+		switch (htOption.sValign) {
+			case "top" :
+				htPosition.nTop += htOption.nTop;	
+			break;
+			case "middle" :
+				htPosition.nTop += (nHeight - nLayerHeight) / 2;
+			break;
+			case "bottom" :
+				htPosition.nTop += nHeight - nLayerHeight - htOption.nTop;
+			break;
+		}
+		
+		return htPosition;
+	},
+	
+	_adjustScrollPosition : function(htPosition) {
+		/* 기준 엘리먼트가 body인 경우 scroll 포지션에 따른 보정 */
+		if (this.getElement() == document.body) {
+			var htScrollPosition = jindo.$Document().scrollPosition();
+			htPosition.nTop += htScrollPosition.top;	
+			htPosition.nLeft += htScrollPosition.left;
+		}
+		return htPosition;
+	},
+	
+	/**
+	 * 옵션에 해당하는 레이어의 위치를 구한다.
+	 * @param {HashTable} htOption
+	 * @return {HashTable} htPosition
+	 * @example
+oLayerPosition.getPosition({
+	sPosition: "outside-bottom",
+	sAlign: "left",
+	sValign: "",
+	nTop: 10, //지정되지 않으면 0으로 설정된다.
+	nLeft: 10 //지정되지 않으면 0으로 설정된다.
+}); 
+
+(return value) htPosition = {
+	nTop : (Number) 문서상의 y좌표
+	nLeft : (Number) 문서상의 x좌표
+} 
+	 */
+	getPosition : function(htOption) {
+		if (typeof htOption != "object") {
+			htOption = this.option();
+		} 
+		if (typeof htOption.nTop == "undefined") {
+			htOption.nTop = 0;
+		}
+		if (typeof htOption.nLeft == "undefined") {
+			htOption.nLeft = 0;
+		}
+		
+		var sArea,
+			bCenter = this._isPosition(htOption, "center"),
+			bInside = this._isPosition(htOption, "inside"),
+			
+			bTop = this._isPosition(htOption, "top"),
+			bBottom = this._isPosition(htOption, "bottom"),
+			bLeft = this._isPosition(htOption, "left"),
+			bRight = this._isPosition(htOption, "right");
+		
+		if (bLeft) {
+			sArea = "left";
+		}
+		if (bRight) {
+			sArea = "right";
+		}
+		if (bTop) {
+			sArea = "top";
+		}
+		if (bBottom) {
+			sArea = "bottom";
+		}
+		if (bCenter){
+			sArea = "center";
+		}
+		
+		var el = this.getElement(),
+			wel = jindo.$Element(el),
+			elLayer = this.getLayer(),
+			welLayer = jindo.$Element(elLayer),
+			htElementPosition = wel.offset(),
+			nWidth = el.offsetWidth,// + parseInt(wel.css('marginLeft')) + parseInt(wel.css('marginRight'));
+			nHeight = el.offsetHeight,// + parseInt(wel.css('marginTop')) + parseInt(wel.css('marginBottom'));
+			oClientSize,
+			nLayerWidth = elLayer.offsetWidth,
+			nLayerHeight = elLayer.offsetHeight,
+			htPosition = {
+				nTop: htElementPosition.top,
+				nLeft: htElementPosition.left
+			};
+			
+		if (el == document.body) {
+			oClientSize = jindo.$Document().clientSize();
+			nWidth = oClientSize.width;
+			nHeight = oClientSize.height;
+		}
+		
+		//Layer에 마진이 있는경우 렌더링 보정.
+		nLayerWidth += parseInt(welLayer.css('marginLeft')) + parseInt(welLayer.css('marginRight')) || 0;
+		nLayerHeight += parseInt(welLayer.css('marginTop')) + parseInt(welLayer.css('marginBottom')) || 0;
+		
+		switch (sArea) {
+			case "center" :
+				htPosition.nTop += (nHeight - nLayerHeight) / 2;
+				htPosition.nTop += htOption.nTop;
+				htPosition.nLeft += (nWidth - nLayerWidth) / 2;
+				htPosition.nLeft += htOption.nLeft;
+			break;
+			case "top" :
+				if (bInside) {
+					htPosition.nTop += htOption.nTop;	
+				} else {
+					htPosition.nTop -= htOption.nTop + nLayerHeight;
+				}
+				htPosition = this._setLeftRight(htOption, htPosition);
+			break;
+			case "bottom" :
+				htPosition.nTop += nHeight;
+				if (bInside) {
+					htPosition.nTop -= htOption.nTop + nLayerHeight;
+				} else {
+					htPosition.nTop += htOption.nTop;
+				}
+				htPosition = this._setLeftRight(htOption, htPosition);
+			break;
+			case "left" :
+				if (bInside) {
+					htPosition.nLeft += htOption.nLeft;
+				} else {
+					htPosition.nLeft -= htOption.nLeft + nLayerWidth;
+				}
+				htPosition = this._setVerticalAlign(htOption, htPosition);
+			break;
+			case "right" :
+				htPosition.nLeft += nWidth;
+				if (bInside) {
+					htPosition.nLeft -= htOption.nLeft + nLayerWidth;
+				} else {
+					htPosition.nLeft += htOption.nLeft;
+				}
+				htPosition = this._setVerticalAlign(htOption, htPosition);
+			break;
+		}
+		
+		htPosition = this._adjustScrollPosition(htPosition);
+		return htPosition;
+	},
+	
+	/**
+	 * 레이어를 지정된 옵션에 맞게 위치시킨다.
+	 * @param {HashTable} htPosition 위치에 대한 객체 (생략시, 설정된 옵션에 따라 자동으로 계산된다)
+	 * @return {this} 인스턴스 자신
+	 * @remark css의 top, left 속성으로 위치를 설정한다. 
+	 * @example
+oLayerPosition.setPosition({ nTop : 100, nLeft : 100 }); 
+	 */
+	setPosition : function(htPosition){
+		var welLayer = jindo.$Element(this.getLayer());
+		welLayer.css("left", "-9999px").css("top", "0px");
+		
+		if (typeof htPosition == "undefined") {
+			htPosition = this.getPosition();
+		}
+		if (this.option("bAuto")) {
+			htPosition = this._adjustPosition(htPosition);
+		}
+		welLayer.css("left", htPosition.nLeft + "px").css("top", htPosition.nTop + "px"); //offset으로 설정할경우 간혹 수치가 맞지 않음
+		return this;
+	},
+	
+	/**
+	 * 현재 레이어의 위치를 구한다.
+	 * @return {HashTable}
+	 * @remark 설정된 css의 top, left 속성값을 숫자값으로 리턴한다.
+	 * @example
+(return value) htPosition = {
+	nTop : (Number) 문서상의 y좌표
+	nLeft : (Number) 문서상의 x좌표
+} 
+	 */
+	getCurrentPosition : function() {
+		var welLayer = jindo.$Element(this.getLayer());
+			
+		return {
+			nTop : parseInt(welLayer.css("top")),
+			nLeft : parseInt(welLayer.css("left"))
+		};
+	},
+	
+	/**
+	 * 레이어 전체가 화면에 보이는지 여부를 가져온다.
+	 * @param {HashTable} htPosition
+	 * @return {Boolean}
+	 * @ignore
+	 */
+	_isFullyVisible : function(htPosition){
+		var elLayer = this.getLayer(),
+			welLayer = jindo.$Element(elLayer),
+			oScrollPosition = jindo.$Document().scrollPosition(),
+			nScrollTop = oScrollPosition.top, 	//top
+			nScrollLeft = oScrollPosition.left,	//left
+			oClientSize = jindo.$Document().clientSize(),
+			nLayerWidth = elLayer.offsetWidth + (parseInt(welLayer.css('marginLeft')) + parseInt(welLayer.css('marginRight')) || 0),
+			nLayerHeight = elLayer.offsetHeight + (parseInt(welLayer.css('marginTop')) + parseInt(welLayer.css('marginBottom')) || 0);
+		
+		if (htPosition.nLeft >= 0 && 
+			htPosition.nTop >= 0 && 
+			oClientSize.width >= htPosition.nLeft - nScrollLeft + nLayerWidth && 
+			oClientSize.height >= htPosition.nTop - nScrollTop + nLayerHeight) {
+			return true;
+		}
+		return false;
+	},
+	
+	/**
+	 * 가로방향으로 반전되어 배치되도록 변환된 옵션 객체를 가져온다.
+	 * @param {HashTable} htOption
+	 * @return {HashTable} htOption
+	 * @ignore
+	 */
+	_mirrorHorizontal : function(htOption) {
+		if (htOption.sAlign == "center" || htOption.sPosition == "inside-center") {
+			return htOption;
+		}
+		
+		var htConvertedOption = {};
+		for (var i in htOption) {
+			htConvertedOption[i] = htOption[i];
+		}
+		
+		if (this._isPosition(htConvertedOption, "right")) {
+			htConvertedOption.sPosition = htConvertedOption.sPosition.replace(/right/, "left");
+		} else if (this._isPosition(htConvertedOption, "left")) {
+			htConvertedOption.sPosition = htConvertedOption.sPosition.replace(/left/, "right");
+		} else if (htConvertedOption.sAlign == "right") {
+			htConvertedOption.sAlign = "left";
+		} else if (htConvertedOption.sAlign == "left") {
+			htConvertedOption.sAlign = "right";
+		}
+		
+		return htConvertedOption;
+	},
+	
+	/**
+	 * 세로방향으로 반전되어 배치되도록 변환된 옵션 객체를 가져온다.
+	 * @param {HashTable} htOption
+	 * @return {HashTable} htOption
+	 * @ignore
+	 */
+	_mirrorVertical : function(htOption) {
+		if (htOption.sValign == "middle" || htOption.sPosition == "inside-center") {
+			return htOption;
+		}
+		
+		var htConvertedOption = {};
+		for (var i in htOption) {
+			htConvertedOption[i] = htOption[i];
+		}
+		
+		if (this._isPosition(htConvertedOption, "top")) {
+			htConvertedOption.sPosition = htConvertedOption.sPosition.replace(/top/, "bottom");
+		} else if (this._isPosition(htConvertedOption, "bottom")) {
+			htConvertedOption.sPosition = htConvertedOption.sPosition.replace(/bottom/, "top");
+		} else if (htConvertedOption.sValign == "top") {
+			htConvertedOption.sValign = "bottom";
+		} else if (htConvertedOption.sValign == "bottom") {
+			htConvertedOption.sValign = "top";
+		}
+		
+		return htConvertedOption;
+	},
+	
+	/**
+	 * 레이어가 항상 보이도록 위치를 자동 조절한다.
+	 * 우선순위는 가로 반전, 세로반전, 가로세로반전 순이다.
+	 * 모든 경우에도 레이어 전체가 보이지 않을 경우 원위치시킨다.
+	 * @param {HashTable} htPosition
+	 * @return {HashTable} htOption
+	 * @ignore
+	 */
+	_adjustPosition: function(htPosition){
+		var htOption = this.option(),
+			aCandidatePosition = [];
+		
+		aCandidatePosition.push(htPosition);
+		aCandidatePosition.push(this.getPosition(this._mirrorHorizontal(htOption)));
+		aCandidatePosition.push(this.getPosition(this._mirrorVertical(htOption)));
+		aCandidatePosition.push(this.getPosition(this._mirrorVertical(this._mirrorHorizontal(htOption))));
+		
+		for (var i = 0, htCandidatePosition; htCandidatePosition = aCandidatePosition[i]; i++) {
+			if (this._isFullyVisible(htCandidatePosition)) {
+				htPosition = htCandidatePosition;
+				break;
+			}
+		}
+		return htPosition;
+	}
+}).extend(jindo.Component);
+/**
+ * @fileOverview RolloverArea와 달리 mousedown/mouseup이 아닌 click이벤트를 체크하는 컴포넌트
+ * @author senxation
+ * @version 0.1.3
+ */
+jindo.RolloverClick = jindo.$Class({
+	/** @lends jindo.RolloverClick.prototype */
+	  
+	/**
+	 * RolloverClick 컴포넌트를 생성한다.
+	 * RolloverClick 컴포넌트는 기준 엘리먼트의 자식들 중 특정 클래스명을 가진 엘리먼트에 마우스액션이 있을 경우 클래스명을 변경하는 이벤트를 발생시킨다.
+	 * @constructs 
+	 * @class RolloverArea와 달리 mousedown/mouseup이 아닌 click이벤트를 체크하는 컴포넌트
+	 * @extends jindo.UIComponent
+	 * @requires jindo.RolloverArea
+	 * @param {HTMLElement} el RolloverArea에 적용될 상위 기준 엘리먼트. 컴포넌트가 적용되는 영역(Area)이 된다.
+	 * @param {HashTable} htOption 옵션 객체
+	 * @see jindo.RolloverArea
+	 * @example
+var oRolloverClick = new jindo.RolloverClick(document.body, {
+	bActivateOnload : true, // (Boolean) 컴포넌트가 로드된 후 activate 여부
+	sCheckEvent : "click", // (String) 클릭이벤트를 체크하기 위한 이벤트명. "click", "mousedown", "mouseup"이 사용될 수 있다. 해당 이벤트가 발생하면 click 커스텀이벤트가 발생한다.
+	bCheckDblClick : false, // (Boolean) 더블클릭이벤트를 체크할 지 여부
+	RolloverArea : { //RolloverArea에 적용될 옵션 객체
+		sClassName : "rollover", // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+		sClassPrefix : "rollover-", // (String) 컴포넌트가 적용될 엘리먼트에 붙게될 class명의 prefix. (prefix+"over|down")
+		htStatus : {
+			sOver : "over", // (String) mouseover시 추가될 클래스명
+			sDown : "down" // (String) mousedown시 추가될 클래스명
+		}  
+	}
+}).attach({
+	over : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 커서가 올라갔을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mousedown 이벤트에 대한 $Event 객체  
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 추가하지 않음
+	},
+	out : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 커서가 벗어났을 때 발생
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) mouseout 이벤트에 대한 $Event 객체  
+		//}
+		//oCustomEvent.stop(); 수행시 클래스명을 제거하지 않음
+	},
+	click : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 버튼을 클릭했을 때 발생 (sCheckEvent 이벤트가 발생했을때)
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) click 이벤트에 대한 $Event 객체  
+		//}
+	},
+	dblclick : function(oCustomEvent) {
+		//컴포넌트가 적용된 엘리먼트에 마우스 더블버튼을 클릭했을 때 발생. bCheckDblClick 옵션이 true때만 발생한다. 
+		//전달되는 이벤트 객체 oCustomEvent = {
+		//	element : (HTMLElement) 적용된 엘리먼트
+		//	htStatus : {
+		//		sOver : "over", // (String) mouseover시 추가, mouseout시 제거될 클래스명
+		//		sDown : "down" // (String) mousedown시 추가, mouseup시 제거될 클래스명
+		//	},
+		//	weEvent : ($Event) click 이벤트에 대한 $Event 객체  
+		//}
+	}
+});
+	 */				  
+	$init : function(el, htOption) {
+		this.option({ 
+			bActivateOnload : true,
+			sCheckEvent : "click",
+			bCheckDblClick : false, // (Boolean) 더블클릭이벤트를 체크할 지 여부
+			RolloverArea : { //RolloverArea에 적용될 옵션 객체
+				sClassName : "rollover", // (String) 컴포넌트가 적용될 엘리먼트의 class 명. 상위 기준 엘리먼트의 자식 중 해당 클래스명을 가진 모든 엘리먼트에 Rollover 컴포넌트가 적용된다.
+				sClassPrefix : "rollover-", // (String) 컴포넌트가 적용될 엘리먼트에 붙게될 class명의 prefix. (prefix+"over|down")
+				bCheckMouseDown : false,
+				bActivateOnload : false,
+				htStatus : {
+					sOver : "over", // (String) mouseover시 추가될 클래스명
+					sDown : "down" // (String) mousedown시 추가될 클래스명
+				}  
+			}
+		});
+		this.option(htOption || {});
+		
+		var self = this;
+		this._oRolloverArea = new jindo.RolloverArea(el, this.option("RolloverArea")).attach({
+			over : function(oCustomEvent) {
+				if (!self.fireEvent("over", oCustomEvent)) {
+					oCustomEvent.stop();
+				}
+			},
+			out : function(oCustomEvent) {
+				if (!self.fireEvent("out", oCustomEvent)) {
+					oCustomEvent.stop();
+				}
+			}
+		});
+		this._wfClick = jindo.$Fn(this._onClick, this);
+		this._wfDblClick = jindo.$Fn(this._onClick, this);
+		
+		if (this.option("bActivateOnload")) {
+			this.activate();
+		}
+	},
+	
+	_onClick : function(we) {
+		var elRollover = we.element,
+			sType = "click";
+			
+		if (we.type == "dblclick") {
+			sType = we.type;
+		}
+		
+		while (elRollover = this._oRolloverArea._findRollover(elRollover)) {
+			this.fireEvent(sType, { 
+				element : elRollover,
+				htStatus : this._oRolloverArea.option("htStatus"),
+				weEvent : we
+			});
+			
+			elRollover = elRollover.parentNode;
+		}
+	},
+	
+	/**
+	 * RolloverClick를 활성화시킨다.
+	 * @return {this}
+	 */
+	_onActivate : function() {
+		this._wfClick.attach(this._oRolloverArea._elArea, this.option("sCheckEvent"));
+		if (this.option("bCheckDblClick")) {
+			this._wfDblClick.attach(this._oRolloverArea._elArea, 'dblclick');
+		}
+		this._oRolloverArea.activate();
+	},
+	
+	/**
+	 * RolloverClick를 비활성화시킨다.
+	 * @return {this}
+	 */
+	_onDeactivate : function() {
+		this._wfClick.detach(this._oRolloverArea._elArea, this.option("sCheckEvent"));
+		this._wfDblClick.detach(this._oRolloverArea._elArea, 'dblclick');
+		this._oRolloverArea.deactivate();
+	}
+}).extend(jindo.UIComponent);
+/**
+ * @fileOverview 체크박스나 라디오버튼의 디자인을 대체하기 위한 HTML Component 
+ * @author hooriza, modified by senxation
+ * @version 0.5.2
+ */
+
+jindo.CheckBox = jindo.$Class({
+	/** @lends jindo.CheckBox */
+	sTagName : 'input[type=checkbox]', //'input[type=radio]'
+	
+	/**
+	 * CheckBox 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class 체크박스나 라디오버튼의 디자인을 대체하기 위한 HTML Component 
+	 * @extends jindo.HTMLComponent
+	 * @param {String | HTMLElement} el input[type=checkbox] 또는 input[type=radio]를 감싸고 있는 엘리먼트 혹은 그 id
+	 * @param {HashTable} htOption 옵션 객체
+	 * @example
+<span id="ajax_checkbox">
+	<span class="ajax_checkbox_mark"></span><input type="checkbox" name="c" id="c1" />
+</span> 
+<label for="c1">첫번째</label>
+
+<script type="text/javascript" language="javascript">
+	var oCheckBox = jindo.CheckBox(jindo.$('ajax_checkbox'), { sClassPrefix : 'checkbox-' }).attach({
+		beforeChange : function(oCustomEvent) {
+			//전달되는 이벤트객체 oCustomEvent = {
+			//	bChecked : (Boolean) 체크 여부
+			//}
+			//oCustomEvent.stop(); 수행시 체크/해제 되지 않음
+		},
+		change : function(oCustomEvent) {
+			//전달되는 이벤트객체 oCustomEvent = {
+			//	bChecked : (Boolean) 체크 여부
+			//}
+		}
+	});
+</script>
+	 * @remark input[type=checkbox], input[type=radio]에 이벤트를 직접 바인딩해서 사용할 경우 제대로 동작하지 않음
+	 */
+	
+	$init : function(el, htOption) {
+		this.option({
+			sClassPrefix : 'checkbox-'
+		});
+		
+		this.option(htOption || {});
+
+		this._elWrapper = jindo.$(el);
+		this._welWrapper = jindo.$Element(el);
+		this._assignHTMLElements();
+		
+		this.wfOnClickInput = jindo.$Fn(this._onClickInput, this);
+		this.wfOnClickWrapper = jindo.$Fn(this._onClickWrapper, this);
+		this.wfOnFocusInput = jindo.$Fn(this._onFocusInput, this);
+		this.wfOnBlurInput = jindo.$Fn(this._onBlurInput, this);
+		
+		this.activate();
+		this.paint();
+	},
+	
+	_assignHTMLElements : function() {
+		var elWrapper = this._elWrapper;
+		/**
+		 * 해당 input[type=checkbox] 엘리먼트
+		 * @ignore
+		 */
+		this._elInput = jindo.$$.getSingle('input', elWrapper);
+		/**
+		 * 해당 input[type=checkbox] 엘리먼트를 대체할 엘리먼트
+		 * @ignore
+		 */
+		if (this._elInput.type == "radio") {
+			this.sTagName = "input[type=radio]";
+			this.option("sClassPrefix", "radio-");
+		}
+		var sPrefix = this.option('sClassPrefix');
+		this._elSubstitute = jindo.$$.getSingle("." + sPrefix + "mark", elWrapper);
+		this._welSubstitute = jindo.$Element(this._elSubstitute);
+	},
+	
+	/**
+	 * Input 엘리먼트를 구한다.
+	 * @return {HTMLElement}
+	 */
+	getInput : function() {
+		return this._elInput;
+	},
+	
+	/**
+	 * Check 여부를 가져온다.
+	 * @return {Boolean}
+	 */
+	getChecked : function() {
+		return this.getInput().checked;
+	},
+	
+	/**
+	 * Check 여부를 설정한다.
+	 * @param {Boolean}
+	 * @return {this}
+	 */
+	setChecked : function(b) {
+		this.getInput().checked = b;
+		this.paint();
+		return this;
+	},
+	
+	/**
+	 * CheckBox를 enable 시킨다.
+	 * @return {this}
+	 */
+	enable : function() {
+		this.getInput().disabled = false;
+		this.paint();
+		return this;
+	},
+	
+	/**
+	 * CheckBox를 disable 시킨다.
+	 * @return {this}
+	 */
+	disable : function() {
+		this.getInput().disabled = true;
+		this.paint();
+		return this;
+	},
+	
+	_onClickInput : function(we) {
+		we.stop(jindo.$Event.CANCEL_DEFAULT);
+		
+		var self = this;
+		setTimeout(function(){ //Scope 안에서 input[type=checkbox]의 checked가 이상함!
+			self._welWrapper.fireEvent("click");	
+		}, 1);
+	},
+	
+	_onClickWrapper : function(we) {
+		var elInput = this._elInput;
+		if (elInput.disabled || we.element === elInput) { /* Diabled거나 Label을 클릭했거나 키보드 스페이스로 직접 선택했을 때 */
+			return;
+		}
+		elInput.focus();
+
+		if (this.fireEvent("beforeChange", { bChecked : elInput.checked })) {
+			switch (elInput.type) {
+				case "checkbox" :
+					elInput.checked = !elInput.checked;
+					this.paint();
+				break;
+				case "radio" :
+					elInput.checked = true;
+		
+					var self = this;
+					//name이 같은 input만 다시 그림
+					jindo.$A(this.constructor.getInstance()).forEach(function(oRadioButton){
+						if (oRadioButton.getInput().name == self.getInput().name) {
+							oRadioButton.paint();
+						} 
+					});
+				break;
+			}
+		}
+	},
+	
+	_onFocusInput : function(we) {
+		this._welWrapper.addClass(this.option('sClassPrefix') + 'focused'); 
+	},
+	
+	_onBlurInput : function(we) {
+		this._welWrapper.removeClass(this.option('sClassPrefix') + 'focused');
+	},
+	
+	/**
+	 * 컴포넌트를 활성화한다.
+	 */
+	_onActivate : function() {
+		this._welWrapper.addClass(this.option('sClassPrefix') + 'applied');
+		
+		this.wfOnClickInput.attach(this._elInput, 'click');
+		this.wfOnClickWrapper.attach(this._elWrapper, 'click');
+		this.wfOnFocusInput.attach(this._elInput, 'focus');
+		this.wfOnBlurInput.attach(this._elInput, 'blur');
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화한다.
+	 */
+	_onDeactivate : function() {
+		this._welWrapper.removeClass(this.option('sClassPrefix') + 'applied');
+		
+		this.wfOnClickInput.detach(this._elInput, 'click');
+		this.wfOnClickWrapper.detach(this._elWrapper, 'click');
+		this.wfOnFocusInput.detach(this._elInput, 'focus');
+		this.wfOnBlurInput.detach(this._elInput, 'blur');
+	},
+	
+	/**
+	 * 컴포넌트를 새로 그려준다. (HTMLComponent 공통메소드)
+	 */
+	_onPaint : function() {
+		var sPrefix = this.option('sClassPrefix');
+		
+		if (this._elInput.disabled){
+			this._welWrapper.addClass(sPrefix + 'disabled');	
+		} else {
+			this._welWrapper.removeClass(sPrefix + 'disabled');
+		}
+		
+		if (this._elInput.checked){
+			this._welSubstitute.addClass(sPrefix + 'checked');	
+		} else {
+			this._welSubstitute.removeClass(sPrefix + 'checked');
+		}
+		
+		this.fireEvent("change", {
+			bChecked : this._elInput.checked
+		});
+	}
+	
+}).extend(jindo.HTMLComponent);
+/**
+ * @fileOverview 정해진 크기의 박스내의 내용에 따라 자동으로 스크롤바를 생성하는 스크롤박스 컴포넌트
+ * @author senxation
+ * @version 0.2
+ */
+jindo.ScrollBox = new jindo.$Class({
+	/** @lends jindo.ScrollBox */
+
+	/**
+	 * ScrollBox 컴포넌트는 정해진 크기의 박스내의 내용을 스크롤바를 이용해 이동하여 볼 수 있게 한다.
+	 * ScrollBar 컴포넌트와 다르게 박스내의 내용이 유동적으로 변할 때 스크롤이 나타나거나 사라지고 막대의 길이도 자동으로 구해진다.
+	 * @constructs
+	 * @class 정해진 크기의 박스내의 내용에 따라 자동으로 스크롤바를 생성하는 스크롤박스 컴포넌트
+	 * @extends jindo.ScrollBar
+	 * @param {HTMLElement} el
+	 * @param {Object} oOption
+	 * @example
+var oScrollBox = new jindo.ScrollBox("scroll", {
+	sClassPrefix : "scrollbar-", // (String) Class Prefix
+	sOverflowX : "auto", // (String) 가로스크롤을 보여주는 방법 "auto"(자동) || "scroll" (항상)|| "hidden" (보이지않음) 
+	sOverflowY : "auto", // (String) 세로스크롤을 보여주는 방법 "auto"(자동) || "scroll" (항상)|| "hidden" (보이지않음)
+	bAdjustThumbSize : true, // (Boolean) Thumb의 크기가 Content의 크기에따라 자동으로 변할지 여부
+	nMinThumbSize : 50, // (Number) bAdjustThumbSize가 true일경우 크기가 변해도 최소로 유지될 크기
+	nDelta : 16 // (Number) 스크롤 속도
+});
+	 */	
+	$init : function(el, oOption) {
+		
+		this.option({
+			sClassPrefix : "scrollbar-",
+			bActivateOnload : true,
+			sOverflowX : "auto",
+			sOverflowY : "auto",
+			bAdjustThumbSize : true,
+			nMinThumbSize : 50,
+			nDelta : 16 //스크롤 속도
+		});
+		
+		this.option(oOption || {});
+		
+		this._el = jindo.$(el);
+		
+		if (this.option("bActivateOnload")) {
+			this.activate();
+			this.reset();
+		}
+	},
+	
+	/**
+	 * 스크롤바의 보임/숨김 여부를 자동으로 설정한다.
+	 */	
+	reset : function() {
+		
+		var oBoxSize = this.getDefaultBoxSize();
+		var oContentSize = this.getDefaultContentSize();
+		
+		this._autoToggleScrollBar();
+		
+		//보정을 위한 상태설정		
+		var oStatusH = this.hasScrollBarHorizontal();
+		var oStatusV = this.hasScrollBarVertical();
+		
+		this._adjustBoxSize();
+		this._adjustContentSize();
+		
+		//보정
+		this._autoToggleScrollBar();
+		if (oStatusH != this.hasScrollBarHorizontal() || oStatusV != this.hasScrollBarVertical()) {
+			this._adjustBoxSize();
+			this._adjustContentSize();
+		}
+		
+		this._autoToggleAvailability();
+		this._adjustTrackSize();
+		this._adjustThumbSize();
+		this.$super.reset();
+	},
+
+	/**
+	 * 컴포넌트를 활성화한다.
+	 */
+	_onActivate : function() {
+		var sPrefix = this.option("sClassPrefix");
+		//활성화 로직 ex)event binding
+		this.$super._onActivate();
+		this.reset();
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화한다.
+	 */
+	_onDeactivate : function() {
+		var sPrefix = this.option("sClassPrefix");
+		
+		this.$super._onDeactivate();
+		this._adjustBoxSize();
+	},
+
+	/**
+	 * 스크롤 박스의 크기를 설정한다.
+	 * @param {Number} nWidth (optional)
+	 * @param {Number} nHeight (optional)
+	 */
+	setSize : function(nWidth, nHeight) {
+		var sClassPrefix = this.option("sClassPrefix");
+
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		
+		var oBoxSize = this.getDefaultBoxSize();
+
+		if (nWidth) {
+			//jindo.$Element(this._el).width(nWidth);
+			jindo.$Element(this._el).css("width", nWidth + "px");
+		}
+		if (nHeight) {
+			//jindo.$Element(this._el).height(nHeight);
+			jindo.$Element(this._el).css("height", nHeight + "px");
+		}
+
+		this.setBoxSize(nWidth, nHeight);
+
+		this._oBoxSize = {
+			nWidth : jindo.$Element(this._elBox).width(),
+			nHeight : jindo.$Element(this._elBox).height()
+		}
+		this.reset(); 
+	},
+
+	/**
+	 * 컨텐트 엘리먼트의 크기를 구한다.
+	 * @return {Object}
+	 * @example
+var oSize = {
+	nWidth : (Number),
+	nHeight : (Number)
+}
+	 */
+	getContentSize : function() {
+		var welContent = jindo.$Element(this._elContent);
+		
+		return {
+			nWidth : parseInt(welContent.width()),
+			nHeight : parseInt(welContent.height())
+		}
+	},
+
+	/**
+	 * 컨텐트 엘리먼트의 크기를 설정한다.
+	 * @param {Number} nWidth
+	 * @param {Number} nHeight
+	 */	
+	setContentSize : function(nWidth, nHeight) {
+		var welContent = jindo.$Element(this._elContent);
+		
+		if (nWidth) {
+			if (nWidth == Infinity) {
+				welContent.css("width", "");
+			}
+			else {
+				welContent.css("width", nWidth + "px");	
+			}
+			
+		}
+
+		if (nHeight) {
+			if (nHeight == Infinity) {
+				welContent.css("height", "auto");
+			}
+			else {
+				welContent.css("height", nHeight + "px");	
+			}
+		}
+		this.$super.reset();
+	},
+	
+	/**
+	 * 박스 엘리먼트의 크기를 구한다.
+	 * @example
+var oSize = {
+	nWidth : (Number),
+	nHeight : (Number)
+}
+	 */
+	getBoxSize : function() {
+		var welBox = jindo.$Element(this._elBox);
+		return {
+			nWidth : parseInt(welBox.width()),
+			nHeight : parseInt(welBox.height())
+		}
+	},
+	
+	/**
+	 * 박스 엘리먼트의 크기를 설정한다.
+	 * @param {Number} nWidth
+	 * @param {Number} nHeight
+	 */
+	setBoxSize : function(nWidth, nHeight) {
+		var welBox = jindo.$Element(this._elBox);
+		if (nWidth) {
+			//jindo.$Element(this._elBox).width(nWidth);
+			welBox.css("width", nWidth + "px");
+		}
+		if (nHeight) {
+			//jindo.$Element(this._elBox).height(nHeight);
+			welBox.css("height", nHeight + "px");
+		}
+		this.$super.reset();
+	},
+
+	/**
+	 * 트랙 엘리먼트의 크기를 구한다.
+	 * @param {Object} 
+	 * @return {Object}
+	 * @example
+var oSize = {
+	nWidth : (Number),
+	nHeight : (Number)
+}
+	 */
+	getTrackSize : function(o) {
+		if (!o.elScrollBar) {
+			return {
+				nWidth : 0,
+				nHeight : 0
+			}	
+		}
+		var welTrack = jindo.$Element(o.elTrack);
+		return {
+			nWidth : parseInt(welTrack.width()),
+			nHeight : parseInt(welTrack.height())
+		}
+	},
+	
+	/**
+	 * 트랙 엘리먼트의 크기를 설정한다.
+	 * @param {Number} nWidth
+	 * @param {Number} nHeight
+	 */
+	setTrackSize : function(o, nWidth, nHeight) {
+		var welTrack = jindo.$Element(o.elTrack);
+		if (nWidth) {
+			//jindo.$Element(o.elTrack).width(nWidth);
+			welTrack.css("width", nWidth + "px");
+		}
+		if (nHeight) {
+			//jindo.$Element(o.elTrack).height(nHeight);
+			welTrack.css("height", nHeight + "px");
+		}
+	},
+	
+	/**
+	 * 가로스크롤이 생겨야하는 상황인지 판단한다.
+	 * @return {Boolean}
+	 */
+	isNeededScrollBarHorizontal : function() {
+		
+		if(this.option("sOverflowX") == "scroll") {
+			return true;
+		}
+		
+		var oContentSize = this.getContentSize();
+		var oBoxSize = this.getDefaultBoxSize();
+		
+		if (this.getScrollBarHorizontal().elScrollBar && this.option("sOverflowX") != "hidden") {
+			if(this.hasScrollBarVertical()) {
+				if(oContentSize.nWidth > oBoxSize.nWidth - jindo.$Element(this.getScrollBarVertical().elScrollBar).width()) {
+					return true;	
+				}
+			}
+			if (oContentSize.nWidth > oBoxSize.nWidth){
+				return true;	
+			}
+		}
+		return false;
+	},
+	
+	/**
+	 * 세로스크롤이 생겨야하는 상황인지 판단한다.
+	 * @return {Boolean}
+	 */
+	isNeededScrollBarVertical : function() {
+		
+		if(this.option("sOverflowY") == "scroll") {
+			return true;
+		}
+		
+		var oContentSize = this.getContentSize();
+		var oBoxSize = this.getDefaultBoxSize();
+
+		if (this.getScrollBarVertical().elScrollBar && this.option("sOverflowY") != "hidden") {
+			if(this.hasScrollBarHorizontal()) {
+				if(oContentSize.nHeight > oBoxSize.nHeight - jindo.$Element(this.getScrollBarHorizontal().elScrollBar).height()) {
+					return true;	
+				}
+			}
+			if(oContentSize.nHeight > oBoxSize.nHeight) {
+				return true;	
+			}
+		}
+		return false;
+	},
+	
+	_autoToggleScrollBar : function() {
+		
+		if (!this.isActivating()) {
+			return;
+		}
+		
+		var sClassPrefix = this.option("sClassPrefix");
+		
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		var bAjustThumbSize = this.option("bAdjustThumbSize");
+		
+		var bV = this.isNeededScrollBarVertical();
+		if (oV.elScrollBar) {
+			var welScrollBar = jindo.$Element(oV.elScrollBar);
+			(bV) ? welScrollBar.addClass(sClassPrefix + "show") : welScrollBar.removeClass(sClassPrefix + "show");
+			if (oV.elThumb && bAjustThumbSize) {
+				jindo.$Element(oV.elThumb).css("height", "0px"); //ie6에서 문제때문에 스크롤바를 보여준 직후에 (trackSize를 조절해주기 이전) Thumb사이즈를 0로 만들어준다.
+			}
+		}
+		var bH = this.isNeededScrollBarHorizontal();
+		if (oH.elScrollBar) {
+			var welScrollBar = jindo.$Element(oH.elScrollBar);
+			(bH) ? welScrollBar.addClass(sClassPrefix + "show") : welScrollBar.removeClass(sClassPrefix + "show");
+			if (oH.elThumb && bAjustThumbSize) {
+				jindo.$Element(oH.elThumb).css("width", "0px");
+			}
+		}
+
+		//세로스크롤 안생기고, 가로스크롤생긴후에 세로스크롤이 필요해지는 경우!		
+		var bV = this.isNeededScrollBarVertical();
+		if (oV.elScrollBar) {
+			var welScrollBar = jindo.$Element(oV.elScrollBar);
+			(bV) ? welScrollBar.addClass(sClassPrefix + "show") : welScrollBar.removeClass(sClassPrefix + "show");
+			if (oV.elThumb && bAjustThumbSize) {
+				jindo.$Element(oV.elThumb).css("height", "0px");
+			}	
+		}
+	},
+	
+	/**
+	 * Track의 길이를 자동 조절한다.
+	 */
+	_adjustTrackSize : function() {
+		
+		if (!this.isActivating()) {
+			return;
+		}
+		
+		var oContentSize = this.getContentSize();
+		var oBoxSize = this.getDefaultBoxSize();
+		
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		
+		var bH = this.isNeededScrollBarHorizontal();
+		//가로 스크롤
+		if (bH && oH.elScrollBar) {
+			var nTrackWidth = oBoxSize.nWidth;
+
+			var wel = jindo.$Element(oH.elScrollBar);
+			wel.css("top", oBoxSize.nHeight - wel.height() + "px");
+		
+			//세로 스크롤도 있는경우
+			var nVerticalWidth = 0;
+			var bV = this.hasScrollBarVertical();
+			if (bV && oV.elScrollBar) {
+				nVerticalWidth = parseInt(jindo.$Element(oV.elScrollBar).width());
+				nTrackWidth -= nVerticalWidth;
+			}	
+			wel.width(nTrackWidth); //가로스크롤의 크기 조절
+			
+			var nButtonLeftWidth = 0;
+			if (oH.elButtonLeft) {
+				nButtonLeftWidth = parseInt(jindo.$Element(oH.elButtonLeft).width());
+				nTrackWidth -= nButtonLeftWidth;
+			}
+			if (oH.elButtonRight) {
+				nTrackWidth -= parseInt(jindo.$Element(oH.elButtonRight).width());
+			}
+
+			jindo.$Element(oH.elTrack).css("left", nButtonLeftWidth + "px"); //가로스크롤의 위치 조절
+			
+			this.setTrackSize(oH, nTrackWidth, null);
+		}
+
+		var bV = this.isNeededScrollBarVertical();		
+		//세로 스크롤
+		if (bV && oV.elScrollBar) {
+			var nTrackHeight = oBoxSize.nHeight;
+			
+			//가로 스크롤도 있는경우
+			var nHorizontalHeight = 0;
+			var bH = this.hasScrollBarHorizontal();
+			if (bH && oH.elScrollBar) {
+				nHorizontalHeight = parseInt(jindo.$Element(oH.elScrollBar).height());
+				nTrackHeight -= nHorizontalHeight;
+			}
+			
+			if (oV.elButtonUp) {
+				nTrackHeight -= parseInt(jindo.$Element(oV.elButtonUp).height());
+			}
+			if (oV.elButtonDown) {
+				nTrackHeight -= parseInt(jindo.$Element(oV.elButtonDown).height());
+				//jindo.$Element(oV.elButtonDown).css("bottom", nHorizontalHeight +"px");
+			}
+			
+			this.setTrackSize(oV, null, nTrackHeight);
+		}
+		
+	},
+	
+	/**
+	 * ScrollBar 가 생성되었을 경우의 Box 사이즈를 설정해준다.
+	 */
+	_adjustBoxSize : function() {
+		
+		if (!this.isActivating()) {
+			return;
+		}
+		
+		var oContentSize = this.getDefaultContentSize();
+		var oBoxSize = this.getDefaultBoxSize();
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		var bV = this.hasScrollBarVertical();
+		var bH = this.hasScrollBarHorizontal();
+		
+		this.setBoxSize(oBoxSize.nWidth, oBoxSize.nHeight);
+		
+		//가로 스크롤
+		if (bH && oH.elScrollBar) {
+			var nHeight = oBoxSize.nHeight;
+			nHeight -= parseInt(jindo.$Element(oH.elScrollBar).height());
+			this.setBoxSize(null, nHeight);
+		}
+		//세로 스크롤
+		if (bV && oV.elScrollBar) {
+			var nWidth = oBoxSize.nWidth;
+			nWidth -= parseInt(jindo.$Element(oV.elScrollBar).width());
+			this.setBoxSize(nWidth, null);
+		}
+
+		//가로, 세로스크롤 모두 없는 경우에 Box와 Content사이즈가 같게 설정
+		//if (!bH && !bV) {
+			//this.setBoxSize(oBoxSize.nWidth, oBoxSize.nHeight);
+		//}
+	},
+	
+	_adjustContentSize : function() {
+		
+		if (!this.isActivating()) {
+			return;
+		}
+		
+		var oContentSize = this.getDefaultContentSize();
+		var oBoxSize = this.getBoxSize();
+		var bV = this.option("sOverflowY") != "hidden";
+		var bH = this.option("sOverflowX") != "hidden";	
+		//가로, 세로스크롤 중 하나만 존재하는 경우에는 Content사이즈를 조절해 줌
+		//세로 스크롤
+		if (bV && !bH) {
+			var nWidth = oBoxSize.nWidth;
+		}
+		//가로 스크롤
+		if (bH && !bV) {
+			var nHeight = oBoxSize.nHeight;
+		}
+		
+		this.setContentSize(nWidth || Infinity, nHeight || Infinity);
+	},
+
+	_adjustThumbSize : function() {
+		
+		if (!this.isActivating()) {
+			return;
+		}
+		
+		if (!this.option("bAdjustThumbSize")) {
+			return;
+		}
+		
+		var sClassPrefix = this.option("sClassPrefix");
+		var nMinThumbSize = this.option("nMinThumbSize");
+		var oContentSize = this.getContentSize();
+		var oBoxSize = this.getBoxSize(); //현재 그려진 box 사이즈
+
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		if (oV.elScrollBar) {
+					
+			var oTrackSizeV = this.getTrackSize(oV);
+			var nThumbHeight = Math.floor(parseInt(oTrackSizeV.nHeight * oBoxSize.nHeight / oContentSize.nHeight));
+			if (nThumbHeight < nMinThumbSize) {
+				nThumbHeight = nMinThumbSize;
+			}
+			if (nThumbHeight >= oTrackSizeV.nHeight) {
+				nThumbHeight = oTrackSizeV.nHeight;
+			}
+			jindo.$Element(oV.elThumb).height(nThumbHeight);
+			
+			///////thumb-body 크기 조절
+			var nGap = 0;
+			if(oV.elThumbHead) {
+				nGap += jindo.$Element(oV.elThumbHead).height();
+			}
+			if(oV.elThumbFoot) {
+				nGap += jindo.$Element(oV.elThumbFoot).height();
+			}
+			if(oV.elThumbBody) {
+				jindo.$Element(oV.elThumbBody).height(nThumbHeight - nGap);
+			}
+		}
+		
+		if (oH.elScrollBar) {
+			var oTrackSizeH = this.getTrackSize(oH);
+			var nThumbWidth = Math.floor(parseInt(oTrackSizeH.nWidth * oBoxSize.nWidth / oContentSize.nWidth));
+			if (nThumbWidth < nMinThumbSize) {
+				nThumbWidth = nMinThumbSize;
+			}
+			//max값과 같은 경우
+			if (nThumbWidth >= oTrackSizeH.nWidth) {
+				nThumbWidth = oTrackSizeH.nWidth;
+			}
+			jindo.$Element(oH.elThumb).width(nThumbWidth);
+			
+			///////thumb-body 크기 조절
+			var nGap = 0;
+			if(oH.elThumbHead) {
+				nGap += jindo.$Element(oH.elThumbHead).width();
+			}
+			if(oH.elThumbFoot) {
+				nGap += jindo.$Element(oH.elThumbFoot).width();
+			}
+			if(oH.elThumbBody) {
+				jindo.$Element(oH.elThumbBody).width(nThumbWidth - nGap);	
+			}
+		}
+	},
+	_autoToggleAvailability : function(){
+		
+		var sClassPrefix = this.option("sClassPrefix");
+		
+		var oContentSize = this.getContentSize();
+		var oBoxSize = this.getBoxSize(); //현재 그려진 box 사이즈
+		var oH = this.getScrollBarHorizontal();
+		var oV = this.getScrollBarVertical();
+		
+		if (oH.elScrollBar) {
+			//deactivate
+			if (this.option("sOverflowX") == "scroll" && oBoxSize.nWidth >= oContentSize.nWidth) {
+				jindo.$Element(oH.elScrollBar).addClass(sClassPrefix + "disabled");
+				this.$super._onDeactivate("horizontal");
+				if (this.isActivating()) { //활성화일경우에만 scrollbar에서 삽입된 noscript 클래스명을 다시 제거
+					jindo.$Element(this._el).removeClass(sClassPrefix + "noscript");
+				}	
+			}
+			else {
+				jindo.$Element(oH.elScrollBar).removeClass(sClassPrefix + "disabled");
+				
+				if (this.isActivating()) { //활성화일경우에만 scrollbar도 활성화
+					this.$super._onActivate("horizontal");
+				}
+			}	
+		}
+		
+		if (oV.elScrollBar) {
+			if (this.option("sOverflowY") == "scroll" && oBoxSize.nHeight >= oContentSize.nHeight) {
+				jindo.$Element(oV.elScrollBar).addClass(sClassPrefix + "disabled");
+				this.$super._onDeactivate("vertical");
+				if (this.isActivating()) { //활성화일경우에만 scrollbar에서 삽입된 noscript 클래스명을 다시 제거
+					jindo.$Element(this._el).removeClass(sClassPrefix + "noscript")
+				}
+			}
+			else {
+				jindo.$Element(oV.elScrollBar).removeClass(sClassPrefix + "disabled");
+				if (this.isActivating()) { //활성화일경우에만 scrollbar도 활성화
+					this.$super._onActivate("vertical");
+				}
+			}
+		}
+	}
+}).extend(jindo.ScrollBar);
+/**
+ * @fileOverview HTML Select 엘리먼트를 대체하여 디자인을 적용하는 컴포넌트
+ * @author senxation
+ * @version 0.2.5
+ */
+
+jindo.SelectBox = jindo.$Class({
+	/** @lends jindo.SelectBox.prototype */
+	sTagName : 'select',
+	
+	_bDisabled : false, 
+	_sPrevValue : null, //select의 이전 값
+	_nSelectedIndex : 0, //선택된 index
+	_bRealFocused : false, //탭키 이동으로 실제로 포커스되었는지의 여부
+	
+	/**
+	 * SelectBox 컴포넌트를 생성한다.
+	 * @constructs
+	 * @class HTML Select 엘리먼트를 대체하여 디자인을 적용하는 컴포넌트
+	 * @extends jindo.HTMLComponent
+	 * @requires jindo.Timer
+	 * @requires jindo.LayerManager
+	 * @requires jindo.LayerPosition
+	 * @requires jindo.RolloverClick
+	 * @param {HTMLElement} el
+	 * @param {HashTable} htOption
+	 * @example
+oSelectBox = new jindo.SelectBox(jindo.$("s"), {
+	sClassPrefix : 'selectbox-', //Default Class Prefix
+	nWidth : null, //가로 사이즈, null시 자동
+	nHeight : null, //목록의 최대 높이. 그 이상시 스크롤 생김, null시 자동.
+	bUseLayerPosition : true, //LayerPosition 컴포넌트로 위치 설정할지 여부.
+	aOptionHTML : [], //목록에서 option 내부에 html을 적용하고 싶을 경우 option 엘리먼트의 개수에 맞게 값을 설정한다.
+	aOptionLabel : [], //aOptionHTML이 설정된 option이 선택된 경우에 레이블영역에 보여질 html내용. 생략할 경우 aOptionHTML과 동일하게 표현된다. 
+	LayerPosition : {
+		sPosition : "outside-bottom", //목록의 위치. LayerPosition 컴포넌트에서 사용할 옵션
+		sAlign : "left", //목록의 정렬. LayerPosition 컴포넌트에서 사용할 옵션
+		nTop : 0, //선택박스와 목록의 상하 간격. LayerPosition 컴포넌트에서 사용할 옵션
+		nLeft : 0 //선택박스와 목록의 좌우 간격. LayerPosition 컴포넌트에서 사용할 옵션
+	},
+	LayerManager :{
+		sCheckEvent : "mousedown", // {String} 어떤 이벤트가 발생했을 때 레이어를 닫아야 하는지 설정
+		nShowDelay : 20, //{Number} 보여주도록 명령을 한 뒤 얼마 이후에 실제로 보여질지 지연시간 지정 (ms)
+		nHideDelay : 0, //{Number} 숨기도록 명령을 한 뒤 얼마 이후에 실제로 숨겨지게 할지 지연시간 지정 (ms)
+		sMethod : "show" //{String} "fade", "slide" 보이고 숨길 방법 설정 (Transition 컴포넌트 사용)
+	}
+}).attach({
+	change : function(oCustomEvent) {//선택한 아이템이 바뀌었을때 발생
+		//전달되는 이벤트객체 oCustomEvent = {
+		//	nIndex : (Number) 선택된 옵션의 인덱스, nLastIndex : nLastSelectedIndex
+		//	nLastIndex : (Number) 선택되기 전의 옵션의 인덱스
+		//}
+	},
+	open : function(oCustomEvent) {//레이어가 열리기 직전 발생
+		//oCustomEvent.stop(); 수행시 레이어가 열리지 않음
+	},
+	close : function(oCustomEvent) {//레이어가 닫히기 직전 발생
+		//oCustomEvent.stop(); 수행시 레이어가 닫히지 않음					
+	},
+	focus : function(oCustomEvent) {//셀렉트박스가 포커스를 얻으면 발생
+		//oCustomEvent.stop(); 수행시 포커스 할 수 없음
+	},
+	blur : function(oCustomEvent) {//셀렉트박스가 포커스를 잃으면 발생
+	}
+});
+	 */
+	$init : function(el, htOption) {
+		this._aItemData = [];
+		this._aListItem = [];
+		this._aOptions = [];
+		
+		this.option({
+			sClassPrefix : 'selectbox-', //Default Class Prefix
+			nWidth : null,
+			nHeight : null,
+			bUseLayerPosition : true, //LayerPosition 컴포넌트로 위치 설정할지 여부
+			aOptionHTML : [],
+			aOptionLabel : [],
+			LayerPosition : { //LayerPosition 컴포넌트에서 사용할 옵션
+				sPosition : "outside-bottom", //목록의 위치. LayerPosition 컴포넌트에서 사용할 옵션
+				sAlign : "left", //목록의 정렬. LayerPosition 컴포넌트에서 사용할 옵션
+				nTop : 0, //선택박스와 목록의 상하 간격. LayerPosition 컴포넌트에서 사용할 옵션
+				nLeft : 0 //선택박스와 목록의 좌우 간격. LayerPosition 컴포넌트에서 사용할 옵션
+			},
+			LayerManager : {
+				sCheckEvent : "mousedown", // {String} 어떤 이벤트가 발생했을 때 레이어를 닫아야 하는지 설정
+				nShowDelay : 20, //{Number} 보여주도록 명령을 한 뒤 얼마 이후에 실제로 보여질지 지연시간 지정 (ms)
+				nHideDelay : 0, //{Number} 숨기도록 명령을 한 뒤 얼마 이후에 실제로 숨겨지게 할지 지연시간 지정 (ms)
+				sMethod : "show" //{String} "fade", "show" 보이고 숨길 방법 설정 (Transition 컴포넌트 사용)
+			}
+		});
+		this.option(htOption || {});
+
+		this._el = jindo.$(el);
+		this._assignHTMLElements(); //컴포넌트에서 사용되는 HTMLElement들을 선언하는 메소드
+		if(this.option("bUseLayerPosition")) {
+			this._initLayerPosition();
+		}
+		this._initLayerManager();
+		this._initRolloverClick();
+		this._oTimer = new jindo.Timer();
+		this._wfOnFocusSelect = jindo.$Fn(this._onFocusSelect, this);
+		this._wfOnBlurSelect = jindo.$Fn(this._onBlurSelect, this);
+		this._wfOnMouseDownBox = jindo.$Fn(this._onMouseDownBox, this);
+		this._wfOnMouseDownList = jindo.$Fn(this._onMouseDownList, this);
+		
+		this._wfOnKeyDown = jindo.$Fn(this._onKeyDown, this);
+		this._wfOnMouseWheel = jindo.$Fn(function(e){
+			e.stop(jindo.$Event.CANCEL_DEFAULT);
+		}); //ie6 에서 셀렉트박스에서 스크롤할 경우 선택값이 바뀌는 것을 방지
+		
+		this._oAgent = jindo.$Agent(); 
+		this.activate(); //컴포넌트를 활성화한다.
+	},
+
+	/**
+	 * 컴포넌트에서 사용되는 HTMLElement들을 선언하는 메소드
+	 */
+	_assignHTMLElements : function() {
+		var sPrefix = this.option("sClassPrefix"),
+			el = this._el;
+			
+		this._wel = jindo.$Element(el);
+		this._elSelect	= jindo.$$.getSingle('select.' + sPrefix + 'source', el);
+		this._sSelectInnerHTML = this._elSelect.innerHTML; //초기의 innerHtml을 구함
+		this._elOptionDefault = jindo.$$.getSingle('option.' + sPrefix + 'default', el);
+		this._elSelectOptionGroup	= jindo.$$.getSingle('select.' + sPrefix + 'source-option-group', el);
+		this._elBox		= jindo.$$.getSingle('.' + sPrefix + 'box', el);
+		this._elLabel	= jindo.$$.getSingle('.' + sPrefix + 'label', el);
+		this._elLayer	= jindo.$$.getSingle('.' + sPrefix + 'layer', el);
+		this._elList	= jindo.$$.getSingle('.' + sPrefix + 'list', el);
+		this._elList.innerHTML = "";
+		this._elSelectList	= jindo.$('<ul>');
+		this._elList.insertBefore(this._elSelectList, this._elList.firstChild);
+	},
+	
+	/**
+	 * select 엘리먼트를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getSelectElement : function() {
+		return this._elSelect;
+	},
+	
+	/**
+	 * box 엘리먼트(클래스명 "box")를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getBoxElement : function() {
+		return this._elBox;
+	},
+	
+	/**
+	 * label 엘리먼트(클래스명 "label")를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getLabelElement : function() {
+		return this._elLabel;
+	},
+	
+	/**
+	 * layer 엘리먼트(클래스명 "layer")를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getLayerElement : function() {
+		return this._elLayer;
+	},
+	
+	/**
+	 * list 엘리먼트(클래스명 "list")를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getListElement : function() {
+		return this._elList;
+	},
+	
+	/**
+	 * list 엘리먼트 내부의 실제 목록 ul 엘리먼트를 가져온다.
+	 * @return {HTMLElement} 
+	 */
+	getSelectListElement : function() {
+		return this._elSelectList;
+	},
+	
+	_limitWidth : function() {
+		var nWidth = this.option("nWidth");
+		this.getLayerManager()._sLayerCSSOverflowX = "hidden";
+		if (nWidth) {
+			jindo.$Element(this.getBoxElement()).css({
+				"width": nWidth + "px",
+				"overflowX": "hidden"
+			});
+			jindo.$Element(this.getLayerElement()).css({
+				"width": nWidth + "px",
+				"overflowX": "hidden"
+			});
+		}
+	},
+	
+	_initLayerManager : function() {
+		var self = this,
+			sPrefix = this.option("sClassPrefix"),
+			elSelect = this.getSelectElement();
+			
+		this._oLayerManager = new jindo.LayerManager(this.getLayerElement(), this.option("LayerManager")).attach({
+			beforeShow : function(oCustomEvent) {
+				/* LayerPosition이 사용되는 경우 레이어가 document.body로 이동되었으므로 사이즈를 다시 측정 */
+				if (self.option("bUseLayerPosition") && !this._bMeasureFinished) {
+					this.setLayer(oCustomEvent.elLayer);
+				}
+				
+				self._limitWidth();
+				
+				var nHeight = self.option("nHeight");
+				if (nHeight) { //높이값 제한
+					var welLayer = jindo.$Element(this.getLayer());
+					if (this._nLayerHeight >= nHeight) {
+						this._sLayerCSSOverflowY = "auto"; //_restore할 css값
+						welLayer.css("overflowY", "hidden");
+						if (oCustomEvent.sMethod != "slide") {
+							welLayer.css("height", nHeight + "px");
+						}
+						this._nLayerHeight = nHeight;
+					}
+				}
+				
+				if(self.fireEvent("open")) {
+					setTimeout(function(){ //focus때문에 delay
+						elSelect.focus();
+					}, 10);
+					self._wel.addClass(sPrefix + 'open');
+				} else {
+					oCustomEvent.stop();
+				}
+			},
+			appear : function(oCustomEvent) {
+				if (self.option("bUseLayerPosition")) {
+					self.getLayerPosition().setPosition(); //레이어가 항상보이도록 포지셔닝을 LayerPosition에 위임
+					this._bMeasureFinished = true;
+				}
+			},
+			show : function(oCustomEvent) {
+				self._paintSelected();
+			},
+			beforeHide : function(oCustomEvent) {
+				if(self.fireEvent("close")) {
+					self._wel.removeClass(sPrefix + 'open').removeClass(sPrefix + 'focused');
+					setTimeout(function(){ //focus때문에 delay
+						self.getSelectElement().blur();
+					}, 10);
+				} else {
+					oCustomEvent.stop();
+					setTimeout(function(){ //focus때문에 delay
+						elSelect.focus();
+					}, 10);
+				}
+			},
+			hide : function(oCustomEvent) {
+				jindo.$Element(oCustomEvent.elLayer).css("height", this._sLayerCSSHeight);
+			}
+		}).link(this.getBoxElement()).link(this.getLayerElement());
+	},
+	
+	/**
+	 * LayerManager 객체를 가져온다.
+	 * @return {jindo.LayerManager}
+	 */
+	getLayerManager : function() {
+		return this._oLayerManager;
+	},
+	
+	_initRolloverClick : function() {
+		var self = this,
+			sPrefix = this.option("sClassPrefix");
+		
+		this._oRolloverClick = new jindo.RolloverClick(this.getSelectListElement(), {
+			sCheckEvent : "mouseup",
+			RolloverArea : {
+				sClassName : sPrefix + "item",
+				sClassPrefix : sPrefix + "item-"  
+			}
+		}).attach({
+			over : function(oCustomEvent) {
+				if (self._welOvered) {
+					self._welOvered.removeClass(sPrefix + "item-over");	
+				}
+				var wel = jindo.$Element(oCustomEvent.element);
+				wel.addClass(sPrefix + "item-over");
+				self._welOvered = wel;
+			},
+			out : function(oCustomEvent) {
+				oCustomEvent.stop();
+			},
+			click : function(oCustomEvent) {
+				var nSelectedIndex = self._nSelectedIndex;
+				jindo.$A(self._aItemData).forEach(function(htData){
+					if (htData.elItem === oCustomEvent.element) {
+						self.setValue(htData.sValue);
+						jindo.$A.Break();
+					}
+				});
+				
+				var nLastSelectedIndex = self.getSelectedIndex();
+				
+				if (nSelectedIndex != nLastSelectedIndex) {
+					jindo.$Element(self.getSelectElement()).fireEvent("change"); //이미 선언된 select의 onchange핸들러 수행을 위해 이벤트 트리거링
+					self.fireEvent("change", { 
+						nIndex : nSelectedIndex, 
+						nLastIndex : nLastSelectedIndex 
+					});	
+				}
+				
+				if (!jindo.$Element(oCustomEvent.element).hasClass(sPrefix + "notclose")) {
+					self.getLayerManager().hide(); //선택이 제대로 이뤄졌을 경우에 hide
+				} 
+			}
+		});
+	},
+	
+	/**
+	 * RolloverClick 객체를 가져온다.
+	 * @return {jindo.RolloverClick}
+	 */
+	getRolloverClick : function() {
+		return this._oRolloverClick;
+	},
+	
+	_initLayerPosition : function() {
+		this._oLayerPosition = new jindo.LayerPosition(this.getBoxElement(), this.getLayerElement(), this.option("LayerPosition"));
+	},
+	
+	/**
+	 * LayerPosition 객체를 가져온다.
+	 * @return {jindo.LayerPosition}
+	 */
+	getLayerPosition : function() {
+		return this._oLayerPosition;
+	},
+
+	/**
+	 * 컴포넌트를 활성화한다.
+	 */
+	_onActivate : function() {
+		var sPrefix = this.option("sClassPrefix"),
+			elSelect = this.getSelectElement();
+		
+		this._limitWidth();	
+		this._wel.removeClass(sPrefix + "noscript");
+		this._wfOnFocusSelect.attach(elSelect, "focus");
+		this._wfOnBlurSelect.attach(elSelect, "blur");
+		this._wfOnMouseDownBox.attach(this.getBoxElement(), "mousedown");
+		this._wfOnMouseDownList.attach(this.getListElement(), "mousedown");
+		this._wfOnKeyDown.attach(elSelect, "keydown");
+		this._wfOnMouseWheel.attach(elSelect, "mousewheel"); 
+		
+		this.paint();
+		this._sPrevValue = this.getValue();
+	},
+	
+	/**
+	 * 컴포넌트를 비활성화한다.
+	 */
+	_onDeactivate : function() {
+		this.getLayerManager().hide();
+		var sPrefix = this.option("sClassPrefix"),
+			elSelect = this.getSelectElement();
+			
+		this._wel.addClass(sPrefix + "noscript");
+		this._wfOnFocusSelect.detach(elSelect, "focus");
+		this._wfOnBlurSelect.detach(elSelect, "blur");
+		this._wfOnMouseDownBox.detach(this.getBoxElement(), "mousedown");
+		this._wfOnMouseDownList.detach(this.getListElement(), "mousedown");
+		this._wfOnKeyDown.detach(elSelect, "keydown");
+		this._wfOnMouseWheel.detach(elSelect, "mousewheel");
+	},
+	
+	/**
+	 * text값에 대한 option의 value를 가져온다.
+	 * @param {String} sText
+	 * @return {String}
+	 */
+	getValueOf : function (sText) {
+		for (var i = 0, oItemData; (oItemData = this._aItemData[i]); i++) {
+			if (oItemData.sText == sText) {
+				return oItemData.sValue;
+			}
+		}
+		return null;
+	},
+	
+	/**
+	 * Select의 value를 가져온다.
+	 * @return {String}
+	 */
+	getValue : function() {
+		return this.getSelectElement().value;
+	},
+	
+	/**
+	 * Select의 text를 가져온다.
+	 * @return {String}
+	 */
+	getText : function() {
+		return this._aItemData[this._nSelectedIndex].sText;
+	},
+	
+	/**
+	 * Select의 html를 가져온다.
+	 * @remark 옵션의 aOptionHTML을 설정한 경우에 리턴값을 가진다.
+	 * @return {String}
+	 */
+	getHTML : function() {
+		return this.getLabelElement().innerHTML;
+	},
+	
+	/**
+	 * SelectBox의 value를 설정한다.
+	 * @param {String} sValue 
+	 */
+	setValue : function(sValue) {
+		this.getSelectElement().value = sValue;
+		this._sPrevValue = this.getValue();
+		this._paint();
+	},
+
+	/**
+	 * 선택된 index를 가져온다.
+	 * @param {Number} nIndex
+	 */
+	getSelectedIndex : function(nIndex) {
+		return this.getSelectElement().selectedIndex;		
+	},
+
+	/**
+	 * nIndex번째 옵션을 선택한다.
+	 * disabled 된것에 대해 처리한다.
+	 * @param {Object} nIndex
+	 */
+	setSelectedIndex : function(nIndex, bFireEvent) {
+		if (typeof bFireEvent == "undefined") {
+			bFireEvent = true;
+		}
+		
+		if (this._isSelectable(nIndex)) {
+			var nLastSelectedIndex = this.getSelectedIndex();
+			this._setSelectedIndex(nIndex);
+			this._paint();
+			
+			if (bFireEvent && nLastSelectedIndex != nIndex) {
+				this.fireEvent("change", { nIndex : nIndex, nLastIndex : nLastSelectedIndex });	
+			}
+			return true;
+		}
+		return false;
+	},
+	
+	_setSelectedIndex : function(nIndex) {
+		this.getSelectElement().selectedIndex = nIndex; //선택된 index는 이메소드를 그릴때 정의
+	},
+	
+	_isSelectable : function(nIndex) {
+		var htItem = this._aItemData[nIndex];
+		if (!htItem || htItem.bDisabled || htItem.bDefault) {
+			return false;
+		} else {
+			return true;
+		}
+	},
+
+	/**
+	 * Select의 option 엘리먼트들을 가져온다.
+	 * @return {Array}
+	 */
+	getOptions : function() {
+		return this._aOptions;
+	},
+	
+	/**
+	 * List내의 아이템 엘리먼트(li)들을 가져온다.
+	 * @return {Array}
+	 */
+	getListItems : function() {
+		return this._aListItem;
+	},
+	
+	/**
+	 * 셀렉트박스가 disabled 되었는지 여부를 가져온다.
+	 */
+	getDisabled : function() {
+		return this._bDisabled;
+	},
+	
+	/**
+	 * 보여질 옵션 그룹을 설정한다.
+	 * source 엘리먼트 내에 <option class="selectbox-default"> 엘리먼트가 선언되어있어야한다.
+	 * 옵션 그룹을 설정하기 위해 기본으로 설정된 source-option-group 셀렉트 엘리먼트가 선언되어있어야한다. 
+	 * option 중 지정된 옵션 그룹명(option-group-그룹명)을 가진 엘리먼트만 보여진다.
+	 * @param {String} sName 옵션 그룹 명
+	 * @return {Boolean} 설정 완료 여부
+	 * @example
+<!-- 수행 전 구조 -->
+<div>
+	<select class="selectbox-source">
+   		<option value="0" class="selectbox-default">팀을 선택하세요</option>
+   	</select>
+	<select class="selectbox-source-option-group"> <!--옵션 그룹을 설정하기 위한 보이지 않는 select-->
+   		<option value="1" class="selectbox-option-group-1">Ajax UI1팀</option>
+   		<option value="2" class="selectbox-option-group-1">Ajax UI2팀</option>
+		<option value="3" class="selectbox-option-group-1">Ajax UI3팀</option>
+		<option value="4" class="selectbox-option-group-1">Ajax UI4팀</option>
+		<option disabled="disabled" class="selectbox-option-group-1">----------------------</option>
+		<option value="5" class="selectbox-option-group-1">SPSUI TF</option>
+		<option value="6" class="selectbox-option-group-2">플래시UI1팀</option>	
+   		<option value="7" class="selectbox-option-group-2">플래시UI2팀</option>
+		<option disabled="disabled" class="selectbox-option-group-2">----------------------</option>
+		<option value="8" class="selectbox-option-group-2">RIA기술팀</option>
+		<option value="9" class="selectbox-option-group-3">UI기술기획팀</option>
+		<option value="10" class="selectbox-option-group-3">웹표준화팀</option>
+		<option value="11" class="selectbox-option-group-3">오픈UI기술팀</option>
+		<option value="12" class="selectbox-option-group-3">인터널서비스</option>
+   	</select>
+	<div class="selectbox-box">
+		<div class="selectbox-label">팀을 선택하세요</div>
+	</div>
+	<div class="selectbox-layer">
+		<div class="selectbox-list"><ul style="height: auto;"/></div>
+	</div>
+</div>
+
+setOptionGroup("1")
+
+<!-- 수행 후 구조 -->
+<div>
+	<select class="selectbox-source">
+   		<option value="0" class="selectbox-default">팀을 선택하세요</option>
+   		<option value="1" class="selectbox-option-group-1">Ajax UI1팀</option>
+   		<option value="2" class="selectbox-option-group-1">Ajax UI2팀</option>
+		<option value="3" class="selectbox-option-group-1">Ajax UI3팀</option>
+		<option value="4" class="selectbox-option-group-1">Ajax UI4팀</option>
+		<option disabled="disabled" class="selectbox-option-group-1">----------------------</option>
+		<option value="5" class="selectbox-option-group-1">SPSUI TF</option>
+	</select>
+	<select class="selectbox-source-option-group"> <!--옵션 그룹을 설정하기 위한 보이지 않는 select-->
+   		<option value="1" class="selectbox-option-group-1">Ajax UI1팀</option>
+   		<option value="2" class="selectbox-option-group-1">Ajax UI2팀</option>
+		<option value="3" class="selectbox-option-group-1">Ajax UI3팀</option>
+		<option value="4" class="selectbox-option-group-1">Ajax UI4팀</option>
+		<option disabled="disabled" class="selectbox-option-group-1">----------------------</option>
+		<option value="5" class="selectbox-option-group-1">SPSUI TF</option>
+		<option value="6" class="selectbox-option-group-2">플래시UI1팀</option>	
+   		<option value="7" class="selectbox-option-group-2">플래시UI2팀</option>
+		<option disabled="disabled" class="selectbox-option-group-2">----------------------</option>
+		<option value="8" class="selectbox-option-group-2">RIA기술팀</option>
+		<option value="9" class="selectbox-option-group-3">UI기술기획팀</option>
+		<option value="10" class="selectbox-option-group-3">웹표준화팀</option>
+		<option value="11" class="selectbox-option-group-3">오픈UI기술팀</option>
+		<option value="12" class="selectbox-option-group-3">인터널서비스</option>
+   	</select>
+	<div class="selectbox-box">
+		<div class="selectbox-label">팀을 선택하세요</div>
+	</div>
+	<div class="selectbox-layer">
+		<div class="selectbox-list">
+			<ul>
+				<li class="selectbox-item">Ajax UI1팀</li>
+				<li class="selectbox-item">Ajax UI2팀</li>
+				<li class="selectbox-item">Ajax UI3팀</li>
+				<li class="selectbox-item">Ajax UI4팀</li>
+				<li class="selectbox-item-disabled">----------------------</li>
+				<li class="selectbox-item">SPSUI TF</li>
+			</ul>
+		</div>
+	</div>
+</div>
+	 */
+	setOptionGroup : function(sName) {
+		if (!this._elSelectOptionGroup || !this._elOptionDefault) {
+			return false;
+		}
+		
+		var elSelect = this.getSelectElement(),
+			sPrefix = this.option('sClassPrefix'),
+			aGroupOption = jindo.$$("." + sPrefix + "option-group-" + sName, this._elSelectOptionGroup),
+			elOptionDefault = this._elOptionDefault = this._elOptionDefault.cloneNode(true);
+		
+		elSelect.innerHTML = "";
+		elSelect.appendChild(elOptionDefault);
+		this._nSelectedIndex = 0; 
+		for (var i = 0; i < aGroupOption.length; i++) {
+			elSelect.appendChild(aGroupOption[i].cloneNode(true));
+		}
+		this._sPrevValue = this.getValue();
+		
+		this.paint();
+		return true;
+	},
+	
+	/**
+	 * 선택된 값이 있는지 여부를 가져온다.
+	 * Default 옵션이 선택된 경우에 false를 리턴한다.
+	 */
+	isSelected : function() {
+		return !this._aItemData[this.getSelectedIndex()].bDefault;
+	},
+	
+	/**
+	 * 선택된 값을 초기화하여 default값으로 되돌린다.
+	 */
+	setDefault : function() {
+		var nDefaultOption = -1;
+			
+		jindo.$A(this._aItemData).forEach(function(o, i) {
+			if (o.bDefault || o.bSelected) {
+				nDefaultOption = i;	
+			}
+		});
+		
+		if (nDefaultOption < 0) { //default나 selected="selected" 된거 없으면 첫번째 옵션이 default 
+			nDefaultOption = 0;
+		} 
+		
+		this._nSelectedIndex = nDefaultOption;
+		this._setSelectedIndex(nDefaultOption);
+		this._sPrevValue = this.getValue();
+		
+		this._paint();
+	},
+	
+	/**
+	 * 셀렉트박스를 다시 그린다.
+	 */
+	paint : function() {
+		this._paintList();
+		this._paintSelected();
+		this._paintLabel();
+		this.getLayerManager().setLayer(this.getLayerElement());
+	},
+	
+	/**
+	 * 타이머로 체크하여 계속 다시 그림
+	 * @ignore
+	 */
+	_paint : function() {
+		this._paintSelected();
+		this._paintLabel();
+	},
+	
+	/**
+	 * 현재 설정된 값을 box의 label에 그린다.
+	 * @ignore
+	 */
+	_paintLabel : function() {
+		var welLabel = jindo.$Element(this.getLabelElement()),
+			sHTML = this.option("aOptionHTML")[this._nSelectedIndex] || "",
+			sLabel = this.option("aOptionLabel")[this._nSelectedIndex] || "",
+			sText = this.getText();
+			
+		if (sHTML) {
+			if (sLabel) {
+				welLabel.html(sLabel);
+			} else {
+				welLabel.html(sHTML);
+			}
+		} else {
+			welLabel.text(sText);
+		}
+		welLabel.attr("unselectable", "on");
+	},
+	
+	/**
+	 * 현재 설정된 값을 list에 그린다.
+	 * @ignore
+	 */
+	_paintList : function() {
+		var sPrefix = this.option('sClassPrefix');
+		this._aOptions = jindo.$$('option', this.getSelectElement());
+		var aOptions = this._aOptions;
+		this._aItemData = [];
+		this._aListItem = [];
+		
+		this._nSelectedIndex = 0; 
+		var elList = this.getSelectListElement();
+		elList.innerHTML = "";
+		if (this.option("nHeight")) { /* 높이값 되돌리기 */
+			jindo.$Element(this.getLayerElement()).css("height", "auto");
+			//this.getLayerManager()._restore();
+			//.css("overflowX", "").css("overflowY", "");
+		}
+		
+		for (var i = 0, elOption; (elOption = aOptions[i]); i++) {
+			var welOption = jindo.$Element(elOption),
+				bDefault = welOption.hasClass(sPrefix + 'default'),
+				bSelected = welOption.attr("selected") == "selected",
+				bDisabled = bDefault || elOption.disabled,
+				sHTML = this.option("aOptionHTML")[i] || "",
+				sText = welOption.text() || "",
+				sValue = welOption.attr("value");
+				
+			if (!sValue) {
+				welOption.attr("value", sText);
+				sValue = sText;
+			}
+			
+			this._aItemData[i] = {
+				elOption : elOption,
+				elItem : null,
+				sHTML : sHTML,
+				sText : sText,
+				sValue : sValue,
+				
+				bDisabled : bDisabled,
+				bSelected : bSelected,
+				bDefault : bDefault
+			};
+			
+			// <li> 태그 만들기
+			var elItem = null,
+				htItem = this._aItemData[i];
+				
+			if (!htItem.bDefault) {
+				elItem = jindo.$('<li>');
+				// <option> 에 적용된 스타일 그대로 적용하기
+				elItem.style.cssText = htItem.elOption.style.cssText;
+				elItem.className = htItem.elOption.className;
+				var welItem = jindo.$Element(elItem);
+				if (htItem.sHTML) {
+					welItem.html(htItem.sHTML);
+				} else {
+					welItem.text(htItem.sText);
+				}
+				welItem.attr("unselectable", "on");
+				
+				if (htItem.bDisabled) {
+					welItem.addClass(sPrefix + 'item-disabled');
+				}
+				else {
+					welItem.addClass(sPrefix + 'item'); //구분선이 아닐경우만
+				}
+				
+				elList.appendChild(elItem);
+				this._aListItem.push(elItem);
+				this._aItemData[i].elItem = elItem;
+			}
+			
+		}
+		if (this._aListItem.length === 0) {
+			this.disable();
+			return;
+		}
+		this.enable();
+	},
+	
+	/**
+	 * 레이어가 열리면, 현재 선택된 아이템을 하이라이팅하고 scrollTop을 보정
+	 * @ignore
+	 */
+	_paintSelected : function() {
+		var sPrefix = this.option('sClassPrefix'),
+			n = this.getSelectedIndex(),
+			htItem,
+			nPrevSelectedIndex = this._nSelectedIndex;
+			
+		this._nSelectedIndex = n; //선택된 index는 이메소드를 그릴때 정의
+		htItem = this._aItemData[n];
+		if (htItem.elItem) {
+			var elSelected = htItem.elItem,
+				welSelected = jindo.$Element(elSelected);
+				
+			if (this._welSelected) {
+				this._welSelected.removeClass(sPrefix + "item-selected");	
+			}
+			if (this._welOvered) {
+				this._welOvered.removeClass(sPrefix + "item-over");	
+			}
+			this._welSelected = this._welOvered = welSelected;
+			welSelected.addClass(sPrefix + "item-selected").addClass(sPrefix + "item-over");	
+			
+			if (this.isLayerOpened()) {
+				var elLayerElement = this.getLayerElement();
+				//scroll포지션 세팅
+				if (!this.option("nHeight") || this.getLayerManager().option("sMethod") == "slide") {
+				//	elLayerElement.scrollTop = 0;
+				//	return;
+				}
+				var nHeight = parseInt(jindo.$Element(elLayerElement).css("height"), 10),
+					nOffsetTop = elSelected.offsetTop,
+					nOffsetHeight = elSelected.offsetHeight,
+					nScrollTop = elLayerElement.scrollTop,
+					bDown;
+				
+				if (nPrevSelectedIndex < n) {
+					bDown = true;
+				} else {
+					bDown = false;
+				}
+				if (nOffsetTop < nScrollTop || nOffsetTop > nScrollTop + nHeight) {
+					elLayerElement.scrollTop = nOffsetTop;
+				}
+				if (bDown) {
+					if (nOffsetTop + nOffsetHeight > nHeight + nScrollTop) {
+						elLayerElement.scrollTop = (nOffsetTop + nOffsetHeight - nHeight);
+					}
+				} else {
+					if (nOffsetTop < nScrollTop) {
+						elLayerElement.scrollTop = nOffsetTop;
+					}
+				}
+			}
+		}
+	},
+	
+	/**
+	 * Select 레이어가 열려있는지 여부를 가져온다.
+	 * @return {Boolean}
+	 */
+	isLayerOpened : function() {
+		return this.getLayerManager().getVisible();	
+	},
+	
+	/**
+	 * SelectBox를 disable 시킨다.
+	 * 마우스로 클릭하더라도 목록 레이어가 펼쳐지지 않는다.
+	 */
+	disable : function() {
+		this.getLayerManager().hide();
+		var sPrefix = this.option("sClassPrefix");
+		this._wel.addClass(sPrefix + 'disabled');
+		this.getSelectElement().disabled = true;
+		this._bDisabled = true;
+	},
+	
+	/**
+	 * SelectBox를 enable 시킨다.
+	 */
+	enable : function() {
+		var sPrefix = this.option("sClassPrefix");
+		this._wel.removeClass(sPrefix + 'disabled');
+		this.getSelectElement().disabled = false;
+		this._bDisabled = false;
+	},
+	
+	/**
+	 * 레이어를 연다.
+	 * @return {this}
+	 */
+	open : function() {
+		if (!this._bDisabled) {
+			this.getLayerManager().show();
+		}
+		return this;
+	},
+	
+	/**
+	 * 레이어를 닫는다.
+	 * @return {this}
+	 */
+	close : function() {
+		this.getLayerManager().hide();
+		return this;
+	},
+	
+	_onMouseDownBox : function(we){
+		we.stop(jindo.$Event.CANCEL_DEFAULT);
+		if (!this._bDisabled) {
+			this.getLayerManager().toggle();
+		}
+	},
+	
+	_onMouseDownList : function(we){
+		if (!jindo.$$.getSingle("! ." + this.option("sClassPrefix") + "notclose", we.element)) {
+			we.stop(jindo.$Event.CANCEL_DEFAULT);
+		}
+	},
+	
+	/**
+	 * 현재 index로부터 선택가능한 다음 index를 구한다.
+	 * @param {Number} nIndex
+	 * @param {Number} nTarget
+	 * @ignore
+	 */
+	_getSelectableIndex : function(nIndex, nDirection, nTargetIndex) {
+		var nFirst = -1,
+			nLast = this._aItemData.length - 1,
+			i;
+		
+		for (i = 0; i < this._aItemData.length; i++) {
+			if (this._isSelectable(i)) {
+				if (nFirst < 0) {
+					nFirst = i;	
+				}
+				else {
+					nLast = i;
+				}
+			}
+		}
+		
+		switch (nDirection) {
+			case -1 :
+				if (nIndex == nFirst) {
+					return nIndex;
+				}
+				for (i = nIndex - 1; i > nFirst; i--) {
+					if (this._isSelectable(i)) {
+						return i;
+					}					
+				}
+				return nFirst;
+			
+			case 1 :
+				if (nIndex == nLast) {
+					return nIndex;
+				}
+				for (i = nIndex + 1; i < nLast; i++) {
+					if (this._isSelectable(i)) {
+						return i;
+					}					
+				}
+				return nLast;
+			
+			case Infinity :
+				return nLast;
+			
+			case -Infinity :
+				return nFirst;
+		}
+	},
+	
+	_onKeyDown : function(we){
+		var htKey = we.key();
+		
+		if (this._oAgent.os().mac && this._oAgent.navigator().safari) {
+			var nKeyCode = htKey.keyCode;
+			if (nKeyCode != 9) {
+				//mac용 사파리에서는 select에서의 keydown을 중단. tab 제외
+				we.stop(jindo.$Event.CANCEL_DEFAULT);
+			}
+			var nSelectedIndex = this.getSelectedIndex(),
+				nTargetIndex = nSelectedIndex;
+				
+			// 콤보박스에서 발생한 이벤트도 처리하는 경우
+			switch (nKeyCode) {
+				case 37: // LEFT:
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, -1);
+					break;
+					
+				case 38: // UP:
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, -1);
+					break;
+				
+				case 39: // RIGHT
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, 1);
+					break;
+					
+				case 40: // DOWN
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, 1);
+					break;
+					
+				case 33: // PGUP
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, -Infinity);
+					break;
+					
+				case 34: // PGDN
+					nTargetIndex = this._getSelectableIndex(nSelectedIndex, Infinity);
+					break;
+				case 13: // ENTER
+					this.getLayerManager().hide();
+					break;
+			}
+			
+			var oParam = {
+				nIndex: nTargetIndex,
+				nLastIndex: parseInt(this._nSelectedIndex, 10)
+			};
+			
+			this._setSelectedIndex(nTargetIndex);
+			this._paint();
+			if (oParam.nIndex != oParam.nLastIndex) {
+				this.fireEvent("change", oParam);	
+			}
+		} else {
+			if(this.isLayerOpened() && (htKey.enter || htKey.keyCode == 9)) {
+				this.getLayerManager().hide();
+			}
+		}
+	},
+	
+	_onFocusSelect : function(we){
+		var sPrefix = this.option('sClassPrefix'),
+			wel = this._wel;
+			 
+		if(!this.isLayerOpened()) {
+			if (this.fireEvent("focus")) {
+				this._bRealFocused = true;	
+			} else {
+				this.getSelectElement().blur();
+				return;
+			}
+		}
+		wel.addClass(sPrefix + 'focused');	
+		
+		//mac용 사파리에서는 타이머 돌지 않음
+		if (!(this._oAgent.os().mac && this._oAgent.navigator().safari)) {
+			var self = this;
+			this._oTimer.start(function(){
+			
+				var sValue = self.getValue();
+				if (!!self._sPrevValue && self._sPrevValue != sValue) {
+					var nSelectedIndex = self.getSelectElement().selectedIndex;
+					//Disable default는 다시 선택되지 않도록. ie는 선택이되네..
+					if (!self._isSelectable(nSelectedIndex)) {
+						var nDiff = -(self._nSelectedIndex - nSelectedIndex);
+						nDiff = (nDiff > 0) ? 1 : -1;
+						self._setSelectedIndex(self._getSelectableIndex(self._nSelectedIndex, nDiff, nSelectedIndex));
+						return true;
+					}
+					
+					var oParam = {
+						nIndex: nSelectedIndex,
+						nLastIndex: parseInt(self._nSelectedIndex, 10)
+					};
+					
+					self._paint();
+					if (oParam.nIndex != oParam.nLastIndex) {
+						self.fireEvent("change", oParam);	
+					}
+					
+					self._sPrevValue = sValue;
+				}
+				
+				return true;
+			}, 10);
+		}
+	},
+	
+	_onBlurSelect : function(we){
+		var self = this,
+			sPrefix = this.option('sClassPrefix');
+			
+		if (this._bRealFocused) { //레이어가 오픈되지 않고 focus되었던 경우에만 blur 발생
+			this.fireEvent("blur");
+			this._wel.removeClass(sPrefix + 'focused');
+			this._bRealFocused = false;
+		}
+		setTimeout(function(){
+			self._oTimer.abort();	
+		}, 10); //마우스로 선택된것도 체크되도록
+	}
+}).extend(jindo.HTMLComponent);	

@@ -1,0 +1,77 @@
+/**
+ * lcslog.js  v 0.4.11.l
+ * Last Updated: 2009-07-10
+ * Author : Chin Mi Ae, Lee Dae Beom
+ * Copyright 2009 NHN Corp. All rights Reserved.
+ * NHN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ *
+ * This code includes some part of the
+ * "Flash Player Detection Kit Revision 1.5" by Michael Williams
+ * & Copyright 2005-2007 Adobe Macromedia Softward.LLC. All rights reserved.
+ */
+
+
+var lcs_add = {};
+
+var lcs_ver = "v0.4.11.l";
+var lcs_count = 0;
+lcs_obj = [];
+
+function lcs_do( etc ) {
+	// TODO : check lcs server name!! 
+	if (!lcs_SerName) { var lcs_SerName = "lcs.naver.com"; }
+
+	var rs = "";
+	var index;
+
+	try {
+		var lcs_Addr = (window.location.protocol ? window.location.protocol : "http:")+"//" + lcs_SerName + "/m?";
+	} catch(e){ return; }
+
+	try {
+		rs = lcs_Addr + "u=" + encodeURIComponent(document.URL) 
+			+ "&e=" + (document.referrer ? encodeURIComponent(document.referrer) : "");
+	} catch(e) {
+	}
+
+	try {
+
+	if (typeof lcs_add.i == 'undefined' )
+		lcs_add.i = "";
+
+	for( var index in lcs_add)
+	{
+		if( typeof lcs_add[index] != 'function' ) 
+			rs += "&" + index + "=" + encodeURIComponent(lcs_add[index]);
+	}
+
+	for( var index in etc )
+	{
+		if ( (index.length >= 3 && (typeof etc[index] != 'function')) || index == 'qy')
+		{
+			rs += "&" + index + "=" + encodeURIComponent(etc[index]);
+		}
+	}
+
+
+	if(lcs_count > 0 )
+	{
+		var timeStr = (new Date).getTime();
+		rs += "&ts=" + timeStr;
+	}
+	rs += "&EOU";
+
+	if (document.images) {
+		var obj = (new Image());
+		lcs_obj.push(obj);
+		obj.src = rs;
+	} else {
+		document.write( '<im' + 'g sr' + 'c="' + rs + '" width="1" height="1" border="0" />');
+	}
+	lcs_count++;
+
+	} catch(e) {
+		return;
+	}
+}
+
