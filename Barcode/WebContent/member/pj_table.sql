@@ -1,6 +1,6 @@
 CREATE TABLE tblnomal(
 	`id`	char(20) NOT NULL,
-	`passWord` char(16) NOT NULL,
+	`pass` char(16) NOT NULL,
 	`name` char(10) NOT NULL,	
 	`birth` char(8) NOT NULL,
 	`gender` char(1) NOT NULL,

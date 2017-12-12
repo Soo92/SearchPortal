@@ -12,6 +12,11 @@ body { font-family: 'Nanum Gothic', son-serif; }
 #start span{font-weight:bold;}
 #start a{text-decoration:none;}
 
+#bookmark{width:15%; height:15px; float:right; margin-top:20px;}
+#bookmark p{color:gray; font-size:12px;}
+#bookmark span{font-weight:bold;}
+#bookmark a{text-decoration:none;}
+
 #logo{width:250px; height:80px; background:#000; float:left; margin-top:55px;}
 #search{width:550px; height:50px; float:left; margin-top:70px; margin-left:30px;
 				border:solid 2px; border-color:#ff4800;}

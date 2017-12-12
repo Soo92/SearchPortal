@@ -29,14 +29,43 @@
 		}
 		document.loginFrm.submit();
 	}
+
+	function bookmarksite(title,url) { 
+	   // Internet Explorer
+	   if(document.all)
+	   {
+	       window.external.AddFavorite(url, title); 
+	   }
+	   // Google Chrome
+	   else if(window.chrome){
+	      alert("Ctrl+D키를 누르시면 즐겨찾기에 추가하실 수 있습니다.");
+	   }
+	   // Firefox
+	   else if (window.sidebar) // firefox 
+	   {
+	       window.sidebar.addPanel(title, url, ""); 
+	   }
+	   // Opera
+	   else if(window.opera && window.print)
+	   { // opera 
+	      var elem = document.createElement('a'); 
+	      elem.setAttribute('href',url); 
+	      elem.setAttribute('title',title); 
+	      elem.setAttribute('rel','sidebar'); 
+	      elem.click(); 
+	   }
+	} 
 </script>
 	
 </head>
 <body>
-	<div id="wrap">
+	<div id="wrap" float="left">
 		<div id="header">
 			<div id="start">
-				<a href="#"><p>바코드를 시작페이지로&nbsp;&nbsp;<span>></span></p></a>
+				<a href="./custom/start_page.jsp"><span><p>시작페이지로 설정</p></span></a>
+			</div>
+			<div id="bookmark">
+				<a href="javascript:bookmarksite('타이틀', 'http://localhost/Barcode/index.jsp')"><span><p>즐겨찾기 추가하기</p></span></a>
 			</div>
 			<div id="logo"><img src="./img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
 			<div id="search">
