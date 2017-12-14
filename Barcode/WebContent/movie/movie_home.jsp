@@ -131,19 +131,17 @@ function delayed_submit(object) {
                             <a href="http://movie.naver.com/" title="영화홈" class="menu01_on"><strong>영화홈</strong></a><!-- N=a:LNB.home -->
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/running/current.nhn" title="상영작·예정작" class="menu02"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
+                            <a href="currentmovie.html" title="상영작·예정작" class="menu02"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
                             <ul class="navi_sub" id="navi_movie" style="display:none">
-                            <li><a href="http://movie.naver.com/movie/running/current.nhn" title="현재 상영영화" class="sub2_1"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
-                            <li><a href="http://movie.naver.com/movie/running/premovie.nhn" title="개봉 예정영화" class="sub2_2"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
-                            <li><a href="http://movie.naver.com/movie/running/weekendmovie.nhn" title="TV/DVD 영화" class="sub2_3"><em>TV/DVD 영화</em></a><!-- N=a:LNB.guide --></li>
-                            <li><a href="http://movie.naver.com/movie/running/movieclip.nhn" title="예고편" class="sub2_4"><em>예고편</em></a><!-- N=a:LNB.tailer --></li>
+                            <li><a href="currentmovie.html" title="현재 상영영화" class="sub2_1"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
+                            <li><a href="premovie.html" title="개봉 예정영화" class="sub2_2"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/sdb/rank/rmovie.nhn" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
+                            <a href="ranking1.html" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
                         </li>
                         <li>
-                            <a href="http://movie.naver.com/movie/bi/mi/reserve.nhn" title="예매" class="menu05"><strong>예매</strong></a><!-- N=a:LNB.ticket -->
+                            <a href="theater.html" title="예매" class="menu05"><strong>예매</strong></a><!-- N=a:LNB.ticket -->
                         </li>
                         
                         
