@@ -1,0 +1,371 @@
+/*
+ * Script for LIst Page
+ * Refactoring initalize Modules in nboard2.js
+ * 
+ * @author AjaxUI, NHN Corp.
+ * @editor SOHN,BD(realrap) 
+ * @since 2008.07.08
+ */
+/**
+ * 글 목록 페이지 초기화 함수
+ */
+function initializeListScript(){
+	for(var i=0; i<aTitle.length ; i++){
+		if($('n2_ultemp_'+i)){
+			var ul_offsetwidth = $('n2_ultemp_'+i).offsetWidth;
+			var li_marginwidth = parseInt(($('n2_litemp_'+i)).style.marginLeft);
+			if(oAgent.Gecko){
+					$('n2_litemp_'+i).style.width = (ul_offsetwidth) - (li_marginwidth) - 12 + 'px';
+				}
+		}
+	}
+	
+	oCommonFn.setDocumentDomain();	// 공용함수 in nboard2.js 
+	oCommonFn.setServiceCallback();	// 공용함수 in nboard2.js
+	if ( !oServiceCallBack.listPage( aCurrentCategory[0], aCurrentCategory[1], aCurrentCategory[2], sTemplateObjectId ) ) {
+		return;
+	}
+	
+	if($('n2_category0') != null){
+		for(var i=0; i<aCategoryList['0'].length; i++){
+			_addCategoryOption($("n2_category0"), aCategoryList['0'][i]['id'], aCategoryList['0'][i]['name']);
+		}
+		if(oAgent.mSafari) {
+			$('n2_category0').style.visibility="visible";
+		} else {
+			oCategory0 = new Selectbox();
+			oCategory0.transform("n2_category0", { width : 'auto' });
+		}
+	}
+	if($('n2_category1') != null){
+		if(oAgent.mSafari) {
+			$('n2_category1').style.visibility="visible";
+		} else {
+			oCategory1 = new Selectbox();
+			oCategory1.transform("n2_category1", { width : 'auto', height : 600 });
+		}
+	}
+	if($('n2_category2') != null){
+		if(oAgent.mSafari) {
+			$('n2_category2').style.visibility="visible";
+		} else {
+			oCategory2 = new Selectbox();
+			oCategory2.transform("n2_category2", { width : 'auto', height : 600 });
+		}
+	}
+	
+	if($('n2_oDocPerPage') != null){
+		if(oAgent.IE55){
+			$('n2_oDocPerPage').style.visibility = "visible";
+		} else if(oAgent.mSafari) {
+			$('n2_oDocPerPage').style.visibility = "visible";
+		} else {
+			(new Selectbox()).transform("n2_oDocPerPage", { width : '72' });
+		}
+	}
+
+	//검색 체크박스
+	var imgs = new Ku.Radiobox('n2_searchBy', {
+		skinFormat : sImageUrlPrefix+'/img_check_%s.gif',
+		onChange : function(v, i) { // onChange 시에 입력모드를 변경
+			(i == 1) ? setImeMode('english', 'n2_query') : setImeMode('korean', 'n2_query');
+			fncSetAlt();
+		}
+	});
+
+	fncSetAlt();
+	function fncSetAlt() {
+	    imgs._elements.each(function(v,i) {
+	        imgs._sources[i].checked?(v.alt = 'on') : (v.alt = 'off');
+		});
+	}
+    
+    
+	oCommonFn.setCategory();
+	
+	if (useScrollIntoView) {
+		$('n2_nboard_top').scrollIntoView(false);
+	}
+	
+	// 제목/템플릿오브젝트명 길이 맞추기
+	oCommonUI.adjustTitleWidth(sListType, nDocNum, nTopDocNum, aTitle, aTemplateObjectName);
+	
+	
+	oCommonUI.checkParentIFrame();
+	
+	// prevent flicker bug in IE 6
+	try {document.execCommand('BackgroundImageCache', false, true);} catch(e) {}
+	
+	// 목록 화면으로 돌아오면서 팝업을 띄워야 하는 경우가 있음 (ex : 오픈톡)
+	if(sPopupUrl && _isInDomain(sPopupUrl, document.domain)) window.open(sPopupUrl);
+	
+	oControlLayer = new Ju.controlLayer({'bAutoAdjusting' : true});
+	
+	// 검색어 기본 입력모드를 한글로 설정(IE에서만 동작)
+	setImeMode('korean', 'n2_query');
+	$('n2_skin_wrap').style.visibility = 'visible';
+}
+
+function _isInDomain(url, domain){
+	var domainInUrl = url.match( /:\/\/(www\.)?([^\/:]+)/ );
+   	domainInUrl = domainInUrl[2]?domainInUrl[2]:'';
+   	var index = domainInUrl.lastIndexOf(domain);
+   	return index == domainInUrl.length - domain.length;
+}
+
+
+/**
+ * 한 페이지에 보일 게시물 수 변경
+ * @param {Number} nDocumentPerPage
+ */
+function changeDocPerPage(nDocPerPage){
+	document.location.href = sDocPerPageUrlTemplate.replace('_cntPerPage_', nDocPerPage);
+}
+
+
+
+
+/**
+ * 미리보기 레이어 감추는 함수
+ */
+function hidePreview(){
+	$("n2_oImgOnlyPreviewLayer").style.display = "none";
+	$("n2_oImgOnlyPreviewLayerImage").innerHTML = "";
+	$("n2_oPreviewLayer").style.display = "none";
+	$("n2_oPreviewLayerImage").innerHTML = "";
+	$("n2_oPreviewLayerText").innerHTML = "";
+}
+
+/**
+ * 리스트에서 미리보기 레이어 보여주는 함수
+ * @param {Object} eEvent
+ * @param {String} sArticleID
+ */
+function showPreview(eEvent, sArticleIndex, sType){
+
+	if(aPreviewData[sArticleIndex] && !oAgent.mSafari){
+		var oBase = eEvent.target || eEvent.srcElement;
+		var oParent = oBase.parentNode.parentNode.parentNode;
+		//FF에서 제목글 관련 말풍선 위치 수정 . 
+		if(oAgent.Gecko && oBase.tagName.toUpperCase() == 'A' && oParent.tagName.toUpperCase() =='LI'){
+			oParent = oBase.parentNode.parentNode;
+		}
+		var nGap = Element.realPos(oBase).left - Element.realPos(oParent).left;
+		var nBoardHeight = (/MSIE/.test(navigator.userAgent) ?  document.body.scrollHeight + (document.body.offsetHeight - document.body.clientHeight) : document.body.offsetHeight);
+
+		var nBoardObj = $('n2_nboard');
+		var nBoardObjParentNode  = nBoardObj.parentNode;
+		var otherNodeHeight = 0;
+
+		if(nBoardObjParentNode.tagName != "BODY"){
+			otherNodeHeight = _getOtherNodeHeight(nBoardObjParentNode , nBoardObjParentNode.parentNode.childNodes);
+		}
+		
+		if(otherNodeHeight>0){
+			nBoardHeight = $('n2_nboard').offsetHeight;
+		}
+
+		if(oAgent.IE){
+			nGap += 11;
+		} else {
+			if(nGap > 0){
+				oParent.style.width = "auto";
+			}
+			nGap += 22;
+		}
+
+		var oLayer, oLayerImage, oLayerText;
+		if(sType == "image") {
+			oLayer = $("n2_oImgOnlyPreviewLayer");
+			oLayerImage = $("n2_oImgOnlyPreviewLayerImage");
+			oLayerText = null;
+		} else {
+			oLayer = $("n2_oPreviewLayer");
+			oLayerImage = $("n2_oPreviewLayerImage");
+			oLayerText = $('n2_oPreviewLayerText');
+		}
+		
+		if(sType != "image") {
+			//oLayer.style.top = (_realPosforN2(oBase).top + oBase.offsetHeight + 3) + "px";
+			oLayer.style.top = (eEvent.clientY + document.body.scrollTop + 17) + "px";
+			oLayer.style.left = _realPosforN2(oBase).left + "px";
+			oLayer.style.width = (oParent.offsetWidth - nGap) + "px";
+		}
+
+		if(aPreviewData[sArticleIndex].thumbnail && sType != 'text'){
+			var oPreviewImage = new Image();
+			oPreviewImage.onload = function() {
+				var thumbnailWidth = oLayerImage.clientWidth;
+				var thumbnailHeight = oLayerImage.clientHeight;
+				var imageSize = resizeImage(this, thumbnailWidth, thumbnailHeight);
+				
+				if(sType == "image"){
+					oLayer.style.width = imageSize.nWidth;
+					oLayer.style.height = imageSize.nHeight;
+
+					var nBaseLeft = Element.realPos($('n2_nboard')).left;
+					var nLayerWidth = imageSize.nWidth;
+					var nLayerLeft = (Element.realPos(oBase).left - ((nLayerWidth - oBase.offsetWidth) / 2));
+
+					if(nLayerLeft + nLayerWidth > nBaseLeft + $("n2_nboard").offsetWidth) nLayerLeft -= ((nLayerLeft + nLayerWidth) - (nBaseLeft + $("n2_nboard").offsetWidth));
+					oLayer.style.left = (nLayerLeft < nBaseLeft ? nBaseLeft : (nLayerLeft))+"px";
+					oLayer.style.top = (Element.realPos(oBase).top - ((imageSize.nHeight - oBase.offsetHeight) / 2))+"px";
+					
+					try{ oLayer.style.cursor = "pointer"; }catch(e){ oLayer.style.cursor = "hand";}
+					oLayer.onmouseout = hidePreview;
+					oLayer.onclick = function(){document.location.href = oBase.parentNode.href}
+				}
+				oLayerImage.innerHTML = '<img src="'+this.src+'" width="'+imageSize.nWidth+'" height="'+imageSize.nHeight+'">';
+				if(oLayerText){
+					_adjustPreviewLayerHeight(oLayer, oBase, oLayerText, nBoardHeight);
+					_adjustPreviewTextLayerWidth(oLayer, oLayerImage, oLayerText);
+				}
+			}
+			oPreviewImage.src = aPreviewData[sArticleIndex].thumbnail;
+			oLayerImage.style.display = "block";
+		}else{
+			oLayerImage.style.display = "none";
+		}
+		
+		var url = document.URL;
+		if ( url.search('1100001003') != -1) {
+			oLayer.style.width = 780;
+		}
+
+		oLayer.style.display = "block";
+		if(oLayerText){
+			oLayerText.innerHTML = aPreviewData[sArticleIndex].text;
+			oLayerText.style.wordBreak = "break-all";
+			_adjustPreviewLayerHeight(oLayer, oBase, oLayerText, nBoardHeight);
+			_adjustPreviewTextLayerWidth(oLayer, oLayerImage, oLayerText);
+		}
+	}
+}
+
+function _adjustPreviewLayerHeight(oLayer, oBase, oLayerText, nHeight) {
+	var nBoardObj = $('n2_nboard');
+	var nBoardObjParentNode  = nBoardObj.parentNode;
+	var otherNodeHeight = 0;
+	if(nBoardObjParentNode.tagName != "BODY"){
+		otherNodeHeight = _getOtherNodeHeight(nBoardObjParentNode , nBoardObjParentNode.parentNode.childNodes);
+	}
+	//while(Element.realPos(oLayer).top + oBase.offsetHeight + oLayer.offsetHeight > nHeight) {
+	while(oLayerText.innerHTML.length > 0 && Element.realPos(oLayer).top - otherNodeHeight + oBase.offsetHeight + oLayer.offsetHeight > nHeight) {
+    	oLayerText.innerHTML = oLayerText.innerHTML.substr(0, oLayerText.innerHTML.length - 11);
+	}
+
+}
+
+function _adjustPreviewTextLayerWidth(oLayer, oLayerImage, oLayerText) {
+	if (oAgent.Gecko) {
+		oLayerText.style.width = (oLayer.clientWidth - oLayerImage.clientWidth - Element.getCSS(oLayerImage, "margin-right").replace('px','')) + "px";
+	} else {
+		oLayerText.style.width = '';
+	}
+}
+
+var middleOffsetLeft = 0;
+var middleOffsetTop= 0;
+
+function _realPosforN2(oEl){
+	if (oEl.offsetParent) {
+		var styleTypeN2 = oEl.offsetParent;
+		var resultgetCss = Element.getCSS(styleTypeN2,"position");
+		//middle tagID는 pc그린서비스에 사용하는 것임
+		var middleTag = $('middle');
+
+		if(resultgetCss == 'relative' && middleTag && (styleTypeN2 == middleTag)){
+			middleOffsetLeft = styleTypeN2.offsetLeft;
+			middleOffsetTop= styleTypeN2.offsetTop;
+		}
+			var p = _realPosforN2(oEl.offsetParent);
+			return { top: oEl.offsetTop+p.top, left: oEl.offsetLeft+p.left };
+	} else {
+			return { top: oEl.offsetTop-middleOffsetTop, left:oEl.offsetLeft-middleOffsetLeft };
+	}
+}
+	
+
+
+function _getOtherNodeHeight (parentNode, topNode){
+	var nBoardtmpnode = topNode;
+	var nodeHeight = 0;
+	if(oAgent.Gecko && nBoardtmpnode){
+		
+			for(i = 0 ; i < nBoardtmpnode.length ; i++){
+				if(nBoardtmpnode[i] == parentNode) break;
+				if(nBoardtmpnode[i].tagName) {
+					if(nBoardtmpnode[i].tagName == "DIV") {
+						nodeHeight += nBoardtmpnode[i].offsetHeight;
+					}
+				}
+			}
+
+	}
+	return nodeHeight;
+}
+//2st METHOD .getOtherNodeHeight 를 getNodeHeight로 대체해야 할것이다
+/*
+function getNodeHeight(startNode){
+	
+	var preTempNode = startNode;
+	var startParent = startNode.parentNode;
+	var divHeight	= 0;
+
+	while(startParent.tagName != 'BODY'){
+		var DepthChild = startParent.childNodes;
+		var DepthChildLen = DepthChild.length;
+
+		if(DepthChildLen > 1){
+			for(i=0;i<DepthChildLen ; i++){
+				if(DepthChild[i].tagName == 'DIV' && DepthChild[i] != preTempNode){
+					divHeight += DepthChild[i].offsetHeight;
+				}else if(DepthChild[i] == preTempNode){
+					break;
+				}
+			}
+		}
+		preTempNode = startParent;
+		startParent = startParent.parentNode;
+	}
+	return divHeight;
+}
+*/
+/**
+ * 카테고리 이동  Option.ftl 에서 호출됨. 
+ */
+function goCategoryList(){
+	var aCategory = getSelectedCategory();
+	
+	if(!serviceCallback("categoryChange", {category0 : aCategory[0], category1 : aCategory[1], category2 : aCategory[2], templateObjectId : sTemplateObjectId})) return; 
+	
+	var sParams = '';
+	if(aCategory[0]) sParams += "n2_category0=" + aCategory[0];
+	if(aCategory[1]) sParams += "&n2_category1=" + aCategory[1];
+	if(aCategory[2]) sParams += "&n2_category2=" + aCategory[2];
+	
+	var url = sCategoryUrlTemplate + (sCategoryUrlTemplate.indexOf('?') == -1 ? "?" : "&") + sParams; 
+	document.location.href = url;
+}
+
+/**
+ * 검색 처리 Search.ftl 에서 호출됨. 
+ */
+function searchList(){
+	 var elSearchBy = document.getElementsByName('n2_searchBy');
+		var elQuery  = $('n2_query');
+		var sQuery = elQuery.value.replace(/^\s+/,'').replace(/\s+$/,'');
+		if(sQuery == "") {
+			//081013 alert("검색어를 입력해 주십시오");
+			alert(nboard2._('do4list.check.searchword.description'));
+			elQuery.focus();
+			return false;
+		}else if(sQuery.length > 1000){
+			//081013 alert("검색어는 1000자 이내로 입력해 주셔야 합니다.");
+			alert(nboard2._('do4list.check.maxlength.description'));
+			elQuery.focus();
+			return false;
+		}else{
+			document.location.href = (elSearchBy[0].checked ? sSearchByContentsUrlTemplate : sSearchByWriterUrlTemplate).replace('_query_', encodeURIComponent(elQuery.value));
+		}
+}

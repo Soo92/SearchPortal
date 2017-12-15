@@ -1,0 +1,811 @@
+/**
+ * @fileOverview 컨텍스트 메뉴를 구현한 nhn.ContextMenu 컴포넌트
+ * @author pistos
+ */
+nhn.ContextMenu = jindo.$Class({
+	/**
+	 * 상단
+	 * @type {string}
+	 */
+	POSITION_TOP : 'T',
+	/**
+	 * 하단
+	 * @type {string}
+	 */
+	POSITION_BOTTOM : 'B',
+	/**
+	 * 좌측 위 정렬
+	 * @type {string}
+	 */
+	POSITION_LEFT_TOP : 'LT',
+	/**
+	 * 좌측 아래 정렬
+	 * @type {string}
+	 */
+	POSITION_LEFT_BOTTOM : 'LB',
+	/**
+	 * 우측 위 정렬
+	 * @type {string}
+	 */
+	POSITION_RIGHT_TOP : 'RT',
+	/**
+	 * 좌측 아래 정렬
+	 * @type {string}
+	 */
+	POSITION_RIGHT_BOTTOM : 'RB',
+	
+	_sTemplate : null,
+	_oItemData : null,
+	_el : null,
+	
+	/** @lends nhn.ContextMenu */
+	/**
+	 * ContextMenu 컴포넌트를 생성한다.
+	 * @constructs	 * 
+	 * @param {Object} oOption 초기화 옵션 설정을 위한 객체.
+	 * @param {String} option.position	컨텍스트 메뉴의 기준위치. 커서 또는 엘리먼트의 상단(T),하단(B),우상단(RT),우하단(RB),좌상단(LT),좌하단(LB)중 선택한다.
+	 * @param {String} option.useCursorPoint	커서 기준으로 메뉴를 노출할지 여부. true이면 커서기준, false이면 이벤트의 target 기준으로 노출한다.
+	 * @param {String} option.classname	컨텍스트 메뉴에 적용할 css class 명. default는 'contextmenu'
+	 * @param {String} option.width	컨텍스트 메뉴의 너비. 기본 150px
+	 * @example
+	 */
+	$init : function(el, oOptions){
+		this.option({
+				position : 'RT',
+				classPrefix : '',
+				useItemData : false,
+				itemData : null
+		});
+		
+		this.option(oOptions||{});
+		var sPrefix = this.option('classPrefix');
+		this.setTemplate('<li class="' + sPrefix + 'item"><label>{=text}</label></li>');
+		this._oItemData = {};
+		if (jindo.$(el)) {
+			el = jindo.$Element(jindo.$(el));
+		}
+		else {
+			el = jindo.$Element(jindo.$("<UL>"));
+			el.addClass(sPrefix+"menu");
+			document.body.appendChild(el.$value());
+		}
+		this._setRoot(el);				
+		el.hide();
+		this._bindEvents();
+		if (this.option("itemData")) {
+			var items = this.createItem(this.option("itemData"));
+			this.appendItem(this.getRoot(), items);
+		}
+		else {
+			this._paintAllItems(this.getRoot());
+		}
+	},
+	
+	/**
+	 * 루트 ul 엘리먼트를 가져온다.
+	 * @return {HTMLElement}
+	 */
+	getRoot : function() {
+		return this._el;
+	},
+	
+	/**
+	 * 루트 ul 엘리먼트를 세팅한다.
+	 * @param {Object} el
+	 */
+	_setRoot : function(el) {
+		this._el = el
+	},
+	
+	/**
+	 * 특정 메뉴(ul)을 보여준다.
+	 * @param {Object} elMenu
+	 * @param {Object} oTarget
+	 * @param {Object} sPosition
+	 */
+	_showMenu : function(elMenu, oTarget, sPosition){
+		this._oDocMax = jindo.$Document().scrollSize();
+		elMenu.show();
+		this._setPosition(elMenu, oTarget, sPosition||this.option("position"),0);
+	},
+	
+	/**
+	 * 특정메뉴(ul)을 감춘다.
+	 * @param {Object} elMenu
+	 */
+	_hideMenu : function(elMenu){
+		elMenu.hide();	
+	},
+	
+	/**
+	 * 모든메뉴를 감춘다.
+	 */
+	_hideAllMenu : function(){
+		var sPrefix = this.option('classPrefix');
+		this.getRoot().child(function(v){
+				if(v.$value().tagName && v.$value().tagName.toUpperCase()=="UL")
+					v.hide();
+				if(v.$value().tagName && v.$value().tagName.toUpperCase()=="LI")
+					v.removeClass(sPrefix + 'over');		
+		});
+		this.getRoot().hide();
+	},
+	
+	/**
+	 * 이벤트를 바인딩한다.
+	 */
+	_bindEvents : function() {
+		
+		var sPrefix = this.option('classPrefix');
+		var self = this;
+		var el = this.getRoot();
+	
+		var fHasChild = function(elItem) {			
+			var oParts = self._getParts(elItem);
+			
+			return oParts.child && oParts.child.$value().getElementsByTagName('li')[0] ? true : false;			
+		};
+
+		// 마우스 오버 이벤트 바인딩
+		jindo.$Fn(function(e) {			
+			var el = jindo.$Element(e.element);
+			
+			var elItem = this.getItem(el);
+						
+			if (!elItem) return;
+
+			if (fHasChild(elItem)) {				
+				var oParts = this._getParts(elItem);
+				if (oParts.child) {
+					this._showMenu(oParts.child, elItem);	
+				}				
+			}
+			elItem.addClass(sPrefix + 'over');			
+
+		}, this).attach(el, 'mouseover');
+		
+		// 마우스 아웃 이벤트 바인딩
+		jindo.$Fn(function(e) {
+			
+			var el = jindo.$Element(e.element);
+			var rel = jindo.$Element(e.relatedElement);
+			
+			var elItem = this.getItem(el);
+			var relItem;
+			try {
+				relItem = this.getItem(rel);
+			}catch(e){}
+						
+			if (!elItem) return;
+			if (relItem && relItem.isChildOf(elItem)) return;
+
+			if (fHasChild(elItem)) {	
+				var oParts = this._getParts(elItem);
+				if (oParts.child) {
+					this._hideMenu(oParts.child);
+				}				
+			}
+			elItem.removeClass(sPrefix + 'over');			
+
+		}, this).attach(el, 'mouseout');
+		
+		// 마우스 클릭 이벤트 바인딩
+		jindo.$Fn(function(e) {
+			
+			var el = jindo.$Element(e.element);
+			
+			// 메뉴 이외의 영역을 선택하면 메뉴 숨김
+			if(!el.isChildOf(this.getRoot()) && this.getRoot().visible())
+				this._hideAllMenu();			
+			
+			var elItem = this.getItem(el);
+			
+			if (!elItem) return;
+			
+			// 하위 메뉴가 있으면 하위메뉴 토글
+			if (fHasChild(elItem)) {
+				var oParts = this._getParts(elItem);
+				if (oParts.child) {
+					if(oParts.child.visible()) this._hideMenu(oParts.child);
+					else this._showMenu(oParts.child, elItem);
+				}				
+			}else{// 아니라면 선택하고 메뉴 닫기
+				this._hideAllMenu();
+				elItem.removeClass(sPrefix + 'over');
+				this.fireEvent('click', { element : elItem, event : e });
+			}			
+
+		}, this).attach(document.body, 'click');
+		
+	},
+	
+	/**
+	 * 노드에 적용될 템플릿을 가져온다.
+	 * @return {String}
+	 */
+	getTemplate : function() {
+		return this._sTemplate;
+	},
+	/**
+	 * 노드에 적용될 템플릿을 설정한다.
+	 * @param {String} s
+	 */
+	setTemplate : function(s) {
+		this._sTemplate = s;
+	},
+	
+	/**
+	 * 특정 엘리먼트가 속해있는 아이템을 구한다.
+	 * @param {HTMLElement} el 노드 자체, 노드의 버튼, 레이블 같이 노드의 li태그 자식 엘리먼트로부터 노드를 구할 수 있다.  
+	 * @return {HTMLElement} 노드
+	 */
+	getItem : function(el) {
+		if(!el) return null;
+		var sPrefix = this.option('classPrefix');
+		if(el.$value) el = el.$value();
+		var elItem = jindo.$Element(cssquery.test(el, '.' + sPrefix + 'item') ? el : cssquery.getSingle('! .' + sPrefix + 'item', el));
+		return elItem && elItem.isChildOf(this.getRoot()) ? elItem : null;		
+	},
+	
+	/**
+	 * 컨텍스트 메뉴를 보여준다.
+	 * @param {Object} event
+	 * @param {Object} sPosition
+	 */
+	show : function(e, sPosition){
+		var oEvent = jindo.$Event(e);
+		this._showMenu(this._el, jindo.$Element(oEvent.element), sPosition||this.option("position"));		
+		oEvent.stop();
+	},	
+	
+	/**
+	 * 컨텍스트 메뉴를 숨긴다.
+	 */	
+	hide : function(){
+		 this._el.hide();		
+	},	
+	
+	/**
+	 * 컨텍스트 메뉴의 노출 상태를 토글한다.
+	 * @param {window.event} event
+	 * @param {string} position 컨텍스트메뉴의 옵션에 있는 위치 설정을 무시하고, 이 위치에 보여준다.
+	 */
+	toggle : function(e, sPosition){
+		if( this._el.visible()) this.hide();
+		else this.show(e, sPosition);
+	},
+	
+	/**
+	 * 컨텍스트메뉴의 위치를 계산한다.
+	 * 지정된 포지션이 도큐먼트 영역을 벗어나면 
+	 * 적당한 위치를 찾아 이동한다.
+	 * @param {jindo.$Event} oEvent
+	 * @param {string} sPosition
+	 */
+	_setPosition : function(elMenu, oTarget, sPosition,iTryCnt){
+		var oPos = {left:0,top:0};
+		oPos = this._getElementBasePosition(elMenu, oTarget, sPosition);
+		oPos.top = oPos.top -1;
+		elMenu.offset(oPos.top, oPos.left);
+		var bNeedRefresh = false;
+		if(this._isOverflowX(elMenu)){
+			if(/L/.test(sPosition))
+				sPosition = sPosition.replace(/L/,"R");
+			else
+				sPosition = sPosition.replace(/R/,"L");
+			bNeedRefresh = true;
+		}
+		if(this._isOverflowY(elMenu)){
+			if(/B/.test(sPosition))
+				sPosition = sPosition.replace(/B/,"T");
+			else
+				sPosition = sPosition.replace(/T/,"B");
+			bNeedRefresh = true;
+		}
+		if(bNeedRefresh && iTryCnt<5)
+			this._setPosition(elMenu, oTarget, sPosition, ++iTryCnt);
+	},
+		
+	/**
+	 * 엘리먼트 위치에 기반한 포지션을 계산한다.
+	 * @param {jindo.$Element} oTarget
+	 * @param {Object} position
+	 */
+	_getElementBasePosition : function(elMenu, oTarget, position){
+		oPos = oTarget.offset();
+		switch(position){
+			case this.POSITION_RIGHT_BOTTOM :
+				oPos.top -= elMenu.height()-oTarget.height();
+			case this.POSITION_RIGHT_TOP :
+				oPos.left += oTarget.width();
+				break;
+			case this.POSITION_LEFT_BOTTOM :
+				oPos.top -= elMenu.height()-oTarget.height();
+			case this.POSITION_LEFT_TOP :					
+				oPos.left -= elMenu.width();
+				break;
+			case this.POSITION_BOTTOM :				
+				oPos.top += oTarget.height();
+				break;
+			case this.POSITION_TOP :
+				oPos.top -=  elMenu.height();
+				break;
+		}			
+		return oPos;
+	},
+	
+	/**
+	 * 컨텍스트 메뉴가 도큐먼트의 가로영역을 벗어났는지 체크한다.	 
+	 * @param {int} maxWidth
+	 */
+	_isOverflowX : function(elMenu){
+		return this._oDocMax.width < (elMenu.offset().left+ elMenu.width()) ||  elMenu.offset().left<0;
+	},
+	
+	/**
+	 * 컨텍스트 메뉴가 도큐먼트의 세로영역을 벗어났는지 체크한다.	 
+	 * @param {int} maxWidth
+	 */
+	_isOverflowY : function(elMenu){
+		return this._oDocMax.height < ( elMenu.offset().top+ elMenu.height()) ||  elMenu.offset().top<0;
+	},
+	
+	/**
+	 * 노드를 새로 그린다. (자식노드가 있거나 마지막 노드일경우 클래스명 처리)
+	 * @param {Object} elItem
+	 */
+	paintItem : function(elItem) {
+		if (!elItem) return;
+		this._paintHasChild(elItem);	
+	},
+	
+	/**
+	 * 아이템의 파트 얻기 
+	 * @param {Object} elItem
+	 */
+	_getParts : function(elItem) {		
+		var aParts = cssquery(' > *', elItem.$value());
+		var item = aParts[0]?jindo.$Element(aParts[0]):null;
+		var child = aParts[1]?jindo.$Element(aParts[1]):null;
+		return { item : item, child : child};		
+	},
+		
+	/**
+	 * 하위 요소 여부에 따른  스타일 먹이기
+	 * @param {Object} elItem
+	 */
+	_paintHasChild : function(elItem) {
+		var oParts = this._getParts(elItem);
+		var sPrefix = this.option('classPrefix');
+		var bHasChild = oParts.child && oParts.child.$value().getElementsByTagName('li')[0] ? true : false;
+		if (!bHasChild && oParts.child)
+			oParts.child.leave();
+		if(oParts.child)
+			 oParts.child.hide();
+		elItem[bHasChild ? 'addClass' : 'removeClass'](sPrefix + 'more');		
+	},
+	
+	/**
+	 * 모든 요소 스타일 먹이기
+	 * @param {Object} elItem
+	 */
+	_paintAllItems : function(elItem) {		
+		var sPrefix = this.option('classPrefix');
+		var aItems = cssquery('.' + sPrefix + 'item', elItem.$value());
+		for (var i = 0, elItem; elItem = aItems[i]; i++)
+			this.paintItem(jindo.$Element(elItem));
+	},
+	
+	/**
+	 * 하위 요소 스타일 먹이기
+	 * @param {Object} elItem
+	 */
+	_paintChildItems : function(elItem) {
+		
+		var elChild = this._getChild(elItem);
+		
+		var sPrefix = this.option('classPrefix');
+		var aItems = cssquery(' > .' + sPrefix + 'item', elChild);
+		for (var i = 0, elItem; elItem = aItems[i]; i++)
+			this.paintItem(jindo.$Element(elItem));
+		
+	},
+	
+	/**
+	 * 추가정보를 얻기 위한 키값 얻기
+	 * @param {Object} elItem
+	 */
+	_getItemDataKey : function(elItem) {
+		
+		var sClassName = elItem.$value().className;
+		var sPrefix = this.option('classPrefix');
+		
+		var rKey = new RegExp(sPrefix + 'ctxmenu-(data-[0-9]+)');
+		if (rKey.test(sClassName)) return RegExp.$1;
+		
+		return null;		
+	},
+	
+	/**
+	 * 아이템을 생성할 때 적용된  원시 데이터를 가져온다.
+	 * 옵션의 useItemData를 true로 설정했을 때에만 createItem를 통해 생성된 노드에 대해서만 리턴값을 가진다.
+	 * @param {HTMLElement} elItem 데이터를 가져올 노드
+	 * @return {Object} 노드의 원시 데이터
+	 */
+	getItemRawData : function(elItem) {
+		
+		var bEnable = this.option('useItemData') ? true : false;
+		if (!bEnable) throw new Error('You should add the "useItemData : true" in constructor\'s options');
+		
+		var sKey = this._getItemDataKey(elItem);
+		return this._oItemData[sKey];
+		
+	},
+	
+	/**
+	 * 아이템에 설정된 data를 구한다.
+	 * 옵션의 useItemData를 true로 설정했을 때에만 리턴값을 가진다. 
+	 * @param {HTMLElement} elItem
+	 * @return {Object} 아이템의 data
+	 * @example 
+data의 기본 구조
+{ 
+	text : (String) 아이템명, 
+	_children : (Array) 자식아이템 배열 
+}
+	 */
+	getItemData : function(elItem) {
+		
+		var bEnable = this.option('useItemData') ? true : false;
+		if (!bEnable) throw new Error('You should add the "useItemData : true" in constructor\'s options');
+		elItem = jindo.$Element(elItem);
+		
+		var self = this;
+		
+		var fGetData = function(elItem) {
+			
+			var sKey = self._getItemDataKey(elItem);
+			var oData;
+			if (sKey) {
+				
+				var oItemData = self._oItemData[sKey];
+				
+				if (typeof oItemData == 'string') {
+					
+					oData = { text : oItemData };
+					
+				} else {
+					
+					oData = {};
+				
+					 jindo.$H(oItemData).forEach(function(v, k) {
+						if (k == '_children') return;
+						oData[k] = v;
+					});
+					
+				}
+				
+			} else {
+				
+				var elItem = self._getParts(elItem).item.$value();
+				oData = { text : (elItem.textContent || elItem.innerText || '').replace(/(^\s+|\s+$)/g, '') };
+				
+			}
+			
+			var aChilds = self.getChildItems(elItem);
+			if (aChilds.length != 0) oData._children = [];
+			
+			for (var i = 0, elChild; elChild = aChilds[i]; i++)
+				oData._children.push(arguments.callee(elChild));
+			
+			return oData;
+			
+		};
+		
+		var fGetChild = function(elItem) {
+			
+			var aRet = [];
+			
+			var aChilds = self.getChildItems(elItem);
+			
+			for (var i = 0, elChild; elChild = aChilds[i]; i++)
+				aRet.push(fGetData(elChild));
+			
+			return aRet;
+			
+		}
+		
+		if (elItem) return fGetData(elItem);
+		return fGetChild(elItem);
+		
+	},
+	
+	/**
+	 * 아이템 데이터 삭제
+	 * @param {Object} elItem
+	 */
+	_clearItemData : function(elItem) {
+		
+		var bEnable = this.option('useItemData') ? true : false;
+		if (!bEnable) return;
+		var sKey = this._getItemDataKey(elItem);
+		if (sKey) delete this._oItemData[sKey];
+		
+	},
+	
+	/**
+	 * 하위메뉴 ul요소 얻기
+	 * @param {Object} elItem
+	 */
+	_getChild : function(elItem) {
+		if(!elItem) return this.getRoot();
+		var child = cssquery.getSingle('ul', elItem.$value());
+		return child ? jindo.$Element(child) : null;		
+	},
+	
+	/**
+	 * 하위메뉴 ul요소 생성
+	 * @param {Object} elItem
+	 */
+	_createChild : function(elItem) {				
+		var elChild = (!elItem || elItem.$value()==this.getRoot().$value())?this.getRoot():this._getChild(elItem);
+		
+		if (!elChild) {
+			elChild = jindo.$Element(jindo.$('<ul>'));
+			var sPrefix = this.option('classPrefix');
+			elChild.addClass(sPrefix+"menu");
+			elItem.append(elChild);
+		}
+
+		try {
+			return elChild;
+		} finally {
+			elChild = null;
+		}		
+	},
+	
+	/**
+	 * 자식 노드를 모두 삭제한다.
+	 * @param {HTMLElement} elItem 삭제할 노드들의 부모노드
+	 * @return {Boolean} 삭제여부
+	 */
+	clearItem : function(elItem) {
+		
+		if(elItem) elItem = jindo.$Element(elItem);
+		var elChild = this._getChild(elItem);
+		if (!elChild) return false;
+		
+		var aChildLi = elChild.$value().getElementsByTagName('li');
+		for (var i = 0, elChildLi; elChildLi = aChildLi[i]; i++)
+			this._clearItemData( jindo.$Element(elChildLi) );
+		
+		elChild.leave();
+		this.paintItem(elItem);
+		
+		return true;
+	},
+	
+	/**
+	 * 자식 아이템들을 가져온다.
+	 * @param {HTMLElement} elItem 노드
+	 * @return {Array} 자식 노드들의 배열
+	 */
+	getChildItems : function(elItem) {		
+		var sPrefix = this.option('classPrefix');
+		if(elItem) elItem = jindo.$Element(elItem);
+		var elChild = this._getChild(elItem);
+		return elChild ? cssquery('> .' + sPrefix + 'item', elChild.$value()) : [];
+	},
+	
+	/**
+	 * 부모 아이템을 가져온다.
+	 * @param {HTMLElement} elItem 노드
+	 * @return {HTMLElement} 부모 노드
+	 */
+	getParentItem : function(elItem) {
+		return this.getItem(elItem.parentItem);
+	},
+	
+	_moveItems : function(elItem, aSrcItems, fCallback) {
+		
+		var waSrcParents =  jindo.$A();
+		for (var i = 0, oSrcItem; oSrcItem = aSrcItems[i]; i++) {
+			var oSrcParentItem = this.getParentItem(oSrcItem);
+			fCallback(oSrcItem);
+			if (waSrcParents.indexOf(oSrcParentItem) == -1)
+				waSrcParents.push(oSrcParentItem);			
+		}
+		var self = this;
+		waSrcParents.forEach(function(oSrcParentItem) {
+			
+			if (!oSrcParentItem || oSrcParentItem.isChildOf(self._el)) {
+				self.paintItem(oSrcParentItem);
+				self._paintChildItems(oSrcParentItem);
+			}
+			
+		});
+		if(!elItem || elItem.$value()==this.getRoot().$value())
+			this._paintAllItems(this.getRoot());
+		else
+			this.paintItem(elItem);		
+	},
+	
+	/**
+	 * 아이템을 삭제한다.
+	 * @param {HTMLElement} elItem 삭제할 아이템
+	 * @return {Boolean}
+	 */
+	removeItem : function(elItem) {
+		
+		if (!elItem || elItem == this.getRoot().$value()) return false;
+		
+		elItem = jindo.$Element(elItem);
+		this._clearItemData(elItem);
+		elItem.leave();
+		
+		return true;
+	},
+	
+	/**
+	 * 특정 노드 앞 새 노드를 삽입한다. 
+	 * @param {HTMLElement} elItem 기준 노드
+	 * @param {Array} aSrcItems 삽입할 노드의 배열
+	 */
+	insertItemBefore : function(elItem, aSrcItems) {
+		
+		if (!(aSrcItems instanceof Array)) return arguments.callee.call(this, elItem, [ aSrcItems ]);
+		
+		if(elItem) elItem = jindo.$Element(elItem);
+		var oParentItem = elItem.parent();
+		this._moveItems(elItem, aSrcItems, function(oSrcItem) {elItem.before(oSrcItem);});
+		
+	},
+	
+	/**
+	 * 특정 노드에 새 자식노드를 삽입한다. 
+	 * @param {HTMLElement} elItem 삽입할 노드의 부모가 될 노드
+	 * @param {Array} aSrcItems 삽입할 노드의 배열
+	 */
+	appendItem : function(elItem, aSrcItems) {
+		if (!(aSrcItems instanceof Array)) return arguments.callee.call(this, elItem, [ aSrcItems ]);
+		
+		elItem = jindo.$Element(elItem);
+		
+		var elChild = this._createChild(elItem);
+		this._moveItems(elItem, aSrcItems, function(aSrcItem) {elChild.append(aSrcItem); });
+		if (!elItem || elItem.$value() == this.getRoot().$value()) 
+			this._paintAllItems(this.getRoot());
+		else {
+			this._paintHasChild(elItem);
+			this._paintChildItems(elItem);
+		}
+	},
+		
+	/**
+	 * 아이템을 생성한다.
+	 * @param {Array} aDatas 생성할 노드의 정보
+	 * @return {Array} 생성된 노드들의 배열
+	 * @example 
+var aNewItems = menu.createItem([
+	{
+		text : '포유류',
+		_children : [
+			{ text : '고래' },
+			{ text : '토끼' },
+			{ text : '다람쥐' },
+			{
+				text : '맹수',
+				_children : [
+					{ text : '호랑이' },
+					{ text : '표범' },
+					{ text : '사자' },
+					{ text : '재규어' }
+				]
+			}
+		
+		]
+	},
+	
+	{ text : '조류' }
+
+]);
+	 */
+	createItem : function(aDatas) {
+		
+		var self = this;
+		var sPrefix = this.option('classPrefix');
+		var bEnable = this.option('useItemData') ? true : false;
+		var fGetChildCode = function(elChild, sCode) {
+			var sChild = elChild ? fGetCode(elChild) : '';
+			if (sChild) {				
+				var bChanged = false;				
+				sCode = sCode.replace(/(<ul(\s[^>]*)*>)(<\/ul>)/i, function(_, sBegin, _, sClose) {
+					bChanged = true;
+					return sBegin + sChild + sClose;
+				});				
+				if (!bChanged) sCode = sCode.replace(/<\/li>/i, function(_) { return '\n<ul class="'+sPrefix+'menu">' + sChild + '</ul>\n' + _; });				
+			}			
+			return sCode;
+			
+		};
+		
+		var fSetUnique = function(sTemplate, oData) {			
+			if (!bEnable) return sTemplate;			
+			var sUnique = ('data-' + new Date().getTime() + parseInt(Math.random() * 10000000)).toString(); //ie8 버그수정. toString 이 없으면 나중에 sUnique값이 바뀜
+			var sUniqClass = sPrefix + 'ctxmenu-' + sUnique;			
+			var bHasParts = /^([^>]*>)(.*)$/.test(sTemplate);			
+			if (bHasParts) {
+				
+				var sLi = RegExp.$1;
+				var sRemain = RegExp.$2;				
+				var bReplaced = false;
+				
+				sLi = sLi.replace(/\sclass\=(['"])/i, function(_, sQuot) {
+					bReplaced = true;
+					return ' class=' + sQuot + sUniqClass + ' ';
+				});
+				
+				if (!bReplaced) sLi = sLi.replace('>', ' class="' + sUniqClass + '">');				
+				sTemplate = (sLi + sRemain).toString(); //ie8 버그수정. toString 이 없으면 sTemplate값 중 li의 class값이 제대로 들어가 있지 않음. 왜?				
+				self._oItemData[sUnique] = oData;
+				
+			}
+			
+			//요기서 sUnique값을 찍어보면 바뀌어있음.. 왜??
+			
+			return sTemplate;
+			
+		};
+		
+		var fGetCode = function(oDatas) {
+			
+			var fRecursive = arguments.callee;			
+			var aCodes = [];			
+			var sTemplate = self.getTemplate();
+			
+			if (typeof oDatas == 'string') {
+				
+				var oParam = { template : sTemplate, data : oDatas };				
+				self.fireEvent('beforeprocessdata', oParam);
+				oParam.template = fSetUnique(oParam.template, oDatas);
+				
+				return  jindo.$Template(oParam.template).process({ text : oDatas });
+
+			} else if (oDatas instanceof Array) {
+				
+				 jindo.$A(oDatas).forEach(function(oData) {					
+					var oParam = { template : sTemplate, data : oData };					
+					self.fireEvent('beforeprocessdata', oParam);
+					oParam.template = fSetUnique(oParam.template, oData);					
+					var sCode =  jindo.$Template(oParam.template).process(typeof oData == 'string' ? { text : oData } : oData);
+					sCode = fGetChildCode(oData._children, sCode);					
+					aCodes.push(sCode);					
+				});
+				
+			} else {
+				
+				 jindo.$H(oDatas).forEach(function(elChild, sName) {					
+					var oParam = { template : sTemplate, data : sName };					
+					self.fireEvent('beforeprocessdata', oParam);
+					oParam.template = fSetUnique(oParam.template, sName);					
+					var sCode =  jindo.$Template(oParam.template).process({ text : sName });
+					sCode = fGetChildCode(elChild, sCode);					
+					aCodes.push(sCode);					
+				});
+				
+			}
+			
+			return aCodes.join('\n');
+			
+		};
+		var sPrefix = this.option('classPrefix');
+		var sCode = fGetCode(aDatas);
+		var elDummy = jindo.$Element(jindo.$('<ul class="'+sPrefix+'menu">'));
+		elDummy.html(sCode);
+		this._paintAllItems(elDummy);
+			
+		return cssquery(' > *', elDummy.$value());
+		
+	}
+
+}).extend(nhn.Component);

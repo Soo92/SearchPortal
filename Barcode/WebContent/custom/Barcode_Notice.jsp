@@ -1,69 +1,69 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="mgr" class="member.MemberMgr" />
 <%
 	request.setCharacterEncoding("euc-kr");
-	String id = (String)session.getAttribute("idKey");	
+	String id = (String) session.getAttribute("idKey");
 	String email = mgr.getMember(id).getEmail();
 	String name = mgr.getMember(id).getName();
 %>
 <!DOCTYPE html>
-<!-- saved from url=(0084)https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&categoryNo=16690 -->
+<!-- saved from url=(0071)http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394 -->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="og:title" content="바코드 고객센터">
-<meta property="og:description" content="시작 페이지 설정 방법(익스플로러)">
+
+
+
+
+
+
+
+<meta property="og:title" content="네이버 고객센터">
+
+
+
+
+
+
+<meta property="og:description"
+	content="네이버 고객센터를 통해 각 서비스 도움말을 확인해보세요.">
+
+
+
+
+
 <meta property="og:image"
 	content="http://static.naver.net/help/img/img_logo_naver_200X200.png">
 <meta property="og:image:secure_url"
 	content="https://ssl.pstatic.net/static/help/img/img_logo_naver_200X200.png">
 <meta property="og:type" content="website">
-<title>바코드 시작페이지 설정방법</title>
+
+
+<title>네이버 고객센터</title>
 <link rel="shortcut icon" type="image/x-icon"
-	href="https://ssl.pstatic.net/static/help/common/favicon.ico">
-<link rel="stylesheet" type="text/css" href="./바코드 시작페이지_files/help.css">
+	href="http://static.naver.net/help/common/favicon.ico">
+<link rel="stylesheet" type="text/css"
+	href="./Barcode_Notice_files/help.css">
+
+
+
+
+
+
 <script type="text/javascript">
 	var topPath = "/support/";
 	var ccsrv = "cc.naver.com";
 </script>
 <script type="text/javascript"
-	src="./바코드 시작페이지_files/jquery-1.10.2.js.다운로드"></script>
-<script type="text/javascript" src="./바코드 시작페이지_files/common.js.다운로드"></script>
-<script type="text/javascript" src="./바코드 시작페이지_files/clickcr.js.다운로드"></script>
-<link rel="stylesheet" href="../css/swiper.min.css" type="text/css">
-	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
-	<script type="text/javascript" src="../js/swiper.min.js"></script>
-	<link rel="stylesheet" href="../css/product_style.css" type="text/css">
-	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
-	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
-	<script type="text/javascript">
-	function mypage() {
-		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
-			document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
-		else
-			document.getElementById("gnb_my_layer").className = "gnb_my_li";
-	}
-	function alarm() {
-		if(document.getElementById("gnb_notice_layer").className===("gnb_notice_li"))
-			document.getElementById("gnb_notice_layer").className = "gnb_notice_li gnb_lyr_opened";
-		else
-			document.getElementById("gnb_notice_layer").className = "gnb_notice_li";
-	}
-	function service() {
-		if(document.getElementById("gnb_service_layer").className===("gnb_service_li"))
-			document.getElementById("gnb_service_layer").className = "gnb_service_li gnb_lyr_opened";
-		else
-			document.getElementById("gnb_service_layer").className = "gnb_service_li";
-	}
-	function delayed_submit(object) {
-		if (navigator.userAgent.indexOf('MSIE') == -1) {
-			var b = c = new Date();
-	      	while ((b.getTime() - c.getTime()) < 100) {
-				b = new Date();
-	      	}
-		} 
-	}
-	</script>
+	src="./Barcode_Notice_files/jquery-1.10.2.js.다운로드"></script>
+<script type="text/javascript"
+	src="./Barcode_Notice_files/common.js.다운로드"></script>
+<script type="text/javascript"
+	src="./Barcode_Notice_files/clickcr.js.다운로드"></script>
+
+
+<script type="text/javascript">document.domain = 'naver.com';</script>
+
 <style id="gnb_style" type="text/css">
 @charset "UTF-8";
 /* NTS UIT Development Office YJH 140717 */
@@ -2057,253 +2057,652 @@ a.gnb_service_all:hover, a.gnb_service_all:visited, a.gnb_service_all:active,
 	color: #777;
 }
 </style>
-<script src="./바코드 시작페이지_files/clickcrD.js.다운로드" id="gnb_clickcrD"
+<script src="./Barcode_Notice_files/clickcrD.js.다운로드" id="gnb_clickcrD"
 	charset="utf-8"></script>
 </head>
-
-<body style="">
+<body onload="getGNB();" style="">
 	<div id="wrap">
 		<div id="u_skip">
 			<a
-				href="https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&amp;categoryNo=16690#content"
+				href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#content"
 				onclick="document.getElementById(&#39;content&#39;).tabIndex=-1;document.getElementById(&#39;content&#39;).focus();return false;">본문
 				바로가기</a>
 		</div>
-		<script type="text/javascript" src="./바코드 시작페이지_files/search.js.다운로드"></script>
+
+		<!-- header -->
+
+
+
+
+
+
+
+
+
+		<script type="text/javascript"
+			src="./Barcode_Notice_files/search.js.다운로드"></script>
+		<script type="text/javascript">
+var gnb_service = "help";
+var gnb_logout = encodeURIComponent(document.location);
+var gnb_template = "gnb_utf8";
+var gnb_searchbox = "off";
+var gnb_shortnick = "off";
+var gnb_brightness = 3;
+var gnb_one_naver = 1;
+
+var INIT_SEARCH_TEXT= "궁금한 점이 있다면 도움말을 검색해 보세요.";
+
+jQuery().ready(function(){
+	if (jQuery('#searchText').val() == '') {
+		jQuery('#searchText').val(INIT_SEARCH_TEXT);
+	}
+});
+
+function openSearch(form) {
+	var searchText = form.searchText.value;
+	var url = "";
+
+	if (searchText == "" || searchText == INIT_SEARCH_TEXT) {
+		alert("원하시는 검색어를 입력해 주세요.");
+		jQuery('#searchText').focus();
+		return false;
+	}
+
+	if ("원격지원" == searchText) {
+        url = 'https://help.naver.com' + "/support/contents/contents.nhn?serviceNo=1074&categoryNo=15260";
+		form.action = url;
+		form.method = "post";
+
+		return true;
+	}
+
+	if (checkKeywordSearchSize(searchText) > 600) {
+		searchText = checkKeywordCut(searchText, 600);
+	}
+
+	form.searchText.value = searchText;
+	form.method = "get";
+
+	return true;
+}
+
+function reSearchParamChange(){
+	var totalSearchForm = jQuery.find("#searchForm");
+
+	jQuery(totalSearchForm).find( "#serviceName" ).val('');
+	jQuery(totalSearchForm).find( "#searchText" ).val(jQuery("#searchKeyword").val());
+	if( jQuery("#searchKeyword").val()  == '' ) { //검색어가 있는 경우에는 서비스명을 지우고 반영
+		jQuery(totalSearchForm).find( "#searchText" ).val( jQuery("#searchName").val() );
+	}
+	jQuery(totalSearchForm).submit();
+}
+</script>
 		<div id="header">
 			<div class="gnb_area">
 				<div class="Ngnb">
 					<div class="Ngnb_inner">
-						<a href="../index.jsp" class="Nlogo_link"><img
-							src="logo_ci.png" width="150" height="30"
-							style="margin-top: 10px;"></a>
+						<a href="http://www.naver.com/" class="Nlogo_link"><span
+							class="Nlogo">NAVER</span></a>
 						<h1 class="Ngnb_service">
-							<a href="https://help.naver.com/support/home.nhn"
+							<a href="http://help.naver.com/support/home.nhn"
 								class="Nhome_link"><span class="Nhome">고객센터</span></a>
 						</h1>
 						<div class="Ngnb_common">
-				<%if(id == null || id.equals("")){%>
-					<a href="../member/login.jsp">
-						<table width="70px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px #b73400 solid; background:background:#ff5b1b; margin-bottom:7px;">
-							<tr>
-								<td height="30px;"><p>로그인</p></td>
-							</tr>
-						</table>
-						</a>
-				<%}else{%>
-				<div id="gnb" class="gnb_dark_type2"><strong class="blind">사용자 링크</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="mypage()"><img id="gnb_profile_img" src="http://static.naver.net/common/myarea/myInfo.gif" width="26" height="26" alt="내 프로필 이미지" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1"><%=name %></span><em class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a href="#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="http://static.naver.net/common/myarea/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">프로필 사진 변경</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"><%=name %></a>님</span><a class="gnb_btn_login" href="../member/logout.jsp"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그아웃</span></a></p><a href="http://mail.naver.com" class="gnb_mail_address"><%=email %></a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">내정보</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>B Pay</em><a href="http://pay.naver.com" id="gnb_pay_point"><span>내 페이포인트</span><strong>63,035원</strong></a></p></div></div><a href="#" class="gnb_my_interface" style="display:none"><span class="blind">환경설정</span></a></div></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">전체 알림</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>알림을 모두 삭제하시겠습니까?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>레이어 닫기</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a></div></div><iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li><li class="gnb_service_li" id="gnb_service_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_service" onclick="service(); return false;"><span class="blind">서비스 더보기</span><span class="gnb_icon"></span><span class="ico_arrow"></span></a><div class="gnb_service_lyr" id="gnb_service_lyr"><div class="gnb_favorite_search" id="gnb_favorite_search"><div class="gnb_favorite_area"><div class="gnb_favorite_lstwrp"><div class="gnb_first_visit" style="display:none"><span class="blind">나만의 즐겨찾기를 추가해 보세요!</span><a href="#" class="gnb_close"><span class="blind">닫기</span></a></div><strong class="blind">즐겨찾는 서비스</strong><ul class="gnb_favorite_lst" id="gnb_favorite_lst"><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li></ul><a href="#" class="gnb_my_interface" onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span class="blind">즐겨찾기 설정</span></a></div></div><div class="gnb_search_area"><div class="gnb_search_box" onmouseover="gnb_search.mouseOver(this);" onmouseout="gnb_search.mouseOut(this);"><input id="gnb_svc_search_input" type="text" title="서비스 검색" value="더 많은 서비스를 간편하게 시작하세요!" onfocus="gnb_search.clearInput(this);" onblur="gnb_search.resetInput(this);" onkeydown="gnb_search.keyDown(event);" onkeyup="gnb_search.keyUp(event);"><a href="#" class="gnb_del_txt" id="gnb_del_txt" style="display:none"><span class="blind">삭제</span></a><div class="gnb_pop_input" id="gnb_pop_input" tabindex="0" onfocus="gnb_search.searchPopOnMouse = true; return false;" onfocusout="gnb_search.searchPopOnMouse = false; return false;" onmouseover="gnb_search.searchPopOnMouse = true; return false;" onmouseout="gnb_search.searchPopOnMouse = false; return false;" style="display:none"><ul class="gnb_pop_lst"></ul></div></div><div class="gnb_search_lstwrp"><ul class="gnb_search_lst gnb_first"><li class="gnb_first"><a href="http://cafe.naver.com/">카페</a></li><li><a href="http://news.naver.com/">뉴스</a></li><li><a href="http://map.naver.com/">지도</a></li><li><a href="http://sports.news.naver.com/">스포츠</a></li><li><a href="http://game.naver.com/">게임</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://section.blog.naver.com/">블로그</a></li><li><a href="http://post.naver.com/main.nhn">포스트</a></li><li><a href="http://dic.naver.com/">사전</a></li><li><a href="http://kin.naver.com/">지식iN</a></li><li><a href="http://weather.naver.com/">날씨</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://mail.naver.com/">메일</a></li><li><a href="http://stock.naver.com/">증권</a></li><li><a href="http://land.naver.com/">부동산</a></li><li><a href="http://music.naver.com/">뮤직</a></li><li><a href="http://book.naver.com">책</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://shopping.naver.com/">쇼핑</a></li><li><a href="http://comic.naver.com/">웹툰</a></li><li><a href="http://movie.naver.com/">영화</a></li><li><a href="http://cloud.naver.com/">클라우드</a></li><li><a href="http://auto.naver.com/">자동차</a></li></ul></div></div><div class="gnb_banner"><a href="http://campaign.naver.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="바코드페이 | 12월 이벤트" width="265" height="47" src="http://static.naver.net/common/gnb/banner/promo_npay_1712.png"></a></div><div class="gnb_linkwrp"><a href="http://www.naver.com/more.html" class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a></div></div><div class="gnb_svc_more" id="gnb_svc_more" style="display: none;"><strong class="blind">바코드 주요 서비스</strong><div class="gnb_bg_top"></div><div class="gnb_svc_hd"><strong class="gnb_svc_tit">바로가기 설정</strong><span class="link"><a href="http://www.naver.com/more.html">전체 서비스 보기</a></span></div><div class="gnb_svc_lstwrp"><div class="gnb_svc_lst1"><ul class="gnb_first"><li><input type="checkbox" id="nsvc_game" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_game">게임</label></li><li><input type="checkbox" id="nsvc_weather" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_weather">날씨</label></li><li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">바코드쇼핑</label></li><li><input type="checkbox" id="nsvc_navercast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navercast">바코드캐스트</label></li><li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">바코드클라우드</label></li><li class="gnb_event"><input type="checkbox" id="nsvc_naverpay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_naverpay">바코드페이</label><em class="ic_gnb_new">New</em></li><li><input type="checkbox" id="nsvc_news" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_news">뉴스</label></li><li><input type="checkbox" id="nsvc_comic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_comic">만화/웹툰</label></li><li><input type="checkbox" id="nsvc_memo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_memo">메모</label></li><li><input type="checkbox" id="nsvc_mail" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_mail">메일</label></li><li><input type="checkbox" id="nsvc_music" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_music">뮤직</label></li><li><input type="checkbox" id="nsvc_land" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_land">부동산</label></li><li><input type="checkbox" id="nsvc_bookmark" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_bookmark">북마크</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_blog" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_blog">블로그</label></li><li><input type="checkbox" id="nsvc_dic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dic">사전</label></li><li><input type="checkbox" id="nsvc_software" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_software">소프트웨어</label></li><li><input type="checkbox" id="nsvc_sports" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_sports">스포츠</label></li><li><input type="checkbox" id="nsvc_ya9" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_ya9">야구9단</label></li><li><input type="checkbox" id="nsvc_movie" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_movie">영화</label></li><li><input type="checkbox" id="nsvc_office" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_office">오피스</label></li><li><input type="checkbox" id="nsvc_novel" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_novel">웹소설</label></li><li><input type="checkbox" id="nsvc_auto" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_auto">자동차</label></li><li><input type="checkbox" id="nsvc_contact" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_contact">주소록</label></li><li><input type="checkbox" id="nsvc_finance" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_finance">증권(금융)</label></li><li><input type="checkbox" id="nsvc_map" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_map">지도</label></li><li><input type="checkbox" id="nsvc_kin" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_kin">지식iN</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_terms" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_terms">지식백과</label></li><li><input type="checkbox" id="nsvc_book" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_book">책</label></li><li><input type="checkbox" id="nsvc_cafe" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cafe">카페</label></li><li><input type="checkbox" id="nsvc_calendar" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_calendar">캘린더</label></li><li><input type="checkbox" id="nsvc_photo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_photo">포토갤러리</label></li><li><input type="checkbox" id="nsvc_nstore" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_nstore">N스토어</label></li><li><input type="checkbox" id="nsvc_navertv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navertv">바코드TV</label></li></ul></div><div class="svc_lst2"><div class="svc_spc gnb_first"><strong><a href="http://dic.naver.com/">어학사전</a></strong><ul class=""><li><input type="checkbox" id="nsvc_krdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_krdic">국어사전</label></li><li><input type="checkbox" id="nsvc_endic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_endic">영어/영영사전</label></li><li><input type="checkbox" id="nsvc_hanja" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_hanja">한자사전</label></li><li><input type="checkbox" id="nsvc_jpdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_jpdic">일어사전</label></li><li><input type="checkbox" id="nsvc_cndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cndic">중국어사전</label></li><li><input type="checkbox" id="nsvc_frdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_frdic">프랑스어사전</label></li><li><input type="checkbox" id="nsvc_dedic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dedic">독일어사전</label></li><li><input type="checkbox" id="nsvc_rudic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_rudic">러시아어사전</label></li><li><input type="checkbox" id="nsvc_vndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_vndic">베트남어사전</label></li><li><input type="checkbox" id="nsvc_spdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_spdic">스페인어사전</label></li><li><input type="checkbox" id="nsvc_translate" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_translate">번역기</label></li></ul></div><div class="svc_spc"><strong>인기/신규서비스</strong><ul class=""><li><input type="checkbox" id="nsvc_grafolio" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_grafolio">그라폴리오</label></li><li><input type="checkbox" id="nsvc_post" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_post">포스트</label></li><li><input type="checkbox" id="nsvc_luncherapp" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_luncherapp">도돌런처</label></li><li><input type="checkbox" id="nsvc_band" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_band">밴드</label></li><li><input type="checkbox" id="nsvc_line" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_line">라인</label></li></ul></div></div></div><div class="svc_btnwrp"><div class="svc_btns"><button class="gnb_save" onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;"><strong class="blind">확인</strong></button><button class="gnb_close" onclick="gnbFavorite.cancel(); return false;"><span class="blind">취소</span></button><button class="gnb_return" onclick="gnbFavorite.resetService(); return false;"><span class="blind">초기 설정으로 변경</span></button></div></div><div class="gnb_bg_btm"></div></div></div><iframe id="gnb_service_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:297px;width:585px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe><iframe id="gnb_svc_more_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:-4px;width:295px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li></ul>
-				</div>
-					<%}%>
-							
+							<%
+								if (id == null || id.equals("")) {
+							%>
+							<a href="../member/login.jsp">
+								<table width="70px" cellpadding="5" cellspacing="0" border="1"
+									align="center"
+									style="border-collapse: collapse; border: 1px #b73400 solid; background: background:#ff5b1b; margin-bottom: 7px;">
+									<tr>
+										<td height="30px;"><p>로그인</p></td>
+									</tr>
+								</table>
+							</a>
+							<%
+								} else {
+							%>
+							<div id="gnb" class="gnb_dark_type2">
+								<strong class="blind">사용자 링크</strong>
+								<ul class="gnb_lst" id="gnb_lst" style="display: block;">
+									<li class="gnb_login_li" id="gnb_login_layer"
+										style="display: none;"><a class="gnb_btn_login"
+										href="https://nid.naver.com/nidlogin.login"
+										id="gnb_login_button"><span class="gnb_bg"></span><span
+											class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li>
+									<li class="gnb_my_li" id="gnb_my_layer"
+										style="display: inline-block;"><div
+											class="gnb_my_namebox" id="gnb_my_namebox"
+											style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);">
+											<a href="javascript:;" class="gnb_my" onclick="mypage()"><img
+												id="gnb_profile_img"
+												src="http://static.naver.net/common/myarea/myInfo.gif"
+												width="26" height="26" alt="내 프로필 이미지"
+												style="display: inline-block;"><span
+												id="gnb_profile_filter_mask" class="filter_mask"
+												style="display: inline-block;"></span> <span
+												class="gnb_name" id="gnb_name1"><%=name%></span><em
+												class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a
+												href="#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a>
+										</div>
+										<div class="gnb_my_lyr" id="gnb_my_lyr">
+											<div class="gnb_my_content">
+												<div class="gnb_img_area">
+													<span class="gnb_mask"></span><img
+														src="http://static.naver.net/common/myarea/myInfo.gif"
+														width="80" height="80" alt=""><a
+														href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"
+														class="gnb_change"><span class="blind">프로필 사진
+															변경</span></a>
+												</div>
+												<div class="gnb_txt_area">
+													<p class="gnb_account">
+														<span class="gnb_name" id="gnb_name2"><a
+															class="gnb_nick"
+															href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"><%=name%></a>님</span><a
+															class="gnb_btn_login" href="../member/logout.jsp"><span
+															class="gnb_bg"></span><span class="gnb_bdr"></span><span
+															class="gnb_txt">로그아웃</span></a>
+													</p>
+													<a href="http://mail.naver.com" class="gnb_mail_address"><%=email%></a>
+													<ul class="gnb_edit_lst">
+														<li class="gnb_info"><a
+															href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">내정보</a></li>
+													</ul>
+													<p class="gnb_pay_check" id="gnb_pay_check">
+														<em>B Pay</em><a href="http://pay.naver.com"
+															id="gnb_pay_point"><span>내 페이포인트</span><strong>63,035원</strong></a>
+													</p>
+												</div>
+											</div>
+											<a href="#" class="gnb_my_interface" style="display: none"><span
+												class="blind">환경설정</span></a>
+										</div></li>
+									<li class="gnb_notice_li" id="gnb_notice_layer"
+										style="display: inline-block;"><a href="javascript:;"
+										class="gnb_notice" onclick="alarm(); return false;"><span
+											class="blind">알림</span><span class="gnb_icon"></span><em
+											class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span
+												class="gnb_ico_new"><span class="gnb_count"
+													id="gnb_me_count" style="display: inline-block;"></span></span></em><span
+											class="ico_arrow"></span></a>
+									<div class="gnb_notice_lyr" id="gnb_notice_lyr">
+											<div class="svc_noti svc_panel">
+												<div class="svc_scroll">
+													<div class="svc_head">
+														<strong class="gnb_tit">전체 알림</strong>
+														<div class="task_right">
+															<button
+																onclick="gnbNaverMeLayer.deleteReadList(this, event);"
+																id="gnb_btn_read_noti_del">읽은 알림 삭제</button>
+															<button onclick="gnbNaverMeLayer.showDeleteAlert();"
+																id="gnb_btn_all_noti_del">모두 삭제</button>
+														</div>
+													</div>
+													<div class="svc_body" id="gnb_naverme_layer"></div>
+												</div>
+												<div class="gnb_ly_alert" id="gnb_ly_alert"
+													style="display: none;">
+													<p class="gnb_msg">
+														<strong>알림을 모두 삭제하시겠습니까?</strong>
+													</p>
+													<div class="gnb_btns">
+														<button id="ly_alert_confirm"
+															onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button>
+														<button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button>
+													</div>
+													<button class="gnb_btn_close"
+														onclick="gnbNaverMeLayer.hideDeleteAlert();">
+														<i>레이어 닫기</i>
+													</button>
+												</div>
+												<a href="http://me.naver.com/box/noti.nhn"
+													class="gnb_notice_all">내 알림 전체보기</a>
+											</div>
+										</div>
+										<iframe id="gnb_notice_lyr_iframe" title="빈 프레임"
+											class="gnb_pad_lyr" name="padding" width="0" height="0"
+											scrolling="no" frameborder="0"
+											style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)"></iframe></li>
+									<li class="gnb_service_li" id="gnb_service_layer"
+										style="display: inline-block;"><a href="javascript:;"
+										class="gnb_service" onclick="service(); return false;"><span
+											class="blind">서비스 더보기</span><span class="gnb_icon"></span><span
+											class="ico_arrow"></span></a>
+									<div class="gnb_service_lyr" id="gnb_service_lyr">
+											<div class="gnb_favorite_search" id="gnb_favorite_search">
+												<div class="gnb_favorite_area">
+													<div class="gnb_favorite_lstwrp">
+														<div class="gnb_first_visit" style="display: none">
+															<span class="blind">나만의 즐겨찾기를 추가해 보세요!</span><a href="#"
+																class="gnb_close"><span class="blind">닫기</span></a>
+														</div>
+														<strong class="blind">즐겨찾는 서비스</strong>
+														<ul class="gnb_favorite_lst" id="gnb_favorite_lst">
+															<li class="gnb_add"><a href="#"><span
+																	class="ic_add"></span>추가</a></li>
+															<li class="gnb_add"><a href="#"><span
+																	class="ic_add"></span>추가</a></li>
+															<li class="gnb_add"><a href="#"><span
+																	class="ic_add"></span>추가</a></li>
+															<li class="gnb_add"><a href="#"><span
+																	class="ic_add"></span>추가</a></li>
+														</ul>
+														<a href="#" class="gnb_my_interface"
+															onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span
+															class="blind">즐겨찾기 설정</span></a>
+													</div>
+												</div>
+												<div class="gnb_search_area">
+													<div class="gnb_search_box"
+														onmouseover="gnb_search.mouseOver(this);"
+														onmouseout="gnb_search.mouseOut(this);">
+														<input id="gnb_svc_search_input" type="text"
+															title="서비스 검색" value="더 많은 서비스를 간편하게 시작하세요!"
+															onfocus="gnb_search.clearInput(this);"
+															onblur="gnb_search.resetInput(this);"
+															onkeydown="gnb_search.keyDown(event);"
+															onkeyup="gnb_search.keyUp(event);"><a href="#"
+															class="gnb_del_txt" id="gnb_del_txt"
+															style="display: none"><span class="blind">삭제</span></a>
+														<div class="gnb_pop_input" id="gnb_pop_input" tabindex="0"
+															onfocus="gnb_search.searchPopOnMouse = true; return false;"
+															onfocusout="gnb_search.searchPopOnMouse = false; return false;"
+															onmouseover="gnb_search.searchPopOnMouse = true; return false;"
+															onmouseout="gnb_search.searchPopOnMouse = false; return false;"
+															style="display: none">
+															<ul class="gnb_pop_lst"></ul>
+														</div>
+													</div>
+													<div class="gnb_search_lstwrp">
+														<ul class="gnb_search_lst gnb_first">
+															<li class="gnb_first"><a
+																href="http://cafe.naver.com/">카페</a></li>
+															<li><a href="http://news.naver.com/">뉴스</a></li>
+															<li><a href="http://map.naver.com/">지도</a></li>
+															<li><a href="http://sports.news.naver.com/">스포츠</a></li>
+															<li><a href="http://game.naver.com/">게임</a></li>
+														</ul>
+														<ul class="gnb_search_lst">
+															<li class="gnb_first"><a
+																href="http://section.blog.naver.com/">블로그</a></li>
+															<li><a href="http://post.naver.com/main.nhn">포스트</a></li>
+															<li><a href="http://dic.naver.com/">사전</a></li>
+															<li><a href="http://kin.naver.com/">지식iN</a></li>
+															<li><a href="http://weather.naver.com/">날씨</a></li>
+														</ul>
+														<ul class="gnb_search_lst">
+															<li class="gnb_first"><a
+																href="http://mail.naver.com/">메일</a></li>
+															<li><a href="http://stock.naver.com/">증권</a></li>
+															<li><a href="http://land.naver.com/">부동산</a></li>
+															<li><a href="http://music.naver.com/">뮤직</a></li>
+															<li><a href="http://book.naver.com">책</a></li>
+														</ul>
+														<ul class="gnb_search_lst">
+															<li class="gnb_first"><a
+																href="http://shopping.naver.com/">쇼핑</a></li>
+															<li><a href="http://comic.naver.com/">웹툰</a></li>
+															<li><a href="http://movie.naver.com/">영화</a></li>
+															<li><a href="http://cloud.naver.com/">클라우드</a></li>
+															<li><a href="http://auto.naver.com/">자동차</a></li>
+														</ul>
+													</div>
+												</div>
+												<div class="gnb_banner">
+													<a href="http://campaign.naver.com/pointevent/"
+														class="gnb_service_event"><img id="gnb_promo"
+														alt="바코드페이 | 12월 이벤트" width="265" height="47"
+														src="http://static.naver.net/common/gnb/banner/promo_npay_1712.png"></a>
+												</div>
+												<div class="gnb_linkwrp">
+													<a href="http://www.naver.com/more.html"
+														class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a>
+												</div>
+											</div>
+											<div class="gnb_svc_more" id="gnb_svc_more"
+												style="display: none;">
+												<strong class="blind">바코드 주요 서비스</strong>
+												<div class="gnb_bg_top"></div>
+												<div class="gnb_svc_hd">
+													<strong class="gnb_svc_tit">바로가기 설정</strong><span
+														class="link"><a
+														href="http://www.naver.com/more.html">전체 서비스 보기</a></span>
+												</div>
+												<div class="gnb_svc_lstwrp">
+													<div class="gnb_svc_lst1">
+														<ul class="gnb_first">
+															<li><input type="checkbox" id="nsvc_game"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_game">게임</label></li>
+															<li><input type="checkbox" id="nsvc_weather"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_weather">날씨</label></li>
+															<li><input type="checkbox" id="nsvc_shopping"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_shopping">바코드쇼핑</label></li>
+															<li><input type="checkbox" id="nsvc_navercast"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_navercast">바코드캐스트</label></li>
+															<li><input type="checkbox" id="nsvc_cloud"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_cloud">바코드클라우드</label></li>
+															<li class="gnb_event"><input type="checkbox"
+																id="nsvc_naverpay" name="selmenu"
+																class="gnb_input_check" value=""> <label
+																for="nsvc_naverpay">바코드페이</label><em class="ic_gnb_new">New</em></li>
+															<li><input type="checkbox" id="nsvc_news"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_news">뉴스</label></li>
+															<li><input type="checkbox" id="nsvc_comic"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_comic">만화/웹툰</label></li>
+															<li><input type="checkbox" id="nsvc_memo"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_memo">메모</label></li>
+															<li><input type="checkbox" id="nsvc_mail"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_mail">메일</label></li>
+															<li><input type="checkbox" id="nsvc_music"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_music">뮤직</label></li>
+															<li><input type="checkbox" id="nsvc_land"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_land">부동산</label></li>
+															<li><input type="checkbox" id="nsvc_bookmark"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_bookmark">북마크</label></li>
+														</ul>
+														<ul class="">
+															<li><input type="checkbox" id="nsvc_blog"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_blog">블로그</label></li>
+															<li><input type="checkbox" id="nsvc_dic"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_dic">사전</label></li>
+															<li><input type="checkbox" id="nsvc_software"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_software">소프트웨어</label></li>
+															<li><input type="checkbox" id="nsvc_sports"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_sports">스포츠</label></li>
+															<li><input type="checkbox" id="nsvc_ya9"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_ya9">야구9단</label></li>
+															<li><input type="checkbox" id="nsvc_movie"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_movie">영화</label></li>
+															<li><input type="checkbox" id="nsvc_office"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_office">오피스</label></li>
+															<li><input type="checkbox" id="nsvc_novel"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_novel">웹소설</label></li>
+															<li><input type="checkbox" id="nsvc_auto"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_auto">자동차</label></li>
+															<li><input type="checkbox" id="nsvc_contact"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_contact">주소록</label></li>
+															<li><input type="checkbox" id="nsvc_finance"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_finance">증권(금융)</label></li>
+															<li><input type="checkbox" id="nsvc_map"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_map">지도</label></li>
+															<li><input type="checkbox" id="nsvc_kin"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_kin">지식iN</label></li>
+														</ul>
+														<ul class="">
+															<li><input type="checkbox" id="nsvc_terms"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_terms">지식백과</label></li>
+															<li><input type="checkbox" id="nsvc_book"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_book">책</label></li>
+															<li><input type="checkbox" id="nsvc_cafe"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_cafe">카페</label></li>
+															<li><input type="checkbox" id="nsvc_calendar"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_calendar">캘린더</label></li>
+															<li><input type="checkbox" id="nsvc_photo"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_photo">포토갤러리</label></li>
+															<li><input type="checkbox" id="nsvc_nstore"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_nstore">N스토어</label></li>
+															<li><input type="checkbox" id="nsvc_navertv"
+																name="selmenu" class="gnb_input_check" value="">
+																<label for="nsvc_navertv">바코드TV</label></li>
+														</ul>
+													</div>
+													<div class="svc_lst2">
+														<div class="svc_spc gnb_first">
+															<strong><a href="http://dic.naver.com/">어학사전</a></strong>
+															<ul class="">
+																<li><input type="checkbox" id="nsvc_krdic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_krdic">국어사전</label></li>
+																<li><input type="checkbox" id="nsvc_endic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_endic">영어/영영사전</label></li>
+																<li><input type="checkbox" id="nsvc_hanja"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_hanja">한자사전</label></li>
+																<li><input type="checkbox" id="nsvc_jpdic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_jpdic">일어사전</label></li>
+																<li><input type="checkbox" id="nsvc_cndic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_cndic">중국어사전</label></li>
+																<li><input type="checkbox" id="nsvc_frdic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_frdic">프랑스어사전</label></li>
+																<li><input type="checkbox" id="nsvc_dedic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_dedic">독일어사전</label></li>
+																<li><input type="checkbox" id="nsvc_rudic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_rudic">러시아어사전</label></li>
+																<li><input type="checkbox" id="nsvc_vndic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_vndic">베트남어사전</label></li>
+																<li><input type="checkbox" id="nsvc_spdic"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_spdic">스페인어사전</label></li>
+																<li><input type="checkbox" id="nsvc_translate"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_translate">번역기</label></li>
+															</ul>
+														</div>
+														<div class="svc_spc">
+															<strong>인기/신규서비스</strong>
+															<ul class="">
+																<li><input type="checkbox" id="nsvc_grafolio"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_grafolio">그라폴리오</label></li>
+																<li><input type="checkbox" id="nsvc_post"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_post">포스트</label></li>
+																<li><input type="checkbox" id="nsvc_luncherapp"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_luncherapp">도돌런처</label></li>
+																<li><input type="checkbox" id="nsvc_band"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_band">밴드</label></li>
+																<li><input type="checkbox" id="nsvc_line"
+																	name="selmenu" class="gnb_input_check" value="">
+																	<label for="nsvc_line">라인</label></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<div class="svc_btnwrp">
+													<div class="svc_btns">
+														<button class="gnb_save"
+															onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;">
+															<strong class="blind">확인</strong>
+														</button>
+														<button class="gnb_close"
+															onclick="gnbFavorite.cancel(); return false;">
+															<span class="blind">취소</span>
+														</button>
+														<button class="gnb_return"
+															onclick="gnbFavorite.resetService(); return false;">
+															<span class="blind">초기 설정으로 변경</span>
+														</button>
+													</div>
+												</div>
+												<div class="gnb_bg_btm"></div>
+											</div>
+										</div>
+										<iframe id="gnb_service_lyr_iframe" title="빈 프레임"
+											class="gnb_pad_lyr" name="padding" width="0" height="0"
+											scrolling="no" frameborder="0"
+											style="display: none; top: 34px; right: 297px; width: 585px; height: 385px; opacity: 0; -ms-filter: alpha(opacity = 0)"></iframe>
+										<iframe id="gnb_svc_more_iframe" title="빈 프레임"
+											class="gnb_pad_lyr" name="padding" width="0" height="0"
+											scrolling="no" frameborder="0"
+											style="display: none; top: 34px; right: -4px; width: 295px; height: 385px; opacity: 0; -ms-filter: alpha(opacity = 0)"></iframe></li>
+								</ul>
+							</div>
+							<%
+								}
+							%>
+
 						</div>
 					</div>
 				</div>
 			</div>
+
+
+			<div class="sta Nsearch">
+				<form id="searchForm" name="searchForm" method="get"
+					action="http://help.naver.com/support/search/searchResultAll.nhn"
+					target="_top"
+					onsubmit="clickcr(this, &#39;tsn.search&#39;, &#39;&#39;, &#39;&#39;, event);return openSearch(this);"
+					class="snb_search_box">
+					<fieldset>
+						<legend class="blind">네이버 도움말 검색 영역</legend>
+						<div class="srch_area">
+							<span class="srch_box"> <span class="ipt_box"> <!-- [D] input 요소에 포커스가 갈 경우 클래스 fcs 추가 및 value 삭제 -->
+
+
+
+									<input id="searchText" name="searchText" type="text"
+									title="도움말 검색" accesskey="w" value="궁금한 점이 있다면 도움말을 검색해 보세요."
+									onfocus="this.value = &#39;&#39;;"
+									onblur="if(this.value == &#39;&#39;) this.value = &#39;궁금한 점이 있다면 도움말을 검색해 보세요.&#39;;"
+									class="srch_kwd">
+
+
+							</span>
+							<!-- [D] button 클릭할 경우 클래스 active 추가 -->
+							</span>
+							<button id="ischButton" type="submit" title="검색" class="btn_srch">
+								<span class="blind">검색</span>
+							</button>
+							<!-- [D] 서비스명 input에 텍스트 입력시 display:block 변경 -->
+							<div class="auto_kwd" style="display: none; z-index: 999999">
+								<ul>
+								</ul>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
 		</div>
+
 		<script type="text/javascript">
 jQuery(function () {
 	jQuery(document.body).click(function (event){
 		if(jQuery(event.target).parents("#gnb").length > 0) {
 			return;
 		}
+
 		if (gnbAllLayerClose != 'undefined') {
 			gnbAllLayerClose();
 		}
 	});
 });
 </script>
+		<!-- //header -->
+
+
 		<div id="container">
+
 			<!-- ticker notice -->
-			<div class="spot_area" style="display: none">
+			<div class="spot_area">
 				<div class="spot">
-					<marquee scrollamount="5" onmouseover="stop()" onmouseout="start()">
-					</marquee>
+					<h3>공지사항</h3>
+					<p>
+						<a
+							href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#"
+							onclick="return BBS.goBBS(&#39;10000000000030659391&#39;);">[복구
+							중] 12/13 (수), '네이버 툴즈' 서비스에 장애 현상이 있음을 알려드립니다.</a>
+					</p>
 				</div>
 			</div>
-			<!-- //ticker notice -->
-			<div class="content_wrap svs">
-				<div class="snb">
-					<script type="text/javascript"
-						src="./바코드 시작페이지_files/jquery-1.10.2.js.다운로드"></script>
-					<h2>
-						<a
-							href="../index.jsp"
-							onclick="clickcr(this, &#39;ctg.home&#39;, &#39;&#39;, &#39;&#39;, event);"
-							title="바코드 전반">바코드 전반</a>
-					</h2>
-					<div class="nav">
-						<!-- h3 class="tit_nav">이용방법</h3-->
-						<span class="nav_top_line"></span>
-						<h4 class="back_prv">
-							<a
-								href="../index.jsp"
-								onclick="return CATEGORY.change(&#39;1074&#39;, &#39;16683&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;GRP01&#39;, event)"><span
-								class="ic_prv"></span>인터넷 익스플로러 환경</a>
-						</h4>
-						<ul>
-							<li class="on l2"><a
-								href="start_page.jsp"
-								onclick="return CATEGORY.change(&#39;1074&#39;, &#39;16690&#39;, &#39;VC03&#39;, &#39;&#39;, &#39;GRP01&#39;, event)">바코드를
-									시작페이지로 설정하는 방법</a></li>
-					</div>
-					<script type="text/javascript">
-	jQuery().ready(function(){
-		if (jQuery('.on a').height() > 16 && jQuery('.on a').height() <= 32) {
-			jQuery('.on').addClass('l2');
-		} else if(jQuery('.on a').height() > 32) {
-			jQuery('.on').addClass('l3');
-		}
- 	});
-</script>
-				</div>
-				<script type="text/javascript"
-					src="./바코드 시작페이지_files/jindo.textcheck.js.다운로드"></script>
+
+			<div class="content_wrap">
 				<div id="content">
-					<div class="ctg_section">
-						<div class="pnt_ctg_area">
-							<h4 class="blind">카테고리 정보</h4>
-							<ul>
-								<li><a
-									href="../index.jsp"
-									onclick="return SERVICE.goService(&#39;1074&#39;, &#39;LINK01&#39;, &#39;http://help.naver.com/ops/step2/faq.nhn?parentId=12119&amp;depth=2&#39;, &#39;ctn.navi&#39;, event)"
-									title="바코드 전반">바코드 전반</a></li>
-								<li><a
-									href="../index.jsp"
-									onclick="CATEGORY.change(&#39;1074&#39;, &#39;16682&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;&#39;, event, &#39;ctn.navi&#39;)"
-									title="바코드 시작페이지 설정 안내">바코드 시작페이지 설정 안내</a></li>
-								<li><a
-									href="../index.jsp"
-									onclick="CATEGORY.change(&#39;1074&#39;, &#39;16683&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;&#39;, event, &#39;ctn.navi&#39;)"
-									title="인터넷 익스플로러 환경">인터넷 익스플로러 환경</a></li>
-								<li class="last"><strong title="바코드를 시작페이지로 설정하는 방법">바코드를
-										시작페이지로 설정하는 방법</strong></li>
-							</ul>
-						</div>
-						<div class="svs_end_area">
-							<!-- [D] 현재 선택된 타이틀 적용 -->
-							<h1 class="blind">바코드를 시작페이지로 설정하는 방법</h1>
-							<!-- [D] 본문 페이지일 경우 클래스 cont 추가 -->
-							<table class="cmn_table cont">
-								<!-- [D] 현재 선택된 타이틀 적용 -->
-								<caption>바코드를 시작페이지로 설정하는 방법</caption>
-								<colgroup>
-									<col>
-									<col style="width: 82px">
-									<col style="width: 76px">
-								</colgroup>
-								<thead>
-									<tr>
-										<th scope="col"><span class="atcl">제목</span></th>
-										<th scope="col">업데이트</th>
-										<th scope="col">조회수</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><span class="atcl">시작 페이지 설정 방법(익스플로러)</span></td>
-										<td>2016.12.06</td>
-										<td>26173849</td>
-									</tr>
-								</tbody>
-							</table>
-							<!-- [D] 본문 상세 타이틀 적용 -->
-							<h2 class="blind">시작 페이지 설정 방법(익스플로러)</h2>
-							<div class="svs_end_cont">
-								<p></p>
-								<p>
-									<br>
-								</p>
-								<p>인터넷 옵션 변경 및 툴바 설치로 설정하실 수 있습니다.</p>
-								<p>
-									<br>
-								</p>
-								<table class="__se_tbl" border="0" cellspacing="0"
-									cellpadding="0">
-									<tbody>
-										<tr>
-											<td
-												style="padding: 32px 7px 11px 1px; width: 566px; color: rgb(102, 102, 102); border-bottom-color: rgb(85, 85, 85); border-bottom-width: 2px; border-bottom-style: solid; background-color: rgb(255, 255, 255);">
-												<p>
-													<strong><span
-														style="color: #ff4800; font-size: 12pt;">시작 페이지 변경 방법</span></strong>
-												</p>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<p>
-									<br>
-								</p>
-								<p>
-									<br>
-								</p>
-								<p>
-									<b>1) 인터넷 익스플로러를 띄웁니다. </b>
-								</p>
-								<p>&nbsp;</p>
-								<p>
-									<b>2) 메뉴에서 '도구&gt;인터넷옵션'을 클릭합니다. </b>
-								</p>
-								<p>&nbsp;</p>
-								<p>
-									<img
-										style="border: 1px solid rgb(154, 154, 154); border-image: none;"
-										alt="익스플로러24" src="./바코드 시작페이지_files/시작페이지.png" border="1"
-										attachimageno="2218">
-								</p>
-								<p>
-									<span style="color: rgb(154, 154, 154);">▲ 인터넷 옵션 클릭 화면</span>
-								</p>
-								<p>&nbsp;</p>
-								<p>
-									<b>3) [일반]탭의 홈페이지 URL 입력란에, 'http://www.Barcode.com' 을
-										입력합니다. </b>
-								</p>
-								<p>&nbsp;</p>
-								<p>
-									<img
-										style="border: 1px solid rgb(154, 154, 154); border-image: none;"
-										alt="익스플로러25" src="./바코드 시작페이지_files/시작페이지2.png" border="1"
-										attachimageno="2219">
-								</p>
-								<p>
-									<span style="color: rgb(154, 154, 154);">▲ 홈페이지 탭 입력 화면</span>
-								</p>
-								<p>&nbsp;</p>
-								<p>
-									<b>4) '확인' 버튼을 클릭합니다. </b>
-								</p>
-								<p>
-									<b>&nbsp;</b>
-								</p>
-								<p>
-									<b>5) 인터넷 익스플로러를 새로 띄워보면, </b>
-								</p>
-								<p>
-									<b>&nbsp;&nbsp; 바코드로 시작 페이지가 변경된 것을 확인하실 수 있습니다.</b>
-								</p>
-								<p>
-									<b><br></b>
-								</p>
-								<p>
-									<b><br></b>
-								</p>
-								<p>
-									<b> </b>
-								</p>
-								<table class="__se_tbl" border="0" cellspacing="0"
-									cellpadding="0">
-									<tbody>
-										<tr>
-											<td
-												style="padding: 32px 7px 11px 1px; width: 566px; color: rgb(102, 102, 102); border-bottom-color: rgb(85, 85, 85); border-bottom-width: 2px; border-bottom-style: solid; background-color: rgb(255, 255, 255);">
-												<div id="aside">
-													<div class="know_section"></div>
-												</div>
-							</div>
-						</div>
-						<script>
-jQuery(document).ready(function(){	
+					<div class="notice_area">
+						<iframe id="NAVER_COMMON_BOARD_IFRAME"
+							name="NAVER_COMMON_BOARD_IFRAME" title="공지사항"
+							src="./Barcode_Notice_files/10000000000030659394.html"
+							width="100%" height="10%" frameborder="0" scrolling="auto"
+							class="nboard3" style="height: 783px;"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+		<!-- layer kin bridge -->
+		<div class="ly_dim" style="display: none;"></div>
+		<div class="ly_kin_bridge" style="display: none">
+			<div class="con">
+				<h1 class="blind">이용자들끼리 주고 받는 생생한 네이버 사용법</h1>
+				<p class="blind">지식iN에서 검색하고 물어보세요!</p>
+				<h2 class="blind">네이버와 관련한 궁금한 점을 쉽게 찾을 수 있어요.</h2>
+				<p class="blind">네이버사용법에 대한 질문/답변이 무려 24만개!! 하루에 새로운 질문 답변이
+					200개!! 지금 바로 지식iN에서 궁금한 점을 찾아 보세요.</p>
+				<a
+					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
+					onclick="clickcr(this, &#39;kbr.search&#39;, &#39;&#39;, &#39;&#39;, event)"
+					class="srch" target="_blank"><span class="blind">지식iN에서
+						네이버 사용법 검색하기</span></a>
+				<h2 class="blind">찾으시는 내용이 없다면 지식iN에 물어보세요.</h2>
+				<p class="blind">다른 이용자와 지식iN 고수들, 네이버 지식파트너가 정확하고 빠르게 답변합니다.
+					궁금한 점이 있으시면 지금 바로 지식iN에서 질문해 보세요.</p>
+				<a
+					href="http://kin.naver.com/qna/question.nhn?dirId=10601&amp;d1Id=1"
+					onclick="clickcr(this, &#39;kbr.ask&#39;, &#39;&#39;, &#39;&#39;, event)"
+					class="ask" target="_blank"><span class="blind">지식iN에서
+						네이버 사용법 질문하기</span></a>
+				<p class="blind">질문 내용을 등록하신 후 ‘네이버사용법’을 선택해주시면 더욱 정확하고 빠르게 답변
+					받을 수 있어요.</p>
+				<p class="blind">예) 지식Q&amp;A &gt; 컴퓨터통신 &gt; 인터넷 &gt; 네이버사용법
+					&gt; OOO (서비스 명)</p>
+				<a id="closeKinPopup"
+					href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#"
+					class="close"><span class="blind">닫기</span></a>
+			</div>
+		</div>
+		<!-- //layer kin bridge -->
+		<script>
+jQuery(document).ready(function(){
+	
 	/**
 	 * 지식인 사용법 자세히 보기
 	 */
@@ -2328,114 +2727,67 @@ jQuery(document).ready(function(){
 	
 });
 </script>
-<script type="text/javascript"
-	src="./바코드 시작페이지_files/flashObject.js.다운로드">
-</script>
-<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery("#kinParterBanner").click(function(event){
-			jQuery("#dimLayout").show();
-			jQuery("#kinPartnerLayout").show();
-			return false;
-		});
-		jQuery("#kinParterPopupCloseButton").click(function(event){
-			nhn.FlashObject.find('player').flashStop();
-			jQuery("#dimLayout").hide();
-			jQuery("#kinPartnerLayout").hide();
-			return false;
-		});
-	});
-</script>
-						<div id="dimLayout" class="ly_dim" style="display: none"></div>
-						<div id="kinPartnerLayout" class="ly_kin_partner"
-							style="display: none">
-							<div class="con">
-								<h1 class="blind">지식파트너 활성화용 소개 동영상</h1>
-								<!-- 동영상영역 -->
-								<div class="kin_mov">
-									<script type="text/javascript">
-				var param = {"flashVars" : "isautoplay=false&imgurl=https://ssl.pstatic.net/static/help/support/img_pnmov.jpg&flvurl=/support/static/kin_partner.flv&volume=0.2&contentWidth=720&contentHeight=405"};
-				nhn.FlashObject.show("/support/static/player.swf", "player", 720, 405, param, "middle", "11,3,378,5");
-			</script>
-									<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-										codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=11,3,378,5"
-										class="F1512954478244876688_undefined"
-										style="position: relative !important;" "="" width="720"
-										height="405" id="player" align="middle">
-										<param name="movie" value="/support/static/player.swf">
-										<param name="quality" value="high">
-										<param name="bgColor" value="#FFFFFF">
-										<param name="allowScriptAccess" value="always">
-										<param name="wmode" value="window">
-										<param name="menu" value="false">
-										<param name="allowFullScreen" value="true">
-										<param name="flashVars"
-											value="isautoplay=false&amp;imgurl=https://ssl.pstatic.net/static/help/support/img_pnmov.jpg&amp;flvurl=/support/static/kin_partner.flv&amp;volume=0.2&amp;contentWidth=720&amp;contentHeight=405&amp;__flashID=player">
-										<embed width="720" height="405" name="player"
-											class="F1512954478244876688_undefined"
-											style="position: relative !important;"
-											"="" src="/support/static/player.swf" align="middle"
-											quality="high" bgcolor="#FFFFFF" allowscriptaccess="always"
-											wmode="window" menu="false" allowfullscreen="true"
-											flashvars="isautoplay=false&amp;imgurl=https://ssl.pstatic.net/static/help/support/img_pnmov.jpg&amp;flvurl=/support/static/kin_partner.flv&amp;volume=0.2&amp;contentWidth=720&amp;contentHeight=405&amp;__flashID=player"
-											type="application/x-shockwave-flash"
-											pluginspage="http://www.macromedia.com/go/getflashplayer">
-									</object>
-								</div>
+		<!-- footer -->
+		<div id="footer">
+
+
+
+
+
+
+
+			<h3 class="blind">네이버 정책 및 약관</h3>
+			<ul class="lst_policy">
+				<li><a href="http://www.naver.com/rules/service.html">이용약관</a></li>
+				<li><a href="http://www.naver.com/rules/privacy.html"><strong>개인정보처리방침</strong></a></li>
+				<li><a href="http://www.naver.com/rules/youthpolicy.html">청소년보호정책</a></li>
+				<li><a href="http://www.naver.com/rules/spamcheck.html">네이버정책</a></li>
+			</ul>
+			<div class="info info_v2">
+				<a
+					href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#mapPopup"
+					class="v_map" id="openMap">위치안내</a>
+				<!-- [D] 위치안내 클릭시 display:block 변경 -->
+				<div id="mapPopup" class="map_popup" style="display: none">
+					<div class="con">
+						<p class="tit">
+							<strong>고객센터 위치안내</strong>
+						</p>
+						<div class="mapinfo">
+							<div>
+								<img src="./Barcode_Notice_files/img_new_map_v2.jpg" width="368"
+									height="323" alt="고객센터 지도">
 							</div>
-						</div>
-						<div id="footer">
-							<h3 class="blind">바코드 정책 및 약관</h3>
-							<ul class="lst_policy">
-								<li><a href="../index.jsp">이용약관</a></li>
-								<li><a href="../index.jsp"><strong>개인정보처리방침</strong></a></li>
-								<li><a href="../index.jsp">청소년보호정책</a></li>
+							<p class="map_address">
+								<strong>강원도 춘천시 퇴계로 89 강원전문건설회관</strong>
+							</p>
+							<ul class="list_info">
+								<li class="last3">고객센터 전화번호 : <span class="btext">1588
+										- 3820</span> <span>(평일 09:00~18:00)</span></li>
 							</ul>
-							<div class="info info_v2">
-								<a
-									href="https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&amp;categoryNo=16690#mapPopup"
-									class="v_map" id="openMap">위치안내</a>
-								<!-- [D] 위치안내 클릭시 display:block 변경 -->
-								<div id="mapPopup" class="map_popup" style="display: none">
-									<div class="con">
-										<p class="tit">
-											<strong>고객센터 위치안내</strong>
-										</p>
-										<div class="mapinfo">
-											<div>
-												<img src="./바코드 시작페이지_files/img_new_map_v2.jpg" width="368"
-													height="323" alt="고객센터 지도">
-											</div>
-											<p class="map_address">
-												<strong>강원도 춘천시 퇴계로 89 강원전문건설회관</strong>
-											</p>
-											<ul class="list_info">
-												<li class="last3">고객센터 전화번호 : <span class="btext">1588
-														- 3820</span> <span>(평일 09:00~18:00)</span></li>
-											</ul>
-											<p class="guide">
-												<span>※</span> <span class="txt">바코드 서비스 관련 궁금하신 점은,<br>고객센터
-													전화 또는 온라인 고객센터를 통해 해결하실 수 있습니다.
-												</span>
-											</p>
-										</div>
-										<div class="btn_area">
-											<a id="closeMap"
-												href="../index.jsp"
-												class="btn_confrm">확인</a>
-										</div>
-									</div>
-									<button href="#" class="p_close">고객센터 위치안내 닫기</button>
-								</div>
-								<address>
-									ⓒ <a href="../index.jsp">Barcode
-										Corp.</a> <a href="../index.jsp"
-										class="f_logo_naver"><img
-										src="./바코드 시작페이지_files/logo_ci.png" width="63" height="11"
-										alt="NAVER"></a>
-								</address>
-							</div>
-							<script>
+							<p class="guide">
+								<span>※</span> <span class="txt">네이버 서비스 관련 궁금하신 점은,<br>고객센터
+									전화 또는 온라인 고객센터를 통해 해결하실 수 있습니다.
+								</span>
+							</p>
+						</div>
+						<div class="btn_area">
+							<a id="closeMap"
+								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#"
+								class="btn_confrm">확인</a>
+						</div>
+					</div>
+					<button href="#" class="p_close">고객센터 위치안내 닫기</button>
+				</div>
+
+				<address>
+					ⓒ <a href="http://www.navercorp.com/ko/index.nhn">NAVER Corp.</a> <a
+						href="http://www.navercorp.com/ko/index.nhn" class="f_logo_naver"><img
+						src="./Barcode_Notice_files/ci_naver.gif" width="63" height="11"
+						alt="NAVER"></a>
+				</address>
+			</div>
+			<script>
 	jQuery(document).on("click", "#openMap", function (event) {
 		event.preventDefault();
 		PAGE.nClickForNoLink('fot.location', event);
@@ -2455,18 +2807,16 @@ jQuery(document).ready(function(){
 	jQuery(document).on("click", "#arsPopup .btn_confirm, #arsPopup .btn_close", function () {
 		jQuery("#arsPopup").hide();
 	});
-	</script>
-</div>
-</div>
-	<script type="text/javascript"
-		src="./바코드 시작페이지_files/lcslog.js.다운로드"></script>
-	<script type="text/javascript">
-var nsc = "help.service";
-lcs_do();
-jQuery(function() {
-	getGNB();
-});
-
 </script>
+		</div>
+		<!-- //footer -->
+	</div>
+	<script type="text/javascript"
+		src="./Barcode_Notice_files/lcslog.js.다운로드"></script>
+	<script type="text/javascript">
+var nsc = "help.main";
+lcs_do();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,1764 @@
+	/**
+	 * @projectDescription Nboard JavaScript Library
+	 * @copyright NHN corp. <http://www.nhncorp.com>
+	 * @author AjaxUI Team <TarauS>
+	 * 
+	 * Refactoring this by realrap(Sohn) since 2008.07.14
+	 */
+
+	var sSelectedCommentReplyForm;
+	var oSelectedWriteForm, oSelectedPersonaconImage;
+	var bBlockReOpenPL = false, bCursorOverPL = false;
+	var bBlockReOpenSL = false, bCursorOverSL = false;
+	var oCategory0, oCategory1, oCategory2, oCategoryBW;
+	var oPropertySelectBox;
+	var bAjaxRequesting = false;
+	var oEditor, editor, nAttachIndex = 0, infopopupFilter;
+	var aAttachedFileList = new Array();
+	var oImageUploader, oFileUploader;
+	var nFileUploadRequestCount = 0;
+	var loginCallbackParams = {};
+	var oClipboardCopyModule, oControlLayer;
+	var bImageLoadCheck = false;
+	var oTimer;
+	var oAgent = $Agent();
+	var bImageSavedData = "";
+	var serviceCallback;
+	var bPopLoginSupport = true;
+	var canSubmit = true;
+	
+
+	function getSelectedCategory(){
+		var c = [null, null, null];
+		for(var i=0;i<3;i++) {
+			var select = $('n2_category'+i);
+			if(select != null) {
+				if(select.value != 'none') c[i] = select.value;
+				else break;
+			}
+		}
+		return c;
+	}
+
+	function showPersonaconLayer(eEvent, sFormId, sImageId){
+		if(bBlockReOpenPL == false){
+			var oBase = eEvent.target || eEvent.srcElement;
+			if(oBase.tagName == "IMG") {oBase = oBase.parentNode;}
+			oSelectedWriteForm = $(sFormId);
+			oSelectedPersonaconImage = $(sImageId);
+			var topPosition = jindo.$Element(oBase).offset().top + oBase.offsetHeight;
+			
+			$("n2_oPersonaconLayer").style.top = topPosition + "px";		
+			$("n2_oPersonaconLayer").style.left = (Element.realPos(oBase).left) + "px";
+			$("n2_oPersonaconLayer").style.display = "block";
+			Event.register(document.body, "mousedown", checkPersonaconLayer);
+		}
+	}
+
+	function hidePersonaconLayer(){
+		oSelectedWriteForm = null;
+		oSelectedPersonaconImage = null;
+		if ( $("n2_oPersonaconLayer") ) {
+			$("n2_oPersonaconLayer").style.display = "none";
+			Event.unregister(document.body, "mousedown", checkPersonaconLayer);
+		}
+	}
+
+	function checkPersonaconLayer(){
+		if(bCursorOverPL == false){
+			hidePersonaconLayer();
+			bBlockReOpenPL = true;
+			setTimeout("bBlockReOpenPL="+false,300);
+		}
+	}
+
+	function setPersonacon(nIndex, sAddress){
+		oSelectedWriteForm.userPersonacon.value = nIndex;
+		oSelectedPersonaconImage.src = sAddress;
+		hidePersonaconLayer();
+	}
+
+	function updateCommentRecommendCount(sCommentID){
+		if ( oCommonFn.underMaintenance() ) {
+			return;
+		}
+		if( !sLoginUserID ){
+			popupLogin();
+			return;
+		}
+		
+		if(bAjaxRequesting == false){
+			bAjaxRequesting = true;
+			new Ajax(sRecommendCommentUrlTemplate.replace('_commentId_', sCommentID), {
+				onLoad : function(oRequest) {
+					if(_checkAjaxError(oRequest)){
+						$("n2_elCommentRC_"+sCommentID).innerHTML = parseInt($("n2_elCommentRC_"+sCommentID).innerHTML) + 1;
+					}
+					bAjaxRequesting = false;
+				},
+				onError : function() {
+					alert(nboard2._('common.system.error.description'));
+					bAjaxRequesting = false;
+				}
+				
+			});
+		}else{
+			alert(nboard2._('common.overlap.recommand.description'));
+			return false;
+		}
+	}
+	
+	function updateCommentPage(nPage){
+		if(bAjaxRequesting == false){
+			bAjaxRequesting = true;
+			new Ajax(sCommentPagingUrlTemplate.replace('_commentPage_', nPage), {
+				onLoad : function(oRequest) {
+					if(_checkAjaxError(oRequest)){
+						if(oRequest.responseText){
+							$("n2_oCommentContainer").innerHTML = oRequest.responseText;
+							_setAutoExpand();
+							oCommonUI.checkParentIFrame();
+						}
+					}
+					bAjaxRequesting = false;
+				},
+				onError : function() {
+					alert(nboard2._('common.system.error.description'));
+					bAjaxRequesting = false;
+				}
+			});
+		}else{
+			alert(nboard2._('common.notcomplete.processing.description'));
+			return false;
+		}
+	}
+
+	function toggleCommentReplyForm(sCommentID, sGroupID, nPage){
+		var sPreviousCommentID;
+		if(sSelectedCommentReplyForm != null){
+			sPreviousCommentID = sSelectedCommentReplyForm.replace('n2_elComment_','');
+		}
+		var sCommentReplyFormName = "n2_elComment_"+sCommentID;
+		var oCommentButton = $('n2_elCommentButton_'+sCommentID);
+		var oReply = $(sCommentReplyFormName);
+
+		if(sCommentReplyFormName != sSelectedCommentReplyForm || sSelectedCommentReplyForm == ""){
+			if(sPreviousCommentID && (sPreviousCommentID != sCommentID)){
+				var oPreviousCommentButton = $('n2_elCommentButton_'+sPreviousCommentID);
+				if(oPreviousCommentButton){
+					oPreviousCommentButton.src = oCommentButton.getAttribute('originalImage');
+					oPreviousCommentButton.onmouseover = function(){this.src=this.getAttribute('overImage')};
+					oPreviousCommentButton.onmouseout = function(){this.src=this.getAttribute('originalImage')};
+				}
+			}
+			oReply.appendChild($("n2_elCommentReplyBox"));
+			$("n2_elCommentReplyBox").style.display = "block";
+			$("n2_fCommentReply").commentGroupId.value = sGroupID;
+			$("n2_fCommentReply").commentPage.value = nPage;
+			oCommentButton.src = oCommentButton.getAttribute('clickImage');
+			oCommentButton.onmouseover = function(){};
+			oCommentButton.onmouseout = function(){};
+			sSelectedCommentReplyForm = sCommentReplyFormName;
+			
+		}else{
+			$("n2_elCommentReplyBox").style.display = "none";
+			oCommentButton.src = oCommentButton.getAttribute('originalImage');
+			oCommentButton.onmouseover = function(){this.src=this.getAttribute('overImage')};
+			oCommentButton.onmouseout = function(){this.src=this.getAttribute('originalImage')};
+			sSelectedCommentReplyForm = "";
+		}
+		hidePersonaconLayer();
+	}
+
+	function checkAppleMobile() {
+		return (navigator.platform.match(/iPad|iPhone/) != null);
+	}
+
+	function hideElementById(eId) {
+		 Element.setCSS(eId, {visibility:"hidden", display:"none"});
+	}
+	
+	var kuAuto = null;
+	
+	function _setAutoExpand(sType){
+		var replyWidthMargin = 44;
+		var emoticonOffset = ( $( 'n2_elPersonaconContainer' ) ) ? 0 : -38 ;
+		var widthOffset;
+		var textareaWidth;
+		if(oAgent.Safari){
+			widthOffset = 155 + emoticonOffset;
+			if($('n2_commentValueWrite') != null){
+				if ( $('n2_commentValueWrite').style.width ) {
+					textareaWidth = $('n2_commentValueWrite').style.width;
+				}
+				else {
+					textareaWidth = ($('n2_nboard').offsetWidth - widthOffset) + 'px';
+				}
+				$('n2_commentValueWrite').style.width = textareaWidth;
+				$('n2_commentValueWrite').rows = 6;
+			}
+			if($('n2_commentValueReply') != null){
+				if ( $('n2_commentValueReply').style.width ) {
+					textareaWidth = $('n2_commentValueReply').style.width;
+				}
+				else {
+					textareaWidth = ($('n2_nboard').offsetWidth - widthOffset - replyWidthMargin) + 'px';
+				}
+				$('n2_commentValueReply').style.width = textareaWidth;
+				$('n2_commentValueReply').rows = 6;
+			}
+		}else{
+			widthOffset = 138 + emoticonOffset;
+			if($('n2_commentValueWrite') != null && $('n2_commentValueWrite').getAttribute('AutoExpand') == "false"){
+				if ( $('n2_commentValueWrite').style.width ) {
+					textareaWidth = $('n2_commentValueWrite').style.width;
+				}
+				else {
+					textareaWidth = ($('n2_elCommentWriteBox').offsetWidth - widthOffset) + 'px';
+				}
+				new Ku.AutoExpand("n2_commentValueWrite", {maxRows : 25, stopAutoExpandAt: 10, width : textareaWidth, gripImg : sImageUrl+'/btn_resize.gif', gripImg_y_spacing : 1, onRowChange : oCommonUI.checkParentIFrame});
+				$('n2_commentValueWrite').AutoExpand = "true";
+			}
+			
+			
+			if($('n2_commentValueReply') != null && $('n2_commentValueReply').getAttribute('AutoExpand') == "false"){
+				if ( $('n2_commentValueReply').style.width ) {
+					textareaWidth = $('n2_commentValueReply').style.width;
+				}
+				else {
+					Element.show('n2_elCommentReplyBox');
+					textareaWidth = ($('n2_elCommentReplyBox').offsetWidth - widthOffset - replyWidthMargin) + 'px';
+				}
+				// modified by blankus 2008-12-19
+				Element.show('n2_elCommentReplyBox');
+				kuAuto = new Ku.AutoExpand("n2_commentValueReply", {maxRows : 25, stopAutoExpandAt: 10, width : textareaWidth, gripImg : sImageUrl+'/btn_resize.gif', gripImg_y_spacing : 1, onRowChange : oCommonUI.checkParentIFrame});
+				$('n2_commentValueReply').AutoExpand = "true";
+				Element.hide('n2_elCommentReplyBox');
+			}
+		}
+	}
+	
+	function submitComment( elForm, maxLength, increaseCount ){
+		if ( oCommonFn.underMaintenance() ) {
+			return false;
+		}
+
+		if ( typeof( maxLength ) != "number" ) {
+			maxLength = 10000;
+		}
+		if ( typeof( increaseCount ) != "boolean" ) {
+			increaseCount = true;
+		}
+
+		var elContent = elForm.commentValue;
+		if ( elForm.defaultMessage.value && ( elForm.defaultMessage.value == elContent.value ) ) {
+			elContent.value = "";
+		}
+		if(!elContent.value || elContent.value.replace(/\s*/,'').length == 0){
+			alert(nboard2._("common.require.comment.description"));
+			elContent.focus();
+			return false;
+		}
+		if ( !checkMaxLength( elContent, maxLength ) ) {
+			return false;
+		}
+
+		if(bAjaxRequesting){
+			alert(nboard2._('common.notcomplete.processing.description'));
+			return false;
+		}
+		
+		// if(!_checkForbiddenWords(elContent.value, aCommentForbiddenWords))
+		// return false;
+		
+		elContent.value = elContent.value.replace(/^\s+/, '').replace(/^\s+$/mg, '\n').replace(/\n\n+/g, '\n\n');
+		var sUrl = sCommentSubmitUrlTemplate.replace('_commentPage_', elForm.commentPage.value); 
+		
+		bAjaxRequesting = true;
+		if(elForm.commentGroupId != null) {
+			if (elForm.commentGroupId.value === "") {
+				PWMFilter.doFilter(2);
+			} else {
+				PWMFilter.doFilter(3);
+			}
+		}
+		bAjaxRequesting = false;
+		if (canSubmit) {
+			bAjaxRequesting = true;
+			new Ajax(sUrl, {
+				method : 'post',
+				params : {
+					'userPersonacon' : elForm.userPersonacon != null ? elForm.userPersonacon.value : '',
+					'commentValue'   : elContent.value,
+					'commentGroupId' : elForm.commentGroupId != null ? elForm.commentGroupId.value : '',
+					'lang' : ( elForm.lang.value ? elForm.lang.value : '' ),
+					'templateObjectId' : elForm.templateObjectId != null ? elForm.templateObjectId.value : ''
+				},
+				onLoad : function(oRequest) {
+					if(_checkAjaxError(oRequest)){
+						if(oRequest.responseText){
+							$("n2_oCommentContainer").innerHTML = oRequest.responseText;
+							_setAutoExpand();
+							elContent.value = "";
+							sSelectedCommentReplyForm = "";
+							if ( increaseCount ) {
+								updateCommentCount(1);
+							}
+							oCommonUI.checkParentIFrame();
+						}
+					}
+					bAjaxRequesting = false;
+				},
+				onError : function() {
+					alert(nboard2._('common.system.error.description'));
+					bAjaxRequesting = false;
+				}
+			});
+		}
+	}
+
+	function updateCommentCount(nIncrement){
+		var count = parseInt($('n2_elCommentCount').innerHTML) + nIncrement;
+		$('n2_elCommentCount').innerHTML = ( count > 0 ) ? count : 0;
+		if($('n2_elCommentCount2')) $('n2_elCommentCount2').innerHTML = ( count > 0 ) ? count : 0;
+	}
+
+	function deleteComment(sCommentID, nCommentPage, decreaseCount){
+		if ( oCommonFn.underMaintenance() ) {
+			return false;
+		}
+
+		if ( typeof( decreaseCount ) == "undefined" ) {
+			decreaseCount = true;
+		}
+		if(sLoginUserID){
+			if(bAjaxRequesting == false){
+				bAjaxRequesting = true;
+				var commentUrl = sCommentDeleteUrlTemplate.replace('_commentId_', sCommentID).replace('_commentPage_', nCommentPage);
+				new Ajax(commentUrl, {
+					onLoad : function(oRequest) {
+						if(_checkAjaxError(oRequest)){
+							if(oRequest.responseText){
+								$("n2_oCommentContainer").innerHTML = oRequest.responseText;
+								if( ( $('n2_elCommentCount') != null ) && decreaseCount ) {
+									updateCommentCount(-1);
+								}
+								_setAutoExpand();
+								oCommonUI.checkParentIFrame();
+							}
+						}
+						bAjaxRequesting = false;
+						
+					},
+					onError : function() {
+						alert(nboard2._('common.system.error.description'));
+						bAjaxRequesting = false;
+					}
+				});
+			}else{
+				alert(nboard2._('common.notcomplete.processing.description'));
+				return false;
+			}
+		}else{
+			_gotoPermissionError("login");
+		}
+	}
+
+	function checkHtmlMode(){
+			if($("n2_tool_bg").parentNode.style.display != 'none' && $('n2_elHtmlMode').checked){
+				return true;
+			}else{
+				return false;
+			}
+	}
+	
+	function _checkForbiddenWords(sContent, aForbiddenWordsList){
+		if(aForbiddenWordsList.length == 0) return true;
+		
+		var sForbiddenWords = aForbiddenWordsList.join(':::');
+		sForbiddenWords = sForbiddenWords.replace(/([\(\)\[\]\+\-\|\*\?\.\\])/g,'\\'+'$1').replace(/:::/g, '|');
+		aTmpList = sContent.replace(/(<[^>]+>|\s)*/gi,'').match(new RegExp('('+sForbiddenWords+').*?', 'gi'));
+		var aCheckedList = [];
+		if(aTmpList) for(var i=0; i<aTmpList.length; i++) if(!aCheckedList.has(aTmpList[i])) aCheckedList.push(aTmpList[i]);
+		if(aCheckedList.length){
+			alert(nboard2._('common.check.forbiddenword.description', {1: aCheckedList.join(', ')}));
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	function resizeImage(oTarget, nMaxWidth, nMaxHeight){
+		var nRatioBase, nRatioWidth, nRatioHeight, nResizeWidth, nResizeHeight;
+
+		if(oTarget.width > nMaxWidth || oTarget.height > nMaxHeight){
+			nRatioWidth  = nMaxWidth / oTarget.width;
+			nRatioHeight = nMaxHeight / oTarget.height;
+
+			if(nRatioWidth > nRatioHeight) nRatioBase = nRatioHeight;
+			else nRatioBase = nRatioWidth;
+
+			nResizeWidth  = oTarget.width * nRatioBase;
+			nResizeHeight = oTarget.height * nRatioBase;
+		}else{
+			nResizeWidth  = oTarget.width;
+			nResizeHeight = oTarget.height;
+		}
+		oTarget.width = parseInt(nResizeWidth);
+		oTarget.height = parseInt(nResizeHeight);
+		return {'nWidth':parseInt(nResizeWidth), 'nHeight':parseInt(nResizeHeight)};
+	}
+	
+	function _resizeAttachedImage(bLink){
+		var nMaxWidth = $('n2_elTitleContainer').offsetWidth;
+		
+		var aImageList = $('n2_content').getElementsByTagName('IMG');
+		for(var i=0; i<aImageList.length; i++){
+			if(aImageList[i].getAttribute('nhn_extra_image') != 'true'){
+				resizeImage(aImageList[i], nMaxWidth)
+				if(bLink){
+					if (sEnableImagePopup) {
+						try{ aImageList[i].style.cursor = 'pointer';} catch(e){ aImageList[i].style.cursor = 'hand'; }
+						aImageList[i].onclick = function(){
+							window.open(sImagePopupUrl + (sImagePopupUrl.indexOf('?') >= 0 ? '&' : '?') + 'sImageURL=' + encodeURIComponent(this.src), 'wndPreviewImage', 'top='+(window.screen.availHeight/2 - 90)+', left='+(window.screen.availWidth/2 - 130)+', width=260, height=180');
+						}
+					} 
+				}
+				if(aImageList[i].offsetWidth == nMaxWidth) aImageList[i].style.display = "block";
+			}
+		}
+	}
+	
+	function _addCategoryOption(oTarget, sValue, sText){
+		if(oTarget && sText && sValue){
+			var oOption = new Option();
+			oOption.value = sValue;
+			oOption.innerHTML = sText;
+			oOption.text = sText;
+			oTarget.appendChild(oOption);
+		}
+	}
+
+	function _removeCategoryOption(oTarget){
+		if(typeof(oTarget) == "object"){
+			nLimit = oTarget.options.length - 1;
+			for(var i=nLimit; i>=0; i--){
+				if(oTarget.options[i].value != 'none') oTarget.removeChild(oTarget.options[i]);
+			}
+		}
+	}
+
+	function changeCategory(nStep, sCategoryID){
+		var oTarget;
+		switch(nStep){
+		case 0:
+			oTarget = $("n2_category1");
+			if($("n2_category1") != null) _removeCategoryOption($("n2_category1"));
+			if($("n2_category2") != null) _removeCategoryOption($("n2_category2"));
+			break;
+		case 1:
+			oTarget = $("n2_category2");
+			if($("n2_category2") != null) _removeCategoryOption($("n2_category2"));
+			break;
+		}
+		
+		if(sCategoryID){
+			if($("n2_category"+(nStep + 1)) != null){
+				if(typeof(aCategoryList[sCategoryID]) != "undefined"){
+					for(var i=0; i<aCategoryList[sCategoryID].length; i++){
+						_addCategoryOption(oTarget, aCategoryList[sCategoryID][i].id, aCategoryList[sCategoryID][i].name);
+					}
+				}
+			}
+		}
+		
+		if(nStep == 0 && oCategory1 != null){
+			$("n2_category1").value = "none";
+			oCategory1.touch();
+		}
+		if((nStep == 0 || nStep == 1) && oCategory2 != null){
+			$("n2_category2").value = "none";
+			oCategory2.touch();
+		}
+	}
+
+	function checkMaxLength(oTarget, nMaxLength){
+		var sValue = oTarget.value;
+		var nLength = sValue.length;
+		
+		if(nLength > nMaxLength){
+			alert(nboard2._('common.check.maxlength.description', {1: nMaxLength}));
+			sValue = sValue.replace(/\r\n$/,"");
+			oTarget.value = sValue.substr(0, nMaxLength);
+			oTarget.focus();
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+		
+	function _getLoginCallbackUrl() {
+		if(sLoginCallbackType == 'parameter') {
+			return sWrapperLoginCallbackUrl + encodeURIComponent(document.location.href);
+		} else if(sLoginCallbackType == 'permalink') {
+			return sPermalink;
+		} else {
+			return document.location.href;
+		}
+	}	
+
+	function popupLogin(callback, wndName) {
+		if ( !bPopLoginSupport ) {
+			gotoLoginPage( callback );
+			return;
+		}
+
+		if(!callback) {
+			callback = _getLoginCallbackUrl();
+		}
+		var url = sLoginPopupUrlTemplate.replace("_successCallback_", encodeURIComponent(sLoginPopupCallbackUrl + (sLoginPopupCallbackUrl.indexOf('?') == -1 ? "?" : "&") + 'callback=' + encodeURIComponent(callback)));
+		if(!wndName) {
+			wndName = 'wndLoginWindow';
+		}
+		window.open(url, wndName, 'width=410, height=280, scrollbars=0, status=0, resizable=0, toolbar=0, titlebar=0, location=0');
+	}
+	
+
+	function gotoLoginPage(callback, back) {
+		if(confirm(nboard2._('common.confirm.login.description'))) {
+			if(!callback) {
+				callback = _getLoginCallbackUrl();
+			}
+			var url = sLoginPageUrlTemplate.replace("_successCallback_", encodeURIComponent(callback));
+			window.top.location = url;
+		} else if(back) {
+			history.back();
+		}
+	}
+
+	function gotoRealNamePage(url, back) {
+		if(confirm(nboard2._('common.confirm.authuser.description'))) {
+			if(url == null) url = window.top.location;
+			window.top.location = "https://nid.naver.com/cert.nhn?todo=cert_start&rurl=" + encodeURIComponent(url);
+		} else if(back) {
+			history.back();
+		}
+	}
+
+	function _gotoPermissionError(sType, sParam){
+		switch(sType){
+			case "login": gotoLoginPage();break;
+			case "adult": alert(nboard2._('common.check.adult.description')); break; 
+			case "special": alert(nboard2._('common.check.special.description')); break; 
+			case "own": alert(nboard2._('common.check.own.description', {1: sParam})); break; 
+			case "restrictedId" : alert(nboard2._('common.check.restrictedid.description')); break; 
+			case "restrictedIp" : alert(nboard2._('common.check.restrictedip.description')); break; 
+		}
+	}
+	
+	function _checkAjaxError(oRequest){
+		if(oRequest.status != 200) {
+			alert(nboard2._('common.system.error.description'));
+			return false;
+		}
+
+		var sResult = oRequest.getResponseHeader('NBoardResult');
+		if(sResult) {
+			if(sResult == '599'){
+				alert(oRequest.responseText.replace(/\r\n/g,''));
+				return false;
+			}
+		}
+				
+		return true;
+	}
+	
+	function setWindowSize(nWidth, nHeight, bMoveCenter){
+		var oDocument = document.getElementsByTagName('HTML')[0];
+ 		var nTargetWidth = nWidth || oDocument.scrollWidth;
+ 		var nTargetHeight = nHeight || oDocument.scrollHeight;
+
+ 		var oRuler = document.body.appendChild(document.createElement('DIV'));
+ 		with(oRuler.style) {
+ 			position = 'absolute'; left = top = 0; width = height = '100%';
+		}
+
+		var nDifferentWidth = nTargetWidth - oDocument.offsetWidth;
+		var nDifferentHeight = oAgent.IE ? nTargetHeight - Math.max(oDocument.offsetHeight, oRuler.offsetHeight) : nTargetHeight - oRuler.offsetHeight;
+		if(nDifferentWidth || nDifferentHeight){
+			resizeWindow(nTargetWidth, nTargetHeight, nDifferentWidth, nDifferentHeight, bMoveCenter);
+		}
+ 		document.body.removeChild(oRuler);
+	}
+
+	var oResizingTimer;
+	function resizeWindow(nWidth, nHeight, nDifferentWidth, nDifferentHeight, bMoveCenter){
+		try{
+			if(oAgent.IE){
+				var nScreenTop = top.window.screenTop;
+				var nScreenLeft = top.window.screenLeft;
+				var nAvailableWidth = top.window.screen.availWidth;
+				var nAvailableHeight = top.window.screen.availHeight;
+				var nTitleBarHeight = oAgent.IE7 ? 28 : 0;
+				var nAddressBarHeight = oAgent.IE7 ? 24 : 0;
+				var nStatusBarHeight = oAgent.IE7 ? 24 : 0;
+				var nBorder = 6;
+				
+				if(nWidth >= nAvailableWidth || (nHeight + nTitleBarHeight + nAddressBarHeight) >= nAvailableHeight){
+					top.window.moveTo(nScreenLeft - 3, 0)
+				}else{
+					var nMovePositionX = ((nScreenLeft + nWidth + nBorder) > nAvailableWidth && nScreenLeft < nAvailableWidth) ? (nScreenLeft + nWidth) - nAvailableWidth : 0; 
+					var nMovePositionY = ((nScreenTop + nHeight + nStatusBarHeight) > nAvailableHeight) ? (nScreenTop + nHeight + nStatusBarHeight) - nAvailableHeight : 0; 
+					if(nMovePositionX != 0 || nMovePositionY != 0 || nScreenLeft > nAvailableWidth) top.window.moveBy(-nMovePositionX, -nMovePositionY);
+				}
+				
+				if(nAvailableHeight < nHeight || nAvailableWidth < nWidth){
+					top.window.moveTo(0, 0);
+				}else{
+					if(bMoveCenter){
+						top.window.moveTo(nAvailableWidth/2 - nWidth/2, nAvailableHeight /2 - nHeight/2 - 40);
+					}
+				}
+			}
+			
+			if(top.window.outerHeight) {
+				if(top.window.outerHeight+nDifferentHeight > top.window.screen.availHeight) {
+					nDifferentHeight = top.window.screen.availHeight - top.window.outerHeight;
+				}
+			} else {
+				if(document.documentElement.offsetHeight + nDifferentHeight + 40 + ($Agent().IE7 ? 24 : 0) > top.window.screen.availHeight) {
+					nDifferentHeight = top.window.screen.availHeight - document.documentElement.offsetHeight - 40 - ($Agent().IE7 ? 24 : 0);
+					top.window.document.body.scroll = "auto";
+				}
+			}
+			
+			top.window.resizeBy(nDifferentWidth, nDifferentHeight);
+		}catch(e){
+			if(oResizingTimer == null){
+				oResizingTimer = setTimeout('resizeWindow('+nWidth+', '+nHeight+', '+nDifferentWidth+', '+nDifferentHeight+', '+bMoveCenter+')', 100);
+				oResizingTimer = null;
+			}
+		}
+	}
+
+	function documentwrite(src){
+		document.write(src);
+	}
+
+	function popupReport( targetType, targetId, writerId, targetLang ) {
+		if ( oCommonFn.underMaintenance() ) {
+			return;
+		}
+
+		if ( typeof( targetLang ) != "string" ) {
+			targetLang = "ko";
+		}
+
+		if ( sLoginUserID ) {
+			window.open( '', 'wndReportWindow', 'width=500, height=465, scrollbars=0, status=0, resizable=0, toolbar=0, titlebar=0, location=0' );
+			var oForm = $( "n2_reportPopupForm" );
+			oForm.targetType.value = targetType;
+			oForm.targetId.value = targetId;
+			oForm.writerId.value = writerId;
+			oForm.targetLang.value = targetLang;
+			oForm.target = 'wndReportWindow';
+			oForm.submit();
+		}
+		else{
+			popupLogin();
+		}
+	}
+	
+	function popupSrpReport( targetType, targetId, writerId,title,regdate ) {
+		if ( oCommonFn.underMaintenance() ) {
+			return;
+		}
+		if ( sLoginUserID ) {
+			var oForm = $( "n2_sreportPopupForm" );
+			if (targetType == 'document') {
+				window.open( '', 'wndReportWindow', 'width=530, height=600, scrollbars=0, status=0, resizable=0, toolbar=0, titlebar=0, location=0' );
+				oForm.itemType.value = "CONT";
+			} else if (targetType == 'comment'){
+				window.open( '', 'wndReportWindow', 'width=530, height=550, scrollbars=0, status=0, resizable=0, toolbar=0, titlebar=0, location=0' );
+				oForm.itemType.value = "CMNT";
+			}
+			oForm.target = 'wndReportWindow';
+			
+			oForm.itemId.value = targetId;
+			oForm.itemWriterId.value = writerId;
+			oForm.itemTitle.value = title;
+			oForm.itemDt.value = regdate;
+			oForm.submit();
+		}
+		else{
+			popupLogin();
+		}
+	}
+	
+
+	function popupHelp(sUrl) {
+		window.open(sUrl, null, 'width=540, height=400');
+	}	
+	
+	function initializeReportScript(){
+		var height;
+		if(sTargetType == "comment"){
+			height = oAgent.IE ? 420 : 440;
+		}else{
+			height = oAgent.IE ? 440 : 460;
+		}
+		if(!sUseReporterEmail) {
+			height -= 25;
+		}
+		setWindowSize(560, height);
+	}
+	
+	function showUserLayer(sUserID, oBaseElement){
+		if($('n2_elUserLayer').style.display == "none"){
+			if(bAjaxRequesting == false){
+				bAjaxRequesting = true;
+				new Ajax(sUserLayerUrlTemplate.replace("_writerId_", sUserID), {
+					onLoad : function(oResponse) {
+						if(_checkAjaxError(oResponse)){
+							if(oResponse.responseText.match(/\S/) != null) {
+								$('n2_elUserLayer').innerHTML = oResponse.responseText;
+								oControlLayer.show('n2_elUserLayer', oBaseElement, null, null, 7);
+							}
+						}
+						bAjaxRequesting = false;
+					},
+					onError : function() {
+						alert(nboard2._('common.system.error.description'));
+						bAjaxRequesting = false;
+						oControlLayer.hide();
+					}
+				});
+			}
+		}else{
+			oControlLayer.hide();
+		}
+	}
+	
+
+    var oCasterMenu;
+
+	var oPrevTarget;
+
+	var sCurrentUserid;	
+
+	var oOperatingCastItem;
+
+	function showCasterLayer(event, sUserID, casterId,isCaster,isAdmin) {
+		var oEvent = jindo.$Event(event);
+		var oTarget = oEvent.element;
+		if(oPrevTarget && oCasterMenu)
+		{
+			if(oPrevTarget == oTarget)
+			{
+				oCasterMenu.toggle(event,"B");
+				return;	
+			}
+			// oCasterMenu.hide();
+		}
+		oPrevTarget = oTarget;
+		var oAjax = new jindo.$Ajax(opencastdomain+"/ajaxGetOperatingCastList.nhn?casterId="+sUserID+"&", {
+			type :"flash",
+			method:"get",
+			timeout : 3, 
+			ontimeout : function(resp) {alert("죄송합니다. 일시적인 시스템 장애가 발생했습니다.");},
+			onload : function(resp) {
+					var operatingCastList=[];
+					if (!resp || resp.text()=="") {
+						alert("showCasterInfoLayer(): INVALID RESPONSE");
+					} else {
+						var result = resp.json();				
+						if(result.isSuccess) {		
+							if (result.totalCount > 0) {
+								jindo.$A(result.result).forEach(function(v){		
+									operatingCastList[operatingCastList.length] = {text:v.title, castid:v.castId};
+								});
+							}
+							initCasterMenu(sUserID, operatingCastList,casterId,isCaster,isAdmin);
+							oCasterMenu.show(oEvent,"B");
+						}
+						else {
+							alert("죄송합니다. 일시적인 시스템 장애가 발생했습니다.");
+						}
+					}
+					return false;
+			}
+		});
+		oAjax.header("If-Modified-Since","0");
+		oAjax.request(null);
+	
+		return false;
+	}
+	
+	function initCasterMenu(sUserID, aOperatingCastList,casterId,isCaster,isAdmin){
+		if (!oCasterMenu) {
+			var itemData = [
+				{ text : '블로그 보기', type:'blog'},			
+				{ text : '글쓰기차단하기', type:'cut'}
+			];
+			oCasterMenu =new nhn.ContextMenu("opencast_layer",{"classPrefix":"opencast","useItemData":true,"itemData":itemData,"position":"RT"}).attach({
+					click: function(e){
+						if((type = oCasterMenu.getItemData(e.element).type))
+						{
+							if(type=="blog") { 
+								window.open("http://blog.naver.com/"+sCurrentUserid);
+							}
+							if(type=="cut") {
+								if (confirm("글쓰기 차단 목록에 등록하시겠습니까?\n글쓰기 차단 목록 확인 및 차단해제는 [캐스트관리 > 프라이버시 설정]에서 하실 수 있습니다.")){
+									intercept(casterId, sCurrentUserid);
+								}
+							}
+							return;
+						}
+						if ((castid = oCasterMenu.getItemData(e.element).castid)) {
+							top.document.location.href = opencastdomain+"/"+castid;
+							return;
+						}
+					}
+			});	
+		}
+		
+		sCurrentUserid = sUserID;
+		var items = oCasterMenu.getChildItems(null);
+		
+        if (aOperatingCastList.length == 0) {        	
+			if (items.length > 3) {				
+				oCasterMenu.removeItem(oOperatingCastItem[0]);				
+			}
+			for (var i = 0 ; i < items.length ; i++) {
+    			if(jindo.$Element(items[i]).text()  == '글쓰기차단하기') {
+    				if ((!isCaster && isAdmin)) {
+    					jindo.$Element(items[i]).show();
+    		        } else {
+    		        	jindo.$Element(items[i]).hide();
+    		        }
+    			}
+    		}
+		} else {
+			if (items.length == 3) {  // 운영중 캐스트가 있음에도 불구하고 아이템이 2개인 경우.
+				var castItem = [{ text : '운영캐스트보기' }];
+				oOperatingCastItem = oCasterMenu.createItem(castItem);
+				oCasterMenu.insertItemBefore(items[0], oOperatingCastItem);
+			}
+			items = oCasterMenu.getChildItems(null);
+			var castListItems = oCasterMenu.createItem(aOperatingCastList);
+			oCasterMenu.clearItem(oOperatingCastItem[0]);
+			oCasterMenu.appendItem(oOperatingCastItem[0], castListItems);			
+			jindo.$Element(oOperatingCastItem[0].childNodes[1]).addClass("castlist");
+			for (var i = 0 ; i < items.length ; i++) {
+    			if(jindo.$Element(items[i]).text()  == '글쓰기차단하기') {
+    				if ((!isCaster && isAdmin)) { // 관리자 이면.
+    					jindo.$Element(items[i]).show();
+    		        } else {
+    		        	jindo.$Element(items[i]).hide();
+    		        }
+    			}
+    		}
+		}
+	}
+	
+	function showBaseballLayer(event, sUserID) {
+		var oEvent = jindo.$Event(event);
+		var itemData = [
+			{ text : '클럽하우스 방문', type:'club'},
+			{ text : '구단기록 비교', type:'team'},
+			{ text : '쪽지보내기', type:'note'}
+		];
+		if(oCasterMenu) {
+			oCasterMenu.hide();
+		}
+		oCasterMenu =new nhn.ContextMenu("opencast_layer",{"classPrefix":"ly_","useItemData":true,"itemData":itemData,"position":"RT"}).attach({
+			click: function(e){
+				if((type = oCasterMenu.getItemData(e.element).type))
+				{
+					if(type=="club") {
+						var club = window.open('http://ya9.naver.com/club/teaminfo.nhn?mid=' + sUserID, '_club', 'width=769,height=680,status=no,left=0,top=0');
+						
+						if((/Chrome/.test(navigator.userAgent)) || (/Firefox/.test(navigator.userAgent))){
+							club = jindo.$Window(club);
+							club.resizeTo(769, 680);	
+						}					
+					}
+					
+					if(type=="team") {
+						var team = window.open('http://ya9.naver.com/friendstat.nhn?frndId=' + sUserID, '_team', 'width=560,height=292,status=no,left=0,top=0');
+						
+						if((/Chrome/.test(navigator.userAgent)) || (/Firefox/.test(navigator.userAgent))){
+							team = jindo.$Window(team);
+							team.resizeTo(570, 370);	
+						}
+					}
+					
+					if(type=="note") {
+						window.open('http://note.naver.com/note/sendForm.nhn?targetUserId='+ sUserID +'&popup=1&svcType=21', '_note', 'status=no,left=0,top=0');
+					}
+
+					return;
+				}
+			}
+			});
+		
+		oCasterMenu.show(oEvent,"RT");
+	}
+	
+	function showFootballLayer(event, sUserID) {
+		var oEvent = jindo.$Event(event);
+		var itemData = [
+			{ text : '클럽하우스 방문', type:'club'},
+			{ text : '클럽 기록 비교', type:'team'}
+		];
+		if(oCasterMenu) {
+			oCasterMenu.hide();
+		}
+		oCasterMenu =new nhn.ContextMenu("opencast_layer",{"classPrefix":"ly_","useItemData":true,"itemData":itemData,"position":"RT"}).attach({
+			click: function(e){
+				if((type = oCasterMenu.getItemData(e.element).type))
+				{
+					if(type=="club") {
+						var club = window.open('http://fd.naver.com/club?mid=' + sUserID, '_club', 'width=940,height=618,status=no,left=0,top=0');
+						
+						if((/Chrome/.test(navigator.userAgent)) || (/Firefox/.test(navigator.userAgent))){
+							club = jindo.$Window(club);
+							club.resizeTo(958, 682);	
+						}					
+					}
+					
+					if(type=="team") {
+						var team = window.open('http://fd.naver.com/club/compareClub?mid=' + sUserID, '_team', 'width=420,height=430,status=no,left=0,top=0');
+						
+						if((/Chrome/.test(navigator.userAgent)) || (/Firefox/.test(navigator.userAgent))){
+							team = jindo.$Window(team);
+							team.resizeTo(435, 494);	
+						}
+					}
+					return;
+				}
+			}
+		});
+		
+		oCasterMenu.show(oEvent,"RT");
+	}	
+	
+	function intercept(casterId, writerId) {
+		var params;
+		params = {
+				"n2_ocCasterId" : casterId,
+				"n2_ocWriterId" : writerId,
+				"n2_boardId" : 1000003444
+		}
+		new Ajax("/nboard2/opencastInterception.nhn", {
+			method : 'POST',
+			async : false,
+			params : params,
+			charset :'utf-8',
+			onLoad : function(oRequest) {
+				var resultObj = eval('('+oRequest.responseText + ')');
+				alert(resultObj.returnMessage);
+			},
+			onError : function() {
+				alert(nboard2._('common.system.error.description'));
+			}
+		}
+		)
+	}
+		
+	function open_window(url, name, width, height, feature) {
+        oWnd = window.open(url, name, feature+",width=" + width +",height=" + height);
+	    return oWnd;
+	}
+	 
+	function open_modeless_window(url, name, width, height, feature) {
+	     oWnd = window.showModelessDialog(url, name, feature+";dialogWidth=" + width+"px"+";dialogHeight=" + height+"px");
+		 return oWnd;
+	}
+	
+	function open_wnd(url, name, width, height) {
+	    var oWnd = open_window(url, name, width, height, "toolbar=0,menubar=0,resizable=yes,scrollbars=no");
+	    return oWnd;
+	}
+	
+	function notePopup(userId) {
+		open_window("http://note.naver.com/note/sendForm.nhn?targetUserId="+userId+"&svcType=16&popup=1");
+	}
+
+	
+	function _goTemplateObjectList(resultSet){
+		var svcName = resultSet['service'];
+		var classId		= "";
+		var genreId		= 1;
+		var objectId	= "";
+		var objectName	= "";
+
+		switch (svcName) {
+			case 'movie':
+				classId = 1;
+				objectId = resultSet['code'];
+				objectName = resultSet['kname']; 
+				break;
+			case 'drama':
+				classId = 2;
+				objectId = resultSet['code'];
+				objectName = resultSet['kname']; 
+				break;
+			case 'music':
+				classId = 3;
+				objectId = resultSet['tubeid'];
+				objectName = resultSet['title']; 
+				break;
+			case 'shopping' : 
+				classId = 4;
+				objectId = resultSet['pid'];
+				objectName = resultSet['model']; 
+				break;
+			case 'book':
+				classId = 5;
+				objectId = resultSet['bid'];
+				objectName = resultSet['filtertitle']; 
+				break;
+			case 'game':
+				classId = 8;
+				objectId = resultSet['gameId'];
+				objectName = resultSet['kname']; 
+				break;
+		}
+		
+		var url = sTemplateObjectListUrlTemplate.replace('_objectId_', objectId).replace('_objectName_', encodeURIComponent(objectName)); 
+		document.location.href = url;
+	}
+
+	var nClassIdDef = {
+	'movie' : 1,
+	'drama' : 2,
+	'music' : 3,
+	'shop'  : 4,
+	'book'  : 5,
+	// 'travel': 6,
+	// 'recipe': 7,
+	'game'  : 8
+	};
+
+	// infopopup call
+	function openSearchPop (){
+
+		for(var x in nClassIdDef){
+			if(nClassIdDef[x] == nTemplateClassId){
+				var nThisSvcName = x;	
+			}
+		}
+		// url definition
+		if(nThisSvcName != undefined && nThisSvcName != null){
+			var infoPopupBaseURI = sStaticUrl + '/html/attach_information/';
+			var serviceName4List = 'ex'+nThisSvcName+'.html';
+			var callbackName	 = '_goTemplateObjectList';			//callback function Name
+			
+			window.open(infoPopupBaseURI + serviceName4List + '?part=search&serviceName='+nThisSvcName+'&keyword=&callbackName='+callbackName ,'infopopup','width=425,height=220');
+		}
+	}
+	
+	function deleteTrackback(sTrackbackId) {
+		if(sLoginUserID){
+			if(bAjaxRequesting == false){
+				bAjaxRequesting = true;
+				var url = sTrackbackDeleteUrlTemplate.replace('_trackbackId_', sTrackbackId);
+				
+				new Ajax(url, {
+					onLoad : function(oRequest) {
+						if(_checkAjaxError(oRequest)){
+							if(oRequest.responseText){
+								$("n2_oTrackbackContainer").innerHTML = oRequest.responseText;
+								if($('n2_elTrackbackCount') != null) {
+									$('n2_elTrackbackCount').innerHTML = parseInt($('n2_elTrackbackCount').innerHTML) - 1; 
+								}	
+								oCommonUI.checkParentIFrame();
+							}
+						}
+						bAjaxRequesting = false;
+					},
+					onError : function() {
+						alert(nboard2._('common.system.error.description'));
+						bAjaxRequesting = false;
+					}
+				});
+			}else{
+				alert(nboard2._('common.notcomplete.processing.description'));
+				return false;
+			}
+		}else{
+			_gotoPermissionError("login");
+		}
+	}
+
+var CountTextArea = Class({
+	__init : function(op){
+		this.op = op;
+		this.textArea = $(op.textAreaId);
+		this.defaultTxt = this.textArea.value;
+
+		Event.register(this.textArea, "focus", this.focus.bindForEvent(this));
+		Event.register(this.textArea, "blur", this.blur.bind(this));
+	},
+	focus : function(evnt){
+		var target = evnt.element;
+		if (this.defaultTxt == target.value) {
+		target.innerHTML = "";
+		}
+		this.timerReturn = setInterval(this.interval.bind(this), 5000);
+	},
+	blur : function(){
+		clearInterval(this.timerReturn);
+		this.timerReturn = '';
+	},
+	interval: function(){
+		var newValue = this.textArea.value;
+
+		if (newValue != this.oldValue) {
+			var ar = this.cutLen(newValue);
+
+			if (ar.len > this.op.maxLen) {
+				this.textArea.blur();
+				alert(nboard2._('common.check.maxlength.description', {1: this.op.maxLen}));
+				this.textArea.value = ar.msg;
+				this.textArea.focus();
+			} else {
+			//	this.showLen.innerHTML = ar.len;
+			}
+			this.oldValue = newValue;
+		}
+	},
+	cutLen: function(txt){
+		var reArray = { len : 0, msg : "" };
+		var curSize = 0;
+		var ch;
+
+		for (i = 0; i < txt.length; i++) {
+			ch = txt.charAt(i)
+			if (escape(ch).length > 4) {
+				curSize = 1;
+			} else if(escape(ch) == "%0D" ){
+				curSize =0;
+			} else {
+				curSize = 1;
+			}
+			if (( reArray.len + curSize) <= this.op.maxLen) {
+				reArray.msg += unescape(ch);
+			}
+				reArray.len += curSize;
+		}
+		return reArray;
+	}
+});
+
+
+var oCommonUI = {
+	checkParentIFrame: function (){		
+		if(sParentFrame) oCommonUI._resizeParentIFrame(eval(sParentFrame));
+	},
+	_resizeParentIFrame: function (oTarget, nMinimunHeight) {
+		if(!oTarget) return;
+		nMinimunHeight = nMinimunHeight || 500;
+		var nHeight = (/MSIE/.test(navigator.userAgent) ?  document.body.scrollHeight + (document.body.offsetHeight - document.body.clientHeight) : Math.max(document.body.scrollHeight, document.body.clientHeight));
+		
+		//if((/Chrome/.test(navigator.userAgent)) || (/Firefox/.test(navigator.userAgent)) )){
+		// unified resizing logic 
+		var dummy = document.createElement("DIV");
+		document.body.appendChild(dummy);
+		nHeight = dummy.offsetTop;
+		document.body.removeChild(dummy);
+		//}
+		
+		oTarget.style.height = (nHeight < nMinimunHeight) ? nMinimunHeight+'px' : nHeight+'px';
+
+		if (typeof this._resizeParentIFrame.check == 'undefined') this._resizeParentIFrame.check = 0;
+		if (typeof oTarget._check == 'undefined') oTarget._check = 0;
+		
+		if (oTarget._check < 5) {
+			oTarget._check++;
+			setTimeout(this._resizeParentIFrame.bind(this, oTarget, nMinimunHeight), 100); // check 5 times for IE bug
+		} else {
+			oTarget._check = 0;
+		}
+	},
+
+	adjustTitleWidth :function (sListType, nDocNum, nTopDocNum, aTitle, aTemplateObjectName) {
+		this._adjustNormalTitleWidth(0, nTopDocNum, aTitle, aTemplateObjectName);
+		if(sListType == 'album') {
+		} else if(sListType == 'webzine') {
+			this._adjustWebzineTitleWidth(nTopDocNum, nDocNum, aTitle, aTemplateObjectName);
+		} else {
+			this._adjustNormalTitleWidth(nTopDocNum, nDocNum, aTitle, aTemplateObjectName);
+		}
+	},
+	_adjustNormalTitleWidth : function (nBegin, nEnd, aTitle, aTemplateObjectName) {
+		for(var i = nBegin; i < nEnd; i++){
+			if($('n2_elTemplateObjectName_' + i)) {
+				var nMaxHeight = $('n2_elTemplateInfoArea_' + i).offsetHeight * 1.2;
+				var nMaxWidth = $('n2_elTemplateInfoArea_' + i).offsetWidth;
+				this._adjustWidth($('n2_elTemplateObjectName_' + i), aTemplateObjectName[i], $('n2_elTemplateInfoArea_' + i), nMaxWidth, nMaxHeight, true);
+				$('n2_elTemplateObjectName_' + i).style.width = ($('n2_elTemplateObjectName_' + i).offsetWidth + 1) + 'px'; 
+			}
+		
+			if($('n2_elDocTitle_' + i)) {
+				var nMaxHeight = $('n2_elDocTitleArea_' + i).offsetHeight * 1.2;
+				var nMaxWidth = 0;
+				if($('n2_elDocTitleParent_' + i)) nMaxWidth = $('n2_elDocTitleParent_' + i).offsetWidth;
+				this._adjustWidth($('n2_elDocTitle_' + i), aTitle[i], $('n2_elDocTitleArea_' + i), nMaxWidth, nMaxHeight, false);
+				$('n2_elDocTitle_' + i).style.width = ($('n2_elDocTitle_' + i).offsetWidth + 1) + 'px';
+			}
+		}
+	},
+	_adjustWebzineTitleWidth : function (nBegin, nEnd, aTitle, aTemplateObjectName) {
+		for(var i = nBegin; i < nEnd; i++){
+			if($('n2_elTemplateObjectName_' + i)) {
+				var nMaxHeight = $('n2_elTemplateInfoArea_' + i).offsetHeight * 1.2;
+				var nMaxWidth = Element.realPos($('n2_elWebzineList')).right - (Element.realPos($('n2_elRightOfTitle_' + i)).left) - 20;
+				this._adjustWidth($('n2_elTemplateObjectName_' + i), aTemplateObjectName[i], $('n2_elTemplateInfoArea_' + i), nMaxWidth, nMaxHeight, true);
+			}
+
+			if($('n2_elDocTitle_' + i)) {
+				var nMaxHeight = $('n2_elDocTitleArea_' + i).offsetHeight * 1.2;
+				var nMaxWidth = this._maxWidthOfWebzineList(i, 'n2_elDocTitleArea_');
+				this._adjustWidth($('n2_elDocTitle_' + i), aTitle[i], $('n2_elDocTitleArea_' + i), nMaxWidth, nMaxHeight, false);
+			}
+		}
+	},
+	_maxWidthOfWebzineList : function (nIndex, sIdPrefix) {
+		if($('n2_elRightOfTitle_' + nIndex)) {
+			return Element.realPos($('n2_elRightOfTitle_' + nIndex)).left - Element.realPos($(sIdPrefix + nIndex)).left - 10;
+		} else {
+			return 0;
+		}
+	},
+	_adjustWidth : function (oVariableArea, sOriginalText, oLimitedArea, nMaxWidth, nMaxHeight, bEscapeHtml) {
+		if ( sOriginalText == "" ) {
+			oVariableArea.innerHTML = "&nbsp;";
+			return;
+		}
+		var nLength = 2;
+		while(true) {
+			nLength += 2;
+			var bFullLength = false;
+			
+			if(nLength >= sOriginalText.length) {
+				nLength = sOriginalText.length;
+				bFullLength = true;
+			}
+			
+			if(bFullLength) {
+				oVariableArea.innerHTML = bEscapeHtml ? this._escapeHtml(sOriginalText) : sOriginalText;
+			} else {
+				oVariableArea.innerHTML = (bEscapeHtml ? this._escapeHtml(sOriginalText.substr(0, nLength)) : sOriginalText.substr(0, nLength)) + " ..";
+			}
+	
+			if(oLimitedArea.offsetHeight > nMaxHeight || (nMaxWidth > 0 && oLimitedArea.offsetWidth >= nMaxWidth)) {
+				oVariableArea.innerHTML = (bEscapeHtml ? this._escapeHtml(sOriginalText.substr(0, nLength - 3)) : sOriginalText.substr(0, nLength - 3)) + " ..";
+				break;
+			}
+			if(bFullLength) break;
+		}
+
+	},
+	_escapeHtml :function (str) {
+	   	return str.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;");
+	}
+}
+
+
+
+var oPageMove = {
+	list : function( listCate0, listCate1, listCate2, listTObj, pageUrl ) {
+		if ( oServiceCallBack.toListPage( listCate0, listCate1, listCate2, listTObj, pageUrl ) ) {
+			location.href = pageUrl;
+		}
+	},
+
+	read : function( docId, docCate0, docCate1, docCate2, docTObj, pageUrl ) {
+		if ( oServiceCallBack.toReadPage( docId, docCate0, docCate1, docCate2, docTObj, pageUrl ) ) {
+			location.href = pageUrl;
+		}
+	},
+	write : function( pageUrl ) {
+		if ( oCommonFn.underMaintenance() ) {
+			return false;
+		}
+		else {
+			location.href = pageUrl;
+			return true;
+		}
+	}
+}
+
+
+
+var oServiceCallBack = {
+	CONST : {
+		BOARD_ID : "boardId",
+		DOC_ID : "docId",
+		PAGE_URL : "pageUrl",
+		LIST_CATEGORY_0 : "listCategory0",
+		LIST_CATEGORY_1 : "listCategory1",
+		LIST_CATEGORY_2 : "listCategory2",
+		LIST_TEMPLATE_OBJECT_ID : "listTemplateObjectId",
+		DOC_CATEGORY_0 : "docCategory0",
+		DOC_CATEGORY_1 : "docCategory1",
+		DOC_CATEGORY_2 : "docCategory2",
+		DOC_TEMPLATE_OBJECT_ID : "docTemplateObjectId"
+	},
+
+	initServiceCallback : function() {
+		serviceCallback = function( type, arg ) {
+			return true;
+		};
+
+		if ( ( typeof( parent ) == "object" ) && ( parent != null ) ) {
+			var iframe = parent.document.getElementById( "NAVER_COMMON_BOARD_IFRAME" );
+			if ( iframe ) {
+		 		if ( typeof( parent.onNBoardEvent ) == "function" ) {
+		 			serviceCallback = parent.onNBoardEvent;
+		 		}
+			}
+			else {
+				if ( typeof( onNBoardEvent ) == "function" ) {
+		 			serviceCallback = onNBoardEvent;
+		 		}
+			}
+		}
+	},
+
+	_call : function( type, arg ) {
+		arg[ this.CONST.BOARD_ID ] =  sBoardId;
+		this._setEmptyParam( arg );
+		return serviceCallback( type, arg );
+	},
+
+	_setEmptyParam : function( arg ) {
+		if ( !arg[ this.CONST.DOC_ID ] ) arg[ this.CONST.DOC_ID ] = null;
+		if ( !arg[ this.CONST.PAGE_URL ] ) arg[ this.CONST.PAGE_URL ] = null;
+		if ( !arg[ this.CONST.LIST_CATEGORY_0 ] ) arg[ this.CONST.LIST_CATEGORY_0 ] = null;
+		if ( !arg[ this.CONST.LIST_CATEGORY_1 ] ) arg[ this.CONST.LIST_CATEGORY_1 ] = null;
+		if ( !arg[ this.CONST.LIST_CATEGORY_2 ] ) arg[ this.CONST.LIST_CATEGORY_2 ] = null;
+		if ( !arg[ this.CONST.LIST_TEMPLATE_OBJECT_ID ] ) arg[ this.CONST.LIST_TEMPLATE_OBJECT_ID ] = null;
+		if ( !arg[ this.CONST.DOC_CATEGORY_0 ] ) arg[ this.CONST.DOC_CATEGORY_0 ] = null;
+		if ( !arg[ this.CONST.DOC_CATEGORY_1 ] ) arg[ this.CONST.DOC_CATEGORY_1 ] = null;
+		if ( !arg[ this.CONST.DOC_CATEGORY_2 ] ) arg[ this.CONST.DOC_CATEGORY_2 ] = null;
+		if ( !arg[ this.CONST.DOC_TEMPLATE_OBJECT_ID ] ) arg[ this.CONST.DOC_TEMPLATE_OBJECT_ID ] = null;
+	},
+
+
+	_setListInfo : function( arg, lCate0, lCate1, lCate2, lTObj ) {
+		arg[ this.CONST.LIST_CATEGORY_0 ] = ((lCate0 == 0) ? '' : ("'" + lCate0 + "'")) ;
+		arg[ this.CONST.LIST_CATEGORY_1 ] = ((lCate1 == 0) ? '' : ("'" + lCate1 + "'")) ;
+		arg[ this.CONST.LIST_CATEGORY_2 ] = ((lCate2 == 0) ? '' : ("'" + lCate2 + "'")) ;
+		arg[ this.CONST.LIST_TEMPLATE_OBJECT_ID ] = lTObj;
+	},
+
+
+	_setReadInfo : function( arg, dCate0, dCate1, dCate2, dTObj ) {
+		arg[ this.CONST.DOC_CATEGORY_0 ] = ((dCate0 == 0) ? '' : ("'" + dCate0 + "'")) ;
+		arg[ this.CONST.DOC_CATEGORY_1 ] = ((dCate1 == 0) ? '' : ("'" + dCate1 + "'")) ;
+		arg[ this.CONST.DOC_CATEGORY_2 ] = ((dCate2 == 0) ? '' : ("'" + dCate2 + "'")) ;
+		arg[ this.CONST.DOC_TEMPLATE_OBJECT_ID ] = dTObj;
+	},
+	
+
+	_testAlert : function( type, arg ) {
+		alert( type + " = \nboardId[ " + arg[ this.CONST.BOARD_ID ] + " ]\n"
+			+ "docId[ " + arg[ this.CONST.DOC_ID ] + " ]\n"
+			+ "listCategory[ " + arg[ this.CONST.LIST_CATEGORY_0 ] + ", " + arg[ this.CONST.LIST_CATEGORY_1 ] + ", " + arg[ this.CONST.LIST_CATEGORY_2 ] + " ]\n"
+			+ "listTemplateObject[ " + arg[ this.CONST.LIST_TEMPLATE_OBJECT_ID ] + " ]\n"
+			+ "docCategory[ " + arg[ this.CONST.DOC_CATEGORY_0 ] + ", " + arg[ this.CONST.DOC_CATEGORY_1 ] + ", " + arg[ this.CONST.DOC_CATEGORY_2 ] + " ]\n"
+			+ "docTemplateObject[ " + arg[ this.CONST.DOC_TEMPLATE_OBJECT_ID ] + " ]"
+		); 
+	},
+
+
+
+	toListPage : function( listCate0, listCate1, listCate2, listTObj, pageUrl ) {
+		var type = "toListPage";
+		var arg = {};
+		arg[ this.CONST.PAGE_URL ] = pageUrl;
+		this._setListInfo( arg, listCate0, listCate1, listCate2, listTObj );
+		return this._call( type, arg );
+	},
+
+
+	listPage : function( listCate0, listCate1, listCate2, listTObj ) {
+		var type = "listPage";
+		var arg = {};
+		this._setListInfo( arg, listCate0, listCate1, listCate2, listTObj );
+		return this._call( type, arg );
+	},
+
+
+	toReadPage : function( docId, docCate0, docCate1, docCate2, docTObj, pageUrl ) {
+		var type = "toReadPage";
+		var arg = {};
+		arg[ this.CONST.DOC_ID ] = docId;
+		arg[ this.CONST.PAGE_URL ] = pageUrl;
+		this._setReadInfo( arg, docCate0, docCate1, docCate2, docTObj );
+		return this._call( type, arg );
+	},
+
+
+	readPage : function( docId, docCate0, docCate1, docCate2, docTObj ) {
+		var type = "readPage";
+		var arg = {};
+		arg[ this.CONST.DOC_ID ] = docId;
+		this._setReadInfo( arg, docCate0, docCate1, docCate2, docTObj );
+		return this._call( type, arg );
+	},
+
+
+	writePage : function( listCate0, listCate1, listCate2, listTObj ) {
+		var type = "writePage";
+		var arg = {};
+		this._setListInfo( arg, listCate0, listCate1, listCate2, listTObj );
+		return this._call( type, arg );
+	},
+	
+
+	outFromWritePage : function(bResponse) {
+		var type = "outFromWritePage";
+		var arg = {response:bResponse};
+		return this._call( type, arg );
+	}
+};
+
+
+var oCommonFn = {
+	setCategory : function (){
+		if(aCurrentCategory[0] != null && $('n2_category0') != null){
+			$('n2_category0').value = aCurrentCategory[0];
+			if(!oAgent.mSafari) {
+				// mobile safari 의 경우 doForList.js의 initializeListScript() 내 분기에 의해 oCategory0 = new Selectbox(); 로써 transform 되지 않았으므로 touch() 할 수 없다.
+				oCategory0.touch();
+			}
+		}
+		if(oCategory1 != null && aCurrentCategory[0] != null){
+			changeCategory(0, aCurrentCategory[0]);
+			if(aCurrentCategory[1] != undefined && $('n2_category1') != null){
+				$('n2_category1').value = aCurrentCategory[1];
+				if(!oAgent.mSafari) {
+					oCategory1.touch();
+				}
+			}
+		}
+		if(oCategory2 != undefined && aCurrentCategory[1] != null){
+			changeCategory(1, aCurrentCategory[1]);
+			if(aCurrentCategory[2] != undefined && $('n2_category2') != null){
+				$('n2_category2').value = aCurrentCategory[2];
+				if(!oAgent.mSafari) {
+					oCategory2.touch();
+				}
+			}
+		}
+	},
+
+	setDocumentDomain : function (){
+		var aDomain = document.domain.split('.');
+		var nLength = aDomain.length;
+		if(nLength > 2) document.domain = aDomain[nLength - 2] + '.' + aDomain[nLength - 1];
+	},
+
+	setServiceCallback : function () {
+		oServiceCallBack.initServiceCallback();
+	},
+
+	preventRightClick : function () {
+		document.oncontextmenu = new Function ("return false");
+		document.ondragstart = new Function ("return false");
+		document.onselectstart = new Function ("return false");
+	},
+
+	underMaintenance : function() {
+		if ( bUnderMaintenance ) {
+			alert( nboard2._( 'common.check.maintenance.description' ) );
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+}
+
+
+function onReadImgLoad (img){
+	 _resizeImgWithWidthConstraint(img, 80, 300)
+}
+
+function _resizeImgWithWidthConstraint(obj, minX, maxX){
+	 if(obj.width == 0) return;
+	 if(obj.width > maxX){__resizeImgByWidth(obj, maxX);}
+	 if(obj.width < minX){__resizeImgByWidth(obj, minX);}
+
+	 var node1				= $('n2_template_Dd');
+	 if(node1 != undefined && node1 != null && node1 != ""){
+		 var n2ContentWidth	= $('n2_content').style.width;		//612
+		 var boarderWidth	= 5+10+2;							// div margin-left:5, dl margin-left:10 ,imgboarder:2, 
+		 node1.style.width	= (parseInt(n2ContentWidth)-boarderWidth-obj.width) + "px";
+	 }
+}
+
+function __resizeImgByWidth (obj, x){
+	 xy_ratio = obj.height/obj.width;
+	 obj.width=x;
+	 obj.height=obj.width*xy_ratio;
+}
+
+
+function setImeMode() {
+	//all characters are entered through/without the IME. internet explorer only.
+	if(navigator.appName.indexOf("Microsoft")==-1) return;
+	var aArg = Array.prototype.slice.apply(arguments);
+	var sIme = aArg[0].toLowerCase() == 'korean' ? 'active' : 'inactive';
+	for(var i=1;i<aArg.length;i++) {
+		var el = document.getElementById(aArg[i]);
+		if (el) {
+			el.style.imeMode = sIme;
+			if (sIme == 'inactive') el.title = '영문으로 자동 입력됩니다.';
+		}
+	}
+}
+
+var PWMFilter = {
+		_blockLayerAppended : ['false','false'],
+		_jobName : ['제목','본문','댓글'],
+		initialize : function(){
+		},
+		toggleLayer2Help : function(disp){
+			try{
+				if (document.getElementById('layer2Help').style.display=== 'block') {
+					document.getElementById('layer2Help').style.display='none';
+				} else {
+					document.getElementById('layer2Help').style.display='block';
+				}
+			}catch(e){}
+		},
+		_blockLayerHTML1 : [
+			"<div id=\"c_layer_popup\" style=\"position:absolute\">"+
+			    "<p class=\"c_desc00\">작성하신 <strong><span id=\"jobName1\">내용</span>에 사용이 제한된 문구가 포함</strong>되어<br> 일시적으로 등록이 제한됩니다.</p>"+
+			    "<div class=\"c_contents\">"+
+			        "<p class=\"c_desc01\">이용자 분들이 홍보성 도배, 스팸 게시물로 불편을 겪지 않도록<br> 다음과 같은 경우 해당 게시물 등록이 일시적으로 제한됩니다.</p>"+
+			        "<ul class=\"c_desc02\">"+
+			            "<li>특정 게시물 대량으로 등록되거나 해당 게시물에서 자주 사용하는<br>문구가 포함된 경우</li>"+
+			            "<li>특정 게시물이 과도하게 반복 작성되거나 해당 게시물에서 자주 사용하는<br>문구가 포함된 경우</li>"+
+			        "</ul>"+
+			        "<p class=\"c_desc03\">스팸 게시물이 확대 생성되는 것을 방지하기 위하여 문구 및 사용 제한기간을<br>상세하게 안내해 드리지 못하는 점 양해 부탁 드립니다."+
+					"모두가 행복한 인터넷<br>문화를 만들기 위한 네이버의 노력이오니 회원님의 양해와 협조 부탁드립니다.</p>"+
+			        "<p class=\"c_desc04\">더 궁금하신 사항은 <a href=\"http://help.naver.com/service/exMailQuestion.jsp?question_gubn=service&TBID=TBOX20081030000000&sub_tb_id=TBOX20081030000001&Addoption1278=%BC%AD%BA%F1%BD%BA%B8%ED&Addoption1279=%B1%DD%C4%A2%BE%EE&qppath=01&sysgbn=sys\" target=\"_blank\">고객센터</a>로 문의하시면 자세히 알려드리겠습니다.</p>"+
+			        "<p class=\"c_desc05\">수정하신 후 다시 등록해 주세요.</p>"+
+			    "</div>"+
+			    "<div class=\"c_footer\"><button type=\"button\"  onclick=\"PWMFilter.hideNoticeLayer()\" style=\"cursor:pointer;\">확인</button>"+
+			    "<button type=\"button\" class=\"c_close\"  onclick=\"PWMFilter.hideNoticeLayer()\" style=\"cursor:pointer;\"><img src=\"http://static.naver.com/common/popup/btn_close3.gif\" width=\"15\" height=\"14\" alt=\"닫기\"></button>"+
+			    "</div>"+
+			"</div>"
+		],
+		_blockLayerHTML2 : [
+			"<div id=\"banword_wrap1\" style=\"position:absolute\">"+
+			"<div id=\"bw_header\"><h1>금칙어가 포함되어 있습니다</h1></div>"+
+			"<div id=\"bw_content\">"+
+			"	<p class=\"bw_desc5\">작성하신 <strong><span id=\"jobName2\">내용</span>에 금칙어가 포함</strong>되어 있습니다.</p>"+
+			"	<div class=\"bw_bx1\">"+
+			"	<div class=\"bw_bx1_shadow\">"+
+			"		<strong>해당되는 금칙어</strong> "+
+			"		<a href=\"#\"><img src=\"http://static.naver.com/common/popup/ico_help.gif\""+
+			"		onclick=\"PWMFilter.toggleLayer2Help();\" alt=\"도움말\" width=\"14\" height=\"14\"></a>"+
+			"		<div class=\"bw_bx1_shadow_in\" id=\"detectedWords2\">금칙어목록</div>"+
+			"		<!-- layer Bubble -->"+
+			"		<div id='layer2Help' class=\"layer_bubble\" style=\"top:32px; left:83px;display:none\">"+
+			"		<div class=\"layer_content\">"+
+			"			<!-- It's up to you -->"+
+			"			<div style=\"padding:10px 0 5px 4px; *padding:9px 0 6px 4px;\">"+
+			"<p>네이버에서는 서비스 이용자 보호를 위해 금칙어 제도를<br>"+
+			"운영하고 있습니다.<br></p><p class=\"bw_orange\">금칙어란 불법성, 음란성, 욕설로 의심되어<br>"+
+			"자동으로 등록이 제한된 특정 단어나 URL을 의미합니다.</p>"+
+			"			</div>"+
+			"			<!-- //It's up to you -->"+
+			"			<span class=\"rt_iefix\"></span>"+
+			"		</div>"+
+			"		<span class=\"rt\">"+
+			"		<!-- Do not delete this comment. It's hack for IE6 -->"+
+			"		</span>"+
+			"		<span class=\"lb\"></span><span class=\"rb\"></span><span class=\"arrow top\"></span>"+
+			"		</div>"+
+			"		<!-- //layer Bubble -->"+
+			"	</div>"+
+			"	</div>"+
+			"	<div class=\"bw_bx2\">"+
+			"		<p class=\"bw_desc3\">금칙어를 삭제하신 후 다시 글을 등록하시기 바랍니다.<br>"+
+			"		건전한 인터넷 문화 조성을 위해 회원님의 적극적인 협조를 부탁드립니다.</p>"+
+			"	</div>"+
+			"	<p class=\"bw_desc4\">더 궁금하신 사항은 <a href=\"http://help.naver.com/service/exMailQuestion.jsp?question_gubn=service&TBID=TBOX20081030000000&sub_tb_id=TBOX20081030000001&Addoption1278=%BC%AD%BA%F1%BD%BA%B8%ED&Addoption1279=%B1%DD%C4%A2%BE%EE&qppath=01&sysgbn=sys\" target=\"_blank\">고객센터</a>로 문의하시면 자세히 알려드리겠습니다.</p>"+
+			"</div>"+
+			"<div id=\"bw_btn_footer\"><button type=\"button\" onclick=\"PWMFilter.hideNoticeLayer()\" style=\"cursor:pointer;\">확인</button>"+
+			"<button type=\"button\" class=\"c_close\" onclick=\"PWMFilter.hideNoticeLayer()\"><img src=\"http://static.naver.com/common/popup/btn_close3.gif\" width=\"15\" height=\"14\" alt=\"닫기\"></button>"+
+			"</div>"+
+			"</div>"
+		],
+		_appendBlockLayer : function(v){
+			if(this._blockLayerAppended[v-1] == true) {
+				return;
+			}
+			var div = document.createElement('div');
+			var html = (v==1) ? this._blockLayerHTML1 : this._blockLayerHTML2;
+			div.innerHTML = html;
+			document.body.appendChild(div);
+			this._blockLayerAppended[v-1] = true;
+		},
+		hideNoticeLayer : function(){
+			try{
+				document.getElementById('c_layer_popup').style.display = 'none';
+			}catch(e){}
+			try{
+				document.getElementById('banword_wrap1').style.display = 'none';
+			}catch(e){}
+		},
+		showNoticeLayer : function(key,pwWords,layerId) {
+			this.hideNoticeLayer();
+			if (sBoardId == 1000003444) {
+				var w;
+				var url = "oc_pw_popup.nhn?n2_boardId=1000003444&pwords="+encodeURIComponent(pwWords);
+				if ($Agent().IE) {
+					w = open_modeless_window(url,"opencast_popup",460,350,'scroll=no');
+				} else {
+					w = open_window(url,"opencast_popup",460,350,'toolbar=0,menubar=0,status=no,resizable=no,scrollbars=no');
+					w.focus();
+				}
+				return false;
+			}
+			var t= this;
+			this._appendBlockLayer(layerId);
+			document.getElementById('jobName'+layerId).innerHTML = this._jobName[key];
+			if(layerId == 2){
+				document.getElementById('detectedWords'+layerId).innerHTML = pwWords;
+			}
+			var isIE = false;
+			if ($Agent().IE) {
+				isIE = true;
+			}
+
+			var objW = 370;
+			var objH = 428;
+			if (key == 2) {
+				objH = 380;
+			}
+
+			var h = parseInt(document.body.clientHeight);
+			
+			var w = (isIE) ? parseInt(document.body.clientWidth) : window.innerWidth;
+			var st = parseInt(document.body.scrollTop);
+			var top = (st)+(h/2)-(objH/2);
+			var left = (w/2) - (objW/2);
+
+			if(parent!=window && top > (parseInt(document.body.clientHeight)-objH)){
+				top = parseInt(document.body.clientHeight)-objH;
+			}
+
+			if (key == 2) {
+				if (top <=0 ) {
+					top = 0;
+				}
+			} else {
+				if (top < 100) {
+					top = 100;
+				}
+			}
+			if (layerId ==1) {
+				$('c_layer_popup').style.top = top+'px';
+				$('c_layer_popup').style.left = left+'px';
+				$('c_layer_popup').style.display = 'block';
+			} else {
+				$('banword_wrap1').style.top = top+'px';
+				$('banword_wrap1').style.left = left+'px';
+				$('banword_wrap1').style.display = 'block';
+			}
+		},
+		
+		doFilter : function(type) {
+			var t = this;
+			// type 1: 본문작성, 2: 덧글 작성
+			var params;
+			if (type == 1) { 
+				params = {
+					"n2_boardId" : sBoardId,
+					"title" : $("n2_titleInput").value,
+					"content" : oEditor.getContent()
+				}
+			} else if (type == 2){ // 덧글일 경우
+				params = {
+						"n2_boardId" : sBoardId,
+						"comment" : $("n2_commentValueWrite").value
+					}
+			} else {	// 덧글의 덧글인 경우
+				params = {
+					"n2_boardId" : sBoardId,
+					"comment" : $("n2_commentValueReply").value
+				}
+			}
+			new Ajax("/nboard2/pwm_filter.nhn", {
+				method : 'POST',
+				async : false,
+				params : params,
+				charset :'utf-8',
+				onLoad : function(oRequest) {
+					var resultObj = eval('('+oRequest.responseText + ')');
+					if (resultObj.pwords != null && resultObj.pwords.length > 0) {
+						canSubmit  = false;
+						if (resultObj.target == "title") {
+							t.showNoticeLayer(0,resultObj.pwords,2);
+						} else if  (resultObj.target == "content") {
+							t.showNoticeLayer(1,resultObj.pwords,1);
+						} else if (resultObj.target == "comment") {
+							t.showNoticeLayer(2,resultObj.pwords,2);
+						} else {
+							return;
+						}
+					} else {
+						canSubmit = true;
+					}
+				},
+				onError : function() {
+					alert(nboard2._('common.system.error.description'));
+				}
+			});
+		}
+	};
+
+
+/**
+ * 
+ * @projectDescription Nboard Common JavaScript Library
+ * @copyright NHN corp. <http://www.nhncorp.com>
+ * @author AjaxUI, NHN Corp. Kim,JK(qpitlove)
+ * @since 2008.10.13
+ */
+
+var nboard2 = {
+
+	// get unescaped unicode message from key
+	_ : function(key, obj) {
+		if (typeof nboard2.lang == 'undefined') return key;
+		if (typeof nboard2.lang[key] == 'undefined') return key;
+	
+		var desc = unescape(nboard2.lang[key]);
+		if(obj) desc = nboard2._template(desc, obj);
+		
+		return desc;
+	},
+	
+	//replace some template string to obj value
+	// var desc = '{1} test';  desc = nboard2._template(desc, {1 : 'abcd' }); //desc = 'abcd test';
+	_template : function(tem,obj){
+		return tem.replace(/{([^{}]*)}/g, 
+	        function (a, b) {  
+	            var r = obj[b];
+	            return r; 
+	        }
+	    ); 
+	}
+
+};

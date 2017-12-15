@@ -1,0 +1,532 @@
+body{background-color:transparent;}
+
+/* 글읽기 덧글, 트랙백, 인쇄영역 */
+#n2_nboard .reply_wrap{position:relative; clear:both; width:auto; _width:100%; margin:0 20px 0 20px; padding:13px 0 7px 0;}
+#n2_nboard .reply_wrap .reply {padding:12px 0 0 0;}
+#n2_nboard .reply_wrap .reply .bar{color:#D4D4D4; margin:0 1px 0 1px;}
+#n2_nboard .reply_wrap .reply a.on {color:#FF7534; font-weight:bold;}
+#n2_nboard .reply_wrap .reply a.off{color:#333333;}
+#n2_nboard .reply_wrap .reply strong{font-size:11px;}
+#n2_nboard .reply_wrap .reply a.print{color:#555555;}
+#n2_nboard .reply_wrap .reply .put_in{background:url(http://design.nboard2.naver.net/design/tw/ko/img/btn_put_in.gif) 1px 2px no-repeat;}
+#n2_nboard .reply_wrap .reply .put_in a{padding-left:12px; color:#555555;}
+#n2_nboard .reply_wrap .reply .put_in strong{margin-left:1px; font-size:11px; font-family:verdana;}
+#n2_nboard .reply_wrap .recommend{width:150px; position:absolute; right:0; top:12px;}
+#n2_nboard .reply_wrap .recommend p{float:right; padding-left:64px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/bg_board_recommend.gif) repeat-x;}
+#n2_nboard .reply_wrap .recommend p span{float:left; margin:6px 4px 0 0; font-weight:bold;}
+
+/* 트랙백 */
+#n2_nboard .trackback_wrap{overflow:hidden; margin:0 5px 5px 5px; padding:13px 0 7px 0; background-color:#F8F8F8;}
+#n2_nboard .trackback_wrap .address{position:relative; width:auto; _width:100%; margin:0 15px 10px 15px;}
+#n2_nboard .trackback_wrap .address .link{font-size:10px; font-family:verdana; color:#888888;}
+#n2_nboard .trackback_wrap .address .copy{vertical-align:middle; margin:0 0 0 0;}
+#n2_nboard .trackback_info{position:absolute; right:0; top:0; font-size:11px;}
+#n2_nboard .trackback_info img{vertical-align:-2px;}
+#n2_nboard .trackback_info a{color:#555555; display:inline-block;}
+#n2_nboard .trackback_wrap ul{width:auto; _width:100%; margin:0 15px 0 15px; padding:5px 0 0 0; background:url(http://design.nboard2.naver.net/design/tw/ko/img/bg_dot01.gif) left top repeat-x;}
+#n2_nboard .trackback_wrap li{position:relative; margin-top:3px; padding:5px 0 5px 4px; border-bottom:1px solid #EDEDED;}
+#n2_nboard .trackback_wrap li .id{position:absolute; right:40px; top:4px; width:100px;}
+#n2_nboard .trackback_wrap li .date{position:absolute; right:5px; top:6px; color:#777777; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_nboard .trackback_wrap .dash{color:#888888;}
+#n2_nboard .trackback_wrap li.end{border-bottom:none;}
+#n2_nboard .trackback_wrap li a{color:#333333;}
+#n2_nboard .view .reply_wrap .recommend{position:absolute; right:0; top:12px;}
+#n2_nboard .view .reply_wrap .recommend p{float:right; padding-left:64px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/bg_board_recommend.gif) repeat-x;}
+#n2_nboard .view .reply_wrap .recommend p span{float:left; margin:6px 4px 0 0; font-weight:bold;}
+#n2_nboard .view .reply_wrap .recommend01{position:absolute; right:0; top:6px;}
+#n2_nboard .view .reply_wrap .recommend01 p{display:inline; margin-left:4px;}
+
+/* 글읽기 댓글 */
+#n2_nboard #n2_comment{width:auto; _width:100%; margin:0 5px 5px 5px; padding:12px 0 5px 0; background-color:#F8F8F8;}
+*html #n2_nboard #n2_comment ul{float:left;}
+#n2_nboard #n2_comment li{position:relative; width:auto; _width:100%; margin:0 15px 0 15px; padding:6px 0 6px 0; border-bottom:1px solid #EDEDED; clear:both; word-wrap:break-word;word-break:break-all; overflow:hidden;}
+#n2_nboard #n2_comment li.end{position:relative; margin:0 15px 0 15px; padding:5px 0 6px 0; border-bottom:none;}
+#n2_nboard #n2_comment li .id{position:absolute; left:0; top:5px; width:115px;}
+#n2_nboard #n2_comment li .id a{color:#727272;}
+#n2_nboard #n2_comment li .id a.login{color:#B0B0B0;}
+#n2_nboard #n2_comment li .id img{vertical-align:middle; margin:0 0 2px 0;}
+#n2_nboard #n2_comment li .subject{margin:0 40px 0 121px; line-height:1.7;}
+#n2_nboard #n2_comment li .subject .ip{font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#999999; margin:0 -1px 0 3px;}
+#n2_nboard #n2_comment li .subject .date{font-size:9px; font-family:verdana; color:#B0B0B0; margin-left:5px;}
+#n2_nboard #n2_comment li .subject img{vertical-align:middle;}
+#n2_nboard #n2_comment li .subject a {text-decoration:none;}
+#n2_nboard #n2_comment li .subject a.report{margin:0 -4px 0 -2px; white-space:nowrap;}
+#n2_nboard #n2_comment li .subject a.delete{margin:0 0 0 -4px;}
+#n2_nboard #n2_comment li .subject a.delete02{margin:0 0 0 0;}
+#n2_nboard #n2_comment li .subject a.delete02 img{vertical-align:bottom;}
+#n2_nboard #n2_comment li .subject .bar{color:#d5d5d5; margin:0 -2px 0 0; font-size:11px;}
+#n2_nboard #n2_comment li .subject a.report{margin:1px 0 1px 2px;}
+#n2_nboard #n2_comment li .subject a.img_reply img{margin:2px 0 1px 0;}
+#n2_nboard #n2_comment li .up{position:absolute; right:0; top:6px; width:50px; text-align:right; font-size:9px; font-family:verdana; color:#777777;}
+#n2_nboard #n2_comment li .up img{vertical-align:middle; margin:1px 0 0 0;}
+#n2_nboard #n2_comment li .up a {text-decoration:none;}
+#n2_nboard #n2_comment li ul{margin:6px 0 -6px 0; padding:0; border-top:1px solid #EDEDED;}
+*html #n2_nboard #n2_comment li ul{float:left;}
+#n2_nboard #n2_comment li li{overflow:hidden; margin:0 0 0 20px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_reply.gif) 0 8px no-repeat; padding:6px 0 7px 13px; clear:both;}
+#n2_nboard #n2_comment li li.end{margin:0 0 0 20px; padding:6px 0 7px 13px; border-bottom:none;}
+#n2_nboard #n2_comment li li .id{position:absolute; left:14px; top:5px;_top:1px; width:107px;}
+#n2_nboard #n2_comment li li .subject{margin:0 40px 0 121px; line-height:1.7;}
+#n2_nboard #n2_comment li li .subject a.report img{margin:2px 0 1px 0;}
+
+/* 하단 버튼영역 */
+#n2_nboard .view_btn{position:relative; clear:both; width:100%; padding:8px 0 20px 0;}
+#n2_nboard .view_btn img{vertical-align:top;}
+#n2_nboard .view_btn span{position:absolute; right:0; top:8px;}
+
+/* 페이지 읽기 하단 리스트 */
+#n2_nboard .list_paging{overflow:hidden; border-top:1px solid #DDDDDD; border-bottom:1px solid #DDDDDD;}
+#n2_nboard .list_paging ul{clear:both; width:100%; margin:0; color:#777777;}
+#n2_nboard .list_paging li{position:relative; width:100%; margin-bottom:0; _margin:0 0 -2px 0; padding:8px 0 6px 0; border-bottom:1px solid #EFEFEF;}
+#n2_nboard .list_paging li.bgcolor{padding:8px 0 6px 0; background-color:#FAFAFA;}
+#n2_nboard .list_paging li.end{padding:8px 0 6px 0; border-bottom:none;}
+#n2_nboard .list_paging li a{color:#333333; display:inline-block;}
+#n2_nboard .list_paging li .status{position:absolute; left:0; top:8px; width:40px; text-align:center; font-family:돋움, Dotum, AppleGothic, sans-serif; font-size:11px; letter-spacing:-1px;}
+#n2_nboard .list_paging li .status a{color:#878787;}
+#n2_nboard .list_paging li .status img{vertical-align:middle; margin-top:1px;}
+html>body #n2_nboard .list_paging li .status img{vertical-align:top; margin-top:4px;}
+#n2_nboard .list_paging li .subject{margin:0 220px 0 35px;}
+#n2_nboard .list_paging li .subject a {_vertical-align:baseline}
+#n2_nboard .list_paging li .subject img{vertical-align:top;}
+#n2_nboard .list_paging li .subject .reply{font-size:10px; font-family:verdana; color:#639933; letter-spacing:-1px;}
+#n2_nboard .list_paging li .subject .reply b{font-weight:bold;}
+#n2_nboard .list_paging li .writer{position:absolute; right:130px; top:8px; width:80px; text-align:left;}
+#n2_nboard .list_paging li .date{position:absolute; right:81px; top:8px;  width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_nboard .list_paging li .hit{position:absolute; right:46px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_nboard .list_paging li .recommend{position:absolute; right:11px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_nboard .list_paging li li{margin:0; padding:0; border:none;}
+#n2_nboard .list_paging li li a{padding-left:12px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_reply.gif) 0 2px no-repeat;}
+
+/* 페이지 읽기 하단 리스트 - 추천 없을시 */
+/* 0108 수정 */
+#n2_nboard div#n2_no_recommand li .writer{position:absolute; right:140px; top:8px; width:80px;}
+/*// 0108 수정 */
+#n2_nboard div#n2_no_recommand li .date{position:absolute; right:46px; top:7px;  width:47px;}
+#n2_nboard div#n2_no_recommand li .hit{position:absolute; right:11px; top:7px; width:30px;}
+
+/* 페이지 읽기 하단 리스트 - 붐업추천 */
+#n2_nboard div#n2_boom_recommend li .writer{position:absolute; right:168px; top:6px; width:80px;}
+#n2_nboard div#n2_boom_recommend li .date{position:absolute; right:98px; top:7px; width:47px;}
+#n2_nboard div#n2_boom_recommend li .hit{position:absolute; right:70px; top:7px; width:30px;}
+#n2_nboard div#n2_boom_recommend li .recommend{position:absolute; right:11px; top:5px; width:46px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_boom_up.gif) no-repeat 0 0; color:#ff4a35; font-size:9px; font-family:verdana; text-indent:17px; line-height:1.8em; letter-spacing:-1px;}
+#n2_nboard div#n2_boom_recommend li .recommend b{font-weight:normal;}
+
+#n2_nboard .list_paging li .compensation {position:absolute; left:40px; top:8px; width:103px; font-size:11px;color:#999999;}
+#n2_nboard .list_paging li .subject.listCompensation {margin-left:143px;}
+
+/*---------------------- 일반형 -------------------------------*/
+#n2_skin_wrap ul.list{clear:both; width:100%;}
+/* 0310수정 */
+#n2_skin_wrap ul.list li{position:relative; width:100%; padding:8px 0 6px 0; border-bottom:1px solid #EDEDED; color:#7A7A7A;vertical-align:top}
+/*// 0310수정 */
+#n2_skin_wrap li.end{border-bottom:1px solid #DDDDDD; padding-bottom:10px;}
+#n2_skin_wrap li a{color:#333333; display:inline-block;}
+#n2_skin_wrap li a span {cursor:pointer;_cursor:hand}
+#n2_skin_wrap li .writer{color:#333333;}
+#n2_skin_wrap ul.list li .notice_icon{position:absolute; left:7px; top:5px;  width:28px; height:18px; text-indent:-9999px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_notice.gif) no-repeat;}
+#n2_skin_wrap ul.list li .best_icon{position:absolute; left:7px; top:8px; width:26px; height:13px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/wico_best_01.gif) no-repeat;}
+#n2_skin_wrap ul.list li .notice_subject{height:14px;margin:0 200px 0 42px;}
+/* 0312추가 */
+#n2_skin_wrap ul.list li .notice_subject a {vertical-align:baseline;}
+/* 0312추가 */
+/* 0320수정 */
+#n2_skin_wrap ul.list li .num{position:absolute; left:0; top:8px; width:36px; text-align:center; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+/*// 0320수정 */
+#n2_skin_wrap ul.list li .compensation {position:absolute; left:41px; top:9px; width:103px; font-size:11px;color:#999999;}
+#n2_skin_wrap ul.list li .subject{margin:0 220px 0 35px;}
+#n2_skin_wrap ul.list li .subject.listCompensation {margin-left:158px;}
+#n2_skin_wrap ul.list li .subject a {_vertical-align:baseline}
+#n2_skin_wrap ul.list li.best .subject{margin:0 220px 0 40px;}
+#n2_skin_wrap ul.list li.best div.subject.listCompensation {margin-left:158px;}
+
+#n2_skin_wrap .subject .assort{font-size:11px; margin:1px 11px 0 0; color:#999999; font-style:normal; display:inline-block; letter-spacing:-1px;}
+#n2_skin_wrap .subject .assort a{color:#999999;}
+#n2_skin_wrap .reply{font-size:10px; font-family:verdana; color:#639933; letter-spacing:-1px;}
+#n2_skin_wrap .reply b{font-weight:bold;}
+#n2_skin_wrap .subject img{vertical-align:middle;}
+/* 0310 수정 */
+#n2_skin_wrap ul.list li .writer{position:absolute; right:130px; top:8px; width:80px;}
+/*// 0310 수정 */
+#n2_skin_wrap ul.list li .date{position:absolute; right:81px; top:7px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.list li .hit{position:absolute; right:46px; top:7px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_skin_wrap ul.list li .recommend{position:absolute; right:11px; top:6px; width:30px; font-size:11px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_skin_wrap ul.list li .subject ul li{margin:0 0 0 10px; padding:0 0 0 12px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_reply.gif) 0 2px no-repeat; border:none;}
+ html>body #n2_skin_wrap ul.list li .subject ul li{width:90%;}
+#n2_skin_wrap .notice_subject b, #n2_skin_wrap .subject b{font-weight:normal;}
+
+/*---------------------- 일반형 붐업다운 추천 -------------------------------*/
+#n2_skin_wrap .list#n2_boom_recommend li .writer{position:absolute; right:168px; top:6px; width:80px;}
+#n2_skin_wrap .list#n2_boom_recommend li .date{position:absolute; right:98px; top:7px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap .list#n2_boom_recommend li .hit{position:absolute; right:70px; top:7px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_skin_wrap .list#n2_boom_recommend li .recommend{position:absolute; right:11px; top:5px; width:46px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_boom_up.gif) no-repeat 0 0; color:#ff4a35; font-size:9px; font-family:verdana; text-indent:17px; line-height:1.8em; letter-spacing:-1px;}
+#n2_skin_wrap .list#n2_boom_recommend li .recommend b{font-weight:normal;}
+
+/*---------------------- 일반형 추천이 없을시 -------------------------------*/
+#n2_skin_wrap .list#n2_no_recommend li .writer{position:absolute; right:95px; top:6px; width:80px;}
+#n2_skin_wrap .list#n2_no_recommend li .date{position:absolute; right:46px; top:7px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap .list#n2_no_recommend li .hit{position:absolute; right:11px; top:7px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+
+/*---------------------- 썸네일형 -------------------------------*/
+#n2_skin_wrap ul.thumb{clear:both; }
+#n2_skin_wrap ul.thumb li.notice{position:relative; width:100%;height:auto;padding:8px 0 6px 0; border-bottom:1px solid #EDEDED;}
+#n2_skin_wrap ul.thumb li.notice .notice_icon{position:absolute; left:7px; top:5px; width:28px; height:18px; text-indent:-9999px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_notice.gif) no-repeat;}
+#n2_skin_wrap ul.thumb li.notice .writer{position:absolute; right:111px; top:4px; width:87px;}
+#n2_skin_wrap ul.thumb li.notice .date{position:absolute; right:80px; top:8px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.thumb li.notice .hit{position:absolute; right:55px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_skin_wrap ul.thumb li.notice .recommend{position:absolute; right:11px; top:4px; width:30px; font-size:11px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+/* 0311 추가 및 수정 */
+#n2_skin_wrap ul.thumb li.best {width:100%;height:auto;padding:8px 0 6px 0;}
+#n2_skin_wrap ul.thumb li.best .subject {padding:0;margin:0 220px 0 40px;}
+/*// 0311 추가 및 수정 */
+#n2_skin_wrap ul.thumb li .best_icon{position:absolute; left:7px; top:8px; width:26px; height:13px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_best_top.gif) no-repeat;}
+#n2_skin_wrap ul.thumb li.best .writer{position:absolute; right:121px; top:8px; width:87px;}
+#n2_skin_wrap ul.thumb li.best .date{position:absolute; right:80px; top:8px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+/* 0310 수정 */
+#n2_skin_wrap ul.thumb li.best .hit{position:absolute; right:55px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+/*// 0310 수정 */
+#n2_skin_wrap ul.thumb li.best .recommend{position:absolute; right:11px; top:7px; width:30px; font-size:10px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_skin_wrap ul.thumb li.best .compensation {position:absolute; left:41px; top:9px; width:103px; font-size:11px;color:#999999;}
+#n2_skin_wrap ul.thumb li.best div.subject.listCompensation {margin-left:158px;padding:0}
+#n2_skin_wrap ul.thumb li.delcont .num{top:14px;}
+#n2_skin_wrap ul.thumb li.delcont .subject{padding:9px 0 5px 0; color:#999999;}
+#n2_skin_wrap ul.thumb li.delcont .writer{top:14px;}
+#n2_skin_wrap ul.thumb li.delcont .date{top:14px;}
+#n2_skin_wrap ul.thumb li.delcont .hit{top:14px;}
+#n2_skin_wrap ul.thumb li{position:relative; width:100%; height:35px;_height:46px; margin:0; padding:4px 0 6px 0; border-bottom:1px solid #EDEDED;vertical-align:top}
+#n2_skin_wrap ul.thumb li.bgcolor{background-color:#FBFBFB;}
+/* 0311수정 */
+#n2_skin_wrap ul.thumb li.end{border-bottom:1px solid #DDDDDD;}
+/*// 0311수정 */
+#n2_skin_wrap ul.thumb li .notice_icon{position:absolute; left:7px; top:1px; width:28px; height:18px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_notice.gif) no-repeat;}
+/* 0311 수정 */
+#n2_skin_wrap ul.thumb li .notice_subject{height:14px;margin:0 200px 0 40px;}
+/*// 0311 수정 */
+/* 0307 추가 */
+#n2_skin_wrap ul.thumb li .notice_subject a {vertical-align:baseline}
+/*// 0307 추가 */
+#n2_skin_wrap ul.thumb li .num{position:absolute; left:0; top:17px; width:35px; text-align:center; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.thumb li .subject{margin:0 220px 0 35px;padding:6px 0 0 60px}
+#n2_skin_wrap ul.thumb li .subject.v_middle {padding-top:13px;}
+#n2_skin_wrap ul.thumb li .subject.reply {padding:0}
+#n2_skin_wrap ul.thumb li .subject .reply{font-size:10px; font-family:verdana; color:#639933; letter-spacing:-1px;}
+#n2_skin_wrap ul.thumb li .subject .reply b{font-weight:bold;}
+#n2_skin_wrap ul.thumb li .subject .photo {position:absolute;top:5px;margin-left:-60px;}
+#n2_skin_wrap ul.thumb li .subject .photo img{border:1px solid #DDDDDD;vertical-align:top;}
+#n2_skin_wrap ul.thumb li .subject .compensation {padding-top:2px;font-size:11px;color:#999999;}
+#n2_skin_wrap ul.thumb li .subject .compensation a {color:#999999;}
+#n2_skin_wrap ul.thumb li .subject img{vertical-align:middle;}
+#n2_skin_wrap ul.thumb li .subject a {_vertical-align:baseline}
+#n2_skin_wrap ul.thumb li .subject a span {cursor:pointer;_cursor:hand}
+#n2_skin_wrap ul.thumb li .writer{position:absolute; right:121px; top:17px; width:87px;}
+/* 0311수정 */
+#n2_skin_wrap ul.thumb li .date{position:absolute; right:80px; top:18px; width:47px;color:#7a7a7a; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+/*// 0311수정 */
+#n2_skin_wrap ul.thumb li .hit{position:absolute; right:55px; top:18px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#777777; text-align:center;}
+#n2_skin_wrap ul.thumb li .recommend{position:absolute; right:11px; top:17px; width:30px; font-size:11px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_skin_wrap ul.thumb li li{margin:0; height:17px;_height:36px;padding:12px 0 7px 0; border:none;}
+#n2_skin_wrap ul.thumb li li .subject{margin:0 220px 12px 44px;}
+#n2_skin_wrap ul.thumb li li a{padding-left:12px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_reply.gif) 0 2px no-repeat;}
+#n2_skin_wrap ul.thumb li li .writer{top:15px;}
+#n2_skin_wrap ul.thumb li li .date{top:17px;}
+#n2_skin_wrap ul.thumb li li .hit{top:17px;}
+
+/*---------------------- 썸네일형 붐업다운 추천 -------------------------------*/
+#n2_skin_wrap .thumb#n2_boom_recommend li.notice .writer{position:absolute; right:168px; top:7px; width:87px;}
+#n2_skin_wrap .thumb#n2_boom_recommend li.notice .date{position:absolute; right:98px; top:8px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap .thumb#n2_boom_recommend li.notice .hit{position:absolute; right:70px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_skin_wrap ul.thumb_option li .writer{position:absolute; right:168px; top:17px; width:87px;}
+#n2_skin_wrap ul.thumb_option li .date{position:absolute; right:98px; top:18px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.thumb_option li .hit{position:absolute; right:70px; top:18px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+
+/*---------------------- 썸네일형 추천이 없을시 -------------------------------*/
+#n2_skin_wrap .thumb#n2_no_recommend li.notice .writer{position:absolute; right:95px; top:7px; width:87px; color:#333333;}
+#n2_skin_wrap .thumb#n2_no_recommend li.notice .date{position:absolute; right:46px; top:8px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap .thumb#n2_no_recommend li.notice .hit{position:absolute; right:11px; top:8px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+#n2_skin_wrap .thumb#n2_no_recommend li .writer{position:absolute; right:95px; top:17px; width:87px;}
+#n2_skin_wrap .thumb#n2_no_recommend li .date{position:absolute; right:46px; top:18px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap .thumb#n2_no_recommend li .hit{position:absolute; right:11px; top:18px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+
+/*---------------------- 웹진형 -------------------------------*/
+#n2_skin_wrap ul.webzine{clear:both; }
+#n2_skin_wrap ul.webzine li{position:relative; width:100%;border-bottom:1px solid #EDEDED;vertical-align:top}
+/* 0311 수정 */
+#n2_skin_wrap ul.webzine li.end{border-bottom:1px solid #DDDDDD;}
+/*// 0311 수정 */
+#n2_skin_wrap ul.webzine li.notice{position:relative; width:100%; padding:8px 0 6px 0; border-bottom:1px solid #EDEDED;}
+#n2_skin_wrap ul.webzine li .notice_icon{position:absolute; left:7px; top:5px; width:28px; height:18px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_notice.gif) no-repeat;}
+/* 0311 수정 */
+#n2_skin_wrap ul.webzine li .notice_subject{height:14px;margin:0 200px 0 40px;}
+/*// 0311 수정 */
+#n2_skin_wrap ul.webzine li .notice_subject a{vertical-align:baseline}
+#n2_skin_wrap ul.webzine li .subject{margin:0 220px 0 36px;}
+#n2_skin_wrap ul.webzine li.notice .writer{right:119px; top:8px;}
+#n2_skin_wrap ul.webzine li.notice .date{right:87px; top:9px;}
+#n2_skin_wrap ul.webzine li.notice .hit{right:52px; top:9px;}
+#n2_skin_wrap ul.webzine li.notice .recommend{right:12px; top:8px;}
+
+#n2_skin_wrap ul.webzine li .best_icon{position:absolute; left:7px; top:8px; width:26px; height:13px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_best_top.gif) no-repeat;}
+#n2_skin_wrap ul.webzine li.best {width:100%;height:auto;padding:8px 0 6px 0;}
+/* 0313 수정 */
+#n2_skin_wrap ul.webzine li.best .subject{margin:0 220px 0 40px;}
+/*// 0313 수정 */
+#n2_skin_wrap ul.webzine li.best .subject a{vertical-align:baseline}
+#n2_skin_wrap ul.webzine li.best .compensation {position:absolute; left:41px; top:9px; width:103px;margin:0; font-size:11px;color:#999999;}
+#n2_skin_wrap ul.webzine li.best div.subject.listCompensation {margin-left:158px;padding:0}
+#n2_skin_wrap ul.webzine li.best .writer{position:absolute; right:119px; top:8px; width:87px;text-align:left}
+#n2_skin_wrap ul.webzine li.best .date{position:absolute; right:87px; top:9px; width:47px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#777777;}
+#n2_skin_wrap ul.webzine li.best .hit{position:absolute; right:52px; top:9px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#777777; text-align:center;}
+#n2_skin_wrap ul.webzine li.best .recommend{position:absolute; right:11px; top:7px; width:46px; font-size:10px; font-family:verdana; color:#7A7A7A; font-weight:bold; text-align:center; letter-spacing:-1px;}
+
+#n2_skin_wrap ul.webzine li .writer{position:absolute; right:119px; top:18px; width:87px;text-align:left}
+#n2_skin_wrap ul.webzine li .date{position:absolute; right:87px; top:19px; width:44px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#777777;text-align:center}
+#n2_skin_wrap ul.webzine li .hit{position:absolute; right:52px; top:19px; width:30px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#777777; text-align:center;}
+#n2_skin_wrap ul.webzine li .recommend{position:absolute; right:12px; top:18px; width:30px; font-size:11px; font-family:verdana; color:#7A7A7A; font-weight:bold; text-align:center; letter-spacing:-1px;}
+
+#n2_skin_wrap ul.webzine li dl{position:relative; overflow:hidden; clear:both; width:auto; _width:100%; margin-left:10px; padding:9px 0 9px 0;}
+#n2_skin_wrap ul.webzine li dl dt{float:left; margin:4px 14px 0 0; display:inline;}
+#n2_skin_wrap ul.webzine li dl dt{border:1px solid #DEDEDE;}
+#n2_skin_wrap ul.webzine li dl dt img{margin:1px; vertical-align:top;}
+#n2_skin_wrap ul.webzine li dl dd{float:left; padding-top:9px;}
+#n2_skin_wrap ul.webzine li dl dd h4{font-size:14px;}
+/* 0306 추가 */
+#n2_skin_wrap ul.webzine li dl dd h4 a {vertical-align:baseline}
+/*// 0306 추가 */
+/* 0311 추가 */
+#n2_skin_wrap ul.webzine li dl dd h4 img {vertical-align:middle}
+/*// 0311 추가 */
+#n2_skin_wrap ul.webzine li dl dd h4 .reply{margin-left:-4px; color:#58902a; font:9px/1.3em Verdana; vertical-align:2px;}
+#n2_skin_wrap ul.webzine li dl dd h4 .reply b{font-size:11px; vertical-align:middle;}
+#n2_skin_wrap ul.webzine li .compensation {margin:4px 0 0 0;font-size:11px;color:#999999;}
+#n2_skin_wrap ul.webzine li .compensation a {color:#999999;}
+#n2_skin_wrap ul.webzine li dl dd p{margin:4px 0 0 1px; color:#6c6c6c; line-height:1.4em;}
+#n2_skin_wrap ul.webzine li dl dd p a{color:#6c6c6c;}
+/* 0306 추가 */
+#n2_skin_wrap ul.webzine li dl dd .webzine_contents {overflow:hidden;width:100%;}
+#n2_skin_wrap ul.webzine li dl dd .webzine_contents a{word-break:break-all}
+/*// 0306 추가 */
+
+/*---------------------- 앨범형 -------------------------------*/
+#n2_skin_wrap ul.album{clear:both;}
+#n2_skin_wrap ul.album li{position:relative; width:100%; padding:3px 0 12px 10px; border-bottom:1px solid #EDEDED;vertical-align:top}
+#n2_skin_wrap ul.album li.notice{position:relative; width:100%; height:auto;padding:8px 0 6px 0; border-bottom:1px solid #EDEDED;}
+/* 0311 수정 */
+#n2_skin_wrap ul.album li.end{border-bottom:1px solid #DDDDDD;}
+/*// 0311 수정 */
+#n2_skin_wrap ul.album li.notice .notice_icon{position:absolute; left:7px; top:5px; width:28px; height:18px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_notice.gif) no-repeat;}
+#n2_skin_wrap ul.album li .best_icon{position:absolute; left:7px; top:8px; width:26px; height:13px; background:url(http://design.nboard2.naver.net/design/tw/ko/img/ico_best_top.gif) no-repeat;}
+/* 0311수정 */
+#n2_skin_wrap ul.album li.notice .notice_subject{height:14px;margin:0 200px 0 40px;}
+/*// 0311수정 */
+/* 0313수정 */
+#n2_skin_wrap ul.album li.notice .notice_subject a {vertical-align:baseline}
+/*// 0313수정 */
+#n2_skin_wrap ul.album li.notice .writer{position:absolute; right:111px; top:7px; width:87px;}
+/* 0311수정 */
+#n2_skin_wrap ul.album li.notice .date{position:absolute; right:80px; top:8px; width:47px; color:#7a7a7a; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.album li.notice .hit{position:absolute; right:55px; top:8px; width:30px; color:#7a7a7a; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+/*// 0311수정 */
+#n2_skin_wrap ul.album li.notice .recommend{position:absolute; right:11px; top:3px; width:30px; font-size:10px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_skin_wrap ul.album li.best {width:100%;height:auto;padding:8px 0 6px 0;}
+/* 0313수정 */
+#n2_skin_wrap ul.album li.best .subject{margin:0 220px 0 40px;}
+/*// 0313수정 */
+/* 0313추가 */
+#n2_skin_wrap ul.album li.best .subject a {vertical-align:baseline}
+/*// 0313추가 */
+#n2_skin_wrap ul.album li.best .writer{position:absolute; right:111px; top:8px; width:87px;}
+/* 0311수정 */
+#n2_skin_wrap ul.album li.best .date{position:absolute; right:80px; top:8px; width:47px;color:#7a7a7a; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif;}
+#n2_skin_wrap ul.album li.best .hit{position:absolute; right:55px; top:8px; width:30px;color:#7a7a7a; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; text-align:center;}
+/*// 0311수정 */
+#n2_skin_wrap ul.album li.best .recommend{position:absolute; right:11px; top:7px; width:30px; font-size:10px; font-family:verdana; font-weight:bold; text-align:center; letter-spacing:-1px;}
+#n2_skin_wrap ul.album li.best img{vertical-align:-2px;}
+#n2_skin_wrap ul.album li.best .compensation {position:absolute; left:41px; top:9px; width:103px; padding:0;margin:0;font-size:11px;color:#999999;}
+#n2_skin_wrap ul.album li.best div.subject.listCompensation {margin-left:158px;padding:0}
+#n2_skin_wrap table.album{clear:both; width:100%; margin:11px 0 0 0; table-layout:fixed; overflow:hidden;}
+#n2_skin_wrap table.album td .photo{float:left; border:1px solid #DEDEDE;}
+#n2_skin_wrap table.album td .photo img{display:block;margin:1px;}
+#n2_skin_wrap table.album td.pd{padding-top:8px;}
+#n2_skin_wrap table.album td .subject{float:left; display:inline;}
+#n2_skin_wrap table.album td .reply{float:left; font-size:10px; font-family:verdana; color:#639933; letter-spacing:-1px; display:inline; margin:0 5px 0 2px;  _margin:-1px 1px 0 2px; vertical-align:middle;}
+html>body #n2_skin_wrap table.album td.pd img{vertical-align:bottom;}
+#n2_skin_wrap table.album span.writer{float:left; display:inline; padding:2px 0 3px 0; color:#A2A2A2}
+#n2_skin_wrap table.album span.writer a{color:#A2A2A2}
+#n2_skin_wrap table.album em.date{float:left; display:inline; padding:2px 0 2px 3px; font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; color:#A2A2A2; margin-left:1px;}
+#n2_skin_wrap table.album span.hit{font-size:11px; color:#777777;}
+#n2_skin_wrap table.album span.hit em{font-size:9px; font-family:tahoma, AppleGothic, Sans-serif; margin:0 0 0 -2px;}
+#n2_skin_wrap table.album span.bar{font-size:11px; color:#E0E0E0;}
+
+
+/* 0214 목록화면 컬럼 옵션화를 위한 CSS*/
+
+/* 글번호 삭제 */
+#n2_skin_wrap .del_num .compensation {left:7px !important;}
+#n2_skin_wrap .del_num .best .compensation {left:42px !important;}
+#n2_skin_wrap .del_num .subject {margin-left:7px !important;}
+#n2_skin_wrap .del_num .best .subject {margin-left:42px !important;}
+#n2_skin_wrap .del_num .subject.listCompensation {margin-left:106px !important;}
+#n2_skin_wrap .del_num .best .subject.listCompensation {margin-left:141px !important;}
+
+/* 작성자 삭제 */
+#n2_skin_wrap .del_writer .subject {margin-right:141px !important;}
+/* 작성일 삭제 */
+#n2_skin_wrap .skin_del_date .writer {right:118px !important;}
+#n2_skin_wrap .del_date .writer {right:83px !important;}
+#n2_skin_wrap .del_date .subject {margin-right:173px !important;}
+/* 조회수 삭제*/
+#n2_skin_wrap .skin_del_hit .date {right:53px !important;}
+#n2_skin_wrap .skin_del_hit .writer {right:135px !important;}
+#n2_skin_wrap .del_hit .date {right:51px !important;}
+#n2_skin_wrap .del_hit .writer {right:100px !important;}
+#n2_skin_wrap .del_hit .subject {margin-right:190px !important;}
+/* 추천수 삭제*/
+#n2_skin_wrap .skin_del_recommend .date {right:59px !important;}
+#n2_skin_wrap .skin_del_recommend .hit {right:18px !important;}
+#n2_skin_wrap .skin_del_recommend .writer {right:135px !important;}
+#n2_skin_wrap .del_recommend .date {right:51px !important;}
+#n2_skin_wrap .del_recommend .hit {right:16px !important;}
+#n2_skin_wrap .del_recommend .writer {right:100px !important;}
+#n2_skin_wrap .del_recommend .subject {margin-right:190px !important;}
+/* 작성자, 작성일 삭제*/
+#n2_skin_wrap .del_writer_date .subject {margin-right:93px !important;}
+/* 작성자, 조회수 삭제*/
+#n2_skin_wrap .skin_del_writer_hit .date {right:53px !important}
+#n2_skin_wrap .del_writer_hit .subject {margin-right:110px !important;}
+#n2_skin_wrap .del_writer_hit .date {right:51px !important}
+/* 작성자, 추천수 삭제*/
+/* 0321수정 */
+#n2_skin_wrap .skin_del_writer_recommend .date {right:55px !important}
+#n2_skin_wrap .skin_del_writer_recommend .hit {right:11px !important}
+/*// 0321수정 */
+#n2_skin_wrap .del_writer_recommend .subject {margin-right:110px !important;}
+#n2_skin_wrap .del_writer_recommend .date {right:51px !important}
+#n2_skin_wrap .del_writer_recommend .hit {right:16px !important}
+/* 작성일, 조회수 삭제*/
+#n2_skin_wrap .skin_del_date_hit .writer {right:82px !important}
+#n2_skin_wrap .skin_del_date_hit .hit {right:22px !important}
+#n2_skin_wrap .del_date_hit .subject {margin-right:133px !important;}
+#n2_skin_wrap .del_date_hit .writer {right:47px !important}
+#n2_skin_wrap .del_date_hit .hit {right:16px !important}
+/* 작성일과 추천수 삭제*/
+#n2_skin_wrap .skin_del_date_recommend .writer {right:82px !important}
+#n2_skin_wrap .skin_del_date_recommend .hit {right:22px !important}
+#n2_skin_wrap .del_date_recommend .subject {margin-right:133px !important;}
+#n2_skin_wrap .del_date_recommend .writer {right:47px !important}
+#n2_skin_wrap .del_date_recommend .hit {right:16px !important}
+/* 조회수와 추천수 삭제*/
+#n2_skin_wrap .skin_del_hit_recommend .writer {right:95px !important}
+#n2_skin_wrap .skin_del_hit_recommend .date {right:13px !important}
+#n2_skin_wrap .del_hit_recommend .subject {margin-right:150px !important;}
+#n2_skin_wrap .del_hit_recommend .writer {right:60px !important}
+#n2_skin_wrap .del_hit_recommend .date {right:11px !important}
+/* 작성자, 작성일, 조회수 삭제*/
+#n2_skin_wrap .del_writer_date_hit .subject {margin-right:53px !important;}
+/* 작성자, 조회수, 추천수 삭제*/
+#n2_skin_wrap .skin_del_writer_hit_recommend .date {right:13px !important}
+#n2_skin_wrap .del_writer_hit_recommend .subject {margin-right:70px !important;}
+#n2_skin_wrap .del_writer_hit_recommend .date {right:11px !important}
+/* 작성일, 조회수, 추천수 삭제*/
+#n2_skin_wrap .skin_del_date_hit_recommend .writer {right:38px !important}
+#n2_skin_wrap .del_date_hit_recommend .subject {margin-right:93px !important;}
+#n2_skin_wrap .del_date_hit_recommend .writer {right:4px !important}
+/* 작성자, 작성일, 추천수 삭제*/
+#n2_skin_wrap .skin_del_writer_date_recommend .hit {right:12px !important}
+#n2_skin_wrap .del_writer_date_recommend .subject {margin-right:43px !important;}
+#n2_skin_wrap .del_writer_date_recommend .hit {right:6px !important}
+/* 모두 삭제*/
+#n2_skin_wrap .del_writer_date_hit_recommend .subject {margin-right:7px !important;}
+
+/*// 0214 목록화면 컬럼 옵션화를 위한 CSS*/
+
+
+/* 0218 인접글 목록 컬럼 옵션화를 위한 CSS */
+/* 작성자 삭제*/
+#n2_nboard .list_paging .del_writer .subject {margin-right:149px !important;}
+/* 작성일 삭제*/
+#n2_nboard .list_paging .del_date .writer {right:133px !important;}
+#n2_nboard .list_paging .del_date .subject {margin-right:170px !important;}
+/* 조회수 삭제*/
+#n2_nboard .list_paging .del_hit .writer {right:120px !important;}
+#n2_nboard .list_paging .del_hit .date {right:77px !important;}
+#n2_nboard .list_paging .del_hit .subject {margin-right:203px !important;}
+/* 추천수 삭제*/
+#n2_nboard .list_paging .del_recommend .writer {right:120px !important;}
+#n2_nboard .list_paging .del_recommend .date {right:77px !important;}
+#n2_nboard .list_paging .del_recommend .hit {right:11px !important;}
+#n2_nboard .list_paging .del_recommend .subject {margin-right:203px !important;}
+/* 작성자와 날짜를 삭제*/
+#n2_nboard .list_paging .del_writer_date .subject {margin-right:81px !important;}
+/* 작성자와 조회수를 삭제*/
+#n2_nboard .list_paging .del_writer_hit .date {right:47px !important;}
+#n2_nboard .list_paging .del_writer_hit .subject {margin-right:81px !important;}
+/* 작성자와 추천수를 삭제*/
+#n2_nboard .list_paging .del_writer_recommend .hit {right:11px !important;}
+#n2_nboard .list_paging .del_writer_recommend .date {right:77px !important;}
+#n2_nboard .list_paging .del_writer_recommend .subject {margin-right:130px !important;}
+/*	날짜와 조회수를 삭제 */
+#n2_nboard .list_paging .del_date_hit .writer {right:104px !important;}
+#n2_nboard .list_paging .del_date_hit .subject {margin-right:180px !important;}
+/*	날짜와 추천수를 삭제 */
+#n2_nboard .list_paging .del_date_recommend .hit {right:11px !important;}
+#n2_nboard .list_paging .del_date_recommend .writer {right:104px !important;}
+#n2_nboard .list_paging .del_date_recommend .subject {margin-right:180px !important;}
+/*	조회수와 추천수를 삭제 */
+#n2_nboard .list_paging .del_hit_recommend .date {right:11px !important;}
+#n2_nboard .list_paging .del_hit_recommend .writer {right:104px !important;}
+#n2_nboard .list_paging .del_hit_recommend .subject {margin-right:180px !important;}
+/* 작성자와 날짜 조회수를 삭제 */
+#n2_nboard .list_paging .del_writer_date_hit .subject {margin-right:51px !important;}
+/* 작성자와 날짜 추천수를 삭제 */
+#n2_nboard .list_paging .del_writer_date_recommend .hit {right:11px !important;}
+#n2_nboard .list_paging .del_writer_date_recommend .subject {margin-right:51px !important;}
+/*	글쓴이와 조회수 추천수를 삭제 */
+#n2_nboard .list_paging .del_writer_hit_recommend .date {right:11px !important;}
+#n2_nboard .list_paging .del_writer_hit_recommend .subject {margin-right:60px !important;}
+/*	날짜와 조회수 추천수를 삭제 */
+#n2_nboard .list_paging .del_date_hit_recommend .writer {right:11px !important;}
+#n2_nboard .list_paging .del_date_hit_recommend .subject {margin-right:120px !important;}
+
+/* 0218 인접글 목록 컬럼 옵션화를 위한 CSS */
+
+
+
+/* selectbox style 1 : 글목록 페이지 카테고리 분류 */
+.sb_style_1 .selectbox .box {position:relative; cursor:pointer; cursor:hand; display:block;padding:3px 0 0 4px; color:#000; font-size:11px; border:1px solid #A3A3A3; background:#FFF; background:url(http://design.nboard2.naver.net/design/tw/ko/img/b_01.gif) top right no-repeat;}
+.sb_style_1 .selectbox .box .box-over { }
+.sb_style_1 .selectbox .button {position:absolute; right:0; top:0; float:left; display:none; margin:3px 2px 0 0; padding:5px 4px;}
+
+.sb_style_1 .selectbox .list {position:absolute; padding:3px 0 2px 4px; display:none; z-index:999; color:#000; font-size:11px; border:1px solid #A3A3A3; background:#FFF; border-top:0; }
+.sb_style_1 .selectbox.sb-expanded .list { display:block; }
+.sb_style_1 .selectbox .list li {padding:3px 0 2px 4px !important; margin:0 !important;cursor:pointer; cursor:hand; display:block;}
+.sb_style_1 .selectbox .list li.item-selected { background-color:#EEEEEE}
+
+.sb_style_1 .selectbox.sb-disabled { }
+.sb_style_1 .selectbox.sb-disabled .box { filter:alpha(opacity=50);opacity:0.5}
+.sb_style_1 .selectbox.sb-disabled * { cursor:default; }
+
+.sb_style_1 .selectbox .listbox {position:absolute; padding:3px 0 2px 4px; display:none; z-index:999; color:#000; font-size:11px; border:1px solid #A3A3A3; background:#FFF; }
+.sb_style_1 .selectbox .listbox li {padding:3px 0 2px 4px !important; margin:0 !important;cursor:pointer; cursor:hand; display:block;}
+.sb_style_1 .selectbox .listbox li.over { background-color:#EEEEEE}
+
+/* //selectbox style 1 */
+
+/* selectbox style 2 : 글목록 페이지 개수 설정 부분*/
+.sb_style_2 .selectbox .box {position:relative; cursor:pointer; cursor:hand; display:block;padding:3px 10px 0 4px; margin-top:3px;color:#000; font-size:11px; border:solid 1px #FFF; background:url(http://design.nboard2.naver.net/design/tw/ko/img/b_02.gif) 57px 0px no-repeat #fff; }
+.sb_style_2 .selectbox .box .box-over { text-decoration:underline; }
+.sb_style_2 .selectbox .button { display:none; }
+
+.sb_style_2 .selectbox .list {position:absolute; padding:1px 0 1px 0 !important; display:none; z-index:999; color:#444; font-size:11px !important; border:1px solid #CACACA; background:#FFF;}
+.sb_style_2 .selectbox.sb-expanded .list { display:block; }
+.sb_style_2 .selectbox .list li {padding:4px 0 4px 5px !important; margin:0 !important;cursor:pointer; cursor:hand; display:block;}
+.sb_style_2 .selectbox .list li.item-selected { text-decoration:underline;color:#004790}
+
+.sb_style_2 .selectbox.sb-disabled { }
+.sb_style_2 .selectbox.sb-disabled .box { filter:alpha(opacity=50);opacity:0.5}
+.sb_style_2 .selectbox.sb-disabled * { cursor:default; }
+/* //selectbox style 2 */
+
+.selectbox_font {font-size:12px; font-family:돋움, Dotum, AppleGothic, sans-serif;}
+
+#n2_nboard .open_talk {position:relative;_width:100%;margin:7px 20px 0;padding:7px 0 3px 9px;border:1px solid #e6e6e6}
+#n2_nboard .open_talk img {vertical-align:middle}
+#n2_nboard .open_talk span {color:#cccccc;}
+#n2_nboard .open_talk .txt_explanation {position:absolute;top:14px;right:9px;

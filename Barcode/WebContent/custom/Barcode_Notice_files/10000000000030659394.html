@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0066)http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518 -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<title>NBoard</title>
+			<link rel="stylesheet" type="text/css" href="./nboard2.css">
+<link rel="stylesheet" type="text/css" href="./skin.css">
+
+<!--[if IE 7]><style>.sb_style_1 .selectbox .box {padding:3px 0 2px 4px;}</style><![endif]-->
+<script src="./jindo.all.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./jindo2.ns.component.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./nboard2.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./message_ko.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./doForList.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./jindo.all.patch.js.다운로드" type="text/javascript" charset="utf-8"></script>
+<script src="./ContextMenu.js.다운로드" type="text/javascript" charset="utf-8"></script>
+
+
+<script type="text/javascript">
+	/**
+ 	* @projectDescription Nboard JavaScript Library
+ 	* @copyright NHN corp. <http://www.nhncorp.com>
+ 	* @author AjaxUI Team <TarauS>
+ 	*/
+		var sParentFrame = "parent.document.getElementById('NAVER_COMMON_BOARD_IFRAME')";
+		var sServiceCallback = "parent.onNBoardEvent";
+
+	var bUnderMaintenance = false;
+
+	var sBoardId = "1000003518";
+	var sTemplateObjectId				= "";
+
+	var sSearchByContentsUrlTemplate	= "\/nboard2/search_by_contents.nhn?n2_boardId=1000003518&n2_query=_query_";
+	var sSearchByWriterUrlTemplate		= "\/nboard2/search_by_writer.nhn?n2_boardId=1000003518&n2_query=_query_";
+	var sDocPerPageUrlTemplate			= "\/nboard2/list.nhn?n2_boardId=1000003518&n2_cntPerPage=_cntPerPage_";
+	var sTemplateObjectListUrlTemplate	= "http://tw.naver.com/nboard2/list.nhn?n2_templateObjectId=_objectId_&n2_templateObjectName=_objectName_&n2_boardId=1000003518";
+	var sCategoryUrlTemplate			= "\/nboard2/list.nhn?n2_boardId=1000003518";
+	
+	var sLoginPageUrlTemplate			= "https://nid.naver.com/nidlogin.login?mode=form&url=_successCallback_";
+	var sLoginPopupUrlTemplate			= "https://nid.naver.com/nidlogin.login?mode=form&template=plogin&url=_successCallback_";
+	var sLoginPopupCallbackUrl			= "http://tw.naver.com/nboard2/popup_login_callback.nhn?n2_boardId=1000003518";
+			var sLoginCallbackType = 'parameter';
+			var sWrapperLoginCallbackUrl = 'http://help.naver.com/opinion/opndefault.jsp?board='; 
+	
+	var sWrapperLoginCallbackUrl		= "http://help.naver.com/opinion/opndefault.jsp?board=";
+	
+	var sUserLayerUrlTemplate			= "\/nboard2/user_layer.nhn?n2_boardId=1000003518&writerId=_writerId_";
+	
+	var sPermissionAdmin				= "false";
+	var sAdminPreview					= "false";
+	
+	var sLoginUserID = "";
+	
+	var sImageUrlPrefix					= "http://design.nboard2.naver.net/design/tw/ko/img";
+	var sPopupUrl						= "";
+
+	var sStaticUrl						= "/static/common";
+	
+	var aPreviewData = {};
+    var useScrollIntoView = true;
+
+var aCategoryList={};aCategoryList["0"]=[];
+var aCurrentCategory = [
+];
+	
+	Event.register(window, "load", initializeListScript);
+</script>
+		</head>
+		<body>
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="n2_nboard" style="width:725px;">
+
+	<!--#-- iPhone, iPad 특성 타는 스타일을 주기 위한 트릭 ---->
+	<script type="text/javascript" for="n2_nboard">
+		if(checkAppleMobile()) {
+			Element.addClass(n2_nboard, 'apple_mobile');
+		};
+	</script>
+
+<script type="text/javascript">
+	//var aPreviewData = {};
+	if(typeof aPreviewData == "undefined") var aPreviewData = {};
+
+		aPreviewData['0'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n12시 7분부터&nbsp;바코드 툴즈&nbsp;서비스에서 접속 오류 현상이 발생하여&nbsp;긴급히 원인 파악 및 대응 중이며, 최대한 빠른 정상화를 위해 노력하고 있습니다.&nbsp;...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['1'] = {
+			text : "\n\t\n\n\n안녕하세요.&nbsp;&nbsp;&nbsp;15시 16분부터&nbsp;바코드 클라우드&nbsp;서비스에서&nbsp;파일 열기 및 업로드, 다운로드가 되지 않는&nbsp;현상이 발생하여&nbsp;긴급히 원인 파악 및 대응 중이며, ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['2'] = {
+			text : "안녕하세요, 바코드입니다.&nbsp;\n&nbsp;&nbsp;\n&nbsp;\n개인사업자, 법인, 공식 단체 뿐만 아니라 동아리, 친목 단체 같은 비공식 단체에서도 &nbsp;\n간편하게 가입하고 쉽게 사용하실 수 있도...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['3'] = {
+			text : "안녕하세요. 바코드 입니다.&nbsp;\n&nbsp;&nbsp;\n최근&nbsp;타 서비스에서 직접 작성하지 않은 스팸 게시물 등록 등의 활동이 발생하고&nbsp;있습니다.&nbsp;\n이에,&nbsp;바코드&nbsp;회원정보의 안전에 대해서도 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['4'] = {
+			text : "\n\t\n\n\n바코드를 이용해주시는 고객 여러분들께 안전한 바코드 이용을 위한 안내 말씀을 드립니다.&nbsp;&nbsp;&nbsp;최근 고객님의 공유기를 해킹하여 DNS를 변조하고, 이후 악성 사이...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['5'] = {
+			text : "안녕하세요. 바코드입니다.&nbsp;\n&nbsp;&nbsp;\n최근&nbsp;바코드 게임 등을 사칭하여 이용자의 결제 인증번호를 탈취하려는 문자가 발송되고 있어&nbsp;\n이용자 여러분께 알려드립니다.&nbsp;\n&nbsp;&nbsp;\n=...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['6'] = {
+			text : "&nbsp;\n안녕하세요. 바코드입니다.&nbsp;\n&nbsp;&nbsp;\n&nbsp;\n바코드를 이용해주시는 회원 여러분께 감사드리며,&nbsp;&nbsp;\n바코드 서비스에서 제공되는 청소년유해매체물 이용 관련해 안내 말씀드립니다...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['7'] = {
+			text : "안녕하세요, 바코드입니다.&nbsp;\n&nbsp;&nbsp;\n최근 바코드㈜ 채용담당자를 사칭한 휴대폰 문자, 이메일, 전화 등에 의한 &nbsp;\n금융사고로 인한 피해가 신고되는 사례가 있어, 이를 예방하...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['8'] = {
+			text : "\n안녕하세요, 바코드 입니다.&nbsp;\n최근 \n바코드 \n서비스를 사칭하는 스미싱 \n문자가 발송되는 사례가 발생하고 있습니다.&nbsp;\n&nbsp;&nbsp;\n■ 참고 : 스미싱 문자 \n사례&nbsp;...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['9'] = {
+			text : "안녕하세요.&nbsp;&nbsp;&nbsp;바코드 서비스를 이용해주시는 고객 여러분께 감사드리며, &nbsp;안전한 바코드 이용을 위해 안내 말씀드립니다. &nbsp;&nbsp;&nbsp;최근, 가짜 바코드 화면/메시지를 이용하여 개인정...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['10'] = {
+			text : "안녕하세요 바코드 입니다.&nbsp;\n&nbsp;\n최근 인터넷 이용 시 바코드를 비롯한 타 인터넷 포털 서비스에 방문할 경우, &nbsp;보안인증을 가장한 팝업 악성코드가 지속적으로 유포되어 주의 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['11'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n15시 9분부터 15시 23분까지&nbsp;북마크 서비스에서&nbsp;접속 오류&nbsp;현상이 발생하였고,&nbsp;\n긴급하게 수정작업을 진행하여 현재는 정상적으로 서비스를 이용하실 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['12'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n11시 12분부터 11시 36분까지&nbsp;부동산 서비스에서&nbsp;&nbsp;테마부동산 페이지에 접속 되지 않는&nbsp;현상이 발생하였고,&nbsp;\n긴급하게 수정작업을 진행하여 현재는 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['13'] = {
+			text : "\n\t\n\n\n안녕하세요.&nbsp;&nbsp;&nbsp;12시 47분부터 12시 59분까지 부동산 서비스에서 접속오류가 발생하였고,&nbsp;긴급하게 수정작업을 진행하여&nbsp;현재는 정상적으로 서비스를 이용하실 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['14'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n14시 32분부터 15시 47분까지&nbsp;바코드 메인에서&nbsp;간헐적으로 접속이 되지 않는&nbsp;현상이 발생하였고,&nbsp;\n긴급하게 수정작업을 진행하여 현재는 정상적으로 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['15'] = {
+			text : "안녕하세요.&nbsp;&nbsp;&nbsp;11시 40분부터 11시 42분까지&nbsp;웨일 브라우저&nbsp;서비스에서&nbsp;&nbsp; 접속이 되지 않는 현상이 발생하였고,긴급하게 수정작업을 진행하여 &nbsp;현재는 정상적으로 서비스를 ...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['16'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n10시부터&nbsp;16시 15분까지 뮤직 서비스에서&nbsp;1분듣기 재생&nbsp;후 다음곡으로 넘어가지 않는&nbsp;현상이 발생하였고,&nbsp;긴급하게 수정작업을 진행하여 현재는 정상적으...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['17'] = {
+			text : "안녕하세요.&nbsp;\n&nbsp;&nbsp;\n7시 18분부터 12시까지&nbsp;블로그 서비스에서&nbsp;최신순으로 정렬되지 않는&nbsp;현상이 발생하였고,&nbsp;\n긴급하게 수정작업을 진행하여 현재는 정상적으로 서비스를 이...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['18'] = {
+			text : "\n\t\n\n\n안녕하세요.&nbsp;&nbsp;&nbsp;16시 35분부터 20시 59분까지 지도 서비스에서 &nbsp;간헐적으로 검색 결과가 노출되지 않는&nbsp;현상이 발생하였고,긴급하게 수정작업을 진행하여 &nbsp;현...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['19'] = {
+			text : "안녕하세요.&nbsp;&nbsp;&nbsp;15시 28분부터&nbsp;19시 13분까지 블로그 검색 시&nbsp;간헐적으로 노출되지 않는 현상이 발생하였고,&nbsp;긴급하게 수정작업을 진행하여&nbsp;현재는 정상적으로 서비스를 이용하...",
+			thumbnail : "" 
+		};
+
+		aPreviewData['20'] = {
+			text : "안녕하세요.&nbsp;11시 59분부터 16시 41분까지 블로그 서비스에서&nbsp;대표 이미지 미노출 현상이 발생하였고,긴급하게 수정작업을 진행하여&nbsp;현재는 정상적으로 서비스를 이용하실 수 있...",
+			thumbnail : "" 
+		};
+</script>
+
+<div id="n2_oPreviewLayer" class="preview" style="top: 405px; left: 45px; width: 558px; display: none;">
+	<div class="shadow01">
+	<div class="shadow01_side">
+	<div class="shadow02">
+	<div class="shadow02_side">
+		<dl>
+		<dt id="n2_oPreviewLayerImage" style="width: 48px; height: 33px; display: none;"></dt>
+		<dd id="n2_oPreviewLayerText" style="word-break: break-all; width: 549px;"></dd>
+		</dl>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+<div id="n2_oImgOnlyPreviewLayer" class="preview" style="display: none;">
+	<div class="photo_border" id="n2_oImgOnlyPreviewLayerImage" style="width:162px;height:142px;"></div>
+</div>
+
+	
+<script id="n2_textAdjustData">
+	var nDocNum = 21;
+	var nTopDocNum = 0;
+	var sListType = "text";
+	
+	var aTitle = [
+			"[복구 중] 12/13 (수), &#39;바코드 툴즈&#39; 서비스에 장애 현상이 있음을 알려드립니다.",
+			"[복구 중] 11/28 (화), &#39;바코드 클라우드&#39; 서비스에 장애 현상이 있음을 알려드립니다.",
+			"[안내] 사용되지 않는 (구)단체 아이디 정리에 대한 안내",
+			"[안내] 계정 도용으로부터 바코드 회원정보를 안전하게 보호하는 방법을 안내해 드립니다.",
+			"[안내] 공유기 DNS 변조에 의한 악성 프로그램 설치에 주의를 부탁드립니다.",
+			"[안내] 결제 인증번호를 요구하는 보이스피싱에 주의해주세요.",
+			"[안내] 청소년유해매체물 이용을 위한 본인확인 인증방법(성인인증) 에 대해 안내 말씀드립니다.",
+			"[안내] 채용관련 보이스피싱 등 금융사고 등에 주의 부탁드립니다.",
+			"[안내] 바코드 서비스를 사칭하는 스미싱 문자, 알림 등에 주의 부탁드립니다.",
+			"[안내] 바코드를 사칭한 개인정보 탈취/악성코드 유포 사례에 주의 부탁드립니다.",
+			"[안내] 금융감독원 사칭 (바코드 사칭 포함) 악성코드 피해 주의 안내",
+			"[복구완료] 12/13 (수), &#39;북마크&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/26 (일), &#39;부동산&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/23 (금), &#39;부동산&#39; 서비스에 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/15 (수), &#39;바코드 메인&#39;의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/10 (금), &#39;웨일 브라우저&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/7 (화), &#39;뮤직&#39; 서비스에 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/7 (화), &#39;블로그검색&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 11/2 (목), &#39;지도&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 10/28 (토), 블로그검색 서비스의 장애 현상이 정상화 되었음을 알려드립니다.",
+			"[복구완료] 10/25 (수), &#39;블로그&#39; 서비스의 장애 현상이 정상화 되었음을 알려드립니다."
+	];
+	
+	var aTemplateObjectName = [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
+	];
+</script>
+
+
+
+
+<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" name="n2_nboard_top" id="n2_nboard_top" style="display:none;"></a>
+
+
+
+<!-- option -->
+<div class="option" id="n2_set_opt02">
+	<div class="type01">
+		<div class="category">
+		</div>
+		
+		
+
+		<div class="type">
+
+			
+		</div>
+	</div>
+</div>
+<!-- //option -->
+
+
+
+
+<div id="n2_skin_wrap" style="visibility: visible;">
+
+
+<div class="skin skin_del_writer_recommend" id="n2_no_recommend">
+
+
+    
+	<div id="n2_elHeaderSubject" class="subject">제목</div>
+		<div id="n2_elHeaderDate" class="date">
+					<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518&amp;n2_sortType=registDateDesc">작성일</a>
+		</div>
+		<div id="n2_elHeaderHit" class="hit">
+					<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518&amp;n2_sortType=readCountDesc">조회</a>
+		</div>
+</div>
+
+
+	
+	
+
+
+<ul class="list del_writer_recommend" id="n2_no_recommend">
+
+
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_0">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030659391&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030659391&#39;);" onmouseover="showPreview(event, &#39;0&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_0" style="cursor: pointer; font-weight: bold; width: 444px;">[복구 중] 12/13 (수), '바코드 툴즈' 서비스에 장애 현상이 있음을 알려드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_0">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_0).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_0).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">17.12.13.</em>
+					<em class="hit">101</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_1">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030659190&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030659190&#39;);" onmouseover="showPreview(event, &#39;1&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_1" style="cursor: pointer; font-weight: bold; width: 469px;">[복구 중] 11/28 (화), '바코드 클라우드' 서비스에 장애 현상이 있음을 알려드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_1">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_1).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_1).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">17.11.28.</em>
+					<em class="hit">1646</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_2">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030656729&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030656729&#39;);" onmouseover="showPreview(event, &#39;2&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_2" style="cursor: pointer; font-weight: bold; width: 308px;">[안내] 사용되지 않는 (구)단체 아이디 정리에 대한 안내</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_2">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_2).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_2).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">17.07.26.</em>
+					<em class="hit">4390</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_3">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030654748&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030654748&#39;);" onmouseover="showPreview(event, &#39;3&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_3" style="cursor: pointer; font-weight: bold; width: 451px;">[안내] 계정 도용으로부터 바코드 회원정보를 안전하게 보호하는 방법을 안내해  ..</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_3">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_3).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_3).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">17.05.19.</em>
+					<em class="hit">8256</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_4">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030273573&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030273573&#39;);" onmouseover="showPreview(event, &#39;4&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_4" style="cursor: pointer; font-weight: bold; width: 422px;">[안내] 공유기 DNS 변조에 의한 악성 프로그램 설치에 주의를 부탁드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_4">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_4).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_4).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">15.04.13.</em>
+					<em class="hit">48742</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_5">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030162945&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030162945&#39;);" onmouseover="showPreview(event, &#39;5&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_5" style="cursor: pointer; font-weight: bold; width: 344px;">[안내] 결제 인증번호를 요구하는 보이스피싱에 주의해주세요.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_5">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_5).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_5).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">15.01.13.</em>
+					<em class="hit">3534</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_6">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030116464&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030116464&#39;);" onmouseover="showPreview(event, &#39;6&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_6" style="cursor: pointer; font-weight: bold; width: 460px;">[안내] 청소년유해매체물 이용을 위한 본인확인 인증방법(성인인증) 에 대해 안내  ..</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_6">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_6).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_6).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">14.11.26.</em>
+					<em class="hit">15528</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_7">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030038575&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030038575&#39;);" onmouseover="showPreview(event, &#39;7&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_7" style="cursor: pointer; font-weight: bold; width: 364px;">[안내] 채용관련 보이스피싱 등 금융사고 등에 주의 부탁드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_7">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_7).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_7).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">14.09.23.</em>
+					<em class="hit">2413</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_8">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000030034515&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000030034515&#39;);" onmouseover="showPreview(event, &#39;8&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_8" style="cursor: pointer; font-weight: bold; width: 426px;">[안내] 바코드 서비스를 사칭하는 스미싱 문자, 알림 등에 주의 부탁드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_8">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_8).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_8).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">14.09.19.</em>
+					<em class="hit">1120</em>
+			</li>
+			<li class="notice">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_9">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000029903569&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000029903569&#39;);" onmouseover="showPreview(event, &#39;9&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_9" style="cursor: pointer; font-weight: bold; width: 447px;">[안내] 바코드를 사칭한 개인정보 탈취/악성코드 유포 사례에 주의 부탁드립니다.</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_9">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_9).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_9).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">14.05.22.</em>
+					<em class="hit">43852</em>
+			</li>
+			<li class="notice end">
+				<span class="notice_icon">공지</span>
+				<div class="notice_subject">
+					<div id="n2_elDocTitleArea_10">
+						<a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" style="word-break:break-all;" onclick="oPageMove.read(&#39;10000000000029130050&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?n2_boardId=1000003518&amp;docId=10000000000029130050&#39;);" onmouseover="showPreview(event, &#39;10&#39;, &#39;both&#39;)" onmouseout="hidePreview(&#39;both&#39;)">
+							<span id="n2_elDocTitle_10" style="cursor: pointer; font-weight: bold; width: 377px;">[안내] 금융감독원 사칭 (바코드 사칭 포함) 악성코드 피해 주의 안내</span>
+
+							<!--#-- iPhone, iPad 에서 한글 폰트 Bold 효과를 주기 위한 트릭. nboard2.css 의 .apple_mobile strong, b와 맞춰 주는 게 좋다. ---->
+							<script type="text/javascript" for="n2_elDocTitle_10">
+								if(checkAppleMobile()) {
+									$(n2_elDocTitle_10).style.cssText='cursor:pointer;_cursor:hand;font-weight:normal;-webkit-text-stroke-width:0.02em';
+								} else {
+									$(n2_elDocTitle_10).style.cssText='cursor:pointer;_cursor:hand;font-weight:bold';
+								};
+							</script>
+
+						</a>
+					</div>
+				</div>
+					<em class="date">13.09.10.</em>
+					<em class="hit">3018</em>
+			</li>
+
+
+
+        
+        <li>
+                <em class="num">1043</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_11">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030659394&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=1&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030659394&#39;);" onmouseover="showPreview(event, &#39;11&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_11" style="cursor: pointer; width: 467px;">[복구완료] 12/13 (수), '북마크' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        <img src="./wico_new.gif" alt="New" width="10" height="9" class="ico_new">
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.12.13.</em>
+                <em class="hit">77</em>
+        </li>
+        
+        <li>
+                <em class="num">1040</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_12">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030659166&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=2&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030659166&#39;);" onmouseover="showPreview(event, &#39;12&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_12" style="cursor: pointer; width: 467px;">[복구완료] 11/26 (일), '부동산' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.26.</em>
+                <em class="hit">4462</em>
+        </li>
+        
+        <li>
+                <em class="num">1037</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_13">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030659138&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=3&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030659138&#39;);" onmouseover="showPreview(event, &#39;13&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_13" style="cursor: pointer; width: 467px;">[복구완료] 11/23 (금), '부동산' 서비스에 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.24.</em>
+                <em class="hit">530</em>
+        </li>
+        
+        <li>
+                <em class="num">1036</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_14">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658974&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=4&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658974&#39;);" onmouseover="showPreview(event, &#39;14&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_14" style="cursor: pointer; width: 455px;">[복구완료] 11/15 (수), '바코드 메인'의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.15.</em>
+                <em class="hit">817</em>
+        </li>
+        
+        <li>
+                <em class="num">1035</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_15">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658886&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=5&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658886&#39;);" onmouseover="showPreview(event, &#39;15&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_15" style="cursor: pointer; width: 507px;">[복구완료] 11/10 (금), '웨일 브라우저' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.10.</em>
+                <em class="hit">609</em>
+        </li>
+        
+        <li>
+                <em class="num">1034</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_16">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658824&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=6&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658824&#39;);" onmouseover="showPreview(event, &#39;16&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_16" style="cursor: pointer; width: 448px;">[복구완료] 11/7 (화), '뮤직' 서비스에 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.07.</em>
+                <em class="hit">394</em>
+        </li>
+        
+        <li>
+                <em class="num">1033</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_17">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658813&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=7&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658813&#39;);" onmouseover="showPreview(event, &#39;17&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_17" style="cursor: pointer; width: 484px;">[복구완료] 11/7 (화), '블로그검색' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.07.</em>
+                <em class="hit">422</em>
+        </li>
+        
+        <li>
+                <em class="num">1032</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_18">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658746&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=8&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658746&#39;);" onmouseover="showPreview(event, &#39;18&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_18" style="cursor: pointer; width: 448px;">[복구완료] 11/2 (목), '지도' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.11.02.</em>
+                <em class="hit">279</em>
+        </li>
+        
+        <li>
+                <em class="num">1031</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_19">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658654&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=9&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658654&#39;);" onmouseover="showPreview(event, &#39;19&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_19" style="cursor: pointer; width: 484px;">[복구완료] 10/28 (토), 블로그검색 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.10.28.</em>
+                <em class="hit">469</em>
+        </li>
+        
+        <li class="end">
+                <em class="num">1030</em>
+            
+            
+            <div class="subject">
+
+                    <span id="n2_elDocTitleArea_20">
+                        <a href="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518#" onclick="oPageMove.read(&#39;10000000000030658589&#39;,0,0,0,&#39;&#39;,&#39;/nboard2/read.nhn?orderInList=10&amp;n2_boardId=1000003518&amp;listTask=list&amp;docId=10000000000030658589&#39;);" onmouseover="showPreview(event, &#39;20&#39;, &#39;all&#39;)" onmouseout="hidePreview(&#39;all&#39;)">
+                            <span id="n2_elDocTitle_20" style="cursor: pointer; width: 467px;">[복구완료] 10/25 (수), '블로그' 서비스의 장애 현상이 정상화 되었음을 알려드립니다.</span>
+                        </a>
+                        &nbsp;
+                        
+                        
+                        
+                        
+                        
+                        
+                    </span>
+
+            </div>
+        
+        
+                <em class="date">17.10.25.</em>
+                <em class="hit">857</em>
+        </li>
+</ul>
+
+
+</div>
+
+
+
+
+<!-- paging -->
+<div class="paging">
+
+
+
+    
+	<table summary="페이지 네비게이션" class="Nnavi">
+	<caption class="blind">페이지 네비게이션 레이아웃을 위한 표</caption>
+	<thead>
+	<tr>
+	<th scope="row">페이지번호</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+				<td class="on_this"><span class="blind">선택상태</span><a href="10000000000030659394.html">1</a></td>
+	</tr>
+	</tbody>
+	</table>
+
+
+	<span>
+	</span>
+	&nbsp;
+</div>
+<!-- //paging -->
+
+
+<!-- form_search-->
+<div class="form_search">
+    <form action="http://ui.nboard2.naver.com/nboard2/list.nhn?n2_boardId=1000003518">
+	<img src="./img_check_on.gif" alt="on"><input type="radio" name="n2_searchBy" id="n2_searchByContents" class="check" checked="checked" style="display: none;"><label for="n2_searchByContents" class="on">제목+내용</label>
+	<input type="text" name="n2_query" id="n2_query" class="input" value="" title="검색어 입력" onkeydown="if(event.keyCode == 13){searchList();return false;}"> <input type="image" src="./wbtn_search.gif" alt="검색" style="width:36px;height:19px;" class="btn" onclick="searchList(); return false;">
+	</form>
+</div>
+<!-- //form_search-->
+
+<script type="text/javascript">
+if(jindo.$Ajax)
+	jindo.$Ajax.SWFRequest.write("/static/common/flash/ajax.swf");
+</script><div style="position:absolute;top:-1000px;left:-1000px"><object id="tmpSwf15150171" width="1" height="1" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"><param name="movie" value="/static/common/flash/ajax.swf"><param name="allowScriptAccess" value="always"><embed name="tmpSwf15150171" src="/static/common/flash/ajax.swf" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" width="1" height="1" allowscriptaccess="always" swliveconnect="true"></object></div>
+
+
+</div>
+
+<script src="./lcslog.js(1).다운로드" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	lcs_do();
+</script>
+
+		
+		
+	
+
+</body></html>

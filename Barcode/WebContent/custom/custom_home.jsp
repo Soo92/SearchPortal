@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
 <%
-		request.setCharacterEncoding("euc-kr");
+	request.setCharacterEncoding("euc-kr");
+	String id = (String)session.getAttribute("idKey");	
+	String email = mgr.getMember(id).getEmail();
+	String name = mgr.getMember(id).getName();
 %>
 
 <!doctype>
@@ -78,8 +82,8 @@ function reSearchParamChange(){
 			<div class="gnb_area">
 				<div class="Ngnb">
 					<div class="Ngnb_inner">
-						<a href="../index.jsp" class="Nlogo_link"><span
-							class="Nlogo">BARCODE</span></a>
+						<a href="../index.jsp" class="Nlogo_link">
+						<img src="logo_ci.png" width="150" height="30" style="margin-top: 10px;"></a>
 						<h1 class="Ngnb_service">
 							<a href="https://help.naver.com/#" class="Nhome_link"><span
 								class="Nhome">고객센터</span></a>
@@ -263,7 +267,7 @@ function reSearchParamChange(){
 															<li class="gnb_first"><a
 																href="http://cafe.naver.com/">카페</a></li>
 															<li><a href="http://news.naver.com/">뉴스</a></li>
-															<li><a href="http://map.naver.com/">지도</a></li>
+															<li><a href="Barcode_Map.jsp">지도</a></li>
 															<li><a href="http://sports.news.naver.com/">스포츠</a></li>
 															<li><a href="http://game.naver.com/">게임</a></li>
 														</ul>
@@ -594,8 +598,7 @@ jQuery(function () {
 									onclick="clickcr(this, &#39;icn.id&#39;, &#39;&#39;, &#39;&#39;, event)"
 									class="svs_ic">회원정보</a></li>
 								<li><a
-									href="./custom_detail.html"
-									onclick="clickcr(this, &#39;icn.usrc&#39;, &#39;&#39;, &#39;&#39;, event)"
+									href="integrated_Search.jsp"
 									class="svs_ic6">통합검색</a></li>
 								<li><a 
 									href="./custom_detail.html"
@@ -611,8 +614,7 @@ jQuery(function () {
 									class="svs_ic14">바코드<br>플레이스
 								</a></li>
 								<li><a
-									href="./custom_detail.html"
-									onclick="clickcr(this, &#39;icn.map&#39;, &#39;&#39;, &#39;&#39;, event)"
+									href="Barcode_Map.jsp"
 									class="svs_ic15">지도</a></li>
 							</ul>
 						</div>
@@ -1517,19 +1519,19 @@ jQuery(function () {
 							</p>
 							<ul class="lst_md">
 								<li><a
-									href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry"
+									href="../member/findid.jsp"
 									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호/ID
 										찾기</a></li>
 								<li><a
-									href="https://nid.naver.com/user/help.nhn?todo=getNewPw"
+									href="../member/findpw.jsp"
 									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호
 										변경</a></li>
 								<li><a
-									href="https://nid.naver.com/user/help.nhn?todo=changeMain&amp;menu=nid1_sub_m1"
+									href="../index.jsp"
 									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">회원정보
 										수정</a></li>
 								<li><a
-									href="https://nid.naver.com/user2/help/userLoginSafety.nhn?menu=nid2_sub_m8"
+									href="../index.jsp"
 									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">로그인
 										보호 설정</a></li>
 							</ul>
@@ -1576,19 +1578,16 @@ jQuery(function () {
 
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659166"
-								title="[복구완료] 11/26 (일), &#39;부동산&#39;..."
-								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[복구완료]
+								title="[복구완료] 11/26 (일), &#39;부동산&#39;...">[복구완료]
 									11/26 (일), '부동산'...</a></li>
 
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659138"
-								title="[복구완료] 11/23 (금), &#39;부동산&#39;..."
-								onclick="clickcr(this, &#39;rnt.list&#39;, &#39;&#39;, &#39;&#39;, event);">[복구완료]
+								title="[복구완료] 11/23 (금), &#39;부동산&#39;...">[복구완료]
 									11/23 (금), '부동산'...</a></li>
 
 						</ul>
-						<a href="http://help.naver.com/support/bbs/notice.nhn"
-							onclick="clickcr(this, &#39;rnt.more&#39;, &#39;&#39;, &#39;&#39;, event);"
+						<a href="Barcode_Notice.jsp"
 							class="nt_more"><span class="blind">공지사항</span> 더보기</a>
 					</div>
 

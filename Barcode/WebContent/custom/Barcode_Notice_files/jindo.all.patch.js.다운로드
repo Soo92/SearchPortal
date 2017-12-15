@@ -1,0 +1,53 @@
+/*
+*	용도 : jindo.all.js prototype을 정의해서 사용하는 용도임
+*
+*/
+
+/**************** JINDO **************/
+Selectbox.prototype._getText = function(nIndex) {
+	if (nIndex === undefined) nIndex = this._related.selectedIndex;
+	
+	if (nIndex > -1) {
+		var oOption = this._related.options[nIndex];
+		return oOption.innerHTML.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+	} else {
+		return '';	
+	}
+};
+
+Selectbox.prototype._getValue = function(nIndex) {
+	
+	if (nIndex === undefined) nIndex = this._related.selectedIndex;
+	
+	return nIndex > -1 ? this._related.options[nIndex].value : '';
+	
+};
+
+Selectbox.prototype._resetSelectedIndex = function() {
+	
+	var nIndex = this._related.selectedIndex;
+	if (nIndex > -1) this._highlightItem(this._getItemByIndex(nIndex));
+	
+};
+
+Ku.Upload.prototype.free = function(){
+		var d = this._div;
+
+		d.onmouseover = null;
+		d.onmouseout  = null;
+		d.onmousedown = null;
+		d.onmouseup   = null;
+		if(d.parentNode) d.parentNode.removeChild(d);
+		this._div = d = null;
+};
+
+Ku.AutoExpand.prototype.findFFVersion3 = function(){
+	var u   = navigator.userAgent;
+	var sFFVersion = u.match(/(?:Firefox)\/([0-9.]+)/);
+	if (sFFVersion == null) {
+		return false;
+	}
+	ver		= sFFVersion[1];
+	var ffMainVersion = ver.substring(0,1);	
+	return (ffMainVersion == 3);
+}
