@@ -1,0 +1,18 @@
+var ConvertTableTag=$Class({_oOsInfo:null,_bIsSupportOverflowScroll:false,$init:function(){this._oOsInfo=
+jindo.m.getOsInfo();this._bIsSupportOverflowScroll=!(this._oOsInfo.android&&this._oOsInfo.version<"4.0");
+this._setEventListener();this.doConverting($$("div._tableAreaForMobile",$("endArea")));$Fn(this.destroy,
+this).attach(window,"unload")},
+_setEventListener:function(){document.addEventListener("addTableArea",$Fn(this._addTableAreaCallback,
+this).bind(),false)},
+_addTableAreaCallback:function(oCustomEvent){this.doConverting(oCustomEvent.addedTableAreaList)},
+doConverting:function(aElTableAreaList){if(!aElTableAreaList||aElTableAreaList.length<1)return;var nLengthOfTableAreaList=
+aElTableAreaList.length;for(var i=0;i<nLengthOfTableAreaList;i++){var elTableArea=aElTableAreaList[i];
+if(!elTableArea)continue;var welTableArea=$Element(elTableArea);if(this._bIsSupportOverflowScroll){if(jindo.m.getBrowserInfo().safari)$Element($$.getSingle("body")).css("-webkit-font-smoothing",
+"antialiased");if(welTableArea.hasClass("tbl_attr"))welTableArea.removeClass("tbl_attr");welTableArea.css({"overflow-x":"auto",
+"-webkit-overflow-scrolling":this._oOsInfo.ios?"auto":"touch"});var aChildOfTableArea=welTableArea.child();
+if(!aChildOfTableArea||aChildOfTableArea.length<1)continue;var nLengthOfChildOfTableArea=aChildOfTableArea.length;
+if(aChildOfTableArea&&nLengthOfChildOfTableArea>0)for(var j=0;j<nLengthOfChildOfTableArea;j++){var welOuterTable=
+aChildOfTableArea[j];if(!welOuterTable)continue;welOuterTable.css("-webkit-transform","translateZ(0)")}}else if(!welTableArea.hasClass("tbl_attr"))welTableArea.addClass("tbl_attr");
+if(!welTableArea.visible())welTableArea.show()}},
+destroy:function(){this._oOsInfo=this._bIsSupportOverflowScroll=null;document.removeEventListener("addTableArea",
+$Fn(this._addTableAreaCallback,this).bind(),false)}});

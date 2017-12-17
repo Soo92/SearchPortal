@@ -1,0 +1,8 @@
+@charset "utf-8";.discover_ct .u_likeit_list_module .u_likeit_list_btn .u_ico,.end .u_likeit_list_module .u_likeit_list_btn .u_ico,.feed_recommend_post_list .u_likeit_list_module .u_likeit_list_btn .u_ico,.lst_detail1 .u_likeit_list_module .u_likeit_list_btn .u_ico,.end_se3_card .u_likeit_list_module .u_likeit_list_btn .u_ico{width:16px;height:14px;background-image:url(http://static.post.naver.net/image/im/sp_btn_like4_150622.png);background-size:16px 14px}
+.discover_ct .u_likeit_list_module .u_likeit_list_btn.on .u_ico,.end .u_likeit_list_module .u_likeit_list_btn.on .u_ico,.feed_recommend_post_list .u_likeit_list_module .u_likeit_list_btn.on .u_ico{background-position:0 0}
+.u_likeit_list_module{height:20px}.u_likeit_list_module .u_none_txt .u_txt{display:inline!important;overflow:hidden;position:absolute;width:0;height:0;line-height:0;color:transparent}
+.u_likeit_list_module .u_likeit_list_btn{display:inline-block;padding:0 2px;overflow:visible;vertical-align:top}
+.u_likeit_list_module .u_likeit_list_btn .u_ico{display:inline-block;overflow:hidden;vertical-align:top;width:18px;height:17px;margin:1px 7px 0 0;background:url(http://static.post.naver.net/image/im/sp_btn_like3_150630.png) 0 0;background-size:18px 35px}
+.u_likeit_list_module .u_likeit_list_btn .u_cnt,.u_likeit_list_module .u_likeit_list_btn .u_txt{line-height:17px;font-size:14px;font-weight:normal;color:#555;vertical-align:top}
+.a .u_likeit_list_module .u_likeit_list_btn .u_cnt{margin-top:2px}html[data-useragent*='Android 6.0'] .a .u_likeit_list_module .u_likeit_list_btn .u_cnt{margin-top:0}
+.u_likeit_list_module .u_likeit_list_btn.on .u_ico{background-position:0 -18px}.u_likeit_list_module .u_likeit_list_btn .u_cnt{font-family:HelveticaNeue-Light}

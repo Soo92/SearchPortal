@@ -1,0 +1,626 @@
+/**
+ * @class MentionsAutoComplete
+ * @author E-juhee
+ * @description
+ */
+MentionsAutoComplete =  jindo.$Class({
+
+    $init : function(htOption) {
+        this.sRequestURL = htOption.sRequestURL;
+        this.sRequestMethod = htOption.sRequestMethod;
+        this.elInputFormat = htOption.elInput;
+        this.elDataFormat = htOption.elInputData;
+        this.sPhotoInfraUrl = htOption.sPhotoInfraUrl;
+        this.welInputFormat = jindo.$Element(htOption.elInput);
+        this.welContentsView = jindo.$Element(htOption.elAutoCompleteListView);
+        this.sPhotoSizeUrl = "?type=m32_32";
+
+        this.oAjax = null;
+        this.cTrigger = '@';
+        this.oKey = -1;
+        this.nCurrentLocation = -1;
+        this.aDefaultContents = new Array();
+        this.aUpdatedContents = new Array();
+        this.eListOfSelection = null;
+        this.bCouldResquest = false;
+        this.nTimer = null;
+        this.sBackup = null;
+
+        this._initEvent();
+    },
+
+    initValue : function() {
+        this.oKey = -1;
+        this.nCurrentLocation = -1;
+        this.eListOfSelection = null;
+        this.bCouldResquest = false;
+        this.nTimer = null;
+        this.sBackup = null;
+    },
+
+    _initEvent : function() {
+        this.welContentsView.delegate("mousedown", "._user_list", jindo.$Fn(this._onMouseDownContent, this).bind());
+        this.welContentsView.delegate("mouseover", "._user_list", jindo.$Fn(this._onMouseOverContent, this).bind());
+        this.welInputFormat.attach("keydown", jindo.$Fn(this._onKeyDownEvent, this).bind());
+        this.welInputFormat.attach("blur", jindo.$Fn(this._onBlur, this).bind());
+        this.welInputFormat.attach("focus", jindo.$Fn(this._onFocus, this).bind());
+    },
+
+    /**
+     * 기본 언급자 저장
+     * @param aContents
+     */
+    setDefaultContent : function(aContents) {
+        this.aDefaultContents = aContents;
+    },
+
+    /**
+     * 서버에서 전달 받은 언급자 저장
+     * @param aContents
+     * @private
+     */
+    _updateAutoCompleteList : function(aContents) {
+        this.aUpdatedContents = aContents;
+    },
+
+    /**
+     * Ajax 통신
+     * @returns {boolean}
+     * @private
+     */
+    _callRequest : function() {
+        var sQueryString, oSelf = this;
+        var sRequestParam = this._findRequestParam();
+
+        this._stopAjax();
+
+        // 파라미터가 없을 경우
+        if(sRequestParam === null) {
+            this._stopRequest();
+            this._hideAutoCompleteList();
+            return false;
+        }
+
+        // 파라미터가 '@' 인 경우
+        if(sRequestParam === this.cTrigger) {
+            this._startRequest();
+            this._updateAutoCompleteList(this.aDefaultContents);
+            this._showAutoCompleteList();
+            return false;
+        }
+
+        sQueryString = {q:sRequestParam.substring(1)};
+        this.oAjax = new jindo.$Ajax(this.sRequestURL, {
+            type :  "jsonp",
+            onload : function(oResponse) {
+                var oJson = oResponse.json();
+                var aList = new Array();
+                var nListLength, mainIndex;
+
+
+                // 자동완성 결과 선택
+                // index = 0 경우, 한글로 입력시
+                // index = 1 경우, 아이디검색
+                // index = 2 경우, 영문으로 입력시
+                if(oJson.items[0]  === undefined || oJson.items[0].length === 0) {
+                    if(oJson.items[1]  === undefined || oJson.items[1].length === 0) {
+                        if(oJson.items[2] === undefined || oJson.items[2].length === 0) {
+                            mainIndex = -1
+                        }
+                        mainIndex = 2;
+                    } else {
+                        mainIndex = 1;
+                    }
+                } else {
+                    mainIndex = 0;
+                }
+
+
+                // 결과에 대한 데이터가 존재한다면
+                // 배열에 저장
+                var nMax = 5;
+                var nSecondIndex = 1;
+                var bSameId = false;
+                if(oJson.items[mainIndex] !== undefined) {
+                    nListLength = oJson.items[mainIndex].length;
+                    for(var i=0; i<nListLength; i++) {
+                        aList.push({name:oJson.items[mainIndex][i][0].toString(), id:oJson.items[mainIndex][i][1].toString(), no:oJson.items[mainIndex][i][2].toString(), imageUrl:oJson.items[mainIndex][i][3].toString()});
+                    }
+
+                    if(mainIndex === 0 && oJson.items[1] !== undefined) {
+                        for(var j=0; j< (nMax - nListLength); j++) {
+                            bSameId = false;
+
+                            if(oJson.items[nSecondIndex][j] !== undefined) {
+                                for(var i=0; i<nListLength; i++) {
+                                    // 중복된 아이디가 있을 경우
+                                    if(oJson.items[nSecondIndex][j][1].toString() === oJson.items[mainIndex][i][1].toString()) {
+                                        bSameId = true;
+                                        break;
+                                    }
+                                }
+
+                                // 중복된 아이디가 없을 경우
+                                if(bSameId === false) {
+                                    aList.push({name:oJson.items[nSecondIndex][j][0].toString(), id:oJson.items[nSecondIndex][j][1].toString(), no:oJson.items[nSecondIndex][i][2].toString(), imageUrl:oJson.items[nSecondIndex][j][3].toString()});
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                // 화면에 리스트 출력
+                if(aList.length > 0) {
+                    oSelf._startRequest();
+                    oSelf._updateAutoCompleteList(aList);
+                    oSelf._showAutoCompleteList();
+                } else {
+                    oSelf._stopRequest();
+                    oSelf._hideAutoCompleteList();
+                }
+            },
+            onerror : function() {
+                oSelf._stopRequest();
+                oSelf._hideAutoCompleteList();
+            },
+            ontimeout : function() {
+                oSelf._stopRequest();
+                oSelf._hideAutoCompleteList();
+            },
+            timeout : 1,
+            async : false
+        }).request(sQueryString);
+    },
+
+    /**
+     * Ajax request 중지
+     * @private
+     */
+    _stopAjax : function() {
+        if(this.oAjax) {
+            this.oAjax.abort();
+        }
+    },
+
+    /**
+     * change true for boolean value of Ajax Request
+     * @private
+     */
+    _startRequest : function() {
+        this.bCouldResquest = true;
+    },
+
+    /**
+     * change false for boolean value of Ajax Request
+     * @private
+     */
+    _stopRequest : function() {
+        this.bCouldResquest = false;
+        this._stopAjax();
+    },
+
+    /**
+     * 언급 요소 창에 보여줄 템플릿
+     * @returns {string}
+     * @private
+     */
+    _makeViewAutoCompleteList : function() {
+        var count, htmlString, length;
+
+        if(this.aUpdatedContents === undefined || this.aUpdatedContents ===  null) {
+            return htmlString = "";
+        }
+
+        length = this.aUpdatedContents.length;
+        htmlString = "<ul>";
+        for(count=0; count<length; count++) {
+            htmlString = htmlString + "<li class=\"_user_list\" data-name=\"" + this.aUpdatedContents[count].name + "\" data-id=\"" + this.aUpdatedContents[count].id + "\" data-no=\"" + this.aUpdatedContents[count].no + "\" data-profile-url=\"" + this.aUpdatedContents[count].imageUrl.toString() +"\">";
+            htmlString = htmlString + "<a href=\"#\">";
+            htmlString = htmlString + "<span class=\"thmb\">";
+
+            // 프로필 이미지 넣기
+            if(this.aUpdatedContents[count].imageUrl.toString() === "") {
+                htmlString = htmlString + "<span class=\"blank\"></span>";
+            } else {
+                htmlString = htmlString + "<img src=\"" + this.sPhotoInfraUrl + this.aUpdatedContents[count].imageUrl + this.sPhotoSizeUrl + "\" width=\"32\" height=\"32\" alt=\"\">";
+            }
+
+            htmlString = htmlString + "<span class=\"mask\"></span>";
+            htmlString = htmlString + "</span>";
+            htmlString = htmlString + "<p><em >" + this.aUpdatedContents[count].name + "</em>(" + this.aUpdatedContents[count].id + ")</p>";
+            htmlString = htmlString + "</a>";
+            htmlString = htmlString + "</li>";
+        }
+        htmlString = htmlString + "</ul>";
+        this.welContentsView.html(htmlString);
+    },
+
+    /**
+     * 선택 요소에 'on' Class 주기
+     * @param element
+     * @private
+     */
+    _addOnClass : function(element) {
+        var element = element || jindo.$$("._user_list")[0];
+        var weElementOfChild;
+
+        if(element !== undefined) {
+            weElementOfChild = jindo.$Element(jindo.$Element(element).child()[0]);
+            weElementOfChild.addClass("on");
+            this._setListOfSelection(element);
+        }
+    },
+
+    /**
+     * 모든 요소에 'on' Class 제거
+     * @private
+     */
+    _removeOnClass : function() {
+        var element = jindo.$$("._user_list");
+        var weElementOfChild;
+
+        for(var i=0; i<element.length; i++) {
+            weElementOfChild = jindo.$Element(jindo.$Element(element[i]).child()[0]);
+
+            if(weElementOfChild.hasClass("on") === true) {
+                weElementOfChild.removeClass("on");
+            }
+        }
+    },
+
+    /**
+     * 키-down/up으로 언급 요소 선택
+     * @param sDirection
+     * @private
+     */
+    _moveOnList : function(sDirection) {
+        var element = jindo.$$("._user_list");
+        var weElement, weElementOfChild, nIndex;
+
+        for(var i=0; i<element.length; i++) {
+            weElement = jindo.$Element(element[i]);
+            weElementOfChild = jindo.$Element(weElement.child()[0]);
+
+            if(weElementOfChild.hasClass("on") === true) {
+                nIndex = i;
+            }
+        }
+
+        if(sDirection === "up") {
+            nIndex = nIndex - 1;
+            if(nIndex < 0) {
+                nIndex = element.length - 1;
+            }
+        } else if(sDirection === "down") {
+            nIndex = nIndex + 1;
+            if(nIndex >= element.length) {
+                nIndex = 0;
+            }
+        }
+
+        this._removeOnClass();
+        this._addOnClass(element[nIndex]);
+    },
+
+    /**
+     * 현재 자동완성 리스트에 선택한 요소를 저장함
+     * @param element
+     * @private
+     */
+    _setListOfSelection : function(element) {
+        this.eListOfSelection = element;
+    },
+
+    /**
+     * 현재 자동완성 리스트에 선택한 요소를 가져옴
+     * @param element
+     * @private
+     */
+    _getListOfSelection : function() {
+        return this.eListOfSelection;
+    },
+
+    /**
+     * 언급 요소 선택창 보이기
+     * @private
+     */
+    _showAutoCompleteList : function() {
+        this._makeViewAutoCompleteList();
+        this.welContentsView.show();
+        this._addOnClass('');
+
+    },
+
+    /**
+     * 언급 요소 선택창 숨기기
+     * @private
+     */
+    _hideAutoCompleteList : function() {
+        this.welContentsView.hide();
+        this._removeOnClass();
+    },
+
+    /**
+     * 언급자 저장하기
+     * @param sData
+     * @private
+     */
+    _pushInsertData : function(sId, sName) {
+        this.elDataFormat.value += sId + ":" + sName + ',';
+    },
+
+    /**
+     * 언급자 제거하기
+     * @param sData
+     * @private
+     */
+    _popDeleteData : function(sData) {
+        this.elDataFormat.value = this.elDataFormat.value.replace(sData+',' , '');
+    },
+
+    /**
+     * 자동완성 API에 전달할 파라미터 추출
+     * @returns {null}
+     * @private
+     */
+    _findRequestParam : function() {
+        var oReg = /^[@]/g;
+        var sInputData = this.elInputFormat.value;
+        var sPreString = sInputData.substring(0, this.nCurrentLocation);
+        var nStartIndex, nNewLineIndex;
+        var sRequestParam = null;
+
+        // start caret position 값이 0보다 작을 경우
+        nStartIndex = sPreString.lastIndexOf(' ');
+        nNewLineIndex = sPreString.lastIndexOf('\n');
+        if(nStartIndex < nNewLineIndex) {
+            nStartIndex = nNewLineIndex + 1;
+        }
+
+        if(nStartIndex < 0) {
+            nStartIndex = 0;
+        }
+
+        sRequestParam = sInputData.substring(nStartIndex).split(' ')[0];
+        if(sRequestParam === "") {
+            sRequestParam = sInputData.substring(nStartIndex).split(' ')[1];
+        }
+
+        // @url이 맞는지 확인
+        if(oReg.test(sRequestParam) === false) {
+            return null;
+        }
+
+        return sRequestParam;
+    },
+
+    /**
+     * 입력 상태 체크
+     * @private
+     */
+    _updateCheck : function() {
+        var sData = this.elDataFormat.value;
+        var sInputString = this.elInputFormat.value;
+        var aUserData = sData.split(',');
+        var aInputParagraph = sInputString.split('\n');
+        var aInputString = new Array();
+        var nCount, nLength, sTempString, bHasNotUser, i;
+        var sUserId;
+
+        nLength = aInputParagraph.length;
+        for(i=0; i<nLength; i++) {
+            aInputString = aInputString.concat(aInputParagraph[i].split(' '));
+        }
+
+        nCount = aUserData.length;
+        nLength = aInputString.length;
+        for(i=0; i<nCount; i++) {
+
+            bHasNotUser = true;
+            for(var j=0; j<nLength; j++) {
+                sUserId = aUserData[i].split(':');
+                sTempString = this.cTrigger + sUserId[0];
+                if(sTempString.localeCompare(aInputString[j]) === 0) {
+                    bHasNotUser = false;
+                    break;
+                }
+            }
+
+            if(bHasNotUser === true && sTempString !== this.cTrigger) {
+                this._popDeleteData(aUserData[i]);
+            }
+        }
+    },
+
+    /**
+     * 선택된 언급자 입력 완성
+     * @param sId
+     * @returns {boolean}
+     * @private
+     */
+    _autoComplete : function(sId) {
+        var sAutoCompleteString = this.cTrigger + sId + ' ';
+        var sInputText = this.elInputFormat.value;
+        var sIndex, sTemp, sUpdateText, nCaretPosition;
+
+        sIndex = sInputText.substr(0, this.nCurrentLocation).lastIndexOf(this.cTrigger);
+        sUpdateText = sInputText.substr(0, sIndex) + sAutoCompleteString;
+        nCaretPosition = sUpdateText.length;
+
+
+        if(checkIeBrowser() === true) {
+            sTemp = sInputText.substr(this.nCurrentLocation);
+        } else {
+            sTemp = sInputText.substr(this.nCurrentLocation + 1);
+        }
+
+        sUpdateText = sUpdateText + sTemp;
+//        sIndex = sTemp.indexOf(' ');
+//        if(sIndex > 0) {
+//            sUpdateText = sUpdateText + sTemp.substr(sIndex);
+//        }
+
+        this.elInputFormat.value = "";
+        this.elInputFormat.value = sUpdateText;
+        this.elInputFormat.focus();
+        setCaretPosition(this.elInputFormat, nCaretPosition);
+
+        return false;
+    },
+
+    /**
+     * 자동완성 실행
+     * @param element
+     * @private
+     */
+    _onAutoComplete : function(element) {
+        var welElement = jindo.$Element(element);
+        var sId = welElement.attr("data-id");
+        var sName = welElement.attr("data-name");
+        var sNo = welElement.attr("data-no");
+        var sProfileUrl = welElement.attr("data-profile-url");
+
+        this._autoComplete(sId);
+        this._pushInsertData(sId, sName, sNo, sProfileUrl);
+        this._stopAjax();
+    },
+
+    /**
+     * - description about keyCode -
+     * keyCode(8) : backspace
+     * keyCode(13) : enter
+     * keyCode(32) : space
+     * keyCode(46) : delete
+     * keyCode(50) : '@'
+     * keyCode(38) : 방향키 '↑'
+     * keyCode(40) : 방향키 '↓'
+     */
+    _onKeyDownEvent : function(event) {
+        this.oKey = event.key();
+
+        if(this.bCouldResquest === true) {
+            if(this.oKey.up) {
+                event.stop();
+                this._stopAjax();
+                this._moveOnList("up");
+                return false;
+            }
+
+            if(this.oKey.down) {
+                event.stop();
+                this._stopAjax();
+                this._moveOnList("down");
+                return false;
+            }
+
+            if(this.oKey.enter) {
+                event.stop();
+                this._stopAjax();
+                this._stopRequest();
+                this._hideAutoCompleteList();
+                this._onAutoComplete(this._getListOfSelection());
+                return false;
+            }
+        }
+    },
+
+    /**
+     * 자동완성 리스트에 마우스를 over 했을 때
+     * @param event
+     * @private
+     */
+    _onMouseOverContent : function(event) {
+        this._removeOnClass();
+        this._addOnClass(event.element);
+    },
+
+    /**
+     * 자동완성 리스트를 선택했을 때
+     * @param event
+     * @returns {boolean}
+     * @private
+     */
+    _onMouseDownContent : function(event) {
+        this._stopRequest();
+        this._hideAutoCompleteList();
+        this._onAutoComplete(event.element);
+        event.stopDefault();
+        return false;
+    },
+
+    _onFocus : function() {
+        var oSelf = this;
+        this.sBackup = this.elInputFormat.value;
+
+        this.nTimer = setInterval(function() {
+            if(oSelf.sBackup !== oSelf.elInputFormat.value) {
+                oSelf.sBackup = oSelf.elInputFormat.value;
+                oSelf.nCurrentLocation = getCaretPosition(oSelf.elInputFormat);
+                oSelf._callRequest();
+                oSelf._updateCheck();
+            }
+        }, 100);
+    },
+
+    /**
+     * 자동완성 입력창에서 벗어났을 때
+     * @param event
+     * @returns {boolean}
+     * @private
+     */
+    _onBlur : function() {
+        clearTimeout(this.nTimer);
+        this._stopRequest();
+        this._hideAutoCompleteList();
+        return false;
+    }
+});
+
+
+
+function setCaretPosition(el, nLength) {
+    var nPosition = nLength;
+
+    if (el.setSelectionRange ) {
+        el.focus();
+        el.setSelectionRange(nPosition, nPosition);
+    } else if(el.createTextRange) {
+        var range = el.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', nPosition);
+        range.moveStart('character', nPosition);
+        range.select();
+    }
+}
+
+function getCaretPosition(el) {
+    if (el.selectionStart) {
+        return el.selectionStart;
+    } else if (document.selection) {
+        el.focus();
+
+        var r = document.selection.createRange();
+        if (r == null) {
+            return 0;
+        }
+
+        var re = el.createTextRange(),
+            rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+
+        return rc.text.length;
+    }
+    return 0;
+}
+
+function checkIeBrowser() {
+    var browser = navigator.userAgent.toLowerCase();
+
+    if( -1 != browser.indexOf('msie')) {
+        return true;
+    }
+
+    return false;
+}

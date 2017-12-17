@@ -1,0 +1,54 @@
+var LikeLayer=$Class({_oElement:null,_wElement:null,_wTemplate:null,_oEvent:null,_bLikeReaction:false,
+_bUsefulReaction:false,_bHahaReaction:false,_sFirstLikeLayerTemplate:'\x3cdiv class\x3d"dim" id\x3d"likeLayer"\x3e'+
+'\x3cdiv class\x3d"ly_dim"\x3e\x3c/div\x3e'+'\x3cdiv class\x3d"layer_module" id\x3d"likeContentsLayer"\x3e'+
+'\x3cdiv class\x3d"layer_module__content"\x3e'+'\x3cdiv class\x3d"layer_module__badge type_best"\x3e'+
+'\x3cspan class\x3d"blind"\x3e\ubca0\uc2a4\ud2b8 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/span\x3e'+"\x3c/div\x3e"+
+'\x3cstrong class\x3d"layer_module__title"\x3e\x3cem class\x3d"layer_module__highlight2"\x3e\uc88b\uc544\uc694\x3c/em\x3e\ub97c\x3cbr\x3e\ub20c\ub7ec\uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4\x3c/strong\x3e'+
+'\x3cp class\x3d"layer_module__text"\x3e\uc88b\uc544\uc694 \ub610\ub294 \uc720\uc775\ud574\uc694\ub97c \ub204\ub978 \ub2f5\ubcc0\uc774 \ubca0\uc2a4\ud2b8\ub85c\x3cbr\x3e\uc120\uc815\ub418\ub294 \uacbd\uc6b0 \x3cem class\x3d"layer_module__highlight2"\x3e\ubca0\uc2a4\ud2b8 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/em\x3e\ub97c \ub4dc\ub9ac\uace0\x3cbr\x3e\uc788\uc73c\ub2c8, \uc720\uc6a9\ud55c \uc815\ubcf4\uac00 \uc788\ub294 \ub2f5\ubcc0\uc5d0\ub294 \uc88b\uc544\uc694\x3cbr\x3e\ub610\ub294 \uc720\uc775\ud574\uc694\ub97c \ub20c\ub7ec\uc8fc\uc138\uc694!\x3c/p\x3e'+
+"\x3c/div\x3e"+'\x3cdiv class\x3d"layer_module__single_buttons"\x3e'+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button type_primary\" onclick\x3d\"nclk(this,'eda*i.best','','');location.href\x3d'/mobile/best/index.nhn';\"\x3e\ubca0\uc2a4\ud2b8 \ubcf4\ub7ec\uac00\uae30\x3c/button\x3e"+
+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button _like_layer_close\" onclick\x3d\"nclk(this,'eda*i.close','','');\"\x3e\ud655\uc778\x3c/button\x3e"+
+"\x3c/div\x3e"+"\x3c/div\x3e"+"\x3c/div\x3e",_sFirstUsefulLayerTemplate:'\x3cdiv class\x3d"dim" id\x3d"likeLayer"\x3e'+
+'\x3cdiv class\x3d"ly_dim"\x3e\x3c/div\x3e'+'\x3cdiv class\x3d"layer_module" id\x3d"likeContentsLayer"\x3e'+
+'\x3cdiv class\x3d"layer_module__content"\x3e'+'\x3cdiv class\x3d"layer_module__badge type_best"\x3e'+
+'\x3cspan class\x3d"blind"\x3e\ubca0\uc2a4\ud2b8 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/span\x3e'+"\x3c/div\x3e"+
+'\x3cstrong class\x3d"layer_module__title"\x3e\x3cem class\x3d"layer_module__highlight2"\x3e\uc720\uc775\ud574\uc694\x3c/em\x3e\ub97c\x3cbr\x3e\ub20c\ub7ec\uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4\x3c/strong\x3e'+
+'\x3cp class\x3d"layer_module__text"\x3e\uc88b\uc544\uc694 \ub610\ub294 \uc720\uc775\ud574\uc694\ub97c \ub204\ub978 \ub2f5\ubcc0\uc774 \ubca0\uc2a4\ud2b8\ub85c\x3cbr\x3e\uc120\uc815\ub418\ub294 \uacbd\uc6b0 \x3cem class\x3d"layer_module__highlight2"\x3e\ubca0\uc2a4\ud2b8 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/em\x3e\ub97c \ub4dc\ub9ac\uace0\x3cbr\x3e\uc788\uc73c\ub2c8, \uc720\uc6a9\ud55c \uc815\ubcf4\uac00 \uc788\ub294 \ub2f5\ubcc0\uc5d0\ub294 \uc88b\uc544\uc694\x3cbr\x3e\ub610\ub294 \uc720\uc775\ud574\uc694\ub97c \ub20c\ub7ec\uc8fc\uc138\uc694!\x3c/p\x3e'+
+"\x3c/div\x3e"+'\x3cdiv class\x3d"layer_module__single_buttons"\x3e'+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button type_primary\" onclick\x3d\"nclk(this,'eda*u.best','','');location.href\x3d'/mobile/best/index.nhn';\"\x3e\ubca0\uc2a4\ud2b8 \ubcf4\ub7ec\uac00\uae30\x3c/button\x3e"+
+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button _like_layer_close\" onclick\x3d\"nclk(this,'eda*u.close','','');\"\x3e\ud655\uc778\x3c/button\x3e"+
+"\x3c/div\x3e"+"\x3c/div\x3e"+"\x3c/div\x3e",_sFirstHahaLayerTemplate:'\x3cdiv class\x3d"dim" id\x3d"likeLayer"\x3e'+
+'\x3cdiv class\x3d"ly_dim"\x3e\x3c/div\x3e'+'\x3cdiv class\x3d"layer_module" id\x3d"likeContentsLayer"\x3e'+
+'\x3cdiv class\x3d"layer_module__content"\x3e'+'\x3cdiv class\x3d"layer_module__badge type_shrine"\x3e'+
+'\x3cspan class\x3d"blind"\x3e\uc131\uc9c0 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/span\x3e'+"\x3c/div\x3e"+
+'\x3cstrong class\x3d"layer_module__title"\x3e\x3cem class\x3d"layer_module__highlight2"\x3e\uc7ac\ubc0c\uc5b4\uc694\x3c/em\x3e\ub97c\x3cbr\x3e\ub20c\ub7ec\uc8fc\uc154\uc11c \uac10\uc0ac\ud569\ub2c8\ub2e4\x3c/strong\x3e'+
+'\x3cp class\x3d"layer_module__text"\x3e\uc7ac\ubc0c\uc5b4\uc694\ub97c \ub204\ub978 \ub2f5\ubcc0\uc774 \ubca0\uc2a4\ud2b8\ub85c \uc120\uc815\ub418\uba74\x3cbr\x3e\x3cem class\x3d"layer_module__highlight2"\x3e\uc131\uc9c0 \ubc1c\uad74\ub2e8 \ubc30\uc9c0\x3c/em\x3e\ub97c \ub4dc\ub9ac\uace0 \uc788\uc73c\ub2c8,\x3cbr\x3e\uae68\uc54c \uac19\uc774 \uc6c3\uae30\uace0 \uc7ac\ubc0c\ub294 \ub2f5\ubcc0\uc5d0\ub294\x3cbr\x3e\uc7ac\ubc0c\uc5b4\uc694\ub97c \ub20c\ub7ec\uc8fc\uc138\uc694!\x3c/p\x3e'+
+"\x3c/div\x3e"+'\x3cdiv class\x3d"layer_module__single_buttons"\x3e'+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button type_primary\" onclick\x3d\"nclk(this,'eda*h.best','','');location.href\x3d'/mobile/best/legendQnaList.nhn'\"\x3e\uc131\uc9c0 \ubcf4\ub7ec\uac00\uae30\x3c/button\x3e"+
+"\x3cbutton type\x3d\"button\" class\x3d\"layer_module__single_button _like_layer_close\" onclick\x3d\"nclk(this,'eda*h.close','','');\"\x3e\ud655\uc778\x3c/button\x3e"+
+"\x3c/div\x3e"+"\x3c/div\x3e"+"\x3c/div\x3e",_sLikeEventLayer:'\x3cdiv class\x3d"dim" id\x3d"likeLayer"\x3e '+
+'\x3cdiv class\x3d"ly_dim"\x3e\x3c/div\x3e'+'\x3cdiv class\x3d"layer_module" id\x3d"likeContentsLayer"\x3e'+
+'\x3cdiv class\x3d"layer_module__content"\x3e'+'\x3cstrong class\x3d"layer_module__title"\x3e\uc774\ubca4\ud2b8 \uc751\ubaa8 \uc644\ub8cc\x3c/strong\x3e'+
+'\x3cp class\x3d"layer_module__text"\x3e'+"\uc9c0\uc2ddiN \ub2e4\uc591\ud55c \ud45c\uc815 \uc774\ubca4\ud2b8\x3cbr\x3e\ucc38\uc5ec\uac00 \uc644\ub8cc \ub418\uc5c8\uc2b5\ub2c8\ub2e4."+
+"\x3c/p\x3e"+'\x3cp class\x3d"layer_module__subtext"\x3e'+"2\uc6d4 27\uc77c \uc9c0\uc2ddiN \uacf5\uc2dd \ube14\ub85c\uadf8\uc5d0\x3cbr\x3e\ub2f9\ucca8\uc790 \uacf5\uc9c0 \uc608\uc815\uc785\ub2c8\ub2e4."+
+"\x3c/p\x3e"+"\x3c/div\x3e"+'\x3cdiv class\x3d"layer_module__single_buttons"\x3e'+'\x3cbutton type\x3d"button" class\x3d"layer_module__single_button _like_layer_close"\x3e\ud655\uc778\x3c/button\x3e'+
+"\x3c/div\x3e"+"\x3c/div\x3e"+"\x3c/div\x3e",$init:function(htOption){this._oElement={};this._wElement=
+{};this._oEvent={};if(htOption){this._bLikeReaction=htOption.isLikeReaction;this._bUsefulReaction=htOption.isUsefulReaction;
+this._bHahaReaction=htOption.isHahaReaction}this._setElement();this._setEventForResponsiveWeb();$Fn(this.destroy,
+this).attach(window,"unload")},
+_setElement:function(){this._oElement["body"]=document.getElementsByTagName("body")[0];this._wElement["body"]=
+$Element(this._oElement["body"])},
+setReaction:function(isLikeReaction,isUsefulReaction,isHahaReaction){this._bLikeReaction=isLikeReaction;
+this._bUsefulReaction=isUsefulReaction;this._bHahaReaction=isHahaReaction},
+showLayer:function(){var sHtml="";if(this._bLikeReaction)sHtml=this._sFirstLikeLayerTemplate;else if(this._bUsefulReaction)sHtml=
+this._sFirstUsefulLayerTemplate;else if(this._bHahaReaction)sHtml=this._sFirstHahaLayerTemplate;else sHtml=
+this._sLikeEventLayer;this._wElement["body"].appendHTML(sHtml);this._wElement["likeLayer"]=$Element($("likeLayer"));
+this._wElement["likeContentsLayer"]=$Element($("likeContentsLayer"));this._wElement["likeLayer"].show();
+this._adjustPositionOfLayerInnerBox();this._oEvent["layerClose"]=$Fn(this._onClickLayerClose,this).attach($$("._like_layer_close"),
+"click")},
+_setEventForResponsiveWeb:function(){if(nhn.Kin.OS.ios||nhn.Kin.OS.android){var sResizeEventType="onorientationchange"in
+window?"orientationchange":"resize";this._oEvent[sResizeEventType]=$Fn(this._adjustPositionOfLayerInnerBox,
+this).attach(window,sResizeEventType)}else this._oEvent["resize"]=$Fn(this._adjustPositionOfLayerInnerBox,
+this).attach(window,"resize");this._oEvent["pageshow"]=$Fn(this._adjustPositionOfLayerInnerBox,this).attach(window,
+"pageshow")},
+_adjustPositionOfLayerInnerBox:function(){var welLayer=this._wElement["likeContentsLayer"];if(welLayer){var nLayerTop=
+window.pageYOffset+($Document(document).clientSize().height-welLayer.height())/2;welLayer.css({"top":nLayerTop})}},
+_onClickLayerClose:function(){this._wElement["likeLayer"].leave()},
+destroy:function(){this._oElement=this._wElement=this._wTemplate=this._oEvent=null}});

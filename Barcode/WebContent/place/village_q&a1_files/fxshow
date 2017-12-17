@@ -1,0 +1,464 @@
+/******************************************  Scouter ******************************************/
+naver_corp_da.Scouter = function(info){
+	if(!info.unit || !info.domId || !info.templateId || !info.ac) return;
+
+	this.daDomain = info.daDomain || [];
+	this.loggingUrlPrefix = info.loggingUrlPrefix || "https://scouter.da.naver.com/collect/scriptError?";
+	this.randomNumber = info.randomNumber || 1000;
+	this.unit = info.unit;
+	this.domId = info.domId;
+	this.templateId = info.templateId;
+	this.ac = info.ac;
+
+	this.init = function(){
+		// this.addErrorEventListner();
+	};
+
+	// try catch 로 잡은 에러를 수집한다. 
+	this.collectError = function(e){
+		var errorType = e.name || "";
+		var errorMessage = e.stack || e.message || e.toString() || "";
+
+		if(!this.isRandomNumber()) return;
+
+		this.log(this.loggingUrlPrefix + this.getErrorLogParam(errorType, errorMessage, "", "", ""));
+	};
+
+	// addErrorEventListner : onError 이벤트 핸들러를 등록한다. 광고 도메인 경로가 아니거나 랜덤 값이 아닌 경우 로깅을 하지 않는다. 
+	this.addErrorEventListner = function(){
+		var _this = this;
+		if(window.addEventListener){
+			window.addEventListener('error', function (e) {
+				var errorType = (e.error && e.error.name) || e.type || "";
+				var errorMessage = e.message || "";
+				var fileName = e.filename || "";
+				var lineNo = e.lineno || "";
+				var columnNo = e.colno || "";
+
+				if(!_this.isDaDomain(fileName) || !_this.isRandomNumber()) return;
+
+				_this.log(_this.loggingUrlPrefix + _this.getErrorLogParam(errorType, errorMessage, fileName, lineNo, columnNo));
+			}, false);
+		} else {
+			window.attachEvent('onerror', function(errorMessage, fileName, lineNo, columnNo, errorType) {
+				var errorType = errorType || "";
+				var errorMessage = errorMessage || "";
+				var fileName = fileName || "";
+				var lineNo = lineNo || "";
+				var columnNo = columnNo || "";
+
+				if(!_this.isDaDomain(fileName) || !_this.isRandomNumber()) return;
+
+				_this.log(_this.loggingUrlPrefix + _this.getErrorLogParam(errorType, errorMessage, fileName, lineNo, columnNo));
+			}, false);	
+		}
+	};
+
+	// isDaDomain : 광고 도메인인지 체크
+	this.isDaDomain = function(fileName){
+		if(fileName === "") return false;
+
+		// DA 라이브러리 도메인
+		var ours = this.daDomain;
+
+		for(var i = 0; i < ours.length; i++) {
+			if(fileName.match(ours[i]) !== null) return true; // 하나라도 매칭되면 true
+		}
+
+		return false;
+	};
+
+	// isRandomNumber : 로깅을 랜덤하게 처리할 때 사용
+	this.isRandomNumber = function(){
+		var rNum = Math.floor(Math.random() * this.randomNumber) + 1;
+		if(rNum === this.randomNumber) return true;
+
+		return false;
+	};
+
+	this.getErrorLogParam = function(errorType, errorMessage, fileName, lineNo, columnNo){
+		var errorLogParam = "unit=" + this.unit + "&domId=" + this.domId + 
+					"&templateId=" + this.templateId + "&ac=" + this.ac + 
+					"&errorType=" + errorType + "&errorMessage=" + errorMessage + 
+					"&fileName=" + fileName + "&lineNo=" + lineNo + "&columnNo=" + columnNo;
+		return errorLogParam;
+	};
+
+	this.log = function(url){
+		var img = document.createElement("img");
+		img.setAttribute("src", url);
+	};
+};
+
+naver_corp_da.scouters = naver_corp_da.scouters || {};
+
+
+naver_corp_da.scouters["da_kin".trim() || "adw_da"] = new naver_corp_da.Scouter({
+	daDomain: ["adcreative.naver.com", "tveta.naver.net", "ssl.pstatic.net/tveta", "ad.naver.com", "veta.naver.com"],
+	loggingUrlPrefix: "https://scouter.da.naver.com/collect/scriptError?",
+	randomNumber: 100,
+	unit: "SU10070",
+	domId: "da_kin".trim() || "adw_da",
+	templateId: "823",
+	ac: "7611003"
+});
+/******************************************  Scouter ******************************************/
+
+/******************************************	ActiveView ******************************************/
+var naver_corp_da = naver_corp_da || {};
+
+naver_corp_da.getDateString = function() {
+	var curDate = new Date();
+	var year = curDate.getFullYear();
+	var month = ((curDate.getMonth() + 1) < 10) ? "0" + (curDate.getMonth() + 1) : curDate.getMonth() + 1;
+	var day = (curDate.getDate() < 10) ? "0" + curDate.getDate() : curDate.getDate();
+	var hour = (curDate.getHours() < 10) ? "0" + curDate.getHours() : curDate.getHours();
+	var minute = (curDate.getMinutes() < 10) ? "0" + curDate.getMinutes() : curDate.getMinutes();
+	var second = (curDate.getSeconds() < 10) ? "0" + curDate.getSeconds() : curDate.getSeconds();
+
+	return year + "" + month + "" + day + "" + hour + "" + minute + "" + second;
+};
+
+naver_corp_da.ActiveView = function(info) {
+	if (!info.adDiv) return;
+
+	this.adDiv = info.adDiv;
+	this.acEndDate = info.acEndDate || "20991231235959";
+	this.adEndDate = info.adEndDate || "20991231235959";
+	this.scrollTarget = info.scrollTarget || window;
+	this.activeViewTime = info.activeViewTime || 0;
+	this.activeViewPercentage = info.activeViewPercentage || 1.0;
+	this.orientationChangeTime = info.orientationChangeTime || 500;
+	this.callback = info.callback || null;
+	this.callbackForInValid = info.callbackForInValid || null;
+
+	this.viewPortIn = false;
+	this.timeout = null;
+	this.isValid = true;
+	this.isCalledCallbackForInValid = false;
+
+	this.scrollEventHandler = function(e) {
+		var _this = this;
+		var curDate = naver_corp_da.getDateString();
+		this.isValid = (curDate <= this.adEndDate);
+
+		var flagIn = this.beIntoViewPortWithRatio(this.adDiv, this.activeViewPercentage);
+		var flagOut = !this.beIntoViewPortWithRatio(this.adDiv, 0.01);
+
+		if (!this.isValid && !this.isCalledCallbackForInValid && this.callbackForInValid) { // endDate 이후, 광고 처리
+			var flagInValid = this.beIntoViewPortWithRatio(this.adDiv, -6.0); // 광고 영역의 위치가 -600% 일 경우
+			if (flagInValid) {
+				this.callbackForInValid();
+				this.isCalledCallbackForInValid = true;
+			}
+		}
+
+		if (flagIn) { // viewport 안에 있을 경우
+			this.viewPortIn = true;
+
+			if (this.timeout) return;
+
+			this.timeout = setTimeout(function() {
+				if (!_this.viewPortIn) return;
+
+				if (_this.callback) _this.callback();
+			}, this.activeViewTime);
+		}
+
+		if (flagOut) { // viewport 밖에 있을 경우
+			this.viewPortIn = false;
+
+			if (!this.timeout) return;
+
+			clearTimeout(this.timeout);
+			this.timeout = null;
+		}
+	};
+
+	this.orientationChangeEventHandler = function(e) {
+		var _this = this;
+		setTimeout(function() {
+			_this.scrollEventHandler();
+		}, this.orientationChangeTime);
+	};
+
+	this.checkActiveView = function() {
+		var _this = this;
+		if (AgentDetect.IS_IOS) {
+			setTimeout(function() {
+				_this.scrollEventHandler();
+			}, 500);
+		} else {
+			this.scrollEventHandler();
+		}
+
+		this.addEventListener();
+	};
+
+	this.clearActiveView = function() {
+		this.removeEventListener();
+		clearTimeout(this.timeout);
+		this.timeout = null;
+	};
+
+	this.getIsValid = function() {
+		return this.isValid;
+	};
+};
+
+naver_corp_da.ActiveView.prototype = {
+	beIntoViewPortWithRatio: function(elem, ratio) {
+		if (!elem) return false;
+
+		var ratio = (ratio) ? ratio : 1.0;
+		var eH = parseInt(elem.style.height || elem.getBoundingClientRect().height || elem.offsetHeight, 10);
+		var viewportTop = window.pageYOffset;
+		var viewportBottom = window.pageYOffset + window.innerHeight;
+
+		var f1 = (viewportTop <= (this.offset(elem).top + (eH * (1.0 - ratio))));
+		var f2 = (viewportBottom >= this.offset(elem).top + (eH * ratio));
+
+		return (f1 && f2);
+	},
+
+	offset: function(elem) {
+		var docElem, win,
+			box = {
+				top: 0,
+				left: 0
+			},
+			doc = elem && elem.ownerDocument;
+
+		if (!doc) {
+			return;
+		}
+
+		docElem = doc.documentElement;
+
+		if (typeof elem.getBoundingClientRect !== typeof undefined) {
+			box = elem.getBoundingClientRect();
+		}
+
+		win = this.getWindow(doc);
+
+		return {
+			top: box.top + (win.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0),
+			left: box.left + (win.pageXOffset || docElem.scrollLeft) - (docElem.clientLeft || 0)
+		};
+	},
+
+	getWindow: function(elem) {
+		return (elem && (elem === elem.window)) ? elem : elem.nodeType === 9 && elem.defaultView;
+	},
+
+	removeEventListener: function() {
+		if (this.scrollTarget.removeEventListener) {
+			this.scrollTarget.removeEventListener('scroll', this, false);
+		} else {
+			this.scrollTarget.detachEvent('scroll', this, false);
+		}
+
+		window.removeEventListener('orientationchange', this, false);
+	},
+
+	addEventListener: function() {
+		if (this.scrollTarget.addEventListener) {
+			this.scrollTarget.addEventListener('scroll', this, false);
+		} else {
+			this.scrollTarget.attachEvent('scroll', this, false);
+		}
+
+		window.addEventListener('orientationchange', this, false);
+	},
+
+	handleEvent: function(e) {
+		switch (e.type) {
+			case 'scroll':
+				this.scrollEventHandler(e);
+				break;
+			case 'orientationchange':
+				this.orientationChangeEventHandler(e);
+				break;
+		}
+	}
+};
+
+naver_corp_da.activeViews = naver_corp_da.activeViews || {};
+
+naver_corp_da.clearActiveViews = function() {
+	var target = naver_corp_da.activeViews;
+	for (var i in target) {
+		if (target.hasOwnProperty(i) && !!target[i]) {
+			target[i].clearActiveView();
+			target[i] = null;
+		}
+	}
+};
+
+/******************************************	ActiveView ******************************************/
+
+/******************************************	naver_corp_da.Util ******************************************/
+naver_corp_da.Util = function() {
+    this.log = function(url) {
+        var args = Array.prototype.slice.call(arguments);
+
+        var image = new Image(1, 1);
+
+        var getType = {};
+        if (args.length > 1 && args[1] && getType.toString.call(args[1]) === "[object Function]") {
+            image.addEventListener("load", args[1]);
+        }
+
+        image.src = appendDummy(url);
+    };
+
+    this.getHttpOrHttpsUrl = function(httpUrl, httpsUrl) {
+		return (document.location.protocol === "http:") ? httpUrl : httpsUrl;
+	};
+
+    var appendDummy = function(url) {
+        if (url.indexOf("?") > 0) {
+            url += "&dummy=";
+            url += Math.random();
+        } else {
+            url += "?dummy=";
+            url += Math.random();
+        }
+        return url;
+    };
+};
+
+/******************************************	naver_corp_da.Util ******************************************/
+
+(function () {
+	try {
+		var util = naver_corp_da.Util ? new naver_corp_da.Util() : new NBP_CORP.Nimp();
+		var daHTML = makeHTML();
+		var da_dom_id = 'da_kin'.trim();
+		var uId = (da_dom_id.length > 0) ? da_dom_id : (typeof nbp_ad !== 'undefined') ? nbp_ad.mobilenetwork.ad_div_id : 'adw_da';
+		var tarEl = NBP_CORP.$(uId);
+
+		function initAd() {
+			var util = naver_corp_da.Util ? new naver_corp_da.Util() : new NBP_CORP.Nimp();
+			var da_dom_id = 'da_kin'.trim();
+			var uId = (da_dom_id.length > 0) ? da_dom_id : (typeof nbp_ad !== 'undefined') ? nbp_ad.mobilenetwork.ad_div_id : 'adw_da';
+			var isViewable = JSON.parse(sessionStorage.getItem(uId + "_isViewable"));
+
+			var ac_end_date = "20180105235959";
+			var ad_end_date = "20180105235959";
+			var scroll_target = (typeof da_scroll_target !== 'undefined') ? da_scroll_target.targetEl : window;
+			var orientation_change_time = 500;
+			var adview_url = "https://mv.veta.naver.com/fxview?eu=EU10000088&ac=7611003&src=3281600&evtcd=V900&x_ti=823&tb=&oid=&sid1=&sid2=&rk=WjHdLQpgE30AAiyfmBkAAASr&eltts=xgzHXhIl1%2FCv2Z1eZXujWg%3D%3D&";
+
+			var options = {
+				uId: uId,
+				util: util,
+				acEndDate: ac_end_date,
+				adEndDate: ad_end_date,
+				scrollTarget: scroll_target,
+				orientationChangeTime: orientation_change_time,
+				adview_url: adview_url
+			};
+
+			if (!isViewable && (typeof naver_corp_da.ActiveViewSub !== "undefined")) {
+				naver_corp_da.initActiveViewSub(options);
+			}
+		}
+
+		function makeHTML() {
+			var html = '';
+			html += '<a href="https://mv.veta.naver.com/fxclick?eu=EU10000088&ac=7611003&src=3281600&br=2607994&evtcd=P901&x_ti=823&tb=&oid=&sid1=&sid2=&rk=WjHdLQpgE30AAiyfmBkAAASr&eltts=xgzHXhIl1%2FCv2Z1eZXujWg%3D%3D&lu=&" style="display:block;background:#fff;">';
+			html += '<span id="nbp_da_img" style="display:block;width:100%;height:120px;background:url(' + util.getHttpOrHttpsUrl('https://ssl.pstatic.net/tveta/libs/1183/1183465/9edb7a4a29848c16b40e_20171212145824111_bg_left.jpg', 'https://ssl.pstatic.net/tveta/libs/1183/1183465/9edb7a4a29848c16b40e_20171212145824111_bg_left.jpg') + ') repeat-x;background-size:auto 120px;-webkit-background-size:1px 120px;text-decoration:none;text-align:center;">';
+			html += '<img src="' + util.getHttpOrHttpsUrl('https://ssl.pstatic.net/tveta/libs/1183/1183465/9edb7a4a29848c16b40e_20171212145824111.png', 'https://ssl.pstatic.net/tveta/libs/1183/1183465/9edb7a4a29848c16b40e_20171212145824111.png') + '" alt="AD" width="320" height="120" data-media-width="640" data-media-height="240" data-content-type="image" style="vertical-align:top;border:none" />';
+			html += '&nbsp;</span>';
+			html += '</a>';
+
+			return html;
+		}
+
+		if (tarEl) {
+			tarEl.removeAttribute('style');
+			tarEl.innerHTML = daHTML;
+
+			/* ActiveView */
+			var ac_end_date = "20180105235959";
+			var ad_end_date = "20180105235959";
+
+			// da_scroll_target : 지식인 태블릿 가로모드 대응 시, 선언되는 객체. da_scroll_target.targetEl에 스크롤이 될 div 엘리먼트가 셋팅됨
+			var scroll_target = (typeof da_scroll_target !== 'undefined') ? da_scroll_target.targetEl : window;
+			var orientation_change_time = 500;
+
+			var callback = function () {
+				var eid = '';
+				try {
+					var target = NBP_CORP.$(uId);
+					eid = (target) ? ((parseInt(target.getBoundingClientRect().height || target.offsetHeight, 10) === 0) ? 'V000' : 'V900') : 'V000';
+				} catch (e) {
+					eid = 'V000';
+
+					// scouter logging
+					naver_corp_da.scouters["da_kin".trim() || "adw_da"].collectError(e);
+				} finally {
+					if (eid === 'V900') naver_corp_da.activeViews[uId].removeEventListener();
+					var url = "https://mv.veta.naver.com/fxview?eu=EU10000088&ac=7611003&src=3281600&evtcd=V900&x_ti=823&tb=&oid=&sid1=&sid2=&rk=WjHdLQpgE30AAiyfmBkAAASr&eltts=xgzHXhIl1%2FCv2Z1eZXujWg%3D%3D&&eid=" + eid;
+					util.log(url);
+
+					try {
+						if (typeof sessionStorage !== "undefined" && tarEl.getAttribute("data-state-type") == "persist") {
+							sessionStorage.setItem(uId + "_isViewable", true);
+						}
+					} catch (e) {
+
+					}
+				}
+			};
+
+			var callbackForInValid = function () {
+				var target = NBP_CORP.$(uId);
+				naver_corp_da.activeViews[uId].removeEventListener();
+				if (target) {
+					target.innerHTML = '';
+					target.style.removeProperty('height');
+				}
+			};
+
+			naver_corp_da.activeViews[uId] = naver_corp_da.activeViews[uId] || null;
+
+			if (naver_corp_da.activeViews[uId]) {
+				naver_corp_da.activeViews[uId].clearActiveView();
+				naver_corp_da.activeViews[uId] = null;
+			}
+
+			var options = {
+				adDiv: tarEl,
+				acEndDate: ac_end_date,
+				adEndDate: ad_end_date,
+				scrollTarget: scroll_target,
+				orientationChangeTime: orientation_change_time,
+				callback: callback,
+				callbackForInValid: callbackForInValid
+			};
+
+			naver_corp_da.activeViews[uId] = (typeof naver_corp_da.ActiveViewSub !== "undefined") ?
+				new naver_corp_da.ActiveViewSub(options) : new naver_corp_da.ActiveView(options);
+
+			naver_corp_da.activeViews[uId].checkActiveView();
+
+			try {
+				// 퍼시스트 컴포넌트 대상 광고일 경우
+				if (typeof sessionStorage !== "undefined" && tarEl.getAttribute("data-state-type") == "persist") {
+					sessionStorage.removeItem(uId);
+					sessionStorage.setItem(uId, "(" + initAd.toString() + ")();");
+
+					sessionStorage.removeItem(uId + "_isViewable");
+					sessionStorage.setItem(uId + "_isViewable", false);
+				}
+			} catch (e) {
+
+			}
+		}
+	} catch (e) {
+		// scouter logging
+		naver_corp_da.scouters["da_kin".trim() || "adw_da"].collectError(e);
+	}
+})();

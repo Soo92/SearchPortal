@@ -1,0 +1,23 @@
+var OpenAnswerComment=$Class({_oOption:null,_wCommentTemplate:null,_COMMENT_LIST_AJAX_URL:"/mobile/ajax/commentListForDetail.nhn",
+$init:function(htOption){this._oOption=htOption||{};this._wCommentTemplate=$Template("commentListTpl");
+if(!this._wCommentTemplate)return;this._openAnswerComment()},
+_openAnswerComment:function(){var oElAnswerListForOpenComment=[];var oMyAnswerHasComment=$$.getSingle("#endArea div._answerCommentOpenArea._isMyThanksMessage");
+if(oMyAnswerHasComment)oElAnswerListForOpenComment[oMyAnswerHasComment.id]=oMyAnswerHasComment;var oElAnswerCommentOpenArea=
+$$.getSingle("#endArea div._answerCommentOpenArea");if(oElAnswerCommentOpenArea)oElAnswerListForOpenComment[oElAnswerCommentOpenArea.id]=
+oElAnswerCommentOpenArea;for(var sKey in oElAnswerListForOpenComment)if(oElAnswerListForOpenComment.hasOwnProperty(sKey))this._getAnswerCommentListAjax($Element(oElAnswerListForOpenComment[sKey]))},
+_getAnswerCommentListAjax:function(wElAnswerCommentOpenArea){var nAnswerNo=parseInt(wElAnswerCommentOpenArea.attr("data-answer-no"),
+10);if(nAnswerNo<1){wElAnswerCommentOpenArea.leave();return}var oParams={dirId:this._oOption.dirId||0,
+docId:this._oOption.docId||0,answerNo:nAnswerNo};var oOptions={method:"get",timeout:3,onload:$Fn(this._succeedInGetCommentListAjax,
+this).bind(wElAnswerCommentOpenArea,nAnswerNo),ontimeout:$Fn(this._failedInGetCommentListAjax,this).bind(wElAnswerCommentOpenArea),
+onerror:$Fn(this._failedInGetCommentListAjax,this).bind(wElAnswerCommentOpenArea)};var oAjax=new $Ajax(this._COMMENT_LIST_AJAX_URL,
+oOptions);oAjax.request(oParams)},
+_succeedInGetCommentListAjax:function(wElAnswerCommentOpenArea,nAnswerNo,oResponse){if(!wElAnswerCommentOpenArea)return;
+var sThanksMessage=decodeURIComponent(wElAnswerCommentOpenArea.attr("data-etm")||"");var oJson=oResponse.json();
+if(oJson&&oJson.isSuccess&&oJson.result&&oJson.result.length>0){var oResult=oJson.result[0];wElAnswerCommentOpenArea.replace(this._wCommentTemplate.process({dirId:this._oOption.dirId,
+docId:this._oOption.docId,answerNo:nAnswerNo,totalCommentCnt:wElAnswerCommentOpenArea.attr("data-total-comment-cnt")||
+0,returnUrl:encodeURIComponent(location.href),thanksMessage:sThanksMessage,commentList:oResult.list||
+[],showMoreBtn:oResult.showMoreBtn||false}))}else if(sThanksMessage)wElAnswerCommentOpenArea.replace(this._wCommentTemplate.process({dirId:this._oOption.dirId,
+docId:this._oOption.docId,answerNo:nAnswerNo,totalCommentCnt:wElAnswerCommentOpenArea.attr("data-total-comment-cnt")||
+0,returnUrl:encodeURIComponent(location.href),thanksMessage:sThanksMessage,commentList:null,showMoreBtn:false}));
+else wElAnswerCommentOpenArea.leave()},
+_failedInGetCommentListAjax:function(wElAnswerCommentOpenArea,oResponse){if(wElAnswerCommentOpenArea)wElAnswerCommentOpenArea.leave()}});

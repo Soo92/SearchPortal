@@ -1,0 +1,49 @@
+/**
+ * Created by juhee on 2014. 2. 24..
+ */
+
+LikeAnimation = function() {
+
+    var welContainer = jindo.$Element("container");
+    welContainer.delegate("click", "a._like_link", function(event) {
+        var elTargetElement = event.element;
+        var welTargetElement = jindo.$Element(elTargetElement);
+        var welLikeOnElement = welTargetElement.next();
+
+
+        function changeElement() {
+            var welChildElement;
+
+
+            welLikeOnElement.prependHTML(elTargetElement.innerHTML);
+            welTargetElement.leave();
+            welChildElement = welLikeOnElement.child();
+            welChildElement[0].prependHTML("<img src=\"http://img.grafolio.net/pc/ic_like.png\" class=\"heart\" width=\"32\" height=\"28\" alt=\"\">");
+            welLikeOnElement.css("display", "block");
+        }
+
+        function animateHeart() {
+            var elHeartImage = welLikeOnElement.query('.heart').$value();
+            var oTransition = new jindo.Transition();
+            var oEffect = new jindo.Effect.linear("50px", "44px", "32px", "28px");
+
+            var nFps = 30;
+            var nDuration = 100;
+            var nSleep = 200;
+
+
+            oTransition.fps(nFps).abort().queue(nDuration, elHeartImage, {
+                '@width' : oEffect(0),
+                '@height' : oEffect(1)
+            }).sleep(nSleep).queue(nDuration, elHeartImage, {
+                    '@width' : oEffect(2),
+                    '@height' : oEffect(3)
+                }).start();
+        }
+
+
+        changeElement();
+        animateHeart();
+    });
+
+}

@@ -1,0 +1,503 @@
+(function (){
+  var ccsrv, g_pid, g_sid, init, nclicksConfig, nclk, nclkF, nclkR, nclk_do, nsc;
+
+  nclk = function(d, p, j, b, c, n) {
+    var e, f, h, k, q, s, t, tU, u;
+    f = void 0;
+    h = void 0;
+    e = void 0;
+    k = void 0;
+    u = void 0;
+    s = void 0;
+    q = navigator.userAgent.toLowerCase().indexOf('safari') !== -1 ? true : false;
+    t = window.event;
+    if (!c) {
+      c = 0;
+    }
+    if (!n) {
+      n = '';
+    }
+    k = '';
+    f = 0;
+    if (c === 1) {
+      f = 0;
+    } else {
+      if (d.href) {
+        e = d.tagName.toLowerCase();
+        k = d.href.toLowerCase();
+        u = d.target;
+        s = d.getAttribute('href', 2);
+        if (u && u !== '_self' && u !== '_top' && u !== '_parent' || k.indexOf('javascript:') !== -1 || s && s.charAt(0) === '#' || k.indexOf('#') !== -1 && k.substr(0, d.href.indexOf('#')) === document.URL || e === 'img') {
+          f = 0;
+        } else {
+          f = 1;
+        }
+      } else {
+        f = 0;
+      }
+    }
+    nclk.getst();
+    tU = nclk.gl(p, j, b, '', 0, nclk.st, n);
+    if (k && k.indexOf(nclk.pt + '//' + ccsrv) === 0) {
+      h = d.href;
+    } else {
+      if (k && k.indexOf(nclk.pt + '//' + ccsrv) !== 0 && e && e !== 'img') {
+        h = tU + '&u=' + nclk.ec(d.href);
+      } else {
+        h = tU + '&u=about%3Ablank';
+      }
+    }
+    if (f === 1 && q && t.preventDefault) {
+      t.preventDefault();
+      nclk.sd(h, function() {
+        nclk.go(d.href);
+      });
+    } else {
+      nclk.sd(h);
+    }
+    return true;
+  };
+
+  nclk_do = function(a) {
+    if (!a) {
+      a = document;
+    }
+    nclk.addEvent(a, 'click', nclk.generateCC);
+  };
+  nclkR = function(b, d, f, c, e) {
+    nclk.getst();
+    window.location.href = nclk.gl(b, d, f, c, 1, nclk.st, e);
+  };
+  nclkF = function(c, d, h, j, e) {
+    var b;
+    nclk.getst();
+    b = nclk.gl(c, d, h, 'about:blank', 0, nclk.st, e);
+    nclk.sd(b, j);
+  };
+  if (typeof nclk === 'undefined') {
+    nclk = {};
+  }
+  if (!g_pid) {
+    g_pid = '';
+  }
+  if (!g_sid) {
+    g_sid = '';
+  }
+  if (!ccsrv) {
+    ccsrv = 'cc.naver.com';
+  }
+  if (!nsc) {
+    nsc = 'decide.me';
+  }
+  nclk.vs = '0.1.7.evt';
+  nclk.md = 'cc';
+  nclk.pt = 'https:';
+  nclk.ct = 0;
+  nclk.st = 0;
+  nclk.ec = encodeURIComponent;
+  nclk.getst = function() {
+    if (window.g_ssc !== void 0 && window.g_query !== void 0) {
+      nclk.st = 1;
+    } else {
+      nclk.st = 0;
+    }
+  };
+  nclk.timeout = 5000;
+  nclk.MaxDepth = 8;
+  nclk.MaxEvtTarget = 4;
+  nclk.sd = function(a, c) {
+    var b, d, e, g;
+    d = 0;
+    g = void 0;
+    if (nclk.ct > 0) {
+      b = (new Date).getTime();
+      a += '&nt=' + b;
+    }
+    if (typeof c === 'function') {
+      d = 1;
+    }
+    e = new Image;
+    e.src = a;
+    e.onload = function() {
+      if (g) {
+        clearTimeout(g);
+      }
+      if (d) {
+        c();
+      }
+      e.onload = null;
+    };
+    if (d) {
+      g = setTimeout((function() {
+        c();
+      }), nclk.timeout);
+    }
+    nclk.ct++;
+  };
+  nclk.gl = function(d, f, k, e, b, h, j) {
+    var c;
+    if (b === void 0) {
+      b = 1;
+    }
+    if (h === void 0) {
+      h = 0;
+    }
+    c = nclk.pt + '//' + ccsrv + '/' + nclk.md + '?a=' + d + '&r=' + k + '&i=' + f + '&m=' + b;
+    if (h === 1) {
+      c += '&ssc=' + g_ssc + '&q=' + nclk.ec(g_query) + '&s=' + g_sid + '&p=' + g_pid + '&g=' + j;
+    } else {
+      c += '&nsc=' + nsc;
+    }
+    if (j) {
+      c += '&g=' + j;
+    }
+    if (e) {
+      c += '&u=' + nclk.ec(e);
+    }
+    return c;
+  };
+  nclk.go = function(a) {
+    window.location.href = a;
+  };
+  nclk.addEvent = function(c, b, a) {
+    if (c.addEventListener) {
+      c.addEventListener(b, a, false);
+    } else {
+      if (c.attachEvent) {
+        c['e' + b + a] = a;
+        c[b + a] = function() {
+          c['e' + b + a](window.event);
+        };
+        c.attachEvent('on' + b, c[b + a]);
+      }
+    }
+  };
+  nclk.generateCC = function(j) {
+    var a, b, c, d, f, g, h, i, k, l, m, n, o, p, q, r;
+    p = j || window.event;
+    if (!p) {
+      return false;
+    }
+    c = p.target || p.srcElement;
+    m = c.nodeName;
+    k = void 0;
+    n = void 0;
+    o = void 0;
+    b = '';
+    r = '';
+    i = '';
+    d = '';
+    a = 0;
+    l = 0;
+    f = void 0;
+    q = void 0;
+    g = void 0;
+    h = 0;
+    if (p.button === 2) {
+      return;
+    }
+    if (c.nodeType === 3) {
+      c = c.parentNode;
+    }
+    if (c.parentNode && c.parentNode.nodeName === 'A') {
+      c = c.parentNode;
+    }
+    n = c;
+    while (h < nclk.MaxEvtTarget) {
+      g = nclk.getTag(c);
+      f = g[0];
+      q = g[1];
+      if (f === 0) {
+        if (c.parentNode) {
+          c = c.parentNode;
+          h++;
+        } else {
+          f = 0;
+          k = n;
+          break;
+        }
+      } else {
+        k = c;
+        break;
+      }
+    }
+    if (h === nclk.MaxEvtTarget) {
+      return false;
+    }
+    switch (f) {
+      case 0:
+      case 1:
+      case 2:
+      case 3:
+        return false;
+      case 4:
+        b = nclk.findArea(k, 1);
+        if (b === void 0) {
+          b = '';
+        }
+        o = nclk.parseNCStr(f, q);
+        b = b + '.' + o[0];
+        break;
+      case 5:
+        b = nclk.findArea(k, 2);
+        if (b === void 0) {
+          b = '';
+        }
+        o = nclk.parseNCStr(f, q);
+        break;
+      case 6:
+        o = nclk.parseNCStr(f, q);
+        b = o[0];
+        break;
+      default:
+        return false;
+    }
+    i = o[1];
+    r = o[2];
+    d = o[3];
+    l = o[4];
+    if (l === '2') {
+      return false;
+    } else {
+      a = l;
+    }
+    if (d) {
+      nclk(k, b, r, i, a, d);
+    } else {
+      nclk(k, b, r, i, a);
+    }
+  };
+  nclk.searchNextObj = function(a) {
+    var b;
+    b = a.nextSibling;
+    if (b && b.nodeType === 3) {
+      b = b.nextSibling;
+    }
+    return b;
+  };
+  nclk.getTag = function(d) {
+    var a, b, c, e, f;
+    b = 0;
+    if (!d) {
+      return 0;
+    }
+    f = void 0;
+    c = void 0;
+    e = void 0;
+    a = '';
+    if (d.className) {
+      a = nclk.getClassTag(d.className);
+      if (!a) {
+        return [0, ''];
+      }
+    } else {
+      return [0, ''];
+    }
+    a = nclk.trim(a);
+    f = a.split('=');
+    c = f[0].charAt(0);
+    e = f[0].substring(1);
+    if (c !== 'N') {
+      return [0, ''];
+    }
+    if (e === 'E') {
+      b = 1;
+    } else {
+      if (e === 'I') {
+        b = 2;
+      } else {
+        if (e === 'EI' || e === 'IE') {
+          b = 3;
+        } else {
+          if (e === 'IP' || e === 'PI') {
+            b = 4;
+          } else {
+            if (e === 'P') {
+              b = 5;
+            } else {
+              if (f[0].length === 1) {
+                b = 6;
+              } else {
+                b = 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    return [b, a];
+  };
+  nclk.findArea = function(b, f) {
+    var a, c, d, e, g, h, i, j, k;
+    h = 0;
+    e = void 0;
+    i = void 0;
+    k = void 0;
+    d = void 0;
+    c = '';
+    a = 0;
+    j = void 0;
+    g = void 0;
+    if (!b) {
+      return;
+    }
+    if (f === 1) {
+      a = 1;
+    } else {
+      if (f === 2) {
+        a = 0;
+      }
+    }
+    while (b = b.parentNode) {
+      e = b;
+      i = b.className;
+      if (i) {
+        i = nclk.getClassTag(i);
+      } else {
+        h++;
+        if (h >= nclk.MaxDepth) {
+          j = '';
+          break;
+        }
+        continue;
+      }
+      if (i.indexOf('=') > 0) {
+        k = i.split('=');
+        g = k[0].substring(1);
+        if (g === 'I' && a === 0) {
+          d = k[1].split(':');
+          if (d[0] === 'a') {
+            if (d[1] !== '' && d[1] !== void 0) {
+              c = d[1];
+            }
+          }
+          a++;
+        } else {
+          if (g === 'E' && a === 1) {
+            if (a === 1) {
+              d = k[1].split(':');
+              if (d[0] === 'a') {
+                if (c === '') {
+                  c = d[1];
+                } else {
+                  c = (d[1] === void 0 ? '' : d[1]) + '.' + c;
+                }
+              }
+            }
+            a++;
+          } else {
+            if ((g === 'EI' || g === 'IE') && a === 0) {
+              d = k[1].split(':');
+              if (d[0] === 'a') {
+                c = d[1];
+              }
+              a += 2;
+            }
+          }
+        }
+      }
+      if (a >= 2) {
+        j = c;
+        break;
+      }
+      h++;
+      if (h >= nclk.MaxDepth) {
+        j = '';
+        break;
+      }
+    }
+    return j;
+  };
+  nclk.parseNCStr = function(f, m) {
+    var a, b, c, d, e, g, h, j, k, l, n;
+    a = void 0;
+    k = void 0;
+    j = void 0;
+    c = void 0;
+    b = '';
+    h = '';
+    n = '';
+    d = '';
+    l = 0;
+    e = 2;
+    m = nclk.trim(m);
+    switch (f) {
+      case 4:
+        e = 4;
+        break;
+      case 5:
+        e = 3;
+        break;
+      case 6:
+        e = 2;
+        break;
+      default:
+        return;
+    }
+    k = m.substring(e);
+    j = k.split(',');
+    g = 0;
+    while (g < j.length) {
+      c = j[g].split(':');
+      if (c[0] === 'a') {
+        b = c[1];
+      } else {
+        if (c[0] === 'r') {
+          h = c[1];
+        } else {
+          if (c[0] === 'i') {
+            n = c[1];
+          } else {
+            if (c[0] === 'g') {
+              d = c[1];
+            } else {
+              if (c[0] === 't') {
+                l = c[1];
+              }
+            }
+          }
+        }
+      }
+      g++;
+    }
+    return [b, h, n, d, l];
+  };
+  nclk.trim = function(a) {
+    return a.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+  };
+  nclk.getClassTag = function(e) {
+    var a, b, c, d;
+    d = '';
+    if (typeof e === 'string') {
+      d = e;
+    } else {
+      if (e.baseVal) {
+        d = e.baseVal;
+      } else {
+        d = '' + e;
+      }
+    }
+    b = new RegExp('N[^=]*=([^ $]*)');
+    c = d.match(b);
+    a = '';
+    if (c) {
+      a = c[0];
+    }
+    return a;
+  };
+  init = function(params) {
+    nsc = params.nsc;
+    g_pid = params.g_pid;
+    window.g_ssc = params.g_ssc;
+    ccsrv = params.nclicksUrl;
+    window.g_query = params.g_query;
+    return g_sid = params.g_sid;
+  }
+  nclk.init = init;
+  nclk.nclk = nclk;
+  nclk.nclkR = nclkR;
+  nclk.nclkF = nclkF;
+  nclk.nclk_do = nclk_do;
+  
+  window.nClicks = nclk
+})()

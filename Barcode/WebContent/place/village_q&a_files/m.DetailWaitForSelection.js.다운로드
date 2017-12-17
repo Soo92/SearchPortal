@@ -1,0 +1,70 @@
+var DetailWaitForSelection=$Class({_oElement:null,_wElement:null,_oEvent:null,_oOption:null,_wTemplate:null,
+_fnOnResizeWindow:null,_bIsLandscapeMode:null,_oWaitForSelectionListAjax:null,_DEFAULT_LIST_COUNT:3,_GET_WAIT_FOR_SELECTION_LIST_AJAX_URL:"/mobile/ajax/getListWaitForSelection.nhn",
+_DEFAULT_EXPIRE_TIME_FOR_LOCAL_STORAGE:6*60*60,_MAX_LENGTH_OF_LOCAL_STORAGE_ITEM:300,$init:function(htOption){if(this._isNoWaitForSelection(htOption.loginUserId))return;
+this._oOption=htOption||{};this._setElement();if(!this._wElement["waitForSelectionListArea"]){this.destroy();
+return}if(htOption.loadImmediately===true){this._callWaitForSelectionListAjax();return}this._setEvent();
+this._onResizeWindow()},
+_isNoWaitForSelection:function(sUserId){if(!sUserId)return true;var sNoWaitForSelection=nhn.Kin.LocalStorage.getItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_NO_WAIT_FOR_SELECTION);
+if(!sNoWaitForSelection)return false;var oRegExpForFindByUser=new RegExp(";("+sUserId+"):([0-9]+);");
+var aNoWaitForSelectionInfo=sNoWaitForSelection.match(oRegExpForFindByUser);if(!aNoWaitForSelectionInfo||
+aNoWaitForSelectionInfo.length<3)return false;var nLastCheckedTime=parseInt(aNoWaitForSelectionInfo[2]||
+0,10);var nCurrentTime=Math.round((new Date).getTime()/1E3);if(nCurrentTime<=nLastCheckedTime+this._DEFAULT_EXPIRE_TIME_FOR_LOCAL_STORAGE)return true;
+else{setTimeout($Fn(function(){sNoWaitForSelection=sNoWaitForSelection.replace(oRegExpForFindByUser,function(sMatch,
+sElementId,nLastCheckedTime,nOffset,sTotalString){return";"});
+nhn.Kin.LocalStorage.setItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_NO_WAIT_FOR_SELECTION,sNoWaitForSelection)},
+this).bind(),0);
+return false}},
+_setElement:function(){this._oElement={};this._oElement["listUpdateBoundary"]=$("listForSelectionUpdateBoundary");
+this._oElement["endContentsArea"]=$$.getSingle("#section_group1 div._contentsArea");this._wElement={};
+this._wElement["waitForSelectionListArea"]=$Element($$.getSingle("div._waitForSelectionListArea"));if(this._wElement["waitForSelectionListArea"])this._wElement["waitForSelectionList"]=
+$Element($$.getSingle("ul._waitForSelectionList",this._wElement["waitForSelectionListArea"].$value()));
+this._wTemplate={};this._wTemplate["waitForSelectionListTpl"]=$Template("waitForSelectionListTpl")},
+_setEvent:function(){this._wEvent={};if(nhn.Kin.OS.ios||nhn.Kin.OS.android){this._fnOnResizeWindow=$Fn(this._onResizeWindow,
+this).bind();jindo.m.bindRotate(this._fnOnResizeWindow)}else this._wEvent["resize"]=$Fn(this._onResizeWindow,
+this).attach(window,"resize");this._wEvent["pageshow"]=$Fn(this._onResizeWindow,this).attach(window,"pageshow")},
+_onResizeWindow:function(){var bIsLandscapeMode=nhn.Kin.getScreenType()==="TABLET_LANDSCAPE";if(this._bIsLandscapeMode===
+bIsLandscapeMode)return;this._bIsLandscapeMode=bIsLandscapeMode;if(bIsLandscapeMode){if(this._wEvent["scroll"]){this._wEvent["scroll"].detach(window,
+"scroll");this._wEvent["scroll"]=null}this._wEvent["contentsScroll"]=$Fn(this._onScroll,this).attach(this._oElement["endContentsArea"],
+"scroll")}else{if(this._wEvent["contentsScroll"]){this._wEvent["contentsScroll"].detach(this._oElement["endContentsArea"],
+"scroll");this._wEvent["contentsScroll"]=null}this._wEvent["scroll"]=$Fn(this._onScroll,this).attach(window,
+"scroll")}},
+_onScroll:function(we){var bIsIntoScreen=this._bIsIntoScreen(this._bIsLandscapeMode?this._oElement["endContentsArea"]:
+null);if(!bIsIntoScreen)return;if(this._oWaitForSelectionListAjax&&!this._oWaitForSelectionListAjax.isIdle())return;
+this._callWaitForSelectionListAjax()},
+_bIsIntoScreen:function(oTargetElement){var nTop=0;var nBottom=0;if(oTargetElement){nTop=oTargetElement.scrollTop;
+nBottom=oTargetElement.scrollTop+window.innerHeight}else{nTop=window.pageYOffset;nBottom=window.pageYOffset+
+window.innerHeight}var nCurrentTop=this._getCurrentTop(this._oElement["listUpdateBoundary"]);return nCurrentTop>=
+nTop&&nCurrentTop<=nBottom},
+_getCurrentTop:function(oTargetElement){var nCurrentTop=0;if(oTargetElement&&oTargetElement.offsetParent){var nCurrentElement=
+oTargetElement;do nCurrentTop+=nCurrentElement.offsetTop;while(nCurrentElement=nCurrentElement.offsetParent)}return nCurrentTop},
+_callWaitForSelectionListAjax:function(){var oAjaxParams={"count":this._DEFAULT_LIST_COUNT};var oAjaxOptions=
+{method:"get",timeout:3,onload:$Fn(this._onSuccessListAjax,this).bind(),ontimeout:$Fn(function(){if(!this._oWaitForSelectionListAjax.isIdle())this._oWaitForSelectionListAjax.abort()},
+this).bind(),
+onerror:$Fn(function(){if(!this._oWaitForSelectionListAjax.isIdle())this._oWaitForSelectionListAjax.abort()},
+this).bind()};
+this._oWaitForSelectionListAjax=new $Ajax(this._GET_WAIT_FOR_SELECTION_LIST_AJAX_URL,oAjaxOptions);this._oWaitForSelectionListAjax.request(oAjaxParams)},
+_onSuccessListAjax:function(oResponse){this._detachAllEvent();var oResponseJson=oResponse.json();if(oResponseJson&&
+oResponseJson.isSuccess&&oResponseJson.totalCount>0){var aResultList=oResponseJson.result;this._wElement["waitForSelectionList"].html(this._wTemplate["waitForSelectionListTpl"].process({"resultList":this._getProcessedList(aResultList)}));
+this._wElement["waitForSelectionListArea"].show()}else this._saveToLocalStorageAsNoWaitForSelection()},
+_getProcessedList:function(aResultList){if(!aResultList)return null;for(var i=0,len=aResultList.length;i<
+len;i++){var oListItem=aResultList[i];var nDirId=oListItem["dirId"]||0;var nDocId=oListItem["docId"]||
+0;var sWriteTime=oListItem["writeTime"];if(nDirId&&nDocId)oListItem["detailUrl"]="/mobile/qna/detail.nhn?d1Id\x3d"+
+nhn.Kin.getD1Id(nDirId)+"\x26dirId\x3d"+nDirId+"\x26docId\x3d"+nDocId;if(sWriteTime)oListItem["formattedWriteTime"]=
+sWriteTime.replace(/^(\d{4})-(\d{2})-(\d{2})(.*)$/,"$1.$2.$3.")}return aResultList},
+_saveToLocalStorageAsNoWaitForSelection:function(){var sUserId=this._oOption.loginUserId;if(!sUserId)return;
+setTimeout($Fn(function(){var sNoWaitForSelection=nhn.Kin.LocalStorage.getItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_NO_WAIT_FOR_SELECTION);
+var nCurrentTime=Math.round((new Date).getTime()/1E3);if(!sNoWaitForSelection||sNoWaitForSelection.length>
+this._MAX_LENGTH_OF_LOCAL_STORAGE_ITEM)sNoWaitForSelection=";"+sUserId+":"+nCurrentTime+";";else{var oRegExpForFindByUser=
+new RegExp(";("+sUserId+"):([0-9]+);");if(oRegExpForFindByUser.test(sNoWaitForSelection))sNoWaitForSelection=
+sNoWaitForSelection.replace(oRegExpForFindByUser,function(sMatch,sElementId,nLastCheckedTime,nOffset,
+sTotalString){return";"+sUserId+":"+nCurrentTime+";"});
+else sNoWaitForSelection=sNoWaitForSelection+sUserId+":"+nCurrentTime+";"}nhn.Kin.LocalStorage.setItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_NO_WAIT_FOR_SELECTION,
+sNoWaitForSelection)},this).bind(),0)},
+_detachAllEvent:function(){if(!this._wEvent)return;if(nhn.Kin.OS.ios||nhn.Kin.OS.android){if(this._fnOnResizeWindow){jindo.m.unbindRotate(this._fnOnResizeWindow);
+this._fnOnResizeWindow=null}}else if(this._wEvent["resize"]){this._wEvent["resize"].detach(window,"resize");
+this._wEvent["resize"]=null}if(this._wEvent["pageshow"])this._wEvent["pageshow"].detach(window,"pageshow");
+if(this._wEvent["scroll"]){this._wEvent["scroll"].detach(window,"scroll");this._wEvent["scroll"]=null}if(this._wEvent["contentsScroll"]){this._wEvent["contentsScroll"].detach(this._oElement["endContentsArea"],
+"scroll");this._wEvent["contentsScroll"]=null}},
+destroy:function(){this._detachAllEvent();this._oElement=this._wElement=this._oEvent=this._oOption=this._wTemplate=
+null;this._bIsLandscapeMode=this._oWaitForSelectionListAjax=null;this._DEFAULT_LIST_COUNT=this._GET_WAIT_FOR_SELECTION_LIST_AJAX_URL=
+null}});

@@ -1,0 +1,175 @@
+var DetailLayer=$Class({_oElement:null,_wElement:null,_wEvent:null,_wAdditionalEvent:null,_oOption:null,
+_wTemplate:null,_bIsLayerShowing:false,_bIsTooltipShowing:false,_bIsLandscapeMode:null,_bUseAnimation:false,
+_oTransition:null,_nCheckCompleteDivideQuestionCount:0,_ANIMATION_LAYER_INTERVAL:4E3,_APPLYEVENT_AJAX_URL:"/mobile/ajax/applyEvent.nhn",
+_CHECK_COMPLETE_DIVIDED_QUESTION_AJAX_URL:"/mobile/ajax/checkCompleteDividedQuestion.nhn",_DIVIDED_QUESTION_LIST_AJAX_URL:"/mobile/ajax/getDividedQuestionList.nhn",
+_CONSTANTS_FOR_WAITFORSELECTION_LAYER:{"maxHideTime":24*60*60,"maxLength":1E3,"cutBoundaryLength":900},
+$init:function(htOption){this._oOption=htOption||{};this._bIsTooltipShowing=this._oOption.isTooltipShowing||
+false;var oOsInfo=jindo.m.getOsInfo();if(oOsInfo)this._bUseAnimation=oOsInfo.android&&oOsInfo.version>=
+"4.0"||(oOsInfo.iphone||oOsInfo.ipad)&&oOsInfo.version>="7.0";this._setElement();this._setEvent();if(this._checkEliteUserVoteLayer())this._showEliteUserVoteLayer();
+if(this._oOption.isInitializeOnLoad===true)$Fn(this.initializeOnLoad,this).attach(window,"load");else if(document.readyState===
+undefined||document.readyState==="complete")this.initializeOnLoad();else $Fn(this.initializeOnLoad,this).attach(window,
+"load")},
+_setElement:function(){this._oElement={};this._oElement["endContentsArea"]=$$.getSingle("#section_group1 div._contentsArea");
+this._oElement["endArea"]=$("endArea");this._oElement["layerArea"]=$$("#ct div._layerArea");this._oElement["eliteUserVoteLayer"]=
+$("eliteUserVoteLayer");this._wElement={};this._wElement["questionLayer"]=$Element("question_layer");
+this._wElement["eventPromotionLayer"]=$Element("event_promotion_layer");this._wElement["waitForThanksMessageLayer"]=
+$Element("wait_for_thanks_message_layer");if(this._wElement["waitForThanksMessageLayer"])this._wElement["waitForThanksMessageLayerInnerBox"]=
+$Element($$.getSingle("div._layer",this._wElement["waitForThanksMessageLayer"].$value()));this._wElement["firstNormalAnswer"]=
+$Element($$.getSingle(".end_as._answer",this._oElement["endArea"]));if(this._oOption.dividedQuestion){this._oElement["dividedQuestionList"]=
+$("dividedQuestionList");this._oElement["dividedQuestionShowBtn"]=$$.getSingle("a._showBtn",this._oElement["dividedQuestionList"]);
+this._oElement["dividedQuestionHideBtn"]=$$.getSingle("button._hideBtn",this._oElement["dividedQuestionList"]);
+this._wElement["dividedQuestionList"]=$Element(this._oElement["dividedQuestionList"]);this._wElement["descriptionLayer"]=
+$Element($$.getSingle("div._descriptionLayer",this._oElement["dividedQuestionList"]));this._wElement["dividedQuestionCompleteLayer"]=
+$Element("divided_question_complete_layer");this._wElement["dividedQuestionIngLayer"]=$Element("divided_question_ing_layer")}this._wTemplate=
+{};this._wTemplate["answerLayerTpl"]=$Template("answer_layer_tpl");this._wTemplate["questionLayerTpl"]=
+$Template("question_layer_tpl");this._wTemplate["questionEventLayerTpl"]=$Template("question_event_layer_tpl");
+this._wTemplate["eventManualApplyLayerTpl"]=$Template("event_manual_apply_layer_tpl");this._wTemplate["fromMsglistCommentLayer"]=
+$Template("from_msglist_comment_layer");this._wTemplate["dividedQuestionListTpl"]=$Template("divided_question_list_tpl");
+this._wTemplate["dividedQuestionLayerTpl"]=$Template("divided_question_layer_tpl")},
+_setEvent:function(){this._wEvent={};this._wEvent["onClickLayerArea"]=$Fn(this._onClickLayer,this).attach(this._oElement["layerArea"],
+"click");if(this._wElement["waitForThanksMessageLayer"])this._wEvent["onClickWaitForThanksMessageLayer"]=
+$Fn(this._onClickWaitForThanksMessageLayer,this).attach(this._wElement["waitForThanksMessageLayer"].$value(),
+"click");if(this._oElement["eliteUserVoteLayer"])this._wEvent["onClickEliteUserVoteLayer"]=$Fn(this._onClickEliteUserVoteLayer,
+this).attach(this._oElement["eliteUserVoteLayer"],"click");if(this._oElement["dividedQuestionList"]){this._wEvent["onClickDividedQuestionShowBtn"]=
+$Fn(this._onClickDividedQuestionShowBtn,this).attach(this._oElement["dividedQuestionShowBtn"],"click");
+this._wEvent["onClickDividedQuestionHideBtn"]=$Fn(this._onClickDividedQuestionHideBtn,this).attach(this._oElement["dividedQuestionHideBtn"],
+"click")}this._wAdditionalEvent=[];document.addEventListener("likeReactionCallback",$Fn(this._likeReactionCallback,
+this).bind(),false)},
+initializeOnLoad:function(){if(this._isShowPushPromotionLayer(this._oOption.from)){if(this._bIsTooltipShowing&&
+typeof oKinCommonTooltip!=="undefined")oKinCommonTooltip.hideTooltip();this.showPushPromotionLayer(this._oOption.from)}else this.showFeedbackLayer();
+if(this._oOption.dividedQuestion&&(!this._oOption.layerData||!(this._oOption.layerData.mode==="question")))this._getDividedQuestionList();
+this._showAllInvisibleArea()},
+_onClickDividedQuestionShowBtn:function(we){this._wElement["descriptionLayer"].toggleClass("is-show");
+we.stop()},
+_onClickDividedQuestionHideBtn:function(we){this._wElement["descriptionLayer"].toggleClass("is-show");
+we.stop()},
+_checkCompleteDividedQuestion:function(){if(this._nCheckCompleteDivideQuestionCount>4){this._wElement["dividedQuestionIngLayer"].hide();
+this._wElement["questionLayer"].html(this._wTemplate["dividedQuestionLayerTpl"].process({"description":"\ub098\ub208 \uc9c8\ubb38 \ub4f1\ub85d\uc911\uc785\ub2c8\ub2e4. \uace7 \uc9c8\ubb38\uc774 \ubaa8\ub450 \ub4f1\ub85d\ub429\ub2c8\ub2e4."}));
+this._wElement["questionLayer"].show();this._getDividedQuestionList()}else{var oParam={"docId":this._oOption.docId};
+var oOption={method:"get",timeout:2,onload:$Fn(this._onCompleteDividedQuestion,this).bind(),ontimeout:$Fn(function(){alert(nhn.Kin.oMessage.TIMEOUT);
+this._wElement["dividedQuestionIngLayer"].hide()},this).bind(),
+onerror:$Fn(function(){alert(nhn.Kin.oMessage.ERROR);this._wElement["dividedQuestionIngLayer"].hide()},
+this).bind()};
+var oAjax=new $Ajax(this._CHECK_COMPLETE_DIVIDED_QUESTION_AJAX_URL,oOption);oAjax.request(oParam)}},
+_onCompleteDividedQuestion:function(oResponse){var oJson=oResponse.json();if(oJson.isSuccess){var bComplete=
+oJson.complete;if(bComplete){this._wElement["dividedQuestionIngLayer"].hide();this._wElement["dividedQuestionCompleteLayer"].show();
+var elLayer=$$.getSingle("div._layer",this._wElement["dividedQuestionCompleteLayer"].$value());if(elLayer)elLayer.style.top=
+nhn.Kin.getTopOfClientCenter(elLayer.clientHeight)+"px";setTimeout($Fn(function(){this._wElement["dividedQuestionCompleteLayer"].hide()},
+this).bind(),1E3);
+this._wElement["questionLayer"].html(this._wTemplate["dividedQuestionLayerTpl"].process({"description":"\ub098\ub208 \uc9c8\ubb38 \x3cem\x3e"+
+oJson.questionCount+"\x3c/em\x3e\uac1c\uac00 \ubaa8\ub450 \ub4f1\ub85d\ub418\uc5c8\uc2b5\ub2c8\ub2e4."}));
+this._wElement["questionLayer"].show();this._getDividedQuestionList()}else{this._nCheckCompleteDivideQuestionCount++;
+setTimeout($Fn(this._checkCompleteDividedQuestion,this).bind(),1E3)}}else alert(oJson.errorMsg)},
+_getDividedQuestionList:function(){var oParam={"docId":this._oOption.docId};var oOption={method:"get",
+timeout:5,onload:$Fn(this._onDividedQuestionList,this).bind(),ontimeout:$Fn(function(){},this).bind(),
+onerror:$Fn(function(){},this).bind()};
+var oAjax=new $Ajax(this._DIVIDED_QUESTION_LIST_AJAX_URL,oOption);oAjax.request(oParam)},
+_onDividedQuestionList:function(oResponse){var oJson=oResponse.json();if(oJson.isSuccess){var aQuestionGroupList=
+oJson.questionGroupList;if(aQuestionGroupList){var nCount=aQuestionGroupList.length;for(var i=0;i<nCount;i++)if(aQuestionGroupList[i].docId===
+this._oOption.docId){aQuestionGroupList.splice(i,1);nCount=aQuestionGroupList.length;break}if(nCount>
+0){for(i=0;i<nCount;i++){var oQuestionGroup=aQuestionGroupList[i];var nDirId=oQuestionGroup.dirId;var nDocId=
+oQuestionGroup.docId;oQuestionGroup.linkUrl="/mobile/qna/detail.nhn?d1Id\x3d"+nhn.Kin.getD1Id(nDirId)+
+"\x26dirId\x3d"+nDirId+"\x26docId\x3d"+(nDocId||0)}this._wElement["dividedQuestionList"].append(this._wTemplate["dividedQuestionListTpl"].process({"list":aQuestionGroupList}));
+this._wElement["dividedQuestionList"].show()}}}},
+_likeReactionCallback:function(oCustomEvent){if(!oCustomEvent||oCustomEvent.actionEvent!=="add")return;
+var oParam={"contentsId":oCustomEvent.contentsId,"actionEvent":oCustomEvent.actionEvent,"reactionType":oCustomEvent.reactionType,
+"dirId":this._oOption.dirId,"docId":this._oOption.docId,"answerNo":oCustomEvent.answerNo,"isTodayQuestion":"N"};
+var oOption={method:"post",timeout:5,onload:$Fn(this._onLikeReactionResponse,this).bind(),ontimeout:$Fn(function(){alert(nhn.Kin.oMessage.TIMEOUT)},
+this).bind(),
+onerror:$Fn(function(){alert(nhn.Kin.oMessage.ERROR)},this).bind()};
+var oLikeAjax=new $Ajax("/mobile/ajax/likeAnswerCallbackAjax.nhn",oOption);oLikeAjax.request(oParam)},
+_onLikeReactionResponse:function(oResponse){var oJson=oResponse.json();var bLikeLayerResult=this.checkAndShowLikeLayer(oJson.isLikeEventLayer,
+oJson.reactionType);if(!bLikeLayerResult)nhn.Kin.checkAndShowBingoCompleteLayer(oJson)},
+checkAndShowLikeLayer:function(isLikeEventLayer,sLikeReactionType){var bLikeLayerResult=this.checkAndShowLikeEventLayer(isLikeEventLayer);
+if(!bLikeLayerResult)bLikeLayerResult=this.checkAndShowLikeReactionLayer(sLikeReactionType);return bLikeLayerResult},
+checkAndShowLikeEventLayer:function(isLikeEventLayer){if(!isLikeEventLayer)return false;if(typeof oLikeLayer===
+"undefined")return false;oLikeLayer.setReaction(false,false,false);oLikeLayer.showLayer();return true},
+checkAndShowLikeReactionLayer:function(sLikeReactionType){var oLocalStorage=nhn.Kin.LocalStorage;if(oLocalStorage.isSupportLocalStorage===
+false)return false;var isLikeReaction=false;var isUsefulReaction=false;var isHahaReaction=false;var sLocalStorageKey=
+"";if(sLikeReactionType==="like"){sLocalStorageKey=oLocalStorage.KEY.MOBILEWEB_LIKE_LIKE_LAYER_CLOSED;
+isLikeReaction=true}else if(sLikeReactionType==="useful"){sLocalStorageKey=oLocalStorage.KEY.MOBILEWEB_LIKE_USEFUL_LAYER_CLOSED;
+isUsefulReaction=true}else if(sLikeReactionType==="haha"){sLocalStorageKey=oLocalStorage.KEY.MOBILEWEB_LIKE_HAHA_LAYER_CLOSED;
+isHahaReaction=true}else return false;var sItem=oLocalStorage.getItem(sLocalStorageKey);if(sItem)return false;
+if(typeof oLikeLayer==="undefined")return false;oLikeLayer.setReaction(isLikeReaction,isUsefulReaction,
+isHahaReaction);oLikeLayer.showLayer();oLocalStorage.setItem(sLocalStorageKey,"Y");return true},
+showFeedbackLayer:function(){var oLayerData=this._oOption.layerData;if(!oLayerData||oLayerData.mode!=
+"question"&&oLayerData.mode!="answer"&&oLayerData.mode!="selectEvent")return;if(oLayerData.mode=="answer"&&
+oLayerData.isDetailContainsAnswer){var sHtml=this._wTemplate["answerLayerTpl"].process(oLayerData);var elTarget=
+$("answer_"+oLayerData.answerNo);var welTarget=$Element(elTarget);welTarget.append(sHtml);this._wAdditionalEvent[this._wAdditionalEvent.length]=
+{"element":welTarget,"action":"click","event":$Fn(this._onClickLayer,this).attach(welTarget,"click")};
+if(nhn.Kin.getScreenType()==="TABLET_LANDSCAPE")setTimeout(function(){nhn.Kin.scrollToPosition(0,welTarget.offset().top-
+5)},200);
+else nhn.Kin.scrollToPosition(0,welTarget.offset().top-5)}else if(oLayerData.mode=="question")if(this._oOption.dividedQuestion){this._wElement["dividedQuestionIngLayer"].show();
+var elLayer=$$.getSingle("div._layer",this._wElement["dividedQuestionIngLayer"].$value());elLayer.style.top=
+nhn.Kin.getTopOfClientCenter(elLayer.clientHeight)+"px";setTimeout($Fn(this._checkCompleteDividedQuestion,
+this).bind(),1E3)}else if(this._oOption.eventId){this._wElement["eventPromotionLayer"].html(this._wTemplate["questionEventLayerTpl"].process(oLayerData));
+this._wElement["eventPromotionLayer"].show();this._oElement["applyEvent"]=$$.getSingle("a._apply_event",
+this._wElement["eventPromotionLayer"].$value());if(this._oElement["applyEvent"])this._wAdditionalEvent[this._wAdditionalEvent.length]=
+{"element":this._oElement["applyEvent"],"action":"click","event":$Fn(this._applyEvent,this).attach(this._oElement["applyEvent"],
+"click")}}else{oLayerData.interestCountDesc=nhn.Kin.getFormattedNumber(oLayerData.interestCount);this._wElement["questionLayer"].html(this._wTemplate["questionLayerTpl"].process(oLayerData));
+this._wElement["questionLayer"].show()}else if(oLayerData.mode=="selectEvent")this._checkWaitForThanksMessageLayer();
+var cookie=new $Cookie;cookie.remove("detail_feedback")},
+_showAllInvisibleArea:function(){var wInvisibleAreas=$ElementList($$("#ct div._showAfterOnLoad"));if(!wInvisibleAreas||
+wInvisibleAreas.length()<1)return;wInvisibleAreas.show()},
+_onClickLayer:function(oEvent){var el=oEvent.element;if(el.tagName.toLowerCase()==="span")el=el.parentNode;
+if(!/^(button|a)$/i.test(el.tagName))return;var wEl=$Element(el);if(wEl.hasClass("_layerCloseBtn")===
+false)return;var aLayerArea=wEl.parent(function(v){return v.hasClass("_layerArea")},5);
+if(aLayerArea&&aLayerArea.length>0)aLayerArea[0].hide();oEvent.stop()},
+_applyEvent:function(oEvent){if(nhn.Kin.checkRos()){oEvent.stop();return}if(!nhn.Kin.checkLogin()){oEvent.stop();
+return}var oParam={resultMode:"json",eventId:this._oOption.eventId,dirId:this._oOption.dirId,docId:this._oOption.docId,
+answerNo:0,ts:(new Date).getTime()};var oOption={method:"post",timeout:5,onload:$Fn(function(response){var result=
+response.json();if(result.isSuccess)this._showApplySuccess();else if(result.errorMsg)alert(result.errorMsg)},
+this).bind(),
+ontimeout:$Fn(function(){alert(nhn.Kin.oMessage.TIMEOUT)},this).bind(),
+onerror:$Fn(function(){alert(nhn.Kin.oMessage.ERROR)},this).bind()};
+var oAjax=new $Ajax(this._APPLYEVENT_AJAX_URL,oOption);oAjax.request(oParam);oEvent.stop()},
+_showApplySuccess:function(){var welTargetLayer=$Element($$.getSingle("div._layer",this._wElement["eventPromotionLayer"].$value()));
+if(!welTargetLayer)return;welTargetLayer.html(this._wTemplate["eventManualApplyLayerTpl"].process())},
+showPushPromotionLayer:function(sLayerType){if(!sLayerType||sLayerType!="msgListCmt"||this._bIsLayerShowing)return;
+var elTarget=$$.getSingle("div._questionArea",$("ct"));var welTarget=$Element(elTarget);var nclkCode=
+this._oOption.answerNo==0?"edq.opipop":"eda.opipop";welTarget.append(this._wTemplate["fromMsglistCommentLayer"].process({nclkCode:nclkCode}));
+var elLayer=$$.getSingle("div._feedback_layer",elTarget);var nAdjustedOffsetTop=0;var aElAboveOfPushPromotionLayer=
+$$("div._aboveOfPushPromotion",elTarget);if(aElAboveOfPushPromotionLayer)for(var i=0,len=aElAboveOfPushPromotionLayer.length;i<
+len;i++)nAdjustedOffsetTop+=$Element(aElAboveOfPushPromotionLayer[i]).height();if(nAdjustedOffsetTop>
+0)$Element(elLayer).css("top",nAdjustedOffsetTop);nhn.Kin.scrollToPosition(0,0);this._wEvent["pushPromotionLayer"]=
+$Fn(this._onClickPushPromotionLayer,this).attach(elLayer,"click");this._bIsLayerShowing=true},
+_onClickPushPromotionLayer:function(oEvent){var welLayer=null;var wel=$Element(oEvent.element);if(!wel)return;
+if(wel.hasClass("_close")){welLayer=wel.parent();welLayer.parent().remove(welLayer);this._setLayerClosed(this._oOption.from);
+if(this._oOption.answerNo&&this._oOption.answerNo!=0){var elTargetAnswer=$$.getSingle("#answer_"+this._oOption.answerNo,
+this._oElement["endArea"]);var welTargetAnswer=$Element(elTargetAnswer);if(welTargetAnswer)nhn.Kin.scrollToPosition(0,
+welTargetAnswer.offset().top)}this._bIsLayerShowing=false}if(this._wEvent["pushPromotionLayer"])this._wEvent["pushPromotionLayer"].detach(welLayer,
+"click")},
+_isShowPushPromotionLayer:function(sLayerType){var nValidTime=6048E5;if(!sLayerType)return false;if(!nhn.Kin.LocalStorage.isSupportLocalStorage())return true;
+var oClosedTime=nhn.Kin.LocalStorage.getItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_END_LAYER_CLOSED_TIME);
+if(!oClosedTime)return true;var oJson=JSON.parse(oClosedTime);var sLastClosedTime=oJson[sLayerType];if(!sLastClosedTime)return true;
+var oCurrentTime=new $Date;var oLastClosedTime=new $Date(sLastClosedTime);var nDiff=oCurrentTime.time()-
+oLastClosedTime.time();return nDiff>=nValidTime},
+_setLayerClosed:function(sLayerType){if(!sLayerType||!nhn.Kin.LocalStorage.isSupportLocalStorage())return;
+var oClosedTime=nhn.Kin.LocalStorage.getItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_END_LAYER_CLOSED_TIME);
+var oJson={};if(oClosedTime)oJson=JSON.parse(oClosedTime);oJson[sLayerType]=(new $Date).time();nhn.Kin.LocalStorage.setItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_END_LAYER_CLOSED_TIME,
+JSON.stringify(oJson))},
+_checkWaitForThanksMessageLayer:function(){if(!this._wElement["waitForThanksMessageLayer"]||!this._wElement["waitForThanksMessageLayerInnerBox"])return;
+if(!this._wElement["firstNormalAnswer"])return;else if(this._oOption.hasSelectableAnswer===true)return;
+if(this._isShowWaitForThanksMessageLayer()){this._wElement["waitForThanksMessageLayer"].show();this._adjustPositionOfLayerInnerBox(this._wElement["waitForThanksMessageLayerInnerBox"])}},
+_adjustPositionOfLayerInnerBox:function(welLayer){if(welLayer){var nLayerTop=window.pageYOffset+($Document(document).clientSize().height-
+welLayer.height())/2;welLayer.css({"top":nLayerTop})}},
+_isShowWaitForThanksMessageLayer:function(){var sThanksMessageClick=nhn.Kin.LocalStorage.getItem(nhn.Kin.LocalStorage.KEY.MOBILEWEB_END_THANKS_MESSAGE_CLICKED);
+if(!sThanksMessageClick)return true;var aThanksMessage=sThanksMessageClick.split(";");return!(aThanksMessage&&
+aThanksMessage.length>=2)},
+_checkEliteUserVoteLayer:function(){if(this._oOption.layerData===undefined||this._oOption.layerData.eliteUserVoteShow==
+false)return false;return nhn.Kin.isExpiredLayerClosedTime("eliteUserVoteLayer",72*60*60)},
+_showEliteUserVoteLayer:function(){nhn.Kin.checkLayerClosedTimeAndShow("eliteUserVoteLayer",72*60*60);
+this._adjustPositionOfLayerInnerBox($Element($$.getSingle("._layer",$("eliteUserVoteLayer"))))},
+_onClickEliteUserVoteLayer:function(oEvent){var wEl=$Element(oEvent.element);if(wEl.hasClass("_close"))nhn.Kin.hideAndSaveLayerClosedTime("eliteUserVoteLayer");
+if(wEl.hasClass("_go_vote")){nhn.Kin.hideAndSaveLayerClosedTime("eliteUserVoteLayer");location.href="/mobile/people/eliteUserVote.nhn"}},
+_onClickWaitForThanksMessageLayer:function(oEvent){var wEl=$Element(oEvent.element);if(wEl.hasClass("_closeBtn"))this._wElement["waitForThanksMessageLayer"].hide();
+else if(wEl.hasClass("_scrollToThankableAnswer")){this._wElement["waitForThanksMessageLayer"].hide();
+this._scrollToFirstThankableAnswer()}oEvent.stop()},
+_scrollToFirstThankableAnswer:function(){var wElTargetAnswer=this._wElement["firstNormalAnswer"];if(!wElTargetAnswer){nhn.Kin.scrollToPosition(0,
+0);return}nhn.Kin.scrollToPosition(0,wElTargetAnswer.offset().top)},
+destroy:function(){if(this._wEvent){if(this._wEvent["onClickLayerArea"])this._wEvent["onClickLayerArea"].detach(this._oElement["layerArea"],
+"click");if(this._wAdditionalEvent)for(var i=0,len=this._wAdditionalEvent.length;i<len;i++){var wEvent=
+this._wAdditionalEvent[i];if(wEvent)wEvent.event.detach(wEvent.element,wEvent.action)}}if(this._oTransition){this._oTransition.clear();
+this._oTransition.destroy();this._oTransition=null}this._oElement=this._wElement=this._wEvent=this._oOption=
+this._wTemplate=null;this._bIsLayerShowing=this._bIsTooltipShowing=this._bIsLandscapeMode=this._bUseAnimation=
+null;this._ANIMATION_LAYER_INTERVAL=this._APPLYEVENT_AJAX_URL=null}});

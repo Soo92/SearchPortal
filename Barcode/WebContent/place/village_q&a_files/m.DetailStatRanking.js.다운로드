@@ -1,0 +1,112 @@
+var DetailStatRanking=$Class({_oOption:null,_oElement:null,_wElement:null,_wTemplate:null,_wEvent:null,
+_oLoading:null,_bIsLandscapeMode:null,_nDirId:0,_sStatType:"ANSWER",_oStatInfo:{"ANSWER":null,"QUESTION":null,
+"READ":null},_sRankingType:"READ",_oRankingActionNumName:{"READ":"\uc870\ud68c\uc218","LIKE":"\uc88b\uc544\uc694\uc218",
+"USEFUL":"\uc720\uc775\ud574\uc694\uc218","HAHA":"\uc7ac\ubc0c\uc5b4\uc694\uc218"},_nAgeGroup:5,_nRankingPage:1,
+_oAgeGroupScroll:null,_oLoadingRanking:null,_bIsRankingLoad:false,_C3P_SCRIPT_FILE_NAME:"kin.c3p.chart.js",
+_URL:{DIRECTORY_STAT_AJAX_URL:"/mobile/ajax/kinDirectoryStat.nhn",RANKING_AJAX_URL:"/mobile/ajax/kinRanking.nhn"},
+MESSAGE:{},$init:function(htOption){if(!htOption)return;this._oOption=htOption;this._nDirId=this._oOption.dirId;
+this._oElement={};this._wElement={};this._wEvent={};this._wTemplate={};this.initializeOnLoad()},
+initializeOnLoad:function(){this.setElement();this.setEvent();this.initializeForResponsiveWeb();this._setRankingLoading();
+nhn.Kin.checkLayerClosedTimeAndShow("detailStatArea",86400);if(this._wElement["donutChart"]&&this._wElement["donutChart"].visible()){var aParam=
+nhn.Kin.extractParams(this._wElement["donutChart"].$value());if(aParam.length===2)nhn.Kin.drawMaleFemaleDountChart("donutChart",
+aParam[0],aParam[1])}},
+setElement:function(){this._oElement["endContentsArea"]=$$.getSingle("#section_group1 div._contentsArea");
+this._oElement["detailStatArea"]=$("detailStatArea");this._wElement["detailStatArea"]=$Element("detailStatArea");
+this._wElement["statType"]=$Element("statType");this._wElement["statsNotice"]=$Element("statsNotice");
+this._wElement["statsChart"]=$Element("statsChart");this._wElement["barChart"]=$Element("barChart");this._wElement["barChartInfo"]=
+$Element("barChartInfo");this._wElement["donutChart"]=$Element("donutChart");this._oElement["rankingLoadingLine"]=
+$("rankingLoadingLine");this._wElement["rankingArea"]=$Element("rankingArea");this._wElement["rankingType"]=
+$Element("rankingType");this._wElement["rankingScroll"]=$Element("rankingScroll");this._wElement["rankingAgeGroup"]=
+$Element("rankingAgeGroup");this._wElement["rankingList"]=$Element("rankingList");this._wElement["rankingNotice"]=
+$Element("rankingNotice");this._wElement["rankingChart"]=$Element("rankingChart");if(this._wElement["rankingArea"])this._wElement["rankingBaseTime"]=
+$Element($$.getSingle("._ranking_base_time",this._wElement["rankingArea"].$value()));this._wElement["rankingMore"]=
+$Element("rankingMore");this._wTemplate["rankingListTpl"]=$Template("rankingListTpl");this._wTemplate["barChartTpl"]=
+$Template("barChartTpl");this._wTemplate["barChartInfoTpl"]=$Template("barChartInfoTpl");this._wTemplate["rankingListTpl"]=
+$Template("rankingListTpl")},
+setEvent:function(){if(this._oElement["detailStatArea"])this._wEvent["detailStatArea"]=this._wElement["detailStatArea"].delegate("click",
+"a",$Fn(this._onClickDetailStatArea,this).bind());if(this._wElement["rankingType"])this._wEvent["rankingType"]=
+this._wElement["rankingType"].delegate("click","a",$Fn(this._onClickRankingTypeArea,this).bind());if(this._wElement["rankingAgeGroup"])this._wEvent["rankingAgeGroup"]=
+this._wElement["rankingAgeGroup"].delegate("click","a",$Fn(this._onClickRankingAgeGroupArea,this).bind());
+if(this._wElement["rankingMore"])this._wEvent["rankingMore"]=this._wElement["rankingMore"].delegate("click",
+"a",$Fn(this._onClickRankingMore,this).bind())},
+initializeForResponsiveWeb:function(){this._setEventForResponsiveWeb()},
+_setEventForResponsiveWeb:function(){if(nhn.Kin.OS.ios||nhn.Kin.OS.android){var sResizeEventType="onorientationchange"in
+window?"orientationchange":"resize";this._wEvent[sResizeEventType]=$Fn(this._onResizeWindow,this).attach(window,
+sResizeEventType)}else this._wEvent["resize"]=$Fn(this._onResizeWindow,this).attach(window,"resize");
+this._wEvent["pageshow"]=$Fn(this._onResizeWindow,this).attach(window,"pageshow");this._onResizeWindow()},
+_onResizeWindow:function(){var bIsLandscapeMode=nhn.Kin.getScreenType()==="TABLET_LANDSCAPE";if(this._bIsLandscapeMode===
+bIsLandscapeMode)return;this._bIsLandscapeMode=bIsLandscapeMode;if(bIsLandscapeMode){if(this._wEvent["scroll"]){this._wEvent["scroll"].detach(window,
+"scroll");this._wEvent["scroll"]=null}this._wEvent["contentsScroll"]=$Fn(this._onScroll,this).attach(this._oElement["endContentsArea"],
+"scroll")}else{if(this._wEvent["contentsScroll"]){this._wEvent["contentsScroll"].detach(this._oElement["endContentsArea"],
+"scroll");this._wEvent["contentsScroll"]=null}this._wEvent["scroll"]=$Fn(this._onScroll,this).attach(window,
+"scroll")}},
+_onClickDetailStatArea:function(oEvent){oEvent.stop();var el=oEvent.element;var wEl=$Element(el);if(wEl.hasClass("_closeDetailStatBtn")){nhn.Kin.hideAndSaveLayerClosedTime("detailStatArea");
+var nDirId=wEl.attr("data-dir-id");nclk(el,"eas.close",nDirId,"")}else if(wEl.hasClass("_statType")){$ElementList($$("a",
+this._wElement["statType"].$value())).removeClass("is_selected").attr("aria-selected","");wEl.addClass("is_selected").attr("aria-selected",
+"true");this._sStatType=nhn.Kin.extractParam(el);if(this._oStatInfo[this._sStatType])this._drawStat(this._oStatInfo[this._sStatType]);
+else this._getDirectoryStatAjax();var sNclk=wEl.attr("data-nclk");nclk(el,"eas."+sNclk,"","")}},
+_getDirectoryStatAjax:function(){var oParam={"statType":this._sStatType,"dirId":this._nDirId};var oOption=
+{method:"post",timeout:5,onload:$Fn(this._onSuccessDirectoryStatAjax,this).bind(),ontimeout:$Fn(function(){if(!this._oDirectoryStatAjax.isIdle())this._oDirectoryStatAjax.abort();
+if(this._oLoadingStat)this._oLoadingStat.hide();this._showNoticeLayer("stats")},this).bind(),
+onerror:$Fn(function(){if(!this._oDirectoryStatAjax.isIdle())this._oDirectoryStatAjax.abort();if(this._oLoadingStat)this._oLoadingStat.hide();
+this._showNoticeLayer("stats")},this).bind()};
+if(this._oLoadingStat)this._oLoadingStat.show();this._oDirectoryStatAjax=new $Ajax(this._URL.DIRECTORY_STAT_AJAX_URL,
+oOption);this._oDirectoryStatAjax.request(oParam)},
+_onSuccessDirectoryStatAjax:function(oResponse){var oJson=oResponse.json();if(this._oLoadingStat)this._oLoadingStat.hide();
+if(oJson&&oJson.isSuccess&&oJson.result){var oStat=oJson.result;this._oStatInfo[this._sStatType]=oStat;
+this._drawStat(oStat)}else this._showNoticeLayer("stats")},
+_drawStat:function(oStat){this._hideNoticeLayer("stats");nhn.Kin.drawMaleFemaleDountChart("donutChart",
+oStat.maleAnswerPercent,oStat.femaleAnswerPercent);var sHtml=this._wTemplate["barChartTpl"].process({bar1Percent:oStat.ageGroupRankPercentList[0]?
+oStat.ageGroupRankPercentList[0].right:0,bar1Rank:oStat.ageGroupRankPercentList[0]?oStat.ageGroupRankPercentList[0].left:
+5,bar2Percent:oStat.ageGroupRankPercentList[1]?oStat.ageGroupRankPercentList[1].right:0,bar2Rank:oStat.ageGroupRankPercentList[1]?
+oStat.ageGroupRankPercentList[1].left:5,bar3Percent:oStat.ageGroupRankPercentList[2]?oStat.ageGroupRankPercentList[2].right:
+0,bar3Rank:oStat.ageGroupRankPercentList[2]?oStat.ageGroupRankPercentList[2].left:5,bar4Percent:oStat.ageGroupRankPercentList[3]?
+oStat.ageGroupRankPercentList[3].right:0,bar4Rank:oStat.ageGroupRankPercentList[3]?oStat.ageGroupRankPercentList[3].left:
+5,bar5Percent:oStat.ageGroupRankPercentList[4]?oStat.ageGroupRankPercentList[4].right:0,bar5Rank:oStat.ageGroupRankPercentList[4]?
+oStat.ageGroupRankPercentList[4].left:5});this._wElement["barChart"].html(sHtml);var oDate=new Date(oStat.updateTime);
+sHtml=this._wTemplate["barChartInfoTpl"].process({date:oDate.getMonth()+1+"\uc6d4 "+oDate.getDate()+"\uc77c",
+dirName:oStat.dirName,actionCnt:oStat.formattedTotalActionCnt,statType:this._sStatType==="QUESTION"?"\uc9c8\ubb38\ud558\uc168":
+this._sStatType==="ANSWER"?"\ub2f5\ubcc0\ud558\uc168":"\ubcf4\uc558"});this._wElement["barChartInfo"].html(sHtml);
+var sHour=oDate.getHours()<10?"0"+oDate.getHours():oDate.getHours();$Element($$.getSingle("._stat_base_time",
+this._wElement["detailStatArea"].$value())).html(sHour+"\uc2dc\uc5d0 \uc5c5\ub370\uc774\ud2b8 \ub41c \ud1b5\uacc4 \uacb0\uacfc\uc785\ub2c8\ub2e4.")},
+_setRankingLoading:function(){if(this._wElement["rankingChart"]){this._oLoadingRanking=new jindo.m.Loading("rankingChart",
+{nWidth:20,nHeight:20,sDefaultForeground:"#999",sLoadingText:""});welTest=$Element($$.getSingle("._loading_container_class_",
+this._wElement["rankingChart"].$value()));welTest.css({position:"absolute",top:"0",left:"0",width:"100%",
+height:"100%"})}},
+_setRankingScroll:function(){if(!this._oAgeGroupScroll&&this._wElement["rankingAgeGroup"]){var aLi=$ElementList($$("li",
+this._wElement["rankingAgeGroup"].$value()));var nWidth=0;for(var i=0;i<aLi.length();i++)nWidth+=aLi.get(i).width();
+this._wElement["rankingAgeGroup"].width(nWidth);this._oAgeGroupScroll=new jindo.m.Scroll(this._wElement["rankingScroll"],
+{bUseHScroll:true,bUseVScroll:false,bUseScrollbar:false,bUseMomentum:false,bAutoResize:true})}},
+_onClickRankingTypeArea:function(we){var el=we.element;var wEl=$Element(el);$ElementList($$("a",this._wElement["rankingType"].$value())).removeClass("is_selected").attr("aria-selected",
+"");wEl.addClass("is_selected").attr("aria-selected","true");this._sRankingType=nhn.Kin.extractParam(el);
+this._getRankingAjax();we.stop();return},
+_onClickRankingAgeGroupArea:function(we){var el=we.element;var wEl=$Element(el);$ElementList($$("a",this._wElement["rankingAgeGroup"].$value())).removeClass("is_selected").attr("aria-selected",
+"");wEl.addClass("is_selected").attr("aria-selected","true");this._nAgeGroup=nhn.Kin.extractParam(el);
+this._getRankingAjax();we.stop();return},
+_onClickRankingMore:function(we){var el=we.element;var aWLi=$ElementList($$("li",this._wElement["rankingList"].$value()));
+for(var i=this._nRankingPage*3,j=0;i<aWLi.length()&&j<3;i++,j++)aWLi.get(i).show();if(i>=aWLi.length())this._wElement["rankingMore"].hide();
+this._nRankingPage++;we.stop();return},
+_getRankingAjax:function(){var oParam={"rankingType":this._sRankingType,"ageGroup":this._nAgeGroup};var oOption=
+{method:"post",timeout:5,onload:$Fn(this._onSuccessRankingAjax,this).bind(),ontimeout:$Fn(function(){if(!this._oRankingAjax.isIdle())this._oRankingAjax.abort();
+if(this._oLoadingRanking)this._oLoadingRanking.hide();this._showNoticeLayer("ranking")},this).bind(),
+onerror:$Fn(function(){if(!this._oRankingAjax.isIdle())this._oRankingAjax.abort();if(this._oLoadingRanking)this._oLoadingRanking.hide();
+this._showNoticeLayer("ranking")},this).bind()};
+if(this._oLoadingRanking)this._oLoadingRanking.show();this._oRankingAjax=new $Ajax(this._URL.RANKING_AJAX_URL,
+oOption);this._oRankingAjax.request(oParam)},
+_onSuccessRankingAjax:function(oResponse){var oJson=oResponse.json();if(this._oLoadingRanking)this._oLoadingRanking.hide();
+if(oJson&&oJson.isSuccess&&oJson.result){var aRanking=oJson.result;if(aRanking.length>0){this._wElement["rankingArea"].parent().show();
+this._setRankingScroll();var sHtml=this._wTemplate["rankingListTpl"].process({rankingList:aRanking,actionNumName:this._oRankingActionNumName[this._sRankingType]});
+this._wElement["rankingList"].html(sHtml);this._nRankingPage=1;if(aRanking.length>3)this._wElement["rankingMore"].show("block");
+else this._wElement["rankingMore"].hide();var oDate=new Date(aRanking[0].updateTime);var sHour=oDate.getHours()<
+10?"0"+oDate.getHours():oDate.getHours();this._wElement["rankingBaseTime"].html(oDate.getDate()+"\uc77c "+
+sHour+"\uc2dc \uae30\uc900");this._hideNoticeLayer("ranking")}else this._showNoticeLayer("ranking")}else this._showNoticeLayer("ranking")},
+_showNoticeLayer:function(sType){if(sType==="stats"){this._wElement["statsChart"].hide();this._wElement["statsNotice"].show()}if(sType===
+"ranking"){this._wElement["rankingChart"].hide();this._wElement["rankingBaseTime"].hide();this._wElement["rankingNotice"].show()}},
+_hideNoticeLayer:function(sType){if(sType==="stats"&&!this._wElement["statsChart"].visible()){this._wElement["statsNotice"].hide();
+this._wElement["statsChart"].show()}if(sType==="ranking"&&!this._wElement["rankingChart"].visible()){this._wElement["rankingBaseTime"].show();
+this._wElement["rankingChart"].show();this._wElement["rankingNotice"].hide()}},
+_onScroll:function(oEvent){if(this._bIsRankingLoad)return;var bIsIntoScreen=nhn.Kin.isIntoScreen(this._oElement["rankingLoadingLine"],
+this._bIsLandscapeMode?this._oElement["endContentsArea"]:null);if(!bIsIntoScreen)return;if(this._oRankingAjax&&
+!this._oRankingAjax.isIdle())return;this._getRankingAjax();this._bIsRankingLoad=true},
+destroy:function(){this._oElement=this._wElement=this._wEvent=this._wTemplate=null;this._oOption=null;
+this._oTouch=this._MSG=this._MAX_LENGTH_OF_FOLDER_MODULE_SESSION_STORAGE=null}});
