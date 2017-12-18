@@ -5,9 +5,6 @@
 		String id = (String)session.getAttribute("idKey");	
 		String name = mgr.getMember(id).getName();
 %>
-<%
-		request.setCharacterEncoding("euc-kr");
-%>
 
 <!doctype>
 <html>

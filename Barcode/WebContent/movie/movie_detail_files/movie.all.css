@@ -246,7 +246,7 @@ div.mv_info .main_score .star_score.b_star span.st_on{background-position:0 -378
 .mv_info_area div.mv_info .ly_count span{display:block;position:absolute;left:50%;margin-left:-5px;bottom:-5px;width:10px;height:6px;background:url(http://static.naver.net/movie/2012/06/ico_arrow_3_1.gif) no-repeat 0 0}
 .mv_info_area div.mv_info .main_score a.ntz_score{display:block;float:left}
 .mv_info_area div.mv_info .main_score .star_score{width:auto;margin-top:-3px;margin-right:0}
-.mv_info_area div.mv_info .main_score .star_score em{display:inline-block;height:16px;padding:0;background:url(http://static.naver.net/movie/2014/04/sp_ico.png) no-repeat -9999px -9999px;text-indent:-9999px;vertical-align:top}
+.mv_info_area div.mv_info .main_score .star_score em{display:inline-block;height:16px;margin-left:1px;padding:0;background:url(http://static.naver.net/movie/2014/04/sp_ico.png) no-repeat -9999px -9999px;text-indent:-9999px;vertical-align:top}
 .mv_info_area div.mv_info .main_score .star_score em.dot{width:4px;background-position:-41px -521px}
 .mv_info_area div.mv_info .main_score .star_score em.num1{width:7px;background-position:-14px -504px}
 .mv_info_area div.mv_info .main_score .star_score em.num2{width:11px;background-position:-23px -504px}
@@ -305,13 +305,13 @@ div.mv_info .main_score .star_score.b_star span.st_on{background-position:0 -378
 .mv_info_area div.mv_info dl.info_spec .step1+dd p span a{display:inline-block}
 .mv_info_area div.mv_info dl.info_spec dd p span{display:inline-block;margin:0 14px 0 -7px;padding-left:7px;background:url(http://static.naver.net/movie/2012/06/bg_tx_line2.gif) no-repeat 0 2px;color:#333}
 .mv_info_area div.mv_info dl.info_spec dd p span em{font-size:15px;color:#f24443}
-.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;background:url(http://static.naver.net/movie/2012/06/ico_arrow2.gif) no-repeat 100% 6px;font-size:13px;color:#777;text-decoration:underline}
+.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;font-size:13px;color:#777;text-decoration:underline}
 .mv_info_area div.mv_info ul.photo_video{overflow:hidden;margin:7px 0 10px;zoom:1}
 .mv_info_area div.mv_info ul.photo_video li{float:left;position:relative;margin-right:2px}
 .mv_info_area div.mv_info ul.photo_video li a{display:block}
 .mv_info_area div.mv_info ul.photo_video li a img{display:block}
 .mv_info_area div.mv_info ul.photo_video li span.vtr{overflow:hidden;position:absolute;left:3px;bottom:3px;width:20px;height:20px;background:url(http://static.naver.net/movie/2015/05/sp_btn.png) no-repeat -25px -435px;text-indent:-9999px}
-.mv_info_area div.mv_info .btn_sns{width:415px;margin:7px 0 20px}
+.mv_info_area div.mv_info .btn_sns{width:415px;margin:7px 0 45px}
 .mv_info_area div.mv_info .btn_sns:after{display:block;clear:both;content:" "}
 .mv_info_area div.mv_info .btn_sns .end_btn_area{width:460px;margin-bottom:17px;*z-index:21;*position:static;*margin-bottom:21px}
 .mv_info_area div.mv_info div.end_btn_area{position:relative}
@@ -3114,7 +3114,7 @@ iframe{border:0;width:100%}
 .blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:0;line-height:0}
 header,hgroup,article,nav,footer,figure,figcaption,canvas,section{display:block}
 input[type=text],input[type=password],button,input[type=button],input[type=reset],input[type=image],input[type=submit],textarea{-webkit-appearance:none;-webkit-text-size-adjust:none;-webkit-border-radius:0}
-h1.svc_name{overflow:hidden;position:relative;height:36px;padding:11px 0 0;border-bottom:1px solid #0d0d0d;background:#ff4800;z-index:40}
+h1.svc_name{overflow:hidden;position:relative;height:36px;padding:11px 0 0;border-bottom:1px solid #0d0d0d;background:#2b2b2b;z-index:40}
 h1.svc_name:after{overflow:hidden;position:absolute;left:0;bottom:0;width:100%;height:1px;background:#313131;content:''}
 h1.svc_name a{display:block;float:left;height:19px;font-size:0;line-height:0}
 h1.svc_name a img{vertical-align:middle}

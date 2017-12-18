@@ -98,7 +98,7 @@ function delayed_submit(object) {
 				<legend><span class="blind">영화검색 영역</span></legend>
 				<div class="srch_field_on _view">
 					<span class="ipt_srch">
-						<label for="ipt_tx_srch" id="search_placeholder">영화검색</label>
+						<label for="ipt_tx_srch" id="search_placeholder">네이버로 영화검색</label>
 						<input type="text" id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100" accesskey="s" style="ime-mode:active;" autocomplete="off">
 						<span class="align"></span>
 						<span class="auto_tx"><a href="http://movie.naver.com/#" title="자동완성 펼치기"><img src="../img/movie/srch_arrow_down.gif" width="7" height="4" title="자동완성 펼치기" alt="자동완성 펼치기"></a></span>
