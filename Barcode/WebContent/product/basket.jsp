@@ -1,5 +1,11 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%request.setCharacterEncoding("euc-kr");%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
+<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<%
+		request.setCharacterEncoding("euc-kr");
+
+%>
 <!DOCTYPE>
 <html>
 <head>

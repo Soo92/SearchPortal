@@ -76,19 +76,33 @@ span{font-weight:bold;}
 					margin-top:45px; border-radius:20px; cursor:pointer;}
 					
 /*detail_slider*/
-#detail_slider{width:1100px; height:200px; margin:0 auto; padding-top:20px;}	
+#detail_slider{width:1100px; height:250px; margin:0 auto;
+							margin-bottom:20px; border:1px lightgray solid; overflow:hidden; position:relative;	}	
+#detail_slider_{width:2036px; height:248px;  position:absolute;}
 
-#detail_slider_{width:1100px; height:180px;background:#fff; border:1px lightgray solid;}
+#button_slider{width:100%; height:50px;position:absolute;}
+
+#pre_button{width:50px; height:50px; background:url('../img/pre.png'); position:absolute;
+top:100px; cursor:pointer; z-index:3;
+}
+#pre_button:hover{background:url('../img/pre_.png')}
+#next_button{width:50px; height:50px; background:url('../img/next.png'); position:absolute;
+top:100px; left:1050px; cursor:pointer; z-index:3;
+}
+#next_button:hover{background:url('../img/next_.png')}
+#product_box{width:144px; height:230px; background:#fff; border:1px lightgray solid; margin:10px 0px 0px 10px;
+	float:left;
+}
 
 /*detail_img*/
 #detail_img{width:1100px; height:auto; margin:0 auto; clear:both;}
 
-#detail_p_info{width:100%; height:5000px; background:#ffc980;}
-#detail_review{width:100%; height:1200px; background:#e8a074;}
+#detail_p_info{width:100%; height:auto; background:#fff;}
+#detail_review{width:100%; height:auto; background:#fff; padding-top:40px;padding-bottom:40px; margin-top:100px; margin-bottom:100px;}
 
 /*QnA*/
-#detail_QnA{width:100%; height:auto; background:#fff; padding-top:40px; padding-bottom:50px;}
-		#spaceBox{width:20px; height: 100px; float:left; background:#e8a074; margin-top:30px; margin-left:30px;}
+#detail_QnA{width:100%; height:auto; background:#fff; padding-top:40px; padding-bottom:40px; margin-bottom:100px;}
+		#spaceBox{width:20px; height: 80px; float:left; background:#ff4800; margin-top:38px; margin-left:30px;}
 		#detail_QnA_header{width:95%; height:150px; position:relative; margin:0 auto;}
 			#detail_QnA_header h1{float:left; font-size:50px; margin-top:30px; margin-left:20px; color:#ff4800;}
 			#detail_QnA_header h3{ font-weight:bold;
@@ -100,7 +114,7 @@ span{font-weight:bold;}
 		#detail_QnA_contents{width:95%; height:auto; margin:0 auto;}
 			#detail_QnA_contents td,th{font-size:12px; line-height:1.5; height:30px;}
 				
-			#bl_title_no,.bl_title_bl_icon,.bl_title_bl_product,.bl_title_bl_subject,.bl_title_bl_name,.bl_title_bl_date,.bl_title_bl_hits{
+			#bl_title_no,.bl_title_bl_icon,.bl_title_bl_product,.bl_title_bl_subject,.bl_title_bl_name,.bl_title_bl_date,.bl_title_bl_hits,.bl_title_bl_star{
 				border-bottom:1px gray solid; 
 				border-top:1px gray solid; 
 			}
@@ -110,13 +124,13 @@ span{font-weight:bold;}
 			.bl_no{text-align:center;}
 			.bl_icon{text-align:center;}
 			.bl_product{text-align:center;}
-			
+			.bl_star{text-align:center;}
 			.bl_name{text-align:center;}
-			.bl_date{text-align:center;}
+			.bl_date{text-align:center; width:80px;}
 			.bl_hits{text-align:center;}
 		
 		
-		#detail_QnA_bottom{width:100%; height:80px; background:yellow;}
+		#detail_QnA_bottom{width:100%; height:80px;position:relative;}
 			#detail_QnA_nextNpre a:hover{text-decoration:none; color:#ff4800;}
 			#detail_QnA_radio{width:400px; height:30px; margin:0 auto; margin-top:22px; font-size:12px; text-align:center;}
 			#detail_QnA_radio input[type=radio]{margin-top:6px;}
@@ -124,10 +138,24 @@ span{font-weight:bold;}
 			input[id=detail_QnA_radioButton]{position:relative; top:3px;}
 			
 			#QnAsearchBox{width:150px; height:25px; border:1px lightgray solid;}
-
+			#detail_QnA_Writer{width:120px; height:50px; position:absolute; top:12px; left:900px;}
+			.button{ background-color: #ff4800;
+							border: none;
+							color: white;
+							padding: 15px 30px;
+							text-align: center;
+							text-decoration: none;
+							display: inline-block;
+							font-size: 16px;
+							margin: 4px 2px;
+							cursor: pointer;
+						}
 	
 
-#detail_s_info{width:100%; height:800px; background:#e87480;}
+#detail_s_info{width:100%; height:auto; background:#fff; margin-bottom:100px;}
+#detail_s_info td{text-indent:20px; font-size:12px;line-height:1.5; height:36px;}
+#detail_s_info th{background:lightgray;}
+.blank{width:10px; height:10px;}
 
 /*nav_2*/
 

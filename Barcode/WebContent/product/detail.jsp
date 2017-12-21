@@ -1,5 +1,29 @@
+<%@page import="jdk.nashorn.internal.parser.TokenStream"%>
+<%@page import="java.util.StringTokenizer"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
+<jsp:useBean id="bean" class="member.ShoppingBean"/>
 <%
+	    int index = Integer.parseInt(request.getParameter("index"));	
+		bean = mgr_shop.getShopping(index);
+		String title = bean.getTitle();
+		String account = bean.getAccount();
+		String stock = bean.getStock();
+		String price = bean.getPrice();
+		String shipAccount = bean.getShipAccount();
+		String shipDate = bean.getShipDate();
+		String origin = bean.getOrigin();
+		String option = bean.getOpt();
+		String proAdd = bean.getProAdd();
+		int maxBuy = bean.getMaxBuy();
+		String mainImg = bean.getMainImg();
+		String listImg = bean.getListImg();
+		String detailImg = bean.getDetailImg();
+		double proStar = bean.getProStar();
+		int reviewNum = bean.getReviewNum();
+		int likeNum = bean.getLikeNum();
+		String Seller = bean.getSeller();
+		
 		request.setCharacterEncoding("euc-kr");
 %>
 
@@ -34,7 +58,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body id="w_rap"  onscroll="myFunction()">
+<body id="w_rap"  onscroll="myFunction()"  onload="nextImg()">
 <div id="all"><!-- header -->
 		<div id="header_">
 			<div id="header">
@@ -42,7 +66,6 @@ $(document).ready(function(){
 					<a href="../index.jsp">
 					<div id="logo"></div>
 					</a>
-					
 					<a href="product_home.jsp">
 					<div id="subject"><p><span>신상ㆍ중고</span> &nbsp;상품 Corner</p></div>
 					</a>
@@ -109,11 +132,11 @@ $(document).ready(function(){
 							margin-left:10px; margin-top:10px; float:left; text-align:left; font-size:14px;">
 			<tr>
 				<td colspan="5" height="50px" style="font-weight:bold; font-size:18px; border-bottom:1px lightgray solid;">
-					[상품제목] 상품_상세이름
+					[<%=title %>] <%=account %>
 				</td>
 				<td  height="36px"
 						style="font-size:16px; font-weight:bold; text-align:right; margin-right:30px; border-bottom:1px lightgray solid;">
-						<p style="margin-right:10px;">[리뷰천사] / 재고:15,641개</p>
+						<p style="margin-right:10px;">[<%=Seller %>] / 재고:<%=stock %>개</p>
 				</td>
 				
 			</tr>
@@ -125,14 +148,14 @@ $(document).ready(function(){
 			
 			<tr>
 				<td rowspan="8" width="400px" height="400px">
-					<img src="../img/02.jpg" width="400px" height="400px">
+					<img src="<%=mainImg %>" width="400px" height="400px">
 				</td>
 				
 				<td   height="36px" width="30px;" rowspan="9" style="border-right:1px lightgray solid;"></td>
 				<td   height="36px" width="30px;"></td>
 				<td   colspan="2" height="60px">
 					<p style="font-size:18px; font-weight:bold;">가격 : 
-					<span style="font-size:30px; color:#ff4800;">38,000원</span></p>
+					<span style="font-size:30px; color:#ff4800;"><%=price %>원</span></p>
 				</td>
 				<td   height="36px" width="270px;"></td>
 			</tr>
@@ -140,9 +163,9 @@ $(document).ready(function(){
 			<tr>
 				<td   height="36px" width="30px;"></td>
 				<td colspan="3" height="120px" rowspan="3" style="border-bottom:1px lightgray dotted">
-					<p style="line-height:25px;">배송비 : <span>2,500원</span></p>
-					<p style="line-height:25px;">배송일 : <span>2~3일 소요</span></p>
-					<p style="line-height:25px;">원산지 : <span>대한민국</span></p>
+					<p style="line-height:25px;">배송비 : <span><%=shipAccount %>원</span></p>
+					<p style="line-height:25px;">배송일 : <span><%=shipDate %>일 소요</span></p>
+					<p style="line-height:25px;">원산지 : <span><%=origin %></span></p>
 				</td>
 				
 			</tr>
@@ -163,15 +186,21 @@ $(document).ready(function(){
 					<p style="margin-top:10px;">옵션</p>
 						<select style="margin:10px 0px 10px 0px; width:300px; height:30px;">
 						<option>옵션을 선택하시오.</option>
-						<option>색상1</option>
-						<option>색상2</option>
+						<% StringTokenizer opt=new StringTokenizer(option,",");
+								for(int i=0;opt.hasMoreElements();i++){
+						%>
+						<option><%=opt.nextToken()%></option>
+						<%}%>
 					</select>
 					
 					<p>추가구성</p>
 					<select style="margin:10px 0px 10px 0px; width:300px; height:30px;">
-						<option>옵션을 선택하시오.</option>
-						<option>색상1</option>
-						<option>색상2</option>
+						<option>추가구성을 선택하시오.</option>
+						<% StringTokenizer prA = new StringTokenizer(proAdd,",");
+								for(int x=0;prA.hasMoreElements();x++){
+						%>
+						<option><%=prA.nextToken() %></option>
+						<%} %>
 					</select>
 				</td>
 				
@@ -190,7 +219,7 @@ $(document).ready(function(){
 			<tr>
 				<td   height="36px" width="30px;"></td>
 				<td colspan="2" height="50px"style="border-top:1px lightgray dotted;">
-					<p>최대구매수량 : 10개&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;★★★★☆ 4.1</p>
+					<p>최대구매수량 : <%=maxBuy %>개&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;★★★★☆ <%=proStar %></p>
 				</td>
 				
 				<!--별점 / 상품리뷰 (건)/ 좋아요 / 공유 -->
@@ -201,12 +230,12 @@ $(document).ready(function(){
 								<tr>
 									
 									<td width="90" style="border-right:1px lightgray solid">
-										<P>리뷰 <span>2,156 건</span></p>
+										<P>리뷰 <span><%=reviewNum %> 건</span></p>
 									</td>
 									<td width="90">
 										<p>
 										<a href="#">
-										♡ <span>18,661</span>
+										♡ <span><%=likeNum %></span>
 										</a>
 										</p>
 									</td>
@@ -236,10 +265,138 @@ $(document).ready(function(){
 </div>
 
 <!-- detail_slider -->
-<div id="wrap">
-	<div id="detail_slider">
-		<div id="detail_slider_">
-		
+
+<script type="text/javascript">
+       var pos = 0;
+       var a=0;
+       var term = 31;
+     
+	 function aa(){
+         
+         var imgNext = document.getElementById("detail_slider_");
+         var id = setInterval(frame1, 5);
+         
+         function frame1(){
+            clearInterval(sliderAuto);
+            
+               if(pos < term*0 && pos > term*-1){
+                   pos++;
+                   imgNext.style.left =pos*5+'px';
+                      
+                   if(pos==0){
+                    clearInterval(id);
+                    } //0이되면 멈춰라
+               }// 0 보단 작고 -200보단 클때 왼쪽으로 이동해라.
+               
+               else if (pos <= term*-1 && pos > term*-2) {
+                   pos++;
+                   imgNext.style.left =pos*5+'px';
+            
+                   if(pos== term*-1){
+                       clearInterval(id);
+                      
+                         }   //   function frame1. else if. if
+                     }
+
+               else if (pos <= term*-2 && pos > term*-3) {
+                   pos++;
+                   imgNext.style.left =pos*5+'px';
+                
+                   if(pos== term*-2){
+                       clearInterval(id);
+                      
+                         }   //   function frame1. else if. if
+                     }
+
+               else if (pos <= term*-3) {
+                   pos++;
+                   imgNext.style.left =pos*5+'px';
+            
+                   if(pos== term*-3){
+                       clearInterval(id);
+                      
+                         }   //   function frame1. else if. if
+                     }
+              
+               }   //   function frame1()
+               
+            setInterval(sliderAuto);
+            
+            }        
+
+	   function bb(){
+             var imgNext = document.getElementById("detail_slider_");
+             var id = setInterval(frame1, 5);
+                function frame1(){
+            //clearInterval(sliderAuto);
+                   if(pos > 0){
+                       pos--;
+                       imgNext.style.left =pos*5+'px';
+                       if(pos==0){
+                           clearInterval(id);
+                       }
+                   }
+                   else if (pos > term*-1) {
+                       pos--;
+                       imgNext.style.left =pos*5+'px';
+                       if(pos== term*-1){
+                           clearInterval(id);
+                       }
+                   }
+                   else if (pos > term*-2) {
+                       pos--;
+                       imgNext.style.left =pos*5+'px';
+                       /* console.log(a);
+                       console.log(pos);
+                       console.log("b"); */
+                       if(pos==term*-2){
+                           clearInterval(id);
+                       }
+                   }
+                   else if (pos > term*-3) {
+                       pos--;
+                       imgNext.style.left =pos*5+'px';
+          
+                       if(pos==term*-3){
+                           clearInterval(id);
+                       }
+                   }
+                   else if (pos > term*-4) {
+                       pos--;
+                       imgNext.style.left =pos*5+'px';
+                       if(pos==term*-4){
+                           clearInterval(id);
+                       }
+                   }
+             }
+          setInterval(sliderAuto);
+      }
+      function nextImg(){
+             sliderAuto = setInterval(bb, 2036);
+      }
+</script>
+
+<div id="wrap" style="padding-top:20px;">
+	<div id="detail_slider">		
+
+			<div id="button_slider">
+				<div id="next_button" onclick="bb()"></div>
+				<div id="pre_button" onclick="aa()"></div>
+			</div>
+	<div id="detail_slider_">			
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
+			<div id="product_box"></div>
 		</div>
 	</div>
 	
@@ -273,19 +430,123 @@ $(document).ready(function(){
 <!-- contents -->
 <div id="detail_img">
 	<div id="detail_p_info">
-	
+		<img src="<%=detailImg %>">
 	</div>
 	
 	<div id="detail_review">
-	
+		<div id="detail_QnA_header">
+			<div id="spaceBox"></div>
+			<h1>Review</h1>
+			<h3>현재 상품에 대한 문의</h3>
+			
+			<p>저희 제품의 만족도는 어떠셨나요? ÷) 
+			<span style="font-weight:900">평점을 남겨주세요!</span></p>
+		</div>
+		
+				<div id="detail_QnA_contents">
+			<table id="bl_table" border="0" cellpadding="0" cellspacing="0" width="95%" style="margin:0 auto;margin-top:30px;">
+				<tbody>
+					<tr>
+						<th id="bl_title_no" class="bl_title_bl_no">NO.</th>
+						<th class="bl_title_bl_icon">&nbsp;</th>
+						
+						<th class="bl_title_bl_product">Product</th>
+						
+						<th class="bl_title_bl_subject">CONTENT</th>
+						<th class="bl_title_bl_star">STAR</th>
+						<th class="bl_title_bl_name">NAME</th>
+						
+						<th class="bl_title_bl_date">DATE</th>
+						
+						<th id="bl_title_hits" class="bl_title_bl_hits">HITS</th>
+				</tr>
+				<!-- INLINE NOTICE -->
+
+				<tr class="bl_noticeline">
+					<td class="bl_no">:::</td>
+					<td class="bl_icon"><img src="../img/b2_notice.gif"></td>
+					<td class="  lt" colspan="6">제품/배송 등의 문의사항을 남겨주세요! 전화보다 신속하게 답변드리도록 하겠습니다!</td>
+				</tr>
+
+				<!-- LIST REPEAT -->
+
+				<tr class="bl_noticeline">
+					<td class="bl_no">:::</td>
+					<td class="bl_icon"><img src="../img/b2_notice.gif"></td>
+					
+					<td class="bl_subject_lt" colspan="2"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=995513&amp;num2=00000&amp;lock=N&amp;flag=notice">교환/반품 시 꼭 확인해 주세요!</a>&nbsp;&nbsp;</td>
+					<td class="bl_star">★★★★☆</td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;"><img src="../img/b2_adminimg.gif" border="0"></div></td>
+					
+					<td class="bl_date"><span class="bl_oldcontent">2016/06/02</span></td>
+					
+					<td class="bl_hits">1844</td>
+				</tr>
+
+				<tr class="bl_evenline">
+					<td class="bl_no">27003</td>
+					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
+					<td class=" "></td>
+					
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985887&amp;num2=00000&amp;lock=Y">주문취소</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					
+					<td class="bl_star">★★★★☆	</td>
+					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">ne24285</div></td>
+					
+					<td class="bl_date"><span class="bl_newcontent">2017/12/10</span></td>
+					
+					<td class="bl_hits">0</td>
+				</tr>
+
+				
+
+				<!-- LIST REPEAT END -->
+				</tbody>
+			</table>
+			
+		<div id="detail_QnA_bottom">	
+			<div id="detail_QnA_nextNpre">
+				<table border="0" cellpadding="0" cellspacing="0" width="150px" style="margin:0 auto;margin-top:30px;">
+					<tr>
+						<td width="15px" style="text-align:center;"><a href="#">1</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">2</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">3</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">4</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">5</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">6</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">7</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">8</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">9</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">10</a></td>
+						<td><a href="#"><img src="../img/next.jpg" width="15px" height="15px"></a></td>
+					</tr>
+				</table>
+			</div>
+			
+			<div id="detail_QnA_radio">
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">제목</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">이름</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">내용</label>
+				<input type="text" id="QnAsearchBox">
+			</div>
+			
+			<div id="detail_QnA_Writer">
+				<input type="button" class="button" value="작성하기">
+			</div>
+		</div>
 	</div>
+		
+	</div><!--review-->
+	
+	
 	
 	<div id="detail_QnA">
 		<div id="detail_QnA_header">
 			<div id="spaceBox"></div>
 			<h1>QnA</h1>
 			<h3>현재 상품에 대한 문의</h3>
-			<div id="s_logo"></div>
+			
 			<p>상품에 대해 궁금하신점이 있으시다면
 			<span style="font-weight:900">친절하게 답변</span>해 드리겠습니다 ^-^</p>
 		</div>
@@ -389,6 +650,7 @@ $(document).ready(function(){
 				<tr class="bl_evenline">
 					<td class="bl_no">26999</td>
 					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
+					
 					
 					<td class="bl_product"><a href="/shop/shopdetail.html?branduid=1118806"><img src="../img/0020010000033.jpg" border="0" height="70" align="center"></a></td>
 					
@@ -499,17 +761,66 @@ $(document).ready(function(){
 				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">내용</label>
 				<input type="text" id="QnAsearchBox">
 			</div>
+			
+			<div id="detail_QnA_Writer">
+				<input type="button" class="button" value="작성하기">
+			</div>
 		</div>
 	</div>
 		
-	</div>
+	</div><!--QnA-->
 	
 	<div id="detail_s_info">
-	
-	</div>
+		<table border="1">
+				<caption></caption>
+					<colgroup><col style="width:18%"><col style="width:32%"><col style="width:18%"><col style="width:32%"></colgroup>	
+						<tbody>
+						<tr>
+							<th scope="row">판매자명</th>
+							<td>리바트키친</td>
+							<th scope="row">연락처</th>
+							<td>031-1577-3332</td>
+						</tr>
+				
+						
+						<tr>
+							<th scope="row">반품/교환 배송비</th>
+							<td colspan="3">(구매자귀책) 0원/0원 / 초기배송비 무료시 반품배송비 부과방법 : 왕복(편도x2)</td>
+						</tr>
+						<tr>
+							<th scope="row">반품/교환지 주소</th>
+							<td colspan="3">보내실 곳: 449884 경기도 용인시 처인구 남사면 북리 54-10</td>
+						</tr>
+						
+						
+						<tr>
+							<th scope="row">반품/교환 안내</th>
+							<td colspan="3">시스템 주방 제품은 최종계약 후 주문생산이 진행되므로 취소/변경/환불이 불가합니다.</td>
+						</tr>
+				
+						<tr height="200">
+							<th scope="row">반품/교환 기준</th>
+							<td colspan="3">상품 수령 후 7일 이내에 신청하실 수 있습니다. 단, 제품이 표시광고 내용과 다르거나 불량 등 계약과 다르게 이행된 경우는 제품 수령일부터 3개월 이내, 그 사실을 안 날 <span style="margin-left:20px;"></span>또는 알 수 있었던 날부터 30일이내에 교환/반품이 가능합니다
+								<ul class="dot">
+									<li>추가적으로 다음의 경우 해당하는 반품/교환은 신청이 불가능할 수 있습니다.
+										<ul class="dash">
+											<li>소비자의 책임 있는 사유로 상품 등이 멸실 또는 훼손된 경우 (단지, 상품 확인을 위한 포장 훼손 제외)</li>
+											<li>소비자의 사용 또는 소비에 의해 상품 등의 가치가 현저히 감소한 경우</li>
+											<li>시간의 경과에 의해 재판매가 곤란할 정도로 상품 등의 가치가 현저히 감소한 경우</li>
+											<li>복제가 가능한 상품 등의 포장을 훼손한 경우</li>
+											<li>소비자의 주문에 따라 개별적으로 생산되는 상품이 제작에 들어간 경우</li>
+										</ul>
+									</li>
+								</ul>
+							</td>
+						</tr>
+				
+						</tbody>
+					</table>
+	</div><!--판매자 정보-->
 </div>
 	
-	
+	<div class="blank"></div>
 </div>
 
 <!-- scrolling -->

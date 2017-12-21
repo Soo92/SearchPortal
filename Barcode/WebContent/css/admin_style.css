@@ -1,0 +1,315 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+*{margin:0; padding:0;}
+body { font-family: 'Nanum Gothic', son-serif; background:#393939;}
+
+a {
+   text-decoration: none;
+}
+
+#wrap {
+   width: 100%;
+   margin: 0 auto;
+   background: #efefef;
+}
+
+#wrap_ {
+   width: 100%;
+   margin: 0 auto;
+   background: #282828;
+}
+
+#wrap1 {
+   width: 1415px;
+   height: auto;
+   margin: 0 auto;
+}
+
+#wrap2 {
+   width: 1100px;
+   height: auto;
+   margin: 0 auto;
+}
+
+/*header*/
+#all {
+   width: 100%;
+   height: auto;
+   margin: 0 auto;
+   position: relative;
+}
+
+#header_ {
+   width: 100%;
+   height: auto;
+   position: fixed;
+   z-index: 20;
+}
+
+#header {
+   width: 100%;
+   height: 55px;
+   background: #ff4800;
+}
+
+#logo {
+   width: 150px;
+   height: 45px;
+   float: left;
+   margin-top: 5px;
+   background:#000
+}
+
+#subject {
+   float: left;
+   margin: 15px 0px 0px 10px;
+}
+
+#subject p {
+   color: #fff;
+   font-size: 16px;
+}
+
+#subject span {
+   font-weight: bold;
+   letter-spacing: -1px;
+   font-size: 20px;
+}
+
+#login {
+   float: right;
+   margin-top: 12px;
+}
+
+#login p {
+   color: #fff;
+   font-size: 14px;
+   text-align: center;
+}
+
+/*nav*/
+#nav {
+   margin: 0 auto;
+   width: 100%;
+   height: 30px;
+   border-top: solid 1px #efefef;
+   border-bottom: solid 1px lightgray;
+   padding-top: 8px;
+   text-align: left;
+   background: #fff;
+   clear: both;
+}
+
+#nav ul {
+   list-style: none;
+   text-align: left;
+   float: left;
+}
+
+#nav a {
+   text-decoration: none;
+   color: gray;
+}
+
+#nav a:hover {
+   color: #ff4800;
+}
+
+.ulul {
+   margin-left: 20px;
+}
+
+#aaa {
+   color: lightgray;
+}
+
+#nav ul li {
+   display: inline;
+   text-transform: capitalize;
+   font-size: 13px;
+}
+
+#navLeft {
+   float: left;
+}
+
+#navRight {
+   float: right;
+   valign: center;
+}
+
+#navRight a {
+   font-size: 13px;
+}
+
+/*title*/
+#title_admin{width:867px; height:50px; margin:0 auto;padding-top:120px; padding-bottom:15px;}
+#title_admin h2{float:left; line-height:45px; margin-left:10px; color:lightgray}
+#title_admin p{float:right; line-height:45px; font-size:12px; color:lightgray}
+#space_box{width:10px; height:45px; background:gray; float:left;}
+
+
+/*입력폼*/
+#admin_reg{width:867px; height:auto; margin:0 auto;}
+#admin_reg td{height:45px}
+#admin_reg input{height:30px; margin-right:10px; }
+#admin_reg p{line-height:30px; font-size:14px; font-weight:bold;}
+#admin_reg input[type=button]{   
+   background-color: #393939;
+   border: none;
+   color: #fff;
+   padding: 5px 15px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 14px;
+   cursor: pointer;
+   font-family: 'Nanum Gothic', son-serif;
+   font-weight: bold;
+   }
+   
+   #main_img{width:400px; height:400px; border:1px lightgray solid; margin:0 auto;text-align:center;}
+   #main_img p{line-height:400px; color:gray}
+   
+   #list_img{width:328px; height:229px; border:1px lightgray solid; margin:0 auto; text-align:center;}
+   #list_img p{line-height:229px; color:gray}
+   
+   #detail_img{width:550px; height:550px/*auto*/; border:1px lightgray solid; margin:0 auto; text-align:center;}
+   #detail_img p {line-height:550px; color:gray}
+
+   #last_button{width:500px; height: auto; padding-top:20px; padding-bottom:10px; text-align: center; margin:0 auto;}
+   
+   #last_button input[type=button]{   
+   background-color: #898989;
+   border: none;
+   color: #fff;
+   padding: 5px 15px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 14px;
+   cursor: pointer;
+   font-family: 'Nanum Gothic', son-serif;
+   font-weight: bold;
+   margin-right
+   }
+   
+   /*footer*/
+   #footerWrap_{width:100%; height:auto; background:#292929; margin-top:10px;}
+   
+   #footer_ {
+   margin: 0 auto;
+   width: 100%;
+   height: 50px;
+   border-top: solid 1px #616161;
+   border-bottom: solid 1px #000;
+   text-align: center;
+}
+
+#footerWrap {
+   width: 1100px;
+   height: auto;
+   margin: 0 auto;
+   margin-top: 10px;
+   font-size: 14px;
+   font-weight: bold;
+}
+
+.a_ {
+   margin-top:5px;
+   float: left;
+   margin-left: 10px;
+   color:#fff;
+}
+
+.a__ {
+   margin-top:5px;
+   float: right;
+   margin-right: 10px;
+   color:#fff;
+}
+
+#footer {
+   width: 1100px;
+   height: 160px;
+   margin: 0 auto;
+   margin-top: 20px;
+   clear:both;
+   position: relative;
+}
+
+#footer ul {
+   list-style: none;
+   text-align: left;
+   margin-left: 110px;
+   margin-top: -20px;
+}
+
+#footer ul li {
+   display: inline;
+   text-transform: capitalize;
+   font-size: 12px;
+   cursor: pointer;
+   padding-left: 10px;
+   color: lightgray;
+}
+
+.Extra {
+   font: bold 12px/20px Nanum;
+   margin-top: 10px;
+   margin-left: 10px;
+   color:#fff;
+}
+
+.except {
+   padding-left: 0;
+}
+
+.aaa {
+   color: lightgray;
+}
+
+#ul_except {
+   width: 100%;
+   height: 10px;
+   position: absolute;
+   top: 135px;
+   left: -100px;
+}
+
+#ul-except ul {
+   margin: 0px;
+}
+
+
+#proList{width:1100px; height:auto; margin:0 auto; }
+#proList table{text-align:center; background:#fff;}
+#proList th{background:#171717; height:35px; color:#fff;}
+#proList td{height:120px;font-size:14px;border-bottom:1px lightgray solid;}
+.three{width:300px;}
+#proList p{font-size:14px; text-align:left; text-indent:10px; line-height:1.5;}
+
+   #proList input[type=button]{   
+   background-color: #898989;
+   border: none;
+   color: #fff;
+   padding: 5px 15px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 14px;
+   cursor: pointer;
+   font-family: 'Nanum Gothic', son-serif;
+   font-weight: bold;
+   margin-right
+   }
+
+   #adminListImg{width:100px; height:100px; background:gray; margin-left:10px;}
+
+
+
+
+
+
+
+
+
+
+
+

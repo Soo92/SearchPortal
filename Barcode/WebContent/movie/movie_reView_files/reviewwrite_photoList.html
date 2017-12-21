@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_reView_files/reviewwrite_photoList.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>네이버 영화</title>
+
+<link rel="stylesheet" type="text/css" href="./common.css">
+
+<link rel="stylesheet" type="text/css" href="./movie_tablet.css">
+<link rel="stylesheet" type="text/css" href="./movie_end.css">
+<script type="text/javascript" src="./jindo.desktop.all.ns.js.다운로드"></script>
+</head>
+<body>
+
+<div class="ifr_area">
+			<div class="insert_img">
+						<a href="javascript:alert(&#39;마지막페이지입니다.&#39;);" title="이전 이미지" class="img_prev_off"><em class="blind">이전 이미지</em></a>
+				<div class="img_file">
+					<ul>
+						<li>
+							<p class="file_thumb"><span></span><img src="./movie_image.jpg" onclick="sendImage(&#39;1&#39;, &#39;http://movie.phinf.naver.net/20170608_186/1496884433662MPo8S_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1333&#39;);" style="cursor:pointer;" alt="영화 이미지"></p>
+							<input type="checkbox" id="img1" name="imgCheckBox[]" value="http://movie.phinf.naver.net/20170608_186/1496884433662MPo8S_JPEG/movie_image.jpg" onclick="checkboxSendImage(this, &#39;http://movie.phinf.naver.net/20170608_186/1496884433662MPo8S_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1333&#39;);" class="chkbox">
+						</li>
+						<li>
+							<p class="file_thumb"><span></span><img src="./movie_image(1).jpg" onclick="sendImage(&#39;2&#39;, &#39;http://movie.phinf.naver.net/20170608_230/1496884433834zUnDR_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;3000&#39;);" style="cursor:pointer;" alt="영화 이미지"></p>
+							<input type="checkbox" id="img2" name="imgCheckBox[]" value="http://movie.phinf.naver.net/20170608_230/1496884433834zUnDR_JPEG/movie_image.jpg" onclick="checkboxSendImage(this, &#39;http://movie.phinf.naver.net/20170608_230/1496884433834zUnDR_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;3000&#39;);" class="chkbox">
+						</li>
+						<li>
+							<p class="file_thumb"><span></span><img src="./movie_image(2).jpg" onclick="sendImage(&#39;3&#39;, &#39;http://movie.phinf.naver.net/20171106_23/1509931550772LIVmI_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1334&#39;);" style="cursor:pointer;" alt="영화 이미지"></p>
+							<input type="checkbox" id="img3" name="imgCheckBox[]" value="http://movie.phinf.naver.net/20171106_23/1509931550772LIVmI_JPEG/movie_image.jpg" onclick="checkboxSendImage(this, &#39;http://movie.phinf.naver.net/20171106_23/1509931550772LIVmI_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1334&#39;);" class="chkbox">
+						</li>
+					
+						<li>
+							<p class="file_thumb"><span></span><img src="./movie_image(3).jpg" onclick="sendImage(&#39;4&#39;, &#39;http://movie.phinf.naver.net/20171106_78/150993155092192Hrh_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1333&#39;);" style="cursor:pointer;" alt="영화 이미지"></p>
+							<input type="checkbox" id="img4" name="imgCheckBox[]" value="http://movie.phinf.naver.net/20171106_78/150993155092192Hrh_JPEG/movie_image.jpg" onclick="checkboxSendImage(this, &#39;http://movie.phinf.naver.net/20171106_78/150993155092192Hrh_JPEG/movie_image.jpg&#39;,&#39;2000&#39;,&#39;1333&#39;);" class="chkbox">
+						</li>
+					
+					</ul>
+				</div>
+						<a href="http://movie.naver.com/movie/bi/mi/reviewwrite_photoList.nhn?code=155665&amp;use_image=0&amp;page=2" title="다음 이미지" class="img_next_on"><em class="blind">다음 이미지</em></a>
+			</div>
+		
+	
+</div>
+<script type="text/javascript">
+function checkboxSendImage(obj, url, width, height) {
+	if(obj.checked) {
+		var result = parent.receiveImage(url, width, height);
+		
+		if(!result) {
+			obj.checked=false;
+		}
+	} else {
+		parent.deleteImage(url);
+	}
+}
+
+function sendImage(imgExposureNo, url, width, height) {
+	
+	var checkBox = jindo.$("img"+imgExposureNo);
+	
+	if(checkBox.checked == true) {
+		checkBox.checked = false;
+		parent.deleteImage(url);
+	} else {
+		checkBox.checked = true;
+		var result = parent.receiveImage(url, width, height);
+		
+		if(result == false) {
+			checkBox.checked = false;
+		}
+	}
+
+}
+</script>
+</body></html>

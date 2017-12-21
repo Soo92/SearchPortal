@@ -16,6 +16,7 @@
 		
 		String num = request.getParameter("num");
 		String reviewnum = request.getParameter("reviewnum");
+		String reviewrite = request.getParameter("reviewrite");
 		int idx = Integer.parseInt(request.getParameter("index"));
 		Vector<ReviewBean> reviewlist=mmgr.getReviewList(idx);
 
@@ -568,7 +569,6 @@ function delayed_submit(object) {
 		</div>
 	</div>
 	<div class="section_group"  id="3">
-		
 		<div class="obj_section">
 			<div class="review">
 				<div class="title_area">
@@ -643,60 +643,64 @@ function delayed_submit(object) {
 	</div>
 <%}else if(num.equals("3")){ if(reviewnum==null||reviewnum.equals("")){%>
 	<div class="section_group section_group_frst">
-				<div class="obj_section">
-					<div class="ifr_module2" id="reviewTab">
-						<div class="ifr_area">
-							<div class="review">
-								<div class="title_area">
-									<h4 class="h_review"><strong class="blind">리뷰</strong></h4>
-									<a href="#" class="wrt_review" onclick="clickcr(this, 'rli.write', '', '', event); goWrite(); return false;"><em>리뷰쓰기</em></a>
-								</div>
-								<div class="top_behavior">
-									<span class="cnt">총<em><%=reviewlist.size() %></em>건</span>
-									<ul class="quarter_mode">
-										<li>
-											<div class="align_latest">
-												<a href="#" id="orderButton" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event);">추천순<span></span></a>
-												<div class="ly_lastest ly_lastest2" id="orderLayer" style="display:none">
-													<ul>
-														<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event); dislplayOrder('goodcnt');">추천순</a></li>
-														<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
-													</ul>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-								<ul class="rvw_list_area">
-<%for(int i=0; i<reviewlist.size();i++) {
-	rbean = reviewlist.get(i);
-	int rnum = rbean.getReviewnum();
-	float rstar = rbean.getStar();
-	String rtitle= rbean.getTitle();
-	String rregdate = rbean.getRegdate();
-	int rviews = rbean.getViews();
-	int rgood = rbean.getGood();
-	String rcontent = rbean.getContent();
-	String rwriter = rbean.getWriter();
-%>
-										<li>
-											<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><strong><%=rtitle %></strong></a>
-											<span class="user"><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><%=rwriter %></a> <em><%=rregdate %></em><em>추천 <%=rgood %></em></span>
-										</li>
-<%} %>							</ul>
-								<div class="paging">
-									<div>
-<%for(int i=0;i<reviewlist.size()/10+1;i++) {%>
-										<a id="pagerTagAnchor<%=i+1%>" href="/movie/bi/mi/review.nhn?code=152385&amp;page=<%=i+1%>" onclick="clickcr(this, 'rli.page', '', '', event);"><span class="on"><%=i+1%></span></a>
-<%}%>
-										<a id="pagerTagAnchor2" href="/movie/bi/mi/review.nhn?code=152385&amp;page=2" title="다음" class="pg_next" onclick="clickcr(this, 'rli.page', '', '', event);"><em>다음</em></a>
+ 	<%if(reviewrite.equals("1")) {%>	 
+		<%@ include file="movie_reView.jsp" %>
+ 	<%}else{ %>	 
+		<div class="obj_section">
+			<div class="ifr_module2" id="reviewTab">
+				<div class="ifr_area">
+					<div class="review">
+						<div class="title_area">
+							<h4 class="h_review"><strong class="blind">리뷰</strong></h4>
+							<a href= "<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1" class="wrt_review" onclick="clickcr(this, 'rli.write', '', '', event); goWrite(); return false;"><em>리뷰쓰기</em></a>
+						</div>
+						<div class="top_behavior">
+							<span class="cnt">총<em><%=reviewlist.size() %></em>건</span>
+							<ul class="quarter_mode">
+								<li>
+									<div class="align_latest">
+										<a href="#" id="orderButton" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event);">추천순<span></span></a>
+										<div class="ly_lastest ly_lastest2" id="orderLayer" style="display:none">
+											<ul>
+												<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event); dislplayOrder('goodcnt');">추천순</a></li>
+												<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
+											</ul>
+										</div>
 									</div>
-								</div>
+								</li>
+							</ul>
+						</div>
+						<ul class="rvw_list_area">
+<%for(int i=0; i<reviewlist.size();i++) {
+rbean = reviewlist.get(i);
+int rnum = rbean.getReviewnum();
+float rstar = rbean.getStar();
+String rtitle= rbean.getTitle();
+String rregdate = rbean.getRegdate();
+int rviews = rbean.getViews();
+int rgood = rbean.getGood();
+String rcontent = rbean.getContent();
+String rwriter = rbean.getWriter();
+%>
+								<li>
+									<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><strong><%=rtitle %></strong></a>
+									<span class="user"><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><%=rwriter %></a> <em><%=rregdate %></em><em>추천 <%=rgood %></em></span>
+								</li>
+<%} %>							</ul>
+						<div class="paging">
+							<div>
+<%for(int i=0;i<reviewlist.size()/10+1;i++) {%>
+								<a id="pagerTagAnchor<%=i+1%>" href="/movie/bi/mi/review.nhn?code=152385&amp;page=<%=i+1%>" onclick="clickcr(this, 'rli.page', '', '', event);"><span class="on"><%=i+1%></span></a>
+<%}%>
+								<a id="pagerTagAnchor2" href="/movie/bi/mi/review.nhn?code=152385&amp;page=2" title="다음" class="pg_next" onclick="clickcr(this, 'rli.page', '', '', event);"><em>다음</em></a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+ 	<%} %> 
 <%}else{
 	rbean = mmgr.getReview(Integer.parseInt(reviewnum));
 	float rstar = rbean.getStar();

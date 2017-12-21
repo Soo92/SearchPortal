@@ -1,6 +1,15 @@
+<%@page import="member.ShoppingBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
+<jsp:useBean id="bean" class="member.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
+		Vector<ShoppingBean> vlist=mgr_shop.getShoppingList();
+		String id = (String)session.getAttribute("idKey");	
+		String email = mgr.getMember(id).getEmail();
+		String name = mgr.getMember(id).getName();
 %>
 
 <!doctype>
@@ -79,7 +88,108 @@
 	
 </div>
 
-	<script type="text/javascript" src="../js/follower.js"></script>
+
+
+<div id="wrap" style="background:#fff;">
+	<div id="wrap2">
+		<div id="category">
+			<a href="#">
+			<div id="category_a"><p>중고1</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고2</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고3</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고4</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고5</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고6</p></div>
+			</a>
+			
+			<a href="#">
+			<div id="category_a" class="space"><p>중고7</p></div>
+			</a>
+			
+		</div>
+	</div>
+</div>
+
+
+	<div id="wrap">
+		<div id="wrap2">
+		
+		<div id="blank"></div>
+		
+		<div id="blank"></div>
+		<!-- for -->
+			<%for(int i=0;i<vlist.size();i++){
+				bean=vlist.get(i);
+				    int index = bean.getIndex();	
+					bean = mgr_shop.getShopping(index);
+					String title = bean.getTitle();
+					String account = bean.getAccount();
+					String stock = bean.getStock();
+					String price = bean.getPrice();
+					String shipAccount = bean.getShipAccount();
+					String shipDate = bean.getShipDate();
+					String origin = bean.getOrigin();
+					String option = bean.getOpt();
+					String proAdd = bean.getProAdd();
+					int maxBuy = bean.getMaxBuy();
+					String mainImg = bean.getMainImg();
+					String listImg = bean.getListImg();
+					String detailImg = bean.getDetailImg();
+					double proStar = bean.getProStar();
+					int reviewNum = bean.getReviewNum();
+					int likeNum = bean.getLikeNum();
+					String Seller = bean.getSeller(); 
+					
+				if(i%3==0){%><div id="blank"></div>
+				<div id="real_product">
+				<%}else{ %><div id="real_product" class="_space"><%} %>
+				<div id="click_me">
+						<a href="detail.jsp?index=<%=index%>">
+							<div class="click_me"><p>click!</p></div>
+						</a>
+				</div>
+						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
+							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
+							margin-left:10px; margin-top:10px;">
+							<tr>
+								<td height="230px;">
+									<img src="<%=listImg %>">
+								 </td>
+							</tr>
+							<tr>
+								<td height="100px;" >
+									<p>상품 : <b>[<%=title %>]</b></p> <p style="font-size:12px; color:#ff4800;"><%=account %></p>
+									<p>가격 : <b><%=price %></b> 원</p>
+									<p>판매 : <b><%=Seller %></b> 님</p>
+								</td>
+							</tr>
+						</table>
+			</div>	
+			<%} %>			
+			<!-- 여기까지 -->
+			<div id="blank"></div>
+			
+			
+			<div id="blank"></div>
+		</div>
+	</div>
+	
+		<script type="text/javascript" src="../js/follower.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 				var speed = 500; //스크롤속도
@@ -107,13 +217,33 @@
 	<div id="float">
 		<div id="view_product">
 			<p>최근 본 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
-			</a>
-			<a href="#">
-			<div id="view_product_link" class="top_space"></div>
+			<% 
+				Cookie c = new Cookie("cookieName","cookieValue");
+				Cookie[] ck = request.getCookies();
+				int cc = ck.length;
+				String mainImg = bean.getMainImg();
+				int index = bean.getIndex();
+				
+				
+				for(int i=0; i<cc; i++){%>
+			
+			<a href="detail.jsp?index=<%=index%>">
+			<div id="view_product_link">
+				<%if( i<=1 || i%2!=0 ){ %>
+				<img src="<%=mainImg %>" width="100" height="100">
+				<%} %>
+			</div>
 			</a>
 			
+			<a href="#">
+			<div id="view_product_link" class="top_space">
+				<%if(i%2==0&& i>1){%>
+				<img src="<%=mainImg %>" width="100" height="100">
+				<%}%>
+			</div>
+			</a>
+			
+				<%} %>
 			<div id="button" class="top_space">
 				<table width="40" cellpadding="5" cellspacing="0" border="1" align="center"
 							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
@@ -160,342 +290,6 @@
 			}
 		</script>
 		
-	</div>
-
-<div id="wrap" style="background:#fff;">
-	<div id="wrap2">
-		<div id="category">
-			<a href="#">
-			<div id="category_a"><p>중고1</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고2</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고3</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고4</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고5</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고6</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_a" class="space"><p>중고7</p></div>
-			</a>
-			
-		</div>
-	</div>
-</div>
-
-
-	<div id="wrap">
-		<div id="wrap2">
-		
-		<div id="blank"></div>
-		
-		<!-- for문을 돌린다면 여기서 부터 하면 될듯 -->
-		<div id="blank"></div>
-		
-			<div id="real_product">
-				<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-						<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-					<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="blank"></div>
-			<!-- 여기까지 -->
-			
-				<!-- for문을 돌린다면 여기서 부터 하면 될듯 -->
-		<div id="blank"></div>
-		
-			<div id="real_product">
-				<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-						<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-					<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="blank"></div>
-			<!-- 여기까지 -->
-			
-			
-					<!-- for문을 돌린다면 여기서 부터 하면 될듯 -->
-		<div id="blank"></div>
-		
-			<div id="real_product">
-				<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-						<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-					<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="blank"></div>
-			<!-- 여기까지 -->
-			
-			
-					<!-- for문을 돌린다면 여기서 부터 하면 될듯 -->
-		<div id="blank"></div>
-		
-			<div id="real_product">
-				<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-						<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="real_product" class="_space">
-					<div id="click_me">
-						<a href="#">
-							<div class="click_me"><p>click!</p></div>
-						</a>
-				</div>
-						<table width="330" cellpadding="5" cellspacing="0" border="1" align="center"
-							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
-							margin-left:10px; margin-top:10px;">
-							<tr>
-								<td height="230px;"> </td>
-							</tr>
-							<tr>
-								<td height="100px;" >
-									<p>&nbsp;&nbsp;상품 : <b>[완전쩌는 신상품]</b> 클릭!</p>
-									<p>&nbsp;&nbsp;가격 : <b>30,000</b> 원</p>
-									<p>&nbsp;&nbsp;판매 : <b>내가바로판매왕</b> 님</p>
-								</td>
-							</tr>
-						</table>
-			</div>
-			
-			<div id="blank"></div>
-			<!-- 여기까지 -->
-			
-			
-			<div id="blank"></div>
-		</div>
 	</div>
 
 
