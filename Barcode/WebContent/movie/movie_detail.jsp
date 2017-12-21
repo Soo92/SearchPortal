@@ -637,7 +637,7 @@ function delayed_submit(object) {
 		<a name="pointAfterTab"></a>
 		<div class="obj_section noline">
 			<div class="ifr_module2">
-				<iframe src="./point.jsp" id="pointAfterListIframe" name="pointAfterListIframe" width="100%" frameborder="0" scrolling="no" class="ifr" title="네티즌 평점 리스트" height="1434px"></iframe>
+				<iframe src="./point.jsp?<%=idx %>" id="pointAfterListIframe" name="pointAfterListIframe" width="100%" frameborder="0" scrolling="no" class="ifr" title="네티즌 평점 리스트" height="1434px"></iframe>
 			</div>
 		</div>
 	</div>

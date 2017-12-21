@@ -3,12 +3,16 @@ package member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class MovieMgr {
 	
 	private DBConnectionMgr pool;
-	
+	/*private final SimpleDateFormat SDF_DATE =
+			new SimpleDateFormat("yyyy'.'MM'.'dd'.'hh':'mm (E)");*/
 	public MovieMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
@@ -82,6 +86,31 @@ public class MovieMgr {
 		return vlist;
 	}
 	
+	///////////////
+	public boolean insertReview(ReviewBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag=false;
+		try {
+			con = pool.getConnection();
+			sql = "insert movie_review(title,star,regdate,content,writer)";
+			sql +="values(?,?,now(),?,'?')";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getTitle());
+			pstmt.setFloat(2, bean.getStar());
+			pstmt.setString(3, bean.getRegdate());
+			pstmt.setString(4, bean.getContent());
+			pstmt.setString(5, bean.getWriter());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	
 	public ReviewBean getReview(int reviewnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -145,6 +174,9 @@ public class MovieMgr {
 		}
 		return vlist;
 	}
+	
+	
+	////////////////
 	
 	public ReBean getRe(int renum) {
 		Connection con = null;
@@ -210,4 +242,87 @@ public class MovieMgr {
 		}
 		return vlist;
 	}
+///////////////////////////////////////////////
+	public boolean insertPoint(PointBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "insert movie_point(idx, star, redate, content)"
+					+"values(?,?,now(),?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bean.getIdx());
+			pstmt.setInt(2, bean.getStar());
+			pstmt.setString(3, bean.getContent());
+			
+			if(pstmt.executeUpdate()==1)
+				flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	public PointBean getPoint(int pointnum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		PointBean regBean = new PointBean();
+		try {
+			con = pool.getConnection();
+			sql = "select * from movie_point where pointnum=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, pointnum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				regBean.setPointnum(rs.getInt("pointnum"));
+				regBean.setIdx(rs.getInt("idx"));
+				regBean.setStar(rs.getInt("star"));
+				regBean.setGood(rs.getInt("good"));
+				regBean.setBad(rs.getInt("bad"));
+				regBean.setContent(rs.getString("content"));
+				regBean.setWriter(rs.getString("writer"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return regBean;
+	}
+	public Vector<PointBean> getPointList(int idx) {
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = null;
+	      Vector<PointBean> vlist = new Vector<>();
+	      try {
+	         con = pool.getConnection();
+	         sql = "select * from movie_point where idx=?";
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setInt(1, idx);
+	         rs = pstmt.executeQuery();
+	         while (rs.next()) {
+	            PointBean regBean = new PointBean();
+	            regBean.setPointnum(rs.getInt("pointnum"));
+	            regBean.setIdx(rs.getInt("idx"));
+	            regBean.setStar(rs.getInt("star"));
+				regBean.setRedate(rs.getString("redate"));
+	            regBean.setGood(rs.getInt("good"));
+	            regBean.setBad(rs.getInt("bad"));
+	            regBean.setContent(rs.getString("content"));
+	            regBean.setWriter(rs.getString("writer"));
+	            vlist.addElement(regBean);
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         pool.freeConnection(con, pstmt, rs);
+	      }
+	      return vlist;
+	   }
 }

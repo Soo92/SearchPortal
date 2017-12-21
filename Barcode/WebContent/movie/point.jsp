@@ -1,26 +1,69 @@
+<%@page import="member.PointBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
+<jsp:useBean id="mgr" class="member.MovieMgr" />
+<jsp:useBean id="bean" class="member.PointBean" />
+<jsp:setProperty name="bean" property="*" />
+<%
+	request.setCharacterEncoding("utf-8");
+	int idx = Integer.parseInt(request.getParameter("index"));
+	Vector<PointBean> vlist= mgr.getPointList(idx);
+	int totalRecord = vlist.size();
+	int numPerPage = 10;//페이지당 레코드수
+	int pagePerBlock = 10;//블럭당 페이지수
+	int totalBlock = 0;
+	int totalPage = 0;
+	int nowPage = 1;//현재페이지
+	int nowBlock = 1;//현재블럭
+	
+	int start = 0;//DB에서 select 시작번호
+	int end = numPerPage;//시작번호로부터 읽어올 select수
+	
+	int listSize = 0;//현재 읽어온 게시물 번호
+	
+	if(request.getParameter("nowPage")!=null){
+		nowPage = Integer.parseInt(request.getParameter("nowPage"));
+	}
+	start = (nowPage*numPerPage)-numPerPage;
+	
+	totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
+	totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
+	nowBlock = (int)Math.ceil((double)nowPage/pagePerBlock);
+%>
 <!DOCTYPE html>
 <!-- saved from url=(0073)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/point.html -->
-<html lang="ko"><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513606894051"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div style="display: none;">
-	<input title="jindoCheck" type="input" name="jindo1513606593145">
+<html lang="ko">
+<div style="display: none;">
+	<input title="jindoCheck" type="input" name="jindo1513606894051">
 </div>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>바코드 영화</title>
-<link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="./point_files/common.css">
-<link rel="stylesheet" type="text/css" href="./point_files/movie_tablet.css">
-<link rel="stylesheet" type="text/css" href="./point_files/movie_end.css">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<div style="display: none;">
+		<input title="jindoCheck" type="input" name="jindo1513606593145">
+	</div>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>바코드 영화</title>
+	<link rel="shortcut icon"
+		href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico"
+		type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="./point_files/common.css">
+	<link rel="stylesheet" type="text/css"
+		href="./point_files/movie_tablet.css">
+	<link rel="stylesheet" type="text/css"
+		href="./point_files/movie_end.css">
 	<!-- content -->
 	<input type="hidden" name="movieCode" id="movieCode" value="152385">
-	<input type="hidden" name="onlyActualPointYn" id="onlyActualPointYn" value="N">
+	<input type="hidden" name="onlyActualPointYn" id="onlyActualPointYn"
+		value="N">
 	<input type="hidden" name="order" id="order" value="sympathyScore">
 	<input type="hidden" name="page" id="page" value="1">
 	<input type="hidden" name="point" id="point" value="0">
 	<div class="ifr_area basic_ifr">
 		<div class="input_netizen ">
-			<form id="pointWriteArea">
+			<form id="pointWriteArea" action="pointProc.jsp">
 				<fieldset>
 					<legend>
 						<span class="blind">네티즌 평점 입력란</span>
@@ -34,47 +77,107 @@
 									<!-- [D] st_off 영역에 마우스 오버시 : 클래스 st_over 추가
 												 [D] 버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가, 짝수 점수 버튼에 클래스 st_r 추가, 디폴트는 화면에 보이지 않는 0점 버튼 -->
 									<div class="st_off" id="pointStarRating">
-										<button type="button" title="0" class="_pointStarRatingList btn_star on">0점 선택됨</button>
-										<button type="button" title="1" class="_pointStarRatingList btn_star">1점</button>
-										<button type="button" title="2" class="_pointStarRatingList btn_star st_r">2점</button>
-										<button type="button" title="3" class="_pointStarRatingList btn_star">3점</button>
-										<button type="button" title="4" class="_pointStarRatingList btn_star st_r">4점</button>
-										<button type="button" title="5" class="_pointStarRatingList btn_star">5점</button>
-										<button type="button" title="6" class="_pointStarRatingList btn_star st_r">6점</button>
-										<button type="button" title="7" class="_pointStarRatingList btn_star">7점</button>
-										<button type="button" title="8" class="_pointStarRatingList btn_star st_r">8점</button>
-										<button type="button" title="9" class="_pointStarRatingList btn_star">9점</button>
-										<button type="button" title="10" class="_pointStarRatingList btn_star st_r">10점</button>
+										<button type="button" title="0"
+											class="_pointStarRatingList btn_star on">0점 선택됨</button>
+										<button type="button" title="1"
+											class="_pointStarRatingList btn_star">1점</button>
+										<button type="button" title="2"
+											class="_pointStarRatingList btn_star st_r">2점</button>
+										<button type="button" title="3"
+											class="_pointStarRatingList btn_star">3점</button>
+										<button type="button" title="4"
+											class="_pointStarRatingList btn_star st_r">4점</button>
+										<button type="button" title="5"
+											class="_pointStarRatingList btn_star">5점</button>
+										<button type="button" title="6"
+											class="_pointStarRatingList btn_star st_r">6점</button>
+										<button type="button" title="7"
+											class="_pointStarRatingList btn_star">7점</button>
+										<button type="button" title="8"
+											class="_pointStarRatingList btn_star st_r">8점</button>
+										<button type="button" title="9"
+											class="_pointStarRatingList btn_star">9점</button>
+										<button type="button" title="10"
+											class="_pointStarRatingList btn_star st_r">10점</button>
 									</div>
-									<span class="blind">평점</span><span class="star_count"><em id="pointStarRatingValue">0<span class="blind">점 </span></em><em>/<span class="blind"> 총 </span>10<span class="blind">점</span></em></span>
+									<span class="blind">평점</span><span class="star_count"><em
+										id="pointStarRatingValue">0<span class="blind">점 </span></em><em>/<span
+											class="blind"> 총 </span>10<span class="blind">점</span></em></span>
 									<!-- [D] 레이어 펼침시 : 클래스 on 추가, 타이틀, 대체 텍스트 변경 : 별점 선택 레이어 닫기 -->
-									<button type="button" id="pointStarRatingLayerOpenButton" class="btn_ly_open _pointStarRatingLayer" title="별점 선택 레이어 펼침">별점
+									<button type="button" id="pointStarRatingLayerOpenButton"
+										class="btn_ly_open _pointStarRatingLayer" title="별점 선택 레이어 펼침">별점
 										선택 레이어 펼침</button>
 								</div>
 							</div>
 						</li>
 						<li class="input_textarea">
-							<!-- [D] 인풋박스 포커스시, 입력내용이 바뀌었을 때 : 클래스 active 추가 --> <textarea id="ment" name="ment" row="1" cols="1" rows="1" class="input_tx" maxlength="140"></textarea>
+							<!-- [D] 인풋박스 포커스시, 입력내용이 바뀌었을 때 : 클래스 active 추가 --> <textarea
+								id="ment" name="content" row="1" cols="1" rows="1"
+								class="input_tx" maxlength="140"></textarea>
 							<p class="tx_length">
 								<em id="ment_cnt">0</em>/140
 							</p>
 						</li>
-						<li><input type="image" id="pointAddButton" src="./point_files/score_btn_submit.png" alt="등록" onclick="parent.clickcr(this,&#39;ara.register&#39;,&#39;&#39;,&#39;&#39;,event); return false;" style="display: block;"></li>
+						<li><input type="image" id="pointAddButton"
+							src="./point_files/score_btn_submit.png" alt="등록"
+							onclick="parent.clickcr(this,&#39;ara.register&#39;,&#39;&#39;,&#39;&#39;,event); return false;"
+							style="display: block;"></li>
 					</ul>
 
-					<div id="pointStarRatingLayer" class="t_layer_score" style="display: none">
+					<div id="pointStarRatingLayer" class="t_layer_score"
+						style="display: none">
 						<strong class="blind">별점을 선택하세요</strong>
 						<ul class="t_list_score">
-							<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 10" onclick="return false;"><span class="star"><span class="on"></span></span> <em>10</em></a></li>
-							<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 9" onclick="return false;"><span class="star"><span class="on"></span></span> <em>9</em></a></li>
-							<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 8" onclick="return false;"><span class="star"><span class="on"></span></span> <em>8</em></a></li>
-							<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 7" onclick="return false;"><span class="star"><span class="on"></span></span> <em>7</em></a></li>
-							<li class="b_none"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 6" onclick="return false;"><span class="star"><span class="on"></span></span> <em>6</em></a></li>
-							<li class="col_right"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 5" onclick="return false;"><span class="star"><span class="on"></span></span> <em>5</em></a></li>
-							<li class="col_right"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 4" onclick="return false;"><span class="star"><span class="on"></span></span> <em>4</em></a></li>
-							<li class="col_right"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 3" onclick="return false;"><span class="star"><span class="on"></span></span> <em>3</em></a></li>
-							<li class="col_right"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 2" onclick="return false;"><span class="star"><span class="on"></span></span> <em>2</em></a></li>
-							<li class="b_none col_right"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" class="_pointStarRatingLayer _pointStarRatingLayerList 1" onclick="return false;"><span class="star"><span class="on"></span></span> <em>1</em></a></li>
+							<li><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 10"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>10</em></a></li>
+							<li><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 9"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>9</em></a></li>
+							<li><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 8"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>8</em></a></li>
+							<li><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 7"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>7</em></a></li>
+							<li class="b_none"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 6"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>6</em></a></li>
+							<li class="col_right"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 5"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>5</em></a></li>
+							<li class="col_right"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 4"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>4</em></a></li>
+							<li class="col_right"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 3"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>3</em></a></li>
+							<li class="col_right"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 2"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>2</em></a></li>
+							<li class="b_none col_right"><a
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								class="_pointStarRatingLayer _pointStarRatingLayerList 1"
+								onclick="return false;"><span class="star"><span
+										class="on"></span></span> <em>1</em></a></li>
 						</ul>
 					</div>
 				</fieldset>
@@ -82,412 +185,229 @@
 
 
 			<!-- [D] 관람객 평점 작성 완료 -->
-			<div id="actualPointWriteExecuteLayer" class="ly_viewer" style="display: none">
+			<div id="actualPointWriteExecuteLayer" class="ly_viewer"
+				style="display: none">
 				<h4>관람객 평점 작성 완료 안내</h4>
 				<p>
-					관람객 평점이 등록되었습니다.<br>
-					<em>바코드페이 포인트 500원</em>이 적립되었습니다.<br>
+					관람객 평점이 등록되었습니다.<br> <em>바코드페이 포인트 500원</em>이 적립되었습니다.<br>
 					<em>7일 이후</em> 확인 가능합니다.
 				</p>
 				<p>(평점 삭제시, 적립된 포인트는 회수됩니다.)</p>
 				<div class="btn">
-					<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="actualPointWriteExecuteLayerOkButton" class="ok">확인</a> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="actualPointWriteExecuteLayerCloseButton" class="close" title="닫기">관람객 평점 작성 완료 안내 레이어 닫기</a>
+					<a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="actualPointWriteExecuteLayerOkButton" class="ok">확인</a> <a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="actualPointWriteExecuteLayerCloseButton" class="close"
+						title="닫기">관람객 평점 작성 완료 안내 레이어 닫기</a>
 				</div>
 			</div>
 			<!-- //관람객 평점 작성 완료 -->
 
 			<!-- [D] 관람객 평점 작성 완료2 -->
-			<div id="pointWriteExecuteLayer" class="ly_viewer" style="display: none">
+			<div id="pointWriteExecuteLayer" class="ly_viewer"
+				style="display: none">
 				<h4>관람객 평점 작성 완료 안내</h4>
 				<p class="msg1">관람객 평점이 등록되었습니다.</p>
 				<div class="btn">
-					<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="pointWriteExecuteLayerOkButton" class="ok">확인</a> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="pointWriteExecuteLayerCloseButton" class="close" title="닫기">관람객
+					<a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="pointWriteExecuteLayerOkButton" class="ok">확인</a> <a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="pointWriteExecuteLayerCloseButton" class="close" title="닫기">관람객
 						평점 작성 완료 안내 레이어 닫기</a>
 				</div>
 			</div>
 			<!-- //관람객 평점 작성 완료2 -->
 
 			<!-- [D] 바코드페이 가입 안내 레이어 -->
-			<div id="naverMileageSubscriptionLayer" class="ly_viewer" style="display: none">
+			<div id="naverMileageSubscriptionLayer" class="ly_viewer"
+				style="display: none">
 				<h4>바코드페이 가입 안내 레이어</h4>
 				<p class="msg2">
 					<em>바코드페이</em> 이용약관에 동의해주시면 포인트 500원<br>이 적립됩니다.
 				</p>
 				<p>
-					<a href="http://pay.naver.com/about" class="link_mileage" target="_blank">바코드페이 소개</a>
+					<a href="http://pay.naver.com/about" class="link_mileage"
+						target="_blank">바코드페이 소개</a>
 				</p>
 				<div class="btn">
-					<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="naverMileageSubscriptionButton" class="join">약관동의</a> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" id="naverMileageSubscriptionLayerCloseButton" class="close" title="닫기">바코드페이 가입 안내 레이어 닫기</a>
+					<a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="naverMileageSubscriptionButton" class="join">약관동의</a> <a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						id="naverMileageSubscriptionLayerCloseButton" class="close"
+						title="닫기">바코드페이 가입 안내 레이어 닫기</a>
 				</div>
 			</div>
 			<!-- //바코드페이 가입 안내 레이어 -->
 
 			<div class="score_total">
-				<strong class="total"><span class="tit"><em class="blind">140자 평</em></span><span class="sp">|</span>총<em>10,187</em>건</strong>
+				<strong class="total"><span class="tit"><em
+						class="blind">140자 평</em></span><span class="sp">|</span>총<em>10,187</em>건</strong>
 
-				<div class="best_score_info _bestPointHelp">
-					
-					
-				</div>
+				<div class="best_score_info _bestPointHelp"></div>
 			</div>
 
 			<div id="orderCheckbox" class="top_behavior">
 				<ul class="sorting_list">
-					<li class="on"><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.bysym&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;sympathyScore&#39;);">호감순</a></li>
-					<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.byrct&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;newest&#39;);">최신순</a></li>
+					<li class="on"><a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						onclick="parent.clickcr(this, &#39;ara.bysym&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;sympathyScore&#39;);">호감순</a></li>
+					<li><a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						onclick="parent.clickcr(this, &#39;ara.byrct&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;newest&#39;);">최신순</a></li>
 
-					<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.high&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;highest&#39;);">평점
+					<li><a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						onclick="parent.clickcr(this, &#39;ara.high&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;highest&#39;);">평점
 							높은 순</a></li>
-					<li><a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.low&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;lowest&#39;);">평점
+					<li><a
+						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+						onclick="parent.clickcr(this, &#39;ara.low&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;lowest&#39;);">평점
 							낮은 순</a></li>
 				</ul>
 			</div>
 			<div class="score_result">
 				<ul>
+					<%
+					for(int i=(nowPage-1)*10; i<(nowPage>totalRecord/10?totalRecord:nowPage*10); i++){
+					bean = vlist.get(i);
+					idx = bean.getPointnum();
+					bean = mgr.getPoint(idx);
+					int star = bean.getStar();
+					String redate = bean.getRedate();
+					int good = bean.getGood();
+					int bad = bean.getBad();
+					String content=bean.getContent();
+					String writer = bean.getWriter();
+					%>
+					
 					<li>
 						<div class="star_score">
-							<span class="st_off"><span class="st_on" style="width: 80.0%"></span></span><em>8</em>
+							<span class="st_off"><span class="st_on"
+								style="width:10%"></span></span><em><%=star %></em>
 						</div>
 						<div class="score_reple">
 							<p>
-								<span class="ico_best">BEST</span>진자 사기꾼이네요ㅋㅋ 제가사기당한거같아요
+								<span class="ico_best">BEST</span><%=content %>
 							</p>
 							<dl>
 								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13418993, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>et45****</span>
+									<em> <a
+										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+										onclick="javascript:showPointListByNid(13418993, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;"
+										target="_top"> <span><%=writer %></span>
 									</a>
-									</em> <em>2017.11.23 00:01</em>
+									</em> <em><%=redate %></em>
 								</dt>
 								<dd>
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;et45****&#39;, &#39;J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=&#39;, &#39;진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 &#39;, &#39;13418993&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
+									<a
+										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+										onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;et45****&#39;, &#39;J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=&#39;, &#39;진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 &#39;, &#39;13418993&#39;, &#39;point_after&#39;, true);return false;"
+										class="go_report2"><em>신고</em></a>
 								</dd>
 							</dl>
 						</div>
 						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13418993 count">2237</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13418993 count v2">391</span></strong>
+							<a class="_sympathyButton"
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+								class="blind">공감</span></a><strong><span
+								class="sympathy_13418993 count"><%=good %></span></strong> <a
+								class="_notSympathyButton"
+								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+								onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+								class="blind">비공감</span></a><strong><span
+								class="notSympathy_13418993 count v2"><%=bad %></span></strong>
 						</div>
 					</li>
-					<li>
-						<div class="star_score">
-							<span class="st_off"><span class="st_on" style="width: 80.0%"></span></span><em>8</em>
-						</div>
-						<div class="score_reple">
-							<p>
-								<span class="ico_best">BEST</span>현빈보러
-								갔다가 유지태 매력에 빠짐
-							</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13420997, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>haha****</span>
-									</a>
-									</em> <em>2017.11.23 17:46</em>
-								</dt>
-								<dd>
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;haha****&#39;, &#39;tol8zsS8lUWLArFafHyIPi7oRD5yj6A1Fj3PY0OGM0Q=&#39;, &#39;현빈보러 갔다가 유지태 매력에 빠짐 &#39;, &#39;13420997&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13420997 count">872</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13420997 count v2">254</span></strong>
-						</div>
-					</li>
-					<li>
-						<div class="star_score">
-							<span class="st_off"><span class="st_on" style="width: 60.0%"></span></span><em>6</em>
-						</div>
-						<div class="score_reple">
-							<p>
-								<span class="ico_best">BEST</span>기대하지말고 보면 볼만함
-							</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13421281, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>lpy4****</span>
-									</a>
-									</em> <em>2017.11.23 19:31</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;lpy4****&#39;, &#39;7F4l+Em2QfMuiPtZEo5RRyK/I0xq938TQ1XFDs+GIDA=&#39;, &#39;기대하지말고 보면 볼만함 &#39;, &#39;13421281&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13421281 count">252</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13421281 count v2">51</span></strong>
-						</div>
-					</li>
-
-
-
-
-
-					<li>
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 40.0%"></span></span><em>4</em>
-
-						</div>
-						<div class="score_reple">
-							<p>
-								<span class="ico_best">BEST</span>지들도 닉네임 클릭안되면서 다알바래ㅋㅋㅋ 이무슨ㅋㅋㅋ
-								b급 오락영화구만
-							</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13417580, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>알레이버크(rafe****)</span>
-									</a>
-									</em> <em>2017.11.22 16:55</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;rafe****&#39;, &#39;qesmkbIpn5oH1u8GWZVf707vcctfw6n9xyWr2a4HXm0=&#39;, &#39;지들도 닉네임 클릭안되면서 다알바래ㅋㅋㅋ 이무슨ㅋㅋㅋ b급 오락영화구만 &#39;, &#39;13417580&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13417580 count">276</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13417580 count v2">84</span></strong>
-						</div>
-					</li>
-
-
-
-
-
-					<li class="last">
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 60.0%"></span></span><em>6</em>
-
-						</div>
-						<div class="score_reple">
-							<p>
-								<span class="ico_best">BEST</span>스토리는
-								좋은듯..한데.뭔가..아쉬운듯 모자른듯..
-							</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13421940, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>발해의혼(hyun****)</span>
-									</a>
-									</em> <em>2017.11.23 22:57</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;hyun****&#39;, &#39;PbFo+tW0/+pWMpUE3i8rB0HbFTkdhmx66azEbKzvyqI=&#39;, &#39;스토리는 좋은듯..한데.뭔가..아쉬운듯 모자른듯.. &#39;, &#39;13421940&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13421940 count">136</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13421940 count v2">41</span></strong>
-						</div>
-					</li>
-
-
-
-
-
-
-
-
-
-
-
-					<li>
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 10.0%"></span></span><em>1</em>
-
-						</div>
-						<div class="score_reple">
-							<p>이 댓글은 곧 비공으로 묻히겠지... 시사화 본 사람은 알거다 그냥 그저그런 양산형 범죄오락 + 댓글
-								중에 안보고 벌써부터 평점테러 라고 하는 사람 분명 있다 문화생활 안해 보셨나? 시사회도 모르나?? 클리셰범벅영화
-								공짜로 봐도 아깝다</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13415955, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>powe****</span>
-									</a>
-									</em> <em>2017.11.22 00:09</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;powe****&#39;, &#39;oj8NkPYs0gNIgSrBrnMlfgP7LFZZVTNyYPSJ1zaLVIk=&#39;, &#39;이 댓글은 곧 비공으로 묻히겠지... 시사화 본 사람은 알거다 그냥 그저그런 양산형 범죄오락  +  댓글 중에 안보고  벌써부터 평점테러 라고 하는 사람 분명 있다  문화생활 안해 보셨나?  시사회도 모르나??   클리셰범벅영화 공짜로 봐도 아깝다 &#39;, &#39;13415955&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13415955 count">5686</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13415955 count v2">2085</span></strong>
-						</div>
-					</li>
-
-
-
-					<li>
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 10.0%"></span></span><em>1</em>
-
-						</div>
-						<div class="score_reple">
-							<p>히야... 진짜 거론할 가치가..</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13416242, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>굿맨(fill****)</span>
-									</a>
-									</em> <em>2017.11.22 02:47</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;fill****&#39;, &#39;0R/Q3FePzXaaozEUV8VToGYRcKWXVWc1ckI1mbSqqUA=&#39;, &#39;히야... 진짜 거론할 가치가.. &#39;, &#39;13416242&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13416242 count">5483</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13416242 count v2">1919</span></strong>
-						</div>
-					</li>
-
-
-
-					<li>
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 10.0%"></span></span><em>1</em>
-
-						</div>
-						<div class="score_reple">
-							<p>영화가 끝났는데 좀 황당하고 이해안가는 장면들도 많고 처음부터 끝까지 어거지로 끼워 맞춘 영화에 정말
-								실망입니다 그리고 매력있는 캐릭터가 단 한명도 없어요 공조애서의 카리스마가 느껴지는 현빈은 어디가고 그냥
-								잘생기기만한 현빈이 등장</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13416251, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>소소한(ley7****)</span>
-									</a>
-									</em> <em>2017.11.22 02:56</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;ley7****&#39;, &#39;OtUzU0pFYlKw0lcGRgOj/6PbBGX5Nv3jYS8QJVFCZ1s=&#39;, &#39;영화가 끝났는데 좀 황당하고 이해안가는 장면들도 많고 처음부터 끝까지 어거지로 끼워 맞춘 영화에 정말 실망입니다 그리고 매력있는 캐릭터가 단 한명도 없어요 공조애서의 카리스마가 느껴지는 현빈은 어디가고 그냥 잘생기기만한 현빈이 등장 &#39;, &#39;13416251&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13416251 count">2325</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13416251 count v2">1040</span></strong>
-						</div>
-					</li>
-
-
-
-					<li>
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 80.0%"></span></span><em>8</em>
-
-						</div>
-						<div class="score_reple">
-							<p>아니 ㅋㅋ 평점테러 맞네 님들 1점 준 애들 닉네임 터치하면 그 사람이 다른 영화도 어떻게 평점 줬는지
-								볼수 있음 보니까 평점 테러들 너무 많아 영화는 단순 오락물이지만 볼만함</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13416404, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>현(kbs1****)</span>
-									</a>
-									</em> <em>2017.11.22 07:24</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;kbs1****&#39;, &#39;CbyVEMGHY6vf0NmP29eW/uO0dFYMTlKx7L/uKDYW9uA=&#39;, &#39;아니 ㅋㅋ 평점테러 맞네 님들  1점 준 애들 닉네임 터치하면 그 사람이 다른 영화도 어떻게 평점 줬는지 볼수 있음 보니까 평점 테러들 너무 많아  영화는 단순 오락물이지만 볼만함 &#39;, &#39;13416404&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13416404 count">1811</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13416404 count v2">789</span></strong>
-						</div>
-					</li>
-
-
-
-					<li class="last">
-						<div class="star_score">
-
-							<span class="st_off"><span class="st_on" style="width: 90.0%"></span></span><em>9</em>
-
-						</div>
-						<div class="score_reple">
-							<p>
-								현빈 간지 작살ㅠㅠ 꼭 보세요 두 번 보세요!!
-							</p>
-							<dl>
-								<dt>
-									<em> <a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="javascript:showPointListByNid(13416625, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;" target="_top"> <span>야호(bass****)</span>
-									</a>
-									</em> <em>2017.11.22 10:34</em>
-								</dt>
-								<dd>
-
-
-
-									<a href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;bass****&#39;, &#39;2GLhcjGNkT4fDCWi2EgU7tyidCve5zxLXw8WBo2iSEw=&#39;, &#39;현빈 간지 작살ㅠㅠ 꼭 보세요 두 번 보세요!! &#39;, &#39;13416625&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a>
-
-								</dd>
-							</dl>
-						</div>
-						<div class="btn_area">
-							<a class="_sympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">공감</span></a><strong><span class="sympathy_13416625 count">1524</span></strong> <a class="_notSympathyButton" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#" onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="blind">비공감</span></a><strong><span class="notSympathy_13416625 count v2">720</span></strong>
-						</div>
-					</li>
-
-
-
-
-
-
+					<%}%>
 				</ul>
 			</div>
+			
 			<div class="paging">
-				<div>
-
-
-					<a id="pagerTagAnchor1" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span class="on">1</span></a> <a id="pagerTagAnchor2" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=2" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>2</span></a>
-					<a id="pagerTagAnchor3" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=3" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>3</span></a>
-					<a id="pagerTagAnchor4" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=4" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>4</span></a>
-					<a id="pagerTagAnchor5" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=5" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>5</span></a>
-					<a id="pagerTagAnchor6" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=6" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>6</span></a>
-					<a id="pagerTagAnchor7" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=7" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>7</span></a>
-					<a id="pagerTagAnchor8" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=8" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>8</span></a>
-					<a id="pagerTagAnchor9" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=9" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>9</span></a>
-					<a id="pagerTagAnchor10" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=10" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><span>10</span></a>
-
-					<a id="pagerTagAnchor2" href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=2" title="다음" class="pg_next" onclick="parent.clickcr(this, &#39;ara.page&#39;, &#39;&#39;, &#39;&#39;, event);"><em>다음</em></a>
-
-
-				</div>
-			</div>
-
+				<script type="text/javascript">
+				function pageing(page) {
+					document.readFrm.nowPage.value=page;
+					document.readFrm.submit();
+				}
+				
+				function block(block) {
+					document.readFrm.nowPage.value=
+						<%=pagePerBlock%>*(block-1)+1;
+					document.readFrm.submit();
+				}
+			</script>
+					<br/>
+					<table>
+						<tr align="center">
+							<td>
+							Total : <%=totalRecord%>Articles(
+							<font color="red"><%=nowPage%>/<%=totalPage%>
+							</font>)	
+							</td>
+						</tr>
+					</table>
+					<table>
+			<tr>
+				<td>게시물 번호 : &nbsp;</td>
+				<%
+						listSize = totalRecord - start;
+						for(int i=0;i<numPerPage;i++){
+							if(i==listSize) break;
+				%>
+				<td align="center">
+				<%=totalRecord-((nowPage-1)*numPerPage)-i%>
+				</td>
+				<%}//for%>
+			</tr>
+		</table>
+		<!-- 페이징 및 블럭 Start -->
+		<table>
+			<tr>
+				<td>
+				<% 
+						int pageStart = (nowBlock-1)*pagePerBlock+1;
+						int pageEnd = ((pageStart+pagePerBlock)<totalPage)?
+								                (pageStart+pagePerBlock):totalPage+1;            
+				%>
+				<%if(totalPage!=0){%>
+				<!-- 이전 블럭 Start -->
+				<%if(nowBlock>1){ %>
+				<a href="javascript:block('<%=nowBlock-1%>')">
+				prev...</a>&nbsp;
+				<%}%>
+				<!-- 이전 블럭 End -->
+				<!-- 페이징 Start -->
+				<%
+				for(;pageStart<pageEnd;pageStart++){
+				%>
+					<a href="javascript:pageing('<%=pageStart%>')">
+					<%if(nowPage==pageStart){%><font color="blue"><%}%>
+					[<%=pageStart%>]
+					<%if(nowPage==pageStart){%></font><%}%>
+					</a>
+				<%}//for%>&nbsp;
+				<!-- 페이징 End -->
+				<!-- 다음 블럭 Start -->
+				<%if(totalBlock>nowBlock){ %>
+				<a href="javascript:block('<%=nowBlock+1%>')">
+				...next</a>
+				<%}%>
+				<!-- 다음 블럭 End -->
+				<%}%>
+				</td>
+			</tr>
+		</table>
+		
+		<hr width="45%"/>
+			<form name="readFrm">
+				<input type="hidden" name="totalRecord" value="<%=totalRecord%>">
+				<input type="hidden" name="nowPage" value="<%=nowPage%>">
+			</form>
+		</div>
+	
 
 
 

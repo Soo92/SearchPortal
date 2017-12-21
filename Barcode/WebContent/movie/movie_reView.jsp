@@ -24,7 +24,7 @@ function star(a){
 	document.getElementById("pointStarRatingValue").innerHTML=a.title;
 	for(i=0;i<11;i++){
 		if(document.getElementById("star"+i).className.match(' on')){
-			document.getElementById("star"+i).className.replace('on','');
+			document.getElementById("star"+i).className = document.getElementById("star"+i).className.replace(' on','');
 		}
 	}
 	a.className=a.className+" on";
@@ -77,9 +77,6 @@ function removeTitle() {
 								<!-- [D]별점이 비활성화인경우에만 star_count 클래스 내에 em class="dis" -->
 								<span class="star_count"><em id="pointStarRatingValue">10</em></span>
 							</div>
-							
-							<!-- [D] 레이어가 펼쳐졌을 때 : 클래스 on 추가 -->
-							<button type="button" id="pointStarLayerButton" class="btn_score">별점 선택 레이어 펼치기</button>
 						</div>
 						<div id="pointLayerSection" class="t_layer_score" style="display:none">
 							<strong class="blind">별점을 선택하세요</strong>
