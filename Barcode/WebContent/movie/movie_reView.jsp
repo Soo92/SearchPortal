@@ -1,14 +1,13 @@
 <%@page import="member.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<jsp:useBean id="mgr" class="member.MovieMgr"/>
 <jsp:useBean id="bean" class="member.ReviewBean"/>
 <jsp:setProperty name="bean" property="*" />
 <%
 		request.setCharacterEncoding("utf-8");
 		int on=-1;
-		String id = (String)session.getAttribute("idKey");
-			String idx = request.getParameter("index");
+		String idk = (String)session.getAttribute("idKey");
+		String index = request.getParameter("index");
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0073)http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&from=list# -->
@@ -1777,7 +1776,7 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
 		</script>
 		<div id="hidden">
 		<input type="hidden" name="star" id="pointStarRating1" value=""/>
-		<input type="hidden" name="idx" id="pointStarRating2" value="<%=idx%>"/>
+		<input type="hidden" name="idx" id="pointStarRating2" value="<%=index%>"/>
 		<input type="hidden" name="content" id="smartEditorIframe1" value="">
 		</div>
 	</form>

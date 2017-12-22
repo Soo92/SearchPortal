@@ -1,3 +1,4 @@
+<%@page import="place.PlaceBoardBean"%>
 <%@page import="place.PlaceBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
@@ -103,8 +104,8 @@
 				<div id="_MM_FLICK_FIRST_PANEL" class="flick-panel">
 					<div class="wrap id_place" data-id="PLACE">
 						<div class="grid1_wrap brick-house">
-							<div class="brick-vowel">
 <%for(int i=0;i<vlist.size();i++) {%>
+							<div class="brick-vowel">
 		<%if(i==0) {%>
 								<div class="grid1 id_cui_placeweather">
 									<div class="cui_placeweather">
@@ -175,29 +176,23 @@
 										</div>
 										<div class="cb_list_wrap">
 											<ul class="cb_list">
-	<%for(int j=0;j<10;j++) {%>
-												<li class="cb_litem"><a
-													href="http://m.blog.barcode.com/ssyehy/221166854111"
-													class="cb_la" data-area="PLACE" data-clk="card"
-													data-gdid="UAT_2187042"
-													data-ugdid="90000003_00000000000000337E925FDF">
+	<%Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
+	for(int j=0;j<plist.size();j++) {%>
+												<li class="cb_litem"><a	class="cb_la">
 														<div class="cb_ltable">
 															<div class="cb_mcell">
-																<div class="cb_mw lzImg"
-																	style="background-color: #b38c7e;">
-																	<img width="100%" class="ub_m fade loaded change"
-																		data-width="222" data-height="145"
-																		src="./place_files/mobile_163728580839c.jpg">
+																<div class="cb_mw lzImg" style="background-color: #b38c7e;">
+																	<img width="100%" class="ub_m fade loaded change" src="<%=plist.get(j).getMainpic() %>">
 																</div>
 															</div>
 															<div class="cb_tcell">
 																<div class="cb_tw">
 																	<div class="cb_t">
-																		<span class="cui_em">대연동 시호우드워크샵</span><span
-																			class="cb_ts"><br> 목공 소품 원데이클래스</span>
+																		<span class="cui_em"><%=plist.get(j).getPlace() %></span><span
+																			class="cb_ts"><br><%=plist.get(j).getTitle() %></span>
 																	</div>
 																	<div class="cb_o">
-																		<span class="cb_on">상시모집</span> <span class="cb_on">~18.1.31</span>
+																		<span class="cb_on">모집기간 </span> <span class="cb_on"><%=plist.get(j).getEnddate() %></span>
 																	</div>
 																</div>
 															</div>
@@ -205,7 +200,7 @@
 												</a></li>
 	<%}%>
 											</ul>
-	<%if(13>3) {%>
+	<%if(plist.size()>3) {%>
 											<div class="cb_info">
 												<button type="button" id="btn<%=i%>" class="cb_btn_more _MM_FOLD _MM_FOLD_SET" onclick="fold('btn<%=i%>')">더보기</button>
 <!-- 												<button type="button" -->
@@ -217,8 +212,8 @@
 										</div>
 									</div>
 								</div>
-<%} %>
 							</div>
+<%} %>
 						</div>
 					</div>
 				</div>
