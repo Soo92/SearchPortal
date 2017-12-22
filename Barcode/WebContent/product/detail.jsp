@@ -1,4 +1,4 @@
-<%@page import="jdk.nashorn.internal.parser.TokenStream"%>
+<%-- <%@page import="jdk.nashorn.internal.parser.TokenStream"%> --%>
 <%@page import="java.util.StringTokenizer"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
@@ -482,14 +482,14 @@ $(document).ready(function(){
 					
 					<td class="bl_hits">1844</td>
 				</tr>
-
-				<tr class="bl_evenline">
+<%for(int i=0;i<10;i++) {%>
+				<tr onclick="reView('tr<%=i%>')" class="bl_evenline">
 					<td class="bl_no">27003</td>
 					<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
 					
 					<td class=" "></td>
 					
-					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=985887&amp;num2=00000&amp;lock=Y">주문취소</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
+					<td class="bl_subject_lt" colspan="1"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a style="cursor:pointer;" onclick="reView()">주문취소</a>&nbsp;&nbsp;<img src="../img/b2_new.gif" border="0" align="absmiddle"></td>
 					
 					<td class="bl_star">★★★★☆	</td>
 					<td class="bl_name"><div style="padding-left:2px; padding-right:2px;">ne24285</div></td>
@@ -498,8 +498,30 @@ $(document).ready(function(){
 					
 					<td class="bl_hits">0</td>
 				</tr>
+				<tr id="tr<%=i %>" style="display:none">
+					<th><p>본문</p></th>
+					<td colspan="2" id="review_img" width="700px">
+						<!--<img src="" width="500px" height="500px">-->
+					</td>
+						<td colspan="5"><!--text-->
+							<p style="margin:10px; text-indent:0;line-height:1.5;">진짜 진기한씨는 엄기준씨가 해주셔야 해요ㅋㅋ저번 드라마 sbs에서 방영 되었던'유령'에서 근엄하고 무게있는 카리스마무언가 심오함과 냉철? 차가운 느낌에서 정말 인상깊었는데요만약 이번 영화에 출연 된다면 엄기준씨의 차가운 이미지 보다는 캐릭터 진기한에 맞게 해주셔도 제격일 것 같아요.
+		옥황상제는 이순재나 신구가 해주면 코미디로 바뀔 것 같은 우스꽝 스런 농담도 해봅니다. 하하하하하하하하
+		하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하 하하하하</p>
+						</td>
+				</tr>
+<%} %>
+					</table>
+					</div>			
 
-				
+		<script type="text/javascript">
+		function reView(a) {
+			alert(a);
+		if( document.getElementById(a).style.display == "none")
+		    document.getElementById(a).style.display = "";
+			else
+		    document.getElementById(a).style.display = "none";
+		}
+		</script> 
 
 				<!-- LIST REPEAT END -->
 				</tbody>
@@ -646,6 +668,8 @@ $(document).ready(function(){
 					
 					<td class="bl_hits">1</td>
 				</tr>
+				
+				
 
 				<tr class="bl_evenline">
 					<td class="bl_no">26999</td>

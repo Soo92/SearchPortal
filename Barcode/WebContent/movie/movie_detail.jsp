@@ -644,7 +644,7 @@ function delayed_submit(object) {
 <%}else if(num.equals("3")){ if(reviewnum==null||reviewnum.equals("")){%>
 	<div class="section_group section_group_frst">
  	<%if(reviewrite.equals("1")) {%>	 
-		<%@ include file="movie_reView.jsp" %>
+ 		<%@include file="movie_reView.jsp"%>
  	<%}else{ %>	 
 		<div class="obj_section">
 			<div class="ifr_module2" id="reviewTab">

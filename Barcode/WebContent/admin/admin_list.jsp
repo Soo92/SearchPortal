@@ -133,11 +133,11 @@
                    
             <td style="width:90px;">
                  <a href="admin_update.jsp?index=<%=idx%>">
-                <input type="button" value="수정">
+                <input type="button" value="수정" name="">
                 </a>
                 
                 <a href="admin_delete.jsp?index=<%=idx%>">
-                 <input type="button" value="삭제" style="margin-top:10px;">
+                 <input type="button" value="삭제" name="" style="margin-top:10px;">
                  </a>
             </td>
           

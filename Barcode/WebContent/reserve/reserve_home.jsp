@@ -1,10 +1,15 @@
+<%@page import="place.PlaceBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="pbean" class="place.PlaceBean"/>
+<jsp:useBean id="pmgr" class="place.PlaceMgr"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
+		Vector<PlaceBean> vlist = pmgr.getPlaceList();
 %>
 
 <!doctype>
@@ -14,6 +19,8 @@
 	<title>상품코너</title>
 	<link rel="stylesheet" href="../css/product_style.css" type="text/css">
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
+	<link rel="stylesheet" type="text/css"	href="./place_files/w_g17122108.css">
+	<link rel="stylesheet" type="text/css"	href="./place_files/e_g150402.css">
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
 	function mypage() {
@@ -41,6 +48,15 @@
 				b = new Date();
 	      	}
 		} 
+	}
+	function fold(a){
+		alert(document.getElementById(a).className);
+		alert(document.getElementById(a).className.match('SET')=='SET');
+		if(document.getElementById(a).className.match('SET')=='SET'){
+			document.getElementById(a).className = document.getElementById(a).className.replace('SET','REMOVE');
+		}else{
+			document.getElementById(a).className = document.getElementById(a).className.replace('REMOVE','SET');
+		}
 	}
 	</script>
 </head>
@@ -76,9 +92,141 @@
 			</div>
 		</div>
 </div>
-	<div id="wrap">
+	<div id="wrap" style="padding-top: 55;">
 		<div id="wrap2">
- 여기다 grid 삽입하기 https://m.naver.com/ 플레이스 참고
+	<div id="ct">
+		<div id="mflick">
+			<div id="prepend" class="grid_prepend" style="display: none">
+				<a href="https://m.barcode.com/#" class="grid_prepend_a"><span class="spuio spuio_prepend"></span> 새&nbsp;&nbsp;글</a>
+			</div>
+			<div class="flick-container">
+				<div id="_MM_FLICK_FIRST_PANEL" class="flick-panel">
+					<div class="wrap id_place" data-id="PLACE">
+						<div class="grid1_wrap brick-house">
+							<div class="brick-vowel">
+<%for(int i=0;i<vlist.size();i++) {%>
+		<%if(i==0) {%>
+								<div class="grid1 id_cui_placeweather">
+									<div class="cui_placeweather">
+										<div class="cp_locale_group">
+											<div class="cp_locale_area">
+												<strong class="locale_name">부산</strong> <span
+													class="locale_info"> <span class="forecast"><span
+														class="imw imw02">맑음</span></span> <span class="celsius">5°</span>
+													<button type="button"
+														class="btn_locale _MM_MYPLACE_LOCATION_BTN">
+														<span class="blind">내위치</span>
+													</button>
+												</span>
+											</div>
+										</div>
+										<div id="_MM_REGION_TAB" class="cp_tab_group cp_tab_on"
+											style="display: block;">
+											<ul class="cp_l">
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="09" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzsu"><span
+														class="name">서울</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="02" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzgg"><span
+														class="name">경기</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="01" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzgw"><span
+														class="name">강원</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="14" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzjj"><span
+														class="name">제주</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="11" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzic"><span
+														class="name">인천</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a cp_aon" data-code="08"
+													data-area="PLACE" data-gdid="UAT_2123210" data-clk="tabzbs"><span
+														class="name">부산</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="07" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzcd"><span
+														class="name">대전·세종·충남</span></a></li>
+												<li class="cp_item"><a href="https://m.barcode.com/#"
+													class="_MM_REGION cp_a" data-code="16" data-area="PLACE"
+													data-gdid="UAT_2123210" data-clk="tabzcp"><span
+														class="name">충북</span></a></li>
+											</ul>
+											<div class="cp_alarm_area">
+												<p class="cp_alarm_snippet" id="place_location_desc">
+													<em class="point">다른 지역</em>의 <em class="point">동네소식</em>도
+													확인해보세요
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+		<%} %>
+								<div class="grid1 id_cui_bundle">
+									<div class="cui_bundle">
+										<div class="cb_title_wrap">
+											<h3 class="cb_title">
+												<span class="cb_main"><%=vlist.get(i).getTitle()%></span><span class="cb_sub"><%=vlist.get(i).getContent()%></span>
+											</h3>
+										</div>
+										<div class="cb_list_wrap">
+											<ul class="cb_list">
+	<%for(int j=0;j<10;j++) {%>
+												<li class="cb_litem"><a
+													href="http://m.blog.barcode.com/ssyehy/221166854111"
+													class="cb_la" data-area="PLACE" data-clk="card"
+													data-gdid="UAT_2187042"
+													data-ugdid="90000003_00000000000000337E925FDF">
+														<div class="cb_ltable">
+															<div class="cb_mcell">
+																<div class="cb_mw lzImg"
+																	style="background-color: #b38c7e;">
+																	<img width="100%" class="ub_m fade loaded change"
+																		data-width="222" data-height="145"
+																		src="./place_files/mobile_163728580839c.jpg">
+																</div>
+															</div>
+															<div class="cb_tcell">
+																<div class="cb_tw">
+																	<div class="cb_t">
+																		<span class="cui_em">대연동 시호우드워크샵</span><span
+																			class="cb_ts"><br> 목공 소품 원데이클래스</span>
+																	</div>
+																	<div class="cb_o">
+																		<span class="cb_on">상시모집</span> <span class="cb_on">~18.1.31</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+												</a></li>
+	<%}%>
+											</ul>
+	<%if(13>3) {%>
+											<div class="cb_info">
+												<button type="button" id="btn<%=i%>" class="cb_btn_more _MM_FOLD _MM_FOLD_SET" onclick="fold('btn<%=i%>')">더보기</button>
+<!-- 												<button type="button" -->
+<!-- 													class="cb_btn_fold _MM_FOLD _MM_FOLD_REMOVE" -->
+<!-- 													data-clk="groupfold" data-seq="762793" -->
+<!-- 													style="display: none;">접기</button> -->
+											</div>
+	<%} %>
+										</div>
+									</div>
+								</div>
+<%} %>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="flick-panel"></div>
+				<div class="flick-panel"></div>
+			</div>
+		</div>
+	</div>
 		</div>
 	</div>
 	

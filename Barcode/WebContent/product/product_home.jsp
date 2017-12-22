@@ -59,7 +59,7 @@
 			<div id="header">
 				<div id="wrap2">
 					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/barcode_logo__.png" width=100% height=100% alt="바코드"></div>
-					<div id="subject"><p><span>신상ㆍ중고</span> &nbsp;상품 Corner</p></div>
+					<div id="subject"><a href="product_home.jsp"><p><span>중고</span> &nbsp;상품 Corner</p></a></div>
 					<div id="login">
 <%if(id == null || id.equals("")){%>
 					<a href="../member/login.jsp">
@@ -218,6 +218,7 @@
 			<div id="blank"></div>
 			<div id="blank"></div>
 		</div>
+	</div>
 	</div>
 	
 	<div id="footer_">

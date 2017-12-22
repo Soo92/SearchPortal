@@ -1,7 +1,14 @@
+<%@page import="member.ReviewBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<jsp:useBean id="mgr" class="member.MovieMgr"/>
+<jsp:useBean id="bean" class="member.ReviewBean"/>
+<jsp:setProperty name="bean" property="*" />
 <%
 		request.setCharacterEncoding("utf-8");
 		int on=-1;
+		String id = (String)session.getAttribute("idKey");
+			String idx = request.getParameter("index");
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0073)http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&from=list# -->
@@ -10,7 +17,9 @@
 <link rel="stylesheet" type="text/css" href="./movie_reView_files/movie.all.css">
 </head>
 <body>
+
 <div id="wrap" class="basic">
+<form name="form" action="movie_reViewProc.jsp">
 <script type="text/javascript">
 function delayed_submit(object) {
 	if (navigator.userAgent.indexOf('MSIE') == -1) {
@@ -20,7 +29,7 @@ function delayed_submit(object) {
       	}
 	} 
 }
-function star(a){
+function staron(a){
 	document.getElementById("pointStarRatingValue").innerHTML=a.title;
 	for(i=0;i<11;i++){
 		if(document.getElementById("star"+i).className.match(' on')){
@@ -30,11 +39,15 @@ function star(a){
 	a.className=a.className+" on";
 };
 function removeTitle() {
+	/* alert( document.getElementById("smartEditorIframe").contentWindow.document.body.innerHTML);		
+	alert( document.getElementById("smartEditorIframe").contentWindow.document.body.content);		
+	alert("a"); */		
 	var a = document.getElementById("inputTitle");
 	if(a.value=="리뷰 제목을 입력하세요.")
 		a.value="";
 }
 </script>
+<input type="text" name="writer" value="작성자">
 <div id="content">
 	<div class="article">
 		<div class="obj_section noline center_obj">
@@ -54,7 +67,7 @@ function removeTitle() {
 					</tr>
 					<tr>
 					<th scope="row"><span class="subject2"><label for="inputTitle" class="subject2">제목</label></span></th>
-					<td><input onclick="removeTitle()" type="text" class="tx_field" value="리뷰 제목을 입력하세요." name="inputTitle" id="inputTitle"></td>
+					<td><input onclick="removeTitle()" type="text" class="tx_field" value="리뷰 제목을 입력하세요." name="title" id="inputTitle"></td>
 					</tr>
 					<tr>
 					<th scope="row" class="tr_star"><span class="subject3">별점</span></th>
@@ -66,21 +79,23 @@ function removeTitle() {
 								버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가
 								짝수 점수 버튼에 클래스 st_r 추가
 								디폴트는 화면에 보이지 않는 0점 버튼 -->
-							<div class="star_score" id="pointSection">
+							<div class="star_score" id="pointSection" >
 								<div class="st_off" id="pointStarRating">
 								<%for(int i=0;i<11;i++) {%>
-									<%if(i%2==0) {%><button id="star<%=i%>" onmouseover="star(this)" type="button" title="<%=i %>" class="_pointStarRatingList st_r"><%=i %>점</button>
-									<%}else {%><button id="star<%=i%>" onmouseover="star(this)" type="button" title="<%=i %>" class="_pointStarRatingList"><%=i %>점</button>
+									<%if(i%2==0) {%><button id="star<%=i%>" onmouseover="staron(this)" type="button" title="<%=i %>" class="_pointStarRatingList st_r"><%=i %>점</button>
+									<%}else {%><button id="star<%=i%>" onmouseover="staron(this)" type="button" title="<%=i %>" class="_pointStarRatingList"><%=i %>점</button>
 									<%}
 								}%>
 								</div>
 								<!-- [D]별점이 비활성화인경우에만 star_count 클래스 내에 em class="dis" -->
-								<span class="star_count"><em id="pointStarRatingValue">10</em></span>
+								<span class="star_count">
+								<em id="pointStarRatingValue">10</em>
+								</span>
 							</div>
 						</div>
 						<div id="pointLayerSection" class="t_layer_score" style="display:none">
 							<strong class="blind">별점을 선택하세요</strong>
-							<ul class="t_list_score">
+							<ul class="t_list_score" >
 								<li><a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="return false;" class="_pointStarLayerList" title="10"><span class="star"><span class="on"></span></span><em>10</em></a></li>
 								<li><a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="return false;" class="_pointStarLayerList" title="9"><span class="star"><span class="on"></span></span><em>9</em></a></li>
 								<li><a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="return false;" class="_pointStarLayerList" title="8"><span class="star"><span class="on"></span></span><em>8</em></a></li>
@@ -184,7 +199,16 @@ function removeTitle() {
 				</td>
 			</tr>
 			<tr>
-				<td tabindex="2" style="height: 459px;"><iframe src="./movie_reView_files/default.html" id="smartEditorIframe" name="smartEditorIframe" frameborder="0" allowtransparency="true" width="100%" height="100%" style="width: 100%; height: 459px;"></iframe><textarea id="textbox" style="visibility: visible; height: 459px; border: 0px; width: 100%; display: none;"></textarea></td>
+					<td tabindex="2" style="height: 459px;">
+						<iframe	src="./movie_reView_files/default.html"
+							id="smartEditorIframe" name="smartEditorIframe"
+							frameborder="0" allowtransparency="true"
+							width="100%" height="100%"
+							style="width: 100%; height: 459px;" >
+						</iframe>
+					<textarea id="textbox" 
+					style="visibility: visible; height: 459px; border: 0px; 
+					width: 100%; display: none;"></textarea></td>
 			</tr>
 			</tbody></table>
 		</td>
@@ -675,13 +699,13 @@ function removeTitle() {
 											<table cellspacing="0" cellpadding="0">
 											<tbody><tr>
 											<td class="tit">행</td>
-											<td><div class="control"><input type="text" id="rows_val" name="rows_val" value="4" onblur="{act|change|&#39;chRows&#39;, this.value }"> <span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnRows"></span></div></td>
+											<td><div class="control"><span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnRows"></span></div></td>
 											</tr>
 											<tr><td height="5" colspan="2"></td></tr>
 
 											<tr>
 											<td class="tit">열</td>
-											<td><div class="control"><input type="text" id="cols_val" name="cols_val" value="4" onblur="{act|change|&#39;chCols&#39;, this.value }"> <span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnCols"></span></div></td>
+											<td><div class="control"><span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnCols"></span></div></td>
 											</tr>
 											</tbody></table>
 											<map name="btnRows">
@@ -743,19 +767,19 @@ function removeTitle() {
 										<col width="143">
 										</colgroup><tbody><tr valign="top">
 										<td class="tit">테두리 굵기</td>
-										<td><div class="control"><input type="text" id="border_val" name="border_val" value="1" onblur="{act|change|&#39;chBorder&#39;, this.value }"> <span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnBorder"></span></div></td>
+										<td><div class="control"><span><img src="./movie_reView_files/btn_updown.gif" alt="" width="15" height="16" usemap="#btnBorder"></span></div></td>
 										</tr>
 										<tr><td height="5" colspan="2"></td></tr>
 
 										<tr>
 										<td height="20" class="tit02">테두리 색</td>
-										<td><div class="color_set"><div class="color_box" onclick="{act|Viewcolorpicker|0 }" style="cursor:pointer"><span id="borderColor" class="color" style="background-color:#B7BBB5;"></span></div>  <input type="text" id="borderColorCode" name="borderColorCode" value="#B7BBB5" class="box_input" style="width:78px; height:20px;" onblur="{act|change|&#39;chBorderColor&#39;,this.value}"> <a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|Viewcolorpicker|0 }"><img src="./movie_reView_files/btn_search.gif" alt="찾기" width="33" height="20" class="btn01"></a></div></td>
+										<td><div class="color_set"><div class="color_box" onclick="{act|Viewcolorpicker|0 }" style="cursor:pointer"><span id="borderColor" class="color" style="background-color:#B7BBB5;"></span></div>  <img src="./movie_reView_files/btn_search.gif" alt="찾기" width="33" height="20" class="btn01"></a></div></td>
 										</tr>
 										<tr><td height="3" colspan="2"></td></tr>
 										<tr>
 										<td class="tit02">표 배경색</td>
 
-										<td><div class="color_set"><div class="color_box" onclick="{act|Viewcolorpicker|1 }" style="cursor:pointer"><span id="backColor" class="color" style="background-color:#FFFFFF;"></span></div>  <input type="text" id="backColorCode" name="backColorCode" value="#FFFFFF" class="box_input" style="width:78px; height:20px;" onblur="{act|change|&#39;chBgColor&#39;,this.value}"> <a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|Viewcolorpicker|1 }"><img src="./movie_reView_files/btn_search.gif" alt="찾기" width="33" height="20" class="btn01"></a></div></td>
+										<td><div class="color_set"><div class="color_box" onclick="{act|Viewcolorpicker|1 }" style="cursor:pointer"><span id="backColor" class="color" style="background-color:#FFFFFF;"></span></div>  <a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|Viewcolorpicker|1 }"><img src="./movie_reView_files/btn_search.gif" alt="찾기" width="33" height="20" class="btn01"></a></div></td>
 										</tr>
 										<tr><td height="10" colspan="2"></td></tr>
 										</tbody></table>
@@ -901,8 +925,8 @@ function removeTitle() {
 							<div class="box_line">
 								<span class="ul_bg"></span>
 								<ul>
-								<li><label class="tit" for="word">찾을단어</label> <input type="text" name="keyword" value="" id="keyword" class="box_input" style="width:150px;"></li>
-								</ul>
+																			
+																		</ul>
 							</div>
 
 							<div class="box_line_btm"><div></div></div>
@@ -934,16 +958,6 @@ function removeTitle() {
 							<map name="tab_menu2">
 							<area alt="찾기" coords="1,2,38,21" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|gosearch}">
 							</map>
-
-
-							<div class="box_line">
-								<span class="ul_bg"></span>
-								<ul>
-								<li><label class="tit" for="word">찾을단어</label> <input type="text" name="keyword_re" value="" id="keyword_re" class="box_input" style="width:150px;"></li>
-								<li><label class="tit" for="word02">바꿀단어</label> <input type="text" name="replace" value="" id="replace" class="box_input" style="width:150px;"></li>
-								</ul>
-							</div>
-
 
 							<div class="box_line_btm"><div></div></div>
 
@@ -978,18 +992,6 @@ function removeTitle() {
 				</tbody></table>
 			</div>
 			</span>
-
-			<div class="extendpbook_items" style="background-color:white;">
-				<div id="extendpbook_basic_area">
-					<input type="text" name="search_input">
-					<input type="button" value="Search" onclick="{act|getbooksearchlist}">
-					<br><br>
-					<a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|getbestsell}">BestSell</a>
-					<a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="">New Books</a>
-				</div>
-				<div id="extendpbook_plugin_area">
-				</div>
-			</div>
 		</div>
 		<!-- //template -->
 	</div>
@@ -1732,11 +1734,6 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
  	}	
 }*/
 </script>
-
-
-								
-								
-							
 						</div>
 					</dd>
 				</dl>
@@ -1760,19 +1757,31 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
 					</tbody>
 					</table>
 					<div class="wrt_board_submit">
-						<a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="submitForm();return false;" title="확인" class="btn_confrm"><em class="blind">확인</em></a><!-- N=a:rwr.confirm -->
-								<a href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="showReviewList();return false;" title="취소" class="btn_cncl"><em class="blind">취소</em></a><!-- N=a:rwr.cancel -->
+						<input type="submit" value="등록" onclick="gethiddenvalue()">
 					</div>
 				</fieldset>
 				
+					</div>
+				</div>
+		<!-- //리뷰 -->
 			</div>
 		</div>
-		<!-- //리뷰 -->
-	</div>
-	
-</div>
-
-	</div>
+		<script type="text/javascript">
+			function gethiddenvalue(){
+				document.getElementById("pointStarRating1").value=
+				document.getElementById("pointStarRatingValue").innerHTML;
+				document.getElementById("smartEditorIframe1").value=
+					document.getElementById("smartEditorIframe").contentWindow.document.body.innerHTML;
+				document.getElementById("form").submit();
+			}
+		</script>
+		<div id="hidden">
+		<input type="hidden" name="star" id="pointStarRating1" value=""/>
+		<input type="hidden" name="idx" id="pointStarRating2" value="<%=idx%>"/>
+		<input type="hidden" name="content" id="smartEditorIframe1" value="">
+		</div>
+	</form>
+</div><!-- end -->
 
 
 </body></html>

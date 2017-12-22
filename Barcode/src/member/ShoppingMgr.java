@@ -247,9 +247,6 @@ public ShoppingBean getShopping(int idx) {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert tblNewShop(title,account,stock,price,shipAccount,shipDate,origin,"
-					+ "opt,proAdd,maxBuy,Seller)"
-					+ "values(?,?,?,?,?,?,?,?,?,?,?)";
 			File dir = new File(UPLOAD);
 			if(!dir.exists())
 				dir.mkdirs();//폴더가 없으면 생성
@@ -299,10 +296,8 @@ public ShoppingBean getShopping(int idx) {
 				pstmt.setString(14, multi.getParameter("listImg"));
 				pstmt.setString(15, multi.getParameter("detailImg"));
 			}
-			
 				if(pstmt.executeUpdate()==1)
 					flag = true;
-			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
