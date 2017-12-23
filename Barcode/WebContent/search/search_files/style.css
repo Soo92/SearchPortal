@@ -1,0 +1,236 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+*{margin:0; padding:0;}
+body { font-family: 'Nanum Gothic', son-serif; }
+	a{text-decoration:none;}
+#wrap{width:1082px; height:auto; margin:0 auto;}
+#wrap2{width:100%; height:auto; margin:0 auto; background:#efefef;}
+.blank{width:7px; height:7px; clear:both;}
+/*header*/
+#header{width:100%;height: auto;}
+#start{width:15%; height:30px; float:right; margin-top:20px;}
+#start p{color:gray; font-size:12px;}
+#start span{font-weight:bold;}
+#start a{text-decoration:none;}
+
+#logo{width: 220px;height: 70px;float:left;margin-top: 30px;}
+#search{
+				width:550px;
+				height:50px;
+				float:left;
+				margin-top: 37px;
+				margin-left:30px;
+				border:solid 2px;
+				border-color:#ff4800;
+				}
+#search_button{width:50px; height:50px; background: #ff4800; float:right;
+						cursor:pointer;
+						}
+						
+#place{width:50px; height:50px; float:right; margin-right:5px;}
+						
+#map{width:52px; height:52px; border:1px lightgray solid; float:left; margin-top:70px;
+		margin-left:20px;
+		}
+#nav{margin:0 auto;width:100%; height:32px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;
+				text-align:center;padding-top:14px;}
+#nav ul{list-style:none; text-align:center;}
+#nav a{text-decoration:none; color:gray;}
+#nav a:hover{color:#ff4800;}
+
+.ulul{margin-left:80px;}
+#nav ul li{display:inline; text-transform:capitalize; font-size:16px;
+				font-weight:bold; cursor:pointer; 
+				}
+
+/*section*/
+#section{width:740px; height:auto; padding:5px 0px 0px 0px; float:left;}
+.section_option{background:#fff; border:solid 1px; border-color:lightgray;margin-bottom:7px;}
+#google{width:100%; height:120px; margin-top:2px; margin-bottom:0;}
+#notice{width:100%; height:50px; margin-top:7px;}
+#notice a{color:gray;}
+	#box_img{width:130px; height:50px; float:left; margin-left:10px;}
+	#_box{float:left;width:500px; height:50px;overflow:hidden;}
+	
+	#move{
+	 width: 500px;
+    height: 500px;
+	margin-left:20px;
+    position: relative;
+    -webkit-animation: myfirst 5s 2; /* Safari 4.0 - 8.0 */
+    -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+    animation: myfirst 12s 100;
+	}
+	
+	#move li{height:50px; line-height:50px; font-size:14px; list-style:none;}
+	
+	@-webkit-keyframes myfirst {
+	
+    0%   {left: 0px; top: 0px;}
+    10%{left: 0px; top: 0px;}
+    20%{left: 0px; top: -50px;}
+    30%{left: 0px; top: -50px;}
+    40%  {left: 0px; top: -100px;}
+    50%  {left: 0px; top: -100px;}
+    60%  {left: 0px; top: -150px;}
+    70%  {left: 0px; top: -150px;}
+    80%  {left: 0px; top: -200px;}
+    90%  {left: 0px; top: -200px;}
+    100% {left: 0px; top:0px;}
+}
+
+
+#movie_Slider_{width:742; height:250px;  background:#fff;
+							margin-bottom:7px;
+							}
+
+#movie_Slider1{width:244px; height:250px; float:left;
+						border-right:0px;
+						}
+#movie_Slider2{width:243px; height:250px; float:left;
+						 border-right:none;
+						}
+#movie_Slider3{width:244px; height:250px; float:left;}
+
+/*section2*/
+#section2{width:332px; height:auto; padding:5px 0px 0px 0px; float:right;}
+#login{width:100%;height: 120px;margin-top:2px;position:relative;}
+#login_box{width:213px; height:70px; margin:20px 0px 12px 13px; float:left;
+					}
+
+#login_button{width:70px; height:71px; background:#ff4800; float:left; cursor:pointer;
+						margin-top:20px; margin-left:10px; text-align:center;
+						}
+#login_button p{font-size:14px; font-weight:bold; margin-top:27px; color:#fff;}
+
+#login_other2{width:100%; height:15px; clear:both;
+					font: 12px/10px Nanum;  position:relative; color:gray; letter-spacing:-0.5;
+					top:5px;
+					}
+#login_other2 a{color:gray;}
+#login_other2 a:hover{font-weight:bold; text-decoration:underline;}
+					
+#login_other2 ul{list-style:none; text-align:left;}
+#login_other2 ul li{display:inline; text-transform:capitalize; cursor:pointer; 
+				}
+.ulul2{margin-left:13px;}
+#login_other2 input[type=checkbox]{
+  position:relative;
+  top:2px;
+}
+
+#logout{width:223px; height:71px; margin:0 auto; float:left;}
+#logout a{color:gray}
+	#profile{width:58px; height:58px; background:gray; border-radius:30px; margin:7px; float:left; margin-right:15px; overflow:hidden;}
+	#login_button{width:70px; height:71px; background:#ff4800; float:left; cursor:pointer;
+						margin-top:20px; text-align:center; float:left;
+						}
+	#login_button p{font-size:14px; font-weight:bold; margin-top:27px; color:#fff;}
+	.myPage{background:#fff; width:60px; float:left; font-size:12px; padding:3px 3px 3px 5px; border:1px lightgray solid;
+	cursor:pointer;}
+	
+	#myPage_other{width:100%; height: 38px; background:lightgray; clear:both;}
+		#myPage_o_but{width:25%; height:39px;float:left; cursor:pointer; text-align:center;}
+		#myPage_o_but:hover{background:#aaa;}
+
+#shopping{width:100%; height:288px; text-align:center;}
+
+#shopping_1{width:150px; height:235px;float:left; margin:10px 0px 13px 10px;}
+#shopping_2{width:150px; height:235px; float:right; margin:10px 10px 13px 0px;}
+#other_text{width:130px; height:auto; margin:0 auto; margin-top:10px;}
+.title{color:gray; font-size:14px; font-weight:bold; line-height:1.5;}
+.account{color:gray; font-size:12px; line-height:1.5;}
+.price{color:#ff4800; font-weight:bold; font-size:14px; line-height:1.5;}
+
+#more{width:100%; height:30px; background:#ff4800; clear:both; margin-top:10px;}
+#more p{line-height:30px;}
+
+#Bottom{width:332; height:150px; margin-top:2px; margin-bottom:0px;}
+#footer_{margin:0 auto;width:100%; height:50px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;
+				text-align:center;}
+				
+#footerWrap{width:1100px; height:auto; margin:0 auto; margin-top:18px;
+					font-size:14px; font-weight:bold;
+}
+.a_{float:left; margin-left:10px;}
+.a__{float:right; margin-right:10px;}
+
+#footer{width:1100px; height:160px; margin:0 auto; margin-top:20px;position:relative;}
+
+#footer ul{list-style:none; text-align:left; margin-left:110px; margin-top:-20px;}
+
+#footer ul li{display:inline; text-transform:capitalize; font-size:12px;
+				 cursor:pointer; padding-left:10px; color:gray;
+				}
+				
+.Extra{font:bold 12px/20px Nanum; margin-top:10px; margin-left:10px;}
+.except{padding-left:0;}
+.aaa{color:lightgray;}
+#ul_except{width:100%; height: 10px; position:absolute; top:135px; left:-100px; }
+#ul-except ul{margin:0px;}
+
+
+input:focus{
+	outline-color:lightblue;
+}
+
+/*********************slider*********************/
+#s_1{background:#282828;}
+#s_2{background:#282828;}
+#s_3{background:#282828;}
+#s_4{background:#282828;}
+#s_5{background:#282828;}
+
+#movie_wrap{width:574px; height:182px; margin:0 auto; margin-top:34px;}
+#movie_wrap p{line-height:1.5; margin-left:5px;}
+
+#movie_sm{width:272px; height:182px; float:left;}
+#movie_sm_r{width:272px; height:182px; float:right;}
+
+#movie_img{width:120px; height:182px; float:left;}
+#movie_text{width:140px; height:182px; float:left; margin-left:10px;}
+
+.movie_tit{font-size:18px; color:#ff0; font-weight:bold; margin-top:5px;}
+.movie_st{font-size:12px; color:#fff;}
+.movie_ct{font-size:14px; color:#fff}
+.movie_s{font-size:10px; color:#fff;}
+
+/*********************shop_tbl*********************/
+
+#shop_tbl{width:744px; height:auto; background:#f00;}
+#shop_td{width:106px; height:106px; background:#ff0;float:left; position:relative;}
+.overlay_td {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #333;
+}
+
+.overlay_td p{line-height:1.5;}
+.text_td {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+
+#shop_td:hover .overlay_td {
+  opacity: 1;
+}
+
+/*********************place_*********************/
+
+#place_img{width:314px; height:100px; background:pink;
+ margin-left:9px;}
+ #place_title{width:314px; height:38px; margin-left:9px; margin-top:5px; text-align:center;}
+ #place_title span{font-weight:bold;}
+ #place_title p{font-size:12px; color:gray; line-height:38px;}

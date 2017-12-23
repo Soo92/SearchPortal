@@ -178,4 +178,29 @@ public class PlaceMgr {
 		}
 		return vlist;
 	}
+	//////////////////////////////////////////////
+	public Vector<PlaceBoardBean> getPlaceLegionList(String place) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<PlaceBoardBean> vlist = new Vector<>();
+		try {
+			con = pool.getConnection();
+			sql = "select DISTINCT place from place_board";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, place);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PlaceBoardBean regBean = new PlaceBoardBean();
+				regBean.setPlace(rs.getString("place"));
+				vlist.addElement(regBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
 }

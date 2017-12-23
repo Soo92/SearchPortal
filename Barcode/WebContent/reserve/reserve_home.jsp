@@ -5,12 +5,13 @@
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <jsp:useBean id="pbean" class="place.PlaceBean"/>
 <jsp:useBean id="pmgr" class="place.PlaceMgr"/>
+<jsp:useBean id="pbbean" class="place.PlaceBoardBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
-		Vector<PlaceBean> vlist = pmgr.getPlaceList();
+		Vector<PlaceBean> vlist = pmgr.getPlaceList();		
 %>
 
 <!doctype>
@@ -59,6 +60,15 @@
 			document.getElementById(a).className = document.getElementById(a).className.replace('REMOVE','SET');
 		}
 	}
+	function clickon(a){
+		//document.getElementById("pointStarRatingValue").innerHTML=a.title;
+		for(i=0;i<11;i++){
+			if(document.getElementById("star"+i).className.match(' on')){
+				document.getElementById("star"+i).className = document.getElementById("star"+i).className.replace(' on','');
+			}
+		}
+		a.className=a.className+" on";
+	};
 	</script>
 </head>
 <body>
@@ -104,9 +114,9 @@
 				<div id="_MM_FLICK_FIRST_PANEL" class="flick-panel">
 					<div class="wrap id_place" data-id="PLACE">
 						<div class="grid1_wrap brick-house">
-<%for(int i=0;i<vlist.size();i++) {%>
+				<%for(int i=0;i<vlist.size();i++) {%>
 							<div class="brick-vowel">
-		<%if(i==0) {%>
+				<%if(i==0) {%>
 								<div class="grid1 id_cui_placeweather">
 									<div class="cui_placeweather">
 										<div class="cp_locale_group">
@@ -124,39 +134,14 @@
 										<div id="_MM_REGION_TAB" class="cp_tab_group cp_tab_on"
 											style="display: block;">
 											<ul class="cp_l">
+											<%Vector<PlaceBoardBean> plist = pmgr.getPlaceLegionList(vlist.get(i).getIdx());
+											for(int j=0; j<plist.size(); j++) %>
 												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="09" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzsu"><span
+													class="_MM_REGION cp_a" id=""><span
 														class="name">서울</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="02" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzgg"><span
-														class="name">경기</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="01" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzgw"><span
-														class="name">강원</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="14" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzjj"><span
-														class="name">제주</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="11" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzic"><span
-														class="name">인천</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a cp_aon" data-code="08"
-													data-area="PLACE" data-gdid="UAT_2123210" data-clk="tabzbs"><span
-														class="name">부산</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="07" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzcd"><span
-														class="name">대전·세종·충남</span></a></li>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" data-code="16" data-area="PLACE"
-													data-gdid="UAT_2123210" data-clk="tabzcp"><span
-														class="name">충북</span></a></li>
 											</ul>
+											
+									<!--<!-- <!-- <!-- <!-- <!-- <!-- <!-- <!--  <!--  -->
 											<div class="cp_alarm_area">
 												<p class="cp_alarm_snippet" id="place_location_desc">
 													<em class="point">다른 지역</em>의 <em class="point">동네소식</em>도
@@ -176,9 +161,10 @@
 										</div>
 										<div class="cb_list_wrap">
 											<ul class="cb_list">
-	<%Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
-	for(int j=0;j<plist.size();j++) {%>
-												<li class="cb_litem"><a	class="cb_la">
+										<%Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
+										for(int j=0;j<plist.size();j++) {%>
+												<li class="cb_litem">
+												<a href="./place_board.jsp?index=<%=plist.get(j).getIdx() %>"	class="cb_la">
 														<div class="cb_ltable">
 															<div class="cb_mcell">
 																<div class="cb_mw lzImg" style="background-color: #b38c7e;">
@@ -197,7 +183,8 @@
 																</div>
 															</div>
 														</div>
-												</a></li>
+												</a>
+												</li>
 	<%}%>
 											</ul>
 	<%if(plist.size()>3) {%>

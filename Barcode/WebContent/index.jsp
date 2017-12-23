@@ -47,7 +47,7 @@
 			<input type="text" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
 								placeholder="검색해보세용!">
 				
-				<div id="search_button"><img src="img/search_icon.png" onclick="location.href='./search/search.html'"></div>
+				<div id="search_button"><img src="img/search_icon.png" onclick="location.href='./search/search.jsp'"></div>
 				<div id="place"><img src="img/place_icon.png"></div>
 			</div>
 			<a href="map/MapPr.jsp">
@@ -235,7 +235,7 @@
 			<div id="profile"></div>
 			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>님</p>
 			<p style="font-size:12px; float:left; line-height:23px; margin-right:5px">환영함당!</p>
-			<a href="#"><p class="myPage">마이페이지</p></a>
+			<a href="./member/mypage.jsp"><p class="myPage">마이페이지</p></a>
 			
 		</div>
 		<a href="./member/logout.jsp"><div id="login_button" style="position:absolute; top:0px; left:230px;"><p>로그아웃</p></div></a>

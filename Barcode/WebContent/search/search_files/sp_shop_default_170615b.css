@@ -21,7 +21,7 @@
 .sp_shop_default .lst_tab .tab .stab .sbar span{display:block;width:1px;height:15px;margin-top:9px;background-color:#e5e5e5}
 .sp_shop_default .lst_tab .tab.first{width:117px}
 .sp_shop_default .lst_tab .tab.first .stab .sbar{display:none}
-.sp_shop_default .lst_tab .tab.selected .stab{z-index:10;margin-right:-1px;border:1px solid #00b235;background-color:#00c63b;color:#fff;font-weight:bold;text-shadow:0 0 1px rgba(0,0,0,0.04)}
+.sp_shop_default .lst_tab .tab.selected .stab{z-index:10;margin-right:-1px;border:1px solid #fc9751;background-color:#ff510d;color:#fff;font-weight:bold;text-shadow:0 0 1px rgba(0,0,0,0.04)}
 .sp_shop_default .lst_tab .tab.selected .stab .sbar{display:none}
 .sp_shop_default .tab_sub{margin-top:-1px;border:1px solid #dfdfdf;background-color:#f9f9fa}
 .sp_shop_default .lst_sub_tab{*zoom:1}
