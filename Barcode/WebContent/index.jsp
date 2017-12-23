@@ -58,8 +58,8 @@
 	
 	<div id="nav">
 		<ul>
-			<li><a href="product/product_home.jsp">신상ㆍ중고 쇼핑</a></li>
-			<li class="ulul"><a href="reserve/reserve_home.jsp">술집ㆍ맛집 예약</a></li>
+			<li><a href="product/product_home.jsp">중고 쇼핑</a></li>
+			<li class="ulul"><a href="reserve/reserve_home.jsp">여행지</a></li>
 			<li class="ulul"><a href="movie/movie_home.jsp">영화 추천</a></li>			
 			<li class="ulul"><a href="custom/custom_home.jsp">고객센터</a></li>			
 		</ul>
@@ -194,7 +194,7 @@
 					<div class="blank" style="height:1px;"></div>
 					
 					<div  id="google" class="section_option" style="margin-top:7px;height:150px">
-				
+						<img src="img/naPong_s.png">
 					</div>
 			</div>
 			<!--우측영역-->
@@ -215,14 +215,9 @@
 								</td>
 							</tr>
 						</table>
-<%}else{%>
-						<%=name%>님
-						<a href="./member/logout.jsp">로그아웃</a>
-<%}%>
 					</div>
 					
 					<div id="login_button" onclick="loginCheck()"><p>로그인</p></div>
-					
 					<div id="login_other2">
 						<ul>
 						<li class="ulul2">
@@ -234,6 +229,31 @@
 						<a href="member/findpw.jsp">비밀번호 찾기</a>
 						</li>
 					</div>
+<%}else{%>
+
+<div id="logout">
+			<div id="profile"></div>
+			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>님</p>
+			<p style="font-size:12px; float:left; line-height:23px; margin-right:5px">환영함당!</p>
+			<a href="#"><p class="myPage">마이페이지</p></a>
+			
+		</div>
+		<a href="./member/logout.jsp"><div id="login_button" style="position:absolute; top:0px; left:230px;"><p>로그아웃</p></div></a>
+		
+		
+						
+						<!-- <a href="./member/logout.jsp">로그아웃</a> -->
+	</div>
+	<div id="myPage_other">
+			<div id="myPage_o_but"><a href="product/basket.jsp"><img src="img/myP_01.png"></a></div>
+			<div id="myPage_o_but"><a href="#"><img src="img/myP_02.png"></a></div>
+			<div id="myPage_o_but"><a href="#"><img src="img/myP_03.png"></a></div>
+			<div id="myPage_o_but"><a href="#"><img src="img/myP_04.png"></a></div>
+	</div>
+				
+<%}%>
+					
+					
 				</div>
 				
 				<div id="shopping" class="section_option">

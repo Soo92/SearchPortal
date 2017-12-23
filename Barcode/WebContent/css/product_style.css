@@ -27,7 +27,7 @@ a {
 }
 
 #wrap1 {
-	width: 1415px;
+	width: 960px;
 	height: auto;
 	margin: 0 auto;
 }
@@ -64,6 +64,7 @@ a {
 	height: 45px;
 	float: left;
 	margin-top: 5px;
+	cursor:pointer;
 }
 
 #subject {
@@ -629,16 +630,32 @@ a {
 }
 
 #review_box {
-	width: 690px;
+	width: 960px;
 	height: 180px;
 	background: #fff;
 	border: 1px lightgray solid;
 	float: left;
 }
 
-#review_box p {
-	font-size: 12px;
-}
+.test{background:#000; margin-top:10px; margin-left:10px;float:left;}
+
+#r_1{width:280px; height:180px; background:#ff4800; float:left;}
+	#r_no{width:30px; height:160px;}
+	#r_img{width:230px; height:160px;}
+
+#r_2{width:520px; height:180px; background:orange; float:left;}
+	#r_title{width:250px; height:40px;}
+	#r_wr{width:250px; height:40px;}
+	#r_star{width:100px; height:30px; background:blue;}
+	#r_sel{width:140px; height:30px;}
+	#r_views{width:100px; height:30px;}
+	#r_time{width:150px; height:30px;}
+	#r_con{}
+
+#r_3{width:150px; height:180px; background:pink; float:left;}
+	#r_good{}
+	#r_button{}
+
 
 #basket {
 	width: 1100px;

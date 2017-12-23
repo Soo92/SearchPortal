@@ -1,4 +1,4 @@
-package member;
+package product;
 
 public class ShoppingBean {
 	

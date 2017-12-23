@@ -1,4 +1,4 @@
-package member;
+package map;
 
 public class MapCustomBean {
 	public String cate0;

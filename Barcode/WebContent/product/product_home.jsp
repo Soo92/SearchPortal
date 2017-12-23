@@ -1,9 +1,9 @@
-<%@page import="member.ShoppingBean"%>
+<%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
-<jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
-<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<jsp:useBean id="mgr_shop" class="product.ShoppingMgr"/>
+<jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		Vector<ShoppingBean> vlist=mgr_shop.getShoppingList();
@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
+	
 	function mypage() {
 		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
 			document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";

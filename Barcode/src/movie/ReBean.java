@@ -1,4 +1,4 @@
-package member;
+package movie;
 
 public class ReBean {
 	private int renum;

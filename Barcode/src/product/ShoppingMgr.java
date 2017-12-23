@@ -1,4 +1,4 @@
-package member;
+package product;
 
 import java.io.File;
 import java.sql.Connection;
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import member.DBConnectionMgr;
 
 public class ShoppingMgr {
 	

@@ -16,6 +16,7 @@ public class MyPageBean {
 	public void setKeeping(String keeping) {
 		this.keeping = keeping;
 	}
-	
-	
 }
+
+
+

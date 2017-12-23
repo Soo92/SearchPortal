@@ -1,4 +1,4 @@
-package member;
+package movie;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
+
+import member.DBConnectionMgr;
 
 public class MovieMgr {
 	

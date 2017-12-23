@@ -1,4 +1,4 @@
-package member;
+package movie;
 
 public class ReviewBean {
 	private int reviewnum;

@@ -119,20 +119,29 @@
 					<div class="nav">
 						<!-- h3 class="tit_nav"></h3-->
 						<span class="nav_top_line"></span>
-<%if(cnum!=null) {%>
-						<h4 class="back_prv"><a href="<%=request.getRequestURI()%>?index=<%=idx%>"><span class="ic_prv"></span><%=cmgr.getCustomCate(cnum).getTitle() %></a></h4>
-<%}%>
+<%Vector<CustomCateBean> cclist1 = cmgr.getCustomCateList(index, "1");
+if(cnum!=null&&cmgr.getCustomCate(cnum).getParent().equals("2")||cnum==null&&boardnum!=null) {%>
+						<h4 class="back_prv"><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&cnum=<%=cmgr.getCustomCate(cnum).getCnum()%>"><span class="ic_prv"></span><%=cmgr.getCustomCate(cnum).getTitle() %></a></h4>
 						<ul>
-<%	Vector<CustomCateBean> cclist1 = cmgr.getCustomCateList(index, "1");
-for(int i=0;i<cclist1.size();i++) {%>
-							<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&cnum=<%=cclist1.get(i).getCnum()%>">
-							<%=cclist1.get(i).getTitle() %></a></li>
-<%}%>
+	<%	String[] a = cmgr.getCustomCate(cnum).getSubCate()!=null?cmgr.getCustomCate(cnum).getSubCate().split(","):new String[]{};
+	for(int i=0;i<a.length;i++) {	%>
+							<li<%if(cnum!=null&&cnum.equals(cmgr.getCustomCate(a[i]).getCnum())) {%> class="on"<%}%>><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&cnum=<%=cmgr.getCustomCate(a[i])%>">
+							<%=cmgr.getCustomCate(a[i]).getTitle() %></a></li>
+	<%}%>
 						</ul>
+<%}else{
+%>
+						<ul>
+	<%for(int i=0;i<cclist1.size();i++) {%>
+							<li<%if(cnum!=null&&cnum.equals(cclist1.get(i).getCnum())) {%> class="on"<%}%>><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&cnum=<%=cclist1.get(i).getCnum()%>">
+							<%=cclist1.get(i).getTitle() %></a></li>
+	<%}%>
+						</ul>
+<%} %>
 					</div>
 				</div>
 				<div id="content">
-<%if(cnum == null || cnum.equals("")){%>
+<%if((cnum == null || cnum.equals("")) && boardnum == null){%>
 					<div class="kwd_typ_section">
 						<ul class="lst_kwd">
 <%	Vector<CustomCateBean> cclist0 = cmgr.getCustomCateList(index, "0");

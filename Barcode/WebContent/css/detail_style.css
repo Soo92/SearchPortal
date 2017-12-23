@@ -2,6 +2,7 @@
 *{margin:0; padding:0;}
 body { font-family: 'Nanum Gothic', son-serif; }
 	a{text-decoration:none;}
+	input{font-family: 'Nanum Gothic', son-serif;}
 	
 #wrap{width:100%; margin:0 auto; background:#efefef;}
 #wrap_{width:100%; margin:0 auto; background:#282828;}
@@ -132,6 +133,7 @@ top:100px; left:1050px; cursor:pointer; z-index:3;
 		
 		#detail_QnA_bottom{width:100%; height:80px;position:relative;}
 			#detail_QnA_nextNpre a:hover{text-decoration:none; color:#ff4800;}
+			#detail_QnA_nextNpre td{font-size:12px;}
 			#detail_QnA_radio{width:400px; height:30px; margin:0 auto; margin-top:22px; font-size:12px; text-align:center;}
 			#detail_QnA_radio input[type=radio]{margin-top:6px;}
 			.radioSpace{margin-right:15px; margin-left:5px;}
@@ -156,6 +158,15 @@ top:100px; left:1050px; cursor:pointer; z-index:3;
 #detail_s_info td{text-indent:20px; font-size:12px;line-height:1.5; height:36px;}
 #detail_s_info th{background:lightgray;}
 .blank{width:10px; height:10px;}
+
+			#review_wri_{width:992px; height:auto; margin:0 auto; margin-top:10px;display:none;}
+			#review_wri_q_{width:992px; height:auto; margin:0 auto; margin-top:10px;display:none;}
+			#review_wri th{background:#efefef; text-align:center; text-indend:0}
+			#review_wri td{height:30px;}
+			#review_wri input[type=text]{height:30px; width:100%;}
+			#review_wri select{height:30px; width:200px;}
+			#review_wri textarea{height:200px; width:100%;border:0;overflow-y:hidden;background:clear;
+			}
 
 /*nav_2*/
 
@@ -227,3 +238,23 @@ top:100px; left:1050px; cursor:pointer; z-index:3;
 .aaa{color:lightgray;}
 #ul_except{width:100%; height: 10px; position:absolute; top:135px; left:-100px; }
 #ul-except ul{margin:0px;}
+
+
+
+
+
+
+
+
+
+
+
+#re_wrap{width:992px; height: auto; margin:0 auto; background:yellow;display:none;}
+#re_wrap p{font-size:12px;}
+#re_wrap th{background:#efefef; text-align: center;}
+#re_wrap td{text-align:left; text-indent:10px;}
+#review_img{width:200px; height:200px; background: #000;margin:0 auto; margin-top:10px; margin-bottom:10px;}
+
+
+
+
