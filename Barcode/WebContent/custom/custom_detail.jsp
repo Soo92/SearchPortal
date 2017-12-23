@@ -186,11 +186,6 @@
 							<h4 class="blind">카테고리 정보</h4>
 							<ul>
 								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>" title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
-	<%int c=0;
-	while(!cnum.equals(index)){
-	cnum=cnum.concat(",").concat(cmgr.getCustomCateParent(cnum).getIdx());
-	c++;}%>
-	<%=cnum %>
 								<li class="last"><strong title="<%=cmgr.getCustomCateParent(cnum).getTitle() %>"><%=cmgr.getCustomCateParent(cnum).getTitle() %></strong></li>
 								</ul>
 						</div>
