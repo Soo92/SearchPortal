@@ -16,6 +16,74 @@
 CREATE DATABASE IF NOT EXISTS `barcode` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `barcode`;
 
+-- Dumping structure for table barcode.custom
+CREATE TABLE IF NOT EXISTS `custom` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `title` char(50) DEFAULT '0',
+  `icon` char(50) DEFAULT '0',
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table barcode.custom: ~4 rows (approximately)
+/*!40000 ALTER TABLE `custom` DISABLE KEYS */;
+INSERT INTO `custom` (`idx`, `title`, `icon`) VALUES
+	(1, '회원정보', ''),
+	(2, '통합검색', '6'),
+	(3, '바코드쇼핑', '19'),
+	(4, '바코드<br>플레이스', '14');
+/*!40000 ALTER TABLE `custom` ENABLE KEYS */;
+
+-- Dumping structure for table barcode.custom_cate
+CREATE TABLE IF NOT EXISTS `custom_cate` (
+  `cnum` int(11) NOT NULL AUTO_INCREMENT,
+  `idx` char(50) NOT NULL DEFAULT '0',
+  `title` char(50) NOT NULL DEFAULT '0',
+  `parent` char(50) DEFAULT '2',
+  `subCate` char(50) DEFAULT NULL,
+  `board` char(50) DEFAULT NULL,
+  `pic` char(50) DEFAULT NULL,
+  PRIMARY KEY (`cnum`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table barcode.custom_cate: ~15 rows (approximately)
+/*!40000 ALTER TABLE `custom_cate` DISABLE KEYS */;
+INSERT INTO `custom_cate` (`cnum`, `idx`, `title`, `parent`, `subCate`, `board`, `pic`) VALUES
+	(1, '1', '로그인 관련 문제 해결', '0', NULL, '1,2', NULL),
+	(2, '1', '계정 도용 관련 이용 안내', '0', NULL, NULL, NULL),
+	(3, '1', '(신)단체 회원(단체ID) 이용 안내', '0', NULL, NULL, NULL),
+	(4, '2', '통합검색', '0', NULL, NULL, NULL),
+	(5, '2', '인물검색', '0', NULL, NULL, NULL),
+	(6, '2', '검색어 서비스', '0', NULL, NULL, NULL),
+	(7, '3', '자주 찾는 도움말', '0', NULL, NULL, NULL),
+	(8, '4', '변경/공지사항 안내', '0', NULL, NULL, NULL),
+	(9, '4', '등록/수정/관리권한', '0', NULL, NULL, NULL),
+	(10, '4', '검색 노출', '0', NULL, NULL, NULL),
+	(11, '1', '네이버 회원 가입/탈퇴', '1', '12,13,14,15', NULL, NULL),
+	(12, '1', '회원 가입', '2', NULL, '1,2', NULL),
+	(13, '1', '가입 오류', '2', NULL, NULL, NULL),
+	(14, '1', '회원 탈퇴', '2', NULL, NULL, NULL),
+	(15, '1', '문의하기', '2', NULL, NULL, NULL),
+	(16, '1', '네이버 회원 가입/탈퇴dd', '1', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `custom_cate` ENABLE KEYS */;
+
+-- Dumping structure for table barcode.custom_cate_board
+CREATE TABLE IF NOT EXISTS `custom_cate_board` (
+  `ccboardnum` int(11) NOT NULL AUTO_INCREMENT,
+  `idx` char(50) DEFAULT NULL,
+  `title` char(50) DEFAULT NULL,
+  `regdate` char(50) DEFAULT NULL,
+  `cnt` char(50) DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`ccboardnum`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table barcode.custom_cate_board: ~2 rows (approximately)
+/*!40000 ALTER TABLE `custom_cate_board` DISABLE KEYS */;
+INSERT INTO `custom_cate_board` (`ccboardnum`, `idx`, `title`, `regdate`, `cnt`, `content`) VALUES
+	(1, '1', '네이버 회원가입 방법', '2017.02.08	', '296621', '			<p></p><p><br></p><p>네이버는 무료서비스로 프리미엄 서비스인 만화, 뮤직 서비스 등을 제외한 </p><p>\r\n\r\n다른 서비스는 모두 무료로 운영되고 있습니다. </p><p><br></p><p>\r\n \r\n\r\n네이버 회원이 되시면 네이버 메일 뿐만 아니라 </p><div align="left">카페, 블로그, 지식iN 등 \r\n\r\n네이버의 다양한 서비스를 무료로 체험하실 수 있습니다.\r\n</div><div align="left"><br></div><div align="left"><table class="__se_tbl" border="0" cellspacing="0" cellpadding="0">\r\n<tbody><tr><td style="padding: 32px 7px 11px 1px; width: 566px; color: rgb(102, 102, 102); border-bottom-color: rgb(85, 85, 85); border-bottom-width: 2px; border-bottom-style: solid; background-color: rgb(255, 255, 255);">\r\n<p><strong><span style="color: rgb(0, 158, 37); font-size: 12pt;">네이버 회원가입 방법</span></strong></p></td></tr></tbody></table></div><p><br></p><p>회원가입은 네이버 홈페이지에서 하실 수 있으며, 아래의 링크를 통해 진행하실 수 있습니다.</p>\r\n<p>&nbsp;</p>\r\n<p><strong><span style="color: rgb(58, 50, 195);">▶ </span></strong><a href="https://nid.naver.com/user2/join.nhn?m=init&amp;lang=ko_KR" target="_blank"><strong><span style="color: rgb(58, 50, 195);">개인 회원가입하기</span></strong></a></p>\r\n<p><br></p><p>※ 단체 회원 가입을 원하신다면, 아래의 도움말을 확인해 주시기 바랍니다.<br></p><p><span style="color: rgb(58, 50, 195);">▶ </span><strong><u><span style="color: rgb(58, 50, 195);"><a href="https://help.naver.com/support/contents/contents.nhn?serviceNo=532&amp;categoryNo=16952" target="_blank"><span style="color: rgb(58, 50, 195);">단체 회원 가입 도움말 바로 가기</span></a></span></u></strong></p><p><br></p><p><br></p><p>네이버는 휴대폰 인증을 통해서 가입하실 수 있으며, </p><p>동일 번호로 한 달에 한 번, 최대 3개의 아이디만 가입 가능합니다. (개인/단체 아이디 동일)</p><p>&nbsp;</p><p><strong><span style="color: rgb(0, 158, 37);">본인 명의 휴대폰이 아니어도 가입을 위한 인증을 하실 수 있습니다.</span></strong></p><p><br></p><p>단, 휴대폰 외에 다른 수단으로는 가입을 위한 인증을 하실 수 없습니다.</p><p>(해외에서도 현지에서 이용하시는 휴대폰으로 인증하여 회원 가입하실 수 있습니다)</p>\r\n<p><br></p>\r\n<p>만 14세 미만은 법률에&nbsp;따라 보호자(법정 대리인)의 동의가 필요하오니, </p>\r\n<p>보호자와 함께 가입을 진행해 주세요.</p><p><br></p><p><br></p><p>※ 회원 가입이 되지 않는다면, 아래의 도움말로 이동하여 가입이 되지 않는 사유를 확인해 주세요.<br></p><p><strong><span style="color: rgb(58, 50, 195);">▶ </span></strong><a href="https://help.naver.com/support/contents/contents.nhn?serviceNo=532&amp;categoryNo=16788" target="_blank"><strong><span style="color: rgb(58, 50, 195);">회원 가입 불가&nbsp;관련 도움말 바로 가기</span></strong></a></p><p>&nbsp;<br></p>\r\n<table class="__se_tbl" style="background-color: rgb(199, 199, 199);" border="0" cellspacing="1" cellpadding="0" _cssquery_uid="787">\r\n<tbody>\r\n<tr>\r\n<td style="padding: 7px 10px; width: 470px; height: 126px; color: rgb(102, 102, 102); background-color: rgb(248, 248, 248);">\r\n<p><strong>※ 참고해주세요!</strong></p>\r\n<p>가입 시 인증번호가 문자로 수신되지 않는 경우, 아래의 내용을 확인해 주세요.\r\n</p><p><br></p><p>\r\n 1. 1588로 발송되는 문자가 수신차단되어 있는지 확인\r\n</p><p>&nbsp;&nbsp; (네이버에서 발신하는 문자는 1588로 시작됨) </p><p>\r\n\r\n 2. 1588번호가 휴대폰 스팸 차단 앱에 등록되어 있는지 확인 </p><p>\r\n\r\n 3. 1588번호가 스팸으로 차단되어 있지 않다면 통신사의 일시적인 장애일 수 있으므로 \r\n\r\n   </p><p>&nbsp;&nbsp; 시간을 두고 다시 시도\r\n</p><p>\r\n 4. 통신사에서 스팸으로 차단하는 경우가 있으므로 이용 중인 통신사로 문자 수신 여부 확인\r\n</p></td></tr></tbody></table><br><p></p>\r\n\r\n             '),
+	(2, '1', '탈퇴 아이디 재가입/복구', '2017.01.18', '67494', '\r\n					<p></p><p><br></p><p>정보통신망법(정보통신망 이용촉진 및 정보보호 등에 관한 법률 제 29조)에 따라서,</p><p>수집목적이 완료된 회원의 정보는 파기하도록 되어 있습니다.</p><p><br></p><p>\r\n이에 탈퇴된 회원의 개인정보 및 데이터는 즉시 파기됩니다.</p><table class="__se_tbl" border="0" cellspacing="0" cellpadding="0">\r\n<tbody><tr><td style="padding: 32px 7px 11px 1px; width: 566px; color: rgb(102, 102, 102); border-bottom-color: rgb(85, 85, 85); border-bottom-width: 2px; border-bottom-style: solid; background-color: rgb(255, 255, 255);">\r\n<p><strong><span style="color: rgb(0, 158, 37); font-size: 12pt;">탈퇴 아이디 재가입/복구</span></strong></p></td></tr></tbody></table><br><p>네이버는 회원 탈퇴 시 아래의&nbsp;내용을 안내하고 있으며&nbsp;그에 대한 동의를 진행하고 있습니다. </p>\r\n<p>&nbsp;</p>\r\n<p><strong><span style="color: rgb(255, 0, 0);">"탈퇴 후에는 해당 아이디로 다시 가입할 수 없으며, 아이디와 데이터는 복구할 수 없습니다."</span></strong></p>\r\n<p>&nbsp;</p>\r\n<p>즉, 위 내용에 동의를 하고 탈퇴한 것이므로&nbsp;안타깝게도 <strong><span style="color: rgb(0, 158, 37);">탈퇴한 아이디는 다시 가입하거나 복구</span><span style="color: rgb(0, 158, 37);">할 수 없습니다.</span></strong></p>\r\n<p>&nbsp;</p>\r\n<p>또한, 네이버 이용약관 제19조 제2항에서도 <strong><span style="color: rgb(0, 158, 37);">"</span><span style="color: rgb(0, 158, 37);">회원이 계약을 해지할 경우, 관련 법 및 개인정보취급방침에 따라 회사가 회원정보를 보유하는 경우를 제외하고는 해지 즉시 회원의 모든 데이터는 소멸됩니다."</span></strong>라고 명시하고 있습니다.</p>\r\n<p>&nbsp;</p>\r\n<p>번거로우시더라도 새로운 아이디로 가입하셔서 서비스를 이용해 주세요.</p>\r\n<p>&nbsp;</p>\r\n<p><strong><span style="color: rgb(58, 50, 195);">▶ </span></strong><a href="https://nid.naver.com/user2/join.nhn?m=init&amp;lang=ko_KR" target="_blank"><strong><span style="color: rgb(58, 50, 195);">네이버 회원 가입 바로 가기</span></strong></a></p><p></p>');
+/*!40000 ALTER TABLE `custom_cate_board` ENABLE KEYS */;
+
 -- Dumping structure for table barcode.movie
 CREATE TABLE IF NOT EXISTS `movie` (
   `idx` int(11) NOT NULL AUTO_INCREMENT,
@@ -34,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `movie` (
   PRIMARY KEY (`idx`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=1;
 
--- Dumping data for table barcode.movie: ~0 rows (approximately)
+-- Dumping data for table barcode.movie: ~1 rows (approximately)
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
 INSERT INTO `movie` (`idx`, `title`, `subtitle`, `star`, `genre`, `country`, `runtime`, `opendate`, `director`, `actor`, `age`, `like`, `content`) VALUES
 	(1, '꾼', 'The Swindlers, 2017', 7.86, '범죄', '한국', '117', '2017.11.22', '장창원', '현빈, 유지태, 배성우', 15, 2892, '‘희대의 사기꾼’을 잡기 위해 사기‘꾼’들이 뭉쳤다!</br>\r\n“판 다시 짜야죠, 팀플레이로!”</br>\r\n대한민국을 발칵 뒤집어 놓은 ‘희대의 사기꾼’ 장두칠이 돌연 사망했다는 뉴스가 발표된다.</br>\r\n 그러나 그가 아직 살아있다는 소문과 함께 </br>\r\n 그를 비호했던 권력자들이 의도적으로 풀어준 거라는 추측이 나돌기 시작한다. <br>\r\n <br>\r\n 사기꾼만 골라 속이는 사기꾼 지성(현빈)은 장두칠이 아직 살아있다며</br>\r\n 사건 담당 검사 박희수(유지태)에게 그를 확실하게 잡자는 제안을 한다.</br>\r\n 박검사의 비공식 수사 루트인 사기꾼 3인방 고석동(배성우), 춘자(나나), 김 과장(안세하)까지 합류시켜 </br>\r\n 잠적한 장두칠의 심복 곽승건(박성웅)에게 접근하기 위한 새로운 판을 짜기 시작한다. <br>\r\n <br>\r\n 하지만 박검사는 장두칠 검거가 아닌 또 다른 목적을 위해 은밀히 작전을 세우고,</br>\r\n 이를 눈치 챈 지성과 다른 꾼들도 서로 속지 않기 위해 각자만의 계획을 세우기 시작하는데…<br>\r\n <br>\r\n 이 판에선 누구도 믿지 마라!</br>\r\n 진짜 ‘꾼’들의 예측불가 팀플레이가 시작된다!');
@@ -53,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `movie_point` (
   PRIMARY KEY (`pointnum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Dumping data for table barcode.movie_point: ~14 rows (approximately)
+-- Dumping data for table barcode.movie_point: ~15 rows (approximately)
 /*!40000 ALTER TABLE `movie_point` DISABLE KEYS */;
 INSERT INTO `movie_point` (`pointnum`, `idx`, `star`, `redate`, `good`, `bad`, `content`, `writer`) VALUES
 	(1, 1, 8, '2017.11.23 00:01', 2237, 391, 'BEST진자 사기꾼이네요ㅋㅋ 제가사기당한거같아요', 'et456789'),
@@ -254,11 +322,85 @@ CREATE TABLE IF NOT EXISTS `tblnomal` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table barcode.tblnomal: ~0 rows (approximately)
+-- Dumping data for table barcode.tblnomal: ~1 rows (approximately)
 /*!40000 ALTER TABLE `tblnomal` DISABLE KEYS */;
 INSERT INTO `tblnomal` (`id`, `pass`, `name`, `gender`, `birth`, `phoneNum`, `email`, `zipcode`, `address`) VALUES
 	('a', '1', '수수', '1', '1', '1', '1', '1', '1');
 /*!40000 ALTER TABLE `tblnomal` ENABLE KEYS */;
+
+
+-- Dumping database structure for hotel
+CREATE DATABASE IF NOT EXISTS `hotel` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `hotel`;
+
+-- Dumping structure for table hotel.cart
+CREATE TABLE IF NOT EXISTS `cart` (
+  `num` int(11) NOT NULL AUTO_INCREMENT,
+  `roomname` char(50) NOT NULL DEFAULT '0',
+  `checkin` char(50) NOT NULL DEFAULT '0',
+  `checkout` char(50) NOT NULL DEFAULT '0',
+  `people` char(50) NOT NULL DEFAULT '0',
+  `pay` char(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hotel.cart: ~4 rows (approximately)
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` (`num`, `roomname`, `checkin`, `checkout`, `people`, `pay`) VALUES
+	(1, '3000', '12/08/2017', '12/22/2017', '3/1/0', '42000'),
+	(2, '0', 'DD/MM/YY', 'DD/MM/YY', '0/0/0', '0'),
+	(3, '2000', '12/16/2017', '12/28/2017', '1/0/0', '24000'),
+	(4, '0', '12/15/2017', 'DD/MM/YY', '1/0/0', '0');
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+
+-- Dumping structure for table hotel.hoteldetail
+CREATE TABLE IF NOT EXISTS `hoteldetail` (
+  `idx` int(11) NOT NULL AUTO_INCREMENT,
+  `roomname` char(50) DEFAULT NULL,
+  `mainpic` char(50) DEFAULT NULL,
+  `subpic1` char(50) NOT NULL DEFAULT '0',
+  `subpic2` char(50) NOT NULL DEFAULT '0',
+  `subpic3` char(50) NOT NULL DEFAULT '0',
+  `subname` char(50) DEFAULT NULL,
+  `subcontent` char(50) DEFAULT NULL,
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hotel.hoteldetail: ~0 rows (approximately)
+/*!40000 ALTER TABLE `hoteldetail` DISABLE KEYS */;
+INSERT INTO `hoteldetail` (`idx`, `roomname`, `mainpic`, `subpic1`, `subpic2`, `subpic3`, `subname`, `subcontent`) VALUES
+	(1, '1', '1', '0', '0', '0', '1', '1');
+/*!40000 ALTER TABLE `hoteldetail` ENABLE KEYS */;
+
+-- Dumping structure for table hotel.tblhotel
+CREATE TABLE IF NOT EXISTS `tblhotel` (
+  `id` char(50) DEFAULT NULL,
+  `pass` char(50) DEFAULT NULL,
+  `email` char(50) DEFAULT NULL,
+  `cart` char(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hotel.tblhotel: ~1 rows (approximately)
+/*!40000 ALTER TABLE `tblhotel` DISABLE KEYS */;
+INSERT INTO `tblhotel` (`id`, `pass`, `email`, `cart`) VALUES
+	('a', 'a', 'a', ',1,2,3,2');
+/*!40000 ALTER TABLE `tblhotel` ENABLE KEYS */;
+
+-- Dumping structure for table hotel.tblproduct
+CREATE TABLE IF NOT EXISTS `tblproduct` (
+  `no` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(50) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `detail` char(50) DEFAULT NULL,
+  `image` char(50) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hotel.tblproduct: ~1 rows (approximately)
+/*!40000 ALTER TABLE `tblproduct` DISABLE KEYS */;
+INSERT INTO `tblproduct` (`no`, `name`, `price`, `detail`, `image`) VALUES
+	(1, '1', 1, '1', '1');
+/*!40000 ALTER TABLE `tblproduct` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
