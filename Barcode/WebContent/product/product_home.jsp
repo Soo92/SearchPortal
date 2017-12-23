@@ -24,7 +24,6 @@
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
-	
 	function mypage() {
 		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
 			document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";

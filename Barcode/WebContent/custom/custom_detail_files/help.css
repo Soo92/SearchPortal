@@ -19,6 +19,8 @@ a:hover,a:active,a:focus{text-decoration:underline}
 #u_skip a{position:absolute;top:-30px;left:0;width:128px;border:1px solid #4ec53d;background:url(https://ssl.pstatic.net/static/common/sp_u_skip.png) repeat-x 0 -11px;text-align:center;outline:none}
 #u_skip a:active,#u_skip a:focus{top:0;text-decoration:none;cursor:pointer;zoom:1}
 #u_skip span{display:inline-block;padding:2px 6px 0 0;background:url(https://ssl.pstatic.net/static/common/sp_u_skip.png) no-repeat 100% 11px;font-size:11px;line-height:26px;color:#fff;letter-spacing:-1px}
+#login { float: right; margin-top: 12px; }
+#login p { color: #fff; font-size: 14px; text-align: center; }
 
 /* sprite */
 .sta .logo_naver,
@@ -56,7 +58,7 @@ a:hover,a:active,a:focus{text-decoration:underline}
 
 /* layout */
 #wrap{min-width:1000px}
-#header{position:relative;background-color:#00c73c;z-index:100;zoom:1}
+#header{position:relative;background-color:#ff4800;z-index:100;zoom:1}
 
 /* 2014.09.25 GNB*/
 #header .gnb_area.help{height:38px;text-align:center}
@@ -70,7 +72,6 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .svs{background:url(https://ssl.pstatic.net/static/help/support/bg_line2.gif) 180px 0 repeat-y}
 .svs #content{float:left;width:618px;margin-right:1px}
 #aside{float:left;width:180px;padding:40px 0 0}
-#footer{clear:both;position:relative;padding:0 0 30px;border-top:2px solid #636870;text-align:center}
 .l_line{width:300%;height:1px;margin-left:-200%;background-color:#cdcdcd;font-size:0;line-height:0}
 
 /* search area */
@@ -275,31 +276,6 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .rsult_section .srch_total{margin:15px 0 15px;padding:4px 0 5px;color:#555;line-height:12px;font-weight:bold}
 .rsult_section .srch_total.v2{margin:-15px 0 0}
 .rsult_section .no_rsult .srch_total{margin:14px 0 0;padding:4px 0 0px}
-
-/* footer */
-.rel_area{height:31px;border-bottom:1px solid #ebebeb;background-color:#fafafa}
-.rel_area .lst_info{width:509px;height:31px;margin:0 auto;background-position:0 -468px}
-.rel_area .lst_info li{float:left;height:100%;margin-left:1px}
-.rel_area .lst_info li:first-child{margin-left:0}
-.rel_area .lst_info .if{width:111px}
-.rel_area .lst_info .if2{width:96px}
-.rel_area .lst_info .if3{width:115px}
-.rel_area .lst_info .if4{width:95px}
-.rel_area .lst_info .if5{width:82px}
-.rel_area .lst_info li a{display:block;width:100%;height:100%;text-decoration:none}
-.lst_policy{height:14px;line-height:14px;padding-top:23px}
-.lst_policy li{display:inline;padding:0 3px 0 6px;background:url(https://ssl.pstatic.net/static/common/footer/bu_bar.gif) 0 50% no-repeat;font-size:11px}
-.lst_policy li:first-child{background:none}
-.lst_policy a{color:#444}
-.lst_policy a:hover{color:#438a01;text-decoration:underline}
-.info{height:20px;margin-top:7px;line-height:20px;color:#7e7e7e}
-.info address{display:inline;position:relative;top:-6px;font:9px/14px Verdana}
-.info address a{padding-bottom:1px;font:bold 9px/14px Tahoma;color:#444}
-.info address a:hover{color:#2DB400}
-.info .v_map{display:inline-block;width:55px;height:20px;margin-right:5px;background-position:-194px -412px}
-.info .v_map:hover{background-position:-194px -438px}
-.info .f_logo_naver{margin-left:3px}
-.info .f_logo_naver img{position:relative;top:2px}
 
 /* 위치안내 팝업 기존 서비스 재사용 */
 .map_popup{position:absolute;left:50%;bottom:53px;z-index:100;width:410px;margin-left:-280px;border:1px solid #888;background:#fff;font-size:12px;text-align:left}
@@ -786,10 +762,6 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .ly_popup form input[id="agreement"]{width:14px;height:14px}
 .ly_popup form label span{position:absolute;bottom:59px;left:40px;color:#999999}
 .ly_popup form input[type=image]{margin-top:8px}
-.pop_footer{height:26px;background-color:#474747}
-.pop_footer_content{padding:6px 20px;text-align:right;color:#ffffff}
-.pop_footer_content .close2{text-decoration:none;color:#ffffff}
-.pop_footer_content img{padding-left:8px}
 
 /* 장애안내 레이어 팝업 수정  20140529 */
 .ly_popup.v2{height:391px}
@@ -862,9 +834,6 @@ a:hover,a:active,a:focus{text-decoration:underline}
 #pop_container.top .qa_frm{padding-top:15px}
 #pop_container.top .write_frm{padding:0 0 16px 0}
 #pop_container .svs_end_area .view_frm{margin-top:0}
-#pop_footer .btn_frm{margin-top:1px;padding:20px 0 0;border-top:1px solid #d6d6d6;text-align:center}
-#pop_footer .btn_confrm{margin-right:4px;font-weight:bold}
-#pop_footer .btn_cancel{width:50px}
 
 /* 유해게시물 신고 폼 유형 추가 20141104 */
 .svs_end_area .confirm_frm .input_txt{width:415px;font-size:12px;vertical-align:top;color:#767676}
@@ -961,6 +930,47 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .sta .auto_kwd li.on{background-color:#f5f5f5}
 .sta .auto_kwd li strong{font-weight:bold;color:#eb0c00}
 
+#footer_{margin:0 auto;width:100%; height:50px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;
+				text-align:center;}
+				
+#footerWrap{width:1100px; height:auto; background:yellow; margin:0 auto; margin-top:18px;
+					font-size:14px; font-weight:bold;
+}
+.a_{float:left; margin-left:10px;}
+.a__{float:right; margin-right:10px;}
+
+#footer{width:1100px; height:160px; margin:0 auto; margin-top:20px;position:relative;}
+
+#footer ul{list-style:none; text-align:left; margin-left:110px; margin-top:-20px;}
+
+#footer ul li{display:inline; text-transform:capitalize; font-size:12px;
+				 cursor:pointer; padding-left:10px; color:gray;
+				}
+				
+#footer_{margin:0 auto;width:100%; height:50px;
+				border-top: solid 1px #efefef;  border-bottom:solid 1px lightgray;
+				text-align:center;}
+				
+#footerWrap{width:1100px; height:auto; background:yellow; margin:0 auto; margin-top:18px;
+					font-size:14px; font-weight:bold;
+}
+.Extra{font:bold 12px/20px Nanum; margin-top:10px; margin-left:10px;}
+
+#ul_except{width:100%; height: 10px; position:absolute; top:135px; left:-100px; }
+#ul-except ul{margin:0px;}
+
+.a_{float:left; margin-left:10px;}
+.a__{float:right; margin-right:10px;}
+
+#footer{width:1100px; height:160px; margin:0 auto; margin-top:20px;position:relative;}
+
+#footer ul{list-style:none; text-align:left; margin-left:110px; margin-top:-20px;}
+
+#footer ul li{display:inline; text-transform:capitalize; font-size:12px;
+				 cursor:pointer; padding-left:10px; color:gray;
+				}
+
 .question_banner{margin:40px 0 17px}
 .question_banner.blog{margin:50px 0 50px;text-align:center}
 
@@ -989,7 +999,7 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .ars_info_popup .btn_close{overflow:hidden;position:absolute;top:8px;right:8px;display:block;width:19px;height:19px;background:url(https://ssl.pstatic.net/static/help/support/btn_close3.jpg) no-repeat;text-indent:-9999px;color:transparent;cursor:pointer}
 /* 원네이버 적용 160704 */
 #header {
-    background-color:#00c73c
+    background-color:#ff4800;
 }
 /* Image Sprite */
 .Ngnb .Nlogo, .Nsearch .logo_naver, .Nsearch .h_title, .Nsearch .btn_srch, .Ngnb_service .Nhome {
@@ -1003,7 +1013,7 @@ a:hover,a:active,a:focus{text-decoration:underline}
 }
 .Ngnb {
     height: 54px;
-    border-bottom: 1px solid #00af35;
+    border-bottom: 1px solid white;
 }
 .Ngnb_inner {
     position: relative;
