@@ -1,7 +1,7 @@
-<%@page import="member.ReviewBean"%>
+<%@page import="movie.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<jsp:useBean id="bean" class="member.ReviewBean"/>
+<jsp:useBean id="bean" class="movie.ReviewBean"/>
 <jsp:setProperty name="bean" property="*" />
 <%
 		request.setCharacterEncoding("utf-8");

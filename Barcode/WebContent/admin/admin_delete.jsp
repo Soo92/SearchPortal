@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="mgr_shop" class="member.ShoppingMgr"/>
+<jsp:useBean id="mgr_shop" class="product.ShoppingMgr"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		int index = Integer.parseInt(request.getParameter("index"));

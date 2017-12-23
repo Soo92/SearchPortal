@@ -1,8 +1,8 @@
-<%@page import="member.ShoppingBean"%>
+<%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="shop_mgr" class="member.ShoppingMgr"/>
-<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<jsp:useBean id="shop_mgr" class="product.ShoppingMgr"/>
+<jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		Vector<ShoppingBean> vlist = shop_mgr.getShoppingList();
@@ -235,9 +235,9 @@
 		
 			<tr>
 				<td colspan="6" style="height:80px;">
-				<p style="float:left;">판매자 주소</p><input type="checkbox" name="s_adr" style="display:inline;float:left; margin-left:20px;cursor:pointer">
+				<p style="float:left;">판매자 주소</p><input type="checkbox" style="display:inline;float:left; margin-left:20px;cursor:pointer">
 				<p style="float:left; margin-left:-15px;font-size:12px; font-weight:normal; color:gray">회원정보와 동일</p>
-					<input type="text" name="s_adrOther" value="" placeholder=" 회원정보와 동일하다면 상단의 check box를 클릭하세요 :-)"style="width:98%;">
+					<input type="text" name="s_adr" value="" placeholder=" 회원정보와 동일하다면 상단의 check box를 클릭하세요 :-)"style="width:98%;">
 				</td>
 			</tr>
 		</table>

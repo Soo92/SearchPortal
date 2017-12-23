@@ -166,6 +166,7 @@ public ShoppingBean getShopping(int idx) {
 			MultipartRequest multi = 
 					new MultipartRequest(req, UPLOAD, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
+			System.out.println(multi.getParameter("idx"));
 			if(multi.getFilesystemName("mainImg")==null
 					&& multi.getFilesystemName("listImg")==null
 					&& multi.getFilesystemName("detailImg")==null) {//이미지 빼고 수정
@@ -187,8 +188,11 @@ public ShoppingBean getShopping(int idx) {
 				pstmt.setString(11, multi.getParameter("proAdd"));
 				pstmt.setString(12, multi.getParameter("s_adr"));
 				pstmt.setInt(13, Integer.parseInt(multi.getParameter("index")));
-				
+				System.out.println(multi.getParameter("detailImg"));
+				System.out.println(multi.getParameter("mainImg"));
+				System.out.println(multi.getParameter("idx"));
 			}else {
+				System.out.println("a");
 				sql = "update tblnewshop set Seller=?,title=?,price=?,account=?,"
 						+ "shipAccount=?,shipDate=?,maxBuy=?,origin=?,"
 						+ "stock=?,opt=?,proAdd=?,s_adr=?,mainImg=?,listImg=?,detailImg=?"
@@ -209,7 +213,11 @@ public ShoppingBean getShopping(int idx) {
 				pstmt.setString(13, multi.getParameter("mainImg"));
 				pstmt.setString(14, multi.getParameter("listImg"));
 				pstmt.setString(15, multi.getParameter("detailImg"));
+				System.out.println("a");
+				System.out.println(multi.getParameter("idx"));
 				pstmt.setInt(16, Integer.parseInt(multi.getParameter("idx")));
+				System.out.println(multi.getParameter("detailImg"));
+				System.out.println(multi.getParameter("mainImg"));
 			}
 			
 			if(pstmt.executeUpdate()==1)

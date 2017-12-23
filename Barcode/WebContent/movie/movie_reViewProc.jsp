@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="Mgr" class="member.MovieMgr"/>
-<jsp:useBean id="Bean" class="member.ReviewBean"/>
+<jsp:useBean id="Mgr" class="movie.MovieMgr"/>
+<jsp:useBean id="Bean" class="movie.ReviewBean"/>
 <jsp:setProperty name="Bean" property="*" />
 <%
 	request.setCharacterEncoding("euc-kr");

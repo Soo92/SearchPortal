@@ -1,5 +1,5 @@
-<jsp:useBean id="mgr" class="member.ShoppingMgr"/>
-<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<jsp:useBean id="mgr" class="product.ShoppingMgr"/>
+<jsp:useBean id="bean" class="product.ShoppingBean"/>
 <jsp:setProperty  name="bean" property="*"/>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%

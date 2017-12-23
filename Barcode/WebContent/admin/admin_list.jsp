@@ -1,8 +1,8 @@
-<%@page import="member.ShoppingBean"%>
+<%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="shop_mgr" class="member.ShoppingMgr"/>
-<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<jsp:useBean id="shop_mgr" class="product.ShoppingMgr"/>
+<jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
 		Vector<ShoppingBean> vlist = shop_mgr.getShoppingList();

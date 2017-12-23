@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
-<jsp:useBean id="mgr" class="member.ShoppingMgr"/>
+<jsp:useBean id="mgr" class="product.ShoppingMgr"/>
 
 <%
 	request.setCharacterEncoding("euc-kr");
@@ -15,5 +15,5 @@
 
 <script>
 	alert(<%=result%>+"<%=str%>");
-  	location.href="<%=location%>";
+<%--   	location.href="<%=location%>"; --%>
 </script>

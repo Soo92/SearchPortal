@@ -5,8 +5,6 @@ public class CustomCateBean {
 	private String idx;
 	private String title;
 	private String parent;
-	private String subCate;
-	private String board;
 	private String pic;
 	public String getCnum() {
 		return cnum;
@@ -31,18 +29,6 @@ public class CustomCateBean {
 	}
 	public void setParent(String parent) {
 		this.parent = parent;
-	}
-	public String getSubCate() {
-		return subCate;
-	}
-	public void setSubCate(String subCate) {
-		this.subCate = subCate;
-	}
-	public String getBoard() {
-		return board;
-	}
-	public void setBoard(String board) {
-		this.board = board;
 	}
 	public String getPic() {
 		return pic;

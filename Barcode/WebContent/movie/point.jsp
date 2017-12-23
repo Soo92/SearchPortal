@@ -1,8 +1,8 @@
-<%@page import="member.PointBean"%>
+<%@page import="movie.PointBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<jsp:useBean id="mgr" class="member.MovieMgr" />
-<jsp:useBean id="bean" class="member.PointBean" />
+<jsp:useBean id="mgr" class="movie.MovieMgr" />
+<jsp:useBean id="bean" class="movie.PointBean" />
 <jsp:setProperty name="bean" property="*" />
 <%
 	request.setCharacterEncoding("utf-8");

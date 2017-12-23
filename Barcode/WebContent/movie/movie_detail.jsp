@@ -1,13 +1,13 @@
-<%@page import="member.ReviewBean"%>
+<%@page import="movie.ReviewBean"%>
 <%@page import="java.util.Vector"%>
-<%@page import="member.ReBean"%>
+<%@page import="movie.ReBean"%>
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
-<jsp:useBean id="mmgr" class="member.MovieMgr"/>
-<jsp:useBean id="mbean" class="member.MovieBean"/>
-<jsp:useBean id="rbean" class="member.ReviewBean"/>
-<jsp:useBean id="rebean" class="member.ReBean"/>
+<jsp:useBean id="mmgr" class="movie.MovieMgr"/>
+<jsp:useBean id="mbean" class="movie.MovieBean"/>
+<jsp:useBean id="rbean" class="movie.ReviewBean"/>
+<jsp:useBean id="rebean" class="movie.ReBean"/>
 <%
 		request.setCharacterEncoding("utf-8");
 		String id = (String)session.getAttribute("idKey");	

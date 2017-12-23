@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id ="mgr_shop" class="member.ShoppingMgr"/>
-<jsp:useBean id ="bean" class="member.ShoppingBean"/>
+<jsp:useBean id ="mgr_shop" class="product.ShoppingMgr"/>
+<jsp:useBean id ="bean" class="product.ShoppingBean"/>
 <jsp:setProperty  name="bean" property="*"/>
 <jsp:setProperty  name="bean" property="title" value="dd"/>
 <jsp:setProperty  name="bean" property="account" value="dd"/>

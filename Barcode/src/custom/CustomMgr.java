@@ -94,16 +94,14 @@ public class CustomMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert custom_cate(Cnum,idx,title,parent,subCate,board,pic"
-					+ "values(?,?,?,?,?,?,?)";
+			sql = "insert custom_cate(Cnum,idx,title,parent,pic"
+					+ "values(?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getCnum());
 			pstmt.setString(2, bean.getIdx());
 			pstmt.setString(3, bean.getTitle());
 			pstmt.setString(4, bean.getParent());
-			pstmt.setString(5, bean.getSubCate());
-			pstmt.setString(6, bean.getBoard());
-			pstmt.setString(6, bean.getPic());
+			pstmt.setString(5, bean.getPic());
 			if(pstmt.executeUpdate()==1)
 				flag = true;
 		} catch (Exception e) {
@@ -113,7 +111,33 @@ public class CustomMgr {
 		}
 		return flag;
 	}
-	public CustomCateBean getCustomCate(String cnum) {
+	public CustomCateBean getCustomCate(String idx) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		CustomCateBean regBean = new CustomCateBean();
+		try {
+			con = pool.getConnection();
+			sql = "select * from custom_cate where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				regBean.setCnum(rs.getString("cnum"));
+				regBean.setIdx(rs.getString("idx"));
+				regBean.setTitle(rs.getString("title"));
+				regBean.setParent(rs.getString("parent"));
+				regBean.setPic(rs.getString("pic"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return regBean;
+	}
+	public CustomCateBean getCustomCateParent(String cnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -130,11 +154,8 @@ public class CustomMgr {
 				regBean.setIdx(rs.getString("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setParent(rs.getString("parent"));
-				regBean.setSubCate(rs.getString("subCate"));
-				regBean.setBoard(rs.getString("board"));
 				regBean.setPic(rs.getString("pic"));
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -161,8 +182,6 @@ public class CustomMgr {
 				regBean.setIdx(rs.getString("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setParent(rs.getString("parent"));
-				regBean.setSubCate(rs.getString("subCate"));
-				regBean.setBoard(rs.getString("board"));
 				regBean.setPic(rs.getString("pic"));
 				vlist.addElement(regBean);
 			}
@@ -199,7 +218,35 @@ public class CustomMgr {
 		}
 		return flag;
 	}
-	public CustomCateBoardBean getCustomCateBoard(String ccboardnum) {
+	public CustomCateBoardBean getCustomCateBoard(String idx) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		CustomCateBoardBean regBean = new CustomCateBoardBean();
+		try {
+			con = pool.getConnection();
+			sql = "select * from custom_cate_board where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, idx);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				regBean.setCcboardnum(rs.getString("ccboardnum"));
+				regBean.setIdx(rs.getString("idx"));
+				regBean.setTitle(rs.getString("title"));
+				regBean.setRegdate(rs.getString("regdate"));
+				regBean.setCnt(rs.getString("cnt"));
+				regBean.setContent(rs.getString("content"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return regBean;
+	}
+	public CustomCateBoardBean getCustomCateBoardParent(String cbnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -209,7 +256,7 @@ public class CustomMgr {
 			con = pool.getConnection();
 			sql = "select * from custom_cate_board where ccboardnum=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, ccboardnum);
+			pstmt.setString(1, cbnum);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				regBean.setCcboardnum(rs.getString("ccboardnum"));

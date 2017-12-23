@@ -3,13 +3,24 @@ package product;
 import java.sql.ResultSet;
 import java.util.Vector;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import member.DBConnectionMgr;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class ReviewMgr {
 	private DBConnectionMgr pool;
+	
+	public static final String UPLOAD
+	="C:/Jsp"; 
+	public static final String ENCTYPE = "EUC-KR";
+	public static final int MAXSIZE = 5*1024*1024;//5MB
 	
 	public ReviewMgr() {
 		pool = DBConnectionMgr.getInstance();
@@ -82,5 +93,45 @@ public class ReviewMgr {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		return vlist;
+	}
+	
+	//리뷰등록
+	public boolean reviewProAdd(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			File dir = new File(UPLOAD);
+			if(!dir.exists())
+				dir.mkdirs();//폴더가 없으면 생성
+			MultipartRequest multi = 
+					new MultipartRequest(req, UPLOAD, MAXSIZE, 
+							ENCTYPE, new DefaultFileRenamePolicy());
+			if(multi.getFilesystemName("img")==null) {//이미지 빼고 수정
+				sql = "insert board (title,star,content)"
+						+ "values(?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, multi.getParameter("title"));
+				pstmt.setString(2, multi.getParameter("star"));
+				pstmt.setString(3, multi.getParameter("content"));
+			}else {
+				sql = "insert board (title,star,img,content)"
+						+ "values(?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, multi.getParameter("title"));
+				pstmt.setString(2, multi.getParameter("star"));
+				pstmt.setString(3, multi.getParameter("img"));
+				pstmt.setString(4, multi.getParameter("content"));
+			}
+				if(pstmt.executeUpdate()==1)
+					flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
 	}
 }

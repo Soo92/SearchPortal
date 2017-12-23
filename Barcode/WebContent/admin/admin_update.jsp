@@ -1,8 +1,8 @@
-<%@page import="member.ShoppingBean"%>
+<%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<jsp:useBean id="shop_mgr" class="member.ShoppingMgr"/>
-<jsp:useBean id="bean" class="member.ShoppingBean"/>
+<jsp:useBean id="shop_mgr" class="product.ShoppingMgr"/>
+<jsp:useBean id="bean" class="product.ShoppingBean"/>
 
 <%
 		request.setCharacterEncoding("euc-kr");
@@ -299,7 +299,7 @@
 						%>
 						<p>아직 지정된 이미지가 존재하지 않습니다.</p>
 						<%}else{ %>
-						<img src="../product/<%=mainImg %>" style="margin-left:-10px;">
+						<img src="../product/<%=mainImg %>" style="margin-left:-10px;" width="100%">
 						<%} %>
 					</div>
 				</td>
