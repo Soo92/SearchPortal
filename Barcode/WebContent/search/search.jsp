@@ -7,7 +7,7 @@
 		String name = mgr.getMember(id).getName();
 %>
 <%
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("euc-kr");
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0075)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/search/search.html -->
@@ -69,20 +69,23 @@ function fold(a){
 		<div id="header_wrap">
 			<div id="header">
 				<div id="logo">
+				<a href="../index.jsp">
 					<img src="./search_files/barcode_logo_.png" width="100%"
 						height="100%" alt="바코드">
+				</a>
 				</div>
 				<div id="search">
-					<input type="text"
-						style="width: 420px; height: 40px; margin: 5px 0px 0px 20px; border: 0px; font-size: 16px;"
-						align="center" placeholder="검색해보세용!">
+				<form name="searchf" action="./search.jsp">
+					<input type="text" name="search" style="width: 420px; height: 40px; margin: 5px 0px 0px 20px; border: 0px; font-size: 16px;"
+					onkeypress="if(event.keyCode==13) {submit(); return false;}" align="center" placeholder="검색해보세용!" value=<%=request.getParameter("search") %>>
 					<div id="search_button">
 						<img src="./search_files/search_icon.png"
-							onclick="location.href=&#39;./search/search.html&#39;">
+							onclick="submit()">
 					</div>
 					<div id="place">
 						<img src="./search_files/place_icon.png">
 					</div>
+				</form>
 				</div>
 					<div id="login">
 <%if(id == null || id.equals("")){%>

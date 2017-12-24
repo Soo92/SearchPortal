@@ -305,7 +305,7 @@ div.mv_info .main_score .star_score.b_star span.st_on{background-position:0 -378
 .mv_info_area div.mv_info dl.info_spec .step1+dd p span a{display:inline-block}
 .mv_info_area div.mv_info dl.info_spec dd p span{display:inline-block;margin:0 14px 0 -7px;padding-left:7px;background:url(http://static.naver.net/movie/2012/06/bg_tx_line2.gif) no-repeat 0 2px;color:#333}
 .mv_info_area div.mv_info dl.info_spec dd p span em{font-size:15px;color:#f24443}
-.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;font-size:13px;color:#777;text-decoration:underline}
+.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;background:url(http://static.naver.net/movie/2012/06/ico_arrow2.gif) no-repeat 100% 6px;font-size:13px;color:#777;text-decoration:underline}
 .mv_info_area div.mv_info ul.photo_video{overflow:hidden;margin:7px 0 10px;zoom:1}
 .mv_info_area div.mv_info ul.photo_video li{float:left;position:relative;margin-right:2px}
 .mv_info_area div.mv_info ul.photo_video li a{display:block}
@@ -3392,7 +3392,7 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 #wrap.fix3{width:1201px}
 #wrap.fix3 #content{width:1010px;padding-bottom:0;text-align:left}
 #wrap.fix3 .section_group_frst{margin-left:0;border-right:0;padding-left:0}
-#container{margin-left:170px}
+#container{margin-left: 85px;}
 #content{position:relative;float:none;margin-top:9px;padding-bottom:55px;border-right:1px solid #525252;border-bottom:1px solid #525252;background:#fff;*zoom:1}
 #content:after{display:block;clear:both;content:" "}
 #container .spot{position:relative;margin-top:11px;margin-bottom:-1px;*z-index:20}
@@ -3406,16 +3406,8 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .t #wrap.basic{width:926px}
 .t .basic #footer .in_footer{margin-right:0}
 .t #header{left:0}
-.Extra {
-	font: bold 12px/20px Nanum;
-	margin-top: 10px;
-	margin-left: -25px;
-	width : 1%;
-}
 #footer .in_footer{display:inline-block;margin-left:150px}
 .basic #footer .in_footer{margin-right:150px}
-#ul_except{width: 70%;height: 10px;position:absolute;top: 150px;left: 200px;}
-#ul-except ul{margin:0px;}
 #footer{clear:both;margin:0 auto;padding:23px 0 50px 0;text-align:center}
 #footer a{color:#fff;text-decoration:none}
 #footer a:visited{color:#fff;text-decoration:none}
@@ -3438,31 +3430,6 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 #footer .info2{margin:-3px 0 13px 0;font-size:11px;line-height:18px}
 #footer .info2 span{display:inline-block;margin-left:2px;padding-left:7px;font-size:11px;background:url(http://static.naver.com/common/footer/bu_bar.gif) 1px 50% no-repeat;_background-position:left 40%}
 #footer .gomobile{clear:both;padding-top:50px}
-
-#footer {
-	width: 100%;
-	height: 160px;
-	margin: 0 auto;
-	margin-top: 20px;
-	position: relative;
-}
-
-#footer ul {
-	list-style: none;
-	text-align: left;
-	margin-left: 110px;
-	margin-top: -20px;
-}
-
-#footer ul li {
-	display: inline;
-	text-transform: capitalize;
-	font-size: 12px;
-	cursor: pointer;
-	padding-left: 10px;
-	color: white;
-}
-
 .gomobile{margin:9px 0 7px}
 .article{float:none}
 .article:after{display:block;clear:both;content:" "}
@@ -3508,7 +3475,7 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .flick_nav a.btn_next em{background-position:-420px 0;margin-left:-13px}
 .flick_nav a.btn_next:hover em,.flick_nav a.btn_next:focus em{background-position:-20px -210px}
 .running_tab{position:absolute;bottom:19px;width:100%}
-.running_tab ul{width:487px;height:33px;margin:0 auto}
+.running_tab ul{width:250px;height:33px;margin:0 auto}
 .running_tab ul li{float:left}
 .running_tab ul li a{display:block;width:81px;height:33px;text-indent:-9999px}
 .running_tab ul li.item0 a{width:82px;background-position:-1px -40px}
@@ -3537,13 +3504,13 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .home_list .obj_off{z-index:10}
 .home_list .obj_off .r{text-align:right}
 .home_list .obj_off .l{text-align:left}
-.home_list .rank_star{display:block;position:absolute;top:5px;left:10px;width:71px;height:14px}
-.home_list .rank_star+strong{margin-right:5px}
+.home_list .rank_star{display:block;position:absolute;top:5px;left: 5px;width:71px;height:14px;}
+.home_list .rank_star+strong{margin-right: 1px;}
 .home_list .rank_star span{display:inline-block;position:absolute;height:14px;left:0}
 .home_list .rank_star span em{display:inline-block;text-indent:-9999px}
 .home_list .rank_star .star_on{background-position:0 -110px}
 .home_list .rank_star .star_off{width:100%;background-position:0 -125px}
-.home_list .obj_off .char{display:inline-block;width:8px;height:14px}
+.home_list .obj_off .char{display:inline-block;width:8px;height:14px;}
 .home_list .obj_off .char em,.home_list .obj_off .spr em{display:inline-block;text-align:left;text-indent:-9999px}
 .home_list .obj_off .sc_num0{width:9px;background-position:0 -143px}
 .home_list .obj_off .sc_num1{background-position:-10px -143px}
@@ -3633,8 +3600,8 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .hh_review_area .star_score{position:absolute;top:0;right:0;min-width:113px;padding-top:8px;margin-right:0;*padding-top:10px}
 .hh_review_area .star_score .st_off{margin-right:5px;vertical-align:-2px}
 .hh_review_area .star_score em{line-height:12px}
-.hh_review_area .score{position:relative;width:31px;height:13px;line-height:18px;text-align:right}
-.hh_review_area .char{display:inline-block;position:relative;width:9px;height:13px;text-align:left;vertical-align:-3px;*vertical-align:-1px}
+.hh_review_area .score{position:relative;width: 51px;height:13px;line-height:18px;text-align:right;}
+.hh_review_area .char{display:inline-block;position:relative;width:9px;height:13px;text-align:left;vertical-align:-3px;*vertical-align:-1px;}
 .hh_review_area .char em{display:inline-block;position:absolute;z-index:-1;font-size:0;text-indent:-9999px}
 .hh_review_area .sc_num0{background-position:0 -192px}
 .hh_review_area .sc_num1{width:8px;background-position:-9px -192px}

@@ -22,11 +22,12 @@ public class PlaceMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert place(title,content"
-					+ "values(?,?)";
+			sql = "insert place(title,content,location"
+					+ "values(?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getTitle());
 			pstmt.setString(2, bean.getContent());
+			pstmt.setString(3, bean.getLocation());
 			if(pstmt.executeUpdate()==1)
 				flag = true;
 		} catch (Exception e) {
@@ -52,6 +53,7 @@ public class PlaceMgr {
 				regBean.setIdx(rs.getString("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setContent(rs.getString("content"));
+				regBean.setLocation(rs.getString("location"));
 			}
 			
 		} catch (Exception e) {
@@ -77,6 +79,7 @@ public class PlaceMgr {
 				regBean.setIdx(rs.getString("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setContent(rs.getString("content"));
+				regBean.setLocation(rs.getString("location"));
 				vlist.addElement(regBean);
 			}
 		} catch (Exception e) {

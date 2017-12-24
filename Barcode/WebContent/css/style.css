@@ -184,10 +184,10 @@ input:focus{
 #movie_img{width:120px; height:182px; float:left;}
 #movie_text{width:140px; height:182px; float:left; margin-left:10px;}
 
-.movie_tit{font-size:18px; color:#ff0; font-weight:bold; margin-top:5px;}
+.movie_tit{font-size:18px;color:#ff0;font-weight:bold;margin-top:5px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;    출처: http://webdir.tistory.com/483 [WEBDIR];}
 .movie_st{font-size:12px; color:#fff;}
-.movie_ct{font-size:14px; color:#fff}
-.movie_s{font-size:10px; color:#fff;}
+.movie_ct{font-size:14px;color:#fff;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.movie_s{font-size:10px;color:#fff;width: 90%;overflow: hidden;text-overflow: ellipsis; /* 여러 줄 자르기 추가 스타일 */white-space: normal;height: 75;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}
 
 /*********************shop_tbl*********************/
 

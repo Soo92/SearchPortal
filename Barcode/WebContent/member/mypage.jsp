@@ -1,10 +1,23 @@
+<%@page import="member.MemberBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="bean" class="member.MemberBean"/>
+
 <%
 		request.setCharacterEncoding("utf-8");
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
+		Vector<MemberBean> vlist = mgr.getMemberList();
+		String phonenum = mgr.getMember(id).getPhonenum();
+		String addres = mgr.getMember(id).getAddress();
+		
+		//////////////////update//////////////////
+		String cname = bean.getName();
+		String cphonenum = bean.getPhonenum();
+		String cemail = bean.getEmail();
+		
 %>
 <%
 		request.setCharacterEncoding("utf-8");
@@ -47,6 +60,40 @@
 			document.getElementById("i_"+a).className = document.getElementById("i_"+a).className.replace('up','dn');
 		}
 	}
+	function changeName() {
+		if(document.getElementById("btn_updateName").value=="수정"){
+			var e = document.getElementById("changeNameText");
+			var d = document.createElement('input');
+			d.id = 'changeNameText';
+			alert(e.innerHTML);
+			d.innerHTML = e.innerHTML;
+			e.parentNode.replaceChild(d, e);
+	
+			
+			document.getElementById("btn_updateName").value="등록";
+			document.getElementById("btn_updateName").innerHTML="등록";
+		}else{
+			var e = document.getElementById("changeNameText");
+			var d = document.createElement('p');
+			d.innerHTML = e.innerHTML;
+			e.parentNode.replaceChild(d, e);
+			
+			document.getElementById("btn_updateName").value="수정";
+			document.getElementById("btn_updateName").innerHTML="수정";
+		}
+	}
+	function changePhonenum() {
+		var e = document.getElementById("p_txt_phoneNo");
+
+		var d = document.createElement('input');
+		d.innerHTML = e.innerHTML;
+		e.parentNode.replaceChild(d, e);
+
+		document.getElementById("btn_updatepn").value="등록";
+		document.getElementById("btn_updatepn").innerHTML="등록";
+	
+	}
+
 	</script>
 	<link rel="stylesheet" href="../css/product_style.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="./mypage_files/help_member.css">
@@ -100,7 +147,7 @@
 								<dt class="blind">&nbsp;</dt>
 								<dd class="intro_desc">&nbsp;</dd>
 								<dt class="nic_tit">별명</dt>
-								<dd class="nic_desc">수수</dd>
+								<dd class="nic_desc"><%=name %></dd>
 							</dl>
 						</div>
 						<p class="btn_area_btm">
@@ -122,11 +169,11 @@
 						<div class="sh_content">
 							<dl class="sh_lst2">
 								<dt>기본 이메일</dt>
-								<dd>dl******@n*******.com</dd>
+								<dd><%=email %></dd>
 								<dt>본인확인 이메일</dt>
-								<dd>등록된 이메일 없음</dd>
+								<dd><%=email %></dd>
 								<dt>휴대전화</dt>
-								<dd>+82 10-8***-***2</dd>
+								<dd>+82 <%=phonenum %></dd>
 							</dl>
 						</div>
 						<p class="btn_area_btm">
@@ -202,7 +249,7 @@
                     <td>
                         <div class="tdcell">
                             <p class="contxt_webctrl nickname">
-                                <input type="text" name="nickname" id="inpNickname" value="수수" style="width:254px">
+                                <input type="text" name="nickname" id="inpNickname" value="<%=name %>" style="width:254px">
                                 <!-- Enter 입력으로 submit이 되는걸 방지하기 위한 Input -->
                                 <input type="text" style="display: none;">
                             </p>
@@ -222,7 +269,7 @@
 				<div class="2" id="a2" style="display: none;"> 
 				        <div class="c_header"> 
 							<h2>연락처 수정</h2>
-							<p class="contxt"><strong>dltjdtn321</strong>님의 연락처 정보입니다.<br>
+							<p class="contxt"><strong><%=email %></strong>님의 연락처 정보입니다.<br>
 							회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 명백한 동의 없이 공개 또는 제 3자에게 제공되지 않습니다. <a href="http://policy.naver.com/policy/privacy.html" target="_blank" onclick="clickcr(this,&#39;inf.privacy&#39;,&#39;&#39;,&#39;&#39;,event);">개인정보처리방침</a></p>
 						</div>
 						<form id="fm" name="fm">
@@ -248,10 +295,10 @@
 									</th>
 									<td>
 										<div class="tdcell">
-											<p class="contxt_tit">이성수</p>
+											<p class="contxt_tit" id="changeNameText" ><%=name %></p>
 													<p class="contxt_desc">실명 정보(이름, 생년월일, 성별, 개인 고유 식별 정보)가 변경된 경우 본인 확인을 통해 정보를 수정하실 수 있습니다.</p>
 													<p class="btn_area_btm">
-														<a href="javascript:changeName();" class="btn_model"><b class="btn2">수정</b></a>
+														<a href="javascript:changeName();" class="btn_model"><b id="btn_updateName" class="btn2">수정</b></a>
 													</p>
 										</div>
 									</td>
@@ -262,7 +309,7 @@
 									</th>
 									<td>
 										<div class="tdcell">
-											<p id="p_txt_phoneNo" class="contxt_tit">+82 10-8***-***2</p>
+											<p id="p_txt_phoneNo" class="contxt_tit">+82 <%=phonenum %></p>
 											<p class="contxt_desc">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 네이버로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
 											<div id="d_phoneNo" style="display:none">
 												<p id="p_txt_phoneNo_changeYn" class="contxt_tit2"><label for="phoneNo">변경할 휴대전화</label></p>
@@ -503,7 +550,7 @@
 												</p>
 											</div>
 											<p id="p_phoneNo" class="btn_area_btm">
-												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="display(&#39;phoneNo&#39;);return false;" class="btn_model"><b class="btn2">수정</b></a>
+												<a href="javascript:changePhonenum()" class="btn_model"><b class="btn2" id="btn_updatepn">수정</b></a>
 											</p>
 									</div>
 								</td>
@@ -519,7 +566,7 @@
 								</th>
 								<td>
 									<div class="tdcell">
-										<p id="p_txt_myLetterEmail" class="contxt_tit">dltjdtn321@naver.com</p>
+										<p id="p_txt_myLetterEmail" class="contxt_tit"><%=email %></p>
 										<p class="contxt_desc">이벤트 등 다양한 네이버의 소식 및 알림을 받기 위해 사용할 이메일 주소입니다.</p>
 										<p class="contxt_webctrl2">
 											<input type="checkbox" id="isEmsCheck" name="isEmsCheck" onclick="setEmsCheck();"><label for="isEmsCheck">네이버의 이벤트 등 프로모션 관련 안내 메일을 수신하겠습니다.</label>

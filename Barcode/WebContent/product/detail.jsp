@@ -97,6 +97,10 @@ $(document).ready(function(){
 		} 
 	}
 	</script>
+	<style>
+	#getMainImg img{width:400px; height:400px;}
+	</style>
+	
 </head>
 
 <body id="w_rap"  onscroll="myFunction()"  onload="nextImg()">
@@ -127,7 +131,6 @@ $(document).ready(function(){
 					<div id="navLeft">
 						<ul>
 							<li><a href="product_used.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
-							<li class="ulul"><a href="product_review.jsp">솔직리뷰</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_best100.jsp">베스트100</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>
@@ -163,6 +166,27 @@ $(document).ready(function(){
 
 <!-- detail_header -->
 
+<script type="text/javascript">
+ function pro_submit1(){
+	 document.getElementById("hiddenMainImg").value=
+		 document.getElementById("getMainImg").innerHTML;
+	 document.getElementById("hiddenSeller").value=
+		 document.getElementById("getSeller").innerHTML;
+	 document.getElementById("hiddenTitle").value=
+		 document.getElementById("getTitle").innerHTML;
+	 document.getElementById("hiddenOpt").value=
+		 document.getElementById("getOpt").innerHTML;
+	 document.getElementById("hiddenProAdd").value=
+		 document.getElementById("getProAdd").innerHTML;
+	 document.getElementById("hiddenPrice").value=
+		 document.getElementById("getPrice").innerHTML;
+	 document.getElementById("hiddenShipAccount").value=
+		 document.getElementById("getShipAccount").innerHTML;
+	 /* 반복해야됨 */
+	 document.pro_submit.submit();
+ }
+</script>
+
 <div id ="wrap3">
 	<div id="detail_header">
 		<div id="detail_header_">
@@ -171,10 +195,10 @@ $(document).ready(function(){
 								margin-left:10px; margin-top:10px; float:left; text-align:left; font-size:14px;">
 				<tr>
 					<td colspan="5" height="50px" style="font-weight:bold; font-size:18px; border-bottom:1px lightgray solid;">
-						[<%=title %>] <%=account %>
+						[<span id="getTitle"><%=title %></span>] <%=account %>
 					</td>
 					<td  height="36px"style="font-size:16px; font-weight:bold; text-align:right; margin-right:30px; border-bottom:1px lightgray solid;">
-						<p style="margin-right:10px;">[<%=Seller %>] / 재고:<%=stock %>개</p>
+						<p style="margin-right:10px;">[<sapn id="getSeller"><%=Seller %></sapn>] / 재고:<%=stock %>개</p>
 					</td>
 				</tr>
 				
@@ -184,14 +208,15 @@ $(document).ready(function(){
 				</tr>
 				
 				<tr>
-					<td rowspan="8" width="400px" height="400px">
-						<img src="<%=mainImg %>" width="400px" height="400px">
+					<td rowspan="8" width="400px" height="400px" id="getMainImg">
+						<img src="<%=mainImg %>">
 					</td>
 					<td   height="36px" width="30px;" rowspan="9" style="border-right:1px lightgray solid;"></td>
 					<td   height="36px" width="30px;"></td>
 					<td   colspan="2" height="60px">
 						<p style="font-size:18px; font-weight:bold;">가격 : 
-						<span style="font-size:30px; color:#ff4800;"><%=price %>원</span></p>
+						<span style="font-size:30px; color:#ff4800;" id="getPrice"><%=price %></span>
+						<span style="color:#ff4800">원</span></p>
 					</td>
 					<td   height="36px" width="270px;"></td>
 				</tr>
@@ -199,7 +224,7 @@ $(document).ready(function(){
 				<tr>
 					<td   height="36px" width="30px;"></td>
 					<td colspan="3" height="120px" rowspan="3" style="border-bottom:1px lightgray dotted">
-						<p style="line-height:25px;">배송비 : <span><%=shipAccount %>원</span></p>
+						<p style="line-height:25px;">배송비 : <span id="getShipAccount"><%=shipAccount %></span>원</p>
 						<p style="line-height:25px;">배송일 : <span><%=shipDate %>일 소요</span></p>
 						<p style="line-height:25px;">원산지 : <span><%=origin %></span></p>
 					</td>
@@ -222,7 +247,7 @@ $(document).ready(function(){
 							<% StringTokenizer opt=new StringTokenizer(option,",");
 									for(int i=0;opt.hasMoreElements();i++){
 							%>
-								<option><%=opt.nextToken()%></option>
+								<option id="getOpt"><%=opt.nextToken()%></option>
 							<%}%>
 						</select>
 						
@@ -232,7 +257,7 @@ $(document).ready(function(){
 							<%if(proAdd!=null){StringTokenizer prA = new StringTokenizer(proAdd,",");
 									for(int x=0;prA.hasMoreElements();x++){
 							%>
-							<option><%=prA.nextToken() %></option>
+							<option id="getProAdd"><%=prA.nextToken() %></option>
 							<%}} %>
 						</select>
 					</td>
@@ -279,11 +304,21 @@ $(document).ready(function(){
 				<div id="insta"><a href="#"><img src="../img/insta.png"></a></div>
 				<div id="fb"><a href="#"><img src="../img/fb.png"></a></div>
 			</div>
-			
+<form name="pro_submit" method="post" action="buy_info.jsp">
 			<div id="detail_button">
-				<div id="buy_">
-					<p>구매하기</p>
-				</div>
+						<input type="hidden" value="<%=mainImg%>" name="pro_MainImg" id="hiddenMainImg">
+						<input type="hidden" value="<%=Seller%>"  name="pro_Seller" id="hiddenSeller">
+						<input type="hidden" value="<%=title%>"  name="pro_Title" id="hiddenTitle">
+						<input type="hidden" value="<%=opt%>" name="pro_Opt" id="hiddenOpt">
+						<input type="hidden" value="<%=proAdd%>" name="pro_ProAdd" id="hiddenProAdd">
+						<input type="hidden" value="<%=price%>" name="pro_Price" id="hiddenPrice">
+						<input type="hidden" value="<%=shipAccount%>" name="pro_ShipAccount" id="hiddenShipAccount">
+</form>
+				<a onclick="pro_submit1()">
+					<div id="buy_">
+						<p>구매하기</p>
+					</div>
+				</a>
 				<div id="detail_basket">
 					<p>장바구니</p>
 				</div>
@@ -292,7 +327,6 @@ $(document).ready(function(){
 		</div><!-- detail_header_ -->
 	</div><!-- detail_header -->
 </div><!-- wrap3 -->
-
 <!-- detail_slider -->
 
 <script type="text/javascript">

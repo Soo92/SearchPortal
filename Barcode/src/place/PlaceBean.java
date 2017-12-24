@@ -5,7 +5,15 @@ public class PlaceBean {
 	private String idx;
 	private String title;
 	private String content;
+	private String location;
 	
+		
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
 	public String getIdx() {
 		return idx;
 	}

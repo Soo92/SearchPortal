@@ -1,18 +1,19 @@
 <%@page import="movie.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<jsp:useBean id="bean" class="movie.ReviewBean"/>
-<jsp:setProperty name="bean" property="*" />
+<jsp:useBean id="mvbean" class="movie.MovieBean"/> 
+<jsp:useBean id="mvgr" class="movie.MovieMgr"/> 
 <%
 		request.setCharacterEncoding("utf-8");
 		int on=-1;
 		String idk = (String)session.getAttribute("idKey");
 		String index1 = request.getParameter("index");
+		mvbean = mvgr.getMember(Integer.parseInt(index1));
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0073)http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&from=list# -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>강철비 : 네이버 영화</title>
+<title><%=mvbean.getTitle() %> : 네이버 영화</title>
 <link rel="stylesheet" type="text/css" href="./movie_reView_files/movie.all.css">
 </head>
 <body>
@@ -60,7 +61,7 @@ function removeTitle() {
 					<tbody>
 					<tr>
 					<th scope="row" class="frst_tr"><span class="subject1">영화</span></th>
-					<td class="frst_tr"> <strong class="title">강철비</strong></td>
+					<td class="frst_tr"> <strong class="title"><%=mvbean.getTitle() %></strong></td>
 					</tr>
 					<tr>
 					<th scope="row"><span class="subject2"><label for="inputTitle" class="subject2">제목</label></span></th>

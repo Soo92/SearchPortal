@@ -80,7 +80,6 @@
 					<div id="navLeft">
 						<ul>
 							<li><a href="product_used.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
-							<li class="ulul"><a href="product_review.jsp">솔직리뷰</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_best100.jsp">베스트100</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
 							<li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>

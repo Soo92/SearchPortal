@@ -1305,7 +1305,6 @@ if(___jindo.isFunction(t._oncompleted)){t._oncompleted(false)
 }},opt.timeout*1000);
 this._timer=_timer
 }this._test_url=url;
-req.send(data);
 return this
 };
 jindo.$Ajax.prototype.isIdle=function(){return this._status==0

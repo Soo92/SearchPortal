@@ -3504,13 +3504,13 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .home_list .obj_off{z-index:10}
 .home_list .obj_off .r{text-align:right}
 .home_list .obj_off .l{text-align:left}
-.home_list .rank_star{display:block;position:absolute;top:5px;left:10px;width:71px;height:14px}
-.home_list .rank_star+strong{margin-right:5px}
+.home_list .rank_star{display:block;position:absolute;top:5px;left: 5px;width:71px;height:14px;}
+.home_list .rank_star+strong{margin-right: 1px;}
 .home_list .rank_star span{display:inline-block;position:absolute;height:14px;left:0}
 .home_list .rank_star span em{display:inline-block;text-indent:-9999px}
 .home_list .rank_star .star_on{background-position:0 -110px}
 .home_list .rank_star .star_off{width:100%;background-position:0 -125px}
-.home_list .obj_off .char{display:inline-block;width:8px;height:14px}
+.home_list .obj_off .char{display:inline-block;width:8px;height:14px;}
 .home_list .obj_off .char em,.home_list .obj_off .spr em{display:inline-block;text-align:left;text-indent:-9999px}
 .home_list .obj_off .sc_num0{width:9px;background-position:0 -143px}
 .home_list .obj_off .sc_num1{background-position:-10px -143px}
@@ -3590,7 +3590,7 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .hh_review_area ul.lst_con{overflow:hidden;width:402px;float:left}
 .hh_review_area li,.hh_review_area ul{background:url(http://static.naver.net/movie/2012/08/dot_line2.gif) repeat-x 0 100%}
 .hh_review_area li{overflow:hidden;position:relative;height:34px;padding-bottom:1px;vertical-align:top;*zoom:1}
-.hh_review_area .detail strong{display:block;overflow:hidden;width:100%;max-width:288px;white-space:nowrap;text-overflow:ellipsis}
+.hh_review_area .detail strong{display:block;overflow:hidden;width:100%;max-width: 260px;white-space:nowrap;text-overflow:ellipsis;}
 .hh_review_area .thmb{float:left;display:none}
 .hh_review_area .thmb a{display:block}
 .hh_review_area .thmb img{margin:10px 12px 0 0}
@@ -3600,8 +3600,8 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .hh_review_area .star_score{position:absolute;top:0;right:0;min-width:113px;padding-top:8px;margin-right:0;*padding-top:10px}
 .hh_review_area .star_score .st_off{margin-right:5px;vertical-align:-2px}
 .hh_review_area .star_score em{line-height:12px}
-.hh_review_area .score{position:relative;width:31px;height:13px;line-height:18px;text-align:right}
-.hh_review_area .char{display:inline-block;position:relative;width:9px;height:13px;text-align:left;vertical-align:-3px;*vertical-align:-1px}
+.hh_review_area .score{position:relative;width: 51px;height:13px;line-height:18px;text-align:right;}
+.hh_review_area .char{display:inline-block;position:relative;width:9px;height:13px;text-align:left;vertical-align:-3px;*vertical-align:-1px;}
 .hh_review_area .char em{display:inline-block;position:absolute;z-index:-1;font-size:0;text-indent:-9999px}
 .hh_review_area .sc_num0{background-position:0 -192px}
 .hh_review_area .sc_num1{width:8px;background-position:-9px -192px}
@@ -3624,7 +3624,7 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .hh_review_area li ul.info li a span em{margin:0 1px 0 4px;color:#f24443;text-align:center}
 .hh_review_area li.on .thmb{display:block}
 .hh_review_area li.on{height:111px}
-.hh_review_area li.on a strong{max-width:212px;height:22px;margin-left:-1px}
+.hh_review_area li.on a strong{max-width: 170px;height:22px;margin-left:-1px;}
 .hh_review_area li.on ul.info{display:block;float:left;width:326px;padding-top:10px;border-top:1px solid #efefef;background:0}
 .hh .controller{width:51px;height:26px!important;background:url(http://static.naver.net/movie/2012/09/sp_btn_nav.png) no-repeat 0 0}
 .hh .controller a.pic_prev{position:absolute;top:1px;left:1px;width:24px;height:24px}

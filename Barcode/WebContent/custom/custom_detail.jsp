@@ -159,7 +159,7 @@
 						<ul class="lst_kwd">
 <% for(int i=0;i<cclist0.size();i++){%>
 							<li>
-								<img src="<%=cclist0.get(i).getPic() %>" width="130" height="92" alt="<%=cclist0.get(i).getTitle() %>" class="thumb"/>
+								<img src="<%=cclist0.get(i).getPic() %>.jpg" width="130" height="92" alt="<%=cclist0.get(i).getTitle() %>" class="thumb"/>
 								<dl>
 									<dt><%=cclist0.get(i).getTitle() %></dt>
 									<!-- [D] 시스텝폰트 기준 띄어쓰기 포함 최대 31자 노출 -->
@@ -213,11 +213,11 @@
 						</div>
 						<div class="svs_end_area">
 							<!-- [D] 현재 선택된 타이틀 적용 -->
-							<h1 class="blind"><%=cmgr.getCustomCateBoard(boardnum).getTitle() %></h1>
+							<h1 class="blind"><%=cmgr.getCustomCateBoardParent(boardnum).getTitle() %></h1>
 							<!-- [D] 본문 페이지일 경우 클래스 cont 추가 -->
 							<table class="cmn_table cont">
 								<!-- [D] 현재 선택된 타이틀 적용 -->
-								<caption><%=cmgr.getCustomCateBoard(boardnum).getTitle() %></caption>
+								<caption><%=cmgr.getCustomCateBoardParent(boardnum).getTitle() %></caption>
 								<colgroup>
 									<col>
 									<col style="width: 82px">
@@ -232,16 +232,16 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><span class="atcl"><%=cmgr.getCustomCateBoard(boardnum).getTitle() %></span></td>
-										<td><%=cmgr.getCustomCateBoard(boardnum).getRegdate() %></td>
-										<td><%=cmgr.getCustomCateBoard(boardnum).getCnt() %></td>
+										<td><span class="atcl"><%=cmgr.getCustomCateBoardParent(boardnum).getTitle() %></span></td>
+										<td><%=cmgr.getCustomCateBoardParent(boardnum).getRegdate() %></td>
+										<td><%=cmgr.getCustomCateBoardParent(boardnum).getCnt() %></td>
 									</tr>
 								</tbody>
 							</table>
 							<!-- [D] 본문 상세 타이틀 적용 -->
 							<h2 class="blind">내 계정(아이디/비밀번호) 도용 의심</h2>
 							<div class="svs_end_cont">
-								<%=cmgr.getCustomCateBoard(boardnum).getContent() %>
+								<%=cmgr.getCustomCateBoardParent(boardnum).getContent() %>
 							</div>
 						</div>
 					</div>

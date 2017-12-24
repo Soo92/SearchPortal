@@ -1,12 +1,21 @@
+<%@page import="place.PlaceBean"%>
+<%@page import="product.ShoppingBean"%>
+<%@page import="movie.MovieBean"%>
+<%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
+<jsp:useBean id="mmgr" class="movie.MovieMgr"/>
+<jsp:useBean id="smgr" class="product.ShoppingMgr"/>
+<jsp:useBean id="pmgr" class="place.PlaceMgr"/>
 <%
 		request.setCharacterEncoding("euc-kr");
+		
 		String id = (String)session.getAttribute("idKey");	
 		String name = mgr.getMember(id).getName();
-%>
-<%
-		request.setCharacterEncoding("euc-kr");
+
+		Vector<MovieBean> mlist = mmgr.getMemberList();
+		Vector<ShoppingBean> slist = smgr.getShoppingList();
+		Vector<PlaceBean> plist = pmgr.getPlaceList();
 %>
 
 <!doctype>
@@ -33,6 +42,9 @@
 		}
 		document.loginFrm.submit();
 	}
+	function removetag(html){
+		html.replaceAll("\\<[^>]*>","")
+	}
 </script>
 	
 </head>
@@ -44,11 +56,12 @@
 			</div>
 			<div id="logo"><img src="img/barcode_logo_.png" width=100% height=100% alt="바코드"></div>
 			<div id="search">
-			<input type="text" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
-								placeholder="검색해보세용!">
-				
-				<div id="search_button"><img src="img/search_icon.png" onclick="location.href='./search/search.jsp'"></div>
+			<form name="searchf" action="./search/search.jsp">
+			<input type="text" name="search" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
+				onkeypress="if(event.keyCode==13) {submit(); return false;}"	placeholder="검색해보세용!">
+				<div id="search_button"><img src="img/search_icon.png" onclick=submit()></div>
 				<div id="place"><img src="img/place_icon.png"></div>
+			</form>				
 			</div>
 			<a href="map/MapPr.jsp">
 			<div id="map"><img src="img/map_icon.png"></div>
@@ -97,45 +110,27 @@
 				<div id="slider_aa">
 				    <div class="swiper-container">
 				        <div class="swiper-wrapper">
-				            <%for(int i=1; i<6; i++ ){ %>
+			            <%for(int i=1; i<(mlist.size()/2+1>6?6:mlist.size()/2+1); i++ ){ %>
 				            <div class="swiper-slide" id="s_<%=i%>">
 				            <div id="movie_wrap">
-					            	<div id="movie_sm">
+				            <%for(int j=0;j<2;j++) {%>
+					            	<div id="movie_sm<%if(j==1){%>_r<%}%>">
 					            		<div id="movie_title">
 					            			<div id="movie_img">
-					            				<img src="img/movie_image.jpg" width="120" height="182">
+					            				<img src="./movie/mainimg/<%=mlist.get((i-1)*2+j).getPic() %>" width="120" height="182">
 					            			</div>
 					            			<div id="movie_text">
-						            			<p class="movie_tit">[ 검사외전 ]</p>
-						            			<p class="movie_st">별점 : ★★★★★</p>
-						            			<p class="movie_ct">장르 : 액션 / 코미디</p>
+						            			<p class="movie_tit">[ <%=mlist.get((i-1)*2+j).getTitle() %> ]</p>
+						            			<p class="movie_st">별점 : <%for(int k=0;k<Float.parseFloat(mlist.get((i-1)*2+j).getStar())/2;k++){ %>★<%} %></p>
+						            			<p class="movie_ct">장르 : <%=mlist.get((i-1)*2+j).getGenre() %></p>
 						            			<br/>
 						            			<p class="movie_s">
-						            			진실 앞에 무대뽀! 다혈질 검사, 살인 누명을 쓰고 감옥에 갇히다!
-  												거친 수사 방식으로 유명한 다혈질 검사 ‘변재욱’(황정민).
- 												취조 중이던 피의자가 변사체로 발견 되면서 살인 혐의로...
+												<%=mlist.get((i-1)*2+j).getContent().replaceAll("\\<[^>]*>","")%>
 						            			</p>
 					            			</div>
 					            		</div>
 					            	</div>
-					            	<div id="movie_sm_r">
-					            		<div id="movie_title">
-					            			<div id="movie_img">
-					            				<img src="img/movie_image.jpg" width="120" height="182">
-					            			</div>
-					            			<div id="movie_text">
-						            			<p class="movie_tit">[ 검사외전 ]</p>
-						            			<p class="movie_st">별점 : ★★★★★</p>
-						            			<p class="movie_ct">장르 : 액션 / 코미디</p>
-						            			<br/>
-						            			<p class="movie_s">
-						            			진실 앞에 무대뽀! 다혈질 검사, 살인 누명을 쓰고 감옥에 갇히다!
-  												거친 수사 방식으로 유명한 다혈질 검사 ‘변재욱’(황정민).
- 												취조 중이던 피의자가 변사체로 발견 되면서 살인 혐의로...
-						            			</p>
-					            			</div>
-					            		</div>
-					            	</div>
+					           	<%} %>
 				            	</div>
 				            	
 				            </div>
@@ -175,13 +170,13 @@
 				</div>
 				
 				<div id="shop_tbl"><!-- skd -->
-					<%for(int i=1; i<22; i++){ %>
+					<%for(int i=1; i<(slist.size()+1>22?22:slist.size()+1); i++){ %>
 						<div id="shop_td">
-							<a href="#">
-								<img src="img/cody/<%=i %>.jpg" width="106" height="106">
+							<a href="<%=request.getRequestURI()%>../product/detail.jsp?index=<%=slist.get(i-1).getIndex()%>">
+								<img src="./product/newShopImg/<%=slist.get(i-1).getMainImg()%>" width="106" height="106">
 								<div class="overlay_td">
 								    <div class="text_td">
-								    	<p style="font-size:12px; font-weight:bold;">상품가격</p>
+								    	<p style="font-size:12px; font-weight:bold;"><%=slist.get(i-1).getPrice()%></p>
 								    	<p style="font-size:10px;">자세히보기</p>
 								    </div>
 								  </div>
@@ -248,47 +243,27 @@
 			<div id="myPage_o_but"><a href="#"><img src="img/myP_03.png"></a></div>
 			<div id="myPage_o_but"><a href="#"><img src="img/myP_04.png"></a></div>
 	</div>
-				
 <%}%>
-					
-					
 				</div>
-				
 				<div id="shopping" class="section_option">
+<%for(int i=0;i<(slist.size()>2?2:slist.size());i++) {%>
 					<a href="#">
-					<div id="shopping_1">
-						<img src="img/09.jpg" width="150px" height="150px">
+					<div id="shopping_<%=i+1%>">
+						<img src="<%=slist.get(i).getMainImg() %>" width="150px" height="150px">
 						<div id="other_text">
 							<p class="title">
-							[20대남친룩]
+							[<%=slist.get(i).getTitle() %>]
 							</p><!-- title -->
 							<p class="account">
-							이렇게만 입으면 솔탈임! 이 코디 핵쩔탱임다 
+							<%=slist.get(i).getAccount() %>
 							</p><!-- account -->
 							<p class="price">
-							74,000원
+							<%=slist.get(i).getPrice() %>
 							</p><!-- price -->
 						</div>
 					</div>
 					</a>
-					
-					<a href="#">
-					<div id="shopping_2">
-						<img src="img/03.jpg" width="150px" height="150px">
-							<div id="other_text">
-								<p class="title">
-								[카와이트윈룩]
-								</p><!-- title -->
-								<p class="account">
-								친구들과 함께 남다른 귀여운 옷을 입어봐요! 
-								</p><!-- account -->
-								<p class="price">
-								54,500원
-								</p><!-- price -->
-						</div>
-					</div>
-					</a>
-					
+<%} %>					
 					<a href="product/product_home.jsp">
 						<div id="more">
 							<p style="color:#fff;">상품 더보러 가기</p>
@@ -297,26 +272,18 @@
 				</div>
 				
 					<table width="334px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
+<%for(int i=0;i<(plist.size()>2?2:plist.size());i++) {%>
 						<tr>
 							<td height="158px" style="border-bottom:none; padding-top:5px">
 							<a href="#">
-								<div id="place_img"><img src="img/view_S/01.jpg"></div>
+								<div id="place_img"><img src="./reserve/img/<%=pmgr.getPlaceBoard(plist.get(i).getIdx()).getMainpic()%>"></div>
 								<div id="place_title">
-									<p><span>[보라카이]</span> 안구정화와 힐링하러 떠나봐요! 선착순 100명...</p>
+									<p><span>[<%=plist.get(i).getLocation() %>]</span><%=plist.get(i).getContent() %> </p>
 								</div>
 								</a>
 							</td>
 						</tr>
-						<tr>
-							<td height="158px" style="border-top:none;">
-							<a href="#">
-								<div id="place_img"><img src="img/view_S/02.jpg"></div>
-								<div id="place_title">
-									<p><span>[오사카]</span> 안구정화와 힐링하러 떠나봐요! 선착순 100명...</p>
-								</div>
-								</a>
-							</td>
-						</tr>
+<%} %>
 					</table>
 					
 					<div id="Bottom" class="section_option" style="margin-top:7px;">

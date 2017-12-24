@@ -204,6 +204,29 @@ public class MemberMgr {
 		}
 		return vlist;
 	}
+	////////////////////////////
+	public void updateMember(MemberBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "update tblnomal set name='?',phonenum=?,email='?' "
+					+ "where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getPhonenum());
+			pstmt.setString(3, bean.getEmail());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+	////////////////////////////
+	
 	//Send id, pass
 		public void sendAccount(String id) {
 			MemberBean bean = getMember(id);

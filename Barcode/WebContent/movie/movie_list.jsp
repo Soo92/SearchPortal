@@ -1,3 +1,4 @@
+<%@page import="movie.ReviewBean"%>
 <%@page import="movie.MovieBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -34,7 +35,7 @@
 	<meta property="og:url" content="http://movie.naver.com">
 	<title>바코드 영화</title>
 	<link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon"> 
-		<link rel="stylesheet" type="text/css" href="./movie_list_files/movie.all.css">
+	<link rel="stylesheet" type="text/css" href="./movie_list_files/movie.all.css">
 	<script type="text/javascript" src="./movie_list_files/movie.home.js"></script>
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<script src="./movie_list_files/clickcrD.js" id="gnb_clickcrD" charset="utf-8"></script>
@@ -68,11 +69,11 @@
 							<div class="flick-container"
 								style="left: -100%; position: relative; width: 100%; height: 430px; transition-duration: 0ms; transform: translate(0px, 0px);">
 								<ul id="flick0" class="flick-ct home_list page0 flick-panel" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 0px); transition-property: -webkit-transform; left: 100%; z-index: 10;">
-<% mvlist = mvmgr.getMemberList("cur");
+<% mvlist = mvmgr.getMemberList(1);
 for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
-									<li class="item<%=i+1 %>" onmouseover="jindo.$Element('currentTooltip<%=i+1 %>').show();" onmouseout="jindo.$Element('currentTooltip1').hide();">
+									<li class="item<%=i+1 %>" onmouseover="jindo.$Element('currentTooltip<%=i+1 %>').show();" onmouseout="jindo.$Element('currentTooltip<%=i+1 %>').hide();">
 										<div class="obj_off tab4">
-											<a href="./movie_detail.jsp?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('currentTooltip1').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip1').hide();movieChart.restartTimer();">
+											<a href="./movie_home.jsp?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('currentTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('currentTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
 												<span class="ico_rating_all">전체 관람가</span>
 												<span class="mask"></span> <img src="./mainimg/<%=mvlist.get(i).getPic() %>" alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 												<span class="baseplate r"> <span class="rank_star l">
@@ -87,12 +88,12 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 											</a>
 											<!-- N=a:run.da,r:1,i:165722 -->
 										</div>
-										<div id="currentTooltip1" class="obj_con"
+										<div id="currentTooltip<%=i+1 %>" class="obj_con"
 											style="display: none">
 											<div class="obj_on ">
 												<div class="tooltip">
 													<span class="top"></span>
-													<p class="mv_title">극장판 포켓몬스터 너로 정했다!</p>
+													<p class="mv_title"><%=mvlist.get(i).getTitle() %></p>
 													<span class="bottom"></span><span class="bottom_r"></span>
 												</div>
 											</div>
@@ -101,13 +102,13 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 <%} %>
 								</ul>
 								<ul id="flick1" class="flick-ct home_list page1 flick-panel blind" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 0px); transition-property: -webkit-transform; left: 200%; z-index: 1;">
-<% mvlist = mvmgr.getMemberList("new");
+<% mvlist = mvmgr.getMemberList(2);
 for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>								
-									<li onmouseover="jindo.$Element('commingTooltip8').show();"	onmouseout="jindo.$Element('commingTooltip8').hide();">
+									<li onmouseover="jindo.$Element('commingTooltip<%=i+1 %>').show();"	onmouseout="jindo.$Element('commingTooltip<%=i+1 %>').hide();">
 										<div class="obj_off tab4">
-											<a href="./movie_detail.jsp?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('commingTooltip8').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip8').hide();movieChart.restartTimer();">
+											<a href="./movie_home.jsp?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('commingTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
 											<span class="ico_rating_12">12세 관람가</span> <span	class="mask"></span> 
-											<img src="<%=mvlist.get(i).getPic() %>"	alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179"	onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+											<img src="../maingimg/<%=mvlist.get(i).getPic() %>"	alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179"	onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 											<span class="baseplate r"> <strong class="l">
 										<%String a = (mvlist.get(i).getOpendate()+"");
 										for(int j=(mvlist.get(i).getOpendate()==null?0:5);j<a.length();j++) {%>
@@ -119,10 +120,10 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 											</a>
 											<!-- N=a:run.da,r:8,i:158256 -->
 										</div>
-										<div id="commingTooltip8" class="obj_con"
+										<div id="commingTooltip<%=i+1 %>" class="obj_con"
 											style="display: none;">
 											<div class="obj_on "><div class="tooltip"><span class="top"></span>
-													<p class="mv_title">고스트 스토리</p>
+													<p class="mv_title"><%=mvlist.get(i).getTitle() %></p>
 													<span class="bottom"></span><span class="bottom_r"></span>
 												</div>
 											</div>
@@ -131,28 +132,29 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 <%} %>
 								</ul>
 								<ul id="flick2"	class="flick-ct home_list page2 flick-panel blind" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 0px); transition-property: -webkit-transform; left: 0%; z-index: 1;">
-<% mvlist = mvmgr.getMemberList("star");
+<% mvlist = mvmgr.getMemberList(3);
 for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>	
 									<li class="item<%=i+1 %>" onmouseover="jindo.$Element('pointTooltip<%=i+1 %>').show();" onmouseout="jindo.$Element('pointTooltip<%=i+1 %>').hide();">
 										<div class="obj_off tab4">
-											<a href="/movie/bi/mi/basic.nhn?code=134846" onfocus="jindo.$Element('pointTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('pointTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
-											<span class="rank"><em>3위</em></span> <span class="ico_rating_all">전체 관람가</span> <span class="mask"></span> 
-											<img src="http://movie2.phinf.naver.net/20160502_142/14621674274327uVm7_JPEG/movie_image.jpg?type=f125" alt="드롭박스" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+											<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('pointTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('pointTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
+											<span class="rank"><em><%=i+1 %>위</em></span> <span class="ico_rating_all">전체 관람가</span> <span class="mask"></span> 
+											<img src="../mainimg/<%=mvlist.get(i).getPic() %>" alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 												<span class="baseplate r"> <span class="rank_star l">
 												<span class="star_off"><em>별점 - 총 10점 중</em></span>
-												<span class="star_on" style="width: 93.3%"><em>9.33점</em></span>
-												</span> <strong class="l"><span class="char sc_num9"><em>9</em></span>
-												<span class="char sc_dot"><em>.</em></span>
-												<span class="char sc_num3"><em>3</em></span>
-												<span class="char sc_num3"><em>3</em></span></strong>
+												<span class="star_on" style="width:<%=Float.parseFloat(mvlist.get(i).getStar())*10%>%"><em><%=mvlist.get(i).getStar()%>점</em></span>
+												</span> <strong class="l">
+												<%String a = (mvlist.get(i).getStar()+"");
+												for(int j=0;j<a.length();j++) {%>
+												<% if(j==1){%><span class="char sc_dot"><em>.</em></span>
+												<% }else{%><span class="char sc_num<%=a.charAt(j)%>"><em><%=a.charAt(j)%></em></span><%}} %>
 											</span> </a>
 											<!-- N=a:run.da,r:3,i:134846 -->
 										</div>
-										<div id="pointTooltip3" class="obj_con" style="display: none;">
+										<div id="pointTooltip<%=i+1 %>" class="obj_con" style="display: none;">
 											<div class="obj_on ">
 												<div class="tooltip">
 													<span class="top"></span>
-													<p class="mv_title">드롭박스</p>
+													<p class="mv_title"><%=mvlist.get(i).getTitle() %></p>
 													<span class="bottom"></span><span class="bottom_r"></span>
 												</div>
 											</div>
@@ -204,155 +206,36 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 										<ul class="lst_con first" data-index="0"
 											style="display: block">
 											<!-- [D] 선택된 경우 li에 class="on" 추가 -->
-											<li id="review1" data-index="0" class="_select_title on">
-												<a
-												href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=85579"
-												class="thmb"
-												onclick="clickcr(this, &#39;tvw.img&#39;, &#39;85579&#39;, &#39;1&#39;, event);"><img
-													src="./movie_list_files/movie_image(29).jpg" width="64"
-													height="91" alt="신과함께-죄와 벌"
-													onerror="this.src=&#39;http://static.naver.net/movie/2012/06/dft_img64x91.png&#39;"></a>
-												<div class="detail">
-													<a
-														href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=85579"
-														onclick="clickcr(this, &#39;tvw.title&#39;, &#39;85579&#39;, &#39;1&#39;, event);"
-														data-index="0" class="_select_title_anchor"><strong>신과함께-죄와
-															벌</strong>
-														<div class="star_score">
-															<span class="st_off"><span class="st_on"
-																style="width: 82.4%">평점 - 총 10점 중</span></span> <span
-																class="score"> <span class="char sc_num8"><em>8</em></span><span
-																class="char sc_dot"><em>.</em></span><span
-																class="char sc_num2"><em>2</em></span><span
-																class="char sc_num4"><em>4</em></span>
-															</span>
-														</div> </a>
-													<ul class="info">
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4588316&amp;code=85579"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4588316&#39;, &#39;1&#39;, event);"><span
-																class="tit">영화 신과 함께 줄거리, 재미도 있고 특수효과 엄청나네!</span></a></li>
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4588009&amp;code=85579"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4588009&#39;, &#39;2&#39;, event);"><span
-																class="tit">[신과 함께-죄와 벌]한국 영화 판타지 장르의 신기원을 이룬
-																	영화!! </span></a></li>
-														<li class="last"><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4588127&amp;code=85579"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4588127&#39;, &#39;3&#39;, event);"><span
-																class="tit">[2D] 신과 함께 - 죄와 벌 / CG와 함께 - 재미 봄</span></a></li>
-													</ul>
-												</div>
-											</li>
-											<li id="review2" data-index="1" class="_select_title"><a
-												href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=155665"
-												class="thmb"
-												onclick="clickcr(this, &#39;tvw.img&#39;, &#39;155665&#39;, &#39;2&#39;, event);"><img
-													src="./movie_list_files/movie_image(30).jpg" width="64"
-													height="91" alt="강철비"
-													onerror="this.src=&#39;http://static.naver.net/movie/2012/06/dft_img64x91.png&#39;"></a>
-												<div class="detail">
-													<a
-														href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=155665"
-														onclick="clickcr(this, &#39;tvw.title&#39;, &#39;155665&#39;, &#39;2&#39;, event);"
-														data-index="1" class="_select_title_anchor"><strong>강철비</strong>
-														<div class="star_score">
-															<span class="st_off"><span class="st_on"
-																style="width: 84.4%">평점 - 총 10점 중</span></span> <span
-																class="score"> <span class="char sc_num8"><em>8</em></span><span
-																class="char sc_dot"><em>.</em></span><span
-																class="char sc_num4"><em>4</em></span><span
-																class="char sc_num4"><em>4</em></span>
-															</span>
-														</div> </a>
-													<ul class="info">
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4587729&amp;code=155665"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4587729&#39;, &#39;1&#39;, event);"><span
-																class="tit">&lt;강철비&gt; - 북한을 다룬 꽤 괜찮은 밀리터리 스릴러</span></a></li>
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4588054&amp;code=155665"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4588054&#39;, &#39;2&#39;, event);"><span
-																class="tit">강철비 (2017)</span></a></li>
-														<li class="last"><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4588249&amp;code=155665"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4588249&#39;, &#39;3&#39;, event);"><span
-																class="tit">강철비 (steel rain) </span></a></li>
-													</ul>
-												</div></li>
-											<li id="review3" data-index="2" class="_select_title"><a
-												href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=125488"
-												class="thmb"
-												onclick="clickcr(this, &#39;tvw.img&#39;, &#39;125488&#39;, &#39;3&#39;, event);"><img
-													src="./movie_list_files/movie_image(31).jpg" width="64"
-													height="91" alt="스타워즈: 라스트 제다이"
-													onerror="this.src=&#39;http://static.naver.net/movie/2012/06/dft_img64x91.png&#39;"></a>
-												<div class="detail">
-													<a
-														href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=125488"
-														onclick="clickcr(this, &#39;tvw.title&#39;, &#39;125488&#39;, &#39;3&#39;, event);"
-														data-index="2" class="_select_title_anchor"><strong>스타워즈:
-															라스트 제다이</strong>
-														<div class="star_score">
-															<span class="st_off"><span class="st_on"
-																style="width: 70.6%">평점 - 총 10점 중</span></span> <span
-																class="score"> <span class="char sc_num7"><em>7</em></span><span
-																class="char sc_dot"><em>.</em></span><span
-																class="char sc_num0"><em>0</em></span><span
-																class="char sc_num6"><em>6</em></span>
-															</span>
-														</div> </a>
-													<ul class="info">
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4587630&amp;code=125488"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4587630&#39;, &#39;1&#39;, event);"><span
-																class="tit">스타워즈: 라스트 제다이 (Star Wars: The Last
-																	Jedi, 2017) </span></a></li>
-														<li><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4586261&amp;code=125488"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4586261&#39;, &#39;2&#39;, event);"><span
-																class="tit">스타워즈:라스트 제다이 IMAX 3D 후기 - 거대한 팬픽션을
-																	보았다.</span></a></li>
-														<li class="last"><a
-															href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4587557&amp;code=125488"
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4587557&#39;, &#39;3&#39;, event);"><span
-																class="tit">영화 &lt;스타워즈:라스트제다이&gt; 새로운 시작...</span></a></li>
-													</ul>
-												</div></li>
-											<li id="review4" data-index="3" class="_select_title"><a
-												href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=166583"
-												class="thmb"
-												onclick="clickcr(this, &#39;tvw.img&#39;, &#39;166583&#39;, &#39;4&#39;, event);"><img
-													src="./movie_list_files/movie_image(32).jpg" width="64"
-													height="91" alt="세 번째 살인"
-													onerror="this.src=&#39;http://static.naver.net/movie/2012/06/dft_img64x91.png&#39;"></a>
-												<div class="detail">
-													<a
-														href="http://movie.naver.com/movie/bi/mi/basic.nhn?code=166583"
-														onclick="clickcr(this, &#39;tvw.title&#39;, &#39;166583&#39;, &#39;4&#39;, event);"
-														class="_select_title_anchor"><strong>세 번째 살인</strong>
-														<div class="star_score">
-															<span class="st_off"><span class="st_on"
-																style="width: 81.9%">평점 - 총 10점 중</span></span> <span
-																class="score"> <span class="char sc_num8"><em>8</em></span><span
-																class="char sc_dot"><em>.</em></span><span
-																class="char sc_num1"><em>1</em></span><span
-																class="char sc_num9"><em>9</em></span>
-															</span>
-														</div> </a>
-													<ul class="info">
-														<li><a href=""
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4587041&#39;, &#39;1&#39;, event);"><span
-																class="tit">세 번째 살인 三度目の殺人, The Third Murder</span></a></li>
-														<li><a href=""
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4586059&#39;, &#39;2&#39;, event);"><span
-																class="tit">&lt;세 번째 살인&gt; 죄는 누가 심판하는가? 텅빈 그릇 같은
-																	진실</span></a></li>
-														<li class="last"><a href=""
-															onclick="clickcr(this, &#39;tvw.list&#39;, &#39;4587716&#39;, &#39;3&#39;, event);"><span
-																class="tit">[세 번째 살인] 그릇 그리고 죄와 벌 </span></a></li>
-													</ul>
-												</div></li>
+				<% mvlist = mvmgr.getMemberList(1); int ra = (int)(Math.random()*3);
+				for(int i=0;i<(mvlist.size()>4?4:mvlist.size());i++) {%>
+							<li id="review<%=i+1 %>" data-index="<%=i%>" class="_select_title<%if(i==0){%> on<%}%>">
+								<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>" class="thmb" onclick="clickcr(this, 'tvw.img', '85579', '<%=i+1 %>', event);"><img src="./mainimg/<%=mvlist.get(i).getPic() %>" width="64" height="91" alt="<%=mvlist.get(i).getTitle() %>" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img64x91.png'"></a>
+								<div class="detail">
+									<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>" onclick="clickcr(this, 'tvw.title', '85579', '1', event);" data-index="<%=i%>" class="_select_title_anchor"><strong><%=mvlist.get(i).getTitle() %></strong>
+										<div class="star_score">
+													<span class="st_off"><span class="st_on" style="width:<%=Float.parseFloat(mvlist.get(i).getStar())*10%>%">평점 - 총 10점 중</span></span>
+													<span class="score">
+												<%String a = (mvlist.get(i).getStar()+"");
+												for(int j=0;j<a.length();j++) {%>
+												<% if(j==1){%><span class="char sc_dot"><em>.</em></span>
+												<% }else{%><span class="char sc_num<%=a.charAt(j)%>"><em><%=a.charAt(j)%></em></span><%}} %>
+											</span>
+										</div>
+									</a>
+									<ul class="info">
+					<% Vector<ReviewBean> mvrlist = mvmgr.getReviewList(mvlist.get(i).getIdx());%><%
+					for(int j=0;j<3;j++) {%>
+						<%if(j<mvrlist.size()){ %>
+						<li<%if(j==2) {%> class="last"<%} %>>
+						<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>&&reviewnum=<%=mvrlist.get(j).getReviewnum() %>" onclick="clickcr(this, 'tvw.list', '4588316', '<%=j+1 %> %>', event);">
+						<span class="tit"><%=mvrlist.get(j).getTitle() %></span></a></li>
+						<%}else{ %>	
+						<li<%if(j==2) {%> class="last"<%} %>><a href="" onclick="clickcr(this, 'tvw.list', '4588316', '<%=j+1 %> %>', event);"><span class="tit"></span></a></li>
+					<%}} %>
+									</ul>
+								</div>
+							</li>
+				<%} %>	
 										</ul>
 									</div>
 								</div>

@@ -58,7 +58,7 @@
 <meta http-equiv="imagetoolbar" content="no">
 <title><%=title%> : 바코드 영화</title>
 <link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="./movie_home_files/movie.all.css">
+<link rel="stylesheet" type="text/css" href="./movie_detail_files/movie.all.css">
 <link rel="stylesheet" type="text/css" href="../css/gnb_style.css">
 <link type="text/css" rel="stylesheet" href="http://common.like.naver.com/static20171214180606/css/desktop/likeit_movie.css" charset="utf-8">
 <link type="text/css" rel="stylesheet" href="http://common.like.naver.com/static20171214180606/css/desktop/likeit.css" charset="utf-8">
@@ -242,8 +242,7 @@ function delayed_submit(object) {
 						<em class="blind">네티즌 평점</em><a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#" class="help" id="pointHelpButtonWide" title="네티즌 평점 도움말 보기">네티즌 평점 도움말</a>
 					</span>
 					<div class="ly_ntz _pointHelpWide" id="pointHelpWide" style="display:none">
-						<span></span>
-								국내 개봉작입니다. 관람하신 영화에 대한<br> 평점을 남겨주세요. 140자평 뿐 아니라 블<br>로그 영화 리뷰작성 시 등록한 별점도 함께<br> 반영됩니다.
+						<span></span>국내 개봉작입니다. 관람하신 영화에 대한<br> 평점을 남겨주세요. 140자평 뿐 아니라 블<br>로그 영화 리뷰작성 시 등록한 별점도 함께<br> 반영됩니다.
 						<button type="button" class="btn_close _pointHelpWide" id="pointHelpCloseButtonWide"><em>닫기</em></button>
 					</div>
 					<div class="ly_count" id="pointNetizenCountWide" style="display:none">
@@ -519,7 +518,7 @@ function delayed_submit(object) {
 			</div>				
 			<div class="score " style="display:block">
 				<div class="title_area">
-					<a>
+					<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=2">
 						<h4 class="h_score"><strong class="blind">평점</strong></h4>
 						<span class="more"><span class="blind">더보기</span></span>
 					</a>
@@ -569,14 +568,14 @@ function delayed_submit(object) {
 		<div class="obj_section">
 			<div class="review">
 				<div class="title_area">
-					<a href="./movie_home.jspmovie/bi/mi/review.nhn?code=152385#reviewTab">
+					<a  href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3">
 						<h4 class="h_review"><strong class="blind">리뷰</strong></h4>
 							<span class="more"><span class="blind">더보기</span></span>
 					</a><!-- N=a:mre.more -->
 					
 					<div>
 							<!-- N=a:mre.help -->
-						<a href="javascript:goWrite();" class="wrt_review"><em>리뷰쓰기</em></a><!-- N=a:mre.write -->
+						<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3" class="wrt_review"><em>리뷰쓰기</em></a><!-- N=a:mre.write -->
 					</div>
 					
 				</div>
@@ -944,7 +943,7 @@ String rwriter = rbean.getWriter();
 						</div>
 						
 						<div class="reple_btn_area">
-				<a href="javascript:goWrite('add')" class="go_btn_review"><em class="blind">리뷰쓰기</em></a><!-- N=a:rvi.write -->
+				<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1" class="go_btn_review"><em class="blind">리뷰쓰기</em></a><!-- N=a:rvi.write -->
 				<a href="javascript:showReviewList();" class="go_btn_lst"><em class="blind">목록보기</em></a><!-- N=a:rvi.list -->
 			</div>
 			<div class="pre_reple_lst">

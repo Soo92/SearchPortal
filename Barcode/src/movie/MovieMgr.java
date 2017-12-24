@@ -32,6 +32,7 @@ public class MovieMgr {
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
+				regBean.setIdx(rs.getInt("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setSubtitle(rs.getString("subtitle"));
 				regBean.setStar(rs.getString("star"));
@@ -67,6 +68,7 @@ public class MovieMgr {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				MovieBean regBean = new MovieBean();
+				regBean.setIdx(rs.getInt("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setSubtitle(rs.getString("subtitle"));
 				regBean.setStar(rs.getString("star"));
@@ -90,7 +92,7 @@ public class MovieMgr {
 		return vlist;
 	}
 	
-	public Vector<MovieBean> getMemberList(String order) {
+	public Vector<MovieBean> getMemberList(int order) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -98,14 +100,18 @@ public class MovieMgr {
 		Vector<MovieBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			if(order.equals("cur"))	sql = "select * from movie where (opendate) <= date_format(now(),'%Y.%m.%d');";
-			else if(order.equals("new"))	sql = "select * from movie where (opendate) > date_format(now(),'%Y.%m.%d');";
-			else	sql = "select * from movie order by ?";
+			if(order==1) {
+				sql = "select * from movie where (opendate) <= date_format(now(),'%Y.%m.%d') order by opendate desc;";
+			}else if(order==2) {
+				sql = "select * from movie where (opendate) > date_format(now(),'%Y.%m.%d')  order by opendate;";
+			}else if(order==3){
+				sql = "select * from movie order by star desc";
+			}
 			pstmt = con.prepareStatement(sql);
-			if(!order.equals("new")||!order.equals("cur"))
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				MovieBean regBean = new MovieBean();
+				regBean.setIdx(rs.getInt("idx"));
 				regBean.setTitle(rs.getString("title"));
 				regBean.setSubtitle(rs.getString("subtitle"));
 				regBean.setStar(rs.getString("star"));

@@ -24,7 +24,23 @@
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
-	
+	function cal(){
+		document.getElementById("priceAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))%>);
+		document.getElementById("saleAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=Integer.parseInt(request.getParameter("pro_Price"))/100%>);
+	}
+	function comma(num){
+	    var len, point, str; 
+	    num = num + ""; 
+	    point = num.length % 3 ;
+	    len = num.length; 
+	    str = num.substring(0, point); 
+	    while (point < len) { 
+	        if (str != "") str += ","; 
+	        str += num.substring(point, point + 3); 
+	        point += 3; 
+	    } 
+	    return str;
+	}
 	function mypage() {
 		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
 			document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
@@ -52,8 +68,59 @@
 		} 
 	}
 	</script>
+	<style>
+	#buy_info{width:1080px; height:auto; margin:0 auto; background:#fff; border:1px lightgray solid; padding:10px;}
+	#buy_info th{ text-indent:0; font-size:14px; height:30px; text-indent:10}
+	#buy_info table{font-size:12px; line-height:1.5;}
+	#buy_info td{height:40px;}
+	#buy_info input[type=text] {height:30px;}
+	#buy_info input[type=button]{   
+	   margin-left:10px;
+	   background-color: #393939;
+	   border: none;
+	   color: #fff;
+	   padding: 7px 15px;
+	   text-align: center;
+	   text-decoration: none;
+	   font-size: 14px;
+	   cursor: pointer;
+	   font-family: 'Nanum Gothic', son-serif;
+	   font-weight: bold;
+		}
+		
+		#plus_button input[type=button]{  
+		margin-left:-5px;
+		background-color: #fff;
+	   border: 1px #ff4800 solid;
+	   color: #ff4800;
+	   padding: 15px 80px;
+	   text-align: center;
+	   text-decoration: none;
+	   font-size: 14px;
+	   cursor: pointer;
+	   font-family: 'Nanum Gothic', son-serif;
+	   font-weight: bold;
+		}
+		
+		#buy_button{width:353px; height: auto; margin:0 auto; text-align:center;}
+		#buy_button input[type=button]{
+		background-color: #ff4800;
+	   	border:0;
+	   	color: #fff;
+	   	padding: 35px 150px;
+	   	text-align: center;
+	   	text-decoration: none;
+	   	font-size: 14px;
+	   	cursor: pointer;
+	   	font-family: 'Nanum Gothic', son-serif;
+	   	font-weight: bold;
+		}
+		
+		#basket_ img{width:140px; height:140px;}
+	</style>
 </head>
 <body>
+
 <div id="all">
 		<div id="header_">
 			<div id="header">
@@ -98,92 +165,192 @@
 			</div>
 		</div>
 </div>
-
+	
 	<div id="wrap_">
 		<div id="wrap2" >
-			<div id="search" style="height:300px;">
-				
+			<div id="search">
+				<div id="search_box">
+				<input type="text" style="width:420px; height:30px; margin:5px 0px 0px 10px; border:0px; font-size:16px;" align="center"
+								placeholder="검색해보세용!">
+					<div id="search_button">
+						<img src="../img/search_icon.png" width="45px" height="45px">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-<div id="wrap" style="background:#fff;">
-	<div id="wrap2">
-		<div id="category" style=" width:780px;">
-			<a href="#">
-			<div id="category_b"><p>전체보기</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_b" class="space"><p>사진리뷰 모아보기</p></div>
-			</a>
-			
-			<a href="#">
-			<div id="category_b"  class="space"><p>조회순으로 보기</p></div>
-			</a>
-			
+	
+	<div id="all">
+		<div id="wrap2" style="margin-bottom:20px;">
+			<img src="../img/basket.jpg">
 		</div>
 	</div>
-</div>
-
-<div id="wrap">
-	<div id="wrap1">
+	
+	<div id="wrap">
 		<div id="blank"></div>
-		
-		<%for(int i=0; i<20;i++){ %>
-		<div id="blank"></div>
-				<div id="review_box">
-					<div id="r_1">
-						<div id="r_no" class="test">
-						
-						</div>
-						<div id="r_img" class="test">
-						
-						</div>
-					</div>	
-					
-					<div id="r_2">
-						<div id="r_title" class="test">
-						
-						</div>
-						<div id="r_wr" class="test">
-						
-						</div>
-						<div id="r_star" class="test">
-						
-						</div>
-						<div id="r_sel" class="test">
-						
-						</div>
-						<div id="r_views" class="test">
-						
-						</div>
-						<div id="r_time" class="test">
-					
-						</div>
-						<div id="r_con" class="test">
-						
-						</div>
-					</div>
-					<div id="r_3">
-						<div id="r_good" class="test">
-						
-						</div>
-						<div id="r_button" class="test">
-						
-						</div>	
+			
+			<!-- for문 Strat *****장바구니 상품 있을 경우 -->
+			<div id="basket">
+					<div id="basket_">
+							<table width="1080px" height="180px" cellpadding="5" cellspacing="0" border="1" align="center"
+							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
+							margin-left:10px; margin-top:10px;float:left;  text-indent:0; text-align:center; font-size:14px;">
+								<tr>
+									<th colspan="2" height="36px">상품/옵션정보</th>
+									<th height="36px" width="100px">수량</th>
+									<th height="36px">상품금액</th>
+									<th height="36px">할인금액</th>
+									<th height="36px">할인적용금액</th>
+									<th height="36px">배송비</th>
+									<th height="36px">주문</th>
+								</tr>
+								<tr>
+									<td rowspan="4" height="36px" width="150px"><%=request.getParameter("pro_MainImg") %></td>
+									<td  height="46px" style="text-indent:20; text-align:left;border:none;font-size:16px;">
+									<b>[<%=request.getParameter("pro_Title") %>]</b><%=request.getParameter("pro_Seller") %> </td>
+									<td rowspan="2" height="36px">
+									<select id="EA" onchange="cal()" style="width:56px;">
+										<option value="1" >1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+									</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_ShipAccount"))) %>원</td>
+									<td rowspan="2" height="36px">
+										<button class="order_button">주문하기</button>
+									</td>
+								</tr>
+								<tr>
+									<td height="26px" style="text-indent:20; text-align:left;border:none;">
+									옵션 : <%=request.getParameter("pro_Opt") %></td>
+								</tr>
+								
+								<tr>
+									<td height="26px" style="text-indent:20; text-align:left;border:none;">추가상품 : <%=request.getParameter("pro_ProAdd") %></td>
+									<td rowspan="2" height="36px">
+										<button class="delete_button">변경</button>
+									</td>
+									<td rowspan="2" height="36px">
+										<button class="delete_button">삭제하기</button>
+									</td>
+								</tr>
+								
+								<tr>
+									<td height="46px" style="text-indent:20; text-align:left;border:none;">
+									<button class="order_button">옵션변경/추가</button>
+									</td>
+								</tr>
+							</table>
+							
 					</div>
 				</div>
-		<div id="blank"></div>
-		<%} %>
-	
-		
-		<div id="blank"></div>
-	</div>
-</div>
+				
 
+				<div id="blank"></div>
+			<!-- for문 End -->
+			
+		<div id="buy_info">
+			
+			<table width="1080px" style="background:#fff; border:1px lightgray solid" height="400">
+				<tr>
+					<td>
+						
+							<table width="550px" height="180px" cellpadding="5" cellspacing="0" border="0" align="center"
+														style="border-collapse:collapse;float:left;  text-indent:20; text-align:left; 
+														font-size:14px; margin-left:30px;">
+									
+									<tr>
+										<th>수령인</th>
+										<td colspan="3"><input type="text"></td>
+									</tr>
+									<tr>
+										<th>배송지명</th>
+										<td colspan="3"><input type="text"></td>
+									</tr>
+									<tr>
+										<th>연락처</th>
+										<td colspan="3">
+											<select style="width:100px; height:30px;">
+												<option>선택</option>
+												<option>010</option>
+												<option>011</option>
+												<option>019</option>
+												<option>017</option>
+											</select>
+											- <input type="text" style="width:100;">
+											- <input type="text" style="width:100;">
+										</td>
+									</tr>
+									<tr>
+										<th rowspan="2" valign="top"><p style="margin-top:10px;">배송주소</p></th>
+										<td><input type="text"><input type="button" value="우편번호"></td>
+			
+									</tr>
+									<tr>
+										<td><input type="text" style="width:400"></td>
+										
+									</tr>
+									<tr>
+											<th rowspan="2" valign="top"><p style="margin-top:5px;">배송메모</p></th>
+										<td colspan="3" style="padding-top:10px">
+											<textarea style="width:400; height: 100px; line-height:20px" placeholder="특별한 메세지를 입력하세용"></textarea>
+										</td>
+									</tr>
+								</table>
+							
+						</td>
+						<td>
+							<table width="380px" height="300px" cellpadding="5" cellspacing="0" border="0" align="center"
+													style="border-collapse:collapse;float:left;  text-indent:100; text-align:left; font-size:14px; border-left: 1px lightgray solid">
+								<tr>
+									<td>
+										<p style="font-size:16px; font-weight:bold; color:gray">결제금액</p>
+										<p style="font-size:30px; font-weight:bold; color:#ff4800; line-height:1;">
+										<sapn id="priceAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))) %></sapn>원</p>
+										<br/>
+										<p style="font-size: 12px; line-height: 25px;">총 상품금액 : 
+										<sapn id="priceAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))) %></sapn>원</p>
+										<p style="font-size: 12px; line-height: 25px;">할인금액 : (-)<sapn id="saleAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %></sapn>원</p>
+										<p style="font-size: 12px; line-height: 25px;">배송비 : (+)<%=String.format("%,d",Integer.parseInt(request.getParameter("pro_ShipAccount"))) %>원</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<br/>
+										<p style="font-size:13px; line-height:25px;">
+										bingo9127님의<span style="font-weight:bold; color:#ff4800">  BarCode Pay</span></p>
+										<p style="font-size:30px; font-weight:bold; line-height:1">6,452,000원</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<br/>
+										<div id="plus_button">
+											<input type="button" value="바코드페이 충전">
+										</div>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+			</table>
+		</div>
+			
+			
+		<div id="blank"></div>
+		<div id="buy_button">
+			<p style="color:#ff4800; font-size:12px; line-height:30px;">오배송을 예방하기 위해 배송지 및 금액을 <b>다시한번 확인해보세요!</b></p>
+			<input type="button" value="구매하기">
+		</div>
+		<div id="blank"></div>
+		<div id="blank"></div>
+		
+	</div>
 	<div id="footer_">
 		<div id="footerWrap">
 			<p class="a_">공지사항</p>
@@ -191,7 +358,7 @@
 		</div>
 	</div>
 	
-	
+
 	<div id="footer">
 		<p class="Extra">Creators</p>
 		
@@ -232,5 +399,6 @@
 			</ul>
 		</div>
 	</div>
+
 </body>
 </html>
