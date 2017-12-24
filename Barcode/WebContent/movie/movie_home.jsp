@@ -11,15 +11,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="imagetoolbar" content="no">
-<meta property="og:title" content="네이버">
-<meta property="og:description" content="영화에 대한 모든 것">
-<meta property="og:image" content="http://static.naver.net/m/movie/icons/OG_270_270.png">
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://movie.naver.com"> 
 <title>바코드 영화</title>
-<link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="../js/movie.home.js"></script>
-<script type="text/javascript" src="../js/clickcrd.js"></script>
 <link rel="stylesheet" type="text/css" href="../css//movie.all.css">
 <link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 <div id="wrap" class="basic">
@@ -140,13 +132,6 @@ function delayed_submit(object) {
                         <li>
                             <a href="ranking1.html" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
                         </li>
-                        <li>
-                            <a href="theater.html" title="예매" class="menu05"><strong>예매</strong></a><!-- N=a:LNB.ticket -->
-                        </li>
-                        
-                        
-                        
-						                        
                         </ul>
                     </div>
 				</div>
@@ -1085,193 +1070,14 @@ function delayed_submit(object) {
 										
 											
 												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4574915&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4574915', '1', event);"><span class="tit">코믹과 액션을 함께 갖춘 리벤져스의 메인이벤트-토르:라그나로크</span></a></li>
-											
-										
-											
 												<li><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4581860&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4581860', '2', event);"><span class="tit">토르의 마지막 피날레  토르 라그나로크 _ 쿠키영상 _ 스포주의</span></a></li>
-											
-										
-											
 												<li class="last"><a href="http://movie.naver.com/movie/bi/mi/reviewread.nhn?nid=4572665&amp;code=134898" onclick="clickcr(this, 'tvw.list', '4572665', '3', event);"><span class="tit">[영화] 토르 - 라그나로크 / 마블의 개성과 안정성</span></a></li>
-											
-										
 									</ul>
 								</div>
 							</li>
 							
 							</ul>
 						</div>
-					</div>
-				</div>
-				<div class="main_spot" id="homeSpotlight">
-					
-					<div class="section">
-						<div class="title_area">
-							<h4 class="hh_spotlight">
-								<strong class="blind">스포트라이트</strong>
-							</h4>
-						</div>
-						<div class="hh_spot_area">
-							<a href="http://nstore.naver.com/event/details.nhn?eventNo=9543">
-								<img src="../img/movie/영화스포트라이트210X196.png" width="210" height="196" title="스포트라이트 배너" alt="스포트라이트 영역 입니다." border="0">
-							</a>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-
-			
-			<div class="obj_section" id="homeTrailer">
-				<div class="main_prv">
-					<div class="title_area">
-						<h4 class="hh_preview"><strong class="blind">예고편</strong></h4>
-						<a href="http://movie.naver.com/movie/running/movieclip.nhn">
-							<span class="more"><span class="blind">더보기</span></span>
-						</a><!-- N=a:cms.more -->
-					</div>
-					<ul class="video_thumb">
-					
-					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3차 예고편" class="video_obj">
-							<span class="mask">동영상</span>
-							
-							<span class="video_ico first"></span>
-							<img src="../img/movie/37018_20171204114403.gif" width="164" height="114" alt="3차 예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
-						</a><!-- N=a:cms.img,r:1,i:37018 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="몬스터 패밀리">몬스터 패밀리</a><!-- N=a:cms.title,r:1,i:37018 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=163844&amp;mid=37018#tab" title="3차 예고편">3차 예고편</a><!-- N=a:cms.desc,r:1,i:37018 --></p>
-					</li>
-					
-					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무삭제 영상" class="video_obj">
-							<span class="mask">동영상</span>
-							
-							<span class="video_ico first"></span>
-							<img src="../img/movie/37017_20171204114448.gif" width="164" height="114" alt="무삭제 영상" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
-						</a><!-- N=a:cms.img,r:2,i:37017 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무서운 꿈">무서운 꿈</a><!-- N=a:cms.title,r:2,i:37017 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=170236&amp;mid=37017#tab" title="무삭제 영상">무삭제 영상</a><!-- N=a:cms.desc,r:2,i:37017 --></p>
-					</li>
-					
-					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="예고편" class="video_obj">
-							<span class="mask">동영상</span>
-							
-							
-							<img src="../img/movie/37033_20171205095959.jpg" width="164" height="114" alt="예고편" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
-						</a><!-- N=a:cms.img,r:3,i:37033 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="오버드라이브">오버드라이브</a><!-- N=a:cms.title,r:3,i:37033 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=92082&amp;mid=37033#tab" title="예고편">예고편</a><!-- N=a:cms.desc,r:3,i:37033 --></p>
-					</li>
-					
-					<li>
-						<a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="뮤직비디오" class="video_obj">
-							<span class="mask">동영상</span>
-							
-							
-							<img src="../img/movie/37037_20171205105433.jpg" width="164" height="114" alt="뮤직비디오" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img164x114.png'">
-						</a><!-- N=a:cms.img,r:4,i:37037 -->
-						<p class="tx_video ico_hd"><span class="blind">HD</span><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="돌아온다">돌아온다</a><!-- N=a:cms.title,r:4,i:37037 --></p>
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/mediaView.nhn?code=162419&amp;mid=37037#tab" title="뮤직비디오">뮤직비디오</a><!-- N=a:cms.desc,r:4,i:37037 --></p>
-					</li>
-					
-					</ul>
-				</div>
-			</div>
-		</div>
-		
-
-		
-		<div class="section_group" id="homePhoto">
-			<div class="obj_section">
-				<div class="main_photo">
-					<div class="title_area">
-						<h4 class="hh_photo"><strong class="blind">포토</strong></h4>
-					</div>
-					<ul>
-					
-					<li class="">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">
-								<img src="../img/movie/movie_image(33).jpg" width="108" height="108" alt="드리밍 러브스토리" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:1,i:6587886 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab"><strong class="tit">우리는 같은 꿈을 꾼다</strong></a><!-- N=a:pho.list,r:1,i:6587886 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=159108&amp;imageNid=6587886#tab">드리밍 러브스토리</a><!-- N=a:pho.tlist,r:1,i:6587886 --></p>
-					</li>
-					
-					<li class="">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">
-								<img src="../img/movie/movie_image(34).jpg" width="108" height="108" alt="사라진 연인" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:2,i:6583065 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab"><strong class="tit">시크릿 레터</strong></a><!-- N=a:pho.list,r:2,i:6583065 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146372&amp;imageNid=6583065#tab">사라진 연인</a><!-- N=a:pho.tlist,r:2,i:6583065 --></p>
-					</li>
-					
-					<li class="">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">
-								<img src="../img/movie/movie_image(35).jpg" width="108" height="108" alt="가족의 성장통" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:3,i:6586853 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab"><strong class="tit">아들에게 가는 길</strong></a><!-- N=a:pho.list,r:3,i:6586853 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=154183&amp;imageNid=6586853#tab">가족의 성장통</a><!-- N=a:pho.tlist,r:3,i:6586853 --></p>
-					</li>
-					
-					<li class="">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">
-								<img src="../img/movie/movie_image(36).jpg" width="108" height="108" alt="새로운 삶의 시작" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:4,i:6590331 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab"><strong class="tit">신과함께-죄와 벌</strong></a><!-- N=a:pho.list,r:4,i:6590331 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=85579&amp;imageNid=6590331#tab">새로운 삶의 시작</a><!-- N=a:pho.tlist,r:4,i:6590331 --></p>
-					</li>
-					
-					<li class="">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">
-								<img src="../img/movie/movie_image(37).jpg" width="108" height="108" alt="깊고 진한  로맨스" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:5,i:6517442 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab"><strong class="tit">스톡홀름의 마지막 연인</strong></a><!-- N=a:pho.list,r:5,i:6517442 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=146394&amp;imageNid=6517442#tab">깊고 진한  로맨스</a><!-- N=a:pho.tlist,r:5,i:6517442 --></p>
-					</li>
-					
-					<li class="last">
-						<p class="thmb">
-							<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">
-								<img src="../img/movie/movie_image(38).jpg" width="108" height="108" alt="거대한 비행물체" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img108x108.png'">
-								
-								
-							</a><!-- N=a:pho.img,r:6,i:6590265 -->
-						</p>
-						<a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab"><strong class="tit">인디펜던츠 데이: 외계의 대침공</strong></a><!-- N=a:pho.list,r:6,i:6590265 -->
-						<p class="tx_brief"><a href="http://movie.naver.com/movie/bi/mi/photoView.nhn?code=169523&amp;imageNid=6590265#tab">거대한 비행물체</a><!-- N=a:pho.tlist,r:6,i:6590265 --></p>
-					</li>
-					
-					</ul>
-				</div>
-			</div>
-			<div class="obj_section">
-				<div class="main_event">
-					<div class="notice">
-						<a href="http://movie.naver.com/movie/other/gonggi.nhn" class="notice_more">공지사항 더보기</a><!-- N=a:bnt.more -->
-						<div class="info"><a href="http://movie.naver.com/movie/other/gonggi.nhn?docID=10000000000030659300"><em>[공지]</em>&nbsp; 롯데시네마 시스템 점검 안내</a><!-- N=a:bnt.list --></div>
-						<p><span class="page_info">정보</span>본 페이지는 나눔글꼴에 최적화 되어있습니다. <a href="http://hangeul.naver.com/font" target="_blank" class="font_inst">나눔글꼴설치<em class="arr"></em></a><!-- N=a:btm.nanumfont --></p>
 					</div>
 				</div>
 			</div>

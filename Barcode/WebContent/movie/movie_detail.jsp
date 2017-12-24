@@ -14,10 +14,13 @@
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
 		
-		String num = request.getParameter("num");
+		String num = request.getParameter("num")==null?"1":request.getParameter("num");
 		String reviewnum = request.getParameter("reviewnum");
 		String reviewrite = request.getParameter("reviewrite");
-		int idx = Integer.parseInt(request.getParameter("index"));
+		String index = request.getParameter("index");
+		int idx = 0;
+		if(index!=null)
+			idx = Integer.parseInt(index);
 		Vector<ReviewBean> reviewlist=mmgr.getReviewList(idx);
 
 		mbean = mmgr.getMember(idx);
@@ -29,13 +32,16 @@
 		String country = mbean.getCountry();
 		String runtime = mbean.getRuntime();
 		String opendate = mbean.getOpendate();
+		int count = 0;
+		if(opendate != null){
 			Calendar today = Calendar.getInstance();
 			Calendar dday = Calendar.getInstance();
 			String[] openda = opendate.split("\\.");
  			dday.set(Integer.parseInt(openda[0]),Integer.parseInt(openda[1])-1,Integer.parseInt(openda[2]));
 			long day = dday.getTimeInMillis()/86400000;
 			long tday = today.getTimeInMillis()/86400000;
-			int count = (int) (day - tday);
+			count = (int) (day - tday);
+		}
 		String director = mbean.getDirector();
 		String actor = mbean.getActor();
 		int age = mbean.getAge();
@@ -164,9 +170,6 @@ function delayed_submit(object) {
                         <li>
                             <a href="http://movie.naver.com/movie/sdb/rank/rmovie.nhn" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
                         </li>
-                        <li>
-                            <a href="http://movie.naver.com/movie/bi/mi/reserve.nhn" title="예매" class="menu05"><strong>예매</strong></a><!-- N=a:LNB.ticket -->
-                        </li>
                         </ul>
 	                        <!-- [D] view 모드 전환간 클래스는 _on,_off / 비활성화는 _disabled -->
                     </div>
@@ -186,6 +189,7 @@ function delayed_submit(object) {
 	<div id="container">
 			<!-- 상단 현재 상영작 썸네일 리스트 -->
 <!-- content -->
+<%if(index!=null){ %>
 <div id="content">
 	<div class="article">
 <!-- 영화정보(wide) -->
@@ -637,15 +641,15 @@ function delayed_submit(object) {
 		<a name="pointAfterTab"></a>
 		<div class="obj_section noline">
 			<div class="ifr_module2">
-				<iframe src="./point.jsp?<%=idx %>" id="pointAfterListIframe" name="pointAfterListIframe" width="100%" frameborder="0" scrolling="no" class="ifr" title="네티즌 평점 리스트" height="1434px"></iframe>
+				<iframe src="./point.jsp?index=<%=idx %>" id="pointAfterListIframe" name="pointAfterListIframe" width="100%" frameborder="0" scrolling="no" class="ifr" title="네티즌 평점 리스트" height="1434px"></iframe>
 			</div>
 		</div>
 	</div>
 <%}else if(num.equals("3")){ if(reviewnum==null||reviewnum.equals("")){%>
 	<div class="section_group section_group_frst">
- 	<%if(reviewrite.equals("1")) {%>	 
+ 	<%if(reviewrite!=null&&reviewrite.equals("1")) {%>
  		<%@include file="movie_reView.jsp"%>
- 	<%}else{ %>	 
+ 	<%}else{ %>
 		<div class="obj_section">
 			<div class="ifr_module2" id="reviewTab">
 				<div class="ifr_area">
@@ -974,35 +978,53 @@ String rwriter = rbean.getWriter();
 <%}}%>
 	</div>
 </div>
-
-<form id="reportForm"></form>
+<%}else{ %>
+<%@include file="movie_list.jsp"%>
+<%} %>
 
 <!-- //content -->
 	</div>
 	<!-- //container -->
 	<!-- footer -->
+	
 <div id="footer">
-	<div class="in_footer">
-		<div class="foot_con">
-				<ul>
-					<li class="first"><a href="http://www.naver.com/rules/service.html" target="rules">이용약관</a><!-- N=a:fot.agreement --></li>		
-					<li><a href="http://www.naver.com/rules/privacy.html" target="rules"><strong>개인정보처리방침</strong></a><!-- N=a:fot.privacy --></li>
-					<li><a href="http://www.naver.com/rules/disclaimer.html" target="rules">책임의 한계와 법적고지</a><!-- N=a:fot.disclaimer --></li>		
-					<li><a href="https://help.naver.com/support/service/main.nhn?serviceNo=800" target="customer">영화 고객센터</a><!-- N=a:fot.help --></li>
-				</ul>
-				<p class="info">본 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다.</p>
-				<p class="info">
-					사업자등록번호 : 220-81-62517<span>통신판매업 신고번호</span> : 경기성남 제 2006 - 692호<span>대표이사 : 한성숙</span><span><a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">사업자등록정보 확인</a><!-- N=a:fot.bizinfo --></span><br>
-					주소 : 경기도 성남시 분당구 불정로 6 바코드 그린팩토리 <span>대표전화 : 1588-3820</span>
-				</p> 
-				<address>
-					<a href="http://www.navercorp.com/" target="_blank" class="logo"><img src="./movie_detail_files/logo_naver.png" width="63" height="11" alt="NAVER"></a><!-- N=a:fot.nhn -->
-					<em>Copyright ©</em>
-					<a href="http://www.navercorp.com/" target="_blank">NAVER Corp.</a><!-- N=a:fot.corp -->
-					<span>All Rights Reserved.</span>
-				</address>
+		<p class="Extra">Creators</p>
+		
+		<ul>
+			<li>크리에이터</li><li class="aaa">|</li>
+			<li>스몰비즈니스</li>
+		</ul>
+		
+		<p class="Extra">Partners</p>
+		<ul>
+			<li>이성수</li><li class="aaa">|</li>
+			<li>김민정</li><li class="aaa">|</li>
+			<li>박준영</li><li class="aaa">|</li>
+			<li>육동주</li><li class="aaa">|</li>
+			<li>조성수</li>
+		</ul>
+		
+		<p class="Extra">Developers</p>
+		<ul>
+			<li>바코드 개발센터</li><li class="aaa">|</li>
+			<li>오픈API</li><li class="aaa">|</li>
+			<li>오픈소스</li><li class="aaa">|</li>
+			<li>바코드 D2</li><li class="aaa">|</li>
+			<li>바코드 랩스</li>
+		</ul>
+		
+		<div id="ul_except">
+			<ul>
+				<li style="padding:0;">회사소개</li><li class="aaa">|</li>
+				<li>인재채용</li><li class="aaa">|</li>
+				<li>제휴제안</li><li class="aaa">|</li>
+				<li>이용약관</li><li class="aaa">|</li>
+				<li>개인정보처리방침</li><li class="aaa">|</li>
+				<li>청소년보호정책</li><li class="aaa">|</li>
+				<li>바코드정책</li><li class="aaa">|</li>
+				<li>고객센터</li><li class="aaa">|</li>
+				<li>ⓒBarcode Crop.</li>
+			</ul>
 		</div>
 	</div>
-</div>
-	<!-- //footer -->
 </div>

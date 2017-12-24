@@ -7,7 +7,7 @@
 		request.setCharacterEncoding("utf-8");
 		int on=-1;
 		String idk = (String)session.getAttribute("idKey");
-		String index = request.getParameter("index");
+		String index1 = request.getParameter("index");
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0073)http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&from=list# -->
@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="./movie_reView_files/movie.all.css">
 </head>
 <body>
-
 <div id="wrap" class="basic">
 <form name="form" action="movie_reViewProc.jsp">
 <script type="text/javascript">
@@ -46,7 +45,6 @@ function removeTitle() {
 		a.value="";
 }
 </script>
-<input type="text" name="writer" value="작성자">
 <div id="content">
 	<div class="article">
 		<div class="obj_section noline center_obj">
@@ -1736,13 +1734,9 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
 						</div>
 					</dd>
 				</dl>
-				
 				<table summary="리뷰쓰기 테이블" class="wrt_board wrt_board_v1"> 
                 <caption>리뷰를 입력하세요</caption> 
                 <tbody> 
-					
-					
-					
 					<tr>
 					<th scope="row" class="align_v tr_guide"><span class="subject7">작성기준</span></th>
 					<td class="tr_guide">
@@ -1756,7 +1750,7 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
 					</tbody>
 					</table>
 					<div class="wrt_board_submit">
-						<input type="submit" value="등록" onclick="gethiddenvalue()">
+						<a href="#" onclick="gethiddenvalue()" title="확인" class="btn_confrm"><em class="blind">확인</em></a>
 					</div>
 				</fieldset>
 				
@@ -1770,13 +1764,14 @@ emoticoninsertionPlugin.IMG_BASE_URL = "http://imgmovie.naver.net/2007/img/edito
 				document.getElementById("pointStarRating1").value=
 				document.getElementById("pointStarRatingValue").innerHTML;
 				document.getElementById("smartEditorIframe1").value=
-					document.getElementById("smartEditorIframe").contentWindow.document.body.innerHTML;
-				document.getElementById("form").submit();
+				document.getElementById("smartEditorIframe").contentWindow.document.body.innerHTML;
+				document.form.submit();
 			}
 		</script>
 		<div id="hidden">
+		<input type="hidden" name="writer" value="<%=idk%>">
 		<input type="hidden" name="star" id="pointStarRating1" value=""/>
-		<input type="hidden" name="idx" id="pointStarRating2" value="<%=index%>"/>
+		<input type="hidden" name="idx" id="pointStarRating2" value="<%=index1%>"/>
 		<input type="hidden" name="content" id="smartEditorIframe1" value="">
 		</div>
 	</form>

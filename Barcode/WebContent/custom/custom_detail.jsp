@@ -63,11 +63,11 @@
 			<div class="gnb_area">
 				<div class="Ngnb">
 					<div class="Ngnb_inner">
-						<a href="http://www.naver.com/" class="Nlogo_link"><span
-							class="Nlogo">NAVER</span></a>
+						<a href="../index.jsp" class="Nlogo_link"> <img
+							src="logo_ci.png" width="150" height="30"
+							style="margin-top: 10px;"></a>
 						<h1 class="Ngnb_service">
-							<a href="https://help.naver.com/support/home.nhn"
-								class="Nhome_link"><span class="Nhome">고객센터</span></a>
+							<a href="https://help.naver.com/#" class="Nhome_link"><span class="Nhome">고객센터</span></a>
 						</h1>
 					<div id="login">
 	<%if(id == null || id.equals("")){%>

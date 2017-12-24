@@ -29,7 +29,6 @@
 		int likeNum = bean.getLikeNum();
 		String Seller = bean.getSeller();
 		
-		
 		Vector<ReviewBean> vlist = mgr_review.getReviewList(index);
 		
 		request.setCharacterEncoding("euc-kr");
@@ -230,11 +229,11 @@ $(document).ready(function(){
 						<p>추가구성</p>
 						<select style="margin:10px 0px 10px 0px; width:300px; height:30px;">
 							<option>추가구성을 선택하시오.</option>
-							<% StringTokenizer prA = new StringTokenizer(proAdd,",");
+							<%if(proAdd!=null){StringTokenizer prA = new StringTokenizer(proAdd,",");
 									for(int x=0;prA.hasMoreElements();x++){
 							%>
 							<option><%=prA.nextToken() %></option>
-							<%} %>
+							<%}} %>
 						</select>
 					</td>
 				</tr>

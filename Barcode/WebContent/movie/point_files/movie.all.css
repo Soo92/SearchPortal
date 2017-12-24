@@ -305,7 +305,7 @@ div.mv_info .main_score .star_score.b_star span.st_on{background-position:0 -378
 .mv_info_area div.mv_info dl.info_spec .step1+dd p span a{display:inline-block}
 .mv_info_area div.mv_info dl.info_spec dd p span{display:inline-block;margin:0 14px 0 -7px;padding-left:7px;background:url(http://static.naver.net/movie/2012/06/bg_tx_line2.gif) no-repeat 0 2px;color:#333}
 .mv_info_area div.mv_info dl.info_spec dd p span em{font-size:15px;color:#f24443}
-.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;font-size:13px;color:#777;text-decoration:underline}
+.mv_info_area div.mv_info dl.info_spec dd a.more{position:absolute;margin-left:5px;padding-right:8px;background:url(http://static.naver.net/movie/2012/06/ico_arrow2.gif) no-repeat 100% 6px;font-size:13px;color:#777;text-decoration:underline}
 .mv_info_area div.mv_info ul.photo_video{overflow:hidden;margin:7px 0 10px;zoom:1}
 .mv_info_area div.mv_info ul.photo_video li{float:left;position:relative;margin-right:2px}
 .mv_info_area div.mv_info ul.photo_video li a{display:block}
@@ -3406,16 +3406,8 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .t #wrap.basic{width:926px}
 .t .basic #footer .in_footer{margin-right:0}
 .t #header{left:0}
-.Extra {
-	font: bold 12px/20px Nanum;
-	margin-top: 10px;
-	margin-left: -25px;
-	width : 1%;
-}
 #footer .in_footer{display:inline-block;margin-left:150px}
 .basic #footer .in_footer{margin-right:150px}
-#ul_except{width: 70%;height: 10px;position:absolute;top: 150px;left: 200px;}
-#ul-except ul{margin:0px;}
 #footer{clear:both;margin:0 auto;padding:23px 0 50px 0;text-align:center}
 #footer a{color:#fff;text-decoration:none}
 #footer a:visited{color:#fff;text-decoration:none}
@@ -3438,31 +3430,6 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 #footer .info2{margin:-3px 0 13px 0;font-size:11px;line-height:18px}
 #footer .info2 span{display:inline-block;margin-left:2px;padding-left:7px;font-size:11px;background:url(http://static.naver.com/common/footer/bu_bar.gif) 1px 50% no-repeat;_background-position:left 40%}
 #footer .gomobile{clear:both;padding-top:50px}
-
-#footer {
-	width: 100%;
-	height: 160px;
-	margin: 0 auto;
-	margin-top: 20px;
-	position: relative;
-}
-
-#footer ul {
-	list-style: none;
-	text-align: left;
-	margin-left: 110px;
-	margin-top: -20px;
-}
-
-#footer ul li {
-	display: inline;
-	text-transform: capitalize;
-	font-size: 12px;
-	cursor: pointer;
-	padding-left: 10px;
-	color: white;
-}
-
 .gomobile{margin:9px 0 7px}
 .article{float:none}
 .article:after{display:block;clear:both;content:" "}

@@ -11,7 +11,6 @@
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
 %>
-
 <!doctype>
 <html>
 <meta charset="utf-8">

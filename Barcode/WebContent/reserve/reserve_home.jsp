@@ -211,7 +211,6 @@
 	</div>
 		</div>
 	</div>
-	
 	<div id="footer_">
 		<div id="footerWrap">
 			<p class="a_">공지사항</p>
