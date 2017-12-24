@@ -3475,7 +3475,7 @@ body{background:#727272 url(http://static.naver.net/movie/2012/06/body_bg.png) r
 .flick_nav a.btn_next em{background-position:-420px 0;margin-left:-13px}
 .flick_nav a.btn_next:hover em,.flick_nav a.btn_next:focus em{background-position:-20px -210px}
 .running_tab{position:absolute;bottom:19px;width:100%}
-.running_tab ul{width:487px;height:33px;margin:0 auto}
+.running_tab ul{width:250px;height:33px;margin:0 auto}
 .running_tab ul li{float:left}
 .running_tab ul li a{display:block;width:81px;height:33px;text-indent:-9999px}
 .running_tab ul li.item0 a{width:82px;background-position:-1px -40px}

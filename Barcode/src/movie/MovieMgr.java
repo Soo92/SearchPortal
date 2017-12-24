@@ -34,7 +34,7 @@ public class MovieMgr {
 			if (rs.next()) {
 				regBean.setTitle(rs.getString("title"));
 				regBean.setSubtitle(rs.getString("subtitle"));
-				regBean.setStar(rs.getFloat("star"));
+				regBean.setStar(rs.getString("star"));
 				regBean.setGenre(rs.getString("genre"));
 				regBean.setCountry(rs.getString("country"));
 				regBean.setRuntime(rs.getString("runtime"));
@@ -44,6 +44,7 @@ public class MovieMgr {
 				regBean.setAge(rs.getInt("age"));
 				regBean.setLike(rs.getInt("like"));
 				regBean.setContent(rs.getString("content"));
+				regBean.setPic(rs.getString("pic"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,7 +69,7 @@ public class MovieMgr {
 				MovieBean regBean = new MovieBean();
 				regBean.setTitle(rs.getString("title"));
 				regBean.setSubtitle(rs.getString("subtitle"));
-				regBean.setStar(rs.getFloat("star"));
+				regBean.setStar(rs.getString("star"));
 				regBean.setGenre(rs.getString("genre"));
 				regBean.setCountry(rs.getString("country"));
 				regBean.setRuntime(rs.getString("runtime"));
@@ -78,6 +79,7 @@ public class MovieMgr {
 				regBean.setAge(rs.getInt("age"));
 				regBean.setLike(rs.getInt("like"));
 				regBean.setContent(rs.getString("content"));
+				regBean.setPic(rs.getString("pic"));
 				vlist.addElement(regBean);
 			}
 		} catch (Exception e) {
@@ -88,6 +90,45 @@ public class MovieMgr {
 		return vlist;
 	}
 	
+	public Vector<MovieBean> getMemberList(String order) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<MovieBean> vlist = new Vector<>();
+		try {
+			con = pool.getConnection();
+			if(order.equals("cur"))	sql = "select * from movie where (opendate) <= date_format(now(),'%Y.%m.%d');";
+			else if(order.equals("new"))	sql = "select * from movie where (opendate) > date_format(now(),'%Y.%m.%d');";
+			else	sql = "select * from movie order by ?";
+			pstmt = con.prepareStatement(sql);
+			if(!order.equals("new")||!order.equals("cur"))
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MovieBean regBean = new MovieBean();
+				regBean.setTitle(rs.getString("title"));
+				regBean.setSubtitle(rs.getString("subtitle"));
+				regBean.setStar(rs.getString("star"));
+				regBean.setGenre(rs.getString("genre"));
+				regBean.setCountry(rs.getString("country"));
+				regBean.setRuntime(rs.getString("runtime"));
+				regBean.setOpendate(rs.getString("opendate"));
+				regBean.setDirector(rs.getString("director"));
+				regBean.setActor(rs.getString("actor"));
+				regBean.setAge(rs.getInt("age"));
+				regBean.setLike(rs.getInt("like"));
+				regBean.setContent(rs.getString("content"));
+				regBean.setPic(rs.getString("pic"));
+				vlist.addElement(regBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+
 	///////////////
 	public boolean insertReview(ReviewBean bean) {
 		Connection con = null;

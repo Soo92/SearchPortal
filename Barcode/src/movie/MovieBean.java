@@ -5,7 +5,7 @@ public class MovieBean {
 	private int idx;
 	private String title;
 	private String subtitle;
-	private float star;
+	private String star;
 	private String genre;
 	private String country;
 	private String runtime;
@@ -15,6 +15,14 @@ public class MovieBean {
 	private int age;
 	private int like;
 	private String content;
+	private String pic;
+	
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -33,10 +41,10 @@ public class MovieBean {
 	public void setSubtitle(String subtitle) {
 		this.subtitle = subtitle;
 	}
-	public float getStar() {
+	public String getStar() {
 		return star;
 	}
-	public void setStar(float star) {
+	public void setStar(String star) {
 		this.star = star;
 	}
 	public String getGenre() {

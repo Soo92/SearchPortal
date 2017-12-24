@@ -100,7 +100,6 @@
 				            <%for(int i=1; i<6; i++ ){ %>
 				            <div class="swiper-slide" id="s_<%=i%>">
 				            <div id="movie_wrap">
-				            
 					            	<div id="movie_sm">
 					            		<div id="movie_title">
 					            			<div id="movie_img">
@@ -119,7 +118,6 @@
 					            			</div>
 					            		</div>
 					            	</div>
-					            	
 					            	<div id="movie_sm_r">
 					            		<div id="movie_title">
 					            			<div id="movie_img">
