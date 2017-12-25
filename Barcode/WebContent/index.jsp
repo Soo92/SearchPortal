@@ -1,28 +1,28 @@
-<%@page import="place.PlaceBean"%>
+<%@page import="place.PlaceBoardBean"%>
 <%@page import="product.ShoppingBean"%>
 <%@page import="movie.MovieBean"%>
 <%@page import="java.util.Vector"%>
-<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <jsp:useBean id="mmgr" class="movie.MovieMgr"/>
 <jsp:useBean id="smgr" class="product.ShoppingMgr"/>
 <jsp:useBean id="pmgr" class="place.PlaceMgr"/>
 <%
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 		
 		String id = (String)session.getAttribute("idKey");	
 		String name = mgr.getMember(id).getName();
 
 		Vector<MovieBean> mlist = mmgr.getMemberList();
 		Vector<ShoppingBean> slist = smgr.getShoppingList();
-		Vector<PlaceBean> plist = pmgr.getPlaceList();
+		Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList((int)(Math.random()*pmgr.getPlaceList().size())+"");
 %>
 
 <!doctype>
 <html>
 <meta charset="utf-8">
 <head>
-	<title>¹ÙÄÚµå</title>
+	<title>ë°”ì½”ë“œ</title>
 	
 	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 	<script type="text/javascript" src="js/swiper.min.js"></script>
@@ -31,12 +31,12 @@
 	<script>
 	function loginCheck() {
 		if (document.loginFrm.id.value == "") {
-			alert("¾ÆÀÌµð¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+			alert("ì•„ì´ë””ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 			document.loginFrm.id.focus();
 			return;
 		}
 		if (document.loginFrm.pass.value == "") {
-			alert("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+			alert("ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”.");
 			document.loginFrm.pass.focus();
 			return;
 		}
@@ -52,13 +52,13 @@
 	<div id="wrap">
 		<div id="header">
 			<div id="start">
-				<a href="#"><p>¹ÙÄÚµå¸¦ ½ÃÀÛÆäÀÌÁö·Î&nbsp;&nbsp;<span>></span></p></a>
+				<a href="#"><p>ë°”ì½”ë“œë¥¼ ì‹œìž‘íŽ˜ì´ì§€ë¡œ&nbsp;&nbsp;<span>></span></p></a>
 			</div>
-			<div id="logo"><img src="img/barcode_logo_.png" width=100% height=100% alt="¹ÙÄÚµå"></div>
+			<div id="logo"><img src="img/barcode_logo_.png" width=100% height=100% alt="ë°”ì½”ë“œ"></div>
 			<div id="search">
 			<form name="searchf" action="./search/search.jsp">
 			<input type="text" name="search" style="width:420px; height:40px; margin:5px 0px 0px 20px; border:0px; font-size:16px;" align="center"
-				onkeypress="if(event.keyCode==13) {submit(); return false;}"	placeholder="°Ë»öÇØº¸¼¼¿ë!">
+				onkeypress="if(event.keyCode==13) {submit(); return false;}"	placeholder="ê²€ìƒ‰í•´ë³´ì„¸ìš©!">
 				<div id="search_button"><img src="img/search_icon.png" onclick=submit()></div>
 				<div id="place"><img src="img/place_icon.png"></div>
 			</form>				
@@ -71,20 +71,20 @@
 	
 	<div id="nav">
 		<ul>
-			<li><a href="product/product_home.jsp">Áß°í ¼îÇÎ</a></li>
-			<li class="ulul"><a href="reserve/reserve_home.jsp">¿©ÇàÁö</a></li>
-			<li class="ulul"><a href="movie/movie_home.jsp">¿µÈ­ ÃßÃµ</a></li>			
-			<li class="ulul"><a href="custom/custom_home.jsp">°í°´¼¾ÅÍ</a></li>			
+			<li><a href="product/product_home.jsp">ì¤‘ê³  ì‡¼í•‘</a></li>
+			<li class="ulul"><a href="reserve/reserve_home.jsp">ë™ë„¤ ì†Œì‹</a></li>
+			<li class="ulul"><a href="movie/movie_home.jsp">ì˜í™” ì¶”ì²œ</a></li>			
+			<li class="ulul"><a href="custom/custom_home.jsp">ê³ ê°ì„¼í„°</a></li>			
 		</ul>
 	</div>
 
 	<div id="wrap2">
 	<div id="wrap">
-			<!--ÁÂÃø¿µ¿ª-->
+			<!--ì¢Œì¸¡ì˜ì—­-->
 			<div id="section">
 				<div  id="google" class="section_option">
 				<div class="content">
-		<div id="addiv" class="ad"><a id="ac_banner_a" href="https://nv.veta.naver.com/fxclick?eu=EU10000120&amp;ac=7614084&amp;src=3287787&amp;br=2612442&amp;evtcd=C1017&amp;x_ti=841&amp;tb=&amp;oid=&amp;sid1=&amp;sid2=&amp;rk=Wjs-zApgIskAAAZ691QAAAOX&amp;eltts=hrBclLt9fRjYMQsOCYc28A%3D%3D&amp;lu=" target="_blank"><img src="https://ssl.pstatic.net/tveta/libs/1174/1174906/c3bdf91d3b8f34693c7e_20171220183601357.jpg" width="740" height="120" title="" alt="¼­¿ï´ë Ãâ½Å 7ÀÎÀÌ °³¹ßÇÑ Æ¯Çã ¹ÞÀº ÇÐ½À¹ý ÇÏ·ç 6¹®Àå ¿µ¾îÇÏ±æ!" border="0"><div id="da_access" style="position: absolute; top: 50%; left: 50%; width: 154px; height: 58px; margin: -29px 0px 0px -77px; background: url(&quot;https://ssl.pstatic.net/tveta/libs/res/www/common/info/da_access.png&quot;); display: none;"></div></a></div>
+		<div id="addiv" class="ad"><a id="ac_banner_a" href="javascript:alert('ê´‘ê³ ')" target="_blank"><img src="https://ssl.pstatic.net/tveta/libs/1174/1174906/c3bdf91d3b8f34693c7e_20171220183601357.jpg" width="740" height="120" title="" alt="ì„œìš¸ëŒ€ ì¶œì‹  7ì¸ì´ ê°œë°œí•œ íŠ¹í—ˆ ë°›ì€ í•™ìŠµë²• í•˜ë£¨ 6ë¬¸ìž¥ ì˜ì–´í•˜ê¸¸!" border="0"><div id="da_access" style="position: absolute; top: 50%; left: 50%; width: 154px; height: 58px; margin: -29px 0px 0px -77px; background: url(&quot;https://ssl.pstatic.net/tveta/libs/res/www/common/info/da_access.png&quot;); display: none;"></div></a></div>
 		<a id="link" name="link" href="javascript:void(0)"></a>
 	</div>
 				</div>
@@ -93,11 +93,10 @@
 					<div id="_box">
 						<div id="move">
 							<ul>
-								<li><a href="#"><span style="font-weight:bold;">[ÇÙ²ÜÀë ¿µÈ­°¡ ¿Ô´Ù¿ä!]</span> ºÁµµºÁµµ ¶Ç º¸°í½ÍÀº ¿µÈ­!</a></li>
-								<li><a href="#"><span style="font-weight:bold;">[°Ë»ç¿ÜÀü]</span> °Ë»ç°¡ ±³µµ¼Ò¿¡ °¤Çû´Ù? ±â¸·Èù ½ºÅä¸® Â¯!</a></li>
-								<li><a href="#"><span style="font-weight:bold;">[¾ÆÀÌÄµ ½ºÇÇÅ©]</span> ÆòÈ­·Î¿î ½ÃÀå¿¡ µµ±úºñÇÒ¸Ó´Ï°¡ ³ªÅ¸³µ´Ù? È²´çÇÑ...</a></li>
-								<li><a href="#"><span style="font-weight:bold;">[ÆÄÆÄ¶óÄ¡]</span> ´Ù Âï¾îÁÖ°Ú´Ù´õ´Ï ³» Àá²¿´ë±îÁö? ÀÌ·¯Áö¸¶ Á¦¹ß ¤Ì¤Ì</a></li>
-								<li><a href="#"><span style="font-weight:bold;">[µ¿Áø½ÜÀÇ ÀÇ·Ú]</span> µ¿Áø½ÜÀÌ ³¯ µû·Î ºÒ·¯¼­ ÀÇ·Ú¸¦ÇÏ´Âµ¥ ±× ³»¿ëÀº..</a></li>
+				<%mlist=mmgr.getMemberList(1);
+				for(int i=0;i<(mlist.size()>5?5:mlist.size());i++) {%>
+								<li><a href="./movie/movie_home.jsp?index=<%=mlist.get(i).getIdx()%>"><span class="movie_ct" style="font-weight:bold;">[<%=mlist.get(i).getTitle() %>]&nbsp</span><span class="movie_ct"><%=mlist.get(i).getContent().replaceAll("\\<[^>]*>","") %></span></a></li>
+				<%} %>
 							</ul>
 						</div>
 					</div>
@@ -114,6 +113,7 @@
 				            <div class="swiper-slide" id="s_<%=i%>">
 				            <div id="movie_wrap">
 				            <%for(int j=0;j<2;j++) {%>
+				            	<a href="./movie/movie_home.jsp?index=<%=mlist.get((i-1)*2+j).getIdx()%>">
 					            	<div id="movie_sm<%if(j==1){%>_r<%}%>">
 					            		<div id="movie_title">
 					            			<div id="movie_img">
@@ -121,8 +121,8 @@
 					            			</div>
 					            			<div id="movie_text">
 						            			<p class="movie_tit">[ <%=mlist.get((i-1)*2+j).getTitle() %> ]</p>
-						            			<p class="movie_st">º°Á¡ : <%for(int k=0;k<Float.parseFloat(mlist.get((i-1)*2+j).getStar())/2;k++){ %>¡Ú<%} %></p>
-						            			<p class="movie_ct">Àå¸£ : <%=mlist.get((i-1)*2+j).getGenre() %></p>
+						            			<p class="movie_st">ë³„ì  : <%for(int k=0;k<Float.parseFloat(mlist.get((i-1)*2+j).getStar())/2;k++){ %>â˜…<%} %></p>
+						            			<p class="movie_ct">ìž¥ë¥´ : <%=mlist.get((i-1)*2+j).getGenre() %></p>
 						            			<br/>
 						            			<p class="movie_s">
 												<%=mlist.get((i-1)*2+j).getContent().replaceAll("\\<[^>]*>","")%>
@@ -130,6 +130,7 @@
 					            			</div>
 					            		</div>
 					            	</div>
+								</a>
 					           	<%} %>
 				            	</div>
 				            	
@@ -142,13 +143,13 @@
 						
 						</div>
 				        <!-- Add Pagination -->
-				        <div class="swiper-pagination"></div><!--ÇÏ´Ü¹öÆ°-->
+				        <div class="swiper-pagination"></div><!--í•˜ë‹¨ë²„íŠ¼-->
 				        <!-- Add Arrows -->
-				        <div class="swiper-button-next"></div><!--´ÙÀ½-->
-				        <div class="swiper-button-prev"></div><!--Àü-->
+				        <div class="swiper-button-next"></div><!--ë‹¤ìŒ-->
+				        <div class="swiper-button-prev"></div><!--ì „-->
 				    </div>
 					</div>
-					</div><!--½½¶óÀÌµåÀüÃ¼-->
+					</div><!--ìŠ¬ë¼ì´ë“œì „ì²´-->
 				
 				    <!-- Swiper JS -->
 				    <script src="js/swiper.min.js"></script>
@@ -172,12 +173,12 @@
 				<div id="shop_tbl"><!-- skd -->
 					<%for(int i=1; i<(slist.size()+1>22?22:slist.size()+1); i++){ %>
 						<div id="shop_td">
-							<a href="<%=request.getRequestURI()%>../product/detail.jsp?index=<%=slist.get(i-1).getIndex()%>">
+							<a href="./product/detail.jsp?index=<%=slist.get(i-1).getIndex()%>">
 								<img src="./product/newShopImg/<%=slist.get(i-1).getMainImg()%>" width="106" height="106">
 								<div class="overlay_td">
 								    <div class="text_td">
 								    	<p style="font-size:12px; font-weight:bold;"><%=slist.get(i-1).getPrice()%></p>
-								    	<p style="font-size:10px;">ÀÚ¼¼È÷º¸±â</p>
+								    	<p style="font-size:10px;">ìžì„¸ížˆë³´ê¸°</p>
 								    </div>
 								  </div>
 							</a>
@@ -185,12 +186,13 @@
 					<%}%>
 					</div>
 					<div class="blank" style="height:1px;"></div>
-					
+					<a href="./product/product_home.jsp">
 					<div  id="google" class="section_option" style="margin-top:7px;height:150px">
 						<img src="img/naPong_s.png">
 					</div>
+					</a>
 			</div>
-			<!--¿ìÃø¿µ¿ª-->
+			<!--ìš°ì¸¡ì˜ì—­-->
 			<form name="loginFrm" method="post" action="./member/loginProc.jsp?url=index.jsp">
 			<div id="section2">
 				<div id="login" class="section_option">
@@ -199,43 +201,43 @@
 						<table width="223px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 							<tr>
 								<td height="35px">
-									<input type="text" name="id" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="¾ÆÀÌµð">
+									<input type="text" name="id" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="ì•„ì´ë””">
 								</td>
 							</tr>
 							<tr>
 								<td height="35px">
-									<input type="password" name="pass" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="ºñ¹Ð¹øÈ£">
+									<input type="password" name="pass" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="ë¹„ë°€ë²ˆí˜¸">
 								</td>
 							</tr>
 						</table>
 					</div>
 					
-					<div id="login_button" onclick="loginCheck()"><p>·Î±×ÀÎ</p></div>
+					<div id="login_button" onclick="loginCheck()"><p>ë¡œê·¸ì¸</p></div>
 					<div id="login_other2">
 						<ul>
 						<li class="ulul2">
-						<input type="checkbox">&nbsp;·Î±×ÀÎ»óÅÂ À¯Áö
+						<input type="checkbox">&nbsp;ë¡œê·¸ì¸ìƒíƒœ ìœ ì§€
 						</li>
-						<li class="ulul2"style="margin-left:5px;"><a href="member/join.jsp">È¸¿ø°¡ÀÔ</a></li>
+						<li class="ulul2"style="margin-left:5px;"><a href="member/join.jsp">íšŒì›ê°€ìž…</a></li>
 						<li class="ulul2">
-						<a href="member/findid.jsp">¾ÆÀÌµð</a>
-						<a href="member/findpw.jsp">ºñ¹Ð¹øÈ£ Ã£±â</a>
+						<a href="member/findid.jsp">ì•„ì´ë””</a>
+						<a href="member/findpw.jsp">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a>
 						</li>
 					</div>
 <%}else{%>
 
 <div id="logout">
 			<div id="profile"></div>
-			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>´Ô</p>
-			<p style="font-size:12px; float:left; line-height:23px; margin-right:5px">È¯¿µÇÔ´ç!</p>
-			<a href="./member/mypage.jsp"><p class="myPage">¸¶ÀÌÆäÀÌÁö</p></a>
+			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>ë‹˜</p>
+			<p style="font-size:12px; float:left; line-height:23px; margin-right:5px">í™˜ì˜í•¨ë‹¹!</p>
+			<a href="./member/mypage.jsp"><p class="myPage">ë§ˆì´íŽ˜ì´ì§€</p></a>
 			
 		</div>
-		<a href="./member/logout.jsp"><div id="login_button" style="position:absolute; top:0px; left:230px;"><p>·Î±×¾Æ¿ô</p></div></a>
+		<a href="./member/logout.jsp"><div id="login_button" style="position:absolute; top:0px; left:230px;"><p>ë¡œê·¸ì•„ì›ƒ</p></div></a>
 		
 		
 						
-						<!-- <a href="./member/logout.jsp">·Î±×¾Æ¿ô</a> -->
+						<!-- <a href="./member/logout.jsp">ë¡œê·¸ì•„ì›ƒ</a> -->
 	</div>
 	<div id="myPage_other">
 			<div id="myPage_o_but"><a href="product/basket.jsp"><img src="img/myP_01.png"></a></div>
@@ -266,7 +268,7 @@
 <%} %>					
 					<a href="product/product_home.jsp">
 						<div id="more">
-							<p style="color:#fff;">»óÇ° ´õº¸·¯ °¡±â</p>
+							<p style="color:#fff;">ìƒí’ˆ ë”ë³´ëŸ¬ ê°€ê¸°</p>
 						</div>
 						</a>					
 				</div>
@@ -275,10 +277,10 @@
 <%for(int i=0;i<(plist.size()>2?2:plist.size());i++) {%>
 						<tr>
 							<td height="158px" style="border-bottom:none; padding-top:5px">
-							<a href="#">
+							<a href="./reserve/place_board.jsp?index=<%=plist.get(i).getIdx()%>">
 								<div id="place_img"><img src="./reserve/img/<%=pmgr.getPlaceBoard(plist.get(i).getIdx()).getMainpic()%>"></div>
 								<div id="place_title">
-									<p><span>[<%=plist.get(i).getLocation() %>]</span><%=plist.get(i).getContent() %> </p>
+									<p class="movie_ct"><span>[<%=plist.get(i).getWriter() %>]</span><%=plist.get(i).getContent().replaceAll("\\<[^>]*>","") %> </p>
 								</div>
 								</a>
 							</td>
@@ -287,7 +289,7 @@
 					</table>
 					
 					<div id="Bottom" class="section_option" style="margin-top:7px;">
-				<div id="addiv"><a id="ac_banner_a" href="https://nv.veta.naver.com/fxclick?eu=EU10000119&amp;ac=7609312&amp;src=3278276&amp;br=2605613&amp;evtcd=C1017&amp;x_ti=939&amp;tb=&amp;oid=&amp;sid1=&amp;sid2=&amp;rk=Wjs-zApgIskAAAZ691sAAAPf&amp;eltts=hrBclLt9fRjYMQsOCYc28A%3D%3D&amp;lu=" target="_blank"><img src="https://ssl.pstatic.net/tveta/libs/1181/1181424/82580d3497e5c47e93ba_20171207151824043.jpg" width="332" height="150" title="" alt="±¹¼¼Ã» ÀüÀÚ¼¼¿ø°ú" border="0"><div id="da_access" style="position: absolute; top: 50%; left: 50%; width: 154px; height: 58px; margin: -29px 0px 0px -77px; background: url(&quot;https://ssl.pstatic.net/tveta/libs/res/www/common/info/da_access.png&quot;); display: none;"></div></a></div>
+				<div id="addiv"><a id="ac_banner_a" href="https://nv.veta.naver.com/fxclick?eu=EU10000119&amp;ac=7609312&amp;src=3278276&amp;br=2605613&amp;evtcd=C1017&amp;x_ti=939&amp;tb=&amp;oid=&amp;sid1=&amp;sid2=&amp;rk=Wjs-zApgIskAAAZ691sAAAPf&amp;eltts=hrBclLt9fRjYMQsOCYc28A%3D%3D&amp;lu=" target="_blank"><img src="https://ssl.pstatic.net/tveta/libs/1181/1181424/82580d3497e5c47e93ba_20171207151824043.jpg" width="332" height="150" title="" alt="êµ­ì„¸ì²­ ì „ìžì„¸ì›ê³¼" border="0"><div id="da_access" style="position: absolute; top: 50%; left: 50%; width: 154px; height: 58px; margin: -29px 0px 0px -77px; background: url(&quot;https://ssl.pstatic.net/tveta/libs/res/www/common/info/da_access.png&quot;); display: none;"></div></a></div>
 				</div>
 				
 			</div>
@@ -298,47 +300,47 @@
 
 	<div id="footer_">
 		<div id="footerWrap">
-			<p class="a_">°øÁö»çÇ×</p>
-			<p class="a__">¼­ºñ½º ÀüÃ¼º¸±â</p>
+			<p class="a_">ê³µì§€ì‚¬í•­</p>
+			<p class="a__">ì„œë¹„ìŠ¤ ì „ì²´ë³´ê¸°</p>
 		</div>
 	</div>
 	<div id="footer">
 		<p class="Extra">Creators</p>
 		
 		<ul>
-			<li>Å©¸®¿¡ÀÌÅÍ</li><li class="aaa">|</li>
-			<li>½º¸ôºñÁî´Ï½º</li>
+			<li>í¬ë¦¬ì—ì´í„°</li><li class="aaa">|</li>
+			<li>ìŠ¤ëª°ë¹„ì¦ˆë‹ˆìŠ¤</li>
 		</ul>
 		
 		<p class="Extra">Partners</p>
 		<ul>
-			<li>ÀÌ¼º¼ö</li><li class="aaa">|</li>
-			<li>±è¹ÎÁ¤</li><li class="aaa">|</li>
-			<li>¹ÚÁØ¿µ</li><li class="aaa">|</li>
-			<li>À°µ¿ÁÖ</li><li class="aaa">|</li>
-			<li>Á¶¼º¼ö</li>
+			<li>ì´ì„±ìˆ˜</li><li class="aaa">|</li>
+			<li>ê¹€ë¯¼ì •</li><li class="aaa">|</li>
+			<li>ë°•ì¤€ì˜</li><li class="aaa">|</li>
+			<li>ìœ¡ë™ì£¼</li><li class="aaa">|</li>
+			<li>ì¡°ì„±ìˆ˜</li>
 		</ul>
 		
 		<p class="Extra">Developers</p>
 		<ul>
-			<li>¹ÙÄÚµå °³¹ß¼¾ÅÍ</li><li class="aaa">|</li>
-			<li>¿ÀÇÂAPI</li><li class="aaa">|</li>
-			<li>¿ÀÇÂ¼Ò½º</li><li class="aaa">|</li>
-			<li>¹ÙÄÚµå D2</li><li class="aaa">|</li>
-			<li>¹ÙÄÚµå ·¦½º</li>
+			<li>ë°”ì½”ë“œ ê°œë°œì„¼í„°</li><li class="aaa">|</li>
+			<li>ì˜¤í”ˆAPI</li><li class="aaa">|</li>
+			<li>ì˜¤í”ˆì†ŒìŠ¤</li><li class="aaa">|</li>
+			<li>ë°”ì½”ë“œ D2</li><li class="aaa">|</li>
+			<li>ë°”ì½”ë“œ ëž©ìŠ¤</li>
 		</ul>
 		
 		<div id="ul_except">
 			<ul>
-				<li style="padding:0;">È¸»ç¼Ò°³</li><li class="aaa">|</li>
-				<li>ÀÎÀçÃ¤¿ë</li><li class="aaa">|</li>
-				<li>Á¦ÈÞÁ¦¾È</li><li class="aaa">|</li>
-				<li>ÀÌ¿ë¾à°ü</li><li class="aaa">|</li>
-				<li>°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</li><li class="aaa">|</li>
-				<li>Ã»¼Ò³âº¸È£Á¤Ã¥</li><li class="aaa">|</li>
-				<li>¹ÙÄÚµåÁ¤Ã¥</li><li class="aaa">|</li>
-				<li>°í°´¼¾ÅÍ</li><li class="aaa">|</li>
-				<li>¨ÏBarcode Crop.</li>
+				<li style="padding:0;">íšŒì‚¬ì†Œê°œ</li><li class="aaa">|</li>
+				<li>ì¸ìž¬ì±„ìš©</li><li class="aaa">|</li>
+				<li>ì œíœ´ì œì•ˆ</li><li class="aaa">|</li>
+				<li>ì´ìš©ì•½ê´€</li><li class="aaa">|</li>
+				<li>ê°œì¸ì •ë³´ì²˜ë¦¬ë°©ì¹¨</li><li class="aaa">|</li>
+				<li>ì²­ì†Œë…„ë³´í˜¸ì •ì±…</li><li class="aaa">|</li>
+				<li>ë°”ì½”ë“œì •ì±…</li><li class="aaa">|</li>
+				<li>ê³ ê°ì„¼í„°</li><li class="aaa">|</li>
+				<li>â“’Barcode Crop.</li>
 			</ul>
 		</div>
 	</div>

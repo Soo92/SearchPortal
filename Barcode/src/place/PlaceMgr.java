@@ -148,7 +148,6 @@ public class PlaceMgr {
 		}
 		return regBean;
 	}
-
 	public Vector<PlaceBoardBean> getPlaceBoardList(String placenum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -181,7 +180,38 @@ public class PlaceMgr {
 		}
 		return vlist;
 	}
-	//////////////////////////////////////////////
+	public Vector<PlaceBoardBean> getPlaceWriterList(String writer) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<PlaceBoardBean> vlist = new Vector<>();
+		try {
+			con = pool.getConnection();
+			sql = "select * from place_board where writer = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PlaceBoardBean regBean = new PlaceBoardBean();
+				regBean.setIdx(rs.getString("idx"));
+				regBean.setPlacenum(rs.getString("placenum"));
+				regBean.setMainpic(rs.getString("mainpic"));
+				regBean.setPlace(rs.getString("place"));
+				regBean.setEnddate(rs.getString("enddate"));
+				regBean.setTitle(rs.getString("title"));
+				regBean.setWriter(rs.getString("writer"));
+				regBean.setRegdate(rs.getString("regdate"));
+				regBean.setContent(rs.getString("content"));
+				vlist.addElement(regBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}	//////////////////////////////////////////////
 	public Vector<PlaceBoardBean> getPlaceLegionList(String place) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

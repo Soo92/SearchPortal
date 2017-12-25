@@ -16,8 +16,7 @@ import member.DBConnectionMgr;
 public class ShoppingMgr {
 	
 	private DBConnectionMgr pool;
-	public static final String UPLOAD
-		="C:/Jsp"; 
+	String Upload="C:/Jsp"; 
 	public static final String ENCTYPE = "EUC-KR";
 	public static final int MAXSIZE = 5*1024*1024;//5MB
 	
@@ -160,11 +159,12 @@ public ShoppingBean getShopping(int idx) {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			File dir = new File(UPLOAD);
+			Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+			File dir = new File(Upload);
 			if(!dir.exists())
 				dir.mkdirs();//폴더가 없으면 생성
 			MultipartRequest multi = 
-					new MultipartRequest(req, UPLOAD, MAXSIZE, 
+					new MultipartRequest(req, Upload, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
 			System.out.println(multi.getParameter("idx"));
 			if(multi.getFilesystemName("mainImg")==null
@@ -255,59 +255,50 @@ public ShoppingBean getShopping(int idx) {
 		PreparedStatement pstmt = null;
 		String sql = null;
 		boolean flag = false;
+		String mainImg = null;
+		String listImg = null;
+		String detailImg = null;
 		try {
+			Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
 			con = pool.getConnection();
-			File dir = new File(UPLOAD);
+			File dir = new File(Upload);
 			if(!dir.exists())
 				dir.mkdirs();//폴더가 없으면 생성
 			MultipartRequest multi = 
-					new MultipartRequest(req, UPLOAD, MAXSIZE, 
+					new MultipartRequest(req, Upload, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
-			if(multi.getFilesystemName("mainImg")==null
-					&& multi.getFilesystemName("listImg")==null
-					&& multi.getFilesystemName("detailImg")==null) {//이미지 빼고 수정
-				sql = "insert tblnewshop (Seller,title,price,account,"
-						+ "shipAccount,shipDate,maxBuy,origin,"
-						+ "stock,opt,proAdd,s_adr)"
-						+ "values(?,?,?,?,?,?,?,?,?,?,?,?)";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("Seller"));
-				pstmt.setString(2, multi.getParameter("title"));
-				pstmt.setString(3, multi.getParameter("price"));
-				pstmt.setString(4, multi.getParameter("account"));
-				pstmt.setString(5, multi.getParameter("shipAccount"));
-				pstmt.setString(6, multi.getParameter("shipDate"));
-				pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
-				pstmt.setString(8, multi.getParameter("origin"));
-				pstmt.setString(9, multi.getParameter("stock"));
-				pstmt.setString(10, multi.getParameter("opt"));
-				pstmt.setString(11, multi.getParameter("proAdd"));
-				pstmt.setString(12, multi.getParameter("s_adr"));
-				
-			}else {
-				sql = "insert tblnewshop (Seller,title,price,account,"
-						+ "shipAccount,shipDate,maxBuy,origin,"
-						+ "stock,opt,proAdd,s_adr,mainImg,listImg,detailImg)"
-						+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("Seller"));
-				pstmt.setString(2, multi.getParameter("title"));
-				pstmt.setString(3, multi.getParameter("price"));
-				pstmt.setString(4, multi.getParameter("account"));
-				pstmt.setString(5, multi.getParameter("shipAccount"));
-				pstmt.setString(6, multi.getParameter("shipDate"));
-				pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
-				pstmt.setString(8, multi.getParameter("origin"));
-				pstmt.setString(9, multi.getParameter("stock"));
-				pstmt.setString(10, multi.getParameter("opt"));
-				pstmt.setString(11, multi.getParameter("proAdd"));
-				pstmt.setString(12, multi.getParameter("s_adr"));
-				pstmt.setString(13, multi.getParameter("mainImg"));
-				pstmt.setString(14, multi.getParameter("listImg"));
-				pstmt.setString(15, multi.getParameter("detailImg"));
+			if(multi.getFilesystemName("mainImg")!=null) {
+				mainImg = multi.getFilesystemName("mainImg");
 			}
-				if(pstmt.executeUpdate()==1)
-					flag = true;
+			if(multi.getFilesystemName("listImg")!=null) {
+				listImg = multi.getFilesystemName("listImg");
+			}
+			if(multi.getFilesystemName("detailImg")!=null) {
+				detailImg = multi.getFilesystemName("detailImg");
+			}
+
+			sql = "insert tblnewshop (Seller,title,price,account,"
+					+ "shipAccount,shipDate,maxBuy,origin,"
+					+ "stock,opt,proAdd,s_adr,mainImg,listImg,detailImg)"
+					+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, multi.getParameter("Seller"));
+			pstmt.setString(2, multi.getParameter("title"));
+			pstmt.setString(3, multi.getParameter("price"));
+			pstmt.setString(4, multi.getParameter("account"));
+			pstmt.setString(5, multi.getParameter("shipAccount"));
+			pstmt.setString(6, multi.getParameter("shipDate"));
+			pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
+			pstmt.setString(8, multi.getParameter("origin"));
+			pstmt.setString(9, multi.getParameter("stock"));
+			pstmt.setString(10, multi.getParameter("opt"));
+			pstmt.setString(11, multi.getParameter("proAdd"));
+			pstmt.setString(12, multi.getParameter("s_adr"));
+			pstmt.setString(13, mainImg);
+			pstmt.setString(14, listImg);
+			pstmt.setString(15, detailImg);
+			if(pstmt.executeUpdate()==1)
+				flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

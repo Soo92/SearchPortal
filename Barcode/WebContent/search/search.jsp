@@ -12,6 +12,8 @@
 <jsp:useBean id="rmgr" class="product.ReviewMgr"/>
 <jsp:useBean id="mmgr" class="movie.MovieMgr"/>
 <%
+		request.setCharacterEncoding("utf-8");
+		
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
@@ -28,8 +30,6 @@
 		int month = cr.get(Calendar.MONTH)+1;
 		int date = cr.get(Calendar.DATE);
 		String today= year+"."+month+"."+date+".";
-
-		request.setCharacterEncoding("euc-kr");
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0075)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/search/search.html -->

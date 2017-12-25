@@ -106,7 +106,6 @@
 					<a href="../index.jsp">
 					<div id="logo"></div>
 					</a>
-					
 					<a href="product_home.jsp">
 					<div id="subject"><p><span>상품</span> &nbsp;등록 Corner</p></div>
 					</a>
@@ -241,14 +240,11 @@
 				</td>
 			</tr>
 		</table>
-		</form>
-		<form>
 		 <table width="867" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff; text-indent:10px; margin-top:10px;">
 			<tr>
 				<td style="height:80px;">
 				<p>메인이미지</p>
 			
-			</script>
 				<input type="file" multiple id="orgFile" class="upload" name="mainImg" value="11" style="margin-left:20px;" >
 				<!-- 파일을 첨부하세요. (작업사이즈 : 400*400 px) -->
 				</td>

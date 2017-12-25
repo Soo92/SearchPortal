@@ -54,7 +54,7 @@
 					</span> <span class="td"> <a
 						href="https://m.blog.naver.com/PostList.nhn?blogId=ssagaji629"
 						onclick="nclk(this, &#39;pgn.eachhome&#39;, &#39;&#39;, &#39;&#39;);">
-							<span class="ell"><%=writer %>님의 블로그</span>
+							<span class="ell"><%=writer %>의 글</span>
 					</a>
 					</span>
 				</div>
@@ -193,21 +193,16 @@
 			<a href="https://m.blog.naver.com/PostList.nhn?blogId=ssagaji629"
 				class="link"
 				onclick="nclk(this, &#39;psp.writer&#39;, &#39;&#39;, &#39;&#39;);">
-				<span class="thumb_area"> <span class="thumb"> <span
-						class="img"><img
-							src="./place_board_files/1500271546767.jpg" width="48"
-							height="48" alt="<%=writer%>"></span>
+				<span class="thumb_area"> <span class="thumb"> 
+					<span class="img"><img src="./place_board_files/1500271546767.jpg" width="48" height="48" alt="<%=writer%>"></span>
 				</span>
 			</span> <span class="txt_area"><strong class="writer ell"><%=writer%></strong></span>
 			</a>
 		</div>
 		<h2 class="tit_h2">
-			<a
-				href="https://m.blog.naver.com/PostList.nhn?blogId=ssagaji629&amp;categoryNo=21&amp;logCode=0"
-				class="link sp_after"
-				onclick="nclk(this, &#39;pst.otherlist&#39;, &#39;&#39;, &#39;&#39;);">
-				<span class="td">이 블로그&nbsp;</span> <span class="td tit"><strong
-					class="ell"><%=writer %></strong></span> <span class="td">의 다른 글</span>
+			<a href="" class="link sp_after">
+				<span class="td">이 글&nbsp;</span> <span class="td tit">
+				<strong class="ell"><%=writer %></strong></span> <span class="td">의 다른 글</span>
 			</a>
 		</h2>
 		<div class="lst_w">
@@ -220,18 +215,16 @@
 					<ul class="_category_post_list"
 						id="_relatedCategoryPostListFlickingPage_0_tablet"
 						style="width: 255px; float: left;">
-						<li class="_category_post_list_221166225951">
-							<div class="lst_detail_t17 ">
-								<a
-									href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221166225951"
-									class="link"
-									onclick="nclk(this, &#39;pst.other&#39;, &#39;&#39;, &#39;&#39;);eprClick.on(&#39;RECENT_POST_LIST&#39;);timerStop();">
+		<%Vector<PlaceBoardBean> pwlist = pmgr.getPlaceWriterList(pmgr.getPlaceBoard(idx).getWriter());
+		for(int i=0; i<pwlist.size();i++){ %>
+						<li>
+							<div class="lst_detail_t17 <%if(pwlist.get(i).getIdx().equals(idx)){%>visited<%}%>">
+								<a href="<%=request.getRequestURI()%>?index=<%=pwlist.get(i).getIdx() %>" class="link">
 									<div class="txt_area">
 										<div class="txt_align">
-											<div class="tit ell">크리스마스 케이크 만들기 원데이클래스 열렸어요~~</div>
+											<div class="tit ell"><%=pwlist.get(i).getTitle()%></div>
 											<div class="meta_data">
-												<span class="td"> <span class="ell">2017. 12.
-														19.</span>
+												<span class="td"> <span class="ell"><%=pwlist.get(i).getRegdate() %></span>
 												</span>
 											</div>
 										</div>
@@ -239,84 +232,18 @@
 								</a>
 							</div>
 						</li>
-						<li class="_category_post_list_221155564632">
-							<div class="lst_detail_t17 visited">
-								<a
-									href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221155564632"
-									class="link"
-									onclick="nclk(this, &#39;pst.other&#39;, &#39;&#39;, &#39;&#39;);eprClick.on(&#39;RECENT_POST_LIST&#39;);timerStop();">
-									<div class="txt_area">
-										<div class="txt_align">
-											<div class="tit ell"><%=writer%></div>
-											<div class="meta_data">
-												<span class="td"> <span class="ell"><%=regdate%></span>
-												</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-						</li>
-						<li class="_category_post_list_221089506100">
-							<div class="lst_detail_t17 ">
-								<a
-									href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221089506100"
-									class="link"
-									onclick="nclk(this, &#39;pst.other&#39;, &#39;&#39;, &#39;&#39;);eprClick.on(&#39;RECENT_POST_LIST&#39;);timerStop();">
-									<div class="thumb_area sp_before">
-										<div class="thumb"
-											style="background-image: url(https://mblogthumb-phinf.pstatic.net/MjAxNzA5MDVfMTU2/MDAxNTA0NTQzMTcyNTU4.-OZWeXNzy02rVIT3SZ-Byr4ZgIaR6PlIZgPrsADFp38g.yNXACYtePu2aspegf7sQ3x_3gejGZxlo7NtrEeVE8Vog.JPEG.ssagaji629/1478575737739.jpg?type=w210)">
-										</div>
-									</div>
-									<div class="txt_area">
-										<div class="txt_align">
-											<div class="tit ell">떡폴레옹, 추석맞이 꽃송편 만들기 수업 안내, 꽃송편, 직접
-												빚은 송편, 체험학습, DIY선물</div>
-											<div class="meta_data">
-												<span class="td"> <span class="ell">2017. 9.
-														5.</span>
-												</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-						</li>
-						<li class="_category_post_list_221082001431">
-							<div class="lst_detail_t17 ">
-								<a
-									href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221082001431"
-									class="link"
-									onclick="nclk(this, &#39;pst.other&#39;, &#39;&#39;, &#39;&#39;);eprClick.on(&#39;RECENT_POST_LIST&#39;);timerStop();">
-									<div class="thumb_area sp_before">
-										<div class="thumb"
-											style="background-image: url(https://mblogthumb-phinf.pstatic.net/MjAxNzA4MjVfMjg2/MDAxNTAzNjQwNTA3NDk3.mvCCB54mavzzBAhmsnFI8PVtewnOxJTiOx4QXqkz4ZMg.2KOU2xqGj7VD6mRDVaPcD-St52tk86qbawPaAMB2CBEg.JPEG.ssagaji629/20170825_143844.jpg?type=w210)">
-										</div>
-									</div>
-									<div class="txt_area">
-										<div class="txt_align">
-											<div class="tit ell">떡폴레옹 수업 소개</div>
-											<div class="meta_data">
-												<span class="td"> <span class="ell">2017. 8.
-														25.</span>
-												</span>
-											</div>
-										</div>
-									</div>
-								</a>
-							</div>
-						</li>
+		<%} %>	
 					</ul>
 				</div>
 			</div>
 			<div class="paginate _categoryPostListPagingBtnArea"
 				style="display: none;">
 				<span class="btn_prev" style=""><i class="sp_before">이전</i></span> <a
-					href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221155564632&amp;proxyReferer=https%3A%2F%2Fm.naver.com%2F#"
+					href=""
 					class="btn_prev _category_post_list_btn _returnFalse"
 					onclick="nclk(this, &#39;pst.prev&#39;, &#39;&#39;, &#39;&#39;);"
 					style="display: none;"><i class="sp_before">이전</i></a> <a
-					href="https://m.blog.naver.com/PostView.nhn?blogId=ssagaji629&amp;logNo=221155564632&amp;proxyReferer=https%3A%2F%2Fm.naver.com%2F#"
+					href=""
 					class="btn_next _category_post_list_btn _returnFalse"
 					onclick="nclk(this, &#39;pst.next&#39;, &#39;&#39;, &#39;&#39;);"
 					style="display: none;"><i class="sp_before">다음</i></a> <span

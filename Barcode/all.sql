@@ -1,1 +1,0 @@
-select * from movie where opendate <= date_format(now(),'%Y-%M-%D')

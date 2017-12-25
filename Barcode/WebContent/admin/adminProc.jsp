@@ -1,14 +1,12 @@
 <jsp:useBean id="mgr" class="product.ShoppingMgr"/>
-<jsp:useBean id="bean" class="product.ShoppingBean"/>
-<jsp:setProperty  name="bean" property="*"/>
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
-		request.setCharacterEncoding("euc-kr");		
+		request.setCharacterEncoding("utf-8");		
 		boolean result = mgr.insertProAdd(request);
-		String str = "»óÇ°µî·Ï ½ÇÆÐ : ´Ù½Ã µî·ÏÇØÁÖ¼¼¿ä.";
+		String str = "ìƒí’ˆë“±ë¡ ì‹¤íŒ¨ : ë‹¤ì‹œ ë“±ë¡í•´ì£¼ì„¸ìš”.";
 		String location = "admin_pro.jsp";
 		if(result){
-			str = "»óÇ°µî·Ï ¼º°ø! ¿Õ¸¹ÀÌ ÆÄ¼¼¿ë¿ë¿ë¤· :-)";
+			str = "ìƒí’ˆë“±ë¡ ì„±ê³µ! ì™•ë§Žì´ íŒŒì„¸ìš©ìš©ìš©ã…‡ :-)";
 			location="admin_list.jsp";
 		}
 %>
@@ -16,5 +14,5 @@
 <script>
 	alert("<%=result%>");
 	alert("<%=str%>");
-	location.href = "<%=location%>";
+<%-- 	location.href = "<%=location%>"; --%>
 </script>

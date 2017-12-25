@@ -10,6 +10,12 @@
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
+		
+		String priceAdd = request.getParameter("pro_Price");
+		String priceShip = request.getParameter("pro_ShipAccount");
+		int priceA = Integer.parseInt(priceAdd.replace(",", ""));
+		int priceS = Integer.parseInt(priceAdd.replace(",", ""));
+		int discount = priceA/100;
 %>
 
 <!doctype>
@@ -25,8 +31,10 @@
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
 	function cal(){
-		document.getElementById("priceAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))%>);
-		document.getElementById("saleAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=Integer.parseInt(request.getParameter("pro_Price"))/100%>);
+		document.getElementById("priceAdd").innerHTML = comma(
+				parseInt(document.getElementById("EA").value)*
+				<%=priceA-discount + priceS%>);
+		document.getElementById("saleAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=discount%>);
 	}
 	function comma(num){
 	    var len, point, str; 
@@ -207,20 +215,20 @@
 								<tr>
 									<td rowspan="4" height="36px" width="150px"><%=request.getParameter("pro_MainImg") %></td>
 									<td  height="46px" style="text-indent:20; text-align:left;border:none;font-size:16px;">
-									<b>[<%=request.getParameter("pro_Title") %>]</b><%=request.getParameter("pro_Seller") %> </td>
+									<b>[<%=request.getParameter("pro_Title") %>]&nbsp</b><%=request.getParameter("pro_Seller") %> </td>
 									<td rowspan="2" height="36px">
 									<select id="EA" onchange="cal()" style="width:56px;">
-										<option value="1" >1</option>
+										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
 									</select>
 									</td>
-									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))) %>원</td>
-									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %>원</td>
-									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %>원</td>
-									<td rowspan="4" height="36px"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_ShipAccount"))) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",priceA) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",discount) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",discount) %>원</td>
+									<td rowspan="4" height="36px"><%=String.format("%,d",priceS) %>원</td>
 									<td rowspan="2" height="36px">
 										<button class="order_button">주문하기</button>
 									</td>
@@ -311,12 +319,12 @@
 									<td>
 										<p style="font-size:16px; font-weight:bold; color:gray">결제금액</p>
 										<p style="font-size:30px; font-weight:bold; color:#ff4800; line-height:1;">
-										<sapn id="priceAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))) %></sapn>원</p>
+										<sapn id="priceAdd"><%=String.format("%,d",priceA-discount+priceS) %></sapn>원</p>
 										<br/>
 										<p style="font-size: 12px; line-height: 25px;">총 상품금액 : 
-										<sapn id="priceAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))-Integer.parseInt(request.getParameter("pro_Price"))/100+Integer.parseInt(request.getParameter("pro_ShipAccount"))) %></sapn>원</p>
-										<p style="font-size: 12px; line-height: 25px;">할인금액 : (-)<sapn id="saleAdd"><%=String.format("%,d",Integer.parseInt(request.getParameter("pro_Price"))/100) %></sapn>원</p>
-										<p style="font-size: 12px; line-height: 25px;">배송비 : (+)<%=String.format("%,d",Integer.parseInt(request.getParameter("pro_ShipAccount"))) %>원</p>
+										<sapn id="priceAdd"><%=String.format("%,d",priceA-discount+priceS) %></sapn>원</p>
+										<p style="font-size: 12px; line-height: 25px;">할인금액 : (-)<sapn id="saleAdd"><%=String.format("%,d",discount) %></sapn>원</p>
+										<p style="font-size: 12px; line-height: 25px;">배송비 : (+)<%=String.format("%,d",priceS) %>원</p>
 									</td>
 								</tr>
 								<tr>

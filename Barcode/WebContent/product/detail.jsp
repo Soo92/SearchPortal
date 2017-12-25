@@ -209,7 +209,7 @@ $(document).ready(function(){
 				
 				<tr>
 					<td rowspan="8" width="400px" height="400px" id="getMainImg">
-						<img src="<%=mainImg %>">
+						<img src="./newShopImg/<%=mainImg %>">
 					</td>
 					<td   height="36px" width="30px;" rowspan="9" style="border-right:1px lightgray solid;"></td>
 					<td   height="36px" width="30px;"></td>

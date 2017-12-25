@@ -603,45 +603,13 @@ function reSearchParamChange(){
 							</p>
 							<ul class="lst_md">
 								<li><a href="../member/findid.jsp"
-									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호/ID
-										찾기</a></li>
+									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호/ID 찾기</a></li>
 								<li><a href="../member/findpw.jsp"
-									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호
-										변경</a></li>
-								<li><a href="../index.jsp"
-									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">회원정보
-										수정</a></li>
-								<li><a href="../index.jsp"
-									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">로그인
-										보호 설정</a></li>
-							</ul>
-						</div>
-						<div class="md_area">
-							<h2>
-								<a href="https://help.naver.com/#"
-									onclick="return PAGE.change(&#39;reportCenter/home.nhn&#39;)"><span
-									class="blind">신고센터</span></a>
-							</h2>
-							<p>
-								<span class="blind">유해게시물 또는 권리침해 게시물은 발견 시 바로 신고해 주세요.</span>
-							</p>
-							<ul class="lst_md">
-								<li><a
-									href="https://help.naver.com/support/contents/contents.nhn?serviceNo=964&amp;categoryNo=2826"
-									onclick="clickcr(this, &#39;rpt.abuse&#39;, &#39;&#39;, &#39;&#39;, event)">유해
-										게시물 신고</a></li>
-								<li><a
-									href="https://cpc.naver.com/cpc/claim.nhn?m=claimRequest"
-									onclick="clickcr(this, &#39;rpt.copyrp&#39;, &#39;&#39;, &#39;&#39;, event)">저작권
-										침해 게시물 신고</a></li>
-								<li><a
-									href="https://help.naver.com/support/alias/contents2/naverhome/naverhome_2.naver"
-									onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event)">결제도용
-										신고</a></li>
-								<li><a
-									href="http://inoti.naver.com/inoti/claim.nhn?m=purpose"
-									onclick="clickcr(this, &#39;rpt.honor&#39;, &#39;&#39;, &#39;&#39;, event)">명예훼손
-										게시물 신고</a></li>
+									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호 변경</a></li>
+								<li><a href="../member/mypage.jsp"
+									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">회원정보 수정</a></li>
+								<li><a href=""
+									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">로그인 보호 설정</a></li>
 							</ul>
 						</div>
 					</div>

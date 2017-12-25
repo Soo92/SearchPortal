@@ -77,7 +77,7 @@
 			<div id="header">
 				<div id="wrap2">
 					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
-					<div id="subject"><p><span>울집 근처</span> &nbsp;예약</p></div>
+					<div id="subject"><p><span>동네 소식</span></p></div>
 					<div id="search_box" style="margin-left:150px;float:left">
 					<input type="text" style="width:420px; height:30px; margin:5px 0px 0px 10px; border:0px; font-size:16px;" align="center"
 									placeholder="검색해보세용!">
