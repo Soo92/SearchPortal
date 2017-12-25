@@ -1,3 +1,4 @@
+<%@page import="movie.PointBean"%>
 <%@page import="movie.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="movie.ReBean"%>
@@ -7,6 +8,7 @@
 <jsp:useBean id="mmgr" class="movie.MovieMgr"/>
 <jsp:useBean id="mbean" class="movie.MovieBean"/>
 <jsp:useBean id="rbean" class="movie.ReviewBean"/>
+<jsp:useBean id="bean" class="movie.PointBean" />
 <jsp:useBean id="rebean" class="movie.ReBean"/>
 <%
 		request.setCharacterEncoding("utf-8");
@@ -48,8 +50,6 @@
 		int age = mbean.getAge();
 		int like = mbean.getLike();
 		String content = mbean.getContent();
-		
-		String scoretotal = "10177";
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0080)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html -->
@@ -264,7 +264,7 @@ function delayed_submit(object) {
 			<div id="noPointWide" class="score">
 				<div class="my_score_area">
 					<!--[D] 내평점이 없는경우 화살표를 없애기 위해 class="my"가 빠진다 -->
-					<a href="./movie_home.jspmovie/bi/mi/point.nhn?code=152385#pointAfterTab">
+					<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=2">
 						<span class="my_score"><em class="blind">내 평점</em></span>
 						<div class="star_score">
 							<span class="st_off"><span class="st_on" style="width:0%">0점</span></span>
@@ -384,7 +384,7 @@ function delayed_submit(object) {
 				<div id="noPoint" class="score">
 					<div class="my_score_area">
 						<!--[D] 내평점이 없는경우 화살표를 없애기 위해 class="my"가 빠진다 -->
-						<a href="./movie_home.jspmovie/bi/mi/point.nhn?code=152385#pointAfterTab">
+						<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=2">
 							<span class="my_score"><em class="blind">내 평점</em></span>
 							<div class="star_score">
 								<span class="st_off"><span class="st_on" style="width:0%">0점</span></span>
@@ -516,6 +516,7 @@ function delayed_submit(object) {
 			                </div>
 			        </div>
 			</div>				
+			<%Vector<PointBean> vlist= mmgr.getPointList(idx);%>
 			<div class="score " style="display:block">
 				<div class="title_area">
 					<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=2">
@@ -525,40 +526,64 @@ function delayed_submit(object) {
 				</div>
 				<div class="score_total">
 					<strong class="total"><span class="tit"><em class="blind">140자 평</em></span><span class="sp">|</span>총
-						<em><%=scoretotal %></em>건
+						<em><%=vlist.size()%></em>건
 					</strong>
 				</div>
 				<div class="score_result">
 					<ul>
+						
+				        <%for(int i=0; i<(vlist.size()>5?5:vlist.size()); i++){
+						bean = vlist.get(i);
+						idx = bean.getPointnum();
+						bean = mmgr.getPoint(idx);
+						int pstar = bean.getStar();
+						String redate = bean.getRedate();
+						int good = bean.getGood();
+						int bad = bean.getBad();
+						String pcontent=bean.getContent();
+						String writer = bean.getWriter();
+						%>
+						
 						<li>
 							<div class="star_score">
-									<span class="st_off">
-										<span class="st_on" style="width:80.0%"></span>
-									</span>
-									<em>8</em>
-								
+								<span class="st_off"><span class="st_on"
+									style="width:<%=pstar*10%>%"></span></span><em><%=pstar %></em>
 							</div>
 							<div class="score_reple">
-								<p><span class="ico_best">BEST</span>진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요  </p>
+								<p>
+									<span class="ico_best">BEST</span><%=pcontent %>
+								</p>
 								<dl>
 									<dt>
-										<em>
-											<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#" onclick="javascript:showPointListByNid(13418993);return false;">
-												<span>et45****</span>
-											</a>
-										</em>
-										<em>2017.11.23 00:01</em>
+										<em> <a
+											href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+											onclick="javascript:showPointListByNid(13418993, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;"
+											target="_top"> <span><%=writer %></span>
+										</a>
+										</em> <em><%=redate %></em>
 									</dt>
 									<dd>
-										<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#" onclick="javascript:common.report(&#39;false&#39;,&#39;et45****&#39;, &#39;SSZMFHAcKvLAGCmrlA5QtvP6TsB6X21Ag4Zy18YYzig=&#39;, &#39;진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 &#39;, &#39;13418993&#39;, &#39;point_after&#39;, true);return false;" class="go_report2"><em>신고</em></a><!-- N=a:mra.report -->
+										<a
+											href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+											onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;et45****&#39;, &#39;J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=&#39;, &#39;진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 &#39;, &#39;13418993&#39;, &#39;point_after&#39;, true);return false;"
+											class="go_report2"><em>신고</em></a>
 									</dd>
 								</dl>
 							</div>
 							<div class="btn_area">
-								<a class="_sympathyButton" href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#"><span class="blind">공감</span></a><!-- N=a:mra.sym --><strong><span class="sympathy_13418993 count">2233</span></strong>
-								<a class="_notSympathyButton" href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#"><span class="blind">비공감</span></a><!-- N=a:mra.opp --><strong><span class="notSympathy_13418993 count v2">391</span></strong>
+								<a class="_sympathyButton"
+									href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+									onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+									class="blind">공감</span></a><strong><span
+									class="sympathy_13418993 count"><%=good %></span></strong> <a
+									class="_notSympathyButton"
+									href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+									onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+									class="blind">비공감</span></a><strong><span
+									class="notSympathy_13418993 count v2"><%=bad %></span></strong>
 							</div>
 						</li>
+						<%}%>
 					</ul>
 				</div>
 			</div>
@@ -577,29 +602,28 @@ function delayed_submit(object) {
 							<!-- N=a:mre.help -->
 						<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3" class="wrt_review"><em>리뷰쓰기</em></a><!-- N=a:mre.write -->
 					</div>
-					
 				</div>
-				
 					<div class="review_good ">
 						<div class="review_title">
 							<strong class="good"><em>좋아요</em></strong>
-							
-							<em class="num_good"><span class="n1"><span class="blind">1</span></span><span class="n1"><span class="blind">1</span></span><span class="n6"><span class="blind">6</span></span><span class="cnt"><span class="blind">명</span></span></em>
+							<em class="num_good">
+							<%for(int i=0; i<Integer.toString(mbean.getLike()).length(); i++) {%>
+							<span class="n<%=Integer.toString(mbean.getLike()).charAt(i)%>"><span class="blind"><%=Integer.toString(mbean.getLike()).charAt(i) %></span></span>
+							<%} %>
+							<span class="cnt"><span class="blind">명</span></span></em>
 						</div>
 						<ul class="rvw_list_area rvw_list_mv">
-							
+			<%reviewlist = mmgr.getReviewList(idx); %>
 								<li>
 									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4578391"><strong>&lt;꾼&gt; 야 이 사기꾼들!!!! 내 두시간을!!!!</strong><em class="hot">HOT</em></a><!-- N=a:mre.title -->
 									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4578391">acts****</a><!-- N=a:mre.uid --> <em>2017.11.14</em><em><span>추천</span> 10</em></span>
 									<p><a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4578391">        꾼      감독   장창원   출연   현빈, 유지태, 배성우, 박성웅, 나나, 안세하   개봉   2017 대한민국   평점                         리뷰보기         20171114왕십리 CGV 8-C-11익무인나눔 시사회2.5/5 ‘희대...</a><!-- N=a:mre.content --></p>
 								</li>
-							
 								<li>
 									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580360"><strong>[영화감상] <%=title%> (The Swindlers, 2017) </strong></a><!-- N=a:mre.title -->
 									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4580360">sakg****</a><!-- N=a:mre.uid --> <em>2017.11.22</em><em><span>추천</span> 9</em></span>
 									<p><a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580360">어제 저녁 퇴근길에 들려서 '대구 CGV'에서 보고 온 '꾼'입니다..벌써 개봉했어? 하시겟지만, '유료시사회'였다는 ㅋㅋㅋㅋ정식개봉은 오늘일듯 싶어요..원래 제가 이런 '사기꾼'나오는 영화들 좋아해서, 넘 보고싶었는데.....</a><!-- N=a:mre.content --></p>
 								</li>
-							
 						</ul>
 							<span class="vs">VS</span>
 					</div>
@@ -607,7 +631,11 @@ function delayed_submit(object) {
 						<div class="review_title">
 							<strong class="bad"><em>글쎄요</em></strong>
 							
-							<em class="num_bad"><span class="n5"><span class="blind">5</span></span><span class="n6"><span class="blind">6</span></span><span class="cnt"><span class="blind">명</span></span></em>
+							<em class="num_bad">
+							<%for(int i=0; i<Integer.toString(mbean.getLike()).length(); i++) {%>
+							<span class="n<%=Integer.toString(mbean.getLike()).charAt(i)%>"><span class="blind"><%=Integer.toString(mbean.getLike()).charAt(i) %></span></span>
+							<%} %>
+							<span class="cnt"><span class="blind">명</span></span></em>
 						</div>
 						<ul class="rvw_list_area rvw_list_mv">
 							

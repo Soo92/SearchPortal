@@ -262,7 +262,6 @@
 			<tr>
 				<td style="height:80px;">
 				<p>메인이미지</p>
-				
 				<script type="text/javascript">
 				function eventOccur(evEle, evType){
 				 if (evEle.fireEvent) {
@@ -287,7 +286,6 @@
 			</script>
 				<input type="file" multiple id="orgFile" class="upload" name="mainImg" value="11" style="margin-left:20px;">
 				<!-- 파일을 첨부하세요. (작업사이즈 : 400*400 px) -->
-				
 				</td>
 			</tr>
 			
@@ -299,7 +297,7 @@
 						%>
 						<p>아직 지정된 이미지가 존재하지 않습니다.</p>
 						<%}else{ %>
-						<img src="../product/<%=mainImg %>" style="margin-left:-10px;" width="100%">
+						<img src="../product/newShopImg/<%=mainImg %>" style="margin-left:-10px;" width="100%">
 						<%} %>
 					</div>
 				</td>

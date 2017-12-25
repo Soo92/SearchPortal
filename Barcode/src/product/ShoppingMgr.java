@@ -55,6 +55,7 @@ public ShoppingBean getShopping(int idx) {
 				regBean.setReviewNum(rs.getInt("reviewNum"));
 				regBean.setLikeNum(rs.getInt("likeNum"));
 				regBean.setSeller(rs.getString("Seller"));
+				regBean.setS_adr(rs.getString("s_adr"));
 			}
 			
 		} catch (Exception e) {
@@ -97,6 +98,7 @@ public ShoppingBean getShopping(int idx) {
 				regBean.setReviewNum(rs.getInt("reviewNum"));
 				regBean.setLikeNum(rs.getInt("likeNum"));
 				regBean.setSeller(rs.getString("Seller"));
+				regBean.setS_adr(rs.getString("s_adr"));
 				vlist.addElement(regBean);
 			}
 		} catch (Exception e) {
@@ -156,114 +158,16 @@ public ShoppingBean getShopping(int idx) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
-		boolean flag = false;
-		try {
-			con = pool.getConnection();
-			Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
-			File dir = new File(Upload);
-			if(!dir.exists())
-				dir.mkdirs();//폴더가 없으면 생성
-			MultipartRequest multi = 
-					new MultipartRequest(req, Upload, MAXSIZE, 
-							ENCTYPE, new DefaultFileRenamePolicy());
-			System.out.println(multi.getParameter("idx"));
-			if(multi.getFilesystemName("mainImg")==null
-					&& multi.getFilesystemName("listImg")==null
-					&& multi.getFilesystemName("detailImg")==null) {//이미지 빼고 수정
-				sql = "update tblnewshop set Seller=?,title=?,price=?,account=?,"
-						+ "shipAccount=?,shipDate=?,maxBuy=?,origin=?,"
-						+ "stock=?,opt=?,proAdd=?,s_adr=?"
-						+ " where idx=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("Seller"));
-				pstmt.setString(2, multi.getParameter("title"));
-				pstmt.setString(3, multi.getParameter("price"));
-				pstmt.setString(4, multi.getParameter("account"));
-				pstmt.setString(5, multi.getParameter("shipAccount"));
-				pstmt.setString(6, multi.getParameter("shipDate"));
-				pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
-				pstmt.setString(8, multi.getParameter("origin"));
-				pstmt.setString(9, multi.getParameter("stock"));
-				pstmt.setString(10, multi.getParameter("opt"));
-				pstmt.setString(11, multi.getParameter("proAdd"));
-				pstmt.setString(12, multi.getParameter("s_adr"));
-				pstmt.setInt(13, Integer.parseInt(multi.getParameter("index")));
-				System.out.println(multi.getParameter("detailImg"));
-				System.out.println(multi.getParameter("mainImg"));
-				System.out.println(multi.getParameter("idx"));
-			}else {
-				System.out.println("a");
-				sql = "update tblnewshop set Seller=?,title=?,price=?,account=?,"
-						+ "shipAccount=?,shipDate=?,maxBuy=?,origin=?,"
-						+ "stock=?,opt=?,proAdd=?,s_adr=?,mainImg=?,listImg=?,detailImg=?"
-						+ " where idx=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, multi.getParameter("Seller"));
-				pstmt.setString(2, multi.getParameter("title"));
-				pstmt.setString(3, multi.getParameter("price"));
-				pstmt.setString(4, multi.getParameter("account"));
-				pstmt.setString(5, multi.getParameter("shipAccount"));
-				pstmt.setString(6, multi.getParameter("shipDate"));
-				pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
-				pstmt.setString(8, multi.getParameter("origin"));
-				pstmt.setString(9, multi.getParameter("stock"));
-				pstmt.setString(10, multi.getParameter("opt"));
-				pstmt.setString(11, multi.getParameter("proAdd"));
-				pstmt.setString(12, multi.getParameter("s_adr"));
-				pstmt.setString(13, multi.getParameter("mainImg"));
-				pstmt.setString(14, multi.getParameter("listImg"));
-				pstmt.setString(15, multi.getParameter("detailImg"));
-				System.out.println("a");
-				System.out.println(multi.getParameter("idx"));
-				pstmt.setInt(16, Integer.parseInt(multi.getParameter("idx")));
-				System.out.println(multi.getParameter("detailImg"));
-				System.out.println(multi.getParameter("mainImg"));
-			}
-			
-			if(pstmt.executeUpdate()==1)
-				flag=true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-		return flag;
-	}
-	
-	//AdminDelete
-	public void adminDelete(int idx) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
-		try {
-			con = pool.getConnection();
-			sql = "delete from tblnewshop where idx=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, idx);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			pool.freeConnection(con, pstmt);
-		}
-	}
-	
-
-	//상품등록
-	public boolean insertProAdd(HttpServletRequest req) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		String sql = null;
+		ResultSet rs = null;
 		boolean flag = false;
 		String mainImg = null;
 		String listImg = null;
 		String detailImg = null;
+		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		File dir = new File(Upload);
+		if(!dir.exists())
+			dir.mkdirs();//폴더가 없으면 생성
 		try {
-			Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
-			con = pool.getConnection();
-			File dir = new File(Upload);
-			if(!dir.exists())
-				dir.mkdirs();//폴더가 없으면 생성
 			MultipartRequest multi = 
 					new MultipartRequest(req, Upload, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
@@ -276,6 +180,123 @@ public ShoppingBean getShopping(int idx) {
 			if(multi.getFilesystemName("detailImg")!=null) {
 				detailImg = multi.getFilesystemName("detailImg");
 			}
+
+			//delete pre img
+			con = pool.getConnection();
+			sql = "select mainImg,detailImg,listImg from tblnewshop where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, req.getParameter("index"));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String pre_mainImg = rs.getString(1);
+				String pre_detailImg = rs.getString(2);
+				String pre_listImg = rs.getString(3);
+				File f1 = new File(Upload+pre_mainImg);
+				File f2 = new File(Upload+pre_detailImg);
+				File f3 = new File(Upload+pre_listImg);
+				if(pre_mainImg!=mainImg)	f1.delete();
+				if(pre_detailImg!=detailImg) f2.delete();
+				if(pre_listImg!=listImg) f3.delete();			
+			}
+			sql = "update tblnewshop set Seller=?,title=?,price=?,account=?,"
+					+ "shipAccount=?,shipDate=?,maxBuy=?,origin=?,"
+					+ "stock=?,opt=?,proAdd=?,s_adr=?,mainImg=?,listImg=?,detailImg=?"
+					+ " where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, multi.getParameter("Seller"));
+			pstmt.setString(2, multi.getParameter("title"));
+			pstmt.setString(3, multi.getParameter("price"));
+			pstmt.setString(4, multi.getParameter("account"));
+			pstmt.setString(5, multi.getParameter("shipAccount"));
+			pstmt.setString(6, multi.getParameter("shipDate"));
+			pstmt.setInt(7, Integer.parseInt(multi.getParameter("maxBuy")));
+			pstmt.setString(8, multi.getParameter("origin"));
+			pstmt.setString(9, multi.getParameter("stock"));
+			pstmt.setString(10, multi.getParameter("opt"));
+			pstmt.setString(11, multi.getParameter("proAdd"));
+			pstmt.setString(12, multi.getParameter("s_adr"));
+			pstmt.setString(13, mainImg);
+			pstmt.setString(14, listImg);
+			pstmt.setString(15, detailImg);
+			pstmt.setString(16, multi.getParameter("index"));
+			if(pstmt.executeUpdate()==1)
+				flag=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	
+	//AdminDelete
+	public boolean adminDelete(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean flag = false;
+		ResultSet rs = null;
+		String sql = null;
+		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		String[] index = req.getParameter("index").split(",");
+		try {
+			con = pool.getConnection();
+			for(int i=0; i<index.length; i++) {
+			sql = "select mainImg,detailImg,listImg from tblnewshop where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, req.getParameter("index"));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String mainImg = rs.getString(1);
+				String detailImg = rs.getString(2);
+				String listImg = rs.getString(3);
+				File f1 = new File(Upload+mainImg);
+				File f2 = new File(Upload+detailImg);
+				File f3 = new File(Upload+listImg);
+				if(f1.exists())	f1.delete();
+				if(f2.exists())	f2.delete();
+				if(f3.exists())	f3.delete();
+			}
+			sql = "delete from tblnewshop where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, index[i]);
+			if(pstmt.executeUpdate()==1)
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+
+	//상품등록
+	public boolean insertProAdd(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		String mainImg = null;
+		String listImg = null;
+		String detailImg = null;
+		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		File dir = new File(Upload);
+		if(!dir.exists())
+			dir.mkdirs();//폴더가 없으면 생성
+		try {
+			MultipartRequest multi = 
+					new MultipartRequest(req, Upload, MAXSIZE, 
+							ENCTYPE, new DefaultFileRenamePolicy());
+			if(multi.getFilesystemName("mainImg")!=null) {
+				mainImg = multi.getFilesystemName("mainImg");
+			}
+			if(multi.getFilesystemName("listImg")!=null) {
+				listImg = multi.getFilesystemName("listImg");
+			}
+			if(multi.getFilesystemName("detailImg")!=null) {
+				detailImg = multi.getFilesystemName("detailImg");
+			}
+			con = pool.getConnection();
 
 			sql = "insert tblnewshop (Seller,title,price,account,"
 					+ "shipAccount,shipDate,maxBuy,origin,"

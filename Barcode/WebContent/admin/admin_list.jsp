@@ -10,13 +10,51 @@
 
 <!doctype>
 <html>
-   <meta charset="utf-8">
-   <head>
-   <title>상품 등록페이지</title>
+<meta charset="utf-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#checkall").click(function(){ 								//최상단 체크박스 클릭
+    	if($("#checkall").prop("checked")){ 						//클릭되었으면
+    		$("input[name=chkList]").prop("checked",true); 				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+    	}else{ 														//클릭이 안되있으면
+  		 	$("input[name=chkList]").prop("checked",false); 			//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+        }
+    })
+})
+function go_modify(){
+  if( $(":checkbox[name='chkList']:checked").length>1 
+		  || $(":checkbox[name='chkList']:checked").length==0 ){
+    alert("수정할 항목을 하나 체크해주세요.");
+    return;
+  }else{
+	  $("#modi").val(get_chked_values());
+	  document.modif.submit();
+  }
+}
+function go_delete(){
+  if( $(":checkbox[name='chkList']:checked").length==0 ){
+    alert("삭제할 항목을 하나이상 체크해주세요.");
+    return;
+  }else{
+	  $("#del").val(get_chked_values());
+	  document.delf.submit();
+  }
+}
+function get_chked_values(){
+  var chked_val = "";
+  $(":checkbox[name='chkList']:checked").each(function(pi,po){
+    chked_val += ","+po.value;
+  });
+  if(chked_val!="")chked_val = chked_val.substring(1);
+  return chked_val;
+}
+</script>
+<head>
+<title>상품 등록페이지</title>
 <link rel="stylesheet" href="../css/admin_style.css" type="text/css">
    </head>
    <body>
-   
       <div id="all">
       <div id="header_">
          <div id="header">
@@ -74,7 +112,7 @@
    <div id="proList">
       <table width="1100px" cellpadding="5" cellspacing="0" border="0" align="center" style="border-collapse:collapse; background:background:#ff5b1b; margin-bottom:7px;">
          <tr>
-            <th><input type="checkbox" value="" style="width:25px"></th>
+            <th><input type="checkbox" id="checkall" style="width:25px" value=""></th>
             <th style="width:60px;">번호</th>
             <th>사진</th>
             <th>제목</th>
@@ -103,44 +141,37 @@
          		String mainImg=bean.getMainImg();
          		String listImg=bean.getListImg();
          		String detailImg=bean.getDetailImg();
-         		
          		if(i%2==0){
          %>
         <tr>
          <%}else{ %><tr style="background:#efefef"><%} 
        
          %>
-            <td><input type="checkbox" value=""></td>
+            <td><input onclick="get_chked_values()" name="chkList" type="checkbox" value="<%=vlist.get(i).getIndex()%>"></td>
             <td><%=i+1 %></td>
             <td style="width:120px;">
             <div id="adminListImg">
-               <img src="../product/<%=mainImg %>" width="100px" height="100">
+               <img src="../product/newShopImg/<%=mainImg %>" width="100px" height="100">
             </div>
          </td>
-            
-            <td class="three">
+         <td class="three">
          <p style="font-size:18px; font-weight:bold;">
          <%=title %>
          </p>
          <p style="color:#ff4800"><%=account %></p>
          <p style="color:gray"><%=option %></p>
-         
          </td>
-            
             <td><%=Seller %></td>
             <td><%=price %>원</td>
             <td><%=stock %>개</td>
-                   
             <td style="width:90px;">
                  <a href="admin_update.jsp?index=<%=idx%>">
                 <input type="button" value="수정" name="">
                 </a>
-                
                 <a href="admin_delete.jsp?index=<%=idx%>">
                  <input type="button" value="삭제" name="" style="margin-top:10px;">
                  </a>
             </td>
-          
          </tr>
          <%} %>
              
@@ -150,8 +181,14 @@
       			<a href="admin_pro.jsp">
 					<input type="button" value="상품등록" style="height:30px;" onclick="proAddCheck()">
 				</a>	
-				<input type="button" value="수     정" style="height:30px; margin-left:10px;">	
-				<input type="button" value="삭     제" style="height:30px; margin-left:10px;">	
+					<input type="button" onclick="go_modify()"  value="수     정" style="height:30px; margin-left:10px;">	
+					<input name="index" type="button" onclick="go_delete()"  value="삭     제" style="height:30px; margin-left:10px;">	
+				<form name="modif" action="admin_update.jsp">
+					<input name="index" id="modi" type="hidden">
+				</form>
+				<form name="delf" action="admin_delete.jsp">
+					<input name="index" id="del" type="hidden">
+				</form>
 			</div>
       
      </div>

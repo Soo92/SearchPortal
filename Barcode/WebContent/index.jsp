@@ -251,7 +251,7 @@
 <%for(int i=0;i<(slist.size()>2?2:slist.size());i++) {%>
 					<a href="#">
 					<div id="shopping_<%=i+1%>">
-						<img src="<%=slist.get(i).getMainImg() %>" width="150px" height="150px">
+						<img src="./product/newShopImg/<%=slist.get(i).getMainImg() %>" width="150px" height="150px">
 						<div id="other_text">
 							<p class="title">
 							[<%=slist.get(i).getTitle() %>]

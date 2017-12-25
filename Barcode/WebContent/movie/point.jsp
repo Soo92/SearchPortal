@@ -142,7 +142,7 @@
 
 			<div class="score_total">
 				<strong class="total"><span class="tit"><em
-						class="blind">140자 평</em></span><span class="sp">|</span>총<em>10,187</em>건</strong>
+						class="blind">140자 평</em></span><span class="sp">|</span>총<em><%=vlist.size() %></em>건</strong>
 
 				<div class="best_score_info _bestPointHelp"></div>
 			</div>
@@ -168,7 +168,6 @@
 			</div>
 			<div class="score_result">
 				<ul>
-					
 					<%
 			         for(int i=(nowPage-1)*10; 
 			        		 i<(nowPage>totalRecord/10?totalRecord:nowPage*10); 
@@ -183,11 +182,10 @@
 					String content=bean.getContent();
 					String writer = bean.getWriter();
 					%>
-					
 					<li>
 						<div class="star_score">
 							<span class="st_off"><span class="st_on"
-								style="width:10%"></span></span><em><%=star %></em>
+								style="width:<%=star*10%>"></span></span><em><%=star %></em>
 						</div>
 						<div class="score_reple">
 							<p>

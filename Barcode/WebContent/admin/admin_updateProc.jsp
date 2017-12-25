@@ -15,5 +15,5 @@
 
 <script>
 	alert(<%=result%>+"<%=str%>");
-<%--   	location.href="<%=location%>"; --%>
+   	location.href="<%=location%>";
 </script>

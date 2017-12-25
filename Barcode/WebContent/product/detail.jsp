@@ -488,7 +488,7 @@ $(document).ready(function(){
 <!-- contents -->
 	<div id="detail_img">
 		<div id="detail_p_info">
-			<img src="<%=detailImg %>">
+			<img src="./newShopImg/<%=detailImg %>">
 		</div>
 	</div><!-- detail_img -->
 	
