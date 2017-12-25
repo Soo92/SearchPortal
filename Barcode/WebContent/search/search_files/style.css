@@ -2,6 +2,24 @@
 *{margin:0; padding:0;}
 body { font-family: 'Nanum Gothic', son-serif; }
 	a{text-decoration:none;}
+#mcont{
+	display: inline-block; width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; white-space: normal; line-height: 1.3; height: 3.9em; text-align: left; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+}
+.sh_blog_passage{
+	display: inline-block;
+	width: 450px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+	line-height:;
+	height: 3.4; 3.9em
+	text-align: left;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
 #wrap{width:1082px; height:auto; margin:0 auto;}
 #wrap2{width:100%; height:auto; margin:0 auto; background:#efefef;}
 .blank{width:7px; height:7px; clear:both;}

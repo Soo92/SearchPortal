@@ -227,7 +227,7 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 					for(int j=0;j<3;j++) {%>
 						<%if(j<mvrlist.size()){ %>
 						<li<%if(j==2) {%> class="last"<%} %>>
-						<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>&&reviewnum=<%=mvrlist.get(j).getReviewnum() %>" onclick="clickcr(this, 'tvw.list', '4588316', '<%=j+1 %> %>', event);">
+						<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>&&num=3&&reviewnum=<%=mvrlist.get(j).getReviewnum() %>" onclick="clickcr(this, 'tvw.list', '4588316', '<%=j+1 %> %>', event);">
 						<span class="tit"><%=mvrlist.get(j).getTitle() %></span></a></li>
 						<%}else{ %>	
 						<li<%if(j==2) {%> class="last"<%} %>><a href="" onclick="clickcr(this, 'tvw.list', '4588316', '<%=j+1 %> %>', event);"><span class="tit"></span></a></li>

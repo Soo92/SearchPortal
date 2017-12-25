@@ -36,7 +36,7 @@ public class ReviewMgr {
 		ReviewBean reBean = new ReviewBean();
 		try {
 			con = pool.getConnection();
-			sql = "select * from board where no=?";
+			sql = "select * from tblnewshop_board where no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
@@ -69,7 +69,7 @@ public class ReviewMgr {
 		Vector<ReviewBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from board where idx = ? order by no;";
+			sql = "select * from tblnewshop_board where idx = ? order by no;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, index);
 			rs = pstmt.executeQuery();
@@ -110,14 +110,14 @@ public class ReviewMgr {
 					new MultipartRequest(req, UPLOAD, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
 			if(multi.getFilesystemName("img")==null) {//이미지 빼고 수정
-				sql = "insert board (title,star,content)"
+				sql = "insert tblnewshop_board (title,star,content)"
 						+ "values(?,?,?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, multi.getParameter("title"));
 				pstmt.setString(2, multi.getParameter("star"));
 				pstmt.setString(3, multi.getParameter("content"));
 			}else {
-				sql = "insert board (title,star,img,content)"
+				sql = "insert tblnewshop_board (title,star,img,content)"
 						+ "values(?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, multi.getParameter("title"));

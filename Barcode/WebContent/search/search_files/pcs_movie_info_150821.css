@@ -5,7 +5,7 @@
 /* 메인 */
 .movie_info{position:relative;overflow:hidden}
 .movie_info .bar{display:inline-block;width:1px;height:11px;margin:-1px 4px 1px 5px;*margin:0 8px 0 5px;border:0;background:url(https://ssl.pstatic.net/sstatic/search/img/sprite_bullet.gif) no-repeat 0 -32px;vertical-align:middle}
-.movie_info.section{padding-bottom:0px}
+.movie_info.section{padding-bottom: 30px;}
 .movie_info .info_main{overflow:hidden;clear:both;width:590px;margin:2px 0 10px 10px}
 .movie_info .info_main .thumb{float:left;position:relative;min-height:55px;_height:55px;margin:1px 13px 5px 0}
 .movie_info .info_main .thumb .thmb_v{display:block;position:absolute;top:0;left:0;z-index:100;width:120px;height:171px;background:url(https://ssl.pstatic.net/sstatic/keypage/outside/movie/pc/img/sp_border.png) no-repeat}

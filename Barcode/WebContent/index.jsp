@@ -43,7 +43,7 @@
 		document.loginFrm.submit();
 	}
 	function removetag(html){
-		html.replaceAll("\\<[^>]*>","")
+		html.replaceAll("\\<[^>]*>","");
 	}
 </script>
 	
