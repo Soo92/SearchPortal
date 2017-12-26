@@ -363,7 +363,7 @@ function fold(a){
 								<ul class="thum_lst w68">
 		<%mlist=mmgr.getMemberList();
 		for(int i=0;i<(mlist.size()>5?5:mlist.size());i++) {%>
-									<li><a href="<%=request.getRequestURI()%>../movie/movie_home.jsp?index=<%=mlist.get(i).getIdx() %>"
+									<li><a href="../movie/movie_home.jsp?index=<%=mlist.get(i).getIdx() %>"
 										class="bf_thum" class="thum">
 										<img src="../movie/mainimg/<%=mlist.get(i).getPic() %>" width="60" height="86" alt="<%=mlist.get(i).getTitle() %>"
 										 onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">

@@ -52,7 +52,7 @@
 	<div id="wrap">
 		<div id="header">
 			<div id="start">
-				<a href="#"><p>바코드를 시작페이지로&nbsp;&nbsp;<span>></span></p></a>
+				<a href="./custom/custom_detail.jsp?index=1&&boardnum=14"><p>바코드를 시작페이지로&nbsp;&nbsp;<span>></span></p></a>
 			</div>
 			<div id="logo"><img src="img/barcode_logo_.png" width=100% height=100% alt="바코드"></div>
 			<div id="search">
@@ -249,7 +249,7 @@
 				</div>
 				<div id="shopping" class="section_option">
 <%for(int i=0;i<(slist.size()>2?2:slist.size());i++) {%>
-					<a href="#">
+					<a href="./product/details?index="<%=slist.get(i).getIndex() %>>
 					<div id="shopping_<%=i+1%>">
 						<img src="./product/newShopImg/<%=slist.get(i).getMainImg() %>" width="150px" height="150px">
 						<div id="other_text">
