@@ -9,15 +9,12 @@
 <jsp:useBean id="pmgr" class="place.PlaceMgr"/>
 <%
 		request.setCharacterEncoding("utf-8");
-		
 		String id = (String)session.getAttribute("idKey");	
 		String name = mgr.getMember(id).getName();
-
 		Vector<MovieBean> mlist = mmgr.getMemberList();
 		Vector<ShoppingBean> slist = smgr.getShoppingList();
 		Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList((int)(Math.random()*pmgr.getPlaceList().size())+"");
 %>
-
 <!doctype>
 <html>
 <meta charset="utf-8">
@@ -101,11 +98,8 @@
 						</div>
 					</div>
 				</div>
-				
 				<div id ="movie_Slider_">
-				
 			<div id="slider_wrap">
-			
 				<div id="slider_aa">
 				    <div class="swiper-container">
 				        <div class="swiper-wrapper">
@@ -136,11 +130,6 @@
 				            	
 				            </div>
 				            <%} %>
-				            
-				            <!-- ------------------------aa------------------------ -->
-				            
-				           
-						
 						</div>
 				        <!-- Add Pagination -->
 				        <div class="swiper-pagination"></div><!--하단버튼-->
@@ -210,7 +199,6 @@
 								</td>
 							</tr>
 						</table>
-					</div>
 					
 					<div id="login_button" onclick="loginCheck()"><p>로그인</p></div>
 					<div id="login_other2">
@@ -225,8 +213,8 @@
 						</li>
 					</div>
 <%}else{%>
-
-<div id="logout">
+ 				<iframe id="minime" name="minime" title="MY영역" src="./member/userInfo.jsp" style="position:relative;width: 112%;height: 120px;top: -14px;left: -13px;" frameborder="0" framespacing="0" marginheight="0" marginwidth="0" scrolling="no" vspace="0"></iframe>
+<%-- <div id="logout">
 			<div id="profile"></div>
 			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>님</p>
 			<p style="font-size:12px; float:left; line-height:23px; margin-right:5px">환영함당!</p>
@@ -245,7 +233,9 @@
 			<div id="myPage_o_but"><a href="#"><img src="img/myP_03.png"></a></div>
 			<div id="myPage_o_but"><a href="#"><img src="img/myP_04.png"></a></div>
 	</div>
-<%}%>
+ --%>
+ <%}%>
+					</div>
 				</div>
 				<div id="shopping" class="section_option">
 <%for(int i=0;i<(slist.size()>2?2:slist.size());i++) {%>

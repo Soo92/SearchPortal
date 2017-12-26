@@ -12,6 +12,8 @@
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
 		Vector<PlaceBean> vlist = pmgr.getPlaceList();		
+		
+		String location = request.getParameter("location");
 %>
 
 <!doctype>
@@ -134,11 +136,12 @@
 										<div id="_MM_REGION_TAB" class="cp_tab_group cp_tab_on"
 											style="display: block;">
 											<ul class="cp_l">
-											<%Vector<PlaceBoardBean> plist = pmgr.getPlaceLegionList(vlist.get(i).getIdx());
-											for(int j=0; j<plist.size(); j++) %>
-												<li class="cp_item"><a href="https://m.barcode.com/#"
-													class="_MM_REGION cp_a" id=""><span
-														class="name">¼­¿ï</span></a></li>
+											<%Vector<PlaceBoardBean> plist = pmgr.getPlaceLegionList();
+											for(int j=0; j<plist.size(); j++) {%>
+												<li class="cp_item<%if(location!=null && location.equals(plist.get(j).getPlace())){%>cp_aon<%}%>">
+													<a href="https://m.barcode.com/#" class="_MM_REGION cp_a" id=""><span class="name"><%=plist.get(j).getPlace() %></span></a>
+												</li>
+											<%} %>
 											</ul>
 											
 									<!--<!-- <!-- <!-- <!-- <!-- <!-- <!-- <!--  <!--  -->
@@ -162,13 +165,14 @@
 										<div class="cb_list_wrap">
 											<ul class="cb_list">
 										<%Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
-										for(int j=0;j<plist.size();j++) {%>
+										for(int j=0;j<plist.size();j++) {
+												%>
 												<li class="cb_litem">
 												<a href="./place_board.jsp?index=<%=plist.get(j).getIdx() %>"	class="cb_la">
 														<div class="cb_ltable">
 															<div class="cb_mcell">
-																<div class="cb_mw lzImg" style="background-color: #b38c7e;">
-																	<img width="100%" class="ub_m fade loaded change" src="<%=plist.get(j).getMainpic() %>">
+																<div class="cb_mw lzImg" style="background-color: #b38c7e;overflow: hidden;max-height: 110px;">
+																	<img width="100%" class="ub_m fade loaded change" src="<%=pmgr.getImgSrc(plist.get(j).getContent())%>" onerror="this.src='./img/sampleimage.jpg'">
 																</div>
 															</div>
 															<div class="cb_tcell">

@@ -29,6 +29,8 @@
 	data-useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36">
 <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+</script>
 <link rel="stylesheet" type="text/css"
 	href="./place_board_files/lego_w-172107688_https.css" charset="UTF-8">
 <link rel="stylesheet" type="text/css"
@@ -104,14 +106,11 @@
 											href="https://m.blog.naver.com/PostList.nhn?blogId=ssagaji629"
 											class="se_thumbnail"
 											onclick="nclk(this, &#39;pst.writer&#39;, &#39;&#39;, &#39;&#39;);">
-											<span class="img"><img
-												src="./place_board_files/1500271546767.jpg" width="35"
+											<span class="img"><img src="./place_board_files/1500271546767.jpg" width="35"
 												height="35" alt="프로필"></span>
 										</a>
 										<div class="se_author">
-											<a
-												href="https://m.blog.naver.com/PostList.nhn?blogId=ssagaji629"
-												onclick="nclk(this, &#39;pst.writer&#39;, &#39;&#39;, &#39;&#39;);"><strong
+											<a href="" onclick="nclk(this, &#39;pst.writer&#39;, &#39;&#39;, &#39;&#39;);"><strong
 												class="ell"><%=writer%></strong></a>
 										</div>
 										<p class="se_date"><%=regdate%></p>

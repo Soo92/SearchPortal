@@ -21,6 +21,7 @@
 		String reviewrite = request.getParameter("reviewrite");
 		String index = request.getParameter("index");
 		String cate = request.getParameter("cate");
+		String pre = request.getParameter("pre");
 		int idx = 0;
 		if(index!=null)
 			idx = Integer.parseInt(index);
@@ -157,14 +158,14 @@ function delayed_submit(object) {
                             <a href="./movie_home.jsp" title="영화홈" class="menu01<%if(index==null&&cate==null){%>_on<%}%>"><strong>영화홈</strong></a><!-- N=a:LNB.home -->
                         </li>
                         <li>
-                            <a href="./movie_home.jspmovie/running/current.nhn" title="상영작·예정작" class="menu02<%if(index!=null){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
-                            <ul class="navi_sub" id="navi_movie" style="display:<%if(index==null&&cate==null){%>none<%}%>;">
-                            <li><a href="./movie_home.jspmovie/running/current.nhn" title="현재 상영영화" class="sub2_1_on"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
-                            <li><a href="./movie_home.jspmovie/running/premovie.nhn" title="개봉 예정영화" class="sub2_2"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
+                            <a href="<%=request.getRequestURI()%>?cate=1" title="상영작·예정작" class="menu02<%if(cate!=null&&cate.equals("1")){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
+                            <ul class="navi_sub" id="navi_movie" style="display:<%if(index==null&&cate==null||cate!=null&&cate.equals("2")){%>none<%}%>;">
+                            <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
+                            <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if(pre!=null&&pre.equals("1")){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="./movie_home.jspmovie/sdb/rank/rmovie.nhn" title="영화랭킹" class="menu03"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
+                            <a href="<%=request.getRequestURI()%>?cate=2" title="영화랭킹" class="menu03<%if(cate!=null&&cate.equals("2")){%>_on<%}%>"><strong>영화랭킹</strong></a><!-- N=a:LNB.db -->
                         </li>
                         </ul>
                     </div>
@@ -998,10 +999,13 @@ String rwriter = rbean.getWriter();
 <%}}%>
 	</div>
 </div>
-<%}else{ %>
+<%}else if(cate==null){ %>
 <%@include file="movie_list.jsp"%>
+<%}else if(cate.equals("1")){ %>
+<%@include file="list.html"%>
+<%}else{ %>
+<%@include file="ranking.html"%>
 <%} %>
-
 <!-- //content -->
 	</div>
 	<!-- //container -->

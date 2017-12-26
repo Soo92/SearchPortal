@@ -87,18 +87,24 @@ body { font-family: 'Nanum Gothic', son-serif; }
 
 /*section2*/
 #section2{width:332px; height:auto; padding:5px 0px 0px 0px; float:right;}
-#login{width:100%; height:140px; margin-top:2px; position:relative}
-#login_box{width:213px; height:70px; margin:20px 0px 12px 13px; float:left;
+#login{width:100%;height: 120px;margin-top:2px;position:relative;}
+#login_box{
+					height:70px;
+					margin: 14px 0px 12px 13px;
+					float:left;
 					}
 
-#login_button{width:70px; height:71px; background:#ff4800; float:left; cursor:pointer;
-						margin-top:20px; margin-left:10px; text-align:center;
-						}
+
 #login_button p{font-size:14px; font-weight:bold; margin-top:27px; color:#fff;}
 
-#login_other2{width:100%; height:15px; clear:both;
-					font: 12px/10px Nanum;  position:relative; color:gray; letter-spacing:-0.5;
-					top:5px;
+#login_other2{
+					height:15px;
+					clear:both;
+					font: 12px/10px Nanum;
+					position:relative;
+					color:gray;
+					letter-spacing:-0.5;
+					top: 10px;
 					}
 #login_other2 a{color:gray;}
 #login_other2 a:hover{font-weight:bold; text-decoration:underline;}
@@ -106,7 +112,7 @@ body { font-family: 'Nanum Gothic', son-serif; }
 #login_other2 ul{list-style:none; text-align:left;}
 #login_other2 ul li{display:inline; text-transform:capitalize; cursor:pointer; 
 				}
-.ulul2{margin-left:13px;}
+.ulul2{margin-left: 5px;}
 #login_other2 input[type=checkbox]{
   position:relative;
   top:2px;
@@ -115,8 +121,14 @@ body { font-family: 'Nanum Gothic', son-serif; }
 #logout{width:223px; height:71px; margin:0 auto; float:left;}
 #logout a{color:gray}
 	#profile{width:58px; height:58px; background:gray; border-radius:30px; margin:7px; float:left; margin-right:15px; overflow:hidden;}
-	#login_button{width:70px; height:71px; background:#ff4800; float:left; cursor:pointer;
-						margin-top:20px; text-align:center; float:left;
+	#login_button{
+						position: absolute;
+						width: 70px;
+						height: 71px;
+						background:#ff4800;
+						cursor:pointer;
+						margin: -71px 0px 0px 229px;
+						text-align:center;
 						}
 	#login_button p{font-size:14px; font-weight:bold; margin-top:27px; color:#fff;}
 	.myPage{background:#fff; width:60px; float:left; font-size:12px; padding:3px 3px 3px 5px; border:1px lightgray solid;
