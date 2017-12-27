@@ -163,7 +163,7 @@ function removeTitle() {
 				</div>
 			</div></span>
 			</td>
-			<td width="75" class="tool_option3"><span class="option"><input type="checkbox" name="" value="" id="html" onclick="Editor.$(&#39;textbox&#39;).execCommand(&#39;html&#39;,this,this.checked);" tabindex="1"><label for="html">html</label></span></td>
+			<td width="75" class="tool_option3"><span class="option"><input type="checkbox" name="" value="" id="html" onclick="Editor.$('textbox').execCommand('html',this,this.checked);" tabindex="1"><label for="html">html</label></span></td>
 			</tr>
 			</tbody></table>
 			<!--
@@ -189,8 +189,8 @@ function removeTitle() {
 							<p class="notice"><span>표시된 단어</span>를 클릭하셔서 맞춤법을 수정하실 수 있습니다.
 						</p></div>
 						<div class="btns">
-							<img src="./movie_reView_files/btn_respelling.gif" width="92" height="22" alt="맞춤법 재검사" onclick="Editor.$(&#39;textbox&#39;).execCommand(&#39;spellcheck&#39;,this);Editor.$(&#39;textbox&#39;).execCommand(&#39;spellcheck&#39;,this);">
-							<img src="./movie_reView_files/btn_spellingend.gif" width="56" height="24" alt="검사종료" onclick="Editor.$(&#39;textbox&#39;).execCommand(&#39;spellcheck&#39;,this);">
+							<img src="./movie_reView_files/btn_respelling.gif" width="92" height="22" alt="맞춤법 재검사" onclick="Editor.$('textbox').execCommand('spellcheck',this);Editor.$('textbox').execCommand('spellcheck',this);">
+							<img src="./movie_reView_files/btn_spellingend.gif" width="56" height="24" alt="검사종료" onclick="Editor.$('textbox').execCommand('spellcheck',this);">
 						</div>
 						<p class="cboth"></p>
 					</div>
@@ -707,16 +707,16 @@ function removeTitle() {
 											</tr>
 											</tbody></table>
 											<map name="btnRows">
-											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chRows&#39;, &#39;ADD&#39; }">
-											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chRows&#39;, &#39;SUB&#39; }">
+											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chRows', 'ADD' }">
+											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chRows', 'SUB' }">
 											</map>
 											<map name="btnCols">
-											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chCols&#39;, &#39;ADD&#39; }">
-											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chCols&#39;, &#39;SUB&#39; }">
+											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chCols', 'ADD' }">
+											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chCols', 'SUB' }">
 											</map>
 											<map name="btnBorder">
-											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chBorder&#39;, &#39;ADD&#39; }">
-											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|&#39;chBorder&#39;, &#39;SUB&#39; }">
+											<area alt="" coords="0,0,16,8" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chBorder', 'ADD' }">
+											<area alt="" coords="0,9,16,20" href="http://movie.naver.com/movie/bi/mi/reviewwrite.nhn?code=155665&amp;from=list#" onclick="{act|change|'chBorder', 'SUB' }">
 											</map>
 										</td>
 										<td>
@@ -979,7 +979,7 @@ function removeTitle() {
 							<div class="spell_check">
 								<ul>{REPLACE}</ul>
 								<div class="spell_search">
-									<input type="text" id="chspell" value="직접입력" style="width:70px; height:19px; font-size:12px;" onfocus="this.value=&#39;&#39;;spellcheckDocPlugin.directInput=1;">
+									<input type="text" id="chspell" value="직접입력" style="width:70px; height:19px; font-size:12px;" onfocus="this.value='';spellcheckDocPlugin.directInput=1;">
 									<img src="./movie_reView_files/btn_spellingedit.gif" width="31" height="20" alt="" style="vertical-align:top;" onclick="spellcheckDocPlugin.changeSpell(this.previousSibling.previousSibling.value)">
 								</div>
 							</div>

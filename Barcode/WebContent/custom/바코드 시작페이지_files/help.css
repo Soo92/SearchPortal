@@ -506,7 +506,7 @@ a:hover, a:active, a:focus {
 } /* 웹툰 */
 .lst_rep_servs .svs_ic13 {
 	background-position: 50% -1200px
-} /* 네이버 클라우드 */
+} /* 바코드 클라우드 */
 .lst_rep_servs .svs_ic14 {
 	background-position: 50% -1300px
 } /* 스마트플레이스 */
@@ -521,7 +521,7 @@ a:hover, a:active, a:focus {
 } /* 캘린더 */
 .lst_rep_servs .svs_ic18 {
 	background-position: 50% -1700px
-} /* 네이버 게임 */
+} /* 바코드 게임 */
 .lst_rep_servs .svs_ic19 {
 	background-position: 50% -1800px
 } /* pay */
@@ -5205,7 +5205,7 @@ a:hover, a:active, a:focus {
 	color: transparent;
 	cursor: pointer
 }
-/* 원네이버 적용 160704 */
+/* 원바코드 적용 160704 */
 
 /* Image Sprite */
 .Nsearch .logo_naver, .Nsearch .h_title, .Nsearch .btn_srch,

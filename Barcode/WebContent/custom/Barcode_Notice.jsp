@@ -18,7 +18,7 @@
 
 
 
-<meta property="og:title" content="네이버 고객센터">
+<meta property="og:title" content="바코드 고객센터">
 
 
 
@@ -26,7 +26,7 @@
 
 
 <meta property="og:description"
-	content="네이버 고객센터를 통해 각 서비스 도움말을 확인해보세요.">
+	content="바코드 고객센터를 통해 각 서비스 도움말을 확인해보세요.">
 
 
 
@@ -39,7 +39,7 @@
 <meta property="og:type" content="website">
 
 
-<title>네이버 고객센터</title>
+<title>바코드 고객센터</title>
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://static.naver.net/help/common/favicon.ico">
 <link rel="stylesheet" type="text/css"
@@ -2065,7 +2065,7 @@ a.gnb_service_all:hover, a.gnb_service_all:visited, a.gnb_service_all:active,
 		<div id="u_skip">
 			<a
 				href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#content"
-				onclick="document.getElementById(&#39;content&#39;).tabIndex=-1;document.getElementById(&#39;content&#39;).focus();return false;">본문
+				onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;">본문
 				바로가기</a>
 		</div>
 
@@ -2583,10 +2583,10 @@ function reSearchParamChange(){
 				<form id="searchForm" name="searchForm" method="get"
 					action="http://help.naver.com/support/search/searchResultAll.nhn"
 					target="_top"
-					onsubmit="clickcr(this, &#39;tsn.search&#39;, &#39;&#39;, &#39;&#39;, event);return openSearch(this);"
+					onsubmit="clickcr(this, 'tsn.search', '', '', event);return openSearch(this);"
 					class="snb_search_box">
 					<fieldset>
-						<legend class="blind">네이버 도움말 검색 영역</legend>
+						<legend class="blind">바코드 도움말 검색 영역</legend>
 						<div class="srch_area">
 							<span class="srch_box"> <span class="ipt_box"> <!-- [D] input 요소에 포커스가 갈 경우 클래스 fcs 추가 및 value 삭제 -->
 
@@ -2594,8 +2594,8 @@ function reSearchParamChange(){
 
 									<input id="searchText" name="searchText" type="text"
 									title="도움말 검색" accesskey="w" value="궁금한 점이 있다면 도움말을 검색해 보세요."
-									onfocus="this.value = &#39;&#39;;"
-									onblur="if(this.value == &#39;&#39;) this.value = &#39;궁금한 점이 있다면 도움말을 검색해 보세요.&#39;;"
+									onfocus="this.value = '';"
+									onblur="if(this.value == '') this.value = '궁금한 점이 있다면 도움말을 검색해 보세요.';"
 									class="srch_kwd">
 
 
@@ -2641,8 +2641,8 @@ jQuery(function () {
 					<p>
 						<a
 							href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#"
-							onclick="return BBS.goBBS(&#39;10000000000030659391&#39;);">[복구
-							중] 12/13 (수), '네이버 툴즈' 서비스에 장애 현상이 있음을 알려드립니다.</a>
+							onclick="return BBS.goBBS('10000000000030659391');">[복구
+							중] 12/13 (수), '바코드 툴즈' 서비스에 장애 현상이 있음을 알려드립니다.</a>
 					</p>
 				</div>
 			</div>
@@ -2672,27 +2672,27 @@ jQuery(function () {
 		<div class="ly_dim" style="display: none;"></div>
 		<div class="ly_kin_bridge" style="display: none">
 			<div class="con">
-				<h1 class="blind">이용자들끼리 주고 받는 생생한 네이버 사용법</h1>
+				<h1 class="blind">이용자들끼리 주고 받는 생생한 바코드 사용법</h1>
 				<p class="blind">지식iN에서 검색하고 물어보세요!</p>
-				<h2 class="blind">네이버와 관련한 궁금한 점을 쉽게 찾을 수 있어요.</h2>
-				<p class="blind">네이버사용법에 대한 질문/답변이 무려 24만개!! 하루에 새로운 질문 답변이
+				<h2 class="blind">바코드와 관련한 궁금한 점을 쉽게 찾을 수 있어요.</h2>
+				<p class="blind">바코드사용법에 대한 질문/답변이 무려 24만개!! 하루에 새로운 질문 답변이
 					200개!! 지금 바로 지식iN에서 궁금한 점을 찾아 보세요.</p>
 				<a
 					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
-					onclick="clickcr(this, &#39;kbr.search&#39;, &#39;&#39;, &#39;&#39;, event)"
+					onclick="clickcr(this, 'kbr.search', '', '', event)"
 					class="srch" target="_blank"><span class="blind">지식iN에서
-						네이버 사용법 검색하기</span></a>
+						바코드 사용법 검색하기</span></a>
 				<h2 class="blind">찾으시는 내용이 없다면 지식iN에 물어보세요.</h2>
-				<p class="blind">다른 이용자와 지식iN 고수들, 네이버 지식파트너가 정확하고 빠르게 답변합니다.
+				<p class="blind">다른 이용자와 지식iN 고수들, 바코드 지식파트너가 정확하고 빠르게 답변합니다.
 					궁금한 점이 있으시면 지금 바로 지식iN에서 질문해 보세요.</p>
 				<a
 					href="http://kin.naver.com/qna/question.nhn?dirId=10601&amp;d1Id=1"
-					onclick="clickcr(this, &#39;kbr.ask&#39;, &#39;&#39;, &#39;&#39;, event)"
+					onclick="clickcr(this, 'kbr.ask', '', '', event)"
 					class="ask" target="_blank"><span class="blind">지식iN에서
-						네이버 사용법 질문하기</span></a>
-				<p class="blind">질문 내용을 등록하신 후 ‘네이버사용법’을 선택해주시면 더욱 정확하고 빠르게 답변
+						바코드 사용법 질문하기</span></a>
+				<p class="blind">질문 내용을 등록하신 후 ‘바코드사용법’을 선택해주시면 더욱 정확하고 빠르게 답변
 					받을 수 있어요.</p>
-				<p class="blind">예) 지식Q&amp;A &gt; 컴퓨터통신 &gt; 인터넷 &gt; 네이버사용법
+				<p class="blind">예) 지식Q&amp;A &gt; 컴퓨터통신 &gt; 인터넷 &gt; 바코드사용법
 					&gt; OOO (서비스 명)</p>
 				<a id="closeKinPopup"
 					href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659394#"
@@ -2736,12 +2736,12 @@ jQuery(document).ready(function(){
 
 
 
-			<h3 class="blind">네이버 정책 및 약관</h3>
+			<h3 class="blind">바코드 정책 및 약관</h3>
 			<ul class="lst_policy">
 				<li><a href="http://www.naver.com/rules/service.html">이용약관</a></li>
 				<li><a href="http://www.naver.com/rules/privacy.html"><strong>개인정보처리방침</strong></a></li>
 				<li><a href="http://www.naver.com/rules/youthpolicy.html">청소년보호정책</a></li>
-				<li><a href="http://www.naver.com/rules/spamcheck.html">네이버정책</a></li>
+				<li><a href="http://www.naver.com/rules/spamcheck.html">바코드정책</a></li>
 			</ul>
 			<div class="info info_v2">
 				<a
@@ -2766,7 +2766,7 @@ jQuery(document).ready(function(){
 										- 3820</span> <span>(평일 09:00~18:00)</span></li>
 							</ul>
 							<p class="guide">
-								<span>※</span> <span class="txt">네이버 서비스 관련 궁금하신 점은,<br>고객센터
+								<span>※</span> <span class="txt">바코드 서비스 관련 궁금하신 점은,<br>고객센터
 									전화 또는 온라인 고객센터를 통해 해결하실 수 있습니다.
 								</span>
 							</p>

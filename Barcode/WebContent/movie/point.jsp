@@ -151,18 +151,18 @@
 				<ul class="sorting_list">
 					<li class="on"><a
 						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, &#39;ara.bysym&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;sympathyScore&#39;);">호감순</a></li>
+						onclick="parent.clickcr(this, 'ara.bysym', '', '', event); dislplayOrder('sympathyScore');">호감순</a></li>
 					<li><a
 						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, &#39;ara.byrct&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;newest&#39;);">최신순</a></li>
+						onclick="parent.clickcr(this, 'ara.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
 
 					<li><a
 						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, &#39;ara.high&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;highest&#39;);">평점
+						onclick="parent.clickcr(this, 'ara.high', '', '', event); dislplayOrder('highest');">평점
 							높은 순</a></li>
 					<li><a
 						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, &#39;ara.low&#39;, &#39;&#39;, &#39;&#39;, event); dislplayOrder(&#39;lowest&#39;);">평점
+						onclick="parent.clickcr(this, 'ara.low', '', '', event); dislplayOrder('lowest');">평점
 							낮은 순</a></li>
 				</ul>
 			</div>
@@ -195,7 +195,7 @@
 								<dt>
 									<em> <a
 										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-										onclick="javascript:showPointListByNid(13418993, &#39;after&#39;);parent.clickcr(this, &#39;ara.uid&#39;, &#39;&#39;, &#39;&#39;, event); return false;"
+										onclick="javascript:showPointListByNid(13418993, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;"
 										target="_top"> <span><%=writer %></span>
 									</a>
 									</em> <em><%=redate %></em>
@@ -203,7 +203,7 @@
 								<dd>
 									<a
 										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-										onclick="parent.clickcr(this, &#39;ara.report&#39;, &#39;&#39;, &#39;&#39;, event); common.report(&#39;false&#39;,&#39;et45****&#39;, &#39;J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=&#39;, &#39;진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 &#39;, &#39;13418993&#39;, &#39;point_after&#39;, true);return false;"
+										onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','et45****', 'J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=', '진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 ', '13418993', 'point_after', true);return false;"
 										class="go_report2"><em>신고</em></a>
 								</dd>
 							</dl>
@@ -211,12 +211,12 @@
 						<div class="btn_area">
 							<a class="_sympathyButton"
 								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-								onclick="parent.clickcr(this, &#39;ara.sym&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+								onclick="parent.clickcr(this, 'ara.sym', '', '', event);"><span
 								class="blind">공감</span></a><strong><span
 								class="sympathy_13418993 count"><%=good %></span></strong> <a
 								class="_notSympathyButton"
 								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-								onclick="parent.clickcr(this, &#39;ara.opp&#39;, &#39;&#39;, &#39;&#39;, event);"><span
+								onclick="parent.clickcr(this, 'ara.opp', '', '', event);"><span
 								class="blind">비공감</span></a><strong><span
 								class="notSympathy_13418993 count v2"><%=bad %></span></strong>
 						</div>

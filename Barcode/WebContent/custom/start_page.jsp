@@ -2066,7 +2066,7 @@ a.gnb_service_all:hover, a.gnb_service_all:visited, a.gnb_service_all:active,
 		<div id="u_skip">
 			<a
 				href="https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&amp;categoryNo=16690#content"
-				onclick="document.getElementById(&#39;content&#39;).tabIndex=-1;document.getElementById(&#39;content&#39;).focus();return false;">본문
+				onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false;">본문
 				바로가기</a>
 		</div>
 		<script type="text/javascript" src="./바코드 시작페이지_files/search.js.다운로드"></script>
@@ -2128,7 +2128,7 @@ jQuery(function () {
 					<h2>
 						<a
 							href="../index.jsp"
-							onclick="clickcr(this, &#39;ctg.home&#39;, &#39;&#39;, &#39;&#39;, event);"
+							onclick="clickcr(this, 'ctg.home', '', '', event);"
 							title="바코드 전반">바코드 전반</a>
 					</h2>
 					<div class="nav">
@@ -2137,13 +2137,13 @@ jQuery(function () {
 						<h4 class="back_prv">
 							<a
 								href="../index.jsp"
-								onclick="return CATEGORY.change(&#39;1074&#39;, &#39;16683&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;GRP01&#39;, event)"><span
+								onclick="return CATEGORY.change('1074', '16683', 'VC01', '', 'GRP01', event)"><span
 								class="ic_prv"></span>인터넷 익스플로러 환경</a>
 						</h4>
 						<ul>
 							<li class="on l2"><a
 								href="start_page.jsp"
-								onclick="return CATEGORY.change(&#39;1074&#39;, &#39;16690&#39;, &#39;VC03&#39;, &#39;&#39;, &#39;GRP01&#39;, event)">바코드를
+								onclick="return CATEGORY.change('1074', '16690', 'VC03', '', 'GRP01', event)">바코드를
 									시작페이지로 설정하는 방법</a></li>
 					</div>
 					<script type="text/javascript">
@@ -2165,15 +2165,15 @@ jQuery(function () {
 							<ul>
 								<li><a
 									href="../index.jsp"
-									onclick="return SERVICE.goService(&#39;1074&#39;, &#39;LINK01&#39;, &#39;http://help.naver.com/ops/step2/faq.nhn?parentId=12119&amp;depth=2&#39;, &#39;ctn.navi&#39;, event)"
+									onclick="return SERVICE.goService('1074', 'LINK01', 'http://help.naver.com/ops/step2/faq.nhn?parentId=12119&amp;depth=2', 'ctn.navi', event)"
 									title="바코드 전반">바코드 전반</a></li>
 								<li><a
 									href="../index.jsp"
-									onclick="CATEGORY.change(&#39;1074&#39;, &#39;16682&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;&#39;, event, &#39;ctn.navi&#39;)"
+									onclick="CATEGORY.change('1074', '16682', 'VC01', '', '', event, 'ctn.navi')"
 									title="바코드 시작페이지 설정 안내">바코드 시작페이지 설정 안내</a></li>
 								<li><a
 									href="../index.jsp"
-									onclick="CATEGORY.change(&#39;1074&#39;, &#39;16683&#39;, &#39;VC01&#39;, &#39;&#39;, &#39;&#39;, event, &#39;ctn.navi&#39;)"
+									onclick="CATEGORY.change('1074', '16683', 'VC01', '', '', event, 'ctn.navi')"
 									title="인터넷 익스플로러 환경">인터넷 익스플로러 환경</a></li>
 								<li class="last"><strong title="바코드를 시작페이지로 설정하는 방법">바코드를
 										시작페이지로 설정하는 방법</strong></li>

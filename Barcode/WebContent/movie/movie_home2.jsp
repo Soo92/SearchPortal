@@ -318,7 +318,7 @@
 										<div class="gnb_banner">
 											<a href="http://campaign.barcode.com/pointevent/"
 												class="gnb_service_event"><img id="gnb_promo"
-												alt="네이버페이 | 12월 이벤트" width="265" height="47"
+												alt="바코드페이 | 12월 이벤트" width="265" height="47"
 												src="http://static.barcode.net/common/gnb/banner/promo_npay_1712.png"></a>
 										</div>
 										<div class="gnb_linkwrp">
@@ -328,7 +328,7 @@
 									</div>
 									<div class="gnb_svc_more" id="gnb_svc_more"
 										style="display: none;">
-										<strong class="blind">네이버 주요 서비스</strong>
+										<strong class="blind">바코드 주요 서비스</strong>
 										<div class="gnb_bg_top"></div>
 										<div class="gnb_svc_hd">
 											<strong class="gnb_svc_tit">바로가기 설정</strong><span
@@ -346,17 +346,17 @@
 														for="nsvc_weather">날씨</label></li>
 													<li><input type="checkbox" id="nsvc_shopping"
 														name="selmenu" class="gnb_input_check" value=""> <label
-														for="nsvc_shopping">네이버쇼핑</label></li>
+														for="nsvc_shopping">바코드쇼핑</label></li>
 													<li><input type="checkbox" id="nsvc_barcodecast"
 														name="selmenu" class="gnb_input_check" value=""> <label
-														for="nsvc_barcodecast">네이버캐스트</label></li>
+														for="nsvc_barcodecast">바코드캐스트</label></li>
 													<li><input type="checkbox" id="nsvc_cloud"
 														name="selmenu" class="gnb_input_check" value=""> <label
-														for="nsvc_cloud">네이버클라우드</label></li>
+														for="nsvc_cloud">바코드클라우드</label></li>
 													<li class="gnb_event"><input type="checkbox"
 														id="nsvc_barcodepay" name="selmenu"
 														class="gnb_input_check" value=""> <label
-														for="nsvc_barcodepay">네이버페이</label><em class="ic_gnb_new">New</em></li>
+														for="nsvc_barcodepay">바코드페이</label><em class="ic_gnb_new">New</em></li>
 													<li><input type="checkbox" id="nsvc_news"
 														name="selmenu" class="gnb_input_check" value=""> <label
 														for="nsvc_news">뉴스</label></li>
@@ -441,7 +441,7 @@
 														for="nsvc_nstore">N스토어</label></li>
 													<li><input type="checkbox" id="nsvc_barcodetv"
 														name="selmenu" class="gnb_input_check" value=""> <label
-														for="nsvc_barcodetv">네이버TV</label></li>
+														for="nsvc_barcodetv">바코드TV</label></li>
 												</ul>
 											</div>
 											<div class="svc_lst2">
@@ -552,7 +552,7 @@
 					</legend>
 					<div class="srch_field_on _view">
 						<span class="ipt_srch"> <label for="ipt_tx_srch"
-							id="search_placeholder">네이버로 영화검색</label> <input type="text"
+							id="search_placeholder">바코드로 영화검색</label> <input type="text"
 							id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100"
 							accesskey="s" style="ime-mode: active;" autocomplete="off">
 							<span class="align"></span> <span class="auto_tx"><a
@@ -1495,7 +1495,7 @@
 						: 한성숙</span><span><a
 						href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">사업자등록정보
 							확인</a>
-					<!-- N=a:fot.bizinfo --></span><br> 주소 : 경기도 성남시 분당구 불정로 6 네이버 그린팩토리
+					<!-- N=a:fot.bizinfo --></span><br> 주소 : 경기도 성남시 분당구 불정로 6 바코드 그린팩토리
 					<span>대표전화 : 1588-3820</span>
 				</p>
 				<address>
@@ -1528,12 +1528,12 @@ if (false) {
 function openWriteActualPointAlert (alertType, koreanTitle, movieCode, count, today, endDate) {
 	if (alertType == "ONE") {
 		setCookieLastUserReserveDate(today, endDate);
-		if (confirm("관람하신 " + koreanTitle + "에\n평점 등록 시 네이버페이 포인트 500원 적립!\n지금 평점쓰기 메뉴로 이동하시겠습니까?")) {
+		if (confirm("관람하신 " + koreanTitle + "에\n평점 등록 시 바코드페이 포인트 500원 적립!\n지금 평점쓰기 메뉴로 이동하시겠습니까?")) {
 			top.location.href = "http://movie.barcode.com/movie/bi/mi/point.nhn?code=" + movieCode;
 		}
 	} else if (alertType == "MORE") {
 		setCookieLastUserReserveDate(today, endDate);
-		if (confirm("관람하신 작품에 평점을 등록해주세요\n작품당 네이버페이 포인트 500원씩 적립!\n평점 미등록작 리스트를 확인하시겠습니까?")) {
+		if (confirm("관람하신 작품에 평점을 등록해주세요\n작품당 바코드페이 포인트 500원씩 적립!\n평점 미등록작 리스트를 확인하시겠습니까?")) {
 			top.location.href = "http://ticket.movie.barcode.com/Order/OverdueList.aspx";
 		}
 	}

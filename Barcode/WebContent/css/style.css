@@ -235,8 +235,13 @@ span.movie_ct{font-size:14px;color:black;white-space: nowrap;overflow: hidden;te
 
 /*********************place_*********************/
 
-#place_img{width:314px; height:100px; background:pink;
- margin-left:9px;}
+#place_img{
+ width:314px;
+ height:100px;
+ background:pink;
+ margin-left:9px;
+ overflow: hidden;
+ }
  #place_title{width:314px; height:38px; margin-left:9px; margin-top:5px; text-align:center;}
  #place_title span{font-weight:bold;}
  #place_title p{font-size:12px; color:gray; line-height:38px;}

@@ -126,12 +126,12 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .lst_rep_servs .svs_ic10{background-position:50% -900px} /* 영화예매 */
 .lst_rep_servs .svs_ic11{background-position:50% -1000px} /* 책 */
 .lst_rep_servs .svs_ic12{background-position:50% -1100px} /* 웹툰 */
-.lst_rep_servs .svs_ic13{background-position:50% -1200px} /* 네이버 클라우드 */
+.lst_rep_servs .svs_ic13{background-position:50% -1200px} /* 바코드 클라우드 */
 .lst_rep_servs .svs_ic14{background-position:50% -1300px} /* 스마트플레이스 */
 .lst_rep_servs .svs_ic15{background-position:50% -1400px} /* 지도 */
 .lst_rep_servs .svs_ic16{background-position:50% -1500px} /* 사전 */
 .lst_rep_servs .svs_ic17{background-position:50% -1600px} /* 캘린더 */
-.lst_rep_servs .svs_ic18{background-position:50% -1700px} /* 네이버 게임 */
+.lst_rep_servs .svs_ic18{background-position:50% -1700px} /* 바코드 게임 */
 .lst_rep_servs .svs_ic19{background-position:50% -1800px} /* pay */
 .lst_rep_servs .svs_ic20{background-position:50% -1900px} /* shopping */
 
@@ -997,7 +997,7 @@ a:hover,a:active,a:focus{text-decoration:underline}
 .ars_info_popup .menu_info .num{display:block;float:left;width:58px;margin-right:15px;background-color:#fafafa;color:#08a600;font-weight:bold;text-align:center;}
 .ars_info_popup .btn_confirm{overflow:hidden;display:block;width:45px;height:25px;margin:10px auto 20px;background:url(https://ssl.pstatic.net/static/help/support/btn_confirm.jpg) no-repeat;text-indent:-9999px;color:transparent;cursor:pointer}
 .ars_info_popup .btn_close{overflow:hidden;position:absolute;top:8px;right:8px;display:block;width:19px;height:19px;background:url(https://ssl.pstatic.net/static/help/support/btn_close3.jpg) no-repeat;text-indent:-9999px;color:transparent;cursor:pointer}
-/* 원네이버 적용 160704 */
+/* 원바코드 적용 160704 */
 #header {
     background-color:#ff4800;
 }

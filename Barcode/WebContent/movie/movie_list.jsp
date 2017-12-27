@@ -59,7 +59,7 @@
 						onmouseout="movieChart.restartTimer();">
 						<div class="flick_nav">
 							<a href="" id="flick_prev" class="btn_prev"
-								onclick="clickcr(this, &#39;run.pre&#39;, &#39;&#39;, &#39;&#39;, event);"
+								onclick="clickcr(this, 'run.pre', '', '', event);"
 								onfocus="oTimer.abort();" onblur="movieChart.restartTimer();"
 								title="이전"><em>이전</em></a>
 							<!-- N=a:run.pre -->
@@ -167,7 +167,7 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 						<!-- //flick area -->
 						<div class="flick_nav">
 							<a href="" id="flick_next" class="btn_next"
-								onclick="clickcr(this, &#39;run.next&#39;, &#39;&#39;, &#39;&#39;, event);"
+								onclick="clickcr(this, 'run.next', '', '', event);"
 								onfocus="oTimer.abort();" onblur="movieChart.restartTimer();"
 								title="다음"><em>다음</em></a>
 							<!-- N=a:run.next -->

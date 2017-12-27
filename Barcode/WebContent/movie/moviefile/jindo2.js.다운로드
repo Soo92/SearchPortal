@@ -7639,7 +7639,7 @@ jindo.$S.prototype.trim = function() {
  * escapeHTML 메서드는 HTML 특수 문자를 HTML 엔티티 형식으로 변환한다.
  * @return {$S} HTML 특수 문자를 엔티티 형식으로 변환한 새로운 $S 객체
  * @see $S#unescapeHTML
- * @remark  ", &, <, > ,' 를 각각 &quot;, &amp;, &lt;, &gt; &#39;로 변경한다.
+ * @remark  ", &, <, > ,' 를 각각 &quot;, &amp;, &lt;, &gt; '로 변경한다.
  * @example
  * var str = ">_<;;";
  * document.write( $S(str).escapeHTML() );
@@ -7690,7 +7690,7 @@ jindo.$S.prototype.times = function(nTimes) {
 /**
  * unescapeHTML 메서드는 이스케이프된 HTML을 원래의 HTML로 변환한다.
  * @return {$S} 이스케이프된 HTML을 원래의 HTML로 변환한 새로운 $S 객체
- * @remark  &quot;, &amp;, &lt;, &gt; &#39;를 각각 ", &, <, >, ' 으로 변경한다.
+ * @remark  &quot;, &amp;, &lt;, &gt; '를 각각 ", &, <, >, ' 으로 변경한다.
  * @see $S#escapeHTML
  * @example
  * var str = "&lt;a href=&quot;http://naver.com&quot;&gt;Naver&lt;/a&gt;";

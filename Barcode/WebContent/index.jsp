@@ -20,7 +20,6 @@
 <meta charset="utf-8">
 <head>
 	<title>바코드</title>
-	
 	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 	<script type="text/javascript" src="js/swiper.min.js"></script>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
@@ -268,7 +267,9 @@
 						<tr>
 							<td height="158px" style="border-bottom:none; padding-top:5px">
 							<a href="./reserve/place_board.jsp?index=<%=plist.get(i).getIdx()%>">
-								<div id="place_img"><img src="./reserve/img/<%=pmgr.getPlaceBoard(plist.get(i).getIdx()).getMainpic()%>"></div>
+								<div id="place_img">
+									<img width="100%" src="<%=pmgr.getImgSrc(plist.get(i).getContent())%>" onerror="this.src='./reserve/img/sampleimage.jpg'">
+								</div>
 								<div id="place_title">
 									<p class="movie_ct"><span>[<%=plist.get(i).getWriter() %>]</span><%=plist.get(i).getContent().replaceAll("\\<[^>]*>","") %> </p>
 								</div>

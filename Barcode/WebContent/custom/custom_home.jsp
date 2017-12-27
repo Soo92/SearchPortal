@@ -112,7 +112,7 @@ function reSearchParamChange(){
 				<form id="searchForm" name="searchForm" method="get"
 					action="https://help.naver.com/support/search/searchResultAll.nhn"
 					target="_top"
-					onsubmit="clickcr(this, &#39;tsn.search&#39;, &#39;&#39;, &#39;&#39;, event);return openSearch(this);"
+					onsubmit="clickcr(this, 'tsn.search', '', '', event);return openSearch(this);"
 					class="snb_search_box">
 					<fieldset>
 						<legend class="blind">바코드 도움말 검색 영역</legend>
@@ -120,8 +120,8 @@ function reSearchParamChange(){
 							<span class="srch_box"> <span class="ipt_box"> <!-- [D] input 요소에 포커스가 갈 경우 클래스 fcs 추가 및 value 삭제 -->
 									<input id="searchText" name="searchText" type="text"
 									title="도움말 검색" accesskey="w" value="궁금한 점이 있다면 도움말을 검색해 보세요."
-									onfocus="this.value = &#39;&#39;;"
-									onblur="if(this.value == &#39;&#39;) this.value = &#39;궁금한 점이 있다면 도움말을 검색해 보세요.&#39;;"
+									onfocus="this.value = '';"
+									onblur="if(this.value == '') this.value = '궁금한 점이 있다면 도움말을 검색해 보세요.';"
 									class="srch_kwd">
 							</span> <!-- [D] button 클릭할 경우 클래스 active 추가 -->
 							</span>
@@ -147,7 +147,7 @@ function reSearchParamChange(){
 					<h3>공지사항</h3>
 					<p>
 						<a href="https://help.naver.com/#"
-							onclick="clickcr(this, &#39;tsn.tick&#39;, &#39;&#39;, &#39;&#39;, event);">[제작
+							onclick="clickcr(this, 'tsn.tick', '', '', event);">[제작
 							중] ~12/27 (수), '바코드 포탈' 서비스 완성 예정.</a>
 					</p>
 				</div>
@@ -177,124 +177,124 @@ function reSearchParamChange(){
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=744"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="가계부">가계부</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17594"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="개발자센터 OpenAPI">개발자센터 OpenAPI</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=958"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="게시중단">게시중단</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=10576"
-											onclick="clickcr(this, &#39;1&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '1', '', '', event);"
 											title="그라폴리오">그라폴리오</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=745"
-											onclick="clickcr(this, &#39;lst.finance&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.finance', '', '', event);"
 											title="금융/증권">금융/증권</a></li>
 									</ul>
 									<h4>ㄴ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
-											onclick="clickcr(this, &#39;lst.weather&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.weather', '', '', event);"
 											title="날씨">날씨</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=801"
-											onclick="clickcr(this, &#39;lst.game&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.game', '', '', event);"
 											title="바코드 PC게임">바코드 PC게임</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1044"
-											onclick="clickcr(this, &#39;lst.qr&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.qr', '', '', event);"
 											title="바코드 QR코드">바코드 QR코드</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=18027"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="바코드 스마트보드">바코드 스마트보드</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17063"
-											onclick="clickcr(this, &#39;lst.nearo&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.nearo', '', '', event);"
 											title="바코드 아이디로 로그인">바코드 아이디로 로그인</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1074"
-											onclick="clickcr(this, &#39;lst.general&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.general', '', '', event);"
 											title="바코드 전반">바코드 전반</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=636"
-											onclick="clickcr(this, &#39;lst.ndrive&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.ndrive', '', '', event);"
 											title="바코드 클라우드">바코드 클라우드</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;lst.cleaner&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.cleaner', '', '', event);"
 											title="바코드 클리너">바코드 클리너</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=705"
-											onclick="clickcr(this, &#39;lst.tvcast&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.tvcast', '', '', event);"
 											title="바코드TV">바코드TV</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=984"
-											onclick="clickcr(this, &#39;lst.me&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.me', '', '', event);"
 											title="바코드me">바코드me</a></li>
 										<li><a href="http://help.line.me/line/?lang=ko"
-											onclick="clickcr(this, &#39;lst.line&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.line', '', '', event);"
 											target="_blank" title="바코드라인">바코드라인</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;lst.vaccine&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.vaccine', '', '', event);"
 											title="바코드백신">바코드백신</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1035"
-											onclick="clickcr(this, &#39;lst.software&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.software', '', '', event);"
 											title="바코드소프트웨어">바코드소프트웨어</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=747"
-											onclick="clickcr(this, &#39;lst.shopping&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.shopping', '', '', event);"
 											title="바코드쇼핑">바코드쇼핑</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=12270"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="바코드예약">바코드예약</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11709"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="바코드예약 파트너센터">바코드예약 파트너센터</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=643"
-											onclick="clickcr(this, &#39;lst.office&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.office', '', '', event);"
 											title="바코드오피스">바코드오피스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=996"
-											onclick="clickcr(this, &#39;lst.cast&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.cast', '', '', event);"
 											title="바코드캐스트">바코드캐스트</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;lst.capture&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.capture', '', '', event);"
 											title="바코드캡처">바코드캡처</a></li>
 										<li><a href="http://help.pay.naver.com/"
-											onclick="clickcr(this, &#39;lst.checkout&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.checkout', '', '', event);"
 											target="_blank" title="바코드페이">바코드페이</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=16738"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="바코드펜션예약">바코드펜션예약</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=729"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="바코드포스트">바코드포스트</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17688"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="네임카드">네임카드</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=997"
-											onclick="clickcr(this, &#39;lst.news&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.news', '', '', event);"
 											title="뉴스">뉴스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=998"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="뉴스 라이브러리">뉴스 라이브러리</a></li>
 									</ul>
 								</div>
@@ -303,130 +303,130 @@ function reSearchParamChange(){
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=3609"
-											onclick="clickcr(this, &#39;lst.video&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.video', '', '', event);"
 											title="동영상">동영상</a></li>
 									</ul>
 									<h4>ㅁ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=706"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="매거진캐스트">매거진캐스트</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=639"
-											onclick="clickcr(this, &#39;lst.memo&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.memo', '', '', event);"
 											title="메모">메모</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=2342"
-											onclick="clickcr(this, &#39;lst.mail&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.mail', '', '', event);"
 											title="메일">메일</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=644"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="문자메시지">문자메시지</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=572"
-											onclick="clickcr(this, &#39;lst.music&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.music', '', '', event);"
 											title="뮤직">뮤직</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;lst.player&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.player', '', '', event);"
 											title="미디어 플레이어">미디어 플레이어</a></li>
 									</ul>
 									<h4>ㅂ</h4>
 									<ul>
 										<li><a href="http://www.band.us/cs/#!/help"
-											onclick="clickcr(this, &#39;lst.band&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.band', '', '', event);"
 											title="밴드">밴드</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=746"
-											onclick="clickcr(this, &#39;lst.land&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.land', '', '', event);"
 											title="부동산">부동산</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=520"
-											onclick="clickcr(this, &#39;lst.blog&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.blog', '', '', event);"
 											title="블로그">블로그</a></li>
 									</ul>
 									<h4>ㅅ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1000"
-											onclick="clickcr(this, &#39;lst.dic&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.dic', '', '', event);"
 											title="사전">사전</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
-											onclick="clickcr(this, &#39;lst.life&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.life', '', '', event);"
 											title="생활형서비스">생활형서비스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=607"
-											onclick="clickcr(this, &#39;icn.register&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'icn.register', '', '', event);"
 											title="스마트플레이스">스마트플레이스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1001"
-											onclick="clickcr(this, &#39;lst.sports&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.sports', '', '', event);"
 											title="스포츠">스포츠</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=964"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="신고센터">신고센터</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="신용카드">신용카드</a></li>
 									</ul>
 									<h4>ㅇ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=521"
-											onclick="clickcr(this, &#39;lst.item&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.item', '', '', event);"
 											title="아이템팩토리">아이템팩토리</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1042"
-											onclick="clickcr(this, &#39;lst.analytics&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.analytics', '', '', event);"
 											title="애널리틱스">애널리틱스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=726"
-											onclick="clickcr(this, &#39;lst.adpost&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.adpost', '', '', event);"
 											title="애드포스트">애드포스트</a></li>
 										<li><a
 											href="http://hgcs.game.sports.news.naver.com/spring/content/gamecc/openPopup?serviceCode=ya9_n"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											target="_blank" title="야구9단">야구9단</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=3181"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="열린연단">열린연단</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=800"
-											onclick="clickcr(this, &#39;lst.movie&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.movie', '', '', event);"
 											title="영화">영화</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=16978"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="오디오클립">오디오클립</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=724"
-											onclick="clickcr(this, &#39;lst.opencast&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.opencast', '', '', event);"
 											title="오픈캐스트">오픈캐스트</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17568"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="웨일">웨일</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=14882"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="웹마스터도구">웹마스터도구</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=804"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="웹소설">웹소설</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=799"
-											onclick="clickcr(this, &#39;lst.comic&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.comic', '', '', event);"
 											title="웹툰/만화">웹툰/만화</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=548"
-											onclick="clickcr(this, &#39;lst.abuse&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.abuse', '', '', event);"
 											title="이용제한">이용제한</a></li>
 									</ul>
 								</div>
@@ -435,121 +435,121 @@ function reSearchParamChange(){
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=5843"
-											onclick="clickcr(this, &#39;lst.auto&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.auto', '', '', event);"
 											title="자동차">자동차</a></li>
 										<li><a
 											href="https://help.naver.com/support/contents/contents.nhn?serviceNo=1074&amp;categoryNo=10027"
-											onclick="clickcr(this, &#39;lst.ends&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.ends', '', '', event);"
 											title="종료서비스">종료서비스</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=986"
-											onclick="clickcr(this, &#39;lst.contact&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.contact', '', '', event);"
 											title="주소록">주소록</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=768"
-											onclick="clickcr(this, &#39;lst.map&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.map', '', '', event);"
 											title="지도">지도</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1003"
-											onclick="clickcr(this, &#39;lst.kin&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.kin', '', '', event);"
 											title="지식iN">지식iN</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1000&amp;categoryNo=2728"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="지식백과">지식백과</a></li>
 									</ul>
 									<h4>ㅉ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=987"
-											onclick="clickcr(this, &#39;lst.note&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.note', '', '', event);"
 											title="쪽지">쪽지</a></li>
 									</ul>
 									<h4>ㅊ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=702"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="책">책</a></li>
 									</ul>
 									<h4>ㅋ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=522"
-											onclick="clickcr(this, &#39;lst.cafe&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.cafe', '', '', event);"
 											title="카페">카페</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=635"
-											onclick="clickcr(this, &#39;lst.calender&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.calender', '', '', event);"
 											title="캘린더">캘린더</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=18438"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="클로바">클로바</a></li>
 									</ul>
 									<h4>ㅌ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11764"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="톡톡파트너센터">톡톡파트너센터</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=606"
-											onclick="clickcr(this, &#39;lst.search&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.search', '', '', event);"
 											title="통합검색">통합검색</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1036"
-											onclick="clickcr(this, &#39;lst.tool&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.tool', '', '', event);"
 											title="툴바">툴바</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="툴즈">툴즈</a></li>
 									</ul>
 									<h4>ㅍ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=802"
-											onclick="clickcr(this, &#39;lst.photo&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.photo', '', '', event);"
 											title="포토갤러리">포토갤러리</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1037"
-											onclick="clickcr(this, &#39;lst.photoviewer&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.photoviewer', '', '', event);"
 											title="포토뷰어">포토뷰어</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=640"
-											onclick="clickcr(this, &#39;lst.photoprint&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.photoprint', '', '', event);"
 											title="포토인화">포토인화</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11492"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="폴라">폴라</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1080"
-											onclick="clickcr(this, &#39;lst.privacy&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.privacy', '', '', event);"
 											title="프라이버시 센터">프라이버시 센터</a></li>
 									</ul>
 									<h4>ㅎ</h4>
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=1002"
-											onclick="clickcr(this, &#39;lst.academic&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.academic', '', '', event);"
 											title="학술정보">학술정보</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11270"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="항공권">항공권</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=770"
-											onclick="clickcr(this, &#39;lst.happybean&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.happybean', '', '', event);"
 											title="해피빈">해피빈</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=14445"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="호텔">호텔</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=532"
-											onclick="clickcr(this, &#39;lst.id&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.id', '', '', event);"
 											title="회원정보">회원정보</a></li>
 									</ul>
 								</div>
@@ -558,31 +558,31 @@ function reSearchParamChange(){
 									<ul>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17925"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="DISCO">DISCO</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=14493"
-											onclick="clickcr(this, &#39;lst.lab&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.lab', '', '', event);"
 											title="Data Lab">Data Lab</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=803"
-											onclick="clickcr(this, &#39;lst.nstore&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, 'lst.nstore', '', '', event);"
 											title="N스토어">N스토어</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=17996"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="Papago">Papago</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=18229"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="Tarte">Tarte</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=12240"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="V LIVE">V LIVE</a></li>
 										<li><a
 											href="https://help.naver.com/support/service/main.nhn?serviceNo=11452"
-											onclick="clickcr(this, &#39;&#39;, &#39;&#39;, &#39;&#39;, event);"
+											onclick="clickcr(this, '', '', '', event);"
 											title="modoo!">modoo!</a></li>
 									</ul>
 								</div>
@@ -595,7 +595,7 @@ function reSearchParamChange(){
 							<h2>
 								<a
 									href="https://nid.naver.com/user2/help/idInquiry.nhn?menu=idinquiry"
-									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)"><span
+									onclick="clickcr(this, 'idm.lost', '', '', event)"><span
 									class="blind">회원정보관리</span></a>
 							</h2>
 							<p>
@@ -603,13 +603,13 @@ function reSearchParamChange(){
 							</p>
 							<ul class="lst_md">
 								<li><a href="../member/findid.jsp"
-									onclick="clickcr(this, &#39;idm.lost&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호/ID 찾기</a></li>
+									onclick="clickcr(this, 'idm.lost', '', '', event)">비밀번호/ID 찾기</a></li>
 								<li><a href="../member/findpw.jsp"
-									onclick="clickcr(this, &#39;idm.chpasswd&#39;, &#39;&#39;, &#39;&#39;, event)">비밀번호 변경</a></li>
+									onclick="clickcr(this, 'idm.chpasswd', '', '', event)">비밀번호 변경</a></li>
 								<li><a href="../member/mypage.jsp"
-									onclick="clickcr(this, &#39;idm.edit&#39;, &#39;&#39;, &#39;&#39;, event)">회원정보 수정</a></li>
+									onclick="clickcr(this, 'idm.edit', '', '', event)">회원정보 수정</a></li>
 								<li><a href=""
-									onclick="clickcr(this, &#39;idm.protect&#39;, &#39;&#39;, &#39;&#39;, event)">로그인 보호 설정</a></li>
+									onclick="clickcr(this, 'idm.protect', '', '', event)">로그인 보호 설정</a></li>
 							</ul>
 						</div>
 					</div>
@@ -623,11 +623,11 @@ function reSearchParamChange(){
 						<ul class="lst_noti">
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659166"
-								title="[복구완료] 11/26 (일), &#39;부동산&#39;...">[복구완료] 11/26 (일),
+								title="[복구완료] 11/26 (일), '부동산'...">[복구완료] 11/26 (일),
 									'부동산'...</a></li>
 							<li><a
 								href="http://help.naver.com/support/bbs/notice.nhn?docId=10000000000030659138"
-								title="[복구완료] 11/23 (금), &#39;부동산&#39;...">[복구완료] 11/23 (금),
+								title="[복구완료] 11/23 (금), '부동산'...">[복구완료] 11/23 (금),
 									'부동산'...</a></li>
 						</ul>
 						<a href="Barcode_Notice.jsp" class="nt_more"><span
@@ -703,7 +703,7 @@ function reSearchParamChange(){
 				<a
 					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
 					class="btn_drt"
-					onclick="clickcr(this, &#39;rbk.banner&#39;, &#39;&#39;, &#39;&#39;, event)"
+					onclick="clickcr(this, 'rbk.banner', '', '', event)"
 					target="_blank">지식in "바코드 사용법" 바로가기</a> <a
 					id="kinParterPopupCloseButton" class="btn_close"><span
 					class="blind">팝업창 닫기</span></a>
@@ -720,7 +720,7 @@ function reSearchParamChange(){
 					200개!! 지금 바로 지식iN에서 궁금한 점을 찾아 보세요.</p>
 				<a
 					href="http://kin.naver.com/qna/list.nhn?m=noanswer&amp;dirId=10601"
-					onclick="clickcr(this, &#39;kbr.search&#39;, &#39;&#39;, &#39;&#39;, event)"
+					onclick="clickcr(this, 'kbr.search', '', '', event)"
 					class="srch" target="_blank"><span class="blind">지식iN에서
 						바코드 사용법 검색하기</span></a>
 				<h2 class="blind">찾으시는 내용이 없다면 지식iN에 물어보세요.</h2>
@@ -728,7 +728,7 @@ function reSearchParamChange(){
 					궁금한 점이 있으시면 지금 바로 지식iN에서 질문해 보세요.</p>
 				<a
 					href="http://kin.naver.com/qna/question.nhn?dirId=10601&amp;d1Id=1"
-					onclick="clickcr(this, &#39;kbr.ask&#39;, &#39;&#39;, &#39;&#39;, event)"
+					onclick="clickcr(this, 'kbr.ask', '', '', event)"
 					class="ask" target="_blank"><span class="blind">지식iN에서
 						바코드 사용법 질문하기</span></a>
 				<p class="blind">질문 내용을 등록하신 후 ‘바코드사용법’을 선택해주시면 더욱 정확하고 빠르게 답변

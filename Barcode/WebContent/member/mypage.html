@@ -9,7 +9,7 @@
 		<div id="header">
 			<div class="top">
 				<h1>
-					<a href="http://www.naver.com/" target="_top" onclick="clickcr(this,&#39;STA.naver&#39;,&#39;&#39;,&#39;&#39;,event);" class="link_logo"><span class="sptxt">NAVER</span><em></em></a> <a href="https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR" onclick="clickcr(this,&#39;STA.my&#39;,&#39;&#39;,&#39;&#39;,event);" class="link_subtit "><span class="sptxt">내정보</span><em></em></a>
+					<a href="http://www.naver.com/" target="_top" onclick="clickcr(this,'STA.naver','','',event);" class="link_logo"><span class="sptxt">NAVER</span><em></em></a> <a href="https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR" onclick="clickcr(this,'STA.my','','',event);" class="link_subtit "><span class="sptxt">내정보</span><em></em></a>
 				</h1>
 				<div class="gnb_area">
 					<div id="gnb" class="gnb_one">
@@ -134,14 +134,14 @@
 											</div>
 										</div>
 										<div class="gnb_banner">
-											<a href="http://campaign.naver.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="네이버페이 | 12월 이벤트" width="265" height="47" src="./mypage_files/promo_npay_1712.png"></a>
+											<a href="http://campaign.naver.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="바코드페이 | 12월 이벤트" width="265" height="47" src="./mypage_files/promo_npay_1712.png"></a>
 										</div>
 										<div class="gnb_linkwrp">
 											<a href="http://www.naver.com/more.html" class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a>
 										</div>
 									</div>
 									<div class="gnb_svc_more" id="gnb_svc_more" style="">
-										<strong class="blind">네이버 주요 서비스</strong>
+										<strong class="blind">바코드 주요 서비스</strong>
 										<div class="gnb_bg_top"></div>
 										<div class="gnb_svc_hd">
 											<strong class="gnb_svc_tit">바로가기 설정</strong><span class="link"><a href="http://www.naver.com/more.html">전체
@@ -152,10 +152,10 @@
 												<ul class="gnb_first">
 													<li><input type="checkbox" id="nsvc_game" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_game">게임</label></li>
 													<li><input type="checkbox" id="nsvc_weather" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_weather">날씨</label></li>
-													<li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">네이버쇼핑</label></li>
-													<li><input type="checkbox" id="nsvc_navercast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navercast">네이버캐스트</label></li>
-													<li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">네이버클라우드</label></li>
-													<li class="gnb_event"><input type="checkbox" id="nsvc_naverpay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_naverpay">네이버페이</label><em class="ic_gnb_new">New</em></li>
+													<li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">바코드쇼핑</label></li>
+													<li><input type="checkbox" id="nsvc_navercast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navercast">바코드캐스트</label></li>
+													<li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">바코드클라우드</label></li>
+													<li class="gnb_event"><input type="checkbox" id="nsvc_naverpay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_naverpay">바코드페이</label><em class="ic_gnb_new">New</em></li>
 													<li><input type="checkbox" id="nsvc_news" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_news">뉴스</label></li>
 													<li><input type="checkbox" id="nsvc_comic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_comic">만화/웹툰</label></li>
 													<li><input type="checkbox" id="nsvc_memo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_memo">메모</label></li>
@@ -186,7 +186,7 @@
 													<li><input type="checkbox" id="nsvc_calendar" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_calendar">캘린더</label></li>
 													<li><input type="checkbox" id="nsvc_photo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_photo">포토갤러리</label></li>
 													<li><input type="checkbox" id="nsvc_nstore" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_nstore">N스토어</label></li>
-													<li><input type="checkbox" id="nsvc_navertv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navertv">네이버TV</label></li>
+													<li><input type="checkbox" id="nsvc_navertv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navertv">바코드TV</label></li>
 												</ul>
 											</div>
 											<div class="svc_lst2">
@@ -296,11 +296,11 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 					<!-- 프로필 설정 -->
 					<div class="sh_group">
 						<div class="sh_header">
-							<h2>네이버 프로필</h2>
-							<a href="javascript:toggle(&#39;profile&#39;);" class="link_help"><i id="i_profile" class="spico ico_arr3_dn">도움말</i></a>
+							<h2>바코드 프로필</h2>
+							<a href="javascript:toggle('profile');" class="link_help"><i id="i_profile" class="spico ico_arr3_dn">도움말</i></a>
 							<!-- [D] 감추기 보이기 dislay:none/block -->
 							<p id="p_profile" class="contxt" style="display: none">
-								네이버에서의 <em>'나'를 표현하는 프로필</em> 정보입니다. <br> 수정 화면에서 프로필 사진과
+								바코드에서의 <em>'나'를 표현하는 프로필</em> 정보입니다. <br> 수정 화면에서 프로필 사진과
 								별명을 변경하세요.
 							</p>
 						</div>
@@ -308,7 +308,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 							<dl class="sh_lst">
 								<dt class="blind">프로필 사진</dt>
 								<dd class="pic_desc">
-									<a href="https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR#" onclick="changeImage();clickcr(this,&#39;imn.prfmodify&#39;,&#39;&#39;,&#39;&#39;,event);">
+									<a href="https://nid.naver.com/user2/help/myInfo.nhn?lang=ko_KR#" onclick="changeImage();clickcr(this,'imn.prfmodify','','',event);">
 										<img src="./mypage_files/default.png" width="80" height="80" alt=""> <span class="spimg img_frame"></span>
 									</a>
 								</dd>
@@ -319,7 +319,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 							</dl>
 						</div>
 						<p class="btn_area_btm">
-							<a onclick="onclick=&quot;fold(1)&quot;" class="btn_model"><b class="btn2" onclick="fold(&#39;a1&#39;)">수정</b></a>
+							<a onclick="onclick=&quot;fold(1)&quot;" class="btn_model"><b class="btn2" onclick="fold('a1')">수정</b></a>
 						</p>
 					</div>
 				</div>
@@ -328,9 +328,9 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 					<div class="sh_group ">
 						<div class="sh_header">
 							<h2>연락처</h2>
-							<a href="javascript:toggle(&#39;userInfo&#39;);" class="link_help"><i id="i_userInfo" class="spico ico_arr3_dn">도움말</i></a>
+							<a href="javascript:toggle('userInfo');" class="link_help"><i id="i_userInfo" class="spico ico_arr3_dn">도움말</i></a>
 							<p id="p_userInfo" class="contxt" style="display: none">
-								네이버에서 <em>중요 내용을 알려드릴 때 사용</em>하는 연락처 정보입니다. 보다 안전한 정보 보호를 위해
+								바코드에서 <em>중요 내용을 알려드릴 때 사용</em>하는 연락처 정보입니다. 보다 안전한 정보 보호를 위해
 								등록된 연락처의 일부만 보여드립니다. 이름 및 정확한 연락처 정보는 수정 화면에서 확인 가능합니다.
 							</p>
 						</div>
@@ -345,7 +345,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 							</dl>
 						</div>
 						<p class="btn_area_btm">
-							<a onclick="onclick=&quot;fold(2)&quot;" class="btn_model"><b class="btn2" onclick="fold(&#39;a2&#39;)">수정</b></a>
+							<a onclick="onclick=&quot;fold(2)&quot;" class="btn_model"><b class="btn2" onclick="fold('a2')">수정</b></a>
 						</p>
 					</div>
 					<!-- 가입된 단체아이디 -->
@@ -355,9 +355,9 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 					<div class="sh_group">
 						<div class="sh_header">
 							<h2>지역 설정</h2>
-							<a href="javascript:toggle(&#39;region&#39;);" class="link_help"><i id="i_region" class="spico ico_arr3_dn">도움말</i></a>
+							<a href="javascript:toggle('region');" class="link_help"><i id="i_region" class="spico ico_arr3_dn">도움말</i></a>
 							<p id="p_region" class="contxt" style="display: none">
-								네이버 서비스에서 <em>공통으로 사용되는 지역 정보</em>입니다. <br> 설정되어 있는 모든 지역을
+								바코드 서비스에서 <em>공통으로 사용되는 지역 정보</em>입니다. <br> 설정되어 있는 모든 지역을
 								보거나 수정하시려면 설정하기를 클릭하세요.
 							</p>
 						</div>
@@ -367,7 +367,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 							</p>
 						</div>
 						<p class="btn_area_btm">
-							<a onclick="fold(3)" class="btn_model"><b class="btn2" onclick="fold(&#39;a3&#39;)">설정</b></a>
+							<a onclick="fold(3)" class="btn_model"><b class="btn2" onclick="fold('a3')">설정</b></a>
 						</p>
 					</div>
 				</div>
@@ -376,7 +376,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 				<div class="1" id="a1" style="display: none;">
     <div class="c_header">
         <h2>프로필 수정</h2>
-        <p class="contxt">네이버 대표 프로필과 별명을 수정 하실 수 있습니다.</p>
+        <p class="contxt">바코드 대표 프로필과 별명을 수정 하실 수 있습니다.</p>
     </div>
     <form id="profileForm" method="post" enctype="multipart/form-data">
         <input type="hidden" id="helpToken" name="token_help" value="G9BYba4BnZEtYid2">
@@ -438,7 +438,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 				        <div class="c_header"> 
 							<h2>연락처 수정</h2>
 							<p class="contxt"><strong>dltjdtn321</strong>님의 연락처 정보입니다.<br>
-							회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 명백한 동의 없이 공개 또는 제 3자에게 제공되지 않습니다. <a href="http://policy.naver.com/policy/privacy.html" target="_blank" onclick="clickcr(this,&#39;inf.privacy&#39;,&#39;&#39;,&#39;&#39;,event);">개인정보처리방침</a></p>
+							회원정보는 개인정보처리방침에 따라 안전하게 보호되며, 회원님의 명백한 동의 없이 공개 또는 제 3자에게 제공되지 않습니다. <a href="http://policy.naver.com/policy/privacy.html" target="_blank" onclick="clickcr(this,'inf.privacy','','',event);">개인정보처리방침</a></p>
 						</div>
 						<form id="fm" name="fm">
 							
@@ -478,11 +478,11 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 									<td>
 										<div class="tdcell">
 											<p id="p_txt_phoneNo" class="contxt_tit">+82 10-8***-***2</p>
-											<p class="contxt_desc">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 네이버로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
+											<p class="contxt_desc">아이디, 비밀번호 찾기 등 본인확인이 필요한 경우 또는 유료 결제 등 바코드로부터 알림을 받을 때 사용할 휴대전화입니다.</p>
 											<div id="d_phoneNo" style="display:none">
 												<p id="p_txt_phoneNo_changeYn" class="contxt_tit2"><label for="phoneNo">변경할 휴대전화</label></p>
 												<p class="contxt_webctrl">
-													<select id="internationalCode" name="internationalCode" class="country_drop" onchange="javascript:setInternationalCode(&#39;internationalCode&#39;,&#39;input_internationalCode&#39;, &#39;&#39;);">
+													<select id="internationalCode" name="internationalCode" class="country_drop" onchange="javascript:setInternationalCode('internationalCode','input_internationalCode', '');">
 															  	 	<option value="233">가나</option>
 															  	 	<option value="241">가봉</option>
 															  	 	<option value="592">가이아나</option>
@@ -700,7 +700,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 													</select>	
 												    <span class="country_code_w"> 
 				                                        <span id="input_internationalCode" class="country_code">+82</span> 
-														<input type="text" id="phoneNo" name="phoneNo" maxlength="14" onkeydown="check_num_ajax2(&#39;phoneNo&#39;, &#39;2&#39;, &#39;e_phoneNo&#39;,&#39;e_authNo&#39;);">
+														<input type="text" id="phoneNo" name="phoneNo" maxlength="14" onkeydown="check_num_ajax2('phoneNo', '2', 'e_phoneNo','e_authNo');">
 				                                    </span> 
 													<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="sendSmsForChangePhoneNo();return false;" class="btn_model"><span class="btn4">인증</span></a>
 												</p>
@@ -708,17 +708,17 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 					
 												<p class="contxt_tit2"><label for="authNo">인증번호 입력</label></p>
 												<p class="contxt_webctrl">
-													<input type="text" id="authNo" name="authNo" value="" maxlength="6" onkeydown="check_num_ajax2(&#39;authNo&#39;, &#39;2&#39;, &#39;e_authNo&#39;,&#39;e_phoneNo&#39;);" disabled="" class="focus" style="width:254px">
+													<input type="text" id="authNo" name="authNo" value="" maxlength="6" onkeydown="check_num_ajax2('authNo', '2', 'e_authNo','e_phoneNo');" disabled="" class="focus" style="width:254px">
 												</p>
 												<p id="e_authNo" class="contxt_alert"></p>
 					
 												<p class="btn_area_btm">
 													<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="checkAuthNoForChangePhoneNo();return false;" class="btn_model"><b id="b_txt_phoneNo_reg" class="btn3">수정완료</b></a>
-													<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="cancelChange(&#39;phoneNo&#39;);return false;" class="btn_model"><b id="b_txt_phoneNo_cncl" class="btn2">수정취소</b></a>
+													<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="cancelChange('phoneNo');return false;" class="btn_model"><b id="b_txt_phoneNo_cncl" class="btn2">수정취소</b></a>
 												</p>
 											</div>
 											<p id="p_phoneNo" class="btn_area_btm">
-												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="display(&#39;phoneNo&#39;);return false;" class="btn_model"><b class="btn2">수정</b></a>
+												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="display('phoneNo');return false;" class="btn_model"><b class="btn2">수정</b></a>
 											</p>
 									</div>
 								</td>
@@ -735,13 +735,13 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 								<td>
 									<div class="tdcell">
 										<p id="p_txt_myLetterEmail" class="contxt_tit">dltjdtn321@naver.com</p>
-										<p class="contxt_desc">이벤트 등 다양한 네이버의 소식 및 알림을 받기 위해 사용할 이메일 주소입니다.</p>
+										<p class="contxt_desc">이벤트 등 다양한 바코드의 소식 및 알림을 받기 위해 사용할 이메일 주소입니다.</p>
 										<p class="contxt_webctrl2">
-											<input type="checkbox" id="isEmsCheck" name="isEmsCheck" onclick="setEmsCheck();"><label for="isEmsCheck">네이버의 이벤트 등 프로모션 관련 안내 메일을 수신하겠습니다.</label>
-											<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="toggle(&#39;emsCheck&#39;);return false;" class="link_more"><i id="i_emsCheck" class="spico ico_arr4_dn">더보기</i></a>
+											<input type="checkbox" id="isEmsCheck" name="isEmsCheck" onclick="setEmsCheck();"><label for="isEmsCheck">바코드의 이벤트 등 프로모션 관련 안내 메일을 수신하겠습니다.</label>
+											<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="toggle('emsCheck');return false;" class="link_more"><i id="i_emsCheck" class="spico ico_arr4_dn">더보기</i></a>
 										</p>
 										<p id="p_emsCheck" style="display:none" class="contxt_desc">
-										     	  네이버페이 서비스는 해당 서비스의 마이페이지에서 수신 여부를 설정할 수 있습니다. 주요 공지사항 및 이벤트 당첨 안내등은 수신 <em>동의 여부에 관계없이 발송</em>되며, 이메일 수신동의 상태의 반영은 최대 2일이 소요될 수 있습니다.
+										     	  바코드페이 서비스는 해당 서비스의 마이페이지에서 수신 여부를 설정할 수 있습니다. 주요 공지사항 및 이벤트 당첨 안내등은 수신 <em>동의 여부에 관계없이 발송</em>되며, 이메일 수신동의 상태의 반영은 최대 2일이 소요될 수 있습니다.
 										     </p>
 										<div id="d_myLetterEmail" style="display: block;">
 											<p class="contxt_tit2"><label for="myLetterEmail">변경할 이메일</label></p>
@@ -752,11 +752,11 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 											<p id="e_myLetterEmail" class="contxt_alert"></p>
 											<p class="btn_area_btm">
 												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="setEmail();return false;" class="btn_model"><b class="btn3">수정완료</b></a>
-												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="cancelChange(&#39;myLetterEmail&#39;);return false;" class="btn_model"><b class="btn2">수정취소</b></a>
+												<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="cancelChange('myLetterEmail');return false;" class="btn_model"><b class="btn2">수정취소</b></a>
 											</p>
 										</div>
 										<p id="p_myLetterEmail" class="btn_area_btm" style="display: none;">
-											<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="display(&#39;myLetterEmail&#39;);return false;" class="btn_model"><b class="btn2">수정</b></a>
+											<a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="display('myLetterEmail');return false;" class="btn_model"><b class="btn2">수정</b></a>
 										</p>
 									</div>
 								</td>
@@ -770,7 +770,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 				<div class="3" id="a3" style="display: none;">
 						<div class="c_header">
 							<h2>지역설정</h2>
-							<p class="contxt">네이버 서비스에서 공통으로 사용하고 있는 지역 목록입니다.</p>
+							<p class="contxt">바코드 서비스에서 공통으로 사용하고 있는 지역 목록입니다.</p>
 						</div>
 					<form name="fm" id="fm" action="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/member/mypage.html" method="post" onsubmit="return false;">
 						<!-- 지역설정 테이블 -->
@@ -787,7 +787,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 							</tr>
 						</thead>			
 							<tbody id="tl">
-							<tr id="del735" class=""><td id="ntd1735" class="tbtit edit"><div id="chk735" style="display:none;">    <label id="nameTag735" for="tyrd2">관심지 1</label></div><div class="edit" id="rNm735" style="display:block">     <input type="text" maxlength="10" onfocus="onClassName(&#39;rName735&#39;);" onkeydown="displayArr(735);" onclick="displayObj(&#39;arr2735&#39;);hiddenObj(&#39;arr1735&#39;);onClassName(&#39;rName735&#39;);" onkeyup="checkRegionName(&#39;regionsetting1&#39;, 735);checkLength(10,735);" onblur="hiddenObj(&#39;arr2735&#39;);hiddenObj(&#39;arr1735&#39;);offClassName(&#39;rName735&#39;);" class="inp_txt" id="rName735" name="rName735" value="주소 입력" title="관심지 제목 입력">     <span id="arr2735" class="ly_localnotify_arrow" style="display: none;">     <span class="txt">위치명을 입력해주세요. (최대 <strong>10자</strong>)<br>예시) 집, 회사</span>     <span class="arrow"></span>     </span>     <span id="arr1735" class="ly_localnotify_arrow" style="display:none">     <span class="txt"><strong>동일한 위치명이 존재합니다.</strong></span>     <span class="arrow"></span>     </span></div></td><td id="ntd2735" class="edit"><div id="mod735" style="display:block">    <span id="s1735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName(&#39;rInput1735&#39;, &#39;rInput2735&#39;, &#39;rInput3735&#39;);getSubRegionList(&#39;region0&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;,735);return false;" value="" id="rInput1735" class="select fir">부산광역시</a><input type="hidden" id="rHidden1735" value="08"></span>    <div id="areaA735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData(&#39;09&#39;,&#39;서울특별시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">서울특별시</a></li><li class=""><a href="javascript:inputData(&#39;08&#39;,&#39;부산광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">부산광역시</a></li><li class="selected"><a href="javascript:inputData(&#39;11&#39;,&#39;인천광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">인천광역시</a></li><li class=""><a href="javascript:inputData(&#39;06&#39;,&#39;대구광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">대구광역시</a></li><li class=""><a href="javascript:inputData(&#39;05&#39;,&#39;광주광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">광주광역시</a></li><li class=""><a href="javascript:inputData(&#39;07&#39;,&#39;대전광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">대전광역시</a></li><li class=""><a href="javascript:inputData(&#39;10&#39;,&#39;울산광역시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">울산광역시</a></li></ul><ul><li class=""><a href="javascript:inputData(&#39;17&#39;,&#39;세종특별자치시&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">세종특별자치시</a></li><li class=""><a href="javascript:inputData(&#39;02&#39;,&#39;경기도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">경기도</a></li><li class=""><a href="javascript:inputData(&#39;01&#39;,&#39;강원도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">강원도</a></li><li class=""><a href="javascript:inputData(&#39;15&#39;,&#39;충청남도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">충청남도</a></li><li class=""><a href="javascript:inputData(&#39;16&#39;,&#39;충청북도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">충청북도</a></li><li class=""><a href="javascript:inputData(&#39;04&#39;,&#39;경상북도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">경상북도</a></li><li class=""><a href="javascript:inputData(&#39;03&#39;,&#39;경상남도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">경상남도</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData(&#39;13&#39;,&#39;전라북도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">전라북도</a></li><li class=""><a href="javascript:inputData(&#39;12&#39;,&#39;전라남도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">전라남도</a></li><li class=""><a href="javascript:inputData(&#39;14&#39;,&#39;제주도&#39;,&#39;rHidden1735&#39;,&#39;rInput1735&#39;, 735);">제주도</a></li></ul><a href="javascript:hiddenObj(&#39;areaA735&#39;);" onclick="clickcr(this, closeLayer ,&#39;&#39;,&#39;&#39;,window.event);" class="close"><span class="blind">특별시/도 선택창 닫기</span></a></div>    <span id="s2735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName(&#39;rInput2735&#39;, &#39;rInput1735&#39;, &#39;rInput3735&#39;);getSubRegionList(&#39;rHidden1735&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);return false;" value="" id="rInput2735" class="select">북구</a><input type="hidden" id="rHidden2735" style="width:50px" value="08320"></span>    <div id="areaB735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData(&#39;08440&#39;,&#39;강서구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">강서구</a></li><li class=""><a href="javascript:inputData(&#39;08410&#39;,&#39;금정구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">금정구</a></li><li class=""><a href="javascript:inputData(&#39;08710&#39;,&#39;기장군&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">기장군</a></li><li class=""><a href="javascript:inputData(&#39;08290&#39;,&#39;남구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">남구</a></li><li class=""><a href="javascript:inputData(&#39;08170&#39;,&#39;동구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">동구</a></li><li class=""><a href="javascript:inputData(&#39;08260&#39;,&#39;동래구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">동래구</a></li></ul><ul><li class=""><a href="javascript:inputData(&#39;08230&#39;,&#39;부산진구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">부산진구</a></li><li class=""><a href="javascript:inputData(&#39;08320&#39;,&#39;북구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">북구</a></li><li class=""><a href="javascript:inputData(&#39;08530&#39;,&#39;사상구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">사상구</a></li><li class=""><a href="javascript:inputData(&#39;08380&#39;,&#39;사하구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">사하구</a></li><li class=""><a href="javascript:inputData(&#39;08140&#39;,&#39;서구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">서구</a></li><li class=""><a href="javascript:inputData(&#39;08500&#39;,&#39;수영구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">수영구</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData(&#39;08470&#39;,&#39;연제구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">연제구</a></li><li class=""><a href="javascript:inputData(&#39;08200&#39;,&#39;영도구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">영도구</a></li><li class=""><a href="javascript:inputData(&#39;08110&#39;,&#39;중구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">중구</a></li><li class=""><a href="javascript:inputData(&#39;08350&#39;,&#39;해운대구&#39;,&#39;rHidden2735&#39;,&#39;rInput2735&#39;, 735);">해운대구</a></li></ul><a href="javascript:hiddenObj(&#39;areaB735&#39;);" onclick="clickcr(this, closeLayer ,&#39;&#39;,&#39;&#39;,window.event);" class="close"><span class="blind">시/군/구 선택창 닫기</span></a></div>    <span id="s3735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName(&#39;rInput3735&#39;, &#39;rInput1735&#39;, &#39;rInput2735&#39;);getSubRegionList(&#39;rHidden2735&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;,735);return false;" value="" id="rInput3735" class="select end on">읍/면/동</a><input type="hidden" id="rHidden3735" value=""></span>    <div id="areaC735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData(&#39;000000&#39;,&#39;전체&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">전체</a></li><li class=""><a href="javascript:inputData(&#39;08320510&#39;,&#39;구포1동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">구포1동</a></li><li class=""><a href="javascript:inputData(&#39;08320520&#39;,&#39;구포2동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">구포2동</a></li><li class=""><a href="javascript:inputData(&#39;08320521&#39;,&#39;구포3동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">구포3동</a></li><li class=""><a href="javascript:inputData(&#39;08320105&#39;,&#39;구포동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">구포동</a></li><li class=""><a href="javascript:inputData(&#39;08320101&#39;,&#39;금곡동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">금곡동</a></li></ul><ul><li class=""><a href="javascript:inputData(&#39;08320550&#39;,&#39;덕천1동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">덕천1동</a></li><li class=""><a href="javascript:inputData(&#39;08320560&#39;,&#39;덕천2동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">덕천2동</a></li><li class=""><a href="javascript:inputData(&#39;08320561&#39;,&#39;덕천3동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">덕천3동</a></li><li class=""><a href="javascript:inputData(&#39;08320104&#39;,&#39;덕천동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">덕천동</a></li><li class=""><a href="javascript:inputData(&#39;08320571&#39;,&#39;만덕1동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">만덕1동</a></li><li class=""><a href="javascript:inputData(&#39;08320572&#39;,&#39;만덕2동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">만덕2동</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData(&#39;08320573&#39;,&#39;만덕3동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">만덕3동</a></li><li class=""><a href="javascript:inputData(&#39;08320103&#39;,&#39;만덕동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">만덕동</a></li><li class=""><a href="javascript:inputData(&#39;08320541&#39;,&#39;화명1동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">화명1동</a></li><li class=""><a href="javascript:inputData(&#39;08320542&#39;,&#39;화명2동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">화명2동</a></li><li class=""><a href="javascript:inputData(&#39;08320543&#39;,&#39;화명3동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">화명3동</a></li><li class=""><a href="javascript:inputData(&#39;08320102&#39;,&#39;화명동&#39;,&#39;rHidden3735&#39;,&#39;rInput3735&#39;, 735);">화명동</a></li></ul><a href="javascript:hiddenObj(&#39;areaC735&#39;);" onclick="clickcr(this, closeLayer ,&#39;&#39;,&#39;&#39;,window.event);" class="close"><span class="blind">읍/면/동 선택창 닫기</span></a></div>    <span class="btn_area" id="save735">        <a href="javascript:getServiceNameForModify(&#39;regionsetting1&#39;,&#39;&#39;, 735);" onclick="clickcr(this, save ,&#39;&#39;,&#39;&#39;,window.event);" class="btn_model"><span class="btn6">저장</span></a>        <a href="javascript:delRow(&#39;del735&#39;,&#39;myinfo&#39;);	changeDisplayDimmed();" onclick="clickcr(this, cancel ,&#39;&#39;,&#39;&#39;,window.event);" class="btn_model"><span class="btn6">취소</span></a>    </span><div id="str735" style="display:none;">    <span id="s4735"></span>    <span id="s5735"></span>    <span id="s6735"></span>    <span class="btn_area" id="modifyLayer735" style="display:block">        <a href="javascript:changeDisplay(&#39;ntd1735&#39;,&#39;ntd2735&#39;,735);" onclick="clickcr(this, edit ,&#39;&#39;,&#39;&#39;,window.event);" class="btn_model"><span class="btn6">변경</span></a>        <a href="javascript:getServiceName(&#39;regionsetting1&#39;,&#39;del735&#39;,&#39;myinfo&#39;);" onclick="clickcr(this, del ,&#39;&#39;,&#39;&#39;,window.event);" class="btn_model"><span class="btn6">삭제</span></a>    </span></div></div></td></tr></tbody>
+							<tr id="del735" class=""><td id="ntd1735" class="tbtit edit"><div id="chk735" style="display:none;">    <label id="nameTag735" for="tyrd2">관심지 1</label></div><div class="edit" id="rNm735" style="display:block">     <input type="text" maxlength="10" onfocus="onClassName('rName735');" onkeydown="displayArr(735);" onclick="displayObj('arr2735');hiddenObj('arr1735');onClassName('rName735');" onkeyup="checkRegionName('regionsetting1', 735);checkLength(10,735);" onblur="hiddenObj('arr2735');hiddenObj('arr1735');offClassName('rName735');" class="inp_txt" id="rName735" name="rName735" value="주소 입력" title="관심지 제목 입력">     <span id="arr2735" class="ly_localnotify_arrow" style="display: none;">     <span class="txt">위치명을 입력해주세요. (최대 <strong>10자</strong>)<br>예시) 집, 회사</span>     <span class="arrow"></span>     </span>     <span id="arr1735" class="ly_localnotify_arrow" style="display:none">     <span class="txt"><strong>동일한 위치명이 존재합니다.</strong></span>     <span class="arrow"></span>     </span></div></td><td id="ntd2735" class="edit"><div id="mod735" style="display:block">    <span id="s1735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName('rInput1735', 'rInput2735', 'rInput3735');getSubRegionList('region0','rHidden1735','rInput1735',735);return false;" value="" id="rInput1735" class="select fir">부산광역시</a><input type="hidden" id="rHidden1735" value="08"></span>    <div id="areaA735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData('09','서울특별시','rHidden1735','rInput1735', 735);">서울특별시</a></li><li class=""><a href="javascript:inputData('08','부산광역시','rHidden1735','rInput1735', 735);">부산광역시</a></li><li class="selected"><a href="javascript:inputData('11','인천광역시','rHidden1735','rInput1735', 735);">인천광역시</a></li><li class=""><a href="javascript:inputData('06','대구광역시','rHidden1735','rInput1735', 735);">대구광역시</a></li><li class=""><a href="javascript:inputData('05','광주광역시','rHidden1735','rInput1735', 735);">광주광역시</a></li><li class=""><a href="javascript:inputData('07','대전광역시','rHidden1735','rInput1735', 735);">대전광역시</a></li><li class=""><a href="javascript:inputData('10','울산광역시','rHidden1735','rInput1735', 735);">울산광역시</a></li></ul><ul><li class=""><a href="javascript:inputData('17','세종특별자치시','rHidden1735','rInput1735', 735);">세종특별자치시</a></li><li class=""><a href="javascript:inputData('02','경기도','rHidden1735','rInput1735', 735);">경기도</a></li><li class=""><a href="javascript:inputData('01','강원도','rHidden1735','rInput1735', 735);">강원도</a></li><li class=""><a href="javascript:inputData('15','충청남도','rHidden1735','rInput1735', 735);">충청남도</a></li><li class=""><a href="javascript:inputData('16','충청북도','rHidden1735','rInput1735', 735);">충청북도</a></li><li class=""><a href="javascript:inputData('04','경상북도','rHidden1735','rInput1735', 735);">경상북도</a></li><li class=""><a href="javascript:inputData('03','경상남도','rHidden1735','rInput1735', 735);">경상남도</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData('13','전라북도','rHidden1735','rInput1735', 735);">전라북도</a></li><li class=""><a href="javascript:inputData('12','전라남도','rHidden1735','rInput1735', 735);">전라남도</a></li><li class=""><a href="javascript:inputData('14','제주도','rHidden1735','rInput1735', 735);">제주도</a></li></ul><a href="javascript:hiddenObj('areaA735');" onclick="clickcr(this, closeLayer ,'','',window.event);" class="close"><span class="blind">특별시/도 선택창 닫기</span></a></div>    <span id="s2735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName('rInput2735', 'rInput1735', 'rInput3735');getSubRegionList('rHidden1735','rHidden2735','rInput2735', 735);return false;" value="" id="rInput2735" class="select">북구</a><input type="hidden" id="rHidden2735" style="width:50px" value="08320"></span>    <div id="areaB735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData('08440','강서구','rHidden2735','rInput2735', 735);">강서구</a></li><li class=""><a href="javascript:inputData('08410','금정구','rHidden2735','rInput2735', 735);">금정구</a></li><li class=""><a href="javascript:inputData('08710','기장군','rHidden2735','rInput2735', 735);">기장군</a></li><li class=""><a href="javascript:inputData('08290','남구','rHidden2735','rInput2735', 735);">남구</a></li><li class=""><a href="javascript:inputData('08170','동구','rHidden2735','rInput2735', 735);">동구</a></li><li class=""><a href="javascript:inputData('08260','동래구','rHidden2735','rInput2735', 735);">동래구</a></li></ul><ul><li class=""><a href="javascript:inputData('08230','부산진구','rHidden2735','rInput2735', 735);">부산진구</a></li><li class=""><a href="javascript:inputData('08320','북구','rHidden2735','rInput2735', 735);">북구</a></li><li class=""><a href="javascript:inputData('08530','사상구','rHidden2735','rInput2735', 735);">사상구</a></li><li class=""><a href="javascript:inputData('08380','사하구','rHidden2735','rInput2735', 735);">사하구</a></li><li class=""><a href="javascript:inputData('08140','서구','rHidden2735','rInput2735', 735);">서구</a></li><li class=""><a href="javascript:inputData('08500','수영구','rHidden2735','rInput2735', 735);">수영구</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData('08470','연제구','rHidden2735','rInput2735', 735);">연제구</a></li><li class=""><a href="javascript:inputData('08200','영도구','rHidden2735','rInput2735', 735);">영도구</a></li><li class=""><a href="javascript:inputData('08110','중구','rHidden2735','rInput2735', 735);">중구</a></li><li class=""><a href="javascript:inputData('08350','해운대구','rHidden2735','rInput2735', 735);">해운대구</a></li></ul><a href="javascript:hiddenObj('areaB735');" onclick="clickcr(this, closeLayer ,'','',window.event);" class="close"><span class="blind">시/군/구 선택창 닫기</span></a></div>    <span id="s3735"><a href="file:///C:/Users/DISKSMART/git/searchportal/Barcode/WebContent/member/mypage.html#" onclick="changeClassName('rInput3735', 'rInput1735', 'rInput2735');getSubRegionList('rHidden2735','rHidden3735','rInput3735',735);return false;" value="" id="rInput3735" class="select end on">읍/면/동</a><input type="hidden" id="rHidden3735" value=""></span>    <div id="areaC735" class="area_layer" style="display: none;"><ul class="fir"><li class=""><a href="javascript:inputData('000000','전체','rHidden3735','rInput3735', 735);">전체</a></li><li class=""><a href="javascript:inputData('08320510','구포1동','rHidden3735','rInput3735', 735);">구포1동</a></li><li class=""><a href="javascript:inputData('08320520','구포2동','rHidden3735','rInput3735', 735);">구포2동</a></li><li class=""><a href="javascript:inputData('08320521','구포3동','rHidden3735','rInput3735', 735);">구포3동</a></li><li class=""><a href="javascript:inputData('08320105','구포동','rHidden3735','rInput3735', 735);">구포동</a></li><li class=""><a href="javascript:inputData('08320101','금곡동','rHidden3735','rInput3735', 735);">금곡동</a></li></ul><ul><li class=""><a href="javascript:inputData('08320550','덕천1동','rHidden3735','rInput3735', 735);">덕천1동</a></li><li class=""><a href="javascript:inputData('08320560','덕천2동','rHidden3735','rInput3735', 735);">덕천2동</a></li><li class=""><a href="javascript:inputData('08320561','덕천3동','rHidden3735','rInput3735', 735);">덕천3동</a></li><li class=""><a href="javascript:inputData('08320104','덕천동','rHidden3735','rInput3735', 735);">덕천동</a></li><li class=""><a href="javascript:inputData('08320571','만덕1동','rHidden3735','rInput3735', 735);">만덕1동</a></li><li class=""><a href="javascript:inputData('08320572','만덕2동','rHidden3735','rInput3735', 735);">만덕2동</a></li></ul><ul class="end"><li class=""><a href="javascript:inputData('08320573','만덕3동','rHidden3735','rInput3735', 735);">만덕3동</a></li><li class=""><a href="javascript:inputData('08320103','만덕동','rHidden3735','rInput3735', 735);">만덕동</a></li><li class=""><a href="javascript:inputData('08320541','화명1동','rHidden3735','rInput3735', 735);">화명1동</a></li><li class=""><a href="javascript:inputData('08320542','화명2동','rHidden3735','rInput3735', 735);">화명2동</a></li><li class=""><a href="javascript:inputData('08320543','화명3동','rHidden3735','rInput3735', 735);">화명3동</a></li><li class=""><a href="javascript:inputData('08320102','화명동','rHidden3735','rInput3735', 735);">화명동</a></li></ul><a href="javascript:hiddenObj('areaC735');" onclick="clickcr(this, closeLayer ,'','',window.event);" class="close"><span class="blind">읍/면/동 선택창 닫기</span></a></div>    <span class="btn_area" id="save735">        <a href="javascript:getServiceNameForModify('regionsetting1','', 735);" onclick="clickcr(this, save ,'','',window.event);" class="btn_model"><span class="btn6">저장</span></a>        <a href="javascript:delRow('del735','myinfo');	changeDisplayDimmed();" onclick="clickcr(this, cancel ,'','',window.event);" class="btn_model"><span class="btn6">취소</span></a>    </span><div id="str735" style="display:none;">    <span id="s4735"></span>    <span id="s5735"></span>    <span id="s6735"></span>    <span class="btn_area" id="modifyLayer735" style="display:block">        <a href="javascript:changeDisplay('ntd1735','ntd2735',735);" onclick="clickcr(this, edit ,'','',window.event);" class="btn_model"><span class="btn6">변경</span></a>        <a href="javascript:getServiceName('regionsetting1','del735','myinfo');" onclick="clickcr(this, del ,'','',window.event);" class="btn_model"><span class="btn6">삭제</span></a>    </span></div></div></td></tr></tbody>
 						</table>
 						</div>
 					<!-- //지역설정 테이블 -->
@@ -820,7 +820,7 @@ if(menu == "nid1_sub_m3" || menu.substring(0,4) == "nid2") {
 					소중한 개인정보 이용내역이 궁금하다면 <a href="https://nid.naver.com/user2/help/privacyInfo.nhn" class="more" target="_blank">개인정보 이용내역 보기</a>
 				</p>
 				<p class="desc_sub">
-					네이버를 더 이상 이용하지 않는다면 <a href="https://nid.naver.com/user2/help/leaveId.nhn?menu=nid&amp;lang=ko_KR" onclick="clickcr(this,&#39;imn.memberout&#39;,&#39;&#39;,&#39;&#39;,event);" class="more">회원탈퇴 바로가기</a>
+					바코드를 더 이상 이용하지 않는다면 <a href="https://nid.naver.com/user2/help/leaveId.nhn?menu=nid&amp;lang=ko_KR" onclick="clickcr(this,'imn.memberout','','',event);" class="more">회원탈퇴 바로가기</a>
 				</p>
 			</div>
 			<!-- //CONTENTS -->
