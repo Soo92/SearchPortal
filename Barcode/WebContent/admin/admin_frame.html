@@ -1,0 +1,2213 @@
+
+<!-- saved from url=(0079)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/admin/admin_frame.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>스타일365-대한민국 No.1 신개념 스타일 소셜스토어 : 관리자모드 </title>
+<meta http-equiv="imagetoolbar" content="no">
+<link rel="stylesheet" style="text/css" href="./admin_frame_files/style.css">
+<script language="JavaScript">
+<!--
+	function OpenWindow(url,intWidth,intHeight) {
+		window.open(url, "_blank", "width="+intWidth+",height="+intHeight+",resizable=1,scrollbars=1");
+	}
+	//모든 링크포커스없애기 (A, IMG)
+	function bluring(){
+		if(event.srcElement.tagName=="A"||event.srcElement.tagName=="IMG")
+			document.body.focus();
+		}
+	document.onfocusin=bluring;
+	//관리자페이지 링크주소들
+	function admin_link(str) {
+		switch(str){
+			case "home": document.location.href="main.php";							break;	//관리자메인
+		}
+	}
+	//관리자페이지 최상단 버튼 링크주소
+	function admin_top_btn(str)
+	{
+		switch (str)
+		{
+			case "main" : window.open('about:blank').location.href="http://style365.co.kr/";					break;	//사이트메인 이동버튼
+			case "conf" : document.location.href="happy_config.php";				break;	//관리자 환경설정
+			case "manual" : document.location.href="javascript:OpenWindow('http://cgimall.co.kr/xml_manual/manual_main.php?db_name=manual_socialstore','980','680')"; break;	//메뉴얼버튼
+			case "logout" : document.location.href="admin.php?admin=logout";			break;	//로그아웃버튼
+		}
+	}
+	//관리자메뉴별 링크주소
+	function admin_menu(num) {
+		switch(num){
+			case 1:document.location.href="file_mod.php";						break;	//기본환경설정
+			case 2:document.location.href="auction_product_list.php";							break;	//등록정보관리
+			case 3:document.location.href="bbs.php?mode=add";						break;	//게시판관리
+			case 4:document.location.href="happy_member.php";						break;	//회원관리
+			case 5:document.location.href="social_jangboo.php";					break;	//결제,통계관리
+			//case 6:document.location.href="main_pickwords.php";		break;	//서비스관리
+			//case 7:document.location.href="happy_config_view.php?number=11";		break;	//디자인관리
+			//case 8:document.location.href="openmarket_tag.php";								break;	//고급자설정
+		}
+	}
+	//case 4:document.location.href="member.php";							break;	//회원관리
+	//[ YOON : 2009-09-16 토글형설명박스 ( 한페이지 하나일 때 주로사용)]
+	//div 의 id값을 'help_view[번호]' 형식으로 하면 됨.
+	function helpView(num){
+		if(document.all['help_view' + num].style.display == 'none'){
+		document.all['help_view' + num].style.display = 'block';
+		}else{
+			document.all['help_view' + num].style.display = 'none';
+		}
+	}
+	//[ YOON : 2009-09-23 도움말 (여러개 사용시) ] ###################################[ start ]
+	//div id값 배열
+	var allDiv = new Array("help1","help2","help3");
+	//처음실행될 함수 : 모든레이어 감추기
+	//body onLoad = cfgStartLoad()
+	function cfgStartLoad(){
+		for (i=0;i < allDiv.length ; i++ ){
+			document.all[allDiv[i]].style.display = "none";
+		}
+	}
+	//해당 레이어보이기,나머지 레이어 안보이기
+	//onClick = 'nowShowLayer('div id명')
+	function cfgNowShowLayer(nowDiv, state) {
+		for (i=0;i < allDiv.length ; i++ ){
+			if (allDiv[i] != nowDiv)
+			{
+				document.all[allDiv[i]].style.display = 'none';
+			}else{
+				document.all[nowDiv].style.display = 'block';
+			}
+		}
+	}
+	//모든레이어 보이기
+	function cfgHideAllLayer() {
+		for (i=0;i < allDiv.length ; i++ ){
+			document.all[allDiv[i]].style.display = 'none';
+		}
+	}
+	//새창
+	function popup_win(url,width,height,resize,scroll){
+		window.open(url, 'popup_win','top=24, width='+width+',height='+height+',resizable='+resize+',scrollbars='+scroll+',location=0');
+	}
+	//[ YOON : 2009-09-23 도움말 (여러개 사용시) ] ###################################[ end ]
+	//이미지 미리로딩
+	// preload photos
+	var mypix = new Array()
+	function preloadImages(){
+		for (i=0; i<preloadImages.arguments.length;i++){
+			mypix[i]=new Image();
+			mypix[i].src=preloadImages.arguments[i];
+		}
+	}
+	// now allocate first photo
+	thispic = 0;
+	var isIE=document.all?true:false;
+	var isNS4=document.layers?true:false;
+	var isNS6=navigator.userAgent.indexOf("Gecko")!=-1?true:false;// now change photo to next
+	function processnext(){
+		// check if more pics
+		if(!document.images)return;
+		thispic=(thispic+1)%mypix.length;
+		if(isIE)
+			document.all.pic1.src = mypix[thispic].src;
+		else if(isNS4)
+			null;
+		else if(isNS6)
+			null;
+	}
+	//onLoad="initImgs()"
+	function initImgs()
+	{
+		preloadImages
+		(
+			"./img/bg_submenu_pan01a.png",
+			"./img/bg_submenu_pan01b.png",
+			"./img/bg_submenu_pan_nowlocate2.png",
+			"./img/bg_menupan03b.gif",
+			"./img/bg_menu_item.gif"
+		);
+	}
+//-->
+</script>
+<style type="text/css">
+	/* 기본CSS설정 */
+	a{color:black;}
+	body{margin:0; background-color:#FFF; background:url('img/bg2.gif') repeat-x;}
+	th{color:white; font-size:9pt; font-family:tahoma; font-weight:bold; text-align:center; letter-spacing:-1;}
+	td{color:black; font-size:8pt; font-family:돋움;}
+	h1,h2,h3,h4,h5,h6,h7,h8{font-family:맑은고딕,돋움;}
+	/*select{height:20; color:white; font-size:9pt; background-color:#F4F4F4;} /* 선택폼 Select */
+	/* 마우스 줄색상 */
+	.overRowsColor{background-color:#F6F6F6;}
+	.outRowsColor{background-color:;}
+	/* 사용함 / 사용안함 ON,OFF */
+	.on{color:red; font:18pt tahoma; font-weight:bold;}
+	.off{color:gray; font:18pt tahoma; font-weight:bold;}
+	/* 통합배너관리 : 배너그룹별보기 부분 */
+	label#groupBox select{width:180; margin-right:30; color:white; background-color:#FF6F20;}
+	/* 폼관리 범주표시 아이콘 */
+	div#ico_form{position:absolute; left:344; margin:-17 0 0 31; width:23; height:23; border:0px solid;}
+	/* 사용자 안내 도움말 */
+	label.add_help a{width:300; height:23; padding:6 30 0 20; border:1px solid #CCC; background:url('./img/bg_help2.jpg') no-repeat right middle;}
+	label.add_help a:hover{color:#F50; text-decoration:none; border:1px solid #AAA;}
+	/* 미니홈설정 스킨선택 부분 */
+	div#skin_select{height:540; margin-bottom:20; border:2px solid #C5CED1; overflow-y:auto;}
+	/* 미니홈 나의메뉴설정 [ YOON : 2010-03-22 추가] product_homeedit.php */
+	div#minihome_custom_menu span{float:left;}
+	div#minihome_custom_menu span#n1{clear:both; width:180; overflow:hidden;}
+	div#minihome_custom_menu span#n1 span{float:left; height:21;}
+	div#minihome_custom_menu span#n1 span.n1{width:27;}
+	div#minihome_custom_menu span#n1 span.n2{color:white; font-family:돋움; font-size:8pt; font-weight:100; background:url('/img/bg_box_title05b2.gif') no-repeat right 0; padding:5 15 0 5; overflow:hidden;}
+	div#minihome_custom_menu span#n2 {margin-left:10; overflow:hidden;}
+	div#minihome_custom_menu span#n2 input{border:1px solid #CCC; background-color:#F4F4F4; width:180px;}
+	div#minihome_custom_menu span#n1,div#minihome_custom_menu span#n2{margin:5 0;}
+	/* 퀵메뉴 이동 링크 [ YOON : 2010-03-24 추가] */
+	label.admin_pref_link a{color:#08F; font-size:8pt; font-weight:100;}
+	/* 관리자 메인이미지 및 안내내용 */
+	div#admin_main_image_wrapper{position:relative; height:430; border:0px solid;}
+	div#notice_txt{position:absolute; top:-14; width:100%; text-align:right; color:#AAA; font-size:8pt; font-family:돋움; letter-spacing:0;}
+	div#admin_main_guide{position:absolute; width:680; z-index:10;}
+		div#admin_main_guide #admin_main_guide_field{position:relative; top:30; left:30; width:100%; border:3px solid #AFB7B8;}
+		div#admin_main_guide #admin_main_guide_field #admin_main_guide_tbl td{color:#000; padding:15 25 15 15; background-color:white; filter:alpha(opacity=65);}
+			div#admin_main_guide #admin_main_guide_field #admin_main_guide_tbl ul{color:#333; font-family:돋움,맑은 고딕, arial;}
+			div#admin_main_guide #admin_main_guide_field #admin_main_guide_tbl ul li.margin_bottom{margin-bottom:6;}
+		div#admin_main_guide #admin_main_guide_field legend{color:#555; font-size:24pt; font-weight:bold; font-family:arial,tahoma; letter-spacing:-2; margin-left:20;}
+		div#admin_main_guide #admin_main_guide_field legend font{color:#888; font-size:24pt; font-weight:bold; font-family:arial,tahoma; letter-spacing:-2;}
+	div#admin_main_image_1a{position:absolute; background:url('img/admin_main_img2a.jpg') no-repeat 0 0;}
+	div#admin_main_image_1b{position:absolute; background:url('img/admin_main_img2b3.jpg') no-repeat right 0;}
+	div#admin_main_image_1a,div#admin_main_image_1b{width:100%; height:100%; border:0px solid; z-index:1;}
+	/* 통계 (총방문자 수)*/
+	div#admin_main_image_google{position:absolute; top:185; left:30; width:530; height:60; text-align:center; z-index:15; border:0px solid;} /* 타이틀 */
+	div#admin_main_image_1c{position:absolute; top:245; left:5; width:50%; height180; text-align:center; z-index:11; border:0px solid;}
+	/* 메인 템플릿방식 이해도 이미지 */
+	div#admin_main_image_1d{position:absolute; top:150; width:100%; height:100%; border:0px solid; text-align:right; z-index:12;}
+	/* PNG24 */
+	.png24{_behavior:url(/css/iepngfix.htc);} /* 원본 가로 519 / 세로 309 */
+	/* 템플릿설명 버튼 이미지 */
+	div#templete_help{position:absolute; top:385; width:100%; height:100%; border:0px solid; text-align:right; z-index:12;}
+	ul#btn_tpl_help{position:absolute;  float:right; top:3; left:64; width:65; height:20; border:0px solid red; z-index:14; list-style:none;}
+	ul#btn_tpl_help li{float:left; margin-right:5; width:15; height:15; border:0px solid;}
+	ul#btn_tpl_help li a{width:100%; height:100%; text-indent:-1em;}
+	ul#btn_tpl_help li a:link{text-decoration:none;}
+	/* 업체등록페이지에서 쿠폰정보등록 부분 */
+	div.coupon{width:580px; height:150px; margin-top:10px; padding:6px 6px 6px 8px; background-color:white; border:1px solid #BBB;}
+	fieldset.coupon_frm{clear:both; float:left; width:560px; height:auto; border:2px dotted #CCC; text-align:left; margin-bottom:10px;
+						background-color:white; padding-top:0px; padding-bottom:15px; padding-left:15px; padding-right:15px;
+						background:url("img/coupon/bg_coupon02.gif") no-repeat -40px -34px;
+						}
+	fieldset.coupon_frm legend{width:auto; background-color:white; padding-left:10px; padding-right:10px; border:0px solid red;}
+	fieldset.coupon_frm ul{clear:both; float:left; list-style:none; margin-top:15px;  margin-left:0px; text-align:left;}
+	fieldset.coupon_frm ul li{float:left; width:100px; height:auto; margin-bottom:5px; margin-left:0px; border:0px solid red;}
+	fieldset.coupon_frm ul li.enter{clear:both; width:120px; height:20px; color:#555; text-align:left; padding:4px 0 0 13px; background:url("img/coupon/bg_title_03.gif") no-repeat 0px 0px;}
+	font.verysmall{font-size:7pt;}
+	label.coupon_number{color:; font:11pt arial bold;}
+	/* ########################################################################################################### */
+	/* [ YOON : 2009-09-18 - happy_config.php // happy_config_view.php // lib.php 관련 폼 스타일요소들 ]		   */
+	/* ########################################################################################################### */
+	/* 세로구분선 happy_config.php */
+	div.vert_line{width:1; height:100%; background-color:white; border-width:0 0 0 1px; border-style:solid; border-left-color:#BBB; border-right-color:#EEE; margin-right:20px;}
+	/* ### lib.php ########## */
+	.group_sort{color:#0080FF; font-family:tahoma; font-weight:100px; margin-left:5px;}
+	/* FORM TYPE [ checkbox | radio ]*/
+	.tbl_box2_padding .cfg_input_chk{width:17px; height:17px; border:0px; background-color:white;}
+	.tbl_box2_padding label.label_txt{font-size:10pt; font-family:맑은 고딕,돋움; margin-right:30;}	/* 글자부분 */
+	/* FORM TYPE [ checkbox | radio ] - 날씨디자인설정 */
+	.tbl_box2_padding div#google_weather_type .cfg_input_chk{width:17px; height:17px; border:0px; margin-top:110px; background-color:white;}
+	.tbl_box2_padding div#google_weather_type label.label_txt{font-size:12pt; font-family:돋움,dotum; font-weight:bold; margin-right:0px; margin-top:110px; height:20px; border:0px solid;}	/* 글자부분 */
+	.tbl_box2_padding div#google_weather_type{position:relative; left:0; width:185px; height:500px; color:gray; border:0px solid;} /* 날씨디자인설정 라디어폼 감싸는 레이어*/
+	table#weather_type table td{padding:10px 10px 10px 20;px}
+	table#weather_type td.2{padding:0 0 0 0;}
+	/* 통계계정 및 코드설정 - 통계그래프보기 버튼 및 일반 링크버튼 */
+	a.btn_stats{width:98px; height:22px; font:8pt 돋움 thin; color:#555; cursor:pointer; text-align:center; background:url(/admin/img/btn_bg_aqua02.png) no-repeat 0px 0px;
+	 _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/admin/img/btn_bg_aqua02.png', sizingMethod='crop');
+	 padding:6px 0 0 0;
+	}
+	a.btn_stats:hover{text-decoration:none;}
+	input.btn_stats{width:98px; height:22px; font:8pt 돋움 thin; color:#888; cursor:pointer; text-align:center; background:url(/admin/img/btn_bg_aqua02.png) no-repeat 0px 0px;
+	 _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/admin/img/btn_bg_aqua02.png', sizingMethod='crop');
+	 padding:6px 0 0 0; border:0px solid;
+	}
+	/* 항목 테이블 타이틀 부분의 칸 */
+	.cfg_tbl_box2_title{padding:20 10 10 10;}
+	.cfg_tbl_box2_title2{padding:10 10;}
+	.cfg_tbl_box2_title3{padding:5 5;background-color:#ffffff;}
+	.cfg_tbl_box2_title3a{width:120; padding:5 5; background-color:#F8FDF0;} /* 파트옵션의 옵션항목 타이틀 칸 */
+	.tbl_box2_padding_cfg3{padding:5 5; background-color:#ffffff;}
+	.reg_preview{color:#AAA;}
+	.cfg_ex_help1a dl{margin-bottom:-2em;} /* 도움말관련 */
+	.cfg_ex_help1a dl.help_dl dt{color:#69B461; font-size:9pt; font-family:맑은 고딕,돋움; margin-bottom:2;} /* 도움말항목 제목색상*/
+	.cfg_ex_help1a dl.help_dl dd{color:gray; font-size:8pt; margin-top:-1.4em; margin-bottom:3; margin-left:6em;}
+	label.help{color:gray; margin-left:20;}
+	/* 휴대폰 문자발송 태그표 */
+	#sms_tag{background-color:#BBB;}
+	#sms_tag .td1{padding:3; font-size:9pt; width:100; background-color:#EEE;}
+	#sms_tag .td2{padding:3; background-color:white;}
+	/* 옵션항목 제목 */
+	p.part_title{color:#0080CC; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:100; margin-bottom:8;}
+	/* 옵션항목 도움말 칸*/
+	.tbl_box2.cfg_opt_help{width:160; color:gray; font-family:맑은 고딕,돋움; font-size:8pt;  padding:5;}
+	/* 예제 | 보기그림 제목글 | 설명글 */
+	#cfg_btn_help{text-align:; margin-top:20;} /* 도움말버튼 */
+	#cfg_ex_field{padding:0 20; margin-top:25;} /* 테이블감싸는 필드셋 */
+	#cfg_ex_field legend{font:8pt '맑은 고딕'; color:gray; padding:0 10;}
+	#cfg_ex_div{padding:20 20 0 20; border:1px dashed #DDD;} /* 테이블감싸는 레이어 */
+	#cfg_ex_box{margin-top:15;} /* 테이블박스 */
+	.cfg_ex_help1{padding-bottom:20;} /* 첫 번째 칸*/
+	.cfg_ex_help1a{font-family:돋움; font-size:9pt; color:#888; padding-bottom:20;} /* 첫 번째 칸만 있을 시*/
+	.cfg_ex_help1a iframe{border:1px solid #CCC;}
+	.cfg_ex_help1a dl.cause{color:#FFAD86; font-family:맑은 고딕,돋움; font-size:8pt; font-style:italic; margin-bottom:0;} /* 주의글 */
+	.cfg_ex_help2{font-family:돋움; font-size:9pt; color:#888; padding:10 0 0 25;} /* 두 번째 칸*/
+	.cfg_ex_help2a{font-family:돋움; font-size:9pt; color:#888; padding:0 0 15 25;} /* 두 번째 칸 type A*/
+	.cfg_ex_help3{width:80; padding:0 0 15 0;} /* 세 번째 칸 : 도움말버튼 */
+	.ex_img_label{font-family:맑은 고딕,돋움; font-size:9pt; text-align:center; margin-top:6;}
+	.cfg_hlep_ul{margin-top:5; margin-right:0; margin-bottom:0;} /* 도움말관련 */
+	/* SMS 및 쪽지 발송문자설정 부분관련*/
+	#tbl_sms_pref{border:0px solid #E7EAEF;}
+	#tbl_sms_pref .td_sms{padding:10;}
+	.sms_pref_ul{color:gray;}
+	/* 도움말항목 DL */
+	dl.help_dl{color:gray; margin-bottom:0;}
+	dl.help_dl dt{color:#000;}
+	dl.help_dl dd{margin-top:-1.2em; margin-left:7em; margin-bottom:4;}
+	/* 도움말항목 DL - Debug */
+	div#help_view_debug{height:70; border:2px solid #00AA80; background-color:#FFE; margin-bottom:4; padding:0 20;}
+	dl.help_dl_debug{font-size:9pt; font-family:맑은 고딕,돋움; margin-top:10;}
+	dl.help_dl_debug dt{color:#0080FF;}
+	dl.help_dl_debug dd{color:gray; margin-top:-1.3em; margin-left:8em;}
+	/* 도움말항목 DL - 일반 */
+	div#help_view_normal{border:2px solid #00AA80; background-color:#FFE; margin-bottom:4; padding:0 20;}
+	dl.help_view_normal{font-size:9pt; font-family:맑은 고딕,돋움; margin-top:10;}
+	dl.help_view_normal dt{color:#0080FF;}
+	dl.help_view_normal dd{color:gray; margin-top:-1.3em; margin-left:8em;}
+	/* 도움말항목 - 폼 디자인 */
+	dl.help_dl_form_design{font-size:9pt; font-family:맑은 고딕,돋움; margin-top:10;}
+	dl.help_dl_form_design dt{color:#000;}
+	dl.help_dl_form_design dd{color:gray; margin-top:-4em; margin-left:11em; padding-left:20px; border-width:0 0 0 2; border-style:solid; border-color:#EEE;}
+	/* 도움말항목 : 회원전체 메일링발송 결과 / 메일전송취소, 이전화면 버튼 */
+	div#send_message3{font-size:10pt; font-family:맑은 고딕,돋움; margin-top:30; border:2px solid #00AA80; background-color:#FFE; margin-bottom:4; padding:20 20;}
+	input#mail_button1, input#mail_button2{width:228; height:37; color:white; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px solid; background:url('img/btn_bg04.gif') no-repeat 0 0;}
+	/* 업체정보상세정보 문자발송형식설정 */
+	#detail_sms td.td_detail{padding:0 20; text-align:center; border-right-width:1; border-style:solid; border-color:#EEE;}
+	#detail_sms td.td_detail2{padding:0 20; text-align:center;}
+	/* 등록된 이미지 아이콘부분*/
+	.tbl_box2_padding div.cfg_txt_regimg{color:gray; font-size:9pt; font-family:tahoma; margin:8 0 8 0; }
+	/* 버튼이미지 (필드등록 | 취소) */
+	.cfg_bg_style_01{width:97; height:37; background:url('img/happy_config_btn_bg01.gif') no-repeat 0 0;}
+	.btn_product{width:105px; height:20px; background:url('img/btn_product_about.gif') no-repeat; margin:0; border:0; padding:0; cursor:pointer;}
+	.btn_product2{width:80px; height:20px; background:url('img/btn_product_group.gif') no-repeat; margin:0; border:0; padding:0; cursor:pointer;}
+	.btn_messinger {width:55px; height:22px; background:url('img/btn_messinger.gif') no-repeat; margin:2px 0 0 0; border:0; padding:0; cursor:pointer;}
+	.btn_sms {width:55px; height:22px; background:url('img/btn_sms.gif') no-repeat; margin:2px 0 0 0; border:0; padding:0; cursor:pointer;}
+	/* 구분선 스타일 <HR> */
+	.tbl_box2_padding .cfg_hr{border:1px dashed #CCC;}
+	.tbl_box2 .cfg_hr{border:1px solid #CCC;}
+	/* happy_config.php 항목편집페이지의 타이틀항목*/
+	.tbl_box2 .cfg_title_tool{text-align:left; font-family:맑은 고딕,돋움; font-size:8pt;}
+	.tbl_box2 .cfg_div{margin:10 0; padding:5 0 5 0; color:#888; font-family:맑은 고딕,돋움; border-width:1 0; border-style:solid; border-color:#CCC;}	/* 소팅번호*/
+	.tbl_box2 .cfg_ptag01{margin:5 0; text-align:center;}
+	/* 도움말 레이어1 : 짧은설명 */
+	.tbl_box2 div.cfg_help_conf_dl_txt{width:100%; color:#555; font-family:돋움; margin:0 0 20px 0; background-color:#FAFAFA; border:1px solid #EEE;} /* 설명글박스 */
+	.tbl_box2 div.cfg_help_conf_dl_txt dl{margin:10px 10px 6px 10px;}
+	.tbl_box2 div.cfg_help_conf_dl_txt dl dt{margin:0;}
+	.tbl_box2 div.cfg_help_conf_dl_txt dl dd{margin:-17px 0 0 60px;}
+	/* 필드메모 */
+	.tbl_box2 div#cfg_field_memo{margin:0 0 5 0;}
+	.tbl_box2 div#cfg_field_memo fieldset {color:#555; font-family:맑은 고딕,돋움; font-size:8pt; padding:0 10 10 10;}
+	.tbl_box2 div#cfg_field_memo fieldset legend{font-family:맑은 고딕,돋움;font-size:8pt; background-color:transparent; padding:10 10 10 10;}
+	/* 저장/설정버튼 스타일설정 (가로 긴 것) */
+	#cfg_admin_tool_btn_tbl{margin:0 0 25 0;}
+	#cfg_admin_tool_btn_tbl input{width:168; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt;
+									text-align:center; padding:5 0 0 0;
+									background:url('img/happy_config_btn_reg_bg.gif') no-repeat; border:0px; cursor:pointer;
+								}
+	#cfg_admin_tool_btn_tbl input#category_group{width:168; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg3.gif') no-repeat; border:0px}
+	#cfg_admin_tool_btn_tbl input.catemenu_mod{background:url('img/btn_mod_bg.gif') no-repeat; border:0px}	/* 수정버튼 */
+	#cfg_admin_tool_btn_tbl input.catemenu_del{background:url('img/btn_del_bg2.gif') no-repeat; border:0px; color:black}	/* 삭제버튼 */
+	#cfg_admin_tool_btn_tbl input.catemenu_list{background:url('img/btn_bg_list.gif') no-repeat; border:0px; color:black}	/* 목록버튼 */
+	/* 관리자툴 버튼 스타일설정2 (가로 짧은 것) */
+	#cfg2_admin_tool_btn_tbl{margin:0 0 25 0;}
+	#cfg2_admin_tool_btn_tbl input{width:84; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg2.gif') no-repeat; border:0px; cursor:pointer;}
+	#cfg2_admin_tool_btn_tbl input#category_group{width:168; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg3.gif') no-repeat; border:0px}
+	#cfg2_admin_tool_btn_tbl input.catemenu_mod{background:url('img/btn_mod_bg.gif') no-repeat; border:0px}	/* 수정버튼 */
+	#cfg2_admin_tool_btn_tbl input.catemenu_del{background:url('img/btn_del_bg2.gif') no-repeat; border:0px; color:black}	/* 삭제버튼 */
+	/* 사용중인 필드 | 새로운필드 추가 */
+	#field_add_layer{margin:0 0 0 0; border:2px solid #92D827;}
+	#field_add_layer #happy_config_field_reg_title{font-family:맑은 고딕,돋움; font-size:10pt;} /* 현재필드제목(타이틀) */
+	#field_add_layer input.cfg_btn_bg01{width:97; height:37; color:white; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg01a.gif') no-repeat 0 0;}	/* 필드추가/수정버튼 */
+	#field_add_layer input.cfg_btn_bg02{width:97; height:37; color:; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg02.gif') no-repeat 0 0;}	/* 취소버튼 */
+	/*#field_add_layer input.cfg_btn_field{width:100; height:24; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:2px solid #2DC60C;}	/* 필드추가/수정 | 취소버튼 */
+	input.cfg_btn_bg01a{width:97; height:37; color:white; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg01a.gif') no-repeat 0 0;}
+	input.cfg_btn_bg01b{width:97; height:37; color:white; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg01b.gif') no-repeat 0 0;}
+	input.cfg_btn_bg02{width:97; height:37; color:; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg02.gif') no-repeat 0 0;}
+	input.cfg_btn_bg03{width:160; height:37; color:; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:bold; border:0px; background:url('img/happy_config_btn_bg03.gif') no-repeat 0 0;}
+	/* 관리자 환경설정 관리 */
+	.tbl_item_config_01,.tbl_item_config_02,.tbl_item_config_03,.tbl_item_config_04,
+	.tbl_item_config_05,.tbl_item_config_06,.tbl_item_config_07,.tbl_item_config_08,.tbl_item_config_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_config_01_value,.tbl_item_config_02_value,.tbl_item_config_03_value,.tbl_item_config_04_value,
+	.tbl_item_config_05_value,.tbl_item_config_06_value,.tbl_item_config_07_value,.tbl_item_config_08_value,.tbl_item_config_09_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_config_01{width:50;}.tbl_item_config_01 label{width:50;}	/* 번호 */
+	.tbl_item_config_01_value{width:50; text-align:center; font-family:tahoma;}
+	.tbl_item_config_02{width:110;}.tbl_item_config_02 label{width:100;}	/* 분류그룹명 */
+	.tbl_item_config_02_value{width:110;}
+	.tbl_item_config_03{}.tbl_item_config_03 label{width:100;}	/* 그룹명 */
+	.tbl_item_config_03_value{color:#0080FF;}.tbl_item_config_03_value div{width:240;}
+	.tbl_item_config_04{width:60;}.tbl_item_config_04 label{width:50;}	/* 노출상태 */
+	.tbl_item_config_04_value{width:60; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_config_04_value font{color:#C09054;}
+	.tbl_item_config_05{width:60;}.tbl_item_config_05 label{width:50;}	/* 파트갯수 */
+	.tbl_item_config_05_value{width:60; text-align:right; font-family:맑은 고딕,돋움;}
+	.tbl_item_config_06{width:60;}.tbl_item_config_06 label{width:50;}	/* 필드갯수 */
+	.tbl_item_config_06_value{width:60; text-align:right; font-family:tahoma;}
+	.tbl_item_config_07{width:40;}.tbl_item_config_07 label{width:30;}	/* 순서 */
+	.tbl_item_config_07_value{width:40; text-align:center; font-family:tahoma;}
+	.tbl_item_config_08{width:80;}.tbl_item_config_08 label{width:70;}	/* 등록일 */
+	.tbl_item_config_08_value{width:80; text-align:center; font-family:tahoma;}
+	.tbl_item_config_09{width:200;}	/* 관리자툴 */
+	.tbl_item_config_09_value{width:200; text-align:center;}
+	/* happy_config.php 사용하는필드 항목부분 들어감 */
+	.tbl_item_config_01_01,.tbl_item_config_01_02,.tbl_item_config_01_03{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_config_01_01_value,.tbl_item_config_01_02_value,.tbl_item_config_01_03_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_config_01_01{width:210;}.tbl_item_config_01_01 label{width:200;}	/* 태그명 */
+	.tbl_item_config_01_01_value{width:210; color:#0080FF; text-align:center; font-family:tahoma;}
+	.tbl_item_config_01_02{}.tbl_item_config_01_02 label{width:200;}	/* 출력형식 미리보기 및 메모 */
+	.tbl_item_config_01_02_value{padding-top:6; padding-bottom:6;}
+	.tbl_item_config_01_03{width:120;}	/* 관리툴 */
+	.tbl_item_config_01_03_value{width:120; text-align:center;}
+	/* ########################################################################################################### */
+	/* 페이징번호 */
+	#paging{font-size:16pt; font-family:맑은 고딕,돋움; font-weight:bold; text-align:center;}
+	/**/
+	.hidden_layer{display:none;}
+	.show_layer{display:block;}
+	.thin{font-weight:100; margin:0 3;}
+	.thin_hr{border:1px dashed #CCC; margin-bottom:0;}
+	.thin_sepr{font-weight:100;}
+	/* 사이트명 */
+	.site_name{color:black; font-size:9pt; font-weight:bold; padding:0 10 0 10;}
+	/* 관리자모드 타이틀 */
+	#title_admin{position:absolute; top:0; left:-2; width:205; height:81; overflow:hidden; border:0px solid;}
+	/* 관리자 사이트맵 */
+	#sitemap_admin_wrapper{position:absolute; top:84; left:0; width:100%; height:14; border:0px solid; z-index:300;}
+	/* 관리자 사이트맵 버튼 */
+	#sitemap_admin{position:relative; float:right; width:110; font-size:8pt; border:0px solid;}
+	/* 최상단버튼( 사이트메인 / 메뉴얼 / 로그아웃 )*/
+	.top_btn{ height:20; margin:0 0 0 3;}
+	/* 관리자메뉴 */
+	#admin_menu td{padding:0 1 0 0;}
+	/* 현재위치 */
+	.admin_now_location{padding:0 0 0 200; background:url('img/bg_bar03.gif') repeat-x 0 0;}
+	#admin_now_loc{color:black; font-size:8pt; font-family:돋움; width:650; margin:1 0 0 -30; border:0px solid red; list-style:none; border}
+	#admin_now_loc li{float:left; margin:4 10 0 0;}
+	#admin_now_loc li.ti_nowloc{float:left; margin:-1 10 -4 0;}
+	/* 서브메뉴 설정 */
+	#submenu_tbl{margin:0 0 10 0;}
+	#submenu_tbl_menu{margin:0 0 20 0;}
+	#submenu_tbl_menu2{margin:0 0 0 0;}
+	.submenu_title{color:white; font-family:돋움; font-size:9pt; font-weight:bold; padding:0 0 0 11; letter-spacing:-1; background:url('img/bg_submenu2.gif');}
+	.submenu_title a{color:#EEE;}
+	.submenu_title a:hover{color:white; text-decoration:none;}
+	#submenu{font-family:돋움; margin:0 0 20 -11; line-height:20px; list-style:circle; letter-spacing:-1; list-style-image:url('img/ico_arrow_02.gif');}
+	#submenu li{color:; font-size:8pt;}
+	#submenu li.sepr{margin:0 0 10 0;}
+	/* 해당 프로그램파일로 각각 이동 / 현재페이지 메뉴명을 굵게표시
+	.submenu_now{font-weight:bold;}	/* 현재페이지의 메뉴명일 경우 이 class명을 사용*/
+	/* 관리자정보 */
+	.admin_info01{ background:url('img/title_admin_info_bg01aa2.gif') no-repeat 0 0;}
+	.admin_info02{ background:url('img/title_admin_info_bg01b2.gif') no-repeat 0 bottom; padding:5 11 11 11;}
+	#admin_info_list{margin:0 0 10 -22; letter-spacing:-1;}
+	#admin_info_list li{color:black; list-style-image:url('img/ico_arrow_02.gif');}
+	.admin_info_list_value{
+							width:140; height:13; margin:0 0 14 -10; padding:1 2 1 2; color:#598; font-family:맑은 고딕,돋움; font-size:8pt;
+							text-align:right; letter-spacing:0;
+							background-color:#FAFAFA; border:1px solid #DDD;}
+	/* 카운트정보 */
+	.count_info01{ background:url('img/title_admin_info_bg01ab2.gif') no-repeat 0 0;}
+	.count_info02{ background:url('img/title_admin_info_bg01b2.gif') no-repeat 0 bottom; padding:5 11 11 11;}
+	#count_info_list{margin:0 0 10 -22; letter-spacing:-1;}
+	#count_info_list li{color:black; list-style-image:url('img/ico_arrow_06.gif');}
+	.count_info_list_value{
+							width:140; height:13; margin:0 0 8 -10; padding:1 2 1 2; color:#598; font-family:tahoma; font-size:8pt;
+							font-weight:bold; text-align:right; letter-spacing:0;
+							background-color:#FAFAFA; border:1px solid #DDD;}
+	.unit{color:#AAA; font-size:8pt; font-family:맑은 고딕,돋움; font-weight:100;}
+	.admin_line{width:150; height:1; margin:0 0 10 -14; border-width:1 0 0 0; border-style:dashed; border-color:#CCC;}
+	.admin_line2{width:156; height:1; margin:6 0 10 -14; border-width:1 0 0 0; border-style:dashed; border-color:#CCC;}
+	/* 메뉴항목 제목 */
+	.item_title{color:black; font-family:돋움; font-size:11pt; font-weight:bold; letter-spacing:-1;}
+	.item_title font{color:#0080FF; font-size:11pt;}
+	.item_title label#area_add{margin:0 0 0 15; border:0px solid;}	/* 버튼: 지역추가 */
+	.item_title select{width:150; height:20; color:; font-size:9pt; background-color:#F4F4F4;} /* 선택폼 Select */
+	.help_txt_title{color:gray; padding-top:4;}	/* 도움말 */
+	/* 도움말 */
+	.help_txt{color:gray; font-szie:8pt; letter-spacing:-1;}
+	.help_txt2{color:#AAA; font-szie:8pt; letter-spacing:-1;}
+	.help_view_txt{color:gray; border:2px solid #A5C44E; padding:20 20; margin:5 0;}
+	.help_view_txt ul.help_ul{margin-top:0; margin-bottom:0;}
+	.help_view_txt ul.help_ul li{line-height:19px;}
+	.help_view_txt ul.help_ul2{margin-top:0; margin-bottom:0; line-height:13px;}
+	.help_view_txt ul.help_ul2 li{margin-bottom:6;}
+	.help_view_txt ol.help_ul2{margin-top:0; margin-bottom:0; line-height:13px;}
+	.help_view_txt ol.help_ul2 li{margin-bottom:8;}
+	.help_view_txt ol.help_ul2 li label.title{width:90; color:#08F;}
+	/* 항목제목 (등록/수정시 좌측타이틀)*/
+	.item_txt{color:#333; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:100; letter-spacing:-1;}
+	.txt_simple_help{color:gray;}	/* 간단설명문구*/
+	/* 검색박스 : 업체정보관리 */
+	#search_box{margin:5 0 6 0;}
+	#search_box td.space{width:6px;}
+	#search_box .search_word input{width:200;}
+	#search_box input{width:100%; height:; font-weight:100; font-size:10pt; margin:0 0 0 0; background-color:#F8F8F8; border:2px solid #FD9264;}
+	/* 지역선택,카테고리 : 업체정보등록ㄴ */
+	.upche_reg_selectbox td.space{width:6px;}
+	.upche_reg_selectbox select{height:20; margin:0 9 0 0; color:; font-size:9pt; background-color:#F4F4F4;}
+	/* 테이블 스타일 */
+	.tbl_box2_item1{background-color:#F9F9F9;}
+	.tbl_box_title{margin:0 0 8 0;}
+	.tbl_box_title .banner select{ height:20; color:; font-size:9pt; background-color:#F4F4F4;} /* 배너통계 년/월 선택폼 Select */
+	.tbl_box{margin:0 0 45 0; background:url('img/bg_item_bar01b.gif') repeat-x;}
+	.tbl_box_pro{margin:0 0 0 0; background:url('img/bg_item_bar01b.gif') repeat-x;}
+	.tbl_box_bbs{margin:0 0 0 0; background:url('img/bg_item_bar01b.gif') repeat-x;}
+	.tbl_box_rnd{margin:0 0 25 0; background-color:#CED3D5;} /*라운딩박스*/
+	.tbl_box2{background-color:#9EADC0;}
+	.tbl_box2_padding{padding:15 10 15 10;}
+	.tbl_box2_padding label{cursor:pointer;}
+	.tbl_box2_padding #board_view_autho5,#board_view_autho1,#board_view_autho0{width:17; height:17; border:0px; background-color:white;}	/* 게시판리스트권한 */
+	.tbl_box2_padding #board_read_autho5,#board_read_autho1,#board_read_autho0{width:17; height:17; border:0px; background-color:white;}	/* 게시판읽기권한 */
+	.tbl_box2_padding #board_write_autho5,#board_write_autho1,#board_write_autho0{width:17; height:17; border:0px; background-color:white;}	/* 게시판쓰기권한 */
+	.tbl_box2_padding #board_view,#board_read,#board_write{width:17; height:17; border:0px; background-color:white;}	/* 게시판리스트/읽기/쓰기권한(수정시) */
+	.tbl_box2_padding #upche_output01, #upche_output02{width:17; height:17; border:0px; background-color:white;}	/* 업체등록 > 노출상태 */
+	.tbl_box2_padding #sms_member_chk{width:17; height:17;}	/* 회원관리 > 전체회워 SMS발송 */
+	.tbl_box2_padding2{padding:1 10 15 10;}
+	.tbl_box2_padding div.help{width:400; color:#888;} /* 게시판관련 페이지 도움말부분 */
+	.tbl_box2_padding3 div.help_txt UL{margin:0;}
+	.tbl_box2 input{width:100%; font-weight:100; font-size:10pt; margin:10 0 0 0; background-color:#F8F8F8; border:1px solid #BBB;}	/* INPUT 폼 스타일설정 */
+	.tbl_box2 input#tpl_list,#tpl_detail,#tpl_detail_def{width:400; font-weight:bold; font-size:10pt; margin:0 0 5 0; background-color:#FAFAFA; border-color:;}
+	.tbl_box2 input#group_output_all,#group_output_sub,#group_output_value{width:17; height:17; color:red; background-color:white; border:2px solid;}	/* 카테고리그룹설정체크박스*/
+	.tbl_box2 textarea{width:100%; font-weight:bold; font-size:10pt; margin:10 0 0 0; background-color:#F8F8F8; border:1px solid #BBB;}
+	.tbl_box2_padding textarea{color:#333; font-weight:100; margin:0; padding:3;} /* TextArea */
+	.tbl_box2 div.help_txt{width:100%; color:#555; font-family:돋움; margin:15 0 0 0; background-color:#FAFAFA; border:1px dashed #8DCB25;} /* 설명글박스 */
+	.tbl_box2 div.help_txt ul{margin:20 20 15 40; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box2 div.help_conf_txt{width:100%; color:#555; font-family:돋움; margin:15 0 0 0; background-color:#FAFAFA; border:1px dashed #8DCB25;} /* 설명글박스 */
+	.tbl_box2 div.help_conf_txt ul{margin:8 20 5 30; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box2 div.help_txt2{width:100%; font-family:돋움; margin:0 0 0 0;} /* 설명글박스2(테두리없는것) */
+	.tbl_box2 div.help_txt2 ul{color:#AAA; margin:5 20 0 20; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box2_padding label#select_item{font-size:10pt; font-family:맑은 고딕,돋움; font-weight:bold; margin:0 30 0 0;}	/* Radio 폼선택글자  항목 전역용 */
+	.help_toggle_txt{padding:15 15 15 15; margin-bottom:10; border:2px solid #6A6; background-color:#FFE;}	/* 토글형 도움말 */
+	.help_toggle_txt UL{margin:0 10 0 30; line-height:19px;}
+	/* 회원메일링발송 버튼설정 */
+	.tbl_box2_padding table#old_mail input.sendmail_btn1{width:80; height:20; color:white; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/btn_bg05a.gif') no-repeat; border:0px;}
+	.tbl_box2_padding table#old_mail input.sendmail_btn2{width:80; height:20; color:#333; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/btn_bg05b.gif') no-repeat; border:0px;}
+	.tbl_box2_padding table#old_mail input.sendmail_btn3{width:80; height:20; color:white; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/btn_bg05c.gif') no-repeat; border:0px;}
+	/* 업체정보 복사페이지의 선택폼 */
+	.tbl_box2_padding select#copySelect{color:white; background-color:#FD7439;}
+	/* 폼 디자인관리 버튼 (폼 정보저장) */
+	input.form_design_btn1{width:168px; height:54px; color:white; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/btn_reg2_bg3.gif') no-repeat 0 0; border:0px; cursor:pointer;}
+	input.form_design_btn2{width:100px; height:54px; color:black; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/happy_member/btn_bg06.gif') no-repeat 0 0; border:0px; cursor:pointer;}
+	input.form_design_btn3{width:110px; height:54px; color:black; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/happy_member/btn_bg06a.gif') no-repeat 0 0; border:0px; cursor:pointer;}
+	input.form_copy{width:228px; height:37px; color:white; font-size:9pt; font-family:맑은 고딕,돋움; font-weight:normal; border:0px solid; background:url('img/happy_member/btn_bg04.gif') no-repeat 0 0; cursor:pointer;}
+	/* 폼 디자인 메인그룹 / 서브구룹 부분관련 */
+	textarea.group_textarea{width:100%;}
+	/* 설문조사정보등록 관련 */
+	.tbl_box2_padding input{margin:0;}
+	.tbl_box2_padding input#vote_time_start,#vote_time_end{width:120; font-family:arial; text-align:center; letter-spacing:1; margin:0 10 0 0;}
+	.tbl_box2_padding input#vote_prog1,#vote_prog2{width:20; height:14; background-color:white; border:0px solid;}
+	.tbl_box2_padding table td{border:0px solid;}
+	.tbl_box2_padding .vote_item_cnt1{}
+	.tbl_box2_padding .vote_item_cnt1 UL{margin:0; height:20; list-style:none; padding:0; border:0px solid}
+	.tbl_box2_padding .vote_item_cnt1 UL LI{margin:0;}
+	.tbl_box2_padding .vote_item_cnt1 UL LI input{margin:0; font-weight:100;}
+	.tbl_box2_padding .vote_item_cnt2{width:200; text-align:right; font-family:맑은 고딕,돋움;}
+	.tbl_box2_padding .vote_item_cnt2 UL{ float:right; margin:0 0 0 0; list-style:none;}
+	.tbl_box2_padding .vote_item_cnt2 UL LI{float:left; margin:0 0 0 0; border:0px solid;}
+	.tbl_box2_padding .vote_item_cnt2 UL LI input{width:80; margin:0 6 0 6;}
+	.tbl_box2_padding .vote_item_cnt2 UL LI.vote_txt{margin:6 0 0 0;}
+	.tbl_box2_padding #vote_pop_size{margin:0 0 0 0; list-style:none;}	/* 팝업창크기 */
+	.tbl_box2_padding #vote_pop_size LI{float:left; width:200; font-size:9pt; font-family:맑은 고딕,돋움;}
+	.tbl_box2_padding #vote_pop_size LI input{width:100; margin:0 6 0 0; text-align:right; font-family:arial;}
+	.tbl_box2_padding #vote_pop_pos{margin:0 0 0 0; list-style:none;}	/* 팝업창시작위치 */
+	.tbl_box2_padding #vote_pop_pos LI{float:left; width:200; font-size:9pt; font-family:맑은 고딕,돋움;}
+	.tbl_box2_padding #vote_pop_pos LI input{width:100; margin:0 6 0 0; text-align:right; font-family:arial;}
+	.tbl_box2_padding #vote_graph{margin:0 0 0 0; list-style:none;}	/* 설문결과값 그래프길이*/
+	.tbl_box2_padding #vote_graph LI{width:180; font-size:9pt; font-family:맑은 고딕,돋움;}
+	.tbl_box2_padding #vote_graph LI input{width:170; margin:0 6 0 0; text-align:right; font-family:arial;}
+	.tbl_box2_padding #vote_help{margin:8 0 0 20; color:gray; line-height:15px;}
+	/* 배너추가 > 배너링크 */
+	.tbl_box2_padding .bnr_item_cnt1{}
+	.tbl_box2_padding .bnr_item_cnt1 input{margin:0; font-weight:100;}
+	.tbl_box2_padding .bnr_item_cnt1 UL#bnr_group{margin:0; height:20; list-style:none; padding:0; border:0px solid}
+	.tbl_box2_padding .bnr_item_cnt1 UL#bnr_group LI{float:left; margin:0 5 0 0;}
+	.tbl_box2_padding .bnr_item_cnt1 #bnr_group input{width:300;} /* 배너추가 > 배너그룹명*/
+	.tbl_box2_padding .bnr_item_cnt1 #bnr_group select{width:200; font-size:10pt;} /* 배너추가 > 배너그룹명*/
+	.tbl_box2_padding .bnr_item_cnt1 select{width:120; height:20; color:white; font-size:9pt; background-color:#FF8040;}
+	.tbl_box2_padding .bnr_item_cnt2{width:180; text-align:right;}
+	.tbl_box2_padding .bnr_item_cnt2 select{width:120; height:20; color:; font-size:9pt; background-color:#F4F4F4;}
+	.tbl_box2_padding #banner_mode1,#banner_mode2,#banner_mode3{width:17; height:17; background-color:white; border:0px;}
+	.tbl_box2_padding .bnr_item_cnt2 UL{ float:right; margin:0 0 0 0; list-style:none;}
+	.tbl_box2_padding .bnr_item_cnt2 UL LI{float:left; margin:0 0 0 0; border:0px solid;}
+	.tbl_box2_padding .bnr_item_cnt2 UL LI select{width:120; margin:0 6 0 6;}
+	.tbl_box2_padding .bnr_item_cnt2 UL LI.bnr_txt{margin:6 0 0 0;}
+	/* 게시판생성관련 */
+	.tbl_box2_padding .bbs_item_cnt1{font-family:맑은 고딕,돋움;}
+	.tbl_box2_padding .bbs_item_cnt1 select{width:300; color:; font-size:8pt; background-color:#F4F4F4;}
+	.tbl_box2_padding .bbs_item_cnt1 option{text-align:center;}
+	.tbl_box2_padding .bbs_item_cnt1 UL{margin:0; height:20; list-style:none; padding:0; border:0px solid}
+	.tbl_box2_padding .bbs_item_cnt1 UL LI{margin:0;}
+	.tbl_box2_padding .bbs_item_cnt1 UL LI input{margin:0; width:300;}
+	.tbl_box2_padding .bbs_item_cnt2{}
+	.tbl_box2_padding .bbs_item_cnt2 div.help_txt{margin:10 0 0 0;}
+	.tbl_box2_padding .bbs_item_cnt2 div.help_txt UL{margin:10 0 5 30;}
+	/* 첨부파일 이미지자동출력 */
+	.tbl_box2_padding #file_attach{margin:0; list-style:none;}
+	.tbl_box2_padding #file_attach input{width:17; height:17; border:0px; background-color:white;}
+	.tbl_box2_padding #file_attach label{cursor:pointer;}
+	/* 팝업출력여부, 팝업출력형식, 추천키워드출력순서설정 */
+	.tbl_box2_padding #output01,#output02, #outtype01, #outtype02, #pick_sort01, #pick_sort02{width:17; height:17; border:0px; background-color:white;}
+	/* input 가로크기 유형별 설정값 */
+	.tbl_box2_padding .input_calendar{width:120px;}
+	.tbl_box2_padding .input_veryshort{width:100px;}
+	.tbl_box2_padding .input_short{width:200px;}
+	.tbl_box2_padding .input_medium{width:300px;}
+	.tbl_box2_padding .input_medium2{width:400px;}
+	.tbl_box2_padding .input_large{width:500px;}
+	.tbl_box2_padding .input_chk{width:17; height:17; border:0px; background-color:white;}
+	.input_noline{border:0px solid;}
+	/* Form 가로크기 유형별 설정값 */
+	.tbl_box2_padding .form_size_veryshort{width:100px;}
+	.tbl_box2_padding .form_size_short{width:200px;}
+	.tbl_box2_padding .form_size_medium{width:300px;}
+	.tbl_box2_padding .form_size_medium2{width:400px;}
+	.tbl_box2_padding .form_size_large{width:500px;}
+	/* 회원정보관리 SMS */
+	.tbl_box2_padding #sms_input1,#sms_input2{float:left;}
+	.tbl_box2_padding #sms_input1{width:340; height:130; margin-right:20; background:url('http://happysms.happycgi.com/send/sms_bg.gif') no-repeat 0 0;}
+	.tbl_box2_padding #sms_input1{position:relative;}
+	.tbl_box2_padding #sms_input2{}
+	.tbl_box2_padding #sms_input2 .help_txt{margin-top:0; height:130;}
+	.tbl_box2_padding #sms_input2 .help_txt ul{margin-top:10px; margin-bottom:0px;}
+	.tbl_box2_padding font.fmt1{font-family:맑은 고딕; font-weight:100; font-size:11pt;}
+	/* 장부결제정보수정 */
+	.tbl_box2_padding font.jangbu_value{font-size:10pt; font-family:맑은 고딕,돋움;}
+	/* 관리자툴 버튼 스타일설정 */
+	#admin_tool_btn_tbl{margin:0 0 25 0;}
+	#admin_tool_btn_tbl input{width:84; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg2.gif') no-repeat; border:0px; cursor:pointer;}
+	#admin_tool_btn_tbl input#category_group{width:168; height:54; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg3.gif') no-repeat; border:0px}
+	#admin_tool_btn_tbl input.catemenu_mod{background:url('img/btn_mod_bg.gif') no-repeat; border:0px}	/* 수정버튼 */
+	#admin_tool_btn_tbl input.catemenu_del{background:url('img/btn_del_bg2.gif') no-repeat; border:0px; color:black;}	/* 삭제버튼 */
+	#admin_tool_btn_tbl input.catemenu_list{background:url('img/btn_bg_list.gif') no-repeat; border:0px; color:white;}	/* 목록버튼 */
+	/* 배너관리 검색폼 */
+	#admin_search_frm td{padding:0 6px 0 0;}
+	#admin_search_frm select{width:140px; height:20px; color:; font-size:9pt; background-color:#F4F4F4;}
+	#admin_search_frm input{height:20px; font-size:9pt; background-color:#F8F8F8; border:px solid #FD9264;}
+	#admin_search_frm input#search_btn{width:45px; height:20px; color:white; font-size:8pt; font-weight:bold; padding:2px 0 0 0; background:url('img/btn_bg03.gif') no-repeat; border:0px;} /* 검색버튼*/
+	#admin_search_frm input#search_word{width:160px; font-size:9pt; background-color:#FFF; border:2px solid #FD9264;}
+	/* 목록 페이지번호 */
+	#list_paging{padding:0 0 0 0; margin:0 0 30 0; list-style:none; font-family:돋움; font-weight:bold; font-size:9pt;}
+	#list_paging li{margin:0 0 0 0;}
+	/* 지역추가 버튼 */
+	#btn_area_reg{margin:0 0 0 -40; width:84; height:54; list-style:none; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg.gif') no-repeat; border:0px}
+	#btn_area_reg li{padding:20 0 0 0; margin:0 0 0 0; border:0px solid red;}
+	#btn_area_reg li a{color:#E0E0E0;}
+	#btn_area_reg li a:hover{color:#FFF; text-decoration:none;}
+	#btn_area_reg li font{width:; height:; font-size:10pt; margin:-16 0 0 -65; padding:15 10 15 10; cursor:pointer; border:0px solid red;}
+	/* 미니홈정보관리 : 관리자 */
+	/* 탭리스트 입력폼관련
+	#sc1 input,#sc2 input,#sc3 input,#sc4 input,#sc5 input{
+	font-weight:100; font-size:10pt; margin:10 0 0 0; background-color:#F8F8F8; border:2px solid #FD9264;} */
+	/* 최근 회원가입 현황 */
+	.tbl_item_1_01_value,.tbl_item_1_02_value,.tbl_item_1_03_value,.tbl_item_1_04_value,
+	.tbl_item_1_05_value,.tbl_item_1_06_value{padding:0 4px 0 4px; letter-spacing:-1px;}
+	.tbl_item_1_01{width:100;}.tbl_item_1_01 label{width:70;}	/* 회원이름*/
+	.tbl_item_1_01_value{width:100; font-family:맑은 고딕,돋움; font-weight:bold; padding-left:10;}
+	.tbl_item_1_02{}.tbl_item_1_02 label{width:70;}	/* 아이디 */
+	.tbl_item_1_02_value{color:#0080FF; font-weight:bold;}
+	.tbl_item_1_03{width:100;}.tbl_item_1_03 label{width:90;}	/* 연락처 */
+	.tbl_item_1_03_value{width:100; text-align:center;}
+	.tbl_item_1_04{width:100;}.tbl_item_1_04 label{width:90;}	/* 핸드폰 */
+	.tbl_item_1_04_value{width:100; text-align:center;}
+	.tbl_item_1_05{width:100;}.tbl_item_1_05 label{width:90;}	/* 등록일 */
+	.tbl_item_1_05_value{width:100; text-align:center;}
+	.tbl_item_1_06{width:150;}.tbl_item_1_06 label{width:140;}	/* 이메일*/
+	.tbl_item_1_06_value{width:150; text-align:center; color:#008040; font-family:tahoma; letter-spacing:0px;}
+	.tbl_item_1_07{width:200;}	/* 관리자툴 */
+	.tbl_item_1_07_value{text-align:center;}
+	/* 업체정보 조회 인기현황 */
+	.tbl_item_2_01_value,.tbl_item_2_02_value,.tbl_item_2_03_value,.tbl_item_2_04_value,
+	.tbl_item_2_05_value,.tbl_item_2_06_value,.tbl_item_2_07_value{padding:0 4px 0 4px; overflow:hidden;}
+	.tbl_item_2_01{width:50;}.tbl_item_2_01 label{width:40;}	/* 순위*/
+	.tbl_item_2_01_value{width:50; text-align:center}
+	.tbl_item_2_02{width:80;}.tbl_item_2_02 label{width:70;}	/* 고유번호 */
+	.tbl_item_2_02_value{width:80; text-align:center;}
+	.tbl_item_2_03{width:150;}.tbl_item_2_03 label{width:140;}	/* 브랜드명 */
+	.tbl_item_2_03_value{width:150;}
+	.tbl_item_2_03_value a{color:#0080FF; font-weight:bold;}
+	.tbl_item_2_03_value a:hover{color:#0080FF;}
+	.tbl_item_2_04{}.tbl_item_2_04 label{width:70;}	/* 카테고리 */
+	.tbl_item_2_04_value{}
+	.tbl_item_2_05{width:150;}.tbl_item_2_05 label{width:140;}	/* 업체명 */
+	.tbl_item_2_05_value{width:150;}
+	.tbl_item_2_06{width:100;}.tbl_item_2_06 label{width:90;}	/* 등록일 */
+	.tbl_item_2_06_value{width:100; text-align:center;}
+	.tbl_item_2_07{width:100;}.tbl_item_2_07 label{width:100;}	/* 조회 */
+	.tbl_item_2_07_value{width:100; text-align:center;color:#0080FF; font-weight:bold;}
+	.list_no{width:16; height:16; color:white; font-size:8pt; font-family:tahoma; text-align:center; padding:1 0 0 0; background-color:#999; border:0px solid #CCC;}
+	/* 최근 게시글 현황 */
+	.tbl_item_3_01,.tbl_item_3_02,.tbl_item_3_03,.tbl_item_3_04,
+	.tbl_item_3_05,.tbl_item_3_06,.tbl_item_3_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_3_01_value,.tbl_item_3_02_value,.tbl_item_3_03_value,.tbl_item_3_04_value,
+	.tbl_item_3_05_value,.tbl_item_3_06_value,.tbl_item_3_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_3_01{width:150;}	/* 게시판명*/
+	.tbl_item_3_01_value{width:150; color:#0080FF; font-weight:bold;}
+	.tbl_item_3_02{width:70;}	/* 첨부파일 */
+	.tbl_item_3_02_value{width:70; text-align:center;}
+	.tbl_item_3_03{}	/* 제목 */
+	.tbl_item_3_03_value{}
+	.tbl_item_3_04{width:90;}	/* 아이디 */
+	.tbl_item_3_04_value{width:90; color:#0080FF; font-weight:bold; text-align:center;}
+	.tbl_item_3_05{width:100;}	/* 등록일 */
+	.tbl_item_3_05_value{width:100; text-align:center;}
+	.tbl_item_3_06{width:80;}	/* 추천수 */
+	.tbl_item_3_06_value{width:80; text-align:center;}
+	.tbl_item_3_07{width:80;}	/* 조회 */
+	.tbl_item_3_07_value{width:80; text-align:center;}
+	/* 지역설정관리 */
+	.tbl_item_4_01,.tbl_item_4_02,.tbl_item_4_03,.tbl_item_4_04,
+	.tbl_item_4_05,.tbl_item_4_06,.tbl_item_4_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_4_01_value,.tbl_item_4_02_value,.tbl_item_4_03_value,.tbl_item_4_04_value,
+	.tbl_item_4_05_value,.tbl_item_4_06_value,.tbl_item_4_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_4_01{width:80;}	/* 출력순서*/
+	.tbl_item_4_01_value{width:80; font-family:tahoma; text-align:center;}
+	.tbl_item_4_01_value div{width:80;}
+	.tbl_item_4_02{}	/* 지역 (시, 도) */
+	.tbl_item_4_02_value{color:#0080FF; font-weight:bold; padding:0 10 0 10;}
+		#area_si{width:200; height:21; margin:0 0 0 0; list-style:none;}	/* 지역 (시, 도)*/
+		#area_si li{border:0px solid;}
+		#area_si li.list1{float:left; margin:6 0 0 0;}	/* 지역명 */
+		#area_si li.list3{}	/* 지역삭제 */
+		#area_si li.list2{margin-right:10;}	/* 지역수정 */
+		#area_si li.list2,#area_si li.list3{float:right; width:46; height:21;}
+		#area_si li a{text-decoration:none;}
+	.tbl_item_4_03{width:280;}	/* 군, 구 */
+	.tbl_item_4_03_value{width:280; text-align:center; padding:5 0 0 0;}
+	.tbl_item_4_03_value select{width:200; height:100; margin:4 5 0 0; border:1px solid #8AF;}	/* 군,구 셀렉트박스 */
+	.tbl_item_4_03_value .area_gungu_in{width:200; height:20; color:#475052; font-family:돋움; font-weight:bold;
+										padding:2 3 0 3; margin:0 5 0 0; background-color:#FFD; border:2px solid #475052;}	/* 군,구 입력폼*/
+	.tbl_item_4_03_value input{width:40; height:20; color:white; font-size:8pt; font-family:돋움;
+								padding:3 0 0 0; margin:1 0 4 0; background-color:#7D898C; border:1px solid #475052;}	/* 군,구 셀렉트박스 관리버튼 */
+	.tbl_item_4_04{width:280;}	/* 읍, 면, 동 */
+	.tbl_item_4_04_value{width:280; text-align:center;}
+	.tbl_item_4_04_value textarea{width:200; height:115; margin:0 5 0 0; border:1px solid #475052;}	/* 읍, 면, 동 TextArea */
+	.tbl_item_4_04_value input{width:40; height:20; color:white; font-size:8pt; font-family:돋움;
+								padding:3 0 0 0; margin:1 0 4 0; background-color:#7D898C; border:1px solid #475052;}	/* 읍, 면, 동 셀렉트박스 관리버튼 */
+	/* 카테고리관리 */
+	.tbl_item_5_01,.tbl_item_5_02,.tbl_item_5_03,.tbl_item_5_04,
+	.tbl_item_5_05,.tbl_item_5_06{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_5_01_value,.tbl_item_5_02_value,.tbl_item_5_03_value,.tbl_item_5_04_value,
+	.tbl_item_5_05_value,.tbl_item_5_06_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_5_01{}	/* 카테고리명*/
+	.tbl_item_5_01 label{width:66;}
+	.tbl_item_5_01_value,.tbl_item_5_01_value a{color:#0080FF; font-weight:bold;}
+	.tbl_item_5_02{width:70;}	/* 출력순서 */
+	.tbl_item_5_02 label{width:56;}
+	.tbl_item_5_02_value{width:70; text-align:center;}
+	.tbl_item_5_03{width:120;}	/* 리스트템플릿 */
+	.tbl_item_5_03 label{width:75;}
+	.tbl_item_5_03_value{width:120; text-align:center;}
+	.tbl_item_5_04{width:120;}	/* 상세템플릿 */
+	.tbl_item_5_04 label{width:66;}
+	.tbl_item_5_04_value{width:120; text-align:center;}
+	.tbl_item_5_05{width:120;}	/* 상세껍데기템플릿 */
+	.tbl_item_5_05 label{width:99;}
+	.tbl_item_5_05_value{width:120; text-align:center;}
+	.tbl_item_5_06{width:260;}	/* 관리자툴 */
+	.tbl_item_5_06_value{width:260; text-align:center;}
+	/* 설문조사관리 */
+	.tbl_item_6_01,.tbl_item_6_02,.tbl_item_6_03,.tbl_item_6_04,
+	.tbl_item_6_05,.tbl_item_6_06,.tbl_item_6_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_6_01_value,.tbl_item_6_02_value,.tbl_item_6_03_value,.tbl_item_6_04_value,
+	.tbl_item_6_05_value,.tbl_item_6_06_value,.tbl_item_6_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_6_01{width:50;}	/* 등록순서 */
+	.tbl_item_6_01_value{width:50; text-align:center;}
+	.tbl_item_6_02{width:200;}	/* 설문조사기간 */
+	.tbl_item_6_02_value{width:200; text-align:center; color:;}
+	.tbl_item_6_03{}	/* 제목 */
+	.tbl_item_6_03 label{width:200;}
+	.tbl_item_6_03_value{padding:3 5;}
+	.tbl_item_6_07{width:90;}	/* 키워드 */
+	.tbl_item_6_07_value{width:90;}
+	.tbl_item_6_04{width:80;}	/* 참여도 */
+	.tbl_item_6_04_value{width:80; text-align:center; color:#F80; font:9pt tahoma;}
+	.tbl_item_6_05{width:80;}	/* 진행상황 */
+	.tbl_item_6_05_value{width:80; text-align:center;}
+	.tbl_item_6_06{width:170;}	/* 관리자툴 */
+	.tbl_item_6_06_value{width:170; text-align:center;}
+	/* 게시판관리 */
+	.tbl_item_7_01,.tbl_item_7_01a,.tbl_item_7_02,.tbl_item_7_03,.tbl_item_7_04,
+	.tbl_item_7_05,.tbl_item_7_06,.tbl_item_7_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_7_01_value,.tbl_item_7_01a_value,.tbl_item_7_02_value,.tbl_item_7_03_value,.tbl_item_7_04_value,
+	.tbl_item_7_05_value,.tbl_item_7_06_value,.tbl_item_7_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_7_01{}	/* 게시판이름 */
+	.tbl_item_7_01 label{width:120;}
+	.tbl_item_7_01_value{font-weight:bold;}
+	.tbl_item_7_01_value a{color:#0080FF;}
+	.tbl_item_7_01a{width:50;}	/* 게시판그룹명 */
+	.tbl_item_7_01a label{width:40;}
+	.tbl_item_7_01a_value{color:gray; font-weight:100; text-align:center;}
+	.tbl_item_7_02{width:140;}	/* DB테이블명 */
+	.tbl_item_7_02 label{width:69;}
+	.tbl_item_7_02_value{width:140; text-align:;}
+	.tbl_item_7_03{width:100;}	/* 리스트권한 */
+	.tbl_item_7_03 label{width:69;}
+	.tbl_item_7_03_value{width:100; text-align:center;}
+	.tbl_item_7_04{width:100;}	/* 읽기권한 */
+	.tbl_item_7_04 label{width:60;}
+	.tbl_item_7_04_value{width:100; text-align:center;}
+	.tbl_item_7_05{width:100;}	/* 쓰기권한 */
+	.tbl_item_7_05 label{width:60;}
+	.tbl_item_7_05_value{width:100; text-align:center;}
+	.tbl_item_7_06{width:120;}	/* 출력형태 */
+	.tbl_item_7_06 label{width:69;}
+	.tbl_item_7_06_value{width:120; text-align:center;}
+	.tbl_item_7_07{width:180;}	/* 관리자툴 */
+	.tbl_item_7_07_value{width:180; text-align:center;}
+	/* 배너관리 */
+	.tbl_item_8_01,.tbl_item_8_02,.tbl_item_8_03,.tbl_item_8_04,
+	.tbl_item_8_05,.tbl_item_8_06,.tbl_item_8_07,.tbl_item_8_08,
+	.tbl_item_8_09,.tbl_item_8_10,.tbl_item_8_11{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_8_01_value,.tbl_item_8_02_value,.tbl_item_8_03_value,.tbl_item_8_04_value,
+	.tbl_item_8_05_value,.tbl_item_8_06_value,.tbl_item_8_07_value,.tbl_item_8_08_value,
+	.tbl_item_8_09_value,.tbl_item_8_10_value,.tbl_item_8_11_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_8_01{width:40}.tbl_item_8_01 label{width:30;}	/* 번호 */
+	.tbl_item_8_01_value{width:40; text-align:center;}
+	.tbl_item_8_01_value a{color:#0080FF;}
+	.tbl_item_8_02{width:100;}.tbl_item_8_02 label{width:90;}	/* 배너그룹명 */
+	.tbl_item_8_02_value{width:100;}
+	.tbl_item_8_03{}.tbl_item_8_03 label{width:130;}	/* 배너사진 + 배너제목 */
+	.tbl_item_8_03_value{color:#0080FF; font-weight:bold;}
+	.tbl_item_8_03_value label.n1{width:60; height:35; border:1px solid #CCC; overflow:hidden;}
+	.tbl_item_8_03_value label.n2{padding:3 0 3 6;}
+	.tbl_item_8_03_value label.n2 font.imgsize{color:gray; font-weight:100;}
+	.tbl_item_8_03_value label.n1,
+	.tbl_item_8_03_value label.n2{float:left;}
+	.tbl_item_8_04{width:68;}.tbl_item_8_04 label{width:60;}	/* 배너형식 */
+	.tbl_item_8_04_value{width:68; text-align:center;}
+	.tbl_item_8_05{width:60;}.tbl_item_8_05 label{width:54;}	/* 노출수 */
+	.tbl_item_8_05_value{width:60; color:#0080FF; text-align:center;}
+	.tbl_item_8_06{width:60;}.tbl_item_8_06 label{width:54;}	/* 클릭수 */
+	.tbl_item_8_06_value{width:60; text-align:center;}
+	.tbl_item_8_07{width:60;}.tbl_item_8_07 label{width:54;}	/* 클릭율 */
+	.tbl_item_8_07_value{width:60; text-align:center;}
+	.tbl_item_8_08{width:75;}.tbl_item_8_08 label{width:70;}	/* 등록일 */
+	.tbl_item_8_08_value{width:75; text-align:center;}
+	.tbl_item_8_09{width:75;}.tbl_item_8_09 label{width:70;}	/* 마지막노출 */
+	.tbl_item_8_09_value{width:75; text-align:center;}
+	.tbl_item_8_10{width:75;}.tbl_item_8_10 label{width:70;}	/* 마지막클릭 */
+	.tbl_item_8_10_value{width:75; text-align:center;}
+	.tbl_item_8_11{width:90;}	/* 관리자툴 */
+	.tbl_item_8_11_value{width:90; text-align:center; padding:5 0;}
+	/* 팝업관리 */
+	.tbl_item_9_01,.tbl_item_9_02,.tbl_item_9_03,.tbl_item_9_04,
+	.tbl_item_9_05,.tbl_item_9_06,.tbl_item_9_07,.tbl_item_9_08,.tbl_item_9_09,.tbl_item_9_10{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_9_01_value,.tbl_item_9_02_value,.tbl_item_9_03_value,.tbl_item_9_04_value,
+	.tbl_item_9_05_value,.tbl_item_9_06_value,.tbl_item_9_07_value,.tbl_item_9_08_value,
+	.tbl_item_9_09_value,.tbl_item_9_10_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_9_01{width:50;}.tbl_item_9_01 label{width:40;}	/* 번호 */
+	.tbl_item_9_01_value{width:50; text-align:center;}
+	.tbl_item_9_02{width:90;}.tbl_item_9_02 label{width:80;}	/* 그룹명 */
+	.tbl_item_9_02_value{width:90; text-align:center;}
+	.tbl_item_9_03{width:140;}.tbl_item_9_03 label{width:120;}	/* 설정기간 */
+	.tbl_item_9_03_value{width:140; color:#0080FF; text-align:center;}
+	.tbl_item_9_04{}.tbl_item_9_04 label{width:150;}	/* 제목 */
+	.tbl_item_9_04_value{}
+	.tbl_item_9_05{width:50;}.tbl_item_9_05 label{width:40;}	/* TOP */
+	.tbl_item_9_05_value{width:50; text-align:center;}
+	.tbl_item_9_06{width:50;}.tbl_item_9_06 label{width:40;}	/* LEFT */
+	.tbl_item_9_06_value{width:50; text-align:center;}
+	.tbl_item_9_07{width:80;}.tbl_item_9_07 label{width:70;}	/* 팝업크기 */
+	.tbl_item_9_07_value{width:80; text-align:center;}
+	.tbl_item_9_08{width:60;}.tbl_item_9_08 label{width:54;}	/* 출력방식 */
+	.tbl_item_9_08_value{width:60; text-align:center;}
+	.tbl_item_9_09{width:60;}.tbl_item_9_09 label{width:50;}	/* 상태 */
+	.tbl_item_9_09_value{width:60; text-align:center;}
+	.tbl_item_9_10{width:130;}	/* 관리자툴 */
+	.tbl_item_9_10_value{width:130; text-align:center;}
+	/* 업체정보관리, 업체정보조회인기현황 */
+	.tbl_item_10_01,.tbl_item_10_02,.tbl_item_10_03,.tbl_item_10_04,
+	.tbl_item_10_05,.tbl_item_10_06,.tbl_item_10_07,.tbl_item_10_08,.tbl_item_10_09,.tbl_item_10_10{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_10_01_value,.tbl_item_10_02_value,.tbl_item_10_03_value,.tbl_item_10_04_value,
+	.tbl_item_10_05_value,.tbl_item_10_06_value,.tbl_item_10_07_value,
+	.tbl_item_10_08_value,.tbl_item_10_09_value,.tbl_item_10_10_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_10_01{width:50;}.tbl_item_10_01 label{width:40;}	/* 번호 */
+	.tbl_item_10_01_value{width:50; text-align:center; color:#888; font-family:arial; font-size:9pt;}
+	.tbl_item_10_02{width:50;}.tbl_item_10_02 label{width:46; letter-spacing:-2;}	/* 고유번호 */
+	.tbl_item_10_02_value{width:50; color:80AF33; text-align:center; font-weight:bold;}
+	.tbl_item_10_03{width:130;}.tbl_item_10_03 label{width:120;}	/* 브랜드명 */
+	.tbl_item_10_03_value{width:130; padding:4 0; color:#0080FF;}.tbl_item_10_03_value a{color:#0080FF;}
+	.tbl_item_10_03_value label img{margin:0 0 2 0;} /* 이미지아이콘 */
+	.tbl_item_10_04{width:125;}.tbl_item_10_04 label{width:70;}	/* 업체명 */
+	.tbl_item_10_04_value{width:125; font-family:맑은 고딕,돋움;}
+	.tbl_item_10_05{}.tbl_item_10_05 label{width:100;}	/* 카테고리 */
+	.tbl_item_10_05_value{padding-top:3; padding-bottom:2; line-height:16px;}
+	.tbl_item_10_06{width:100;}.tbl_item_10_06 label{width:95;}	/* 등록일,기간 */
+	.tbl_item_10_06_value{width:100; text-align:center; padding:5 0;}
+	.tbl_item_10_06_value label.t1{color:#7DAD86;} /* 신규 */
+	.tbl_item_10_06_value label.t2{color:#619BD7;} /* 인기 */
+	.tbl_item_10_06_value label.t3{color:#D2AC46;} /* 추천 */
+	.tbl_item_10_06_value label.t4{color:#9371BF;} /* 특별 */
+	.tbl_item_10_06_value label.t5{color:#3EC143;} /* 예약 */
+	.tbl_item_10_06_value label.t6{color:#58C2E9;} /* 미니 */
+	.tbl_item_10_06_value label img{margin:0 0 2 0;} /* 이미지아이콘 */
+	.tbl_item_10_07{width:50;}.tbl_item_10_07 label{width:40;}	/* 조회 */
+	.tbl_item_10_07_value{width:50; color:#555; text-align:center; font-family:tahoma;}
+	.tbl_item_10_08{width:70;}.tbl_item_10_08 label{width:60;}	/* 미니홈수정 */
+	.tbl_item_10_08_value{width:70; text-align:center;}
+	.tbl_item_10_09{width:84;}	/* 관리자툴 */
+	.tbl_item_10_09_value{width:84; text-align:center;}
+	.tbl_item_10_10{width:62;}	/* 쿠폰 */
+	.tbl_item_10_10_value{width:62; text-align:center;}
+	/* 업체정보평가 댓글관리l */
+	.tbl_item_11_00,.tbl_item_11_01,.tbl_item_11_02,.tbl_item_11_03,.tbl_item_11_04,
+	.tbl_item_11_05,.tbl_item_11_06,.tbl_item_11_07,.tbl_item_11_08{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_11_00_value,.tbl_item_11_01_value,.tbl_item_11_02_value,.tbl_item_11_03_value,.tbl_item_11_04_value,
+	.tbl_item_11_05_value,.tbl_item_11_06_value,.tbl_item_11_07_value,.tbl_item_11_08_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_11_00{width:60;}.tbl_item_11_00 label{width:50;}	/* 업체 */
+	.tbl_item_11_00_value{width:60; text-align:center;}
+	.tbl_item_11_00_value div{width:50; height:30; overflow:hidden; border:1px solid #CCC;}
+	.tbl_item_11_00_value img{width:52; height:30;}
+	.tbl_item_11_01{width:40;}.tbl_item_11_01 label{width:30;}	/* 아이콘 */
+	.tbl_item_11_01_value{width:50; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_11_01_value label{width:30; text-align:right; margin-left:5; color:gray;}
+	.tbl_item_11_02{}.tbl_item_11_02 label{width:260; letter-spacing:-2;}	/* 댓글내용 */
+	.tbl_item_11_02_value{color:#008040; padding-top:10; padding-bottom:9; padding-right:20;}
+	.tbl_item_11_03{width:110;}.tbl_item_11_03 label{width:100;}	/* 이름(아이디) */
+	.tbl_item_11_03_value{width:110; text-align:center; color:#0080FF; font-family:맑은 고딕,돋움; padding-top:3; padding-bottom:3;}
+	.tbl_item_11_04{width:80;}.tbl_item_11_04 label{width:70;}	/* 등록일 */
+	.tbl_item_11_04_value{width:80; text-align:center; font-family:tahoma;}
+	.tbl_item_11_05{width:70;}.tbl_item_11_05 label{width:60;}	/* 찬성 */
+	.tbl_item_11_05_value{width:70; text-align:right; color:gray; font-family:맑은 고딕,돋움;}.tbl_item_11_05_value font{color:#0080FF; font-size:10pt; font-weight:bold;}
+	.tbl_item_11_06{width:70;}.tbl_item_11_06 label{width:60;}	/* 반대 */
+	.tbl_item_11_06_value{width:70; text-align:right; color:gray; font-family:맑은 고딕,돋움;}.tbl_item_11_06_value font{color:#555; font-size:10pt; font-weight:bold;}
+	.tbl_item_11_07{width:70;}.tbl_item_11_07 label{width:60;}	/* 포인트 */
+	.tbl_item_11_07_value{width:70; text-align:right; color:gray; font-family:맑은 고딕,돋움;}.tbl_item_11_07_value font{color:#F83; font-size:10pt; font-weight:bold;}
+	.tbl_item_11_08{width:160;}	/* 관리자툴 */
+	.tbl_item_11_08_value{width:160; text-align:center;}
+	/* 회원관리 */
+	.tbl_item_12_01,.tbl_item_12_02,.tbl_item_12_03,.tbl_item_12_04,
+	.tbl_item_12_05,.tbl_item_12_06,.tbl_item_12_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_12_01_value,.tbl_item_12_02_value,.tbl_item_12_03_value,.tbl_item_12_04_value,
+	.tbl_item_12_05_value,.tbl_item_12_06_value,.tbl_item_12_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_12_01{width:50;}.tbl_item_12_01 label{width:50;}	/* 번호 */
+	.tbl_item_12_01_value{width:50; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_12_01_value label{width:30; text-align:right; margin-left:5; color:gray;}
+	.tbl_item_12_02{}.tbl_item_12_02 label{width:160; letter-spacing:-2;}	/* 회원이름(이메일) */
+	.tbl_item_12_02_value table td.n1{color:#008040; font-family:맑은 고딕,돋움; font-weight:bold; padding-top:6; padding-bottom:6;}
+	.tbl_item_12_02_value table td.n2{padding:0 0 0 10;}
+	.tbl_item_12_02_value table td.n2 table.per_info{width:90; margin:3 5; list-style:none; border:0px solid;}
+	.tbl_item_12_02_value table td.n2 table.per_info td{padding:0 3;}
+	.tbl_item_12_02_value table td.n2 table.per_info td.sn1{text-align:right;}
+	.tbl_item_12_02_value table td.n2 table.per_info td.sn2{text-align:right;}
+	.tbl_item_12_02_value table td.n2 table.per_info td.sn3{text-align:right; font-size:8pt; font-family:Arial; color:#333;}
+	.tbl_item_12_02_value table td.n2 table.per_info td label.line{width:100%; height:0; margin:1 0 1 0; border-width:1 0 0 0; border-style:dotted; border-color:#CCC;}
+	.tbl_item_12_03{width:110;}.tbl_item_12_03 label{width:100;}	/* 아이디 */
+	.tbl_item_12_03_value{width:110; text-align:center; font-family:tahoma;}.tbl_item_12_03_value a{color:#0080FF;}
+	.tbl_item_12_04{width:110;}.tbl_item_12_04 label{width:100;}	/* 연락처 */
+	.tbl_item_12_04_value{width:110; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_12_05_value font{color:#0080FF; font-size:10pt; font-weight:bold;}
+	.tbl_item_12_05{width:110;}.tbl_item_12_05 label{width:100;}	/* 휴대폰 */
+	.tbl_item_12_05_value{width:110; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_12_06_value font{color:#555; font-size:10pt; font-weight:bold;}
+	.tbl_item_12_06{width:90;}.tbl_item_12_06 label{width:70;}	/* 등록일 */
+	.tbl_item_12_06_value{width:90; text-align:center; font-family:tahoma;}
+	.tbl_item_12_07{width:110;}	/* 관리자툴 */
+	.tbl_item_12_07_value{width:110; text-align:center;}
+	/* 부관리자설정 */
+	.tbl_item_13_01,.tbl_item_13_02,.tbl_item_13_03,.tbl_item_13_04,
+	.tbl_item_13_05,.tbl_item_13_06,.tbl_item_13_07,.tbl_item_13_08,.tbl_item_13_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_13_01_value,.tbl_item_13_02_value,.tbl_item_13_03_value,.tbl_item_13_04_value,
+	.tbl_item_13_05_value,.tbl_item_13_06_value,.tbl_item_13_07_value,.tbl_item_13_08_value,.tbl_item_13_09_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_13_01{width:50;}.tbl_item_13_01 label{width:50;}	/* 번호 */
+	.tbl_item_13_01_value{width:50; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_13_01_value label{width:30; text-align:right; margin-left:5; color:gray;}
+	.tbl_item_13_02{}.tbl_item_13_02 label{width:80; letter-spacing:-2;}	/* 이름 */
+	.tbl_item_13_02_value{font-family:맑은 고딕,돋움; font-weight:bold; padding-top:6; padding-bottom:6;}
+	.tbl_item_13_03{width:110;}.tbl_item_13_03 label{width:100;}	/* 아이디 */
+	.tbl_item_13_03_value{width:110; color:#0080FF; text-align:center; font-family:tahoma;}
+	.tbl_item_13_04{width:90;}.tbl_item_13_04 label{width:80;}	/* 연락처 */
+	.tbl_item_13_04_value{width:90; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_13_05_value font{color:#0080FF; font-size:10pt; font-weight:bold;}
+	.tbl_item_13_05{width:90;}.tbl_item_13_05 label{width:80;}	/* 가입일 */
+	.tbl_item_13_05_value{width:90; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_13_06_value font{color:#555; font-size:10pt; font-weight:bold;}
+	.tbl_item_13_06{width:90;}.tbl_item_13_06 label{width:80;}	/* 최종로그인 */
+	.tbl_item_13_06_value{width:90; text-align:center; font-family:tahoma;}
+	.tbl_item_13_07{width:60;}.tbl_item_13_07 label{width:50;}	/* 접속수 */
+	.tbl_item_13_07_value{width:60; text-align:center; font-family:tahoma;}
+	.tbl_item_13_08{width:100;}.tbl_item_13_08 label{width:90;}	/* 유효권한메뉴수 */
+	.tbl_item_13_08_value{width:100; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_13_08_value font{color:#0080FF;}
+	.tbl_item_13_09{width:160;}	/* 관리자툴 */
+	.tbl_item_13_09_value{width:160; text-align:center;}
+	/* 전체회원 SMS발송 */
+	.tbl_item_14_01,.tbl_item_14_02,.tbl_item_14_03,.tbl_item_14_04,.tbl_item_14_05,.tbl_item_14_06,.tbl_item_14_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_14_01_value,.tbl_item_14_02_value,.tbl_item_14_03_value,.tbl_item_14_04_value,.tbl_item_14_05_value,.tbl_item_14_06_value,.tbl_item_14_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_14_01{width:30px;}.tbl_item_14_01 label{width:20;}	/* 체크 */
+	.tbl_item_14_01_value{width:30px; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_14_01_value label{width:30; text-align:right; margin-left:5; color:gray;}
+	.tbl_item_14_02{width:50px;}.tbl_item_14_02 label{width:40;}	/* 번호 */
+	.tbl_item_14_02_value{width:50px; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_14_03{width:110px;}.tbl_item_14_03 label{width:100;}	/* 휴대폰 */
+	.tbl_item_14_03_value{width:110px; color:#0080FF; text-align:center; font-family:맑은 고딕,돋움; font-weight:bold;}
+	.tbl_item_14_04{letter-spacing:-1px;}	/* 회원이름(이메일) */
+	.tbl_item_14_04_value{color:#008040; font-family:맑은 고딕,돋움; font-weight:bold; padding-top:6; padding-bottom:6;}
+	.tbl_item_14_05{width:110px;}.tbl_item_14_05 label{width:100;}	/* 아이디 */
+	.tbl_item_14_05_value{width:110px;text-align:center; font-family:tahoma;}
+	.tbl_item_14_07{width:50px;}/* SMS 허용여부 */
+	.tbl_item_14_07_value{width:50px; color:#008040; font-family:맑은 고딕,돋움; font-weight:bold; text-align:center;}
+	.tbl_item_14_06{width:90px;}.tbl_item_14_06 label{width:80;}	/* 등록일 */
+	.tbl_item_14_06_value{width:90px; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_14_06_value font{color:#555; font-size:10pt; font-weight:bold;}
+	/* 결제장부관리 */
+	.tbl_item_15_01,.tbl_item_15_02,.tbl_item_15_03,.tbl_item_15_04,
+	.tbl_item_15_05,.tbl_item_15_06,.tbl_item_15_07,.tbl_item_15_08,.tbl_item_15_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_15_01_value,.tbl_item_15_02_value,.tbl_item_15_03_value,.tbl_item_15_04_value,
+	.tbl_item_15_05_value,.tbl_item_15_06_value,.tbl_item_15_07_value,.tbl_item_15_08_value,.tbl_item_15_09_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_15_01{width:50;}.tbl_item_15_01 label{width:50;}	/* 장부(고유)번호 */
+	.tbl_item_15_01_value{width:50; text-align:center; font-family:tahoma;}
+	.tbl_item_15_02{width:80;}.tbl_item_15_02 label{width:70;}	/* 결제인 */
+	.tbl_item_15_02_value{width:80; color:#0080FF; font-family:맑은 고딕,돋움; font-weight:bold; padding-top:6; padding-bottom:6;}.tbl_item_15_02_value font{color:gray;font-size:8pt; font-weight:100;}
+	.tbl_item_15_03{}.tbl_item_15_03 label{width:100;}	/* 결제내역 */
+	.tbl_item_15_03_value{padding-top:6; padding-bottom:6; padding-left:10; padding-right:10;}
+	.tbl_item_15_03_value table.jangboo_value{border-top-width:1px; border-top-style:dotted; border-top-color:#DDD;}
+	.tbl_item_15_03_value table.jangboo_value td{border-width:0 0 1 0; border-style:dotted; border-color:#DDD; padding:1 0;}
+	.tbl_item_15_03_value table.jangboo_value .jangBuOverColor,.tbl_item_15_03_value table tr.jangBuOverColor{background-color:#FFFFDD; cursor:;} /* 마우스오버시 색상*/
+	.tbl_item_15_03_value table.jangboo_value .jangBuOutColor,.tbl_item_15_03_value table tr.jangBuOutColor{background-color:;} /* 마우스아웃시 색상 */
+	.tbl_item_15_03_value table td a{color:#0080FF;} /* 업체명 링크색상 */
+	.tbl_item_15_04{width:100;}.tbl_item_15_04 label{width:90;}	/* 결제금액 */
+	.tbl_item_15_04_value{width:100; text-align:right; font-family:맑은 고딕,돋움;}.tbl_item_15_04_value font{color:#0080FF; font-size:10pt; font-weight:bold;}
+	.tbl_item_15_05{width:90;}.tbl_item_15_05 label{width:80;}	/* 결제방식 */
+	.tbl_item_15_05_value{width:90; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_15_06{width:46;}.tbl_item_15_06 label{width:40;}	/* 입금 */
+	.tbl_item_15_06_value{width:46; text-align:center; font-family:tahoma;}
+	.tbl_item_15_07{width:120;}.tbl_item_15_07 label{width:110;}	/* 결제시도일 */
+	.tbl_item_15_07_value{width:120; text-align:center; font-family:tahoma;}
+	.tbl_item_15_08{width:56;}.tbl_item_15_08 label{width:50;}	/* 업체정보 */
+	.tbl_item_15_08_value{width:70; text-align:center; font-family:맑은 고딕,돋움; padding:4 0;}.tbl_item_15_08_value font{color:#0080FF;}
+	.tbl_item_15_08_value img{border:1px solid #CCC;}
+	.tbl_item_15_09{width:110;}	/* 관리자툴 */
+	.tbl_item_15_09_value{width:110; text-align:center;}
+	/* 결제/통계관리 > 결제장부관리 > 결제정보수정 */
+	#jangbu_opt_info{}
+	#jangbu_opt_info li font{color:#0080FF; font-size:9pt; font-weight:bold;}
+	/* 이미지관리 */
+	.tbl_item_16_00,.tbl_item_16_01,.tbl_item_16_02,.tbl_item_16_03,.tbl_item_16_04,
+	.tbl_item_16_05,.tbl_item_16_06,.tbl_item_16_07{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_16_00_value,.tbl_item_16_01_value,.tbl_item_16_02_value,.tbl_item_16_03_value,.tbl_item_16_04_value,
+	.tbl_item_16_05_value,.tbl_item_16_06_value,.tbl_item_16_07_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_16_00{width:50;}	/* 그룹명 */
+	.tbl_item_16_00_value{width:50; color:; font-size:8pt; font-family:맑은 고딕,돋움; padding-left:5;}
+	.tbl_item_16_01{width:150;}.tbl_item_16_01 label{width:120;}	/* 이미지명 */
+	.tbl_item_16_01_value{width:150; color:#0080FF; font-size:8pt; font-family:맑은 고딕,돋움; padding-right:15;}
+	.tbl_item_16_02{}.tbl_item_16_02 label{width:160;}	/* 이미지결과미리보기 */
+	.tbl_item_16_02_value{padding-top:0; padding-bottom:2;}
+	.tbl_item_16_03{width:90;}.tbl_item_16_03 label{width:80;}	/* 사이즈 */
+	.tbl_item_16_03_value{width:90; text-align:center; font-family:tahoma; padding-left:10; padding-right:10;}
+	.tbl_item_16_04{width:60; letter-spacing:-2;}.tbl_item_16_04 label{width:50;}	/* 라인두께 */
+	.tbl_item_16_04_value{width:60; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_16_05{width:90;}.tbl_item_16_05 label{width:80;}	/* 정렬 */
+	.tbl_item_16_05_value{width:90; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_16_06{width:90;}.tbl_item_16_06 label{width:80;}	/* 등록일 */
+	.tbl_item_16_06_value{width:90; text-align:center; font-family:tahoma;}
+	.tbl_item_16_07{width:160;}	/* 관리자툴 */
+	.tbl_item_16_07_value{width:160; text-align:center;}
+	/* 실시간 인기검색어 설정 */
+	.tbl_item_17_01,.tbl_item_17_02,.tbl_item_17_03,.tbl_item_17_04,
+	.tbl_item_17_05,.tbl_item_17_06{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_17_01_value,.tbl_item_17_02_value,.tbl_item_17_03_value,.tbl_item_17_04_value,
+	.tbl_item_17_05_value,.tbl_item_17_06_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_17_01{width:50;}.tbl_item_17_01 label{width:40;}	/* 순위 */
+	.tbl_item_17_01_value{width:50; color:#0080FF; font-size:8pt; font-family:맑은 고딕,돋움; padding-right:15;}
+	.tbl_item_17_01_value div#rank1,.tbl_item_17_01_value div#rank2{float:left;}
+	.tbl_item_17_01_value div#rank1{width:35; text-align:right; margin-right:5;} .tbl_item_17_01_value div#rank2{width:10;color:gray;}
+	.tbl_item_17_02{width:90;}.tbl_item_17_02 label{width:80;}	/* 순위변동 */
+	.tbl_item_17_02_value{width:90; text-align:center; padding-top:0; padding-bottom:2;}
+z
+	.tbl_item_17_03{width:90;}.tbl_item_17_03 label{width:80;}	/* 날짜 */
+	.tbl_item_17_03_value{width:90; text-align:center; font-family:tahoma; padding-left:10; padding-right:10;}
+	.tbl_item_17_04{width:; letter-spacing:-2;}.tbl_item_17_04 label{width:100;}	/* 검색어 */
+	.tbl_item_17_04_value{width:; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_17_04_value input.input1{width:98%; height:22; color:#0080FF; background-color:#FAFAFA; border:1px solid #DDD; font-family:맑은 고딕,돋움;}
+	.tbl_item_17_05{width:130;}.tbl_item_17_05 label{width:120;}	/* 검색횟수 */
+	.tbl_item_17_05_value{width:130; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_17_05_value input.input2{width:98%; height:22; color:#F88; background-color:#FAFAFA; border:1px solid #DDD; font-family:tahoma; font-weight:bold; text-align:right; padding:0 5;}
+	.tbl_item_17_05_value div#count1{float:left; width:80%; margin-right:3;}
+	.tbl_item_17_05_value div#count2{float:left; width:10; color:gray; padding-top:4;}
+	.tbl_item_17_06{width:120;}	/* 관리자툴 */
+	.tbl_item_17_06_value{width:120; text-align:center;}
+	/* 포인트결제관리 */
+	.tbl_item_18_01,.tbl_item_18_02,.tbl_item_18_03,.tbl_item_18_04,
+	.tbl_item_18_05,.tbl_item_18_06,.tbl_item_18_07,.tbl_item_18_08{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_18_01_value,.tbl_item_18_02_value,.tbl_item_18_03_value,.tbl_item_18_04_value,
+	.tbl_item_18_05_value,.tbl_item_18_06_value,.tbl_item_18_07_value,.tbl_item_18_08_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_18_01{width:130;}.tbl_item_18_01 label{width:120;}	/* 결제번호 */
+	.tbl_item_18_01_value{width:130; color:#0080FF; text-align:; font-size:8pt; font-family:맑은 고딕,돋움; padding-left:15;}
+	.tbl_item_18_01a_value{width:130; color:#0080FF; text-align:; font-size:8pt; font-family:맑은 고딕,돋움; padding-left:15;}
+	.tbl_item_18_02{width:;}.tbl_item_18_02 label{width:100;}	/* 결제내역 */
+	.tbl_item_18_02_value{width:; text-align:right; font-size:; font-family:맑은 고딕,돋움; padding-top:0; padding-bottom:2;} .tbl_item_18_02_value font.1{color:#F98F75; font-size:10pt; font-family:arial; font-weight:bold;}
+	.tbl_item_18_02a_value{width:; text-align:right; font-size:; font-family:맑은 고딕,돋움; padding-top:0; padding-bottom:2; padding-right:4;} .tbl_item_18_02a_value font.1{color:#333; font-size:10pt; font-family:arial; font-weight:bold;}
+	.tbl_item_18_03{width:80;}.tbl_item_18_03 label{width:70;}	/* 결제인 */
+	.tbl_item_18_03_value{width:80; color:#0080FF; text-align:center; font-weight:bold; font-family:tahoma;}
+	.tbl_item_18_03a_value{width:80; text-align:center; font-family:arial;}
+	.tbl_item_18_03a_value input{width:70; height:21; text-align:center; font-family:arial;}
+	.tbl_item_18_04{width:100; letter-spacing:-2;}.tbl_item_18_04 label{width:90;} /* 결제금액 */
+	.tbl_item_18_04_value{width:100; color:#0080FF; text-align:right; font-size:10pt; font-weight:bold; font-family:arial; padding-right:10;} .tbl_item_18_04_value font{color:gray; font-size:8pt; font-weight:100;}
+	.tbl_item_18_04a_value{width:100; color:#0080FF; text-align:right; font-size:10pt; font-weight:bold; font-family:arial; padding-right:;} .tbl_item_18_04a_value font{color:gray; font-size:8pt; font-weight:100;}
+	.tbl_item_18_05{width:120;}.tbl_item_18_05 label{width:110;}	/* 결제방식 */
+	.tbl_item_18_05_value{width:120; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_05a_value{width:120; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_05a_value input{width:100; height:21; text-align:center; font-family:맑은 고딕, 돋움;}
+	.tbl_item_18_06{width:140;}.tbl_item_18_06 label{width:130;}	/* 결제일 */
+	.tbl_item_18_06_value{width:140; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_06a_value{width:140; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_06a_value input{width:120; height:21; text-align:center; font-family:arial;}
+	.tbl_item_18_07{width:70;}.tbl_item_18_07 label{width:60;}	/* 입금확인 */
+	.tbl_item_18_07_value{width:70; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_07a_value{width:70; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_18_08{width:110;}	/* 관리자툴 */
+	.tbl_item_18_08_value{width:110; text-align:center;}
+	.tbl_item_18_08a_value{width:110; text-align:center;}
+	/* 미니홈스킨관리 : 2010-03-05 추가 */
+	.tbl_item_19_01,.tbl_item_19_02,.tbl_item_19_03,.tbl_item_19_04,
+	.tbl_item_19_05,.tbl_item_19_06,.tbl_item_19_07,.tbl_item_19_08,.tbl_item_19_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_19_01_value,.tbl_item_19_02_value,.tbl_item_19_03_value,.tbl_item_19_04_value,
+	.tbl_item_19_05_value,.tbl_item_19_06_value,.tbl_item_19_07_value,.tbl_item_19_08_value,.tbl_item_19_09_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_19_01{width:50;} /* 번호 */
+	.tbl_item_19_01_value{width:50; color:#BBB; text-align:center; font-size:14pt; font-family:arial; font-weight:100;}
+	.tbl_item_19_02{width:150;} /* 스킨이미지 */
+	.tbl_item_19_02_value{width:150; text-align:center; padding:4 0;}
+	.tbl_item_19_02_value div.num1{width:130; height:100; overflow:hidden; border:1px solid #FFF;}
+	.tbl_item_19_02_value div.num2{width:130; height:100; border:2px solid #CCC;}
+	.tbl_item_19_03{width:60;} /* 출력유무 */
+	.tbl_item_19_03_value{width:60; color:; text-align:center; font-weight:; font-family:맑은 고딕,돋움;}
+	.tbl_item_19_04{width:;} .tbl_item_19_04 label{width:220;} /* 제목 */
+	.tbl_item_19_04_value{width:; color:; text-align:; font-size:9.4pt; font-weight:bold; font-family:맑은 고딕,돋움; padding-right:10;}
+	.tbl_item_19_04_value label.n1{width:95%; margin-left:15; /*text-overflow-mode: ellipsis; overflow:hidden; white-space: nowrap;*/}
+	.tbl_item_19_04_value label.n2{width:95%; margin-left:15; overflow:hidden; color:#555; font-family:돋움; font-size:8pt; font-weight:100;} /* 간단설명 */
+	.tbl_item_19_04_value label.n3{width:95%; height:38; margin-left:15; overflow:hidden; color:#AAA; font-family:돋움; font-size:8pt; font-weight:100;} /* 스킨메모내용 */
+	.tbl_item_19_05{width:140;} /* 템플릿파일 */
+	.tbl_item_19_05_value{width:140; text-align:; font-family:tahoma; padding:0 5 0 5;}
+	.tbl_item_19_06{width:50;} /* 예약용 */
+	.tbl_item_19_06_value{width:50; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_19_07{width:70;} /* 멀티업로드 */
+	.tbl_item_19_07_value{width:70; text-align:center; font-family:맑은 고딕,돋움;}
+	.tbl_item_19_08{width:80;} /* 등록일 */
+	.tbl_item_19_08_value{width:80; text-align:center; font-family:arial;}
+	.tbl_item_19_09{width:70;} /* 관리자툴 */
+	.tbl_item_19_09_value{width:70; text-align:center;}
+	/* 삭제 회원관리 */
+	.tbl_item_20_01,.tbl_item_20_02,.tbl_item_20_03,.tbl_item_20_04,
+	.tbl_item_20_05{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_20_01_value,.tbl_item_20_02_value,.tbl_item_20_03_value,.tbl_item_20_04_value,
+	.tbl_item_20_05_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_20_01{width:50;}.tbl_item_20_01 label{width:50;}	/* 번호 */
+	.tbl_item_20_01_value{width:50; text-align:center; font-family:맑은 고딕,돋움;}.tbl_item_20_01_value label{width:30; text-align:right; margin-left:5; color:gray;}
+	.tbl_item_20_02{}.tbl_item_20_02 label{width:160; letter-spacing:-2;} /* 회원이름 */
+	.tbl_item_20_02_value{color:#008040; font-family:맑은 고딕,돋움; font-weight:bold; padding-top:6; padding-bottom:6;}
+	.tbl_item_20_03{width:130;}.tbl_item_20_03 label{width:120;}	/* 아이디 */
+	.tbl_item_20_03_value{width:130; text-align:center; font-family:tahoma;}.tbl_item_20_03_value a{color:#0080FF;}
+	.tbl_item_20_04{width:130;}.tbl_item_20_06 label{width:120;}	/* 삭제일 */
+	.tbl_item_20_04_value{width:130; text-align:center; font-family:tahoma;}
+	.tbl_item_20_05{width:70;}	/* 관리자툴 */
+	.tbl_item_20_05_value{width:70; text-align:center;}
+	/* 미니홈스킨 등록페이지 */
+	label.mhs_item{width:165px; border:0px solid;}
+	.tbl_side{width:2;}
+	.tbl_sepr{width:2; background:url('') no-repeat;}
+	.tbl_line{height:1; background-color:#B0B8B9; border-width:0 2 0 2; border-color:white; border-style:solid;}
+	/* ********************************************************************************************************************** */
+	/* 통합회원관리 관련 ( happy_member~.php ) Class		[2010-06-22]													  */
+	/* ********************************************************************************************************************** */
+	.tbl_box_hm{background-color:#9EADC0;}
+	.tbl_box_hm input{width:; font-family:"tahoma","맑은 고딕","돋움"; font-weight:100; font-size:10pt; margin:0 0 0 0; background-color:#F8F8F8; border:1px solid #BBB;}	/* INPUT 폼 스타일설정 */
+	.tbl_box_hm input#tpl_list,#tpl_detail,#tpl_detail_def{width:400; font-weight:bold; font-size:10pt; margin:0 0 5 0; background-color:#FAFAFA; border-color:;}
+	.tbl_box_hm input#group_output_all,#group_output_sub,#group_output_value{width:17; height:17; color:red; background-color:white; border:2px solid;}	/* 카테고리그룹설정체크박스*/
+	.tbl_box_hm textarea{width:100%; font-weight:bold; font-size:10pt; margin:10 0 0 0; background-color:#F8F8F8; border:1px solid #BBB;}
+	.tbl_box_hm div.help_txt{width:100%; color:#555; font-family:돋움; margin:15 0 0 0; background-color:#FAFAFA; border:1px dashed #8DCB25;} /* 설명글박스 */
+	.tbl_box_hm div.help_txt ul{margin:20 20 15 40; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box_hm div.help_conf_txt{width:100%; color:#555; font-family:돋움; margin:15 0 0 0; background-color:#FAFAFA; border:1px dashed #8DCB25;} /* 설명글박스 */
+	.tbl_box_hm div.help_conf_txt ul{margin:8 20 5 30; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box_hm div.help_txt2{width:100%; font-family:돋움; margin:0 0 0 0;} /* 설명글박스2(테두리없는것) */
+	.tbl_box_hm div.help_txt2 ul{color:#AAA; margin:5 20 0 20; line-height:15px; list-style-image:url('img/ico_arrow_08.gif');}
+	.tbl_box_hm_padding{padding:5 10 5 10;}
+	.tbl_box_hm_padding label#select_item{font-size:10pt; font-family:맑은 고딕,돋움; font-weight:bold; margin:0 30 0 0;}	/* Radio 폼선택글자  항목 전역용 */
+	.tbl_box_hm_padding textarea{color:#333; font-weight:100; margin:0; padding:3;} /* TextArea */
+	.tbl_box_hm_padding2{padding:1 10 15 10;}
+	.tbl_box_hm_padding div.help{width:400; color:#888;} /* 게시판관련 페이지 도움말부분 */
+	.tbl_box_hm_padding3 div.help_txt UL{margin:0;}
+	/* FORM TYPE [ checkbox | radio ]*/
+	.tbl_box_hm_padding .input_chk{width:17px; height:17px; border:0px; background-color:white;}
+	.tbl_box_hm_padding .cfg_input_chk{width:17px; height:17px; border:0px; background-color:white;}
+	.tbl_box_hm_padding label.label_txt{font-size:10pt; font-family:맑은 고딕,돋움; margin-right:30px;}	/* 글자부분 */
+	.tbl_box_hm_padding input.btn_zipcode{width:102px; height:24px; font-size:8pt; border:0px solid; background:url('img/happy_member/btn_bg_aqua_zip.gif') no-repeat 0px 0px; cursor:pointer;}	/* 우편번호 */
+	.tbl_box_hm_padding .input_file{width:100%;}
+	/* 도움말 레이어1 : 도움말 */
+	.tbl_box_hm div.cfg_help_conf_dl_txt{width:100%; color:#555; font-family:돋움; margin:10px 0 6px 0; background-color:#FAFAFA; border:1px solid #EEE;} /* 설명글박스 */
+	.tbl_box_hm div.cfg_help_conf_dl_txt dl{margin:10px 10px 6px 10px;}
+	.tbl_box_hm div.cfg_help_conf_dl_txt dl dt{margin:0px;}
+	.tbl_box_hm div.cfg_help_conf_dl_txt dl dd{margin:-14px 0 0 20px;}
+	/* 이미지 미리보기 */
+	.tbl_box_hm_padding img.img_preview{width:200px; margin:6px 0; border:1px solid #999;}
+	.tbl_box_hm_padding img.group_img_preview{margin:10px 0; border:0px solid #999;}
+	/* 타이틀색상 */
+	label.hm_title{color:#08F;}
+	/* ********************************************************************************************* */
+	/* [ 회원정보관리 목록 ] 공통 출력사항 Class */
+	.tbl_item_hm_listNo,.tbl_item_hm_firstReg,.tbl_item_hm_lastLog,.tbl_item_hm_logCount,.tbl_item_adminTool{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_hm_listNo_value,.tbl_item_hm_firstReg_value,.tbl_item_hm_lastLog_value,.tbl_item_hm_logCount_value,.tbl_item_adminTool_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:tahoma;}
+	.tbl_item_hm_listNo{width:50px;} /* 번호 */
+	.tbl_item_hm_listNo_value{width:50px; color:#555; text-align:center; font-family:tahoma; font-size:10pt;}
+	.tbl_item_hm_firstReg{width:;} .tbl_item_hm_firstReg label{width:74px;} /* 가입일 */
+	.tbl_item_hm_firstReg_value{width:; color:#084; text-align:center;}
+	.tbl_item_hm_lastLog{width:80px;} /* 최종로그인 */
+	.tbl_item_hm_lastLog_value{width:80px; text-align:center;}
+	.tbl_item_hm_logCount{width:64px;} /* 로그인횟수 */
+	.tbl_item_hm_logCount_value{width:64px; font-size:10pt; text-align:right;}
+	.tbl_item_hm_logCount_value label{color:#555; font-size:8pt; font-family:맑은 고딕,돋움;}
+	.tbl_item_hm_adminTool{width:68px;} /* 관리툴 */
+	.tbl_item_hm_adminTool_value{width:68px; text-align:center; padding-top:2px; padding-bottom:0px;}
+	/* 샘플 데모작성 기준임 */
+	/* 프로그램 자동생성 부분 'width' 값 (inc/function_happy_member.php 설정)은 관리자 설정값이 있을 경우 작동안함 */
+	/* 항목 제목(Title) 은 유동적으로 변동되는 부분 */
+	/* [ 전체회원정보관리 ] */
+	.tbl_item_hm_user_email,.tbl_item_hm_user_fax,.tbl_item_hm_user_id,.tbl_item_hm_user_name,.tbl_item_hm_user_nick,.tbl_item_hm_user_prefix,
+	.tbl_item_hm_user_jumin1,.tbl_item_hm_user_birth_year,.tbl_item_hm_user_phone,.tbl_item_hm_user_phone2,.tbl_item_hm_sms_forwarding,.tbl_item_hm_photo1
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_hm_user_email_value,.tbl_item_hm_user_fax_value,.tbl_item_hm_user_id_value,.tbl_item_hm_user_name_value,.tbl_item_hm_user_nick_value,.tbl_item_hm_user_prefix_value,
+	.tbl_item_hm_user_jumin1_value,.tbl_item_hm_user_birth_year_value,.tbl_item_hm_user_phone_value,.tbl_item_hm_user_phone2_value,.tbl_item_hm_sms_forwarding_value,.tbl_item_hm_photo1_value
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:tahoma;}
+	.tbl_item_hm_user_email{width:;} /* 이메일 */
+	.tbl_item_hm_user_email_value{width:;}
+	.tbl_item_hm_user_fax{width:;} /* 팩스번호 */
+	.tbl_item_hm_user_fax_value{width:;}
+	.tbl_item_hm_user_id{width:100%;} /* 아이디 */
+	.tbl_item_hm_user_id_value{width:100%; color:#08F; text-align:left;}
+	.tbl_item_hm_user_name{width:;} /* 이름 */
+	.tbl_item_hm_user_name_value{width:; font-family:맑은 고딕,돋움;}
+	.tbl_item_hm_user_nick{width:;} /* 닉네임 */
+	.tbl_item_hm_user_nick_value{width:; font-family:맑은 고딕,돋움;}
+	.tbl_item_hm_user_prefix{width:;} /* 성별 */
+	.tbl_item_hm_user_prefix_value{width:; font-family:맑은 고딕,돋움; text-align:center;}
+	.tbl_item_hm_user_jumin1{} /* 주민등록번호 */
+	.tbl_item_hm_user_jumin1_value{}
+	.tbl_item_hm_user_birth_year{} /* 생년월일 */
+	.tbl_item_hm_user_birth_year_value{}
+	.tbl_item_hm_user_phone{} /* 연락처 */
+	.tbl_item_hm_user_phone_value{}
+	.tbl_item_hm_user_phone2{} /* 연락처2 */
+	.tbl_item_hm_user_phone2_value{}
+	.tbl_item_hm_email_forwarding{} /* 이메일 수신동의 */
+	.tbl_item_hm_email_forwarding_value{}
+	.tbl_item_hm_sms_forwarding{} /* SMS 수신동의 */
+	.tbl_item_hm_sms_forwarding_value{}
+	.tbl_item_hm_photo1{width:80px;} /* 사진 */
+	.tbl_item_hm_photo1_value{width:80px; text-align:center;}
+	.tbl_item_hm_photo1_value img.img_preview{width:72px; border:1px solid #CCC}
+	/* ********************************************************************************************* */
+	/* [탈퇴회원관리] */
+	.tbl_item_hm_out_listNo,.tbl_item_hm_out_userid,.tbl_item_hm_out_time,.tbl_item_hm_out_ip,.tbl_item_hm_out_adminTool{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_hm_out_listNo_value,.tbl_item_hm_out_userid_value,.tbl_item_hm_out_time_value,.tbl_item_hm_out_ip_value,.tbl_item_hm_out_adminTool_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:tahoma;}
+	.tbl_item_hm_out_listNo{width:50px;} /* 번호 */
+	.tbl_item_hm_out_listNo_value{width:50px; color:#555; text-align:center; font-family:tahoma; font-size:10pt;}
+	.tbl_item_hm_out_userid{} /* 아이디 */
+	.tbl_item_hm_out_userid_value{color:#08F; text-align:left;}
+	.tbl_item_hm_out_time{width:140px;} /* 탈퇴시간 */
+	.tbl_item_hm_out_time_value{width:140px; text-align:center;}
+	.tbl_item_hm_out_ip{width:120px;} /* 탈퇴IP */
+	.tbl_item_hm_out_ip_value{width:120px; text-align:center;}
+	.tbl_item_hm_out_adminTool{width:68px;} /* 관리툴 */
+	.tbl_item_hm_out_adminTool_value{width:68px; text-align:center; padding-top:2px; padding-bottom:0px;}
+	/* ********************************************************************************************* */
+	label.man{color:#0FADEA;} /* 남자 */
+	label.women{color:#FD82BF;} /* 여자 */
+	label.no_info{color:gray; font-size:8pt; font-family:맑은 고딕,돋움;} /* 정보값이 없을 경우에 */
+	label.btn_member_view{float:right; display:block; width:300px; height:20px; margin-bottom:20px; text-align:right;} /* 회원그룹관리버튼, 탈퇴회원 버튼 */
+	/* [ 회원그룹관리 ] */
+	.tbl_item_hm_group_1,.tbl_item_hm_group_2,.tbl_item_hm_group_3,.tbl_item_hm_group_4,.tbl_item_hm_group_5,.tbl_item_hm_group_6,
+	.tbl_item_hm_group_7,.tbl_item_hm_group_8,.tbl_item_hm_group_9,.tbl_item_hm_group_10,.tbl_item_hm_group_11{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_hm_group_1_value,.tbl_item_hm_group_2_value,.tbl_item_hm_group_3_value,.tbl_item_hm_group_4_value,.tbl_item_hm_group_5_value,.tbl_item_hm_group_6_value,
+	.tbl_item_hm_group_7_value,.tbl_item_hm_group_8_value,.tbl_item_hm_group_9_value,.tbl_item_hm_group_10_value,.tbl_item_hm_group_11_value{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:맑은 고딕,돋움;}
+	.tbl_item_hm_group_1{width:50px;} /* 번호 */
+	.tbl_item_hm_group_1_value{width:50px; color:#555; text-align:center; font-family:tahoma; font-size:10pt;}
+	.tbl_item_hm_group_2{width:;} .tbl_item_hm_group_2 label{width:120px;} /* 그룹명 */
+	.tbl_item_hm_group_2_value{width:; color:#08F;}
+	.tbl_item_hm_group_3{width:74px;} /* 회원가입 */
+	.tbl_item_hm_group_3_value{width:74px; text-align:center;}
+	.tbl_item_hm_group_4{width:74px; display:none;} /* 기본레벨 >> 필요성이 없어 감춤 >> 추후 사용예정 */
+	.tbl_item_hm_group_4_value{width:74px; text-align:center; font-family:tahoma; font-size:10pt; display:none;}
+	.tbl_sepr4{width:2; background:url('') no-repeat; display:none;}
+	.tbl_item_hm_group_5{width:74px;} /* 실명인증 */
+	.tbl_item_hm_group_5_value{width:74px; text-align:center;}
+	.tbl_item_hm_group_6{width:86px;} /* 주민번호패턴 */
+	.tbl_item_hm_group_6_value{width:86px; text-align:center;}
+	.tbl_item_hm_group_7{width:74px;} /* 휴대폰인증 */
+	.tbl_item_hm_group_7_value{width:74px; text-align:center;}
+	.tbl_item_hm_group_8{width:86px; letter-spacing:0px;} /* E-mail인증 */
+	.tbl_item_hm_group_8_value{width:86px; color:#084; text-align:center;}
+	.tbl_item_hm_group_9{width:80px;} /* 권한권리 */
+	.tbl_item_hm_group_9_value{width:80px; text-align:center;}
+	.tbl_item_hm_group_10{width:80px;} /* 필드관리 */
+	.tbl_item_hm_group_10_value{width:80px; font-size:10pt; text-align:right;},.tbl_item_hm_group_10_value label{color:#555; font-size:8pt;}
+	.tbl_item_hm_group_11{width:60px;} /* 관리툴 */
+	.tbl_item_hm_group_11_value{width:60px; text-align:center; padding-top:2px; padding-bottom:0px;}
+	input.btn_style01{width:130px; height:39px; color:black; font-size:8pt; font-weight:bold; padding:2 0 0 0; border:0px solid; background:url('img/happy_member/btn_bg07b.gif') no-repeat 0px 0px; cursor:pointer;} /* 비회원권한설정 */
+	input.btn_style02{width:120px; height:40px; color:white; font-size:8pt; font-weight:bold; padding:2 0 0 0; border:0px solid; background:url('img/happy_member/btn_bg08.gif') no-repeat 0px 0px; cursor:pointer;} /* 회원그룹추가 */
+	#admin_tool_btn_tbl input.btn_style03{width:110px; height:54px; color:black; font-size:8pt; font-weight:bold; padding:2 0 0 0; background:url('img/btn_bg06a.gif') no-repeat 0 0; border:0px; cursor:pointer;} /* 목록으로 */
+	/* [ 회원그룹관리 등록/수정 ] */
+	.tbl_box_hm label{font-family:"맑은 고딕","돋움"; font-size:9pt; margin-right:2em;}
+	/* [ 회원그룹필드관리] */
+	.tbl_item_hm_field_1,.tbl_item_hm_field_2,.tbl_item_hm_field_3,.tbl_item_hm_field_4,.tbl_item_hm_field_5,.tbl_item_hm_field_6,
+	.tbl_item_hm_field_7,.tbl_item_hm_field_8,.tbl_item_hm_field_9,.tbl_item_hm_field_10,.tbl_item_hm_field_11
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden; color:white; font-size:9pt; font-family:tahoma; font-weight:bold; text-align:center; letter-spacing:-1;}
+	.tbl_item_hm_field_1_value,.tbl_item_hm_field_2_value,.tbl_item_hm_field_3_value,.tbl_item_hm_field_4_value,.tbl_item_hm_field_5_value,.tbl_item_hm_field_6_value,
+	.tbl_item_hm_field_7_value,.tbl_item_hm_field_8_value,.tbl_item_hm_field_9_value,.tbl_item_hm_field_10_value,.tbl_item_hm_field_11_value
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:맑은 고딕,돋움; text-align:center;}
+	.tbl_item_hm_field_1{width:;} /* 필드이름 */
+	.tbl_item_hm_field_1 label{width:130px;}
+	.tbl_item_hm_field_1_value{width:;}
+	.tbl_item_hm_field_1_value input{width:100%; font-family:"맑은 고딕","돋움"; font-size:9pt; background-color:#F4F4F4; border:1px solid #CCC;}
+	.tbl_item_hm_field_2{width:120px;} /* 사용-필수-수정-보기 */
+	.tbl_item_hm_field_2_value{width:120px;}
+	.tbl_item_hm_field_3{width:55px;} /* 리스트출력 */
+	.tbl_item_hm_field_1 label{width:53px;}
+	.tbl_item_hm_field_3_value{width:55px;}
+	.tbl_item_hm_field_4{width:100px;} /* 필드명 */
+	.tbl_item_hm_field_4_value{width:100px;}
+	.tbl_item_hm_field_4_value input{width:100px; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	.tbl_item_hm_field_5{width:90px;} /* 입력형식 */
+	.tbl_item_hm_field_5_value{width:90px;}
+	.tbl_item_hm_field_5_value select{width:90px; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_hm_field_6{width:100px;} /* 출력형식 */
+	.tbl_item_hm_field_6_value{width:100px}
+	.tbl_item_hm_field_6_value input{width:100px; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_hm_field_7{width:100px;} /* 선택옵션 */
+	.tbl_item_hm_field_7_value{width:100px;}
+	.tbl_item_hm_field_7_value input{width:100px; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_hm_field_8{width:100px;} /* CSS */
+	.tbl_item_hm_field_8_value{width:100px;}
+	.tbl_item_hm_field_8_value input{width:; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	.tbl_item_hm_field_9{width:60px;} /* 그룹 */
+	.tbl_item_hm_field_9_value{width:60px;}
+	.tbl_item_hm_field_9_value select{width:60px; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_hm_field_9_value select option.opt1{background-color:#DAF7F8;} /* 메인 */
+	.tbl_item_hm_field_9_value select option.opt2{background-color:#F9D9D9;} /* 서브 */
+	.tbl_item_hm_field_9_value select option.opt3{background-color:#E8E8E8;} /* 기타1 */
+	.tbl_item_hm_field_9_value select option.opt4{background-color:;} /* 기타2 */
+	.tbl_item_hm_field_9_value select option.opt5{background-color:#E4F0DF;} /* 기타3 */
+	.tbl_item_hm_field_10{width:36px;} /* Sort */
+	.tbl_item_hm_field_10_value{width:36px;}
+	.tbl_item_hm_field_10_value input{width:36px; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	input.field_detail_view{width:102px; height:24px; font-size:8pt; font-family:"맑은 고딕","돋움"; border:0px solid; background:url('img/happy_member/btn_bg_aqua_zip.gif') no-repeat 0px 0px; cursor:pointer;}	/* 상세보기버튼 */
+	table.form_btn td{padding:0 2px 0 2px;}
+	table.form_btn td select{color:white; background-color:#FF6F20;}
+	table.tbl_box_hm td label select{color:white; background-color:#FF6F20;}
+	/* 게시판관리 권한보기 팝업창 */
+	table.bbs_permission{background-color:black; border:1px solid #000; margin:; border-right:0px; border-top:0px; filter:alpha(opacity=75); opacity:0.75; -moz-opacity:0.75; opacity:0.75; -moz-opacity:0.75;-ms-filter: alpha(opacity=75);}
+	table.bbs_permission td{color:white; padding:2px; border-width:0 1px 1px 0px; border-style:solid; border-color:#AAA;}
+	table.bbs_permission td.yes,table.bbs_permission td.no{font-family:"tahoma","sans-serif"; font-weight:bold; text-align:center; background-color:#333;}
+	table.bbs_permission td.no{color:#888;}
+	/* 게시판관리 권한항목 체크폼 부분 */
+	.tbl_box2_padding div{float:left; display:block;}
+	.tbl_box2_padding div *{font-family:"맑은 고딕","돋움","Dotum"; font-size:8pt; font-weight:bold;}
+	.tbl_box2_padding div.group_name{width:130px; height:23px; border:0px solid;}
+		/* [ 문의하기 폼설정 ] */
+	.tbl_item_if_field_1,.tbl_item_if_field_2,.tbl_item_if_field_3,.tbl_item_if_field_4,.tbl_item_if_field_5,.tbl_item_if_field_6,
+	.tbl_item_if_field_7,.tbl_item_if_field_8,.tbl_item_if_field_9,.tbl_item_if_field_10,.tbl_item_if_field_11
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden; color:white; font-size:9pt; font-family:tahoma; font-weight:bold; text-align:center; letter-spacing:-1;}
+	.tbl_item_if_field_1_value,.tbl_item_if_field_2_value,.tbl_item_if_field_3_value,.tbl_item_if_field_4_value,.tbl_item_if_field_5_value,.tbl_item_if_field_6_value,
+	.tbl_item_if_field_7_value,.tbl_item_if_field_8_value,.tbl_item_if_field_9_value,.tbl_item_if_field_10_value,.tbl_item_if_field_11_value
+	{padding:0 4px 0 4px; border:0px solid; overflow:hidden; font-family:맑은 고딕,돋움; text-align:center;}
+	.tbl_item_if_field_1{width:;} /* 필드이름 */
+	.tbl_item_if_field_1 label{width:130px;}
+	.tbl_item_if_field_1_value{width:;}
+	.tbl_item_if_field_1_value input{width:100%; font-family:"맑은 고딕","돋움"; font-size:9pt; background-color:#F4F4F4; border:1px solid #CCC;}
+	.tbl_item_if_field_2{width:52px;} /* 사용 */
+	.tbl_item_if_field_2 label{width:50px;}
+	.tbl_item_if_field_2_value{width:52px;}
+	.tbl_item_if_field_3{width:52px;} /* 필수 */
+	.tbl_item_if_field_3 label{width:50px;}
+	.tbl_item_if_field_3_value{width:52px;}
+	.tbl_item_if_field_4{width:32px;} /* 보기 */
+	.tbl_item_if_field_4 label{width:30px;}
+	.tbl_item_if_field_4_value{width:32px;}
+	.tbl_item_if_field_5{width:100px;} /* 필드명 */
+	.tbl_item_if_field_5_value{width:100px;}
+	.tbl_item_if_field_5_value input{width:98%; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	.tbl_item_if_field_6{width:90px;} /* 입력형식 */
+	.tbl_item_if_field_6_value{width:90px;}
+	.tbl_item_if_field_6_value select{width:98%; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_if_field_7{width:160px;} /* 출력형식 */
+	.tbl_item_if_field_7_value{width:160px}
+	.tbl_item_if_field_7_value input{width:98%; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_if_field_8{width:150px;} /* 선택옵션 */
+	.tbl_item_if_field_8_value{width:150px;}
+	.tbl_item_if_field_8_value input{width:98%; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_if_field_9{width:100px;} /* CSS */
+	.tbl_item_if_field_9_value{width:100px;}
+	.tbl_item_if_field_9_value input{width:; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	.tbl_item_if_field_10{width:60px;} /* 그룹 */
+	.tbl_item_if_field_10_value{width:60px;}
+	.tbl_item_if_field_10_value select{width:98%; font-family:"맑은 고딕","돋움"; font-size:8pt;}
+	.tbl_item_if_field_10_value select option.opt1{background-color:#DAF7F8;} /* 메인 */
+	.tbl_item_if_field_10_value select option.opt2{background-color:#F9D9D9;} /* 서브 */
+	.tbl_item_if_field_10_value select option.opt3{background-color:#E8E8E8;} /* 기타1 */
+	.tbl_item_if_field_10_value select option.opt4{background-color:;} /* 기타2 */
+	.tbl_item_if_field_10_value select option.opt5{background-color:#E4F0DF;} /* 기타3 */
+	.tbl_item_if_field_11{width:46px;} /* Sort */
+	.tbl_item_if_field_11_value{width:46px;}
+	.tbl_item_if_field_11_value input{width:98%; font-family:tahoma,AppleGothic,Sans-serif; font-size:8pt;}
+	input.if_field_detail_view{width:102px; height:24px; font-size:8pt; font-family:"맑은 고딕","돋움"; border:0px solid; background:url('img/happy_member/btn_bg_aqua_zip.gif') no-repeat 0px 0px; cursor:pointer;}	/* 상세보기버튼 */
+	table.tbl_box_hm td label select{color:white; background-color:#FF6F20;}
+	table.if_form_btn td{padding:0 2px 0 2px;}
+	table.if_form_btn td select{color:white; background-color:#FF6F20;}
+	/* 마켓디렉토리관리 */
+	.tbl_item_30_01,.tbl_item_30_02,.tbl_item_30_03,.tbl_item_30_04,
+	.tbl_item_30_05,.tbl_item_30_06,.tbl_item_30_07,.tbl_item_30_08,.tbl_item_30_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_30_01{width:auto;}.tbl_item_30_01 label{width:80; border:0px solid red;}	/* 매장이름 */
+	.tbl_item_30_02{width:170;}.tbl_item_30_02 label{width:100;}	/* 템플릿설정 */
+	.tbl_item_30_03{width:60;}.tbl_item_3003 label{width:50;}	/* 소팅번호 */
+	.tbl_item_30_04{width:80;}.tbl_item_30_04 label{width:70;}	/* 관리툴 */
+	.tbl_item_30_05{width:60;}.tbl_item30_05 label{width:50;}	/* 총상품 */
+	.tbl_item_30_06{width:60;}.tbl_item30_06 label{width:50;}	/* 판매중지 */
+	.tbl_item_30_07{width:60;}.tbl_item30_07 label{width:50;}	/* 판매진행 */
+	.tbl_item_30_08{width:70;}.tbl_item30_08 label{width:60;}	/* 수수료 */
+	.tbl_item_30_09{width:}.tbl_item30_09 label{width:}	/* 상세설정 */
+	/* 매장상품관리 */
+	.tbl_item_31_01,.tbl_item_31_02,.tbl_item_31_03,.tbl_item_31_04,
+	.tbl_item_31_05,.tbl_item_31_06,.tbl_item_31_07,.tbl_item_31_08,.tbl_item_31_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_31_01{width:100;}.tbl_item_31_01 label{width:80; border:0px solid red;}	/* 상품번호 */
+	.tbl_item_31_02{width:130;}.tbl_item_31_02 label{width:100;}	/* 사진 */
+	.tbl_item_31_03{width:auto;}.tbl_item_31_03 label{width:50;}	/* 내용 */
+	.tbl_item_31_04{width:100;}.tbl_item_31_04 label{width:70;}	/* 아이디 */
+	.tbl_item_31_05{width:100;}.tbl_item_31_05 label{width:50;}	/* 현재가 */
+	.tbl_item_31_06{width:100;}.tbl_item_31_06 label{width:50;}	/* 등록일 */
+	.tbl_item_31_07{width:120;}.tbl_item_31_07 label{width:50;}	/* 관리툴 */
+	/* 상품평관리 */
+	.tbl_item_32_01,.tbl_item_32_02,.tbl_item_32_03,.tbl_item_32_04,
+	.tbl_item_32_05,.tbl_item_32_06,.tbl_item_32_07,.tbl_item_32_08,.tbl_item_32_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_32_01{width:40;}.tbl_item_32_01 label{width:30; border:0px solid red;}	/* 번호 */
+	.tbl_item_32_02{width:240;}.tbl_item_32_02 label{width:100;}	/* 상품명 */
+	.tbl_item_32_03{width:auto;}.tbl_item_32_03 label{width:50;}	/* 상품평 */
+	.tbl_item_32_04{width:80;}.tbl_item_32_04 label{width:70;}	/* 아이디 */
+	.tbl_item_32_05{width:80;}.tbl_item_32_05 label{width:50;}	/* 날짜 */
+	.tbl_item_32_06{width:70;}.tbl_item_32_06 label{width:50;}	/* 추천여부 */
+	.tbl_item_32_07{width:90;}.tbl_item_32_07 label{width:50;}	/* 관리툴 */
+	/* 포�憐�결제관리 */
+	.tbl_item_33_01,.tbl_item_33_02,.tbl_item_33_03,.tbl_item_33_04,
+	.tbl_item_33_05,.tbl_item_33_06,.tbl_item_33_07,.tbl_item_33_08,.tbl_item_33_09{padding:0 4px 0 4px; border:0px solid; overflow:hidden;}
+	.tbl_item_33_01{width:120;}.tbl_item_33_01 label{width:;}	/* 주문번호 */
+	.tbl_item_33_02{width:150;}.tbl_item_33_02 label{width:;}	/* 구매내역 */
+	.tbl_item_33_03{width:60;}.tbl_item_33_03 label{width:;}	/* 구매자 */
+	.tbl_item_33_04{width:100;}.tbl_item_33_04 label{width:;}	/* 결제금액 */
+	.tbl_item_33_05{width:;}.tbl_item_33_05 label{width:;}	/* 결제방식 */
+	.tbl_item_33_06{width:100;}.tbl_item_33_06 label{width:;}	/* 결제일 */
+	.tbl_item_33_07{width:60;}.tbl_item_33_07 label{width:;}	/* 입금확인 */
+	.tbl_item_33_08{width:100;}.tbl_item_33_08 label{width:;}	/* 관리툴 */
+</style>
+<!--[if iE]>
+<STYLE TYPE="text/css">
+	/* 사이트명 */
+	.site_name{color:black; font-size:9pt; font-weight:bold; padding:4 10 0 10;}
+	/* 현재위치 */
+	.admin_now_location{padding:0 0 0 200;}
+	#admin_now_loc{height:24; color:black; font-size:8pt; font-family:돋움; width:650; margin:0 0 0 5; border:0px solid red;}
+	#admin_now_loc li{float:left; margin:6 10 0 0;}
+	/*#admin_now_loc li{float:left; margin:6 10 0 0;}*/
+	#admin_now_loc li.ti_nowloc{float:left; margin:0 6 -4 0;}
+	/* 서브메뉴 설정 */
+	.submenu_title{padding:3 0 0 11; letter-spacing:-1;}
+	/*#submenu{font-family:돋움; margin:0 0 20 11; line-height:20px; list-style:none;}*/
+	#submenu{font-family:돋움; margin:0 0 20 29; line-height:20px; list-style:circle; list-style-image:url('img/ico_arrow_02a.gif'); list-style-position:20;}
+	/* 관리자정보 */
+	#admin_info_list{margin:5 0 0 18; letter-spacing:-1;}
+	#admin_info_list li{list-style-image:url('img/ico_arrow_02.gif');}
+	.admin_info_list_value{
+							word-break:break-all;
+							width:150; height:13; margin:0 0 14 -14; padding:1 2 1 2; color:#598; font-family:맑은 고딕,돋움; font-size:8pt;
+							text-align:right; letter-spacing:0;
+							background-color:#FAFAFA; border:1px solid #DDD;}
+	/* 카운트정보 */
+	#count_info_list{margin:10 0 0 18; letter-spacing:-1;}
+	#count_info_list li{list-style-image:url('img/ico_arrow_06.gif');}
+	.count_info_list_value{
+							word-break:break-all;
+							width:154; height:13; margin:-16 0 6 -14; padding:1 2 1 2; color:#598; font-family:tahoma; font-size:8pt;
+							text-align:right; letter-spacing:0;
+							background-color:transparent; border:0px solid #DDD;}
+	.admin_line{width:150; height:1; margin:0 0 10 -14; border-width:1 0 0 0; border-style:dashed; border-color:#CCC;}
+	.admin_line2{width:156; height:1; margin:6 0 10 -19; border-width:1 0 0 0; border-style:dashed; border-color:#CCC;}
+	/* 목록 페이지번호 */
+	#list_paging{padding:0 0 0 0; margin:0 0 30 0; list-style:none; font-family:돋움; font-weight:bold; font-size:9pt;}
+	#list_paging li{margin:0 0 0 20;}
+	/* 지역추가 버튼 */
+	#btn_area_reg{margin:0 0 0 20; width:84; height:56; list-style:none; color:white; font-family:돋움; font-weight:bold; font-size:9pt; background:url('img/btn_reg2_bg.gif') no-repeat; border:0px}
+	#btn_area_reg li{width:84; height:54; padding:20 0 0 0; border:0px solid red;}
+	#btn_area_reg li a{color:#E0E0E0;}
+	#btn_area_reg li a:hover{color:#FFF; text-decoration:none;}
+	#btn_area_reg li font{width:76; height:44; margin:-16 0 0 0; padding:15 0 0 0; cursor:pointer; border:0px solid red;}
+</STYLE>
+<![endif]-->
+<style>
+.css_loadingbar {
+	background-color:#000000;
+	width:100%;
+	height:100%;
+	border:1px solid #000000;
+	position:absolute;
+	top:0;
+	left:0;
+	display:none;
+	z-index:10;
+}
+#loading_google{width:520; height:120; border:0px solid #FFF;}
+</style></head>
+<!-- 구글통계값 받는중에 표시되는 애니메이션 -->
+<body onload="initImgs()" style="background:#4b4b4b; overflow-x:hidden;">
+<div style="width:1280px; border:0px solid red;  background:url(img/bg_admin_shadow.gif) repeat-y top right; padding-right:22px;">
+<!-- 타이틀이미지 : 관리자모드 -->
+<div id="title_admin"><a href="javascript:admin_link(&#39;home&#39;);"><img src="./admin_frame_files/title_admin_mode2.png" border="0" style="
+    width: 100%;
+"></a></div>
+
+<!-- CSS -->
+<style type="text/css">
+	/* 서브메뉴 전체감싸는 레이어*/
+	div#admin_sub_menu_wrapper{position:relative; top:0; height:0; z-index:1500; display:none;}
+	/* 서브메뉴 현재위치 아이콘*/
+	div#admin_sub_menu_wrapper div#sub_menu_arrow{position:absolute; top:73; left:-100; z-index:2;}
+	/* 서브메뉴 + 배경이미지 */
+	div#admin_sub_menu_wrapper div#admin_sub_menu_bg{position:absolute; top:80; z-index:1; border:0px solid; width:100%;}
+	div#admin_sub_menu_wrapper div#admin_sub_menu_bg table td.tr1{height:6; background:url('./img/bg_submenu_pan01a.png');}
+	div#admin_sub_menu_wrapper div#admin_sub_menu_bg table td.tr2{color:black; font:8pt 돋움; padding:6 0 12 0; background-color:black; filter:alpha(opacity=60); opacity:0.85; -moz-opacity:0.85;}
+	div#admin_sub_menu_wrapper div#admin_sub_menu_bg table td.tr3{height:8; background:url('./img/bg_submenu_pan01b.png') repeat-x 0 bottom;}
+	/* 서브메뉴 기본크기 더미레이어 */
+	div#dummy_layer{width:1010; border:0px solid white;}
+	div#dummy_layer_cnt{width:788; border:0px solid white;}
+	/* 서브메뉴 레이어 */
+	div#admin_sub_menu_wrapper div#admin_sub_menu{position:relative; top:0; left:200; margin:8 0; width:800; height:; border:0px solid;}
+	/* CSS 적용 서브메뉴 */
+	
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu1 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu1 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu1 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu1 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu1 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu1 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu1 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu2 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu2 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu2 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu2 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu2 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu2 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu2 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu3 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu3 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu3 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu3 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu3 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu3 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu3 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu4 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu4 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu4 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu4 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu4 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu4 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu4 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu5 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu5 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu5 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu5 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu5 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu5 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu5 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu6 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu6 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu6 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu6 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu6 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu6 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu6 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu7 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu7 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu7 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu7 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu7 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu7 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu7 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+				/* 서브메뉴 내용 */
+				div#admin_sub_menu div#submenu8 div.submenu{float:left; width:170; margin-right:20; margin-bottom:15; border:0px solid;}
+				/* 서브메뉴 제목*/
+				div#admin_sub_menu div#submenu8 div.submenu div.menu_subtitle{width:100%; height:21; background:url('./img/bg_title_submenu2a.png') no-repeat; _background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='./img/bg_title_submenu2a.png', sizingMethod='crop');
+				color:white; font-family:돋움; font-size:8pt; font-weight:bold; letter-spacing:-1px; margin-bottom:10; padding:5 15 0 10;}
+				/* 서브메뉴항목 */
+				div#admin_sub_menu div#submenu8 div.submenu table td ul{color:#EEE; font-family:돋움; font-size:10pt; margin:-0.5em 0 0 -1.5em; line-height:19px; list-style:circle; letter-spacing:-2px; list-style-image:url('');}
+				div#admin_sub_menu div#submenu8 div.submenu table td ul li.strong{font-weight:100;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu8 div.submenu table td ul li.strong a{color:#FCC;} /* 굵은 표시 */
+				div#admin_sub_menu div#submenu8 div.submenu table td ul li a{color:#EEE; text-decoration:none;}
+				div#admin_sub_menu div#submenu8 div.submenu table td ul li a:hover{color:white; text-decoration:underline;}
+</style>
+
+
+
+<!-- 서브메뉴 레이어 -->
+<div id="admin_sub_menu_wrapper" onmouseover="menuLayerShowHide(&#39;on&#39;)" onmouseout="menuLayerShowHide(&#39;off&#39;)" style="width: 1280px; display: none;">
+	<!-- 서브메뉴 현재위치 아이콘 -->
+	<div id="sub_menu_arrow" style="left: 600px;"><img src="./admin_frame_files/bg_submenu_pan_nowlocate2.png" border="0" width="30" height="14" class="png24"></div>
+	<!-- 서브메뉴 배경이미지 -->
+	<div id="admin_sub_menu_bg" style="width: 1280px;">
+		<div id="dummy_layer"><div></div></div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tbody><tr><td class="tr1"></td></tr>
+		<tr>
+			<td class="tr2">
+				<!-- 서브메뉴 내용 [ start ] #################################################################### -->
+				<div id="admin_sub_menu">
+					<!-- [기본관리] -->
+					<div id="submenu1" style="display: none;">
+						<!-- 마켓관련설정 -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">마켓관련설정</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										
+										<li><a href="http://style365.co.kr/admin/happy_config_view.php?number=26">마켓관련설정</a>
+										</li><li><a href="http://style365.co.kr/admin/social_category.php">지역 카테고리설정</a>
+										</li><li><a href="http://style365.co.kr/admin/coupon_admin.php">쿠폰횟수 출력제한</a>
+										</li><li><a href="http://style365.co.kr/admin/flat_set.php">플랫기능설정</a>
+										</li><li><a href="http://style365.co.kr/admin/print_main_set.php">메인화면 출력제한</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=11">구매자 카운팅 설정</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=14">현재접속자 환경설정</a>
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+						<!-- 서브메뉴 [솔루션환경설정] -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td><div class="menu_subtitle">솔루션환경설정</div></td>
+								</tr>
+								<tr>
+									<td>
+										<ul>
+											<li><a href="http://style365.co.kr/admin/file_mod.php">환경설정</a>
+											</li><li><a href="http://style365.co.kr/admin/auction_sms_setting.php">SMS 발송설정</a>
+											 <img src="./admin_frame_files/ico_express_reg.png" width="28" height="11" border="0" align="absmiddle" style="margin:-1 0 0 0;" class="png24">											</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=15">차단 단어 설정</a>
+										</li></ul>
+									</td>
+								</tr>
+								</tbody></table>
+						</div>
+					</div>
+					<!-- ############################## -->
+					<!-- [등록관리] -->
+					<div id="submenu2" style="display: none;">
+						<!-- 서브메뉴 [카테고리 정보관리] -->
+						<div class="submenu">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td><div class="menu_subtitle">등록관리</div></td>
+								</tr>
+								<tr>
+									<td>
+										<ul>
+											<li><a href="http://style365.co.kr/admin/auction_category.php">카테고리관리</a>
+											</li><li><a href="http://style365.co.kr/admin/product_add.php">상품등록</a>
+											</li><li><a href="http://style365.co.kr/admin/auction_product_list.php">상품관리</a>
+											</li><li><a href="http://style365.co.kr/admin/auction_trust.php">상품평관리</a>
+											</li><li><a href="http://style365.co.kr/admin/product_about.php">상품문의 목록</a>
+											</li><li><a href="http://style365.co.kr/admin/detail_report.php">쪽지신고관리</a>
+											</li><li><a href="http://style365.co.kr/admin/auction_video.php">동영상등록관리</a>
+										</li></ul>
+									</td>
+								</tr>
+								</tbody></table>
+						</div>
+						<!-- 서브메뉴 [카테고리 정보관리] -->
+						<div class="submenu">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td><div class="menu_subtitle">문의하기 정보관리</div></td>
+								</tr>
+								<tr>
+									<td>
+										<ul>
+											<li><a href="http://style365.co.kr/admin/happy_inquiry_list.php">문의하기 내역관리</a>
+											</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=28">문의하기 관련설정</a>
+											</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=29">문의하기 메일발송폼 설정</a>
+											</li><li><a href="http://style365.co.kr/admin/happy_inquiry_form.php">문의하기 기본등록폼 관리</a>
+										</li></ul>
+									</td>
+								</tr>
+								</tbody></table>
+						</div>
+						<div class="submenu">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td><div class="menu_subtitle">상담신청관리</div></td>
+								</tr>
+								<tr>
+									<td>
+										<ul>
+											<li><a href="http://style365.co.kr/admin/happy_counseling_list.php">상담신청관리</a>
+										</li></ul>
+									</td>
+								</tr>
+								</tbody></table>
+						</div>
+					</div>
+					<!-- ############################## -->
+					
+					
+					
+					<!-- [회원관리] -->
+					<div style="display: none;" id="submenu3">
+						<!--회원관리 -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">회원관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<!-- <LI><a href="admin.php?a=mem&mode=m_list">전체회원관리</a>
+										<LI><a href="admin.php?mode=m_list&member_type=0">일반회원관리</a>
+										<LI><a href="admin.php?mode=m_list&member_type=1">업체회원관리</a>
+										<LI><a href="admin.php?a=mem&mode=m_list&member_type=0&wait=1">대기중인일반회원관리</a>
+										<LI><a href="admin.php?a=mem&mode=m_list&member_type=1&wait=1">대기중인업체회원관리</a> -->
+										<li><a href="http://style365.co.kr/admin/happy_member.php">전체회원관리</a>
+</li><li><a href="http://style365.co.kr/admin/happy_member.php?group_select=1">일반회원정보</a></li><li><a href="http://style365.co.kr/admin/happy_member.php?group_select=2">업체회원정보</a></li><li><a href="http://style365.co.kr/admin/happy_member.php?group_select=3">우수회원정보</a></li><li><a href="http://style365.co.kr/admin/happy_member.php?group_select=4">SNS_LOGIN정보</a></li><li><a href="http://style365.co.kr/admin/happy_member.php?group_select=5">모바일회원정보</a>										</li><li><a href="http://style365.co.kr/admin/admin_member.php">부관리자 관리</a>
+										</li><li><a href="http://style365.co.kr/admin/main.php#" onclick="window.open(&#39;../happy_message.php?adminMode=y&#39;,&#39;adminHappyMessage&#39;,&#39;width=700,height=400,toolbar=no,scrollbars=no&#39;)"><b>관리자 쪽지보기</b></a><b>
+									</b></li></ul><b>
+								</b></td>
+							</tr>
+							</tbody></table>
+						</div>
+						<!--회원관리 -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">회원그룹관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li><a href="http://style365.co.kr/admin/happy_member_group.php">회원그룹관리</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_member_group.php?mode=add">회원그룹등록</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_member.php?type=outList">탈퇴회원관리</a>
+										</li><li><a href="javascript:void(0);" onclick="if(confirm(&#39;일괄 삭제하시겠습니까?&#39;)){location.replace(&#39;happy_member.php?type=out_del_all&#39;);}">탈퇴회원 일괄삭제</a>
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+						<!-- 서브메뉴 [회원레벨관리] -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">회원레벨관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li><a href="http://style365.co.kr/admin/happy_member_level_set.php">회원레벨설정</a>
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+						<!-- <div class=submenu>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td><div class=menu_subtitle>회원그룹관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<UL>
+										<LI>
+									</UL>
+								</td>
+							</tr>
+							</table>
+						</div> -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">회원설정</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<!-- <LI><a href="mailing.php?member_type=0">일반회원메일링</a>
+										<LI><a href="mailing.php?member_type=1">업체회원메일링</a> -->
+<li><a href="http://style365.co.kr/admin/mailing.php?member_type=1">일반회원메일링</a></li><li><a href="http://style365.co.kr/admin/mailing.php?member_type=2">업체회원메일링</a></li><li><a href="http://style365.co.kr/admin/mailing.php?member_type=3">우수회원메일링</a></li><li><a href="http://style365.co.kr/admin/mailing.php?member_type=4">SNS_LOGIN메일링</a></li><li><a href="http://style365.co.kr/admin/mailing.php?member_type=5">모바일회원메일링</a>
+										</li><li><a href="http://style365.co.kr/admin/mailing.php">전체메일링</a>
+										</li><li><a href="http://style365.co.kr/admin/set_mail.php">주문내역 확인메일</a>
+										</li><li><a href="http://style365.co.kr/admin/attendance_conf.php">출석 포인트설정</a>
+										</li><li><a href="http://style365.co.kr/admin/admin_subscription.php">소셜 구독관리(이메일)</a>
+										</li><li><a href="http://style365.co.kr/admin/sms_send.php">소셜 구독관리(SMS)</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=13">회원가입 관련설정</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=23">포인트 지급 설정</a> <!-- upgrade 1.3 -->
+										</li><li><a href="http://style365.co.kr/admin/happy_config_view.php?number=25">회원가입시 추천인설정 </a> <!-- upgrade 1.3 -->
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+					</div>
+					<!-- ############################## -->
+					<!-- [결제/통계관리] -->
+					<div id="submenu4" style="display: none;">
+						<!-- 금액관련설정 -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">결제 관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+																			<li><a href="http://style365.co.kr/admin/happy_config_view.php?number=22">PG 설정</a>
+										</li><li><a href="http://style365.co.kr/admin/auction_money_setup.php">유료/결제금액결정</a>
+										</li><li><a href="http://style365.co.kr/admin/social_product_list.php">상품별주문관리</a>
+										</li><li><a href="http://style365.co.kr/admin/social_jangboo.php"><b>주문장부관리</b></a>
+										</li><li><a href="http://style365.co.kr/admin/go_money.php?mode=seller&amp;jungsan=y">원샷 판매자 정산</a>
+										</li><li><a href="http://style365.co.kr/admin/social_jangboo_point.php">포인트장부관리</a>
+										</li><li><a href="http://style365.co.kr/admin/option_jangboo.php">옵션결제장부관리</a>
+										</li><li><a href="http://style365.co.kr/admin/trust_point_conf.php">상품평 포인트설정</a>
+										</li><li><a href="http://style365.co.kr/admin/main.php#1" onclick="window.open(&#39;sms&#39;,&#39;happysms_admintool&#39;,&#39;width=560,height=650,top=100,left=100,scrolling=no,toolbar=no&#39;)">SMS 관리/충전</a></li></ul></td>
+									
+								
+							</tr>
+							</tbody></table>
+						</div>
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">통계관련설정</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+																				<li><a href="http://style365.co.kr/admin/happy_config_view.php?number=4">통계계정설정</a>
+											</li><li><a href="http://style365.co.kr/admin/happy_analytics.php">접속통계보기</a>
+											</li><li><a href="http://style365.co.kr/admin/auction_stats_100.php">상품일일조회통계</a>
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+					</div>
+					
+					
+					
+					<!-- ############################## -->
+					
+					
+					
+					<!-- [고급자설정] -->
+					<div style="display: block;" id="submenu5">
+						<!-- 서브메뉴 [디자인관리] -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">디자인관리</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<!-- <LI class=strong><A href="http://style365.co.kr/admin/design.php" ONMOUSEOVER="ddrivetip('템플릿(HTML)파일을 HTML소스코드 모드로 편집할 수 있는 기능입니다.','','180')"; ONMOUSEOUT="hideddrivetip()">템플릿디자인 파일관리</A>
+										<LI class=strong><A href="http://style365.co.kr/admin/category_form.php" ONMOUSEOVER="ddrivetip('업체정보 사용등록폼에 대한 설정입니다.','','190')"; ONMOUSEOUT="hideddrivetip()">업체정보 등록폼관리</A> -->
+										<li><a href="http://style365.co.kr/admin/openmarket_tag.php">템플릿 태그생성기</a>
+										<!-- ONMOUSEOVER="ddrivetip('템플릿(HTML)파일에 사용할 태그명령어를 생성합니다.','','250')"; ONMOUSEOUT="hideddrivetip()" -->
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+						<!-- 서브메뉴 [기타정보, 설정] -->
+						<div class="submenu">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td><div class="menu_subtitle">기타정보 <font class="thin">|</font> 설정</div></td>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+																				<li><a href="http://style365.co.kr/admin/dbinfo.php">DB테이블정보보기</a>
+										</li><li><a href="http://style365.co.kr/admin/happy_admin_ip.php">관리자 접속리스트</a>
+										</li><li><a href="http://style365.co.kr/admin/data_initialization.php">자료초기화</a>
+										<!-- <LI><A href="http://style365.co.kr/admin/happy_config_view.php?number=21">메인 제너레이팅</A> -->
+									</li></ul>
+								</td>
+							</tr>
+							</tbody></table>
+						</div>
+					</div>
+				</div>
+				<!-- 서브메뉴 내용 [ end ] #################################################################### -->
+			</td>
+		</tr>
+		<tr><td class="tr3"></td></tr>
+		</tbody></table>
+	</div>
+</div>
+		<!-- 도움말툴팁2 -->
+		<div id="dhtmltooltipHelp"></div>
+		<script language="JavaScript" src="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/admin/admin_frame_files/tooltip2.js.%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C" type="text/javascript"></script>
+		<script language="JavaScript">
+		<!--
+			//서브메뉴 번호 설정 ##############################################
+			var submenu_num = new Array
+			(
+				1,//기본관리
+				2,//등록관리
+				3,//회원관리
+				4,//결졔/통계관리
+				5 //고급자설정
+			);
+			//각 서브메뉴 현재위치 아이콘  X좌표 위치설정 #####################
+			var submenu_arrow_left = new Array
+			(
+				-100,
+				235,//기본관리				(기본값: 235)
+				315,//등록관리				(기본값: 315)
+				405,//회원관리				(기본값: 495)
+				510,//결제,통계관리			(기본값: 590)
+				600//고급자설정				(기본값: 875)
+			);
+			//#################################################################
+			var subMenu = document.getElementById('admin_sub_menu_wrapper');
+			var subMenuArrow = document.getElementById('sub_menu_arrow');
+			//서브메뉴 보이기
+			function admin_sub_menu(num) {
+				//포인트장부관리 검색폼
+				var search_frm_onoff = document.getElementById("search_frm_onoff");
+				for(var i=0; i<submenu_num.length; i++){
+					//처음실행시 모든서브메뉴 레이어 감추기
+					document.getElementById(["submenu" + (i+1)]).style.display = "none";
+					if(num == submenu_num[i]){
+						subMenu.style.display = "block";
+						subMenuArrow.style.left = submenu_arrow_left[num];
+						document.getElementById(["submenu" + num]).style.display = "block";
+						if(search_frm_onoff){
+							search_frm_onoff.style.display = "none";
+						}
+					}
+				}
+			}
+			//서브메뉴판 보일 때 선택폼 안보이기
+			function menuLayerShowHide(state){
+				var search_frm_onoff = document.getElementById("search_frm_onoff");
+				if(state == 'on'){
+					subMenu.style.display = "block";
+					//search_frm_onoff.style.display = "none";
+				}else{
+					subMenu.style.display = "none";
+					//search_frm_onoff.style.display = "block";
+				}
+			}
+			//관리자 서브메뉴 안보이기
+			function admin_sub_menu_off(num){
+				//포인트장부관리 검색폼
+				//var search_frm_onoff = document.getElementById("search_frm_onoff");
+				subMenu.style.display = "none";
+				//search_frm_onoff.style.display = "block";
+			}
+		//-->
+		</script>
+<!-- 상단메뉴부분 -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<!-- 사이트명 -->
+	<tbody><tr bgcolor="#B6B6B6">
+		<td height="32" background="./admin_frame_files/bg_bar01.gif">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody><tr>
+					<td width="220"></td>
+					<td align="left">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tbody><tr>
+								<td width="25" height="32" background="./admin_frame_files/bg_site_name_01a.gif"></td>
+								<td background="./admin_frame_files/bg_site_name_01b.gif" class="site_name">바코드-검색포탈</td>
+								<td width="25" background="./admin_frame_files/bg_site_name_01c.gif"></td>
+							</tr>
+						</tbody></table>
+					</td>
+					<td width="300" align="right" style="padding:4px 5px 0 0;">
+						<!-- [버튼] 예약관리 / 사이트메인 / 메뉴얼 / 로그아웃 -->
+						<a href="javascript:admin_top_btn(&#39;main&#39;);"><img src="./admin_frame_files/btn_home.gif" border="0"></a>
+						<!-- <div class=top_btn style="width:61;"><A HREF="javascript:admin_top_btn('conf');"><img src="img/btn_conf2.gif" border="0"></A></div> --><a href="javascript:admin_top_btn(&#39;manual&#39;);"><img src="./admin_frame_files/btn_manual.gif" border="0"></a> <a href="javascript:admin_top_btn(&#39;logout&#39;);"><img src="./admin_frame_files/btn_logout.gif" border="0"></a>
+					</td>
+				</tr>
+			</tbody></table>
+		</td>
+	</tr>
+	<!-- 메뉴버튼 : 각 버튼 오버용 버튼이미지 -->
+	<tr bgcolor="#CACACA">
+		<td height="49" background="./admin_frame_files/bg_bar02.gif" style="padding:0 7 0 205; border:0px solid red;" valign="bottom">
+			<!-- 버튼이미지 변수 실제값은 [ top_menu.php ] -->
+			<table border="0" cellspacing="0" cellpadding="0" id="admin_menu">
+			<tbody><tr>
+				<td valign="bottom" onmouseover="admin_sub_menu(1);" onmouseout="admin_sub_menu_off();"><a href="javascript:admin_menu(1);"><img src="./admin_frame_files/main_menu_01.gif" border="0"></a></td>
+				<td valign="bottom" onmouseover="admin_sub_menu(2);" onmouseout="admin_sub_menu_off();"><a href="javascript:admin_menu(2);"><img src="./admin_frame_files/main_menu_02.gif" border="0"></a></td>
+				
+				<td valign="bottom" onmouseover="admin_sub_menu(3);" onmouseout="admin_sub_menu_off();"><a href="javascript:admin_menu(3);"><img src="./admin_frame_files/main_menu_04.gif" border="0"></a></td>
+				<td valign="bottom" onmouseover="admin_sub_menu(4);" onmouseout="admin_sub_menu_off();"><a href="javascript:admin_menu(4);"><img src="./admin_frame_files/main_menu_05.gif" border="0"></a></td>
+				
+				
+				<td valign="bottom" onmouseover="admin_sub_menu(5);" onmouseout="admin_sub_menu_off();" align="right" style="padding-right:25;"><a href="javascript:admin_menu(5);"><img src="./admin_frame_files/main_menu_08.gif" border="0"></a></td>
+			</tr>
+			</tbody></table>
+		</td>
+	</tr>
+</tbody></table>
+<div id="search_frm_onoff" style="display:none;"></div>
+<!--[ YOON : 2009-09-07 ] -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;" nowrap="">
+<!-- 현재위치 -->
+<tbody><tr bgcolor="#E7E7E7">
+	<td height="12" background="./admin_frame_files/bg_bar03.gif" class="admin_now_location" width="700">
+		<ul id="admin_now_loc" style="display:none;">
+			<!-- <LI class=ti_nowloc><img src="img/title_now_location2.gif" border="0"> -->
+			<li class="ti_nowloc"><img src="./admin_frame_files/ico_arrow_loct2.gif" border="0">
+			</li><li><a href="http://style365.co.kr/admin/main.php">HOME</a> &gt; <a href="http://style365.co.kr/admin/main.php">관리자메인</a>		</li></ul>
+	</td>
+	
+</tr>
+</tbody></table>
+<!-- 본문부분, dummy_layer(sub_menu.php에) -->
+<!-- <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#252525" style="margin:0 0 1 0;" id="cntWrapperTable">-->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="cntWrapperTable" bgcolor="#000000">
+<tbody><tr bgcolor="#2E2E2E">
+	<td height="5" style="background:url(&#39;img/bg_bar04a.gif&#39;) repeat-x;" nowrap=""><div id="dummy_layer"><div></div></div></td>
+</tr>
+<tr>
+<td bgcolor="#000000">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	
+	<!-- TOP -->
+	<tbody><tr>
+		<!-- 좌측  -->
+		<td width="219" height="22" style="background:url(&#39;img/bgbox_02_v1_a2.gif&#39;) no-repeat 0 0;" nowrap=""></td>
+		<!-- 우측, dummy_layer_cnt(sub_menu.php에) -->
+		<td style="background:url(&#39;img/bgbox_02_v2_a.gif&#39;);"><div id="dummy_layer_cnt"><div></div></div></td>
+		<td width="12" style="background:url(&#39;img/bgbox_02_v3_a.gif&#39;) no-repeat 0 0;" nowrap=""></td>
+	</tr>
+	<!-- CONTENTS -->
+	<tr>
+		<!-- 좌측  -->
+		<td style="background:url(&#39;img/bgbox_02_v1_b2.gif&#39;) repeat-y; padding:68px 27px 0 12px;" valign="top">
+<!-- 현재 카테고리명 -->
+<div style="position:absolute; top:109; left:3; width:175; height:68; margin:0 0 0 0;"><img src="./admin_frame_files/title_now_00.gif" border="0"></div>
+<div id="my_chart9"></div>
+<!-- 기본환경설정 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="main_logo_admin.php">기본환경설정</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 등록정보관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="category.php">등록정보관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 게시판관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="">게시판관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 회원관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="member.php">회원관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 결제관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="jangboo.php">결제관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 통계관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="stats.php">통계관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 서비스환경관리 ->
+<div class=show_layer>
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="setting_sms.php">서비스환경관리</A></td>
+	</tr>
+	</table>
+</div>
+<!-- 고급자설정 ->
+<div class=show_layer style="margin-bottom:30;">
+	<table width="180" border="0" cellspacing="0" cellpadding="0" id=submenu_tbl>
+	<tr>
+		<td height=27 class="submenu_title"><A HREF="">고급자설정</A></td>
+	</tr>
+	</table>
+</div>
+						<!-- 관리자정보 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:0 0 15 0;">
+						<tbody><tr>
+							<td height="27" class="admin_info01"></td>
+						</tr>
+						<tr>
+							<td class="admin_info02">
+								<ul id="admin_info_list">
+									<li>사이트관리자<br>
+									<div class="admin_info_list_value"><strong>s_365</strong></div>
+									
+									</li><li>사이트이름<br>
+									<div class="admin_info_list_value">스타일365-대한민국 No.1 신개념 스타일 소셜스토어</div>
+									</li><li>사이트URL<br>
+									<div class="admin_info_list_value">http://style365.co.kr</div>
+									</li><li>관리자이메일주소<br>
+									<div class="admin_info_list_value">s_365@naver.com</div>
+								</li></ul>
+							</td>
+						</tr>
+						</tbody></table>
+					
+						<!-- 카운트정보 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td height="27" class="count_info01"></td>
+						</tr>
+						<tr>
+							<td class="count_info02">
+								<ul id="count_info_list">
+									<li style="font-size:11px; letter-spacing:-1px;">전체 회원수
+									<div class="count_info_list_value">46<font class="unit">명</font></div>
+									<!-- <LI>대기 회원수
+									<div class="count_info_list_value"><font class=unit>명</font></div> -->
+									</li><li style="font-size:11px; letter-spacing:-1px;">전체 접속자수
+									<div class="count_info_list_value">69,973<font class="unit">명</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">오늘 접속자수
+									<div class="count_info_list_value">17<font class="unit">명</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">어제 접속자수
+									<div class="count_info_list_value">39<font class="unit">명</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">총회원 스크랩수
+									<div class="count_info_list_value">2<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">오늘 등록된 상품수
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">이달 등록된 상품수
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">총 상품수
+									<div class="count_info_list_value">25<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">1회 평균 주문금액
+									<div class="count_info_list_value">57,915<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">오늘 주문건
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">어제 주문건
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">이달 주문건
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">지난달 주문건
+									<div class="count_info_list_value">0<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">전체 주문건
+									<div class="count_info_list_value">269<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">총 주문 상품갯수
+									<div class="count_info_list_value">370<font class="unit">건</font></div>
+									</li><li style="font-size:11px; letter-spacing:-1px;">평균주문 상품갯수 
+									<div class="count_info_list_value">1.38<font class="unit">건</font></div>
+								</li></ul>
+							</td>
+						</tr>
+						</tbody></table>
+					
+			
+			
+			
+			
+		</td>
+		
+		
+			<td style="background:url(&#39;img/bgbox_02_v3_b.gif&#39;)"></td>
+			<td style="background:url(&#39;img/bgbox_02_v3_b.gif&#39;)"></td>
+		</tr>
+		<!-- BOTTOM -->
+		<tr>
+			<!-- 좌측  -->
+			<td height="36" style="background:url(&#39;img/bgbox_02_v1_c2.gif&#39;) no-repeat 0 0;">
+			</td>
+			<!-- 우측 -->
+			<td style="background:url(&#39;img/bgbox_02_v2_c.gif&#39;);">&nbsp;</td>
+			<td style="background:url(&#39;img/bgbox_02_v3_c.gif&#39;) no-repeat 0 0;"></td>
+		</tr>
+		</tbody></table>
+	</td>
+</tr>
+</tbody></table>
+</div>
+<style type="text/css">
+	/* PNG 투명적용 : 이미지일 경우 */
+	/*.png24img{_behavior:url(/css/iepngfix.htc);}*/
+</style>
+<!-- 서브메뉴판 가로크기를 본문테이블 크기변화가 있을 때마다 새로 가로크기 설정해주기 [YOON : 2010-04-08] -->
+<script language="JavaScript">
+<!--
+	var cntTable		= document.getElementById('cntWrapperTable');
+	var cntTable2		= document.getElementById('cntWrapperTable2'); //하단카피라이트 배경그림자
+	var subMenu			= document.getElementById('admin_sub_menu_wrapper');
+	var subMenuBg			= document.getElementById('admin_sub_menu_bg');
+	var cntTableWidth	= "";
+	var FF = (document.layers) ? 1 : 0; // FF?
+	var IE = (document.all) ? 1 : 0; // 익스플로러?
+	function cntTableSize(){
+		cntTableWidth = cntTable.clientWidth;
+		//alert(cntTableWidth);
+		cntTable.onresize = function() { cntTableSize(); };
+		subMenu.style.width = cntTableWidth;
+		subMenuBg.style.width = cntTableWidth;
+	}
+	cntTableSize();
+//-->
+</script>
+<a id="lbLauncher" class="lytebox" style="display: none;"></a><div id="lbOverlay" class="grey" style="display: none;"></div><div id="lbMain" style="display: none;"><div id="lbOuterContainer" class="grey" style="border-radius: 8px;"><div id="lbTopContainer" class="grey" style="border-radius: 8px;"><div id="lbTopData" class="grey"><span id="lbTitleTop"></span><span id="lbNumTop"></span></div><div id="lbTopNav"><a id="lbCloseTop" title="Close (Esc)" class="grey" href="javascript:void(0)"></a><a id="lbPrintTop" title="Print" class="grey" href="javascript:void(0)"></a><a id="lbNextTop" title="Next (→)" class="grey" href="javascript:void(0)"></a><a id="lbPauseTop" title="Pause (spacebar)" class="grey" href="javascript:void(0)" style="display: none;"></a><a id="lbPlayTop" title="Play (spacebar)" class="grey" href="javascript:void(0)" style="display: none;"></a><a id="lbPrevTop" title="Previous (←)" class="grey" href="javascript:void(0)"></a></div></div><div id="lbIframeContainer" style="display: none;"><iframe id="lbIframe" name="lbIframe" frameborder="0" class="grey" style="display: none;" src="./admin_frame_files/saved_resource.html"></iframe></div><div id="lbImageContainer"><img id="lbImage" class="grey"><div id="lbHoverNav"><a id="lbPrevHov" title="Previous (←)" class="grey" href="javascript:void(0)"></a><a id="lbNextHov" title="Next (→)" class="grey" href="javascript:void(0)"></a></div></div><div id="lbLoading" class="grey"></div><div id="lbBottomContainer" class="grey" style="border-radius: 8px;"><div id="lbBottomData" class="grey"><span id="lbTitleBottom"></span><span id="lbNumBottom"></span><span id="lbDescBottom"></span></div><div id="lbBottomNav"><a id="lbClose" title="Close (Esc)" class="grey" href="javascript:void(0)"></a><a id="lbPrint" title="Print" class="grey" href="javascript:void(0)" style="display: none;"></a><a id="lbNext" title="Next (→)" class="grey" href="javascript:void(0)"></a><a id="lbPause" title="Pause (spacebar)" class="grey" href="javascript:void(0)" style="display: none;"></a><a id="lbPlay" title="Play (spacebar)" class="grey" href="javascript:void(0)" style="display: none;"></a><a id="lbPrev" title="Previous (←)" class="grey" href="javascript:void(0)"></a></div></div></div></div></body></html>
