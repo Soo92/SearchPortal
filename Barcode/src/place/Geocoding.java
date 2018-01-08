@@ -62,8 +62,14 @@ class GpsToAddress {
 	private String getGps(String jsonString) {
 		JSONObject jObj = (JSONObject) JSONValue.parse(jsonString);
 		JSONArray jArray = (JSONArray) jObj.get("results");
-		jObj = (JSONObject) jArray.get(2);
-		return (String) jObj.get("location");
+		jObj = (JSONObject) jArray.get(0);
+		System.out.println(jObj);
+		jObj = (JSONObject) jObj.get("geometry");
+		System.out.println(jObj);
+		jObj = (JSONObject) jObj.get("location");
+		Double lng = (Double) jObj.get("lng");
+		Double lat = (Double) jObj.get("lat");
+		return lat+","+lng;
 	}
 
 	public String getAddress() {

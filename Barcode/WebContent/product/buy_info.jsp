@@ -14,7 +14,7 @@
 		String priceAdd = request.getParameter("pro_Price");
 		String priceShip = request.getParameter("pro_ShipAccount");
 		int priceA = Integer.parseInt(priceAdd.replace(",", ""));
-		int priceS = Integer.parseInt(priceAdd.replace(",", ""));
+		int priceS = Integer.parseInt(priceShip.replace(",", ""));
 		int discount = priceA/100;
 %>
 
@@ -215,7 +215,7 @@
 								<tr>
 									<td rowspan="4" height="36px" width="150px"><%=request.getParameter("pro_MainImg") %></td>
 									<td  height="46px" style="text-indent:20; text-align:left;border:none;font-size:16px;">
-									<b>[<%=request.getParameter("pro_Title") %>]&nbsp</b><%=request.getParameter("pro_Seller") %> </td>
+									<b>[<%=request.getParameter("pro_Title") %>]&nbsp;</b><%=request.getParameter("pro_Seller") %> </td>
 									<td rowspan="2" height="36px">
 									<select id="EA" onchange="cal()" style="width:56px;">
 										<option value="1">1</option>
