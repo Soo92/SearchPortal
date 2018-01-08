@@ -1,7 +1,7 @@
 <%@page import="place.PlaceBoardBean"%>
 <%@page import="place.PlaceBean"%>
 <%@page import="java.util.Vector"%>
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <jsp:useBean id="pbean" class="place.PlaceBean"/>
 <jsp:useBean id="pmgr" class="place.PlaceMgr"/>
@@ -14,6 +14,7 @@
 		Vector<PlaceBean> vlist = pmgr.getPlaceList();		
 		
 		String location = request.getParameter("location");
+		String[] weather = request.getParameter("weather").split(",");
 %>
 
 <!doctype>
@@ -26,6 +27,7 @@
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<link rel="stylesheet" type="text/css"	href="./place_files/w_g17122108.css">
 	<link rel="stylesheet" type="text/css"	href="./place_files/e_g150402.css">
+	<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
 	function mypage() {
@@ -73,6 +75,24 @@
 		a.className=a.className+" on";
 	};
 	</script>
+<script>
+$(document).ready(function () {
+    $("#location_btn").click(function() {        
+        // Geolocation API에 액세스할 수 있는지를 확인
+        if (navigator.geolocation) {
+            //위치 정보를 얻기
+            navigator.geolocation.getCurrentPosition (function(pos) {
+                var latitude = pos.coords.latitude;     // 위도
+                var longitude = pos.coords.longitude; // 경도
+                var URL = "geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
+                location.href=URL;
+                });
+        } else {
+            alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+        }
+    });
+});
+</script>
 </head>
 <body>
 <div id="all">
@@ -126,9 +146,8 @@
 											<div class="cp_locale_area">
 												<strong class="locale_name"><%=request.getParameter("location") %></strong> <span
 													class="locale_info"> <span class="forecast"><span
-														class="imw imw02">맑음</span></span> <span class="celsius">5°</span>
-													<button type="button"
-														class="btn_locale _MM_MYPLACE_LOCATION_BTN">
+														class="imw imw02"><%=weather[0] %></span></span> <span class="celsius"><%=weather[1] %>°</span>
+													<button type="button" class="btn_locale _MM_MYPLACE_LOCATION_BTN" id="location_btn">
 														<span class="blind">내위치</span>
 													</button>
 												</span>
