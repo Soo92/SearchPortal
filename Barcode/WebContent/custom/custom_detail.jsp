@@ -180,6 +180,7 @@
 <%} else if(boardnum == null || boardnum.equals("")){ 
 	Vector<CustomCateBean> ccblist1 = cmgr.getCustomCateList(cnum,"2");
 	Vector<CustomCateBoardBean> ccblist2 = cmgr.getCustomCateBoardList(cnum);
+	Vector<CustomCateBoardBean> listing = cmgr.getCustomCateBoardList(cnum);
 	%>
 					<div class="ctg_section">
 						<div class="pnt_ctg_area">
@@ -187,15 +188,14 @@
 							<ul>
 								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>" title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
 								<li class="last"><strong title="<%=cmgr.getCustomCateParent(cnum).getTitle() %>"><%=cmgr.getCustomCateParent(cnum).getTitle() %></strong></li>
-								</ul>
+							</ul>
 						</div>
 						<div class="nav_area">
 							<ul>
 								<!-- [D] 시스템 폰트 기준 띄어쓰기 포함 최대 46자 노출 -->
 	<% for(int k=0;k<ccblist1.size();k++) {%>
 							<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&cnum=<%=ccblist1.get(k).getCnum()%>"><%=ccblist1.get(k).getTitle() %></a></li>
-<%} %>
-<%	for(int k=0;k<ccblist2.size();k++) {%>
+<%} for(int k=0;k<ccblist2.size();k++) {%>
 							<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&boardnum=<%=ccblist2.get(k).getCcboardnum()%>"><%=ccblist2.get(k).getTitle() %></a></li>
 <%} %>
 							</ul>
@@ -206,9 +206,8 @@
 						<div class="pnt_ctg_area">
 							<h4 class="blind">카테고리 정보</h4>
 							<ul>
-								<li><a title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
-								<li><a title="도용 의심">도용 의심</a></li>
-								<li class="last"><strong title="내 계정(아이디/비밀번호) 도용 의심 ">내 계정(아이디/비밀번호) 도용 의심 </strong></li>
+								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>" title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
+								<li class="last"><strong title="<%=cmgr.getCustomCateParent(cnum).getTitle() %>"><%=cmgr.getCustomCateParent(cnum).getTitle() %></strong></li>
 							</ul>
 						</div>
 						<div class="svs_end_area">

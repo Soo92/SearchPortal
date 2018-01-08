@@ -5,7 +5,6 @@
 %>
 
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/Soo/Desktop/user%20info.html -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +14,15 @@
 	if(<%=id%>==null){
 		location.href="../index.jsp"
 	}
+	function toggleService(a) {
+		var ser = document.getElementById("service_pannel").style.display;
+		var panel = document.getElementsByClassName("svc_panel");
+		for (var i = 0; i < panel.length; i++) {
+			if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="none") {panel[i].style.display="block"; ser="block"; alert("a");}
+			else if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="block"){ panel[i].style.display="none"; ser = "none"; alert("d");}
+			else {panel[i].style.display="none"; alert("c");}
+		}
+	}
 </script>
 </head>
 <body>
@@ -22,16 +30,14 @@
 		<div class="profile">
 			<div class="user_area">
 				<div class="user_info">
-					<a href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+					<a href="" target="_parent"
 						class="user_thumbnail" onclick=""> <span class="mask"></span>
 						<img id="profile_image" src="./userInfo_files/myInfo.gif"
 						width="56" height="56" alt="수수 님">
 					</a>
 					<div class="private">
-						<span class="user_name"><a
-							href="https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification"
-							target="_parent"
-							onclick="clickcr(this, 'nmy.idname', '', '', event);My.movePage('https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification');return false;"><strong
+						<span class="user_name"><a href="https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification"
+							target="_parent" onclick="clickcr(this, 'nmy.idname', '', '', event);My.movePage('https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification');return false;"><strong
 								id="user_name">수수</strong>님</a></span> <a
 							href="./mypage.jsp"
 							target="_parent" class="link_myinfo" onclick="">내정보</a>
@@ -40,7 +46,7 @@
 						<a href="./logout.jsp" target="_parent" id="btn_logout"
 							class="btn_logout"><span class="btn_inr">로그아웃</span></a> <span
 							class="link_cover"><a id="note_count_profile"
-							href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+							href="" target="_parent"
 							class="link_note" onclick=""><i>쪽지</i><span class="cnt">377</span></a></span>
 					</div>
 				</div>
@@ -51,44 +57,40 @@
 						style="left: 0px; transition: left 0.3s ease-in-out;">
 						<div id="myPage_other">
 							<div
-								onclick="clickcr(this, 'nmy.ndrive', '', '', event);myCore.toggleService('ndrive');return false;"
+								onclick="toggleService('ndrive')"
 								class="selected" id="myPage_o_but">
-								<a href="file:///C:/Users/Soo/Desktop/mypage.html"
-									class="tab_ndrive"
-									onkeydown="myCore.keydownServiceTab(event, 7)"> <img
+								<a href=""
+									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_01.png"> <span
 									id="ndrive_count" class="b_cnt" style="display:"><em></em><i
 										class="arrow_down"></i></span>
 								</a>
 							</div>
 							<div
-								onclick="clickcr(this, 'nmy.ndrive', '', '', event);myCore.toggleService('memo');return false;"
+								onclick="toggleService('memo')"
 								class="selected" id="myPage_o_but">
-								<a href="file:///C:/Users/Soo/Desktop/mypage.html"
-									class="tab_ndrive"
-									onkeydown="myCore.keydownServiceTab(event, 12)"> <img
+								<a href=""
+									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_02.png"> <span id="memo_count"
 									class="b_cnt" style="display: none"><em></em><i
 										class="arrow_down"></i></span>
 								</a>
 							</div>
 							<div
-								onclick="clickcr(this, 'nmy.ndrive', '', '', event);myCore.toggleService('mail');return false;"
+								onclick="toggleService('mail')"
 								class="selected" id="myPage_o_but">
-								<a href="file:///C:/Users/Soo/Desktop/mypage.html"
-									class="tab_ndrive"
-									onkeydown="myCore.keydownServiceTab(event, 2)"> <img
+								<a href=""
+									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_03.png"> <span id="mail_count"
 									class="b_cnt" style="display: none"><em></em><i
 										class="arrow_down"></i></span>
 								</a>
 							</div>
 							<div
-								onclick="clickcr(this, 'nmy.ndrive', '', '', event);myCore.toggleService('npay');return false;"
+								onclick="toggleService('npay')"
 								class="selected" id="myPage_o_but">
-								<a href="file:///C:/Users/Soo/Desktop/mypage.html"
-									class="tab_ndrive"
-									onkeydown="myCore.keydownServiceTab(event, 5)"> <img
+								<a href=""
+									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_04.png"> <span id="npay_count"
 									class="b_cnt" style="display: none"><em></em><i
 										class="arrow_down"></i></span>
@@ -97,7 +99,7 @@
 						</div>
 					</div>
 				</div>
-				<span class="slide_btn" onkeydown="myCore.keydownPrevBtn(event)">
+				<span class="slide_btn">
 				</span>
 			</div>
 		</div>
@@ -114,10 +116,10 @@
 	}
 </script>
 					<div class="svc_head">
-						<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+						<a href=""
 							class="tit selected"
 							onclick="clickcr(this, 'nmy_mil.allmail', '', '', event);My.drawList('/my/mail/list/?isNew=true');return false;">전체메일</a>
-						<a href="file:///C:/Users/Soo/Desktop/mypage.html" class="tit"
+						<a href="" class="tit"
 							onclick="clickcr(this, 'nmy_mil.inbox', '', '', event);My.drawList('/my/mail/list/?folderSN=0&amp;isNew=true');return false;">받은메일함</a>
 						<div class="task_right">
 							<button
@@ -582,18 +584,18 @@
 									<i>메일 삭제</i>
 								</button></li>
 						</ul>
-						<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+						<a href=""
 							class="view_more"
 							onclick="clickcr(this, 'nmy_mil.mailmore', '', '', event);My.movePage('', 'mailWindows');return false;"
 							target="_blank">메일에서 더보기<span class="ico"></span></a>
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+					<a href="" target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.mail', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>메일</a> <span class="bar"></span> <a
-						href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+						href="" target="_parent"
 						class="svc_link_weak"
 						onclick="clickcr(this, 'nmy_fot.mailset', '', '', event);My.movePage('');return false;">새
 						메일 통수 설정</a>
@@ -618,7 +620,7 @@
 				<div class="svc_scroll" style="-webkit-overflow-scrolling: touch;">
 					<div class="svc_head">
 						<div class="shortcut_cover">
-							<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+							<a href=""
 								class="shortcut mypoint"
 								onclick="clickcr(this, 'nmy_pay.mypoint', '','', event);My.openPage('', 'payWindows');return false;"><span
 								class="label">포인트</span><em class="value">63,453원</em></a><a
@@ -659,7 +661,7 @@
 										<p class="subject">최대 10% 적립되는 바코드페이 taptap카드 출시!</p>
 									</div></a></li>
 							<li><a
-								href="file:///C:/Users/Soo/Desktop/mypage.html?tabMenu=BOOKING"
+								href="?tabMenu=BOOKING"
 								class="list_cover"
 								onclick="clickcr(this, 'nmy_pay.history', '','', event);My.openPage('?tabMenu=BOOKING', 'payWindows');return false;"><span
 									class="thumb"><span class="mask"></span><img
@@ -674,7 +676,7 @@
 										</p>
 									</div></a></li>
 							<li><a
-								href="file:///C:/Users/Soo/Desktop/mypage.html?tabMenu=BOOKING"
+								href="?tabMenu=BOOKING"
 								class="list_cover"
 								onclick="clickcr(this, 'nmy_pay.history', '','', event);My.openPage('?tabMenu=BOOKING', 'payWindows');return false;"><span
 									class="thumb"><span class="mask"></span><img
@@ -691,11 +693,11 @@
 						</ul>
 						<div class="npay_link">
 							<div class="shortcut_cover">
-								<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+								<a href=""
 									class="link_order"
 									onclick="clickcr(this, 'nmy_pay.order', '','', event);My.openPage('', 'payWindows');return false;">결제내역<span
 									class="arrow_right"></span></a> <a
-									href="file:///C:/Users/Soo/Desktop/mypage.html"
+									href=""
 									class="link_mileage"
 									onclick="clickcr(this, 'nmy_pay.point', '','', event);My.openPage('', 'payWindows');return false;">포인트<span
 									class="arrow_right"></span></a> <a
@@ -708,7 +710,7 @@
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+					<a href="" target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.npay', '', '', event);"><span
 						class="svc_ico"></span>Pay</a>
@@ -803,7 +805,7 @@ var cmsServerDomain = "files.cloud.naver.com";
 									</p> <span class="lbu ic_folder"><em class="blind">folder</em></span>
 							</a></li>
 							<li class="read"><a
-								href="file:///C:/Users/Soo/Desktop/mypage.html"
+								href=""
 								class="list_cover"
 								onclick="clickcr(this, 'nmy_ndr.ufile', '', '', event); My.openPage('', ''); return false;">
 									<p class="subject">오피스_이용안내.ndoc</p>
@@ -812,7 +814,7 @@ var cmsServerDomain = "files.cloud.naver.com";
 									</p> <span class="lbu ic_ndoc"><em class="blind">ndoc</em></span>
 							</a></li>
 						</ul>
-						<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+						<a href=""
 							class="view_more"
 							onclick="clickcr(this, 'nmy_ndr.umore', '', '', event); My.openPage('', 'NDrvie'); return false;">바코드
 							클라우드에서 더보기<span class="ico"></span>
@@ -822,17 +824,17 @@ var cmsServerDomain = "files.cloud.naver.com";
 					<!--// my.jsp -->
 				</div>
 				<div class="svc_navigation">
-					<a href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+					<a href="" target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.ndrive', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>바코드 클라우드</a>
 					<div class="task_right">
 						<span class="cnt"><em><i class="blind">현재탭</i>8</em><span>/<i
 								class="blind">전체 탭 갯수</i>13
-						</span></span><a href="file:///C:/Users/Soo/Desktop/mypage.html"
+						</span></span><a href=""
 							class="btn_prev" title="이전"
 							onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a href="file:///C:/Users/Soo/Desktop/mypage.html"
+								탭 보기</i></a><a href=""
 							class="btn_next" title="다음"
 							onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
 								탭 보기</i></a>
@@ -845,10 +847,10 @@ var cmsServerDomain = "files.cloud.naver.com";
 				<div class="svc_scroll" style="-webkit-overflow-scrolling: touch;">
 					<div class="svc_head">
 						<!-- My.drawList 는  My 서버  proxy 를 통해 호출되기때문에 "/my/memo" 를 붙여줘야 한다. -->
-						<a href="file:///C:/Users/Soo/Desktop/mypage.html"
+						<a href=""
 							class="tit selected"
 							onclick="clickcr(this, 'nmy_meo.all', '', '', event);My.drawList('/my/memo/my');return false;">전체
-							메모</a> <a href="file:///C:/Users/Soo/Desktop/mypage.html"
+							메모</a> <a href=""
 							class="tit "
 							onclick="clickcr(this, 'nmy_meo.star', '', '', event);My.drawList('/my/memo/my?filter=important');return false;">중요
 							메모</a>
@@ -886,19 +888,15 @@ var cmsServerDomain = "files.cloud.naver.com";
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="file:///C:/Users/Soo/Desktop/mypage.html" target="_parent"
+					<a href="" target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.memo', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>메모</a>
 					<div class="task_right">
 						<span class="cnt"><em><i class="blind">현재탭</i>13</em><span>/<i
 								class="blind">전체 탭 갯수</i>13
-						</span></span><a href="file:///C:/Users/Soo/Desktop/mypage.html"
-							class="btn_prev" title="이전"
-							onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a href="file:///C:/Users/Soo/Desktop/mypage.html"
-							class="btn_next" title="다음"
-							onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
+						</span></span><a href="" class="btn_prev" title="이전" onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
+								탭 보기</i></a><a href="" class="btn_next" title="다음" onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
 								탭 보기</i></a>
 					</div>
 				</div>

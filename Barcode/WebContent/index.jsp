@@ -42,7 +42,24 @@
 		html.replaceAll("\\<[^>]*>","");
 	}
 </script>
-	
+<script>
+$(document).ready(function () {
+    $("#location_btn").click(function() {        
+        // Geolocation API에 액세스할 수 있는지를 확인
+        if (navigator.geolocation) {
+            //위치 정보를 얻기
+            navigator.geolocation.getCurrentPosition (function(pos) {
+                var latitude = pos.coords.latitude;     // 위도
+                var longitude = pos.coords.longitude; // 경도
+                var URL = "./member/geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
+                location.href=URL;
+                });
+        } else {
+            alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+        }
+    });
+});
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -59,7 +76,7 @@
 				<div id="place"><img src="img/place_icon.png"></div>
 			</form>				
 			</div>
-			<a href="map/MapPr.jsp">
+			<a href="" id="location_btn">
 			<div id="map"><img src="img/map_icon.png"></div>
 			</a>
 		</div>
@@ -68,7 +85,7 @@
 	<div id="nav">
 		<ul>
 			<li><a href="product/product_home.jsp">중고 쇼핑</a></li>
-			<li class="ulul"><a href="reserve/reserve_home.jsp">동네 소식</a></li>
+			<li class="ulul"><a href="reserve/geo_proc.jsp?location=<%=session.getAttribute("location")==null||session.getAttribute("location").equals("null")?"한국":session.getAttribute("location")%>">동네 소식</a></li>
 			<li class="ulul"><a href="movie/movie_home.jsp">영화 추천</a></li>			
 			<li class="ulul"><a href="custom/custom_home.jsp">고객센터</a></li>			
 		</ul>

@@ -5,6 +5,7 @@ package place;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.*;
 
 import org.json.simple.JSONArray;
@@ -29,14 +30,16 @@ class GpsToAddress {
 	}
 
 	private String getApiAddress() {
-		String apiURL = "http://maps.googleapis.com/maps/api/geocode/json?latlng="
-				+ latitude + "," + longitude + "&language=ko";
+		String apiURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng="
+				+ latitude + "," + longitude + "&language=ko&key=AIzaSyDLD7yIiCNnlZWCDG6vv1JKH9fpxJVtUTw";
 		return apiURL;
 	}
 	private String getApiGps() {
-		String apiURL = "http://maps.googleapis.com/maps/api/geocode/json?address="
+		try {location = URLEncoder.encode(location, "UTF-8");
+		} catch (UnsupportedEncodingException e) {}
+		String apiURL = "https://maps.googleapis.com/maps/api/geocode/json?address="
 				+ location
-				+ "&region=kr";
+				+ "&region=kr&key=AIzaSyDLD7yIiCNnlZWCDG6vv1JKH9fpxJVtUTw";
 		return apiURL;
 	}
 
@@ -63,9 +66,7 @@ class GpsToAddress {
 		JSONObject jObj = (JSONObject) JSONValue.parse(jsonString);
 		JSONArray jArray = (JSONArray) jObj.get("results");
 		jObj = (JSONObject) jArray.get(0);
-		System.out.println(jObj);
 		jObj = (JSONObject) jObj.get("geometry");
-		System.out.println(jObj);
 		jObj = (JSONObject) jObj.get("location");
 		Double lng = (Double) jObj.get("lng");
 		Double lat = (Double) jObj.get("lat");

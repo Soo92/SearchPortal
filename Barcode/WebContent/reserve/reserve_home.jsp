@@ -6,6 +6,7 @@
 <jsp:useBean id="pbean" class="place.PlaceBean"/>
 <jsp:useBean id="pmgr" class="place.PlaceMgr"/>
 <jsp:useBean id="pbbean" class="place.PlaceBoardBean"/>
+<jsp:useBean id="pw" class="place.WeatherByGPSApplication"/>
 <%
 		request.setCharacterEncoding("utf-8");
 		String id = (String)session.getAttribute("idKey");	
@@ -13,8 +14,15 @@
 		String name = mgr.getMember(id).getName();
 		Vector<PlaceBean> vlist = pmgr.getPlaceList();		
 		
-		String location = request.getParameter("location");
-		String[] weather = request.getParameter("weather").split(",");
+		String location = "한국";
+		if(request.getParameter("location")!=null){
+			location = request.getParameter("location");
+		}
+		
+		String[] weather = {"none","-","01d"};
+		if(request.getParameter("weather")!=null){
+			weather = request.getParameter("weather").split(",");
+		}
 %>
 
 <!doctype>
@@ -75,24 +83,24 @@
 		a.className=a.className+" on";
 	};
 	</script>
-<script>
-$(document).ready(function () {
-    $("#location_btn").click(function() {        
-        // Geolocation API에 액세스할 수 있는지를 확인
-        if (navigator.geolocation) {
-            //위치 정보를 얻기
-            navigator.geolocation.getCurrentPosition (function(pos) {
-                var latitude = pos.coords.latitude;     // 위도
-                var longitude = pos.coords.longitude; // 경도
-                var URL = "geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
-                location.href=URL;
-                });
-        } else {
-            alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
-        }
-    });
-});
-</script>
+	<script>
+	$(document).ready(function () {
+	    $("#location_btn").click(function() {        
+	        // Geolocation API에 액세스할 수 있는지를 확인
+	        if (navigator.geolocation) {
+	            //위치 정보를 얻기
+	            navigator.geolocation.getCurrentPosition (function(pos) {
+	                var latitude = pos.coords.latitude;     // 위도
+	                var longitude = pos.coords.longitude; // 경도
+	                var URL = "geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
+	                location.href=URL;
+	                });
+	        } else {
+	            alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+	        }
+	    });
+	});
+	</script>
 </head>
 <body>
 <div id="all">
@@ -100,10 +108,13 @@ $(document).ready(function () {
 			<div id="header">
 				<div id="wrap2">
 					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
-					<div id="subject"><p><span>동네 소식</span></p></div>
+					<div id="subject">
+					<a href="./geo_proc.jsp?location=<%=session.getAttribute("location")==null||session.getAttribute("location").equals("null")?"한국":session.getAttribute("location")%>">
+						<p><span>동네 소식</span></p>
+					</a>
+					</div>
 					<div id="search_box" style="margin-left:150px;float:left">
-					<input type="text" style="width:420px; height:30px; margin:5px 0px 0px 10px; border:0px; font-size:16px;" align="center"
-									placeholder="검색해보세용!">
+					<input type="text" style="width:420px; height:30px; margin:5px 0px 0px 10px; border:0px; font-size:16px;" align="center" placeholder="검색해보세용!">
 						<div id="search_button">
 							<img src="../img/search_icon.png" width="45px" height="45px">
 						</div>
@@ -137,16 +148,18 @@ $(document).ready(function () {
 				<div id="_MM_FLICK_FIRST_PANEL" class="flick-panel">
 					<div class="wrap id_place" data-id="PLACE">
 						<div class="grid1_wrap brick-house">
-				<%for(int i=0;i<vlist.size();i++) {%>
+			<%for(int k=0;k<3;k++){%>
 							<div class="brick-vowel">
+				<%for(int i=k;i<vlist.size();i=i+3) {%>
 				<%if(i==0) {%>
 								<div class="grid1 id_cui_placeweather">
 									<div class="cui_placeweather">
 										<div class="cp_locale_group">
 											<div class="cp_locale_area">
-												<strong class="locale_name"><%=request.getParameter("location") %></strong> <span
-													class="locale_info"> <span class="forecast"><span
-														class="imw imw02"><%=weather[0] %></span></span> <span class="celsius"><%=weather[1] %>°</span>
+												<strong class="locale_name"><%=location %></strong> <span
+													class="locale_info"> <span class="forecast">
+													<img src="http://openweathermap.org/img/w/<%=weather[2]%>.png">
+													</span> <span class="celsius"><%=weather[1]%>°</span>
 													<button type="button" class="btn_locale _MM_MYPLACE_LOCATION_BTN" id="location_btn">
 														<span class="blind">내위치</span>
 													</button>
@@ -156,10 +169,14 @@ $(document).ready(function () {
 										<div id="_MM_REGION_TAB" class="cp_tab_group cp_tab_on"
 											style="display: block;">
 											<ul class="cp_l">
+												<li class="cp_item">
+												<a href="./geo_proc.jsp?location=한국" 
+												class="_MM_REGION cp_a<%if(location!=null && location.equals("한국")){%> cp_aon<%}%>" 
+												id=""><span	class="name">전체</span></a></li>
 											<%Vector<PlaceBoardBean> plist = pmgr.getPlaceLegionList();
 											for(int j=0; j<plist.size(); j++) {%>
 												<li class="cp_item">
-												<a href="./reserve_home.jsp?location=<%=plist.get(j).getPlace() %>" 
+												<a href="./geo_proc.jsp?location=<%=plist.get(j).getPlace() %>" 
 												class="_MM_REGION cp_a<%if(location!=null && location.equals(plist.get(j).getPlace())){%> cp_aon<%}%>" 
 												id=""><span	class="name"><%=plist.get(j).getPlace() %></span></a></li>
 											<%} %>
@@ -175,7 +192,9 @@ $(document).ready(function () {
 										</div>
 									</div>
 								</div>
-		<%} %>
+		<%} Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
+	if(!location.equals("한국"))	plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx(),location);
+		if(plist.size()!=0){%>
 								<div class="grid1 id_cui_bundle">
 									<div class="cui_bundle">
 										<div class="cb_title_wrap">
@@ -185,9 +204,7 @@ $(document).ready(function () {
 										</div>
 										<div class="cb_list_wrap">
 											<ul class="cb_list">
-										<%Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList(vlist.get(i).getIdx());
-										for(int j=0;j<plist.size();j++) {
-												%>
+		<%for(int j=0;j<plist.size();j++) {%>
 												<li class="cb_litem">
 												<a href="./place_board.jsp?index=<%=plist.get(j).getIdx() %>"	class="cb_la">
 														<div class="cb_ltable">
@@ -210,7 +227,7 @@ $(document).ready(function () {
 														</div>
 												</a>
 												</li>
-	<%}%>
+		<%}%>
 											</ul>
 	<%if(plist.size()>3) {%>
 											<div class="cb_info">
@@ -224,8 +241,9 @@ $(document).ready(function () {
 										</div>
 									</div>
 								</div>
+	<%}}%>
 							</div>
-<%} %>
+	<%} %>
 						</div>
 					</div>
 				</div>
