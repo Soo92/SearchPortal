@@ -180,7 +180,6 @@
 <%} else if(boardnum == null || boardnum.equals("")){ 
 	Vector<CustomCateBean> ccblist1 = cmgr.getCustomCateList(cnum,"2");
 	Vector<CustomCateBoardBean> ccblist2 = cmgr.getCustomCateBoardList(cnum);
-	Vector<CustomCateBoardBean> listing = cmgr.getCustomCateBoardList(cnum);
 	%>
 					<div class="ctg_section">
 						<div class="pnt_ctg_area">
