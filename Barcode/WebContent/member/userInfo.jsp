@@ -8,20 +8,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="./userInfo_files/myarea.171214.css">
+<link rel="stylesheet" type="text/css" href="./userInfo_files/myarea.171214.css">
+<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 <script type="text/javascript">
 	if(<%=id%>==null){
-		location.href="../index.jsp"
+		location.href="../index.jsp";
 	}
 	function toggleService(a) {
-		var ser = document.getElementById("service_pannel").style.display;
+		var ser = document.getElementById("service_pannel");
 		var panel = document.getElementsByClassName("svc_panel");
 		for (var i = 0; i < panel.length; i++) {
-			if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="none") {panel[i].style.display="block"; ser="block"; alert("a");}
-			else if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="block"){ panel[i].style.display="none"; ser = "none"; alert("d");}
-			else {panel[i].style.display="none"; alert("c");}
+			if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="none") {panel[i].style.display="block"; ser.style.display = "block"; ser.style.height = "";}
+			else if(panel[i].classList.contains("svc_"+a)&&panel[i].style.display=="block"){ panel[i].style.display="none"; ser.style.display = "none"; ser.style.height = "0px";}
+			else {panel[i].style.display="none";}
 		}
+		var resizeHeight = $('#service_pannel').height();
+		  $("#minime",parent.document).height( resizeHeight + 120 );
 	}
 </script>
 </head>
@@ -30,7 +32,7 @@
 		<div class="profile">
 			<div class="user_area">
 				<div class="user_info">
-					<a href="" target="_parent"
+					<a target="_parent"
 						class="user_thumbnail" onclick=""> <span class="mask"></span>
 						<img id="profile_image" src="./userInfo_files/myInfo.gif"
 						width="56" height="56" alt="수수 님">
@@ -59,7 +61,7 @@
 							<div
 								onclick="toggleService('ndrive')"
 								class="selected" id="myPage_o_but">
-								<a href=""
+								<a
 									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_01.png"> <span
 									id="ndrive_count" class="b_cnt" style="display:"><em></em><i
@@ -69,7 +71,7 @@
 							<div
 								onclick="toggleService('memo')"
 								class="selected" id="myPage_o_but">
-								<a href=""
+								<a
 									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_02.png"> <span id="memo_count"
 									class="b_cnt" style="display: none"><em></em><i
@@ -79,7 +81,7 @@
 							<div
 								onclick="toggleService('mail')"
 								class="selected" id="myPage_o_but">
-								<a href=""
+								<a
 									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_03.png"> <span id="mail_count"
 									class="b_cnt" style="display: none"><em></em><i
@@ -89,7 +91,7 @@
 							<div
 								onclick="toggleService('npay')"
 								class="selected" id="myPage_o_but">
-								<a href=""
+								<a
 									class="tab_ndrive"> <img
 									src="./userInfo_files/myP_04.png"> <span id="npay_count"
 									class="b_cnt" style="display: none"><em></em><i
@@ -116,10 +118,10 @@
 	}
 </script>
 					<div class="svc_head">
-						<a href=""
+						<a
 							class="tit selected"
 							onclick="clickcr(this, 'nmy_mil.allmail', '', '', event);My.drawList('/my/mail/list/?isNew=true');return false;">전체메일</a>
-						<a href="" class="tit"
+						<a class="tit"
 							onclick="clickcr(this, 'nmy_mil.inbox', '', '', event);My.drawList('/my/mail/list/?folderSN=0&amp;isNew=true');return false;">받은메일함</a>
 						<div class="task_right">
 							<button
@@ -130,83 +132,6 @@
 					<div class="svc_body">
 						<ul class="svc_list">
 							<!-- [D] .unread 안읽음  -->
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46788"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46788', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">[알림] 5 - 2017. 12. 26 오후 8:00
-										(Asia/Seoul)</p>
-									<p class="info">
-										<span class="user_name">by "바코드 캘린더 ···"</span> <span
-											class="bar"></span> <span class="date">6분 전</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46788', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46787"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46787', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 삼성 갤럭시탭 A6 7.0 T280 단독 특가!</p>
-									<p class="info">
-										<span class="user_name">by "쇼킹딜"</span> <span class="bar"></span>
-										<span class="date">23분 전</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46787', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46786"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46786', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">[PROJECT23244]2017-12-26[프리모아]『앱홍보를 랜딩
-										페이지 제작 (디자인제공)』</p>
-									<p class="info">
-										<span class="user_name">by "(주)프리모아</span> <span class="bar"></span>
-										<span class="date">32분 전</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46786', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46785"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46785', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 단 하루! 패션/뷰티DAY 15%</p>
-									<p class="info">
-										<span class="user_name">by "11번가"</span> <span class="bar"></span>
-										<span class="date">1시간 전</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46785', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class=""><a
-								href="file:///C:/Users/Soo/Desktop/read/46745"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46745', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 로이스 생초콜렛</p>
-									<p class="info">
-										<span class="user_name">by "티몬"</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46745', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
 							<li class="unread"><a
 								href="file:///C:/Users/Soo/Desktop/read/46744"
 								class="list_cover"
@@ -222,376 +147,15 @@
 									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46744', '-1');return false;">
 									<i>메일 삭제</i>
 								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46743"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46743', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 자율주행</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46743', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46742"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46742', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 현대자동차</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46742', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46741"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46741', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 항공사</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46741', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46740"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46740', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 연구 개발</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46740', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46739"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46739', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 권총 알람시계</p>
-									<p class="info">
-										<span class="user_name">by "쿠팡"</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46739', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46738"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46738', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 월급날! 전 고객 11% 쿠폰할인</p>
-									<p class="info">
-										<span class="user_name">by "11번가"</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46738', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46737"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46737', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 퍼펙트 2days! ~10%더블쿠폰+샤벳 20%왕쿠폰+청구할인</p>
-									<p class="info">
-										<span class="user_name">by "SSG.COM"</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46737', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46736"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46736', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - google</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46736', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46735"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46735', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 길고양이</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46735', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46734"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46734', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 이ㆍ얼ㆍ싼 ▶ 하겐다즈 윈터 스페셜 6팩 45% 11,900원
-										| 하나 더 ▶ 사조해표 안심특선 선물세트/크라운 과자선물세트 | 다다익선 ▶ 맥심 카누/오뚜기 특선 선물세트</p>
-									<p class="info">
-										<span class="user_name">by "이마트몰"</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46734', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46733"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46733', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">[광고] 업계 유일! ★토익 응시권 즉시 증정★ 토익보장코스</p>
-									<p class="info">
-										<span class="user_name">by "YBM인강_토익</span> <span class="bar"></span>
-										<span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46733', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46732"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46732', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 경진대회</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 25일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46732', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46731"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46731', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Sheet Metal Fireplace</p>
-									<p class="info">
-										<span class="user_name">by "Instructables"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46731', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46730"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46730', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 파이널 뷰티 클리어런스 UP TO 68%</p>
-									<p class="info">
-										<span class="user_name">by "11번가"</span> <span class="bar"></span>
-										<span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46730', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46729"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46729', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 용돈봉투</p>
-									<p class="info">
-										<span class="user_name">by "티몬 홈데코디자 ···"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46729', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46728"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46728', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 뇌졸중</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46728', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46727"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46727', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 마이다스 아이티</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46727', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46726"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46726', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 즐거운 나의 인생! 욜로DAY</p>
-									<p class="info">
-										<span class="user_name">by "11번가"</span> <span class="bar"></span>
-										<span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46726', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46725"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46725', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">(광고) 얼음분수 축제</p>
-									<p class="info">
-										<span class="user_name">by "티몬"</span> <span class="bar"></span>
-										<span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46725', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46724"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46724', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 인천국제공항</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46724', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46723"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46723', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 자율주행</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46723', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46722"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46722', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 현대자동차</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46722', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46721"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46721', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 항공사</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46721', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
-							<li class="unread"><a
-								href="file:///C:/Users/Soo/Desktop/read/46720"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_mil.list', '', '', event);changeReadStatus(this);My.openPage('read/46720', 'mailWindows');return false;">
-									<span class="notify_ico"><i class="blind">안읽은 메일</i></span>
-									<p class="subject">Google 알리미 - 연구 개발</p>
-									<p class="info">
-										<span class="user_name">by "Google Alerts"</span> <span
-											class="bar"></span> <span class="date">12월 24일</span>
-									</p>
-							</a>
-								<button class="btn_remove"
-									onclick="clickcr(this, 'nmy_mil.delete', '', '', event);My.deleteMail('46720', '-1');return false;">
-									<i>메일 삭제</i>
-								</button></li>
 						</ul>
-						<a href=""
+						<a
 							class="view_more"
 							onclick="clickcr(this, 'nmy_mil.mailmore', '', '', event);My.movePage('', 'mailWindows');return false;"
 							target="_blank">메일에서 더보기<span class="ico"></span></a>
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="" target="_parent"
+					<a target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.mail', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>메일</a> <span class="bar"></span> <a
@@ -599,19 +163,6 @@
 						class="svc_link_weak"
 						onclick="clickcr(this, 'nmy_fot.mailset', '', '', event);My.movePage('');return false;">새
 						메일 통수 설정</a>
-					<div class="task_right">
-						<span class="cnt"><em><i class="blind">현재탭</i>3</em><span>/<i
-								class="blind">전체 탭 갯수</i>13
-						</span></span><a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
-							class="btn_prev" title="이전"
-							onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
-							class="btn_next" title="다음"
-							onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
-								탭 보기</i></a>
-					</div>
 				</div>
 			</div>
 			<div class="svc_npay svc_panel" queryid="C1514285812109585875"
@@ -620,7 +171,7 @@
 				<div class="svc_scroll" style="-webkit-overflow-scrolling: touch;">
 					<div class="svc_head">
 						<div class="shortcut_cover">
-							<a href=""
+							<a
 								class="shortcut mypoint"
 								onclick="clickcr(this, 'nmy_pay.mypoint', '','', event);My.openPage('', 'payWindows');return false;"><span
 								class="label">포인트</span><em class="value">63,453원</em></a><a
@@ -643,14 +194,6 @@
 									class="thumb"></span>
 									<div class="subject_cover">
 										<p class="subject">프렌즈 특별패키지 런칭! 후디커버 또는 충전크래들 100% 증정</p>
-									</div></a></li>
-							<li class="noti_event"><a
-								href="http://campaign.naver.com/event/ngift/201712"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_pay.event', '','', event);My.openPage('http://campaign.naver.com/event/ngift/201712', 'payWindows');return false;"><span
-									class="thumb"></span>
-									<div class="subject_cover">
-										<p class="subject">연말연시, 기프트카드로 마음을 전하세요</p>
 									</div></a></li>
 							<li class="noti_partner"><a
 								href="file:///C:/Users/Soo/Desktop/send/p/credit-card/samsung/apply"
@@ -675,25 +218,10 @@
 												class="state">구매확정</span>
 										</p>
 									</div></a></li>
-							<li><a
-								href="?tabMenu=BOOKING"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_pay.history', '','', event);My.openPage('?tabMenu=BOOKING', 'payWindows');return false;"><span
-									class="thumb"><span class="mask"></span><img
-										src="./userInfo_files/2000744602672805.jpg" alt="바코드 페이"
-										width="26" height="26"></span>
-									<div class="subject_cover">
-										<p class="subject">야간 자유이용권&amp;산타축제(12.01-12.31)</p>
-										<p class="info">
-											<span class="price">15,900원</span> <span class="bar"></span>
-											<span class="date">12월 15일</span> <span class="bar"></span> <span
-												class="state">구매확정</span>
-										</p>
-									</div></a></li>
 						</ul>
 						<div class="npay_link">
 							<div class="shortcut_cover">
-								<a href=""
+								<a
 									class="link_order"
 									onclick="clickcr(this, 'nmy_pay.order', '','', event);My.openPage('', 'payWindows');return false;">결제내역<span
 									class="arrow_right"></span></a> <a
@@ -710,23 +238,10 @@
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="" target="_parent"
+					<a target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.npay', '', '', event);"><span
 						class="svc_ico"></span>Pay</a>
-					<div class="task_right">
-						<span class="cnt"><em><i class="blind">현재탭</i>6</em><span>/<i
-								class="blind">전체 탭 갯수</i>13
-						</span></span><a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
-							class="btn_prev" title="이전"
-							onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
-							class="btn_next" title="다음"
-							onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
-								탭 보기</i></a>
-					</div>
 				</div>
 			</div>
 			<div class="svc_ndrive svc_panel" queryid="C1514285836069107502"
@@ -814,7 +329,7 @@ var cmsServerDomain = "files.cloud.naver.com";
 									</p> <span class="lbu ic_ndoc"><em class="blind">ndoc</em></span>
 							</a></li>
 						</ul>
-						<a href=""
+						<a
 							class="view_more"
 							onclick="clickcr(this, 'nmy_ndr.umore', '', '', event); My.openPage('', 'NDrvie'); return false;">바코드
 							클라우드에서 더보기<span class="ico"></span>
@@ -824,21 +339,10 @@ var cmsServerDomain = "files.cloud.naver.com";
 					<!--// my.jsp -->
 				</div>
 				<div class="svc_navigation">
-					<a href="" target="_parent"
+					<a target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.ndrive', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>바코드 클라우드</a>
-					<div class="task_right">
-						<span class="cnt"><em><i class="blind">현재탭</i>8</em><span>/<i
-								class="blind">전체 탭 갯수</i>13
-						</span></span><a href=""
-							class="btn_prev" title="이전"
-							onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a href=""
-							class="btn_next" title="다음"
-							onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
-								탭 보기</i></a>
-					</div>
 				</div>
 			</div>
 			<div class="svc_memo svc_panel" style="display: none;"
@@ -847,10 +351,10 @@ var cmsServerDomain = "files.cloud.naver.com";
 				<div class="svc_scroll" style="-webkit-overflow-scrolling: touch;">
 					<div class="svc_head">
 						<!-- My.drawList 는  My 서버  proxy 를 통해 호출되기때문에 "/my/memo" 를 붙여줘야 한다. -->
-						<a href=""
+						<a
 							class="tit selected"
 							onclick="clickcr(this, 'nmy_meo.all', '', '', event);My.drawList('/my/memo/my');return false;">전체
-							메모</a> <a href=""
+							메모</a> <a
 							class="tit "
 							onclick="clickcr(this, 'nmy_meo.star', '', '', event);My.drawList('/my/memo/my?filter=important');return false;">중요
 							메모</a>
@@ -866,17 +370,6 @@ var cmsServerDomain = "files.cloud.naver.com";
 								class="list_cover"
 								onclick="clickcr(this, 'nmy_meo.alist', '', '', event);">
 									<span class="notify_ico"><i class="blind">중요메모</i></span>
-									<p class="subject">바빠서 연애할 시간이 없을 때 출처 : K.Greb .. | 바코드
-										블로그</p>
-									<p class="info">
-										<span class="folder"> 내 메모 </span> <span class="bar"></span> <span
-											class="date">2015.05.25 19:33</span>
-									</p>
-							</a></li>
-							<li><a href="javascript:My.openPage('')"
-								class="list_cover"
-								onclick="clickcr(this, 'nmy_meo.alist', '', '', event);">
-									<span class="notify_ico"><i class="blind">중요메모</i></span>
 									<p class="subject">◈ 언제 어디서나 바코드 메모! 바코드 아이디 하나면 PC, 모바일, 웹
 										여기저기 흩어져 있던 메모가 자동으로 동기화되어 메모 관리가 편리해집니다. ◈ 모바일 앱 자세히 보</p>
 									<p class="info">
@@ -888,17 +381,10 @@ var cmsServerDomain = "files.cloud.naver.com";
 					</div>
 				</div>
 				<div class="svc_navigation">
-					<a href="" target="_parent"
+					<a target="_parent"
 						class="svc_link_strong"
 						onclick="clickcr(this, 'nmy_fot.memo', '', '', event);My.movePage('');return false;"><span
 						class="svc_ico"></span>메모</a>
-					<div class="task_right">
-						<span class="cnt"><em><i class="blind">현재탭</i>13</em><span>/<i
-								class="blind">전체 탭 갯수</i>13
-						</span></span><a href="" class="btn_prev" title="이전" onclick="clickcr(this, 'nmy_fot.prev', '', '', event);myCore.moveServicePannel('prev');return false;"><i>이전
-								탭 보기</i></a><a href="" class="btn_next" title="다음" onclick="clickcr(this, 'nmy_fot.next', '', '', event);myCore.moveServicePannel('next');return false;"><i>다음
-								탭 보기</i></a>
-					</div>
 				</div>
 			</div>
 		</div>

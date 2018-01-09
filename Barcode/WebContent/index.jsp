@@ -51,8 +51,7 @@ $(document).ready(function () {
             navigator.geolocation.getCurrentPosition (function(pos) {
                 var latitude = pos.coords.latitude;     // 위도
                 var longitude = pos.coords.longitude; // 경도
-                var URL = "./member/geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
-                location.href=URL;
+                location.href="./member/geo_proc.jsp?latitude="+latitude+"&longitude=" + longitude;
                 });
         } else {
             alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
@@ -76,8 +75,8 @@ $(document).ready(function () {
 				<div id="place"><img src="img/place_icon.png"></div>
 			</form>				
 			</div>
-			<a href="" id="location_btn">
-			<div id="map"><img src="img/map_icon.png"></div>
+			<a>
+			<div id="map"><img id="location_btn" src="img/map_icon.png"></div>
 			</a>
 		</div>
 	</div>
@@ -229,7 +228,7 @@ $(document).ready(function () {
 						</li>
 					</div>
 <%}else{%>
- 				<iframe id="minime" name="minime" title="MY영역" src="./member/userInfo.jsp" style="position:relative;width: 112%;height: 120px;top: -14px;left: -13px;" frameborder="0" framespacing="0" marginheight="0" marginwidth="0" scrolling="no" vspace="0"></iframe>
+ 				<iframe id="minime" name="minime" title="MY영역" src="./member/userInfo.jsp" style="position: relative;width: 112%;height: 120px;top: -14px;left: -13px;background: #fff;" frameborder="0" framespacing="0" marginheight="0" marginwidth="0" scrolling="no" vspace="0"></iframe>
 <%-- <div id="logout">
 			<div id="profile"></div>
 			<p style="margin-top:7px; line-height:30px; font-size:16px;"><b><%=name %></b>님</p>

@@ -6,10 +6,9 @@
 	double longitude = Double.parseDouble(request.getParameter("longitude"));
 	String location = ploca.city(latitude, longitude);
 	session.setAttribute("location", location.split(" ")[1]);
-	System.out.print(location);
 %>
 <meta charset="utf-8">
 <script>
 	alert('<%=location%>')
-//  	location.href='../index.jsp';
+  	location.href='../index.jsp';
 </script>

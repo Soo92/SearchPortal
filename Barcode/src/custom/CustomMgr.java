@@ -192,6 +192,47 @@ public class CustomMgr {
 		}
 		return vlist;
 	}
+	public Vector<CustomCateBean> UpperCateList(String cnum,int order) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<CustomCateBean> vlist = new Vector<>();
+		try {
+			con = pool.getConnection();
+			if(order==2) {
+				sql = "select idx from custom_cate_board where ccboardnum = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, cnum);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					cnum=rs.getString("idx");
+				}
+			}
+			sql = "SELECT @r as cnum," + 
+					"(SELECT title FROM custom_cate WHERE cnum = @r) AS title," + 
+					"(SELECT @p:=parent FROM custom_cate WHERE cnum = @r) AS parent," + 
+					"(SELECT @r:=idx FROM custom_cate WHERE cnum = @r) AS idx" + 
+					" FROM (SELECT @r:=?,@p:=2) var, custom_cate" + 
+					" WHERE @p <> 1";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, cnum);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				CustomCateBean regBean = new CustomCateBean();
+				regBean.setCnum(rs.getString("cnum"));
+				regBean.setIdx(rs.getString("idx"));
+				regBean.setTitle(rs.getString("title"));
+				regBean.setParent(rs.getString("parent"));
+				vlist.addElement(regBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
 
 	public boolean insertCustomCateBoard(CustomCateBoardBean bean) {
 		Connection con = null;

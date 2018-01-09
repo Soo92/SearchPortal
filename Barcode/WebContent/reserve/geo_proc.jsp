@@ -4,17 +4,17 @@
 <%
 	double latitude,longitude;
  	String location = session.getAttribute("location")+"";
-
-	if(location.equals("null")){
-		location = request.getParameter("location");
-		String latlan = ploca.latlng(location);
-		latitude = Double.parseDouble(latlan.split(",")[0]);
-		longitude = Double.parseDouble(latlan.split(",")[1]);
-	}else if(request.getParameter("location")==null){
+ 	
+ 	if(request.getParameter("location")==null){
 		latitude = Double.parseDouble(request.getParameter("latitude"));
 		longitude = Double.parseDouble(request.getParameter("longitude"));
 		location = ploca.city(latitude, longitude).split(" ")[1];
 		session.setAttribute("location", location);
+	}else if(location.equals("null")){
+		location = request.getParameter("location");
+		String latlan = ploca.latlng(location);
+		latitude = Double.parseDouble(latlan.split(",")[0]);
+		longitude = Double.parseDouble(latlan.split(",")[1]);
 	}else{
 		location = request.getParameter("location");
 		String latlan = ploca.latlng(location);

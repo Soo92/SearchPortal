@@ -28,8 +28,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta property="og:title" content="바코드 고객센터">
 <title>바코드 고객센터</title>
-<link rel="stylesheet" type="text/css"
-	href="./custom_detail_files/help.css">
+<link rel="stylesheet" type="text/css" href="./custom_detail_files/help.css">
 <script type="text/javascript">
 	function mypage() {
 		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
@@ -66,8 +65,8 @@
 						<a href="../index.jsp" class="Nlogo_link"> <img
 							src="logo_ci.png" width="150" height="30"
 							style="margin-top: 10px;"></a>
-						<h1 class="Ngnb_service">
-							<a href="https://help.naver.com/#" class="Nhome_link"><span class="Nhome">고객센터</span></a>
+						<h1 class="s">
+							<a href="./custom_home.jsp" class="Nhome_link"><span class="Nhome">고객센터</span></a>
 						</h1>
 					<div id="login">
 	<%if(id == null || id.equals("")){%>
@@ -185,8 +184,13 @@
 						<div class="pnt_ctg_area">
 							<h4 class="blind">카테고리 정보</h4>
 							<ul>
-								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>" title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
-								<li class="last"><strong title="<%=cmgr.getCustomCateParent(cnum).getTitle() %>"><%=cmgr.getCustomCateParent(cnum).getTitle() %></strong></li>
+	<%	Vector<CustomCateBean> catelist = cmgr.UpperCateList(cnum, 1);
+	for(int k=catelist.size()-1;k>=0;k--) {%>
+	<%System.out.println(catelist.size()); %>
+	<%System.out.println(k); %>
+		<%if(k!=0){%><li><a href="<%=request.getRequestURI()%>?index=<%=idx%>&cnum=<%=catelist.get(k).getCnum() %>" title="<%=catelist.get(k).getTitle() %>"><%=catelist.get(k).getTitle() %></a></li>
+		<%}else{ %>	<li class="last"><strong title="<%=catelist.get(k).getTitle() %>"><%=catelist.get(k).getTitle() %></strong></li>
+	<%}} %>
 							</ul>
 						</div>
 						<div class="nav_area">
@@ -205,8 +209,11 @@
 						<div class="pnt_ctg_area">
 							<h4 class="blind">카테고리 정보</h4>
 							<ul>
-								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>" title="<%=clist.get(idx-1).getTitle() %>"><%=clist.get(idx-1).getTitle() %></a></li>
-								<li class="last"><strong title="<%=cmgr.getCustomCateParent(cnum).getTitle() %>"><%=cmgr.getCustomCateParent(cnum).getTitle() %></strong></li>
+	<%	Vector<CustomCateBean> catelist = cmgr.UpperCateList(boardnum, 2);
+	for(int k=catelist.size()-1;k>=0;k--) {%>
+								<li><a href="<%=request.getRequestURI()%>?index=<%=idx%>&cnum=<%=catelist.get(k).getCnum() %>" title="<%=catelist.get(k).getTitle() %>"><%=catelist.get(k).getTitle() %></a></li>
+	<%} %>
+								<li class="last"><strong title="<%=cmgr.getCustomCateBoardParent(boardnum).getTitle() %>"><%=cmgr.getCustomCateBoardParent(boardnum).getTitle() %></strong></li>
 							</ul>
 						</div>
 						<div class="svs_end_area">
