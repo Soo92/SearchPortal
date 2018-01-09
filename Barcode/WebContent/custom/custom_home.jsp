@@ -85,7 +85,7 @@ function reSearchParamChange(){
 				<div class="Ngnb">
 					<div class="Ngnb_inner">
 						<a href="../index.jsp" class="Nlogo_link"> <img
-							src="logo_ci.png" width="150" height="30"
+							src="../img/barcode_logo__.png" width="150" height="30"
 							style="margin-top: 10px;"></a>
 						<h1 class="Ngnb_service">
 							<a href="./custom_home.jsp" class="Nhome_link"><span

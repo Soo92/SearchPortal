@@ -147,7 +147,7 @@ function delayed_submit(object) {
 <div id="header" style="bottom: 0px;">
 		<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#content" title="본문으로 이동" class="blind">본문 바로가기</a>
 		<h1 class="svc_name">
-			<a href="../index.jsp" title="barcodew로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="../img/movie/logo_ci.png" width="62" height="13" alt="NAVER"></a><!-- N=a:LNB.naver -->
+			<a href="../index.jsp" title="barcodew로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="../img/barcode_logo__.png" height="100%" alt="NAVER"></a><!-- N=a:LNB.naver -->
 			<a href="./movie_home.jsp" title="영화서비스홈으로 바로가기" class="svc_logo"><img src="../img/movie/logo_svc.png" width="34" height="19" alt="영화"></a><!-- N=a:LNB.movie -->
 		</h1>		<div id="scrollbar" class="scrollbar" style="width: 148px; height: 891px;">
 			<div class="scrollbar-box" style="width: 148px; height: 891px;">

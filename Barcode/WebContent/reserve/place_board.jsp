@@ -89,7 +89,7 @@
 		<div id="header_">
 			<div id="header">
 				<div id="wrap2">
-					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/movie/logo_ci.png" width=100% height=100% alt="바코드"></div>
+					<div id="logo" onclick="location.href='../index.jsp'"><img src="../img/barcode_logo__.png" width=100% height=100% alt="바코드"></div>
 					<div id="subject">
 					<a href="./geo_proc.jsp?location=<%=session.getAttribute("location")==null||session.getAttribute("location").equals("null")?"한국":session.getAttribute("location")%>">
 						<p><span>동네 소식</span></p>
