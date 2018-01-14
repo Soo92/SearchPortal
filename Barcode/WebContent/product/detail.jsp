@@ -1,4 +1,7 @@
 <%-- <%@page import="jdk.nashorn.internal.parser.TokenStream"%> --%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="product.ReviewBean"%>
 <%@page import="java.util.Vector"%>
 <%@page import="java.util.StringTokenizer"%>
@@ -9,7 +12,35 @@
 <jsp:useBean id="bean_re" class="product.ReviewBean"/>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <%
-	    int index = Integer.parseInt(request.getParameter("index"));	
+		
+		String idx=request.getParameter("index");
+		
+		int maxCookid = 5;
+		Cookie [] ck = request.getCookies();
+		if (ck != null) {
+			int countc=0;
+            System.out.println(ck.length);
+            System.out.println("========");
+		    for (int i=ck.length-1;i>=0;i--) {
+		        if (ck[i].getName().indexOf("sname") != -1) {
+		            System.out.println(ck[i].getValue());
+		            countc++;
+		            if(countc>maxCookid){
+		            	ck[i].setMaxAge(0);
+		            	response.addCookie(ck[i]);
+		            }
+		        }
+		    }
+            System.out.println("========");
+		}
+
+	    Calendar cal = Calendar.getInstance();
+
+        Cookie c = new Cookie("sname"+cal.getTimeInMillis(),idx);
+        c.setMaxAge(60*60*24);
+        response.addCookie(c);
+        
+        int index = Integer.parseInt(idx);	
 		bean = mgr_shop.getShopping(index);
 		String title = bean.getTitle();
 		String account = bean.getAccount();
@@ -989,25 +1020,33 @@ $(document).ready(function(){
 	<div id="float">
 		<div id="view_product">
 			<p>최근 본 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<div id="Recent" style="height:210px; overflow:hidden;">
+<%		if (ck != null) {
+		    for (int i=ck.length-1;i>=0;i--) {
+		        if (ck[i].getName().indexOf("sname") != -1) {
+		            %>
+			<a href="detail.jsp?index=<%=ck[i].getValue()%>">
+				<div id="view_product_link"><img src="./newShopImg/<%=listImg %>"></div>
 			</a>
-			<a href="#">
-			<div id="view_product_link" class="top_space"></div>
-			</a>
-			
+<%		        } }  }%>
+			</div>
+			<script type="text/javascript">
+				function prev(){
+					console.log($('#Recent').children());
+				}
+			</script>
 			<div id="button" class="top_space">
 				<table width="40" cellpadding="5" cellspacing="0" border="1" align="center"
 							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
 							valign:center; margin-top:10px;">
 					<tr>
 						<td height="20px">
-							<a href="#">
+							<a href="javascript:prev()">
 								<p><</p>
 							</a>
 						</td>
 						<td height="20px">
-							<a href="#">
+							<a href="javascript:next()">
 								<p>></p>
 							</a>
 						</td>

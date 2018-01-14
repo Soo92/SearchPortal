@@ -22,7 +22,7 @@ public class CustomMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert custom(title,icon"
+			sql = "insert custom(title,icon) "
 					+ "values(?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getTitle());
