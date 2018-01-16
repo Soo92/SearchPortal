@@ -19,11 +19,8 @@
 		Cookie [] ck = request.getCookies();
 		if (ck != null) {
 			int countc=0;
-            System.out.println(ck.length);
-            System.out.println("========");
 		    for (int i=ck.length-1;i>=0;i--) {
 		        if (ck[i].getName().indexOf("sname") != -1) {
-		            System.out.println(ck[i].getValue());
 		            countc++;
 		            if(countc>maxCookid){
 		            	ck[i].setMaxAge(0);
@@ -31,7 +28,6 @@
 		            }
 		        }
 		    }
-            System.out.println("========");
 		}
 
 	    Calendar cal = Calendar.getInstance();
@@ -239,7 +235,7 @@ $(document).ready(function(){
 				</tr>
 				
 				<tr>
-					<td rowspan="8" width="400px" height="400px" id="getMainImg">
+					<td rowspan="9" width="400px" height="400px" id="getMainImg">
 						<img src="./newShopImg/<%=mainImg %>">
 					</td>
 					<td   height="36px" width="30px;" rowspan="9" style="border-right:1px lightgray solid;"></td>
@@ -304,6 +300,29 @@ $(document).ready(function(){
 				
 				<tr>
 					<td height="36px" width="30px;"></td>
+					<td colspan="3" height="50px"style="border-top:1px lightgray dotted;">
+						<div class="opt_price">
+							<ul class="_add_option_product_area">
+								<li class="_purchase_unit _order_quantity_area">
+									<em>02.911746005/블랙/235</em>
+									<input type="text" maxlength="5">
+									<span class="ea">
+										<a href="#" title="수량 올림" class="_ns_plus _stopDefault frst">수량 올림</a>
+										<a href="#" title="수량 내림" class="_ns_minus _stopDefault">수량 내림</a>
+									</span>
+									<span class="price"><span class="thm _price">74,000</span>원</span>
+									<a href="#" title="삭제" class="">삭제</a>
+								</li>
+							</ul>
+						</div>
+						<div class="sum_total">총 수량 <span class="_total_count">1</span>개<span class="bar">|</span><em>총 상품금액</em>
+							<strong class="fc_point"><span class="_total_price">74,000</span><span class="won">원</span></strong>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td height="36px" width="30px;"></td>
 					<td colspan="2" height="50px"style="border-top:1px lightgray dotted;">
 						<p>최대구매수량 : <%=maxBuy %>개&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;★★★★☆ <%=proStar %></p>
 					</td>
@@ -329,6 +348,8 @@ $(document).ready(function(){
 						</table>
 					</td>
 				</tr>
+				
+
 			</table>
 		
 			<div id="button_sns">

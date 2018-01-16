@@ -49,10 +49,8 @@ $(document).ready(function () {
     var latitude=35.198362;
     var longitude=129.053922;
 	$('#map_window').hide(0);
-	$('#pac-input').hide(0);
 	$('#place').click(function(){
 		$('#map_window').toggle();
-		$('#pac-input').toggle();
 	});
     $("#location_btn").click(function() {        
         // Geolocation API에 액세스할 수 있는지를 확인
