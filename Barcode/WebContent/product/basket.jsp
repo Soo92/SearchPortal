@@ -1,8 +1,10 @@
+<%@page import="product.CartBean"%>
 <%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <jsp:useBean id="mgr_shop" class="product.ShoppingMgr"/>
+<jsp:useBean id="mgr_cart" class="product.CartMgr"/>
 <jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
@@ -10,6 +12,10 @@
 		String id = (String)session.getAttribute("idKey");	
 		String email = mgr.getMember(id).getEmail();
 		String name = mgr.getMember(id).getName();
+		if(id==null){
+			response.sendRedirect("../member/login.jsp");
+		}
+		Vector<CartBean> cartlist =  mgr_cart.getCartList(id);
 %>
 
 <!doctype>
@@ -121,9 +127,12 @@
 	
 	<div id="wrap">
 		<div id="blank"></div>
-			
+<%if(cartlist.size()>0) {%>
 			<!-- for문 Strat *****장바구니 상품 있을 경우 -->
 			<div id="basket">
+	<%for(int i=0;i<cartlist.size();i++) {
+		ShoppingBean Shopp = mgr_shop.getShopping(cartlist.get(i).getIdx());
+		int ea = cartlist.get(i).getEa();%>
 					<div id="basket_">
 							<table width="1080px" height="180px" cellpadding="5" cellspacing="0" border="1" align="center"
 							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
@@ -138,9 +147,9 @@
 									<th height="36px">주문</th>
 								</tr>
 								<tr>
-									<td rowspan="4" height="36px" width="150px">이미지</td>
+									<td rowspan="4" height="36px" width="150px"><img style="width:100%" src="<%=Shopp.getMainImg()%>"></td>
 									<td  height="46px" style="text-indent:20; text-align:left;border:none;font-size:16px;">
-									<b>[회사명]</b> 상품이름</td>
+									<b>[<%=Shopp.getSeller()%>]</b> <%=Shopp.getTitle()%></td>
 									<td rowspan="2" height="36px">
 									<select style="width:56px;">
 										<option>1</option>
@@ -150,10 +159,10 @@
 										<option>5</option>
 									</select>
 									</td>
-									<td rowspan="4" height="36px">24,000원</td>
-									<td rowspan="4" height="36px">24,000원</td>
-									<td rowspan="4" height="36px">24,000원</td>
-									<td rowspan="4" height="36px">24,000원</td>
+									<td rowspan="4" height="36px"><%=Shopp.getPrice()%>원</td>
+									<td rowspan="4" height="36px">0원</td>
+									<td rowspan="4" height="36px"><%=Shopp.getPrice()%>원</td>
+									<td rowspan="4" height="36px"><%=Shopp.getShipAccount()%>원</td>
 									<td rowspan="2" height="36px">
 										<button class="order_button">주문하기</button>
 									</td>
@@ -181,12 +190,11 @@
 							</table>
 							
 					</div>
+	<%} %>
 				</div>
-				
-
 				<div id="blank"></div>
 			<!-- for문 End -->
-			
+<%}else{ %>			
 			<!-- for문 Strat *****장바구니 상품 없을 경우 -->
 			<div id="basket">
 					<div id="basket_">
@@ -206,16 +214,13 @@
 									<td colspan="8" height="145px" width="150px">
 										<h3>장바구니에 담긴 상품이 없습니다.</h3>
 										<br/>
-										<p><a href="../member/login.jsp">
-										<span style="color:#ff4800; font-weight:bold;">로그인</span></a>을 하시면
-										장바구니 보관상품을 확인하실 수 있습니다.(최대 12개월)</p>
-										<p>고객님은 <b>로그아웃</b> 상태입니다.</p>
 									</td>
 								</tr>
 							</table>
 							
 					</div>
 				</div>
+<%} %>			
 				
 
 				<div id="blank"></div>

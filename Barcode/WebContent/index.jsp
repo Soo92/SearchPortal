@@ -48,7 +48,6 @@ $(document).ready(function () {
     var mapDiv = document.getElementById('place');
     var latitude=35.198362;
     var longitude=129.053922;
-	$('#map_window').hide(0);
 	$('#place').click(function(){
 		$('#map_window').toggle();
 	});
@@ -117,15 +116,16 @@ $(document).ready(function () {
     	        place.formatted_address + '</div>');
     	    infowindow.open(map, marker);
     	  });
+    	    $('#map_window').css("display","none");
     	}
     	// Run the initialize function when the window has finished loading.
-    	google.maps.event.addDomListener(mapDiv, 'click', initialize);
+    	google.maps.event.addDomListener(window, 'load', initialize);
 });
 </script>
 </head>
 <body>
 	<input type="text" id="pac-input">
-	<div id="map_window" style="position: absolute;border: 6px dashed #ffa27f;width: 80%;height: 78%;top: 129px;margin: 0px 10%;z-index: 99;overflow: hidden;">
+	<div id="map_window" style="position: absolute;width: 80%;height: 78%;top: 129px;margin: 0px 10%;z-index: 99;">
 	</div>
 	<div id="wrap">
 		<div id="header">

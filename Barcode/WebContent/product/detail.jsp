@@ -12,7 +12,6 @@
 <jsp:useBean id="bean_re" class="product.ReviewBean"/>
 <jsp:useBean id="mgr" class="member.MemberMgr"/>
 <%
-		
 		String idx=request.getParameter("index");
 		
 		int maxCookid = 5;
@@ -212,6 +211,11 @@ $(document).ready(function(){
 	 /* 반복해야됨 */
 	 document.pro_submit.submit();
  }
+ function pro_submit2(){
+	 document.getElementById("hiddenEA").value=
+			Number($('._total_price').html())/Number(<%=price%>);
+	 document.pro_submit22.submit();
+ }
 </script>
 
 <div id ="wrap3">
@@ -273,8 +277,9 @@ $(document).ready(function(){
 							<option>옵션을 선택하시오.</option>
 							<% StringTokenizer opt=new StringTokenizer(option,",");
 									for(int i=0;opt.hasMoreElements();i++){
+										String opt1=opt.nextToken();
 							%>
-								<option id="getOpt"><%=opt.nextToken()%></option>
+								<option id="getOpt" value="<%=opt1 %>"><%=opt1%></option>
 							<%}%>
 						</select>
 						
@@ -283,8 +288,9 @@ $(document).ready(function(){
 							<option>추가구성을 선택하시오.</option>
 							<%if(proAdd!=null){StringTokenizer prA = new StringTokenizer(proAdd,",");
 									for(int x=0;prA.hasMoreElements();x++){
+										String opt2=prA.nextToken();
 							%>
-							<option id="getProAdd"><%=prA.nextToken() %></option>
+							<option id="getProAdd" value="<%=opt2 %>"><%=opt2 %></option>
 							<%}} %>
 						</select>
 					</td>
@@ -300,27 +306,28 @@ $(document).ready(function(){
 				
 				<tr>
 					<td height="36px" width="30px;"></td>
-					<td colspan="3" height="50px"style="border-top:1px lightgray dotted;">
+					<td colspan="3" height="50px"style="border-top:1px lightgray dotted;padding-right: 20px;">
 						<div class="opt_price">
 							<ul class="_add_option_product_area">
-								<li class="_purchase_unit _order_quantity_area">
-									<em>02.911746005/블랙/235</em>
-									<input type="text" maxlength="5">
-									<span class="ea">
-										<a href="#" title="수량 올림" class="_ns_plus _stopDefault frst">수량 올림</a>
-										<a href="#" title="수량 내림" class="_ns_minus _stopDefault">수량 내림</a>
-									</span>
-									<span class="price"><span class="thm _price">74,000</span>원</span>
-									<a href="#" title="삭제" class="">삭제</a>
+								<li class="dummy" style="height:30px;margin:10px 0;border-bottom:1px lightgray dotted;display:none;">
+									<em class="dummy_title">Product Title</em>
+									<div style=" float: right;">
+										<input id="OptNum" type="text" maxlength="3" style="border:1px solid #c8c8c8" value="1" onkeydown="return showKeyCode(event)">
+										<span class="ea">
+											<a onclick="numCh(1,this)" title="수량 올림" class=""><img src="./newShopImg/up.png" height="5px"></a>
+											<a onclick="numCh(-1,this)" title="수량 내림" class=""><img src="./newShopImg/down.png" height="5px"></a>
+										</span>
+										<span class="price"><span class="dummy_price">0</span>원</span>
+										<a onclick="dellist($(this).parent().parent())" title="삭제" class=""><img src="./newShopImg/del.png" height="10px"></a>
+									</div>
 								</li>
 							</ul>
 						</div>
-						<div class="sum_total">총 수량 <span class="_total_count">1</span>개<span class="bar">|</span><em>총 상품금액</em>
-							<strong class="fc_point"><span class="_total_price">74,000</span><span class="won">원</span></strong>
+						<div class="sum_total" style=" margin-bottom: 10px;text-align: right;"><em>총 상품금액</em>
+							<strong class="fc_point"><span class="_total_price">0</span><span class="won">원</span></strong>
 						</div>
 					</td>
 				</tr>
-				
 				<tr>
 					<td height="36px" width="30px;"></td>
 					<td colspan="2" height="50px"style="border-top:1px lightgray dotted;">
@@ -366,14 +373,21 @@ $(document).ready(function(){
 						<input type="hidden" value="<%=price%>" name="pro_Price" id="hiddenPrice">
 						<input type="hidden" value="<%=shipAccount%>" name="pro_ShipAccount" id="hiddenShipAccount">
 </form>
+<form name="pro_submit22" method="post" action="cartProc.jsp">
+						<input type="hidden" value="<%=index%>"  name="pronum">
+						<input type="hidden" value="1" name="ea" id="hiddenEA">
+						<input type="hidden" value="<%=id%>" name="userid">
+</form>
 				<a onclick="pro_submit1()">
 					<div id="buy_">
 						<p>구매하기</p>
 					</div>
 				</a>
-				<div id="detail_basket">
-					<p>장바구니</p>
-				</div>
+				<a onclick="pro_submit2()">
+					<div id="detail_basket">
+						<p>장바구니</p>
+					</div>
+				</a>
 			</div>
 		
 		</div><!-- detail_header_ -->
@@ -382,6 +396,59 @@ $(document).ready(function(){
 <!-- detail_slider -->
 
 <script type="text/javascript">
+	function dellist(a){
+		$(a).remove();
+	}
+	
+	function numCh(i,a){
+		$(a).parent().siblings('input').val((Number($(a).parent().siblings('input').val())+Number(i)));
+		if(Number($(a).parent().siblings('input').val())<1) $(a).parent().siblings('input').val(1);
+		$(a).parent().siblings('.price').children('.dummy_price').html($(a).parent().siblings('input').val()*<%=price%>);
+		var total = 0;
+		for(var i=1;i<$('.dummy_price').length;i++){
+			total=total+Number($('.dummy_price:eq('+i+')').html());
+		}
+		$('._total_price').html(total);
+	}
+	
+	$("#OptNum").bind("change paste keyup", function() {
+	   if(Number($(this).val())<1)
+		   $(this).val(1); 
+		$(this).siblings('.price').children('.dummy_price').html($(this).val()*<%=price%>);
+		var total = 0;
+		for(var i=1;i<$('.dummy_price').length;i++){
+			total=total+Number($('.dummy_price:eq('+i+')').html());
+		}
+		$('._total_price').html(total);
+	});
+	
+	function showKeyCode(event) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) )
+		{
+			return;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	var ad = $('._add_option_product_area');
+	$('select').on('change', function() {
+		var total = 0;
+		for(var i=1;i<$('.dummy_price').length;i++){
+			total=total+Number($('.dummy_price:eq('+i+')').html());
+		}
+		$('._total_price').html(total);
+		if(this.value.indexOf("선택") == -1){
+			var d = $('.dummy').clone(true);
+			d.find('.dummy_title').html(this.value);
+			d.find('.dummy_price').html(<%=price %>);
+			ad.append(d.removeClass('dummy').attr('class', 'Opt').show());
+		}
+	})
+	
        var pos = 0;
        var a=0;
        var term = 31;
@@ -1047,7 +1114,7 @@ $(document).ready(function(){
 		        if (ck[i].getName().indexOf("sname") != -1) {
 		            %>
 			<a href="detail.jsp?index=<%=ck[i].getValue()%>">
-				<div id="view_product_link"><img src="./newShopImg/<%=listImg %>"></div>
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShopping(Integer.parseInt(ck[i].getValue())).getMainImg() %>"></div>
 			</a>
 <%		        } }  }%>
 			</div>

@@ -108,7 +108,49 @@ public ShoppingBean getShopping(int idx) {
 		}
 		return vlist;
 	}
-	
+	//shopping List
+		public Vector<ShoppingBean> getShoppingList(String Seller) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = null;
+			Vector<ShoppingBean> vlist = new Vector<>();
+			try {
+				con = pool.getConnection();
+				sql = "select * from tblnewshop where Seller=? order by idx;";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, Seller);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					ShoppingBean regBean = new ShoppingBean();
+					regBean.setIndex(rs.getInt("idx"));
+					regBean.setTitle(rs.getString("title"));
+					regBean.setAccount(rs.getString("account"));
+					regBean.setStock(rs.getString("stock"));
+					regBean.setPrice(rs.getString("price"));
+					regBean.setShipAccount(rs.getString("shipAccount"));
+					regBean.setShipDate(rs.getString("shipDate"));
+					regBean.setOrigin(rs.getString("origin"));
+					regBean.setOpt(rs.getString("opt"));
+					regBean.setProAdd(rs.getString("proAdd"));
+					regBean.setMaxBuy(rs.getInt("maxbuy"));
+					regBean.setMainImg(rs.getString("mainImg"));
+					regBean.setListImg(rs.getString("listImg"));
+					regBean.setDetailImg(rs.getString("detailImg"));
+					regBean.setProStar(rs.getDouble("proStar"));
+					regBean.setReviewNum(rs.getInt("reviewNum"));
+					regBean.setLikeNum(rs.getInt("likeNum"));
+					regBean.setSeller(rs.getString("Seller"));
+					regBean.setS_adr(rs.getString("s_adr"));
+					vlist.addElement(regBean);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			return vlist;
+		}	
 
 	
 	//Admin 래코드 한개 가져오기

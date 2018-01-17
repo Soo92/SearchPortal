@@ -4,10 +4,8 @@
 <jsp:useBean id="bean" class="member.MemberBean"/>
 <jsp:setProperty  name="bean" property="*"/>
 <%
-System.out.println("b");
-	  boolean result = mgr.insertMember(bean);
-		System.out.println("a");
-	  if(result){
+	boolean result = mgr.insertMember(bean);
+    if(result){
 %>
 <script type="text/javascript">
 		alert("회원가입을 하였습니다.");

@@ -95,8 +95,8 @@ public class MemberMgr {
 		try {
 			con = pool.getConnection();
 			sql = "insert tblnomal(id,pass,name,gender,"
-					+ "birth,phonenum,email,zipcode,address)"
-					+ "values(?,?,?,?,?,?,?,?,?)";
+					+ "birth,phonenum,email,zipcode,address,seller)"
+					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getId());
 			pstmt.setString(2, bean.getPass());
@@ -107,6 +107,7 @@ public class MemberMgr {
 			pstmt.setString(7, bean.getEmail());
 			pstmt.setString(8, bean.getZipcode());
 			pstmt.setString(9, bean.getAddress());
+			pstmt.setString(10, bean.getSeller());
 			if(pstmt.executeUpdate()==1)
 				flag = true;
 		} catch (Exception e) {
@@ -116,6 +117,7 @@ public class MemberMgr {
 		}
 		return flag;
 	}
+	
 	public MemberBean getMember(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -138,8 +140,8 @@ public class MemberMgr {
 				regBean.setZipcode(rs.getString("zipcode"));
 				regBean.setAddress(rs.getString("address"));
 				regBean.setEmail(rs.getString("email"));
+				regBean.setSeller(rs.getString("seller"));
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -195,6 +197,7 @@ public class MemberMgr {
 				regBean.setZipcode(rs.getString("zipcode"));
 				regBean.setAddress(rs.getString("address"));
 				regBean.setEmail(rs.getString("email"));
+				regBean.setSeller(rs.getString("seller"));
 				vlist.addElement(regBean);
 			}
 		} catch (Exception e) {

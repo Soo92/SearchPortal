@@ -5,7 +5,8 @@
 <jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
 		request.setCharacterEncoding("euc-kr");
-		Vector<ShoppingBean> vlist = shop_mgr.getShoppingList();
+		String id=(String) session.getAttribute("idKey");
+		Vector<ShoppingBean> vlist = shop_mgr.getShoppingList(id);
 %>
 
 <!doctype>

@@ -19,7 +19,7 @@
 	<div id="header">
 		<div id="wrap2">
 			<a href="../index.jsp">
-			<div id="logo"></div>
+			<div id="logo"><img src="../img/barcode_logo__.png" width=100% height=100% alt="바코드"></div>
 			</a>
 			<div id="subject"><p><span>바코드</span> &nbsp;회원가입</p></div>
 			
@@ -67,12 +67,6 @@
 	</div>
 	<div id="join">
 	
-		<a href="join_kids.jsp">
-			  <div id="join_1">
-				<p color="white">만 14세 미만 회원가입</p>
-			  </div>
-		</a>
-	
 		<a href="join_normal.jsp">
 			<div id="join_2">
 			  <p>일반 회원가입</p>
@@ -81,16 +75,10 @@
 		
 		<a href="join_seller.jsp">
 			  <div id="join_3">
-			  <p>기업 회원가입</p>
+			  <p>판매자 회원가입</p>
 			  </div>
 		</a>
 			  
-		<a href="#">	  
-			  <div id="join_4">
-			  <p>외국인 회원가입</p>
-			  </div>
-		</a>
-		 
 	</div>
 	
 	

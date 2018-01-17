@@ -1,7 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<jsp:useBean id="mgr" class="member.MemberMgr"/>
+
 <%
 		request.setCharacterEncoding("utf-8");
 		String id = (String)session.getAttribute("idKey");	
+		boolean checkSell = mgr.getMember(id).getSeller()!=null && mgr.getMember(id).getSeller().equals("seller");
 %>
 
 <!DOCTYPE html>
@@ -35,14 +38,14 @@
 					<a target="_parent"
 						class="user_thumbnail" onclick=""> <span class="mask"></span>
 						<img id="profile_image" src="./userInfo_files/myInfo.gif"
-						width="56" height="56" alt="수수 님">
+						width="56" height="56" alt="<%=id%> 님">
 					</a>
 					<div class="private">
-						<span class="user_name"><a href="https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification"
-							target="_parent" onclick="clickcr(this, 'nmy.idname', '', '', event);My.movePage('https://nid.naver.com/user2/api/route.nhn?m=routePcProfileModification');return false;"><strong
-								id="user_name">수수</strong>님</a></span> <a
-							href="./mypage.jsp"
-							target="_parent" class="link_myinfo" onclick="">내정보</a>
+						<span class="user_name"><a href="" target="_parent" onclick=""><strong id="user_name"><%=id%></strong>님</a></span> 
+								<a href="./mypage.jsp" target="_parent" class="link_myinfo" onclick="">내정보</a>
+					<%if(checkSell) {%>
+								<a href="../admin/admin_list.jsp" target="_parent" class="link_myinfo" onclick="">판매자 페이지</a>
+					<%} %>
 					</div>
 					<div class="my_service">
 						<a href="./logout.jsp" target="_parent" id="btn_logout"
@@ -188,9 +191,9 @@
 					<div class="svc_body">
 						<ul class="svc_list">
 							<li class="noti_event"><a
-								href="http://music.naver.com/promotion/clovaspeaker/ticket201712Friends.nhn"
+								href=""
 								class="list_cover"
-								onclick="clickcr(this, 'nmy_pay.event', '','', event);My.openPage('http://music.naver.com/promotion/clovaspeaker/ticket201712Friends.nhn', 'payWindows');return false;"><span
+								onclick="clickcr(this, 'nmy_pay.event', '','', event);My.openPage('', 'payWindows');return false;"><span
 									class="thumb"></span>
 									<div class="subject_cover">
 										<p class="subject">프렌즈 특별패키지 런칭! 후디커버 또는 충전크래들 100% 증정</p>
@@ -250,22 +253,11 @@
 				<div class="svc_scroll" style="-webkit-overflow-scrolling: touch;">
 					<title>user info</title>
 					<!-- my.jsp -->
-					<script type="text/javascript">
-//<![CDATA[
-var userId = "dltjdtn321";
-var userIdx = 13824381;
-var userIdc = 2;
-var cmsServerDomain = "files.cloud.naver.com";
-//]]>
-</script>
 					<!-- svc_head 사진, 업데이트 영역 -->
 					<div class="svc_head">
-						<a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
-							class="tit selected"
+						<a href="" class="tit selected"
 							onclick="clickcr(this, 'nmy_ndr.update', '', '', event); My.drawList('/my/ndrive/new/myFolder.nhn', false); return false;">내
-							폴더</a> <a
-							href="https://my.naver.com/new?svgless=true&amp;20171226193059#"
+							폴더</a> <a href="https://my.barcode.com/new?svgless=true&amp;20171226193059#"
 							class="tit"
 							onclick="clickcr(this, 'nmy_ndr.photo', '', '', event); My.drawList('/my/ndrive/new/myPhoto.nhn', false); return false;">내
 							사진</a>

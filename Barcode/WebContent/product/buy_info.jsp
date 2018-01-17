@@ -34,6 +34,9 @@
 		document.getElementById("priceAdd").innerHTML = comma(
 				parseInt(document.getElementById("EA").value)*
 				<%=priceA-discount + priceS%>);
+		document.getElementById("priceAdd1").innerHTML = comma(
+				parseInt(document.getElementById("EA").value)*
+				<%=priceA-discount + priceS%>);
 		document.getElementById("saleAdd").innerHTML = comma(parseInt(document.getElementById("EA").value)*<%=discount%>);
 	}
 	function comma(num){
@@ -322,7 +325,7 @@
 										<sapn id="priceAdd"><%=String.format("%,d",priceA-discount+priceS) %></sapn>원</p>
 										<br/>
 										<p style="font-size: 12px; line-height: 25px;">총 상품금액 : 
-										<sapn id="priceAdd"><%=String.format("%,d",priceA-discount+priceS) %></sapn>원</p>
+										<sapn id="priceAdd1"><%=String.format("%,d",priceA-discount+priceS) %></sapn>원</p>
 										<p style="font-size: 12px; line-height: 25px;">할인금액 : (-)<sapn id="saleAdd"><%=String.format("%,d",discount) %></sapn>원</p>
 										<p style="font-size: 12px; line-height: 25px;">배송비 : (+)<%=String.format("%,d",priceS) %>원</p>
 									</td>

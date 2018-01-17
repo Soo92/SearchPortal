@@ -69,6 +69,7 @@
 	<div id="wrap">
          <div id="wrap2" >
          <form name="regFrm" method="post" action="memberProc.jsp">
+		<input name="seller" type="hidden" value="normal">
             <a href="../index.jsp"><div id="logo"></div></a>
 			<div id="first">
 				 <table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">

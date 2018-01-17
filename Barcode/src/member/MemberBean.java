@@ -11,7 +11,15 @@ public class MemberBean {
 	private String phonenum;
 	private String zipcode;
 	private String address;
+	private String seller;
 	
+	
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
 	public String getPhonenum() {
 		return phonenum;
 	}
