@@ -5,14 +5,13 @@
 <%
 	request.setCharacterEncoding("euc-kr");
 	String idx = request.getParameter("idx");
-%>
-<%
-    boolean flag = Mgr.insertReview(Bean);
+
+	boolean flag = Mgr.insertReview(Bean);
 	if(flag){
 %>
 		<script>
 			alert("댓글이 등록 되었습니다.");
-			location.href="movie_detail.jsp?index="+<%=idx%>+"&&num=3";
+			location.href="movie_home.jsp?index="+<%=idx%>+"&&num=3";
 		</script>
 <%
 	}else{

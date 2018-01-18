@@ -5,6 +5,20 @@
 <jsp:useBean id="mgr_shop" class="product.ShoppingMgr"/>
 <jsp:useBean id="bean" class="product.ShoppingBean"/>
 <%
+		int maxCookid = 5;
+		Cookie [] ck = request.getCookies();
+		if (ck != null) {
+			int countc=0;
+		    for (int i=ck.length-1;i>=0;i--) {
+		        if (ck[i].getName().indexOf("sname") != -1) {
+		            countc++;
+		            if(countc>maxCookid){
+		            	ck[i].setMaxAge(0);
+		            	response.addCookie(ck[i]);
+		            }
+		        }
+		    }
+		}
 		request.setCharacterEncoding("euc-kr");
 		Vector<ShoppingBean> vlist=mgr_shop.getShoppingList();
 		String id = (String)session.getAttribute("idKey");	
@@ -141,25 +155,33 @@
 	<div id="float">
 		<div id="view_product">
 			<p>최근 본 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<div id="Recent" style="height:210px; overflow:hidden;">
+<%		if (ck != null) {
+		    for (int i=ck.length-1;i>=0;i--) {
+		        if (ck[i].getName().indexOf("sname") != -1) {
+		            %>
+			<a href="detail.jsp?index=<%=ck[i].getValue()%>">
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShopping(Integer.parseInt(ck[i].getValue())).getMainImg() %>"></div>
 			</a>
-			<a href="#">
-			<div id="view_product_link" class="top_space"></div>
-			</a>
-			
+<%		        } }  }%>
+			</div>
+			<script type="text/javascript">
+				function prev(){
+					console.log($('#Recent').children());
+				}
+			</script>
 			<div id="button" class="top_space">
 				<table width="40" cellpadding="5" cellspacing="0" border="1" align="center"
 							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
 							valign:center; margin-top:10px;">
 					<tr>
 						<td height="20px">
-							<a href="#">
+							<a href="javascript:prev()">
 								<p><</p>
 							</a>
 						</td>
 						<td height="20px">
-							<a href="#">
+							<a href="javascript:next()">
 								<p>></p>
 							</a>
 						</td>
@@ -170,18 +192,18 @@
 		
 		<div id="recom_pro">
 			<p>추천 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<%int randomIdx=((int)(mgr_shop.getShoppingList().size()*Math.random()))-1;%>
+			<a href="detail.jsp?index=<%=mgr_shop.getShoppingList().get(randomIdx).getIndex()%>">
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShoppingList().get(randomIdx).getMainImg() %>"></div>
 			</a>
-
 		</div>
 		
 		<div id="google">
 			<p>광고 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<%randomIdx=((int)(mgr_shop.getShoppingList().size()*Math.random()))-1;%>
+			<a href="detail.jsp?index=<%=mgr_shop.getShoppingList().get(randomIdx).getIndex()%>">
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShoppingList().get(randomIdx).getMainImg() %>"></div>
 			</a>
-
 		</div>
 		
 		<div id="top" onclick="scrolling()">

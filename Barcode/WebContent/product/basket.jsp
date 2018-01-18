@@ -131,7 +131,7 @@
 			<!-- for문 Strat *****장바구니 상품 있을 경우 -->
 			<div id="basket">
 	<%for(int i=0;i<cartlist.size();i++) {
-		ShoppingBean Shopp = mgr_shop.getShopping(cartlist.get(i).getIdx());
+		ShoppingBean Shopp = mgr_shop.getShopping(cartlist.get(i).getPronum());
 		int ea = cartlist.get(i).getEa();%>
 					<div id="basket_">
 							<table width="1080px" height="180px" cellpadding="5" cellspacing="0" border="1" align="center"
@@ -147,7 +147,7 @@
 									<th height="36px">주문</th>
 								</tr>
 								<tr>
-									<td rowspan="4" height="36px" width="150px"><img style="width:100%" src="<%=Shopp.getMainImg()%>"></td>
+									<td rowspan="4" height="36px" width="150px"><img style="width:100%" src="./newShopImg/<%=Shopp.getMainImg()%>"></td>
 									<td  height="46px" style="text-indent:20; text-align:left;border:none;font-size:16px;">
 									<b>[<%=Shopp.getSeller()%>]</b> <%=Shopp.getTitle()%></td>
 									<td rowspan="2" height="36px">
@@ -169,11 +169,11 @@
 								</tr>
 								<tr>
 									<td height="26px" style="text-indent:20; text-align:left;border:none;">
-									옵션 : 토리노 벙커_블랙(메트리스 제외)</td>
+									옵션 : -</td>
 								</tr>
 								
 								<tr>
-									<td height="26px" style="text-indent:20; text-align:left;border:none;">추가상품 : 철재사다리 + 45,000원</td>
+									<td height="26px" style="text-indent:20; text-align:left;border:none;">추가상품 : -</td>
 									<td rowspan="2" height="36px">
 										<button class="delete_button">변경</button>
 									</td>

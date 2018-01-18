@@ -1,4 +1,6 @@
 <%-- <%@page import="jdk.nashorn.internal.parser.TokenStream"%> --%>
+<%@page import="java.util.HashMap"%>
+<%@page import="product.ShoppingBean"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.net.URLEncoder"%>
@@ -560,25 +562,16 @@ $(document).ready(function(){
 
 <div id="wrap" style="padding-top:20px;">
 	<div id="wrap2">
-		<div id="detail_slider">		
+		<div id="detail_slider">판매자의 다른 상품		
 			<div id="button_slider">
 				<div id="next_button" onclick="bb()"></div>
 				<div id="pre_button" onclick="aa()"></div>
 			</div>
-			<div id="detail_slider_">			
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
-				<div id="product_box"></div>
+			<div id="detail_slider_">	
+<%Vector<ShoppingBean> slist = mgr_shop.getShoppingList(Seller); 
+for(int i=0;i<slist.size();i++){%>	
+				<div id="product_box"><a href="./detail.jsp?index=<%=slist.get(i).getIndex()%>"><img width=100% src="./newShopImg/<%=slist.get(i).getMainImg()%>"></a></div>
+<%} %>
 			</div>
 		</div><!-- detail_slider -->
 	
@@ -607,7 +600,7 @@ $(document).ready(function(){
 <!-- contents -->
 	<div id="detail_img">
 		<div id="detail_p_info">
-			<img src="./newShopImg/<%=detailImg %>">
+			<img src="./<%=detailImg %>">
 		</div>
 	</div><!-- detail_img -->
 	
@@ -615,8 +608,7 @@ $(document).ready(function(){
 		<div id="detail_QnA_header">
 			<div id="spaceBox"></div>
 			<h1>Review</h1>
-			<h3>현재 상품에 대한 문의</h3>
-			
+			<h3>현재 상품에 대한 리뷰</h3>
 			<p>저희 제품의 만족도는 어떠셨나요? ÷) 
 				<span style="font-weight:900">평점을 남겨주세요!</span>
 			</p>
@@ -647,14 +639,14 @@ $(document).ready(function(){
 					<tr class="bl_noticeline">
 						<td class="bl_no">:::</td>
 						<td class="bl_icon"><img src="../img/b2_notice.gif"></td>
-						<td class="bl_subject_lt" colspan="2"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=995513&amp;num2=00000&amp;lock=N&amp;flag=notice">교환/반품 시 꼭 확인해 주세요!</a>&nbsp;&nbsp;</td>
-						<td class="bl_star">★★★★☆</td>
+						<td class="bl_subject_lt" colspan="2"><img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle"><span class="BoardBrandName"></span><a href="">교환/반품 시 꼭 확인해 주세요!</a>&nbsp;&nbsp;</td>
+						<td class="bl_star">★★★★★</td>
 						<td class="bl_name"><div style="padding-left:2px; padding-right:2px;"><img src="../img/b2_adminimg.gif" border="0"></div></td>
 						<td class="bl_date"><span class="bl_oldcontent">2016/06/02</span></td>
 						<td class="bl_hits">1844</td>
 					</tr>
-					<% for(int i=0;i<vlist.size();i++) {
-					bean_re = mgr_review.getReview(i+1);
+				<% for(int i=0;i<vlist.size();i++) {
+					bean_re = vlist.get(i);
 					int no = bean_re.getNo();
 					String pro_title = bean_re.getPro_title();
 					String rTitle = bean_re.getTitle();
@@ -664,9 +656,9 @@ $(document).ready(function(){
 					int rView = bean_re.getView();
 					String rImg = bean_re.getImg();
 					String rContent = bean_re.getContent();
-					%>
+				%>
 						<tr onclick="reView('tr<%=i%>')" class="bl_evenline">
-							<td class="bl_no"><%=no %></td>
+							<td class="bl_no"><%=i+1 %></td>
 							<td class="bl_icon"><img src="../img/b2_lock.gif" border="0"></td>
 							<td class=" "></td>
 							<td class="bl_subject_lt" colspan="1" width="276">
@@ -695,17 +687,20 @@ $(document).ready(function(){
 				</table>
 			</div>			
 	
-			<script type="text/javascript">
-			function reView(a) {
-			if( document.getElementById(a).style.display == "none")
-			    document.getElementById(a).style.display = "";
-				else
-			    document.getElementById(a).style.display = "none";
-			}
-			</script> 
-			<!-- LIST REPEAT END -->
+		<script type="text/javascript">
+		function reView(a) {
+		if( document.getElementById(a).style.display == "none")
+		    document.getElementById(a).style.display = "";
+			else
+		    document.getElementById(a).style.display = "none";
+		}
+		</script> 
+		<!-- LIST REPEAT END -->
 	
 	 <form name="review_wri" method="post" action="reviewProc.jsp?index=<%=index %>" enctype="multipart/form-data">		 
+	 	<input type="hidden" name="idx" value="<%=idx %>">
+	 	<input type="hidden" name="name" value="<%=id %>">
+	 	<input type="hidden" name="pro_title" value="<%=title %>">
 		<div id="review_wri">
 			<div id="review_wri_">
 				<table width="992px" height="150px" cellpadding="5" cellspacing="0" border="1" align="center"
@@ -716,7 +711,7 @@ $(document).ready(function(){
 					</tr>
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="title"></td>
+						<td><input type="text" name="title" id="titi"></td>
 					</tr>
 					<tr>
 						<th>별점</th>
@@ -747,11 +742,14 @@ $(document).ready(function(){
 	<script type="text/javascript">
 			function reViewWrite() {
 			re = document.review_wri;
-			if( document.getElementById("review_wri_").style.display == ""){
-				document.getElementById("review_wri_").style.display = "block";
-			}else{	
+				if( document.getElementById("review_wri_").style.display == ""){
+					document.getElementById("review_wri_").style.display = "block";
+				}else{	
 					document.getElementById("review_wri_").style.display = "";
-					re.submit(); 
+					console.log(document.getElementById("titi").value);
+					if(document.getElementById("titi").value!=null) {
+						document.review_wri.submit();
+					}
 			    }
 			}
 	</script> 
@@ -798,7 +796,6 @@ $(document).ready(function(){
 			<div id="spaceBox"></div>
 			<h1>QnA</h1>
 			<h3>현재 상품에 대한 문의</h3>
-			
 			<p>상품에 대해 궁금하신점이 있으시다면
 			<span style="font-weight:900">친절하게 답변</span>해 드리겠습니다 ^-^</p>
 		</div>
@@ -830,9 +827,7 @@ $(document).ready(function(){
 						<td class="bl_subject_lt" colspan="3">
 							<img src="../img/b2_head.gif" style="margin-right:5px;" align="absmiddle">
 							<span class="BoardBrandName"></span>
-							<a href="board.html?code=storia0720_board4&amp;page=1&amp;board_cate=&amp;type=v&amp;num1=995513&amp;num2=00000&amp;lock=N&amp;flag=notice">
-							교환/반품 시 꼭 확인해 주세요!
-							</a>&nbsp;&nbsp;
+							<a href=""> 교환/반품 시 꼭 확인해 주세요! </a>&nbsp;&nbsp;
 						</td>
 						<td class="bl_name">
 							<div style="padding-left:2px; padding-right:2px;">
@@ -877,6 +872,46 @@ $(document).ready(function(){
 			</table>
 		</div><!-- detail_QnA_contents -->			
 		
+		<script type="text/javascript">
+			function QnAWrite() {
+			if( dument.getElementById("review_wri_q_").style.display == "none")
+			    document.getElementById("review_wri_q_").style.display = "block";
+				else
+			    document.getElementById("review_wri_q_").style.display = "none";
+			}
+		</script> 
+				
+		<div id="detail_QnA_bottom">	ㄴ
+			<div id="detail_QnA_nextNpre">
+				<table border="0" cellpadding="0" cellspacing="0" width="150px" style="margin:0 auto;margin-top:30px;">
+					<tr>
+						<td width="15px" style="text-align:center;"><a href="#">1</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">2</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">3</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">4</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">5</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">6</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">7</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">8</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">9</a></td>
+						<td width="15px" style="text-align:center;"><a href="#">10</a></td>
+						<td><a href="#"><img src="../img/next.jpg" width="15px" height="15px"></a></td>
+					</tr>
+				</table>
+			</div>
+				
+			<div id="detail_QnA_radio">
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">제목</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">이름</label>
+				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">내용</label>
+				<input type="text" id="QnAsearchBox">
+			</div>
+				
+			<div id="detail_QnA_Writer">
+				<input type="button" class="button" value="작성하기" onclick="QnAWrite()">
+			</div>
+		</div><!-- detail_QnA_bottom -->
+
 		<div id="review_wri">
 			<div id="review_wri_q_">
 				<table width="992px" height="150px" cellpadding="5" cellspacing="0" border="1" align="center"
@@ -916,46 +951,6 @@ $(document).ready(function(){
 				</table>
 			</div>
 		</div><!-- QnA작성 -->
-		
-		<script type="text/javascript">
-			function QnAWrite() {
-			if( dument.getElementById("review_wri_q_").style.display == "none")
-			    document.getElementById("review_wri_q_").style.display = "block";
-				else
-			    document.getElementById("review_wri_q_").style.display = "none";
-			}
-		</script> 
-				
-		<div id="detail_QnA_bottom">	
-			<div id="detail_QnA_nextNpre">
-				<table border="0" cellpadding="0" cellspacing="0" width="150px" style="margin:0 auto;margin-top:30px;">
-					<tr>
-						<td width="15px" style="text-align:center;"><a href="#">1</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">2</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">3</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">4</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">5</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">6</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">7</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">8</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">9</a></td>
-						<td width="15px" style="text-align:center;"><a href="#">10</a></td>
-						<td><a href="#"><img src="../img/next.jpg" width="15px" height="15px"></a></td>
-					</tr>
-				</table>
-			</div>
-				
-			<div id="detail_QnA_radio">
-				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">제목</label>
-				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">이름</label>
-				<input type="radio" id="detail_QnA_radioButton" name="QnA_search"><label class="radioSpace">내용</label>
-				<input type="text" id="QnAsearchBox">
-			</div>
-				
-			<div id="detail_QnA_Writer">
-				<input type="button" class="button" value="작성하기" onclick="QnAWrite()">
-			</div>
-		</div><!-- detail_QnA_bottom -->
 	</div>
 	<!-- detail_QnA -->
 		
@@ -1145,18 +1140,18 @@ $(document).ready(function(){
 		
 		<div id="recom_pro">
 			<p>추천 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<%int randomIdx=((int)(mgr_shop.getShoppingList().size()*Math.random()))-1;%>
+			<a href="detail.jsp?index=<%=mgr_shop.getShoppingList().get(randomIdx).getIndex()%>">
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShoppingList().get(randomIdx).getMainImg() %>"></div>
 			</a>
-
 		</div>
 		
 		<div id="google">
 			<p>광고 상품</p>
-			<a href="#">
-			<div id="view_product_link"></div>
+			<%randomIdx=((int)(mgr_shop.getShoppingList().size()*Math.random()))-1;%>
+			<a href="detail.jsp?index=<%=mgr_shop.getShoppingList().get(randomIdx).getIndex()%>">
+				<div id="view_product_link"><img width="100%" src="./newShopImg/<%=mgr_shop.getShoppingList().get(randomIdx).getMainImg() %>"></div>
 			</a>
-
 		</div>
 		
 		<div id="top" onclick="scrolling()">

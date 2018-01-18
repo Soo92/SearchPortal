@@ -10,8 +10,7 @@
 	if(flag){
 %>
 		<script>
-			alert("댓글이 등록 되었습니다.");
-			location.href(request.getHeader("REFERER"));
+			window.parent.location.href="./movie_home.jsp?index=<%=Bean.getIdx()%>&&num=2";
 		</script>
 <%
 	}else{

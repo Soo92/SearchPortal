@@ -147,25 +147,6 @@
 				<div class="best_score_info _bestPointHelp"></div>
 			</div>
 
-			<div id="orderCheckbox" class="top_behavior">
-				<ul class="sorting_list">
-					<li class="on"><a
-						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, 'ara.bysym', '', '', event); dislplayOrder('sympathyScore');">호감순</a></li>
-					<li><a
-						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, 'ara.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
-
-					<li><a
-						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, 'ara.high', '', '', event); dislplayOrder('highest');">평점
-							높은 순</a></li>
-					<li><a
-						href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-						onclick="parent.clickcr(this, 'ara.low', '', '', event); dislplayOrder('lowest');">평점
-							낮은 순</a></li>
-				</ul>
-			</div>
 			<div class="score_result">
 				<ul>
 					<%
@@ -174,7 +155,6 @@
 			        		 i++){
 					bean = vlist.get(i);
 					idx = bean.getPointnum();
-					bean = mgr.getPoint(idx);
 					int star = bean.getStar();
 					String redate = bean.getRedate();
 					int good = bean.getGood();
@@ -185,40 +165,24 @@
 					<li>
 						<div class="star_score">
 							<span class="st_off"><span class="st_on"
-								style="width:<%=star*10%>"></span></span><em><%=star %></em>
+								style="width:<%=star*10%>%"></span></span><em><%=star %></em>
 						</div>
 						<div class="score_reple">
 							<p>
-								<span class="ico_best">BEST</span><%=content %>
+								<%=content %>
 							</p>
 							<dl>
 								<dt>
-									<em> <a
-										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-										onclick="javascript:showPointListByNid(13418993, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;"
-										target="_top"> <span><%=writer %></span>
-									</a>
-									</em> <em><%=redate %></em>
+									<em><a href="" onclick="" target="_top"> <span><%=writer %></span></a></em> 
+									<em><%=redate %></em>
 								</dt>
-								<dd>
-									<a
-										href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-										onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','et45****', 'J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=', '진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 ', '13418993', 'point_after', true);return false;"
-										class="go_report2"><em>신고</em></a>
-								</dd>
 							</dl>
 						</div>
 						<div class="btn_area">
-							<a class="_sympathyButton"
-								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-								onclick="parent.clickcr(this, 'ara.sym', '', '', event);"><span
-								class="blind">공감</span></a><strong><span
-								class="sympathy_13418993 count"><%=good %></span></strong> <a
-								class="_notSympathyButton"
-								href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
-								onclick="parent.clickcr(this, 'ara.opp', '', '', event);"><span
-								class="blind">비공감</span></a><strong><span
-								class="notSympathy_13418993 count v2"><%=bad %></span></strong>
+							<a class="_sympathyButton" href="" onclick=""><span class="blind">공감</span></a>
+							<strong><span class="sympathy_13418993 count"><%=good %></span></strong>
+							<a class="_notSympathyButton" href="" onclick=""><span class="blind">비공감</span></a>
+							<strong> <span class="notSympathy_13418993 count v2"><%=bad %></span></strong>
 						</div>
 					</li>
 					<%}%>
@@ -282,9 +246,11 @@
 					<a id="pagerTagAnchor11" href="javascript:block('<%=nowBlock+1%>')" title="다음" class="pg_next" onclick=""><em>다음</em></a>
 				<%}} %>
 			<form name="readFrm">
+				<input type="hidden" name="index" value="<%=index%>">
 				<input type="hidden" name="totalRecord" value="<%=totalRecord%>">
 				<input type="hidden" name="nowPage" value="<%=nowPage%>">
-			</form>				</div>
+			</form>				
+			</div>
 			</div>
 		</div>
 	</div>

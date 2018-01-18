@@ -57,13 +57,9 @@
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513590475617"></div><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513590336306"></div><script src="./movie_home_files/splugin.js(1).다운로드" charset="utf-8"></script><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513589908074"></div>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="imagetoolbar" content="no">
-<title><%=title%> : 바코드 영화</title>
-<link rel="shortcut icon" href="http://static.naver.net/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
+<title><%=title==null?"home":title%> : 바코드 영화</title>
 <link rel="stylesheet" type="text/css" href="./movie_detail_files/movie.all.css">
 <link rel="stylesheet" type="text/css" href="../css/gnb_style.css">
-<link type="text/css" rel="stylesheet" href="http://common.like.naver.com/static20171214180606/css/desktop/likeit_movie.css" charset="utf-8">
-<link type="text/css" rel="stylesheet" href="http://common.like.naver.com/static20171214180606/css/desktop/likeit.css" charset="utf-8">
-<link type="text/css" rel="stylesheet" href="http://static.cbox.naver.net/20171215141921/css/comment_movie.css" charset="utf-8">
 <script type="text/javascript">
 function logi(){
 	if (confirm("바코드 로그인 후 이용해주시기 바랍니다.") == true){    //확인
@@ -112,33 +108,13 @@ function delayed_submit(object) {
 		<div class="gnb_box">
 			<div class="gnb_wrap">
 <%if(id == null || id.equals("")){%>
-				<div id="gnb" class="gnb_dark_type2"> <strong class="blind">사용자 링크</strong> <ul class="gnb_lst" id="gnb_lst" style="display: block;"> <li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li> <iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 320px; height: 174px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource.html"></iframe></li> <li class="gnb_notice_li gnb_lyr_opened" id="gnb_notice_layer" style="display: none"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a> <div class="gnb_notice_lyr" id="gnb_notice_lyr"> <div class="svc_noti svc_panel"> <div class="svc_scroll"> <div class="svc_head"> <strong class="gnb_tit">전체 알림</strong> <div class="task_right"> <button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button> <button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button> </div> </div> <div class="svc_body" id="gnb_naverme_layer"></div> </div> <div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"> <p class="gnb_msg"> <strong>알림을 모두 삭제하시겠습니까?</strong> </p> <div class="gnb_btns"> <button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button> <button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button> </div> <button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"> <i>레이어 닫기</i> </button> </div> <a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a> </div> </div> <iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource(1).html"></iframe></li> <li class="mail_li" id="gnb_mail_layer" style="display: none"><a href="http://mail.naver.com/" class="gnb_mail"><span class="blind">메일</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li> </ul>
+				<div id="gnb" class="gnb_dark_type2"> <strong class="blind">사용자 링크</strong> <ul class="gnb_lst" id="gnb_lst" style="display: block;"> <li class="gnb_login_li" id="gnb_login_layer" style="display: inline-block;"><a class="gnb_btn_login" href="../member/login.jsp" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li> <iframe id="gnb_my_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 320px; height: 174px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource.html"></iframe></li> <li class="gnb_notice_li gnb_lyr_opened" id="gnb_notice_layer" style="display: none"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count"></span></span></em><span class="ico_arrow"></span></a> <div class="gnb_notice_lyr" id="gnb_notice_lyr"> <div class="svc_noti svc_panel"> <div class="svc_scroll"> <div class="svc_head"> <strong class="gnb_tit">전체 알림</strong> <div class="task_right"> <button onclick="gnbbarcodeMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button> <button onclick="gnbbarcodeMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button> </div> </div> <div class="svc_body" id="gnb_barcodeme_layer"></div> </div> <div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"> <p class="gnb_msg"> <strong>알림을 모두 삭제하시겠습니까?</strong> </p> <div class="gnb_btns"> <button id="ly_alert_confirm" onclick="gnbbarcodeMeLayer.deleteAllList(this, event);">확인</button> <button onclick="gnbbarcodeMeLayer.hideDeleteAlert();">취소</button> </div> <button class="gnb_btn_close" onclick="gnbbarcodeMeLayer.hideDeleteAlert();"> <i>레이어 닫기</i> </button> </div> <a href="http://me.barcode.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a> </div> </div> <iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top: 34px; right: -4px; width: 299px; height: 332px; display: none; opacity: 0; -ms-filter: alpha(opacity = 0)" src="../img/movie/saved_resource(1).html"></iframe></li> <li class="mail_li" id="gnb_mail_layer" style="display: none"><a href="http://mail.barcode.com/" class="gnb_mail"><span class="blind">메일</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_mail_menu" style="display: none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_mail_count"></span></span></em></a></li> </ul>
 				</div>
 <%}else{%>
-				<div id="gnb" class="gnb_dark_type2"><strong class="blind">사용자 링크</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.naver.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.naver.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="mypage()"><img id="gnb_profile_img" src="http://static.naver.net/common/myarea/myInfo.gif" width="26" height="26" alt="내 프로필 이미지" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1"><%=name %></span><em class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a href="#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="http://static.naver.net/common/myarea/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">프로필 사진 변경</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.naver.com/user2/api/naverProfile.nhn?m=checkIdType"><%=name %></a>님</span><a class="gnb_btn_login" href="../member/logout.jsp"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그아웃</span></a></p><a href="http://mail.naver.com" class="gnb_mail_address"><%=email %></a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.naver.com/user2/help/myInfo.nhn?menu=home">내정보</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>B Pay</em><a href="http://pay.naver.com" id="gnb_pay_point"><span>내 페이포인트</span><strong>63,035원</strong></a></p></div></div><a href="#" class="gnb_my_interface" style="display:none"><span class="blind">환경설정</span></a></div></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">전체 알림</strong><div class="task_right"><button onclick="gnbNaverMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button><button onclick="gnbNaverMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button></div></div><div class="svc_body" id="gnb_naverme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>알림을 모두 삭제하시겠습니까?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbNaverMeLayer.deleteAllList(this, event);">확인</button><button onclick="gnbNaverMeLayer.hideDeleteAlert();">취소</button></div><button class="gnb_btn_close" onclick="gnbNaverMeLayer.hideDeleteAlert();"><i>레이어 닫기</i></button></div><a href="http://me.naver.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a></div></div><iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li><li class="gnb_service_li" id="gnb_service_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_service" onclick="service(); return false;"><span class="blind">서비스 더보기</span><span class="gnb_icon"></span><span class="ico_arrow"></span></a><div class="gnb_service_lyr" id="gnb_service_lyr"><div class="gnb_favorite_search" id="gnb_favorite_search"><div class="gnb_favorite_area"><div class="gnb_favorite_lstwrp"><div class="gnb_first_visit" style="display:none"><span class="blind">나만의 즐겨찾기를 추가해 보세요!</span><a href="#" class="gnb_close"><span class="blind">닫기</span></a></div><strong class="blind">즐겨찾는 서비스</strong><ul class="gnb_favorite_lst" id="gnb_favorite_lst"><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li></ul><a href="#" class="gnb_my_interface" onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span class="blind">즐겨찾기 설정</span></a></div></div><div class="gnb_search_area"><div class="gnb_search_box" onmouseover="gnb_search.mouseOver(this);" onmouseout="gnb_search.mouseOut(this);"><input id="gnb_svc_search_input" type="text" title="서비스 검색" value="더 많은 서비스를 간편하게 시작하세요!" onfocus="gnb_search.clearInput(this);" onblur="gnb_search.resetInput(this);" onkeydown="gnb_search.keyDown(event);" onkeyup="gnb_search.keyUp(event);"><a href="#" class="gnb_del_txt" id="gnb_del_txt" style="display:none"><span class="blind">삭제</span></a><div class="gnb_pop_input" id="gnb_pop_input" tabindex="0" onfocus="gnb_search.searchPopOnMouse = true; return false;" onfocusout="gnb_search.searchPopOnMouse = false; return false;" onmouseover="gnb_search.searchPopOnMouse = true; return false;" onmouseout="gnb_search.searchPopOnMouse = false; return false;" style="display:none"><ul class="gnb_pop_lst"></ul></div></div><div class="gnb_search_lstwrp"><ul class="gnb_search_lst gnb_first"><li class="gnb_first"><a href="http://cafe.naver.com/">카페</a></li><li><a href="http://news.naver.com/">뉴스</a></li><li><a href="http://map.naver.com/">지도</a></li><li><a href="http://sports.news.naver.com/">스포츠</a></li><li><a href="http://game.naver.com/">게임</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://section.blog.naver.com/">블로그</a></li><li><a href="http://post.naver.com/main.nhn">포스트</a></li><li><a href="http://dic.naver.com/">사전</a></li><li><a href="http://kin.naver.com/">지식iN</a></li><li><a href="http://weather.naver.com/">날씨</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://mail.naver.com/">메일</a></li><li><a href="http://stock.naver.com/">증권</a></li><li><a href="http://land.naver.com/">부동산</a></li><li><a href="http://music.naver.com/">뮤직</a></li><li><a href="http://book.naver.com">책</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://shopping.naver.com/">쇼핑</a></li><li><a href="http://comic.naver.com/">웹툰</a></li><li><a href="./movie_home.jsp">영화</a></li><li><a href="http://cloud.naver.com/">클라우드</a></li><li><a href="http://auto.naver.com/">자동차</a></li></ul></div></div><div class="gnb_banner"><a href="http://campaign.naver.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="바코드페이 | 12월 이벤트" width="265" height="47" src="http://static.naver.net/common/gnb/banner/promo_npay_1712.png"></a></div><div class="gnb_linkwrp"><a href="http://www.naver.com/more.html" class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a></div></div><div class="gnb_svc_more" id="gnb_svc_more" style="display: none;"><strong class="blind">바코드 주요 서비스</strong><div class="gnb_bg_top"></div><div class="gnb_svc_hd"><strong class="gnb_svc_tit">바로가기 설정</strong><span class="link"><a href="http://www.naver.com/more.html">전체 서비스 보기</a></span></div><div class="gnb_svc_lstwrp"><div class="gnb_svc_lst1"><ul class="gnb_first"><li><input type="checkbox" id="nsvc_game" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_game">게임</label></li><li><input type="checkbox" id="nsvc_weather" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_weather">날씨</label></li><li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">바코드쇼핑</label></li><li><input type="checkbox" id="nsvc_navercast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navercast">바코드캐스트</label></li><li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">바코드클라우드</label></li><li class="gnb_event"><input type="checkbox" id="nsvc_naverpay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_naverpay">바코드페이</label><em class="ic_gnb_new">New</em></li><li><input type="checkbox" id="nsvc_news" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_news">뉴스</label></li><li><input type="checkbox" id="nsvc_comic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_comic">만화/웹툰</label></li><li><input type="checkbox" id="nsvc_memo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_memo">메모</label></li><li><input type="checkbox" id="nsvc_mail" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_mail">메일</label></li><li><input type="checkbox" id="nsvc_music" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_music">뮤직</label></li><li><input type="checkbox" id="nsvc_land" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_land">부동산</label></li><li><input type="checkbox" id="nsvc_bookmark" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_bookmark">북마크</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_blog" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_blog">블로그</label></li><li><input type="checkbox" id="nsvc_dic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dic">사전</label></li><li><input type="checkbox" id="nsvc_software" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_software">소프트웨어</label></li><li><input type="checkbox" id="nsvc_sports" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_sports">스포츠</label></li><li><input type="checkbox" id="nsvc_ya9" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_ya9">야구9단</label></li><li><input type="checkbox" id="nsvc_movie" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_movie">영화</label></li><li><input type="checkbox" id="nsvc_office" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_office">오피스</label></li><li><input type="checkbox" id="nsvc_novel" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_novel">웹소설</label></li><li><input type="checkbox" id="nsvc_auto" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_auto">자동차</label></li><li><input type="checkbox" id="nsvc_contact" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_contact">주소록</label></li><li><input type="checkbox" id="nsvc_finance" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_finance">증권(금융)</label></li><li><input type="checkbox" id="nsvc_map" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_map">지도</label></li><li><input type="checkbox" id="nsvc_kin" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_kin">지식iN</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_terms" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_terms">지식백과</label></li><li><input type="checkbox" id="nsvc_book" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_book">책</label></li><li><input type="checkbox" id="nsvc_cafe" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cafe">카페</label></li><li><input type="checkbox" id="nsvc_calendar" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_calendar">캘린더</label></li><li><input type="checkbox" id="nsvc_photo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_photo">포토갤러리</label></li><li><input type="checkbox" id="nsvc_nstore" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_nstore">N스토어</label></li><li><input type="checkbox" id="nsvc_navertv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_navertv">바코드TV</label></li></ul></div><div class="svc_lst2"><div class="svc_spc gnb_first"><strong><a href="http://dic.naver.com/">어학사전</a></strong><ul class=""><li><input type="checkbox" id="nsvc_krdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_krdic">국어사전</label></li><li><input type="checkbox" id="nsvc_endic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_endic">영어/영영사전</label></li><li><input type="checkbox" id="nsvc_hanja" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_hanja">한자사전</label></li><li><input type="checkbox" id="nsvc_jpdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_jpdic">일어사전</label></li><li><input type="checkbox" id="nsvc_cndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cndic">중국어사전</label></li><li><input type="checkbox" id="nsvc_frdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_frdic">프랑스어사전</label></li><li><input type="checkbox" id="nsvc_dedic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dedic">독일어사전</label></li><li><input type="checkbox" id="nsvc_rudic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_rudic">러시아어사전</label></li><li><input type="checkbox" id="nsvc_vndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_vndic">베트남어사전</label></li><li><input type="checkbox" id="nsvc_spdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_spdic">스페인어사전</label></li><li><input type="checkbox" id="nsvc_translate" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_translate">번역기</label></li></ul></div><div class="svc_spc"><strong>인기/신규서비스</strong><ul class=""><li><input type="checkbox" id="nsvc_grafolio" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_grafolio">그라폴리오</label></li><li><input type="checkbox" id="nsvc_post" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_post">포스트</label></li><li><input type="checkbox" id="nsvc_luncherapp" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_luncherapp">도돌런처</label></li><li><input type="checkbox" id="nsvc_band" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_band">밴드</label></li><li><input type="checkbox" id="nsvc_line" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_line">라인</label></li></ul></div></div></div><div class="svc_btnwrp"><div class="svc_btns"><button class="gnb_save" onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;"><strong class="blind">확인</strong></button><button class="gnb_close" onclick="gnbFavorite.cancel(); return false;"><span class="blind">취소</span></button><button class="gnb_return" onclick="gnbFavorite.resetService(); return false;"><span class="blind">초기 설정으로 변경</span></button></div></div><div class="gnb_bg_btm"></div></div></div><iframe id="gnb_service_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:297px;width:585px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe><iframe id="gnb_svc_more_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:-4px;width:295px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li></ul>
+				<div id="gnb" class="gnb_dark_type2"><strong class="blind">사용자 링크</strong><ul class="gnb_lst" id="gnb_lst" style="display: block;"><li class="gnb_login_li" id="gnb_login_layer" style="display: none;"><a class="gnb_btn_login" href="https://nid.barcode.com/nidlogin.login" id="gnb_login_button"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그인</span></a></li><li class="gnb_my_li" id="gnb_my_layer" style="display: inline-block;"><div class="gnb_my_namebox" id="gnb_my_namebox" style="background-image: url(&quot;http://static.barcode.net/common/gnb/2014/ico_arrow_wh.gif&quot;);"><a href="javascript:;" class="gnb_my" onclick="mypage()"><img id="gnb_profile_img" src="http://static.naver.net/common/myarea/myInfo.gif" width="26" height="26" alt="내 프로필 이미지" style="display: inline-block;"><span id="gnb_profile_filter_mask" class="filter_mask" style="display: inline-block;"></span> <span class="gnb_name" id="gnb_name1"><%=name %></span><em class="blind">내정보 보기</em><span class="ico_arrow"></span></a><a href="#" class="gnb_emp" id="gnb_emp" style="display: none;">(임직원혜택)</a></div><div class="gnb_my_lyr" id="gnb_my_lyr"><div class="gnb_my_content"><div class="gnb_img_area"><span class="gnb_mask"></span><img src="http://static.naver.net/common/myarea/myInfo.gif" width="80" height="80" alt=""><a href="https://nid.barcode.com/user2/api/barcodeProfile.nhn?m=checkIdType" class="gnb_change"><span class="blind">프로필 사진 변경</span></a></div><div class="gnb_txt_area"><p class="gnb_account"><span class="gnb_name" id="gnb_name2"><a class="gnb_nick" href="https://nid.barcode.com/user2/api/barcodeProfile.nhn?m=checkIdType"><%=name %></a>님</span><a class="gnb_btn_login" href="../member/logout.jsp"><span class="gnb_bg"></span><span class="gnb_bdr"></span><span class="gnb_txt">로그아웃</span></a></p><a href="http://mail.barcode.com" class="gnb_mail_address"><%=email %></a><ul class="gnb_edit_lst"><li class="gnb_info"><a href="https://nid.barcode.com/user2/help/myInfo.nhn?menu=home">내정보</a></li></ul><p class="gnb_pay_check" id="gnb_pay_check"><em>B Pay</em><a href="http://pay.barcode.com" id="gnb_pay_point"><span>내 페이포인트</span><strong>63,035원</strong></a></p></div></div><a href="#" class="gnb_my_interface" style="display:none"><span class="blind">환경설정</span></a></div></li><li class="gnb_notice_li" id="gnb_notice_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_notice" onclick="alarm(); return false;"><span class="blind">알림</span><span class="gnb_icon"></span><em class="gnb_ico_num" id="gnb_me_menu" style="display:none"><span class="gnb_ico_new"><span class="gnb_count" id="gnb_me_count" style="display: inline-block;"></span></span></em><span class="ico_arrow"></span></a><div class="gnb_notice_lyr" id="gnb_notice_lyr"><div class="svc_noti svc_panel"><div class="svc_scroll"><div class="svc_head"><strong class="gnb_tit">전체 알림</strong><div class="task_right"><button onclick="gnbbarcodeMeLayer.deleteReadList(this, event);" id="gnb_btn_read_noti_del">읽은 알림 삭제</button><button onclick="gnbbarcodeMeLayer.showDeleteAlert();" id="gnb_btn_all_noti_del">모두 삭제</button></div></div><div class="svc_body" id="gnb_barcodeme_layer"></div></div><div class="gnb_ly_alert" id="gnb_ly_alert" style="display: none;"><p class="gnb_msg"><strong>알림을 모두 삭제하시겠습니까?</strong></p><div class="gnb_btns"><button id="ly_alert_confirm" onclick="gnbbarcodeMeLayer.deleteAllList(this, event);">확인</button><button onclick="gnbbarcodeMeLayer.hideDeleteAlert();">취소</button></div><button class="gnb_btn_close" onclick="gnbbarcodeMeLayer.hideDeleteAlert();"><i>레이어 닫기</i></button></div><a href="http://me.barcode.com/box/noti.nhn" class="gnb_notice_all">내 알림 전체보기</a></div></div><iframe id="gnb_notice_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="top:34px;right:-4px;width:299px;height:332px;display:none;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li><li class="gnb_service_li" id="gnb_service_layer" style="display: inline-block;"><a href="javascript:;" class="gnb_service" onclick="service(); return false;"><span class="blind">서비스 더보기</span><span class="gnb_icon"></span><span class="ico_arrow"></span></a><div class="gnb_service_lyr" id="gnb_service_lyr"><div class="gnb_favorite_search" id="gnb_favorite_search"><div class="gnb_favorite_area"><div class="gnb_favorite_lstwrp"><div class="gnb_first_visit" style="display:none"><span class="blind">나만의 즐겨찾기를 추가해 보세요!</span><a href="#" class="gnb_close"><span class="blind">닫기</span></a></div><strong class="blind">즐겨찾는 서비스</strong><ul class="gnb_favorite_lst" id="gnb_favorite_lst"><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li><li class="gnb_add"><a href="#"><span class="ic_add"></span>추가</a></li></ul><a href="#" class="gnb_my_interface" onclick="gnbMoreLayer.clickToggleWhole(); return false;"><span class="blind">즐겨찾기 설정</span></a></div></div><div class="gnb_search_area"><div class="gnb_search_box" onmouseover="gnb_search.mouseOver(this);" onmouseout="gnb_search.mouseOut(this);"><input id="gnb_svc_search_input" type="text" title="서비스 검색" value="더 많은 서비스를 간편하게 시작하세요!" onfocus="gnb_search.clearInput(this);" onblur="gnb_search.resetInput(this);" onkeydown="gnb_search.keyDown(event);" onkeyup="gnb_search.keyUp(event);"><a href="#" class="gnb_del_txt" id="gnb_del_txt" style="display:none"><span class="blind">삭제</span></a><div class="gnb_pop_input" id="gnb_pop_input" tabindex="0" onfocus="gnb_search.searchPopOnMouse = true; return false;" onfocusout="gnb_search.searchPopOnMouse = false; return false;" onmouseover="gnb_search.searchPopOnMouse = true; return false;" onmouseout="gnb_search.searchPopOnMouse = false; return false;" style="display:none"><ul class="gnb_pop_lst"></ul></div></div><div class="gnb_search_lstwrp"><ul class="gnb_search_lst gnb_first"><li class="gnb_first"><a href="http://cafe.barcode.com/">카페</a></li><li><a href="http://news.barcode.com/">뉴스</a></li><li><a href="http://map.barcode.com/">지도</a></li><li><a href="http://sports.news.barcode.com/">스포츠</a></li><li><a href="http://game.barcode.com/">게임</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://section.blog.barcode.com/">블로그</a></li><li><a href="http://post.barcode.com/main.nhn">포스트</a></li><li><a href="http://dic.barcode.com/">사전</a></li><li><a href="http://kin.barcode.com/">지식iN</a></li><li><a href="http://weather.barcode.com/">날씨</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://mail.barcode.com/">메일</a></li><li><a href="http://stock.barcode.com/">증권</a></li><li><a href="http://land.barcode.com/">부동산</a></li><li><a href="http://music.barcode.com/">뮤직</a></li><li><a href="http://book.barcode.com">책</a></li></ul><ul class="gnb_search_lst"><li class="gnb_first"><a href="http://shopping.barcode.com/">쇼핑</a></li><li><a href="http://comic.barcode.com/">웹툰</a></li><li><a href="./movie_home.jsp">영화</a></li><li><a href="http://cloud.barcode.com/">클라우드</a></li><li><a href="http://auto.barcode.com/">자동차</a></li></ul></div></div><div class="gnb_banner"><a href="http://campaign.barcode.com/pointevent/" class="gnb_service_event"><img id="gnb_promo" alt="바코드페이 | 12월 이벤트" width="265" height="47" src="http://static.barcode.net/common/gnb/banner/promo_npay_1712.png"></a></div><div class="gnb_linkwrp"><a href="http://www.barcode.com/more.html" class="gnb_service_all" id="gnb_service_all">전체 서비스 보기</a></div></div><div class="gnb_svc_more" id="gnb_svc_more" style="display: none;"><strong class="blind">바코드 주요 서비스</strong><div class="gnb_bg_top"></div><div class="gnb_svc_hd"><strong class="gnb_svc_tit">바로가기 설정</strong><span class="link"><a href="http://www.barcode.com/more.html">전체 서비스 보기</a></span></div><div class="gnb_svc_lstwrp"><div class="gnb_svc_lst1"><ul class="gnb_first"><li><input type="checkbox" id="nsvc_game" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_game">게임</label></li><li><input type="checkbox" id="nsvc_weather" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_weather">날씨</label></li><li><input type="checkbox" id="nsvc_shopping" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_shopping">바코드쇼핑</label></li><li><input type="checkbox" id="nsvc_barcodecast" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_barcodecast">바코드캐스트</label></li><li><input type="checkbox" id="nsvc_cloud" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cloud">바코드클라우드</label></li><li class="gnb_event"><input type="checkbox" id="nsvc_barcodepay" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_barcodepay">바코드페이</label><em class="ic_gnb_new">New</em></li><li><input type="checkbox" id="nsvc_news" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_news">뉴스</label></li><li><input type="checkbox" id="nsvc_comic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_comic">만화/웹툰</label></li><li><input type="checkbox" id="nsvc_memo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_memo">메모</label></li><li><input type="checkbox" id="nsvc_mail" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_mail">메일</label></li><li><input type="checkbox" id="nsvc_music" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_music">뮤직</label></li><li><input type="checkbox" id="nsvc_land" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_land">부동산</label></li><li><input type="checkbox" id="nsvc_bookmark" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_bookmark">북마크</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_blog" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_blog">블로그</label></li><li><input type="checkbox" id="nsvc_dic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dic">사전</label></li><li><input type="checkbox" id="nsvc_software" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_software">소프트웨어</label></li><li><input type="checkbox" id="nsvc_sports" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_sports">스포츠</label></li><li><input type="checkbox" id="nsvc_ya9" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_ya9">야구9단</label></li><li><input type="checkbox" id="nsvc_movie" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_movie">영화</label></li><li><input type="checkbox" id="nsvc_office" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_office">오피스</label></li><li><input type="checkbox" id="nsvc_novel" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_novel">웹소설</label></li><li><input type="checkbox" id="nsvc_auto" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_auto">자동차</label></li><li><input type="checkbox" id="nsvc_contact" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_contact">주소록</label></li><li><input type="checkbox" id="nsvc_finance" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_finance">증권(금융)</label></li><li><input type="checkbox" id="nsvc_map" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_map">지도</label></li><li><input type="checkbox" id="nsvc_kin" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_kin">지식iN</label></li></ul><ul class=""><li><input type="checkbox" id="nsvc_terms" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_terms">지식백과</label></li><li><input type="checkbox" id="nsvc_book" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_book">책</label></li><li><input type="checkbox" id="nsvc_cafe" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cafe">카페</label></li><li><input type="checkbox" id="nsvc_calendar" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_calendar">캘린더</label></li><li><input type="checkbox" id="nsvc_photo" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_photo">포토갤러리</label></li><li><input type="checkbox" id="nsvc_nstore" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_nstore">N스토어</label></li><li><input type="checkbox" id="nsvc_barcodetv" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_barcodetv">바코드TV</label></li></ul></div><div class="svc_lst2"><div class="svc_spc gnb_first"><strong><a href="http://dic.barcode.com/">어학사전</a></strong><ul class=""><li><input type="checkbox" id="nsvc_krdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_krdic">국어사전</label></li><li><input type="checkbox" id="nsvc_endic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_endic">영어/영영사전</label></li><li><input type="checkbox" id="nsvc_hanja" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_hanja">한자사전</label></li><li><input type="checkbox" id="nsvc_jpdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_jpdic">일어사전</label></li><li><input type="checkbox" id="nsvc_cndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_cndic">중국어사전</label></li><li><input type="checkbox" id="nsvc_frdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_frdic">프랑스어사전</label></li><li><input type="checkbox" id="nsvc_dedic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_dedic">독일어사전</label></li><li><input type="checkbox" id="nsvc_rudic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_rudic">러시아어사전</label></li><li><input type="checkbox" id="nsvc_vndic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_vndic">베트남어사전</label></li><li><input type="checkbox" id="nsvc_spdic" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_spdic">스페인어사전</label></li><li><input type="checkbox" id="nsvc_translate" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_translate">번역기</label></li></ul></div><div class="svc_spc"><strong>인기/신규서비스</strong><ul class=""><li><input type="checkbox" id="nsvc_grafolio" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_grafolio">그라폴리오</label></li><li><input type="checkbox" id="nsvc_post" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_post">포스트</label></li><li><input type="checkbox" id="nsvc_luncherapp" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_luncherapp">도돌런처</label></li><li><input type="checkbox" id="nsvc_band" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_band">밴드</label></li><li><input type="checkbox" id="nsvc_line" name="selmenu" class="gnb_input_check" value=""> <label for="nsvc_line">라인</label></li></ul></div></div></div><div class="svc_btnwrp"><div class="svc_btns"><button class="gnb_save" onclick="if(gnbFavorite.addService()){gnbMoreLayer.clickToggleWhole()} return false;"><strong class="blind">확인</strong></button><button class="gnb_close" onclick="gnbFavorite.cancel(); return false;"><span class="blind">취소</span></button><button class="gnb_return" onclick="gnbFavorite.resetService(); return false;"><span class="blind">초기 설정으로 변경</span></button></div></div><div class="gnb_bg_btm"></div></div></div><iframe id="gnb_service_lyr_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:297px;width:585px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe><iframe id="gnb_svc_more_iframe" title="빈 프레임" class="gnb_pad_lyr" name="padding" width="0" height="0" scrolling="no" frameborder="0" style="display:none;top:34px;right:-4px;width:295px;height:385px;opacity:0;-ms-filter:alpha(opacity=0)"></iframe></li></ul>
 				</div>
 <%}%>
 			</div>
-			<!-- 검색창 -->
-			<form id="jSearchForm" action="./movie_home.jspmovie/search/result.nhn" method="get" style="margin:0;display:none;">
-				<input type="text" name="query" maxlength="100" title="영화검색">
-				<input type="hidden" name="section" value="all">
-				<input type="hidden" name="ie" value="utf8">
-			</form>
-			<fieldset id="jSearchArea" class="srch_area">
-				<legend><span class="blind">영화검색 영역</span></legend>
-				<div class="srch_field_on _view">
-					<span class="ipt_srch">
-						<label for="ipt_tx_srch" id="search_placeholder">바코드로 영화검색</label>
-						<input type="text" id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100" accesskey="s" style="ime-mode:active;" autocomplete="off">
-						<span class="align"></span>
-						<span class="auto_tx"><a href="./movie_home.jsp#" title="자동완성 펼치기"><img src="../img/movie/srch_arrow_down.gif" width="7" height="4" title="자동완성 펼치기" alt="자동완성 펼치기"></a></span>
-					</span>
-					<button type="submit" title="검색" class="btn_srch" onclick="clickcr(this,'GNB.search','','',event); delayed_submit(this);"><span class="blind">검색</span></button>
-					 <!-- 자동 완성 영역임 #autocomplate_template-->
-				</div>
-			</fieldset>
-			<!-- //검색창 -->
 		</div>
 	</div>
 </div>
@@ -147,7 +123,7 @@ function delayed_submit(object) {
 <div id="header" style="bottom: 0px;">
 		<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#content" title="본문으로 이동" class="blind">본문 바로가기</a>
 		<h1 class="svc_name">
-			<a href="../index.jsp" title="barcodew로 바로가기" class="ci_logo" id="lnb_gonaver"><img src="../img/barcode_logo__.png" height="100%" alt="NAVER"></a><!-- N=a:LNB.naver -->
+			<a href="../index.jsp" title="barcodew로 바로가기" class="ci_logo" id="lnb_gobarcode"><img src="../img/barcode_logo__.png" height="100%" alt="barcode"></a><!-- N=a:LNB.barcode -->
 			<a href="./movie_home.jsp" title="영화서비스홈으로 바로가기" class="svc_logo"><img src="../img/movie/logo_svc.png" width="34" height="19" alt="영화"></a><!-- N=a:LNB.movie -->
 		</h1>		<div id="scrollbar" class="scrollbar" style="width: 148px; height: 891px;">
 			<div class="scrollbar-box" style="width: 148px; height: 891px;">
@@ -158,7 +134,7 @@ function delayed_submit(object) {
                             <a href="./movie_home.jsp" title="영화홈" class="menu01<%if(index==null&&cate==null){%>_on<%}%>"><strong>영화홈</strong></a><!-- N=a:LNB.home -->
                         </li>
                         <li>
-                            <a href="<%=request.getRequestURI()%>?cate=1" title="상영작·예정작" class="menu02<%if(cate!=null&&cate.equals("1")){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
+                            <a href="<%=request.getRequestURI()%>?cate=1" title="상영작·예정작" class="menu02<%if(cate!=null&&cate.equals("1")||cate==null&&index!=null){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
                             <ul class="navi_sub" id="navi_movie" style="display:<%if(index==null&&cate==null||cate!=null&&cate.equals("2")){%>none<%}%>;">
                             <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
                             <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if(pre!=null&&pre.equals("1")){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
@@ -331,7 +307,7 @@ function delayed_submit(object) {
 				</ul>
 			</div>
 		<div class="spi_area">
-			<div id="wideSpiLayer" class="naver-splugin" data-style="standard-v1-text" data-me-display="off" data-oninitialize="movie_oninitialize()" splugin-id="543426733"><div class="_ly_spi spi_default" style="display: block;">	<ul class="_spi_lst spi_lst">		<li class="_spi_blog spi_btn_blog"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="블로그 보내기" class="_spi_blog" target="_blank">블로그</a></li><li class="_spi_cafe spi_btn_cafe"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="카페 보내기" class="_spi_cafe" target="_blank">카페</a></li><li class="_spi_bookmark spi_btn_bookmark"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="북마크로 보내기" class="_spi_bookmark" target="_blank">북마크</a></li><li class="_spi_memo spi_btn_memo"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="메모 보내기" class="_spi_memo" target="_blank">메모</a></li><li class="_spi_pholar spi_btn_pholar"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="폴라 보내기" class="_spi_pholar" target="_blank">폴라</a></li><li class="_spi_release_cont _spi_release_btn spi_btn_release">	<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_spi_release " title="기타 보내기 펼치기"><span class="_spi_release spi_bg_release"></span>보내기<em class="_spi_release " style="display: block"></em></a></li>	</ul>	<div class="_spi_ly_bmk_ok spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">북마크 되었습니다.<br> <a href="http://me.naver.com/tab/bookmark.nhn" target="_blank" class="_ly_bmk_ok_cls _ly_bmk_lnk spi_impact">바코드 북마크 가기</a></p>		<button class="_ly_bmk_ok_cls spi_close" type="button"><span class="_ly_bmk_ok_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_ok_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_cnf spi_ly_pop spi_ly_pop_v2" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">현재 북마크 되어 있습니다.<br>북마크를 해제하시겠습니까?</p>		<div class="spi_btn">			<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_ly_bmk_cnf_y spi_y " target="_blank"><span class="_ly_bmk_cnf_y"></span>예</a>			<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_ly_bmk_cnf_n spi_n " target="_blank"><span class="_ly_bmk_cnf_n"></span>아니오</a>		</div>		<button class="_ly_bmk_cnf_cls spi_close" type="button"><span class="_ly_bmk_cnf_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_cnf_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_err spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">서버 접속이 원활하지 않습니다.<br> 잠시 후 다시 시도해 주십시오.</p>		<button class="_ly_bmk_err_cls spi_close" type="button"><span class="_ly_bmk_err_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_err_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_ros spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">북마크 서비스 점검 중으로,<br>현재 북마크 읽기만 가능하오니<br>이용에 참고해 주시기 바랍니다.</p>		<button class="_ly_bmk_ros_cls spi_close" type="button"><span class="_ly_bmk_ros_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_ros_cls">X</em></button>	</div>	<div class="_spi_ly_pop spi_ly_pop ly_pop_v1" style="display:none;top: -82px; left: 136px; width: 213px">		<p class="_ly_pop spi_dsc">이  마음에 드셨다면<br><a href="http://me.naver.com/" target="_blank" class="_ly_pop_lnk _ly_pop spi_impact">바코드me</a>에서 편하게 받아보세요.</p>		<div class="_ly_pop spi_ico_arr "></div>	</div></div></div>
+			<div id="wideSpiLayer" class="barcode-splugin" data-style="standard-v1-text" data-me-display="off" data-oninitialize="movie_oninitialize()" splugin-id="543426733"><div class="_ly_spi spi_default" style="display: block;">	<ul class="_spi_lst spi_lst">		<li class="_spi_blog spi_btn_blog"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="블로그 보내기" class="_spi_blog" target="_blank">블로그</a></li><li class="_spi_cafe spi_btn_cafe"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="카페 보내기" class="_spi_cafe" target="_blank">카페</a></li><li class="_spi_bookmark spi_btn_bookmark"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="북마크로 보내기" class="_spi_bookmark" target="_blank">북마크</a></li><li class="_spi_memo spi_btn_memo"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="메모 보내기" class="_spi_memo" target="_blank">메모</a></li><li class="_spi_pholar spi_btn_pholar"><a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" title="폴라 보내기" class="_spi_pholar" target="_blank">폴라</a></li><li class="_spi_release_cont _spi_release_btn spi_btn_release">	<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_spi_release " title="기타 보내기 펼치기"><span class="_spi_release spi_bg_release"></span>보내기<em class="_spi_release " style="display: block"></em></a></li>	</ul>	<div class="_spi_ly_bmk_ok spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">북마크 되었습니다.<br> <a href="http://me.barcode.com/tab/bookmark.nhn" target="_blank" class="_ly_bmk_ok_cls _ly_bmk_lnk spi_impact">바코드 북마크 가기</a></p>		<button class="_ly_bmk_ok_cls spi_close" type="button"><span class="_ly_bmk_ok_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_ok_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_cnf spi_ly_pop spi_ly_pop_v2" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">현재 북마크 되어 있습니다.<br>북마크를 해제하시겠습니까?</p>		<div class="spi_btn">			<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_ly_bmk_cnf_y spi_y " target="_blank"><span class="_ly_bmk_cnf_y"></span>예</a>			<a href="file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html#" class="_ly_bmk_cnf_n spi_n " target="_blank"><span class="_ly_bmk_cnf_n"></span>아니오</a>		</div>		<button class="_ly_bmk_cnf_cls spi_close" type="button"><span class="_ly_bmk_cnf_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_cnf_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_err spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">서버 접속이 원활하지 않습니다.<br> 잠시 후 다시 시도해 주십시오.</p>		<button class="_ly_bmk_err_cls spi_close" type="button"><span class="_ly_bmk_err_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_err_cls">X</em></button>	</div>	<div class="_spi_ly_bmk_ros spi_ly_pop" style="display:none;left: -78px; top: 20px; width: 253px;">		<p class="spi_dsc">북마크 서비스 점검 중으로,<br>현재 북마크 읽기만 가능하오니<br>이용에 참고해 주시기 바랍니다.</p>		<button class="_ly_bmk_ros_cls spi_close" type="button"><span class="_ly_bmk_ros_cls" title="북마크 레이어 닫기"></span><em class="_ly_bmk_ros_cls">X</em></button>	</div>	<div class="_spi_ly_pop spi_ly_pop ly_pop_v1" style="display:none;top: -82px; left: 136px; width: 213px">		<p class="_ly_pop spi_dsc">이  마음에 드셨다면<br><a href="http://me.barcode.com/" target="_blank" class="_ly_pop_lnk _ly_pop spi_impact">바코드me</a>에서 편하게 받아보세요.</p>		<div class="_ly_pop spi_ico_arr "></div>	</div></div></div>
 		</div>
 	</div>
 	
@@ -455,7 +431,7 @@ function delayed_submit(object) {
 
 	<!-- 포스터 -->
 	<div class="poster">
-				<a><img src="./mainimg/movie_image<%=idx%>.jpg" alt="<%=title%>" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img203x290.png'"></a>
+				<a><img width=100% src="./mainimg/movie_image<%=idx%>.jpg" alt="<%=title%>" onerror="this.src='http://static.barcode.net/movie/2012/06/dft_img203x290.png'"></a>
 	</div>
 	<!-- //포스터 -->
 </div>
@@ -557,7 +533,7 @@ function delayed_submit(object) {
 								<dl>
 									<dt>
 										<em> <a
-											href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+											href="http://movie.barcode.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
 											onclick="javascript:showPointListByNid(13418993, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;"
 											target="_top"> <span><%=writer %></span>
 										</a>
@@ -565,7 +541,7 @@ function delayed_submit(object) {
 									</dt>
 									<dd>
 										<a
-											href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+											href="http://movie.barcode.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
 											onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','et45****', 'J1OP/gvXkRRgesQvv9qVnevMLmUhyx1ZipQmv8dsGPM=', '진자  사기꾼이네요ㅋㅋ 제가사기당한거같아요 ', '13418993', 'point_after', true);return false;"
 											class="go_report2"><em>신고</em></a>
 									</dd>
@@ -573,12 +549,12 @@ function delayed_submit(object) {
 							</div>
 							<div class="btn_area">
 								<a class="_sympathyButton"
-									href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+									href="http://movie.barcode.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
 									onclick="parent.clickcr(this, 'ara.sym', '', '', event);"><span
 									class="blind">공감</span></a><strong><span
 									class="sympathy_13418993 count"><%=good %></span></strong> <a
 									class="_notSympathyButton"
-									href="http://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
+									href="http://movie.barcode.com/movie/bi/mi/pointWriteFormList.nhn?code=152385&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false#"
 									onclick="parent.clickcr(this, 'ara.opp', '', '', event);"><span
 									class="blind">비공감</span></a><strong><span
 									class="notSympathy_13418993 count v2"><%=bad %></span></strong>
@@ -601,56 +577,25 @@ function delayed_submit(object) {
 					
 					<div>
 							<!-- N=a:mre.help -->
-						<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3" class="wrt_review"><em>리뷰쓰기</em></a><!-- N=a:mre.write -->
+						<a href="<%if(id==null){ %>../member/login.jsp<%}else{ %><%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1<%}%>" class="wrt_review"><em>리뷰쓰기</em></a><!-- N=a:mre.write -->
 					</div>
 				</div>
 					<div class="review_good ">
-						<div class="review_title">
-							<strong class="good"><em>좋아요</em></strong>
-							<em class="num_good">
-							<%for(int i=0; i<Integer.toString(mbean.getLike()).length(); i++) {%>
-							<span class="n<%=Integer.toString(mbean.getLike()).charAt(i)%>"><span class="blind"><%=Integer.toString(mbean.getLike()).charAt(i) %></span></span>
-							<%} %>
-							<span class="cnt"><span class="blind">명</span></span></em>
-						</div>
-						<ul class="rvw_list_area rvw_list_mv">
 			<%reviewlist = mmgr.getReviewList(idx); %>
-								<li>
-									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4578391"><strong>&lt;꾼&gt; 야 이 사기꾼들!!!! 내 두시간을!!!!</strong><em class="hot">HOT</em></a><!-- N=a:mre.title -->
-									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4578391">acts****</a><!-- N=a:mre.uid --> <em>2017.11.14</em><em><span>추천</span> 10</em></span>
-									<p><a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4578391">        꾼      감독   장창원   출연   현빈, 유지태, 배성우, 박성웅, 나나, 안세하   개봉   2017 대한민국   평점                         리뷰보기         20171114왕십리 CGV 8-C-11익무인나눔 시사회2.5/5 ‘희대...</a><!-- N=a:mre.content --></p>
-								</li>
-								<li>
-									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580360"><strong>[영화감상] <%=title%> (The Swindlers, 2017) </strong></a><!-- N=a:mre.title -->
-									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4580360">sakg****</a><!-- N=a:mre.uid --> <em>2017.11.22</em><em><span>추천</span> 9</em></span>
-									<p><a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580360">어제 저녁 퇴근길에 들려서 '대구 CGV'에서 보고 온 '꾼'입니다..벌써 개봉했어? 하시겟지만, '유료시사회'였다는 ㅋㅋㅋㅋ정식개봉은 오늘일듯 싶어요..원래 제가 이런 '사기꾼'나오는 영화들 좋아해서, 넘 보고싶었는데.....</a><!-- N=a:mre.content --></p>
-								</li>
-						</ul>
-							<span class="vs">VS</span>
-					</div>
-					<div class="review_bad">
 						<div class="review_title">
-							<strong class="bad"><em>글쎄요</em></strong>
-							
-							<em class="num_bad">
-							<%for(int i=0; i<Integer.toString(mbean.getLike()).length(); i++) {%>
-							<span class="n<%=Integer.toString(mbean.getLike()).charAt(i)%>"><span class="blind"><%=Integer.toString(mbean.getLike()).charAt(i) %></span></span>
+							<em class="num_good">
+							<%for(int i=0; i<Integer.toString(reviewlist.size()).length(); i++) {%>
+							<span class="n<%=Integer.toString(reviewlist.size()).charAt(i)%>"><span class="blind"><%=Integer.toString(mbean.getLike()).charAt(i) %></span></span>
 							<%} %>
 							<span class="cnt"><span class="blind">명</span></span></em>
 						</div>
 						<ul class="rvw_list_area rvw_list_mv">
-							
+			<% for(int i=0;i<(reviewlist.size()>5?5:reviewlist.size());i++){%>
 								<li>
-									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580778#tab"><strong><%=title%> : 유행(※사회비판)에 편승하느라 장르적 쾌감을 잃어버린 케이퍼 무비</strong><em class="hot">HOT</em></a>
-									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4580778">c106****</a> <em>2017.11.23</em><em><span>추천</span> 38</em></span>
-									<p><a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4580778#tab">장창원 감독 / 117분 / 15세 관람가현빈, 유지태, 배성우, 박성웅, 나나, 안세하..개인적인 평점 : 4점 (오락성 4점, 작품성 4점)     안녕하세요? 오늘은 어제(22일) 메가박스 북대구에서 관람하고 온 &lt;<%=title%>&gt; 이야기를...</a></p>
+									<a href="./movie_home.jsp?index=<%=idx %>&&num=3&&reviewnum=<%=reviewlist.get(i).getIdx()%>"><strong><%=reviewlist.get(i).getTitle() %></strong><em class="hot">HOT</em></a><!-- N=a:mre.title -->
+									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4578391"><%=reviewlist.get(i).getWriter() %></a><!-- N=a:mre.uid --> <em>2<%=reviewlist.get(i).getRegdate() %></em><em><span>추천</span> <%=reviewlist.get(i).getGood() %></em></span>
 								</li>
-							
-								<li>
-									<a href="./movie_home.jspmovie/bi/mi/reviewread.nhn?code=152385&amp;nid=4578736#tab"><strong>얼개가 꾸역꾸역 억지스러워요.</strong></a>
-									<span class="user"><a href="./movie_home.jspmovie/board/review/list.nhn?st=nickname&amp;sword=4578736">alho****</a> <em>2017.11.16</em><em><span>추천</span> 15</em></span>
-									<p><a href="./movie_home.jsp">반전이 있을 거란 예감이 계속 드는데 그걸 위한 복선이 너무 찌질찌질해요.범죄의 재구성처럼 연출에서 긴박감이 더 있었으면 좋았을 거 같아요. 아니면 반전을 납득할만한 개연성이 있던가요. 모든 얼개가 잘 안 맞아 떨...</a></p>
-								</li>
+			<%} %>
 						</ul>
 					</div>
 			</div>
@@ -677,23 +622,10 @@ function delayed_submit(object) {
 					<div class="review">
 						<div class="title_area">
 							<h4 class="h_review"><strong class="blind">리뷰</strong></h4>
-							<a href= "<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1" class="wrt_review" onclick="clickcr(this, 'rli.write', '', '', event); goWrite(); return false;"><em>리뷰쓰기</em></a>
+							<a href= "<%if(id==null){ %>../member/login.jsp<%}else{ %><%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1<%}%>" class="wrt_review" onclick=""><em>리뷰쓰기</em></a>
 						</div>
 						<div class="top_behavior">
 							<span class="cnt">총<em><%=reviewlist.size() %></em>건</span>
-							<ul class="quarter_mode">
-								<li>
-									<div class="align_latest">
-										<a href="#" id="orderButton" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event);">추천순<span></span></a>
-										<div class="ly_lastest ly_lastest2" id="orderLayer" style="display:none">
-											<ul>
-												<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrcm', '', '', event); dislplayOrder('goodcnt');">추천순</a></li>
-												<li><a href="#" class="_reviewOrder" onclick="clickcr(this, 'rli.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
-											</ul>
-										</div>
-									</div>
-								</li>
-							</ul>
 						</div>
 						<ul class="rvw_list_area">
 <%for(int i=0; i<reviewlist.size();i++) {
@@ -712,14 +644,6 @@ String rwriter = rbean.getWriter();
 									<span class="user"><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><%=rwriter %></a> <em><%=rregdate %></em><em>추천 <%=rgood %></em></span>
 								</li>
 <%} %>							</ul>
-						<div class="paging">
-							<div>
-<%for(int i=0;i<reviewlist.size()/10+1;i++) {%>
-								<a id="pagerTagAnchor<%=i+1%>" href="/movie/bi/mi/review.nhn?code=152385&amp;page=<%=i+1%>" onclick="clickcr(this, 'rli.page', '', '', event);"><span class="on"><%=i+1%></span></a>
-<%}%>
-								<a id="pagerTagAnchor2" href="/movie/bi/mi/review.nhn?code=152385&amp;page=2" title="다음" class="pg_next" onclick="clickcr(this, 'rli.page', '', '', event);"><em>다음</em></a>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -764,216 +688,17 @@ String rwriter = rbean.getWriter();
 <%=rcontent %>
 				</div>
 				<div class="from_blog">
-					<a href="javascript:recommend(4580943);" class="btn_recomm2"><em class="blind">추천하기</em></a><!-- N=a:rvi.recomd -->
+					<a href="" class="btn_recomm2"><em class="blind">추천하기</em></a><!-- N=a:rvi.recomd -->
 					<p class="ly_recomm" id="recommend_success" style="display:none"><span></span>추천하였습니다.</p>
 				</div>
 			</div>
 			<!-- <div class="ifr_module">
 				<iframe id="reviewCommentIframe" name="reviewCommentIframe" width="100%" frameborder="0" scrolling="no" class="ifr" height="300"></iframe>
 			</div> -->
-
-						<div id="cbox_module" class="u_cbox">
-							<div class="u_cbox_wrap u_cbox_ko">
-								<div class="u_cbox_head">
-									<h5 class="u_cbox_title">댓글</h5>
-									<span class="u_cbox_count"><%=relist.size() %></span>
-									<div class="u_cbox_head_tools"></div>
-								</div>
-<%if(id == null || id.equals("")){%>
-								<div class="u_cbox_write_wrap"><div class="u_cbox_write_box u_cbox_type_logged_out"><form><fieldset><legend class="u_vc">댓글 쓰기</legend><div class="u_cbox_write"><div class="u_cbox_write_inner"><div class="u_cbox_write_area"><strong class="u_vc">댓글 입력</strong><div class="u_cbox_inbox"><textarea id="cbox_module__write_textarea" class="u_cbox_text" rows="3" cols="30"></textarea><label onclick="logi()" class="u_cbox_guide" data-action="write#placeholder" data-param="@event">주제와 무관한 댓글, 악플은 삭제될 수 있습니다.</label></div></div><div class="u_cbox_upload_image" style="display:none"><span class="u_cbox_upload_image_wrap fileButton browsebutton _cboxImageSelect"><span class="u-cbox-browse-box"><input class="u-cbox-browse-file-input" type="file" name="browse" accept="image/*" title="이미지 추가"></span><a href="#" class="u_cbox_upload_thumb_link u-cbox-browse-button" data-log="RPP.add"><span class="u_cbox_upload_thumb_add">이미지 추가</span><span class="u_cbox_upload_thumb_mask"></span></a></span></div><div class="u_cbox_upload_sticker" style="display:none"></div><div class="u_cbox_write_count"><span class="u_vc">현재 입력한 글자수</span><strong class="u_cbox_count_num">0</strong>/<span class="u_vc">현재 입력한 글자수</span><span class="u_cbox_write_total">500</span></div><div class="u_cbox_upload"><div class="u_cbox_addition"></div><button type="button" class="u_cbox_btn_upload" data-action="write#request" data-log="RPC.write#RPC.reply"><span class="u_cbox_ico_upload"></span><span class="u_cbox_txt_upload">등록</span></button></div></div></div></fieldset></form></div></div>
-<%}else{ %>
-								<div class="u_cbox_write_wrap"> <div class="u_cbox_write_box u_cbox_type_logged_in"> <form> <fieldset> <legend class="u_vc">댓글 쓰기</legend> <div class="u_cbox_write"> <div class="u_cbox_write_inner"> <div class="u_cbox_profile_area"> <div class="u_cbox_profile"> <strong class="u_vc">로그인 정보</strong> <div class="u_cbox_box_name"> <span class="u_cbox_write_name">수수</span> </div> </div> </div> <div class="u_cbox_write_area"> <strong class="u_vc">댓글 입력</strong> <div class="u_cbox_inbox"> <textarea id="cbox_module__write_textarea" class="u_cbox_text" rows="3" cols="30"></textarea> <label for="cbox_module__write_textarea" class="u_cbox_guide" data-action="write#placeholder" data-param="@event" style="">주제와 무관한 댓글, 악플은 삭제될 수 있습니다.</label> </div> </div> <div class="u_cbox_upload_image" style="display: none"> <span class="u_cbox_upload_image_wrap fileButton browsebutton _cboxImageSelect"><span class="u-cbox-browse-box"><input class="u-cbox-browse-file-input" type="file" name="browse" accept="image/*" title="이미지 추가"></span><a href="#" class="u_cbox_upload_thumb_link u-cbox-browse-button" data-log="RPP.add"><span class="u_cbox_upload_thumb_add">이미지 추가</span><span class="u_cbox_upload_thumb_mask"></span></a></span> </div> <div class="u_cbox_upload_sticker" style="display: none"></div> <div class="u_cbox_write_count"> <span class="u_vc">현재 입력한 글자수</span><strong class="u_cbox_count_num">0</strong>/<span class="u_vc">현재 입력한 글자수</span><span class="u_cbox_write_total">500</span> </div> <div class="u_cbox_upload"> <div class="u_cbox_addition"></div> <button type="button" class="u_cbox_btn_upload" data-action="write#request" data-log="RPC.write#RPC.reply"> <span class="u_cbox_ico_upload"></span><span class="u_cbox_txt_upload">등록</span> </button> </div> </div> </div> </fieldset> </form> </div> </div>
-<%} %>
-								<div class="u_cbox_notice u_cbox_notice_none"
-									style="display: none;"></div>
-								<div class="u_cbox_content_wrap">
-									<ul class="u_cbox_list">
-<%for(int i=0;i<relist.size();i++) {
-	rebean = relist.get(i);
-	int renum = rebean.getRenum();
-	String rewriter = rebean.getWriter();
-	String recontent = rebean.getContent();
-	String reregdate = rebean.getRegdate();
-	int regood = rebean.getGood();
-	int rebad = rebean.getBad();
-	String[] rere= rebean.getRere().split(",");%>
-										<li	class="u_cbox_comment cbox_module__comment_5235752 _user_id_no_6DB8H">
-											<div class="u_cbox_comment_box">
-												<div class="u_cbox_area">
-													<div class="u_cbox_info">
-														<span class="u_cbox_info_main"><span
-															class="u_cbox_name"><span class="u_cbox_name_area"><span
-																	class="u_cbox_nick_area"><span
-																		class="u_cbox_nick"><%=rewriter %></span></span></span></span></span><span
-															class="u_cbox_info_sub"></span>
-													</div>
-													<div class="u_cbox_text_wrap">
-														<span class="u_cbox_contents" data-lang="ko"><%=recontent %></span>
-													</div>
-													<div class="u_cbox_info_base">
-														<span class="u_cbox_date"><%=reregdate %></span>
-													</div>
-													<div class="u_cbox_tool">
-														<a onclick="fold('a<%=i%>')" class="u_cbox_btn_reply u_cbox_btn_reply_on">
-															<strong	class="u_cbox_reply_txt">답글</strong><span
-															class="u_cbox_reply_cnt"><%=!(rere[0].equals(""))?rere.length:0 %></span></a>
-														<div class="u_cbox_recomm_set">
-															<strong class="u_vc">공감/비공감</strong><a class="u_cbox_btn_recomm"
-																title="이 댓글을 공감합니다"><span class="u_cbox_ico_recomm">공감</span><em
-																class="u_cbox_cnt_recomm"><%=regood %></em></a><a href="#" class="u_cbox_btn_unrecomm"
-																title="이 댓글을 비공감합니다"><span
-																class="u_cbox_ico_unrecomm">비공감</span><em
-																class="u_cbox_cnt_unrecomm"><%=rebad %></em></a>
-														</div>
-													</div>
-													<span class="u_cbox_comment_frame"><span
-														class="u_cbox_ico_tip"></span><span
-														class="u_cbox_comment_frame_top"><span
-															class="u_cbox_comment_bg_r"></span><span
-															class="u_cbox_comment_bg_l"></span></span><span
-														class="u_cbox_comment_frame_bottom"><span
-															class="u_cbox_comment_bg_r"></span><span
-															class="u_cbox_comment_bg_l"></span></span></span>
-												</div>
-											</div>
-											<div class="u_cbox_reply_area" style="display:none" id="a<%=i%>">
-<%if((!(rere[0].equals(""))?rere.length:0)!=0) {%>
-												<ul class="u_cbox_list">
-	<%for(i=0;i<rere.length;i++) {
-			rebean = mmgr.getRe(Integer.parseInt(rere[i]));
-			rewriter = rebean.getWriter();
-			recontent = rebean.getContent();
-			reregdate = rebean.getRegdate();
-			regood = rebean.getGood();
-			rebad = rebean.getBad();
-	%>
-													<li	class="u_cbox_comment cbox_module__comment_5235899 _user_id_no_lGgm">
-														<div class="u_cbox_comment_box">
-															<span class="u_cbox_ico_reply"></span>
-															<div class="u_cbox_area">
-																<div class="u_cbox_info">
-																	<span class="u_cbox_info_main"><span
-																		class="u_cbox_name"><span
-																			class="u_cbox_name_area"><span
-																				class="u_cbox_nick_area"><span
-																					class="u_cbox_nick"><%=rewriter %></span></span></span></span></span><span
-																		class="u_cbox_info_sub"></span>
-																</div>
-																<div class="u_cbox_text_wrap">
-																	<span class="u_cbox_contents" data-lang="ko"><%=recontent %></span>
-																</div>
-																<div class="u_cbox_info_base">
-																	<span class="u_cbox_date"><%=reregdate %></span>
-																</div>
-																<div class="u_cbox_tool">
-																	<div class="u_cbox_recomm_set">
-																		<strong class="u_vc">공감/비공감</strong><a href="#"
-																			class="u_cbox_btn_recomm" title="이 댓글을 공감합니다"><span
-																			class="u_cbox_ico_recomm">공감</span><em
-																			class="u_cbox_cnt_recomm"><%=regood %></em></a><a href="#"
-																			class="u_cbox_btn_unrecomm" title="이 댓글을 비공감합니다"><span
-																			class="u_cbox_ico_unrecomm">비공감</span><em
-																			class="u_cbox_cnt_unrecomm"><%=rebad %></em></a>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</li>
-<%} %>
-												</ul>
-<%} %>												
-												<div class="u_cbox_write_wrap">
-													<span class="u_cbox_ico_reply"></span>
-													<div class="u_cbox_write_box u_cbox_type_logged_in">
-														<form>
-															<fieldset>
-																<legend class="u_vc">댓글 쓰기</legend>
-																<div class="u_cbox_write">
-																	<div class="u_cbox_write_inner">
-																		<div class="u_cbox_profile_area">
-																			<div class="u_cbox_profile">
-																				<strong class="u_vc">로그인 정보</strong>
-																				<div class="u_cbox_box_name">
-																					<span class="u_cbox_write_name">수수</span>
-																				</div>
-																			</div>
-																		</div>
-																		<div class="u_cbox_write_area">
-																			<strong class="u_vc">댓글 입력</strong>
-																			<div class="u_cbox_inbox">
-																				<textarea id="cbox_module__reply_textarea_5235752"
-																					class="u_cbox_text" rows="3" cols="30"></textarea>
-																				<label for="cbox_module__reply_textarea_5235752"
-																					class="u_cbox_guide"
-																					data-action="reply#htContext#5235752#write#placeholder"
-																					data-param="@event">주제와 무관한 댓글, 악플은 삭제될 수
-																					있습니다.</label>
-																			</div>
-																		</div>
-																		<div class="u_cbox_upload_image" style="display: none">
-																			<span
-																				class="u_cbox_upload_image_wrap fileButton browsebutton _cboxImageSelect"><span
-																				class="u-cbox-browse-box"><input
-																					class="u-cbox-browse-file-input" type="file"
-																					name="browse" accept="image/*" title="이미지 추가"></span><a
-																				href="#"
-																				class="u_cbox_upload_thumb_link u-cbox-browse-button"
-																				data-log="RPP.add"><span
-																					class="u_cbox_upload_thumb_add">이미지 추가</span><span
-																					class="u_cbox_upload_thumb_mask"></span></a></span>
-																		</div>
-																		<div class="u_cbox_upload_sticker"
-																			style="display: none"></div>
-																		<div class="u_cbox_write_count">
-																			<span class="u_vc">현재 입력한 글자수</span><strong
-																				class="u_cbox_count_num">0</strong>/<span
-																				class="u_vc">현재 입력한 글자수</span><span
-																				class="u_cbox_write_total">500</span>
-																		</div>
-																		<div class="u_cbox_upload">
-																			<div class="u_cbox_addition"></div>
-																			<button type="button" class="u_cbox_btn_upload"
-																				data-action="reply#htContext#5235752#write#request"
-																				data-log="RPC.write#RPC.reply">
-																				<span class="u_cbox_ico_upload"></span><span
-																					class="u_cbox_txt_upload">등록</span>
-																			</button>
-																		</div>
-																	</div>
-																</div>
-															</fieldset>
-														</form>
-													</div>
-												</div>
-											</div></li>
-<%} %>
-									</ul>
-								</div>
-								<div class="u_cbox_paginate" style="">
-									<div class="u_cbox_page_wrap">
-										<span class="u_cbox_pre u_cbox_pre_end"
-											title="첫 페이지 목록으로 이동하기"><span class="u_cbox_ico_page"></span><span
-											class="u_cbox_cnt_page">맨앞</span><span class="u_vc">페이지
-												목록으로 이동하기</span></span><span class="u_cbox_pre" title="이전 페이지 목록으로 이동하기"><span
-											class="u_cbox_ico_page"></span><span class="u_cbox_cnt_page">이전</span><span
-											class="u_vc">페이지 목록으로 이동하기</span></span><strong class="u_cbox_page"><span
-											class="u_cbox_num_page">1</span><span class="u_vc">현재
-												선택된 페이지</span></strong><span class="u_cbox_next" title="다음 페이지 목록으로 이동하기"><span
-											class="u_cbox_cnt_page">다음</span><span
-											class="u_cbox_ico_page"></span><span class="u_vc">페이지
-												목록으로 이동하기</span></span><span class="u_cbox_next u_cbox_next_end"
-											title="마지막 페이지 목록으로 이동하기"><span
-											class="u_cbox_cnt_page">맨뒤</span><span
-											class="u_cbox_ico_page"></span><span class="u_vc">페이지
-												목록으로 이동하기</span></span>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="reple_btn_area">
-				<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1" class="go_btn_review"><em class="blind">리뷰쓰기</em></a><!-- N=a:rvi.write -->
-				<a href="javascript:showReviewList();" class="go_btn_lst"><em class="blind">목록보기</em></a><!-- N=a:rvi.list -->
+s
+			<div class="reple_btn_area">
+				<a href="<%if(id==null){ %>../member/login.jsp<%}else{ %><%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1<%}%>" class="go_btn_review"><em class="blind">리뷰쓰기</em></a><!-- N=a:rvi.write -->
+				<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3" class="go_btn_lst"><em class="blind">목록보기</em></a><!-- N=a:rvi.list -->
 			</div>
 			<div class="pre_reple_lst">
 				<ul>
@@ -1002,9 +727,9 @@ String rwriter = rbean.getWriter();
 <%}else if(cate==null){ %>
 <%@include file="movie_list.jsp"%>
 <%}else if(cate.equals("1")){ %>
-<%@include file="list.html"%>
+<%@include file="list.jsp"%>
 <%}else{ %>
-<%@include file="ranking.html"%>
+<%@include file="ranking.jsp"%>
 <%} %>
 <!-- //content -->
 	</div>
@@ -1015,37 +740,23 @@ String rwriter = rbean.getWriter();
 		<div class="in_footer">
 			<div class="foot_con">
 				<ul>
-					<li class="first"><a
-						href="http://www.naver.com/rules/service.html" target="rules">이용약관</a>
+					<li class="first"><a href="" target="rules">이용약관</a>
 					<!-- N=a:fot.agreement --></li>
-					<li><a href="http://www.naver.com/rules/privacy.html"
-						target="rules"><strong>개인정보처리방침</strong></a>
+					<li><a href="" target="rules"><strong>개인정보처리방침</strong></a>
 					<!-- N=a:fot.privacy --></li>
-					<li><a href="http://www.naver.com/rules/disclaimer.html"
-						target="rules">책임의 한계와 법적고지</a>
+					<li><a href="" target="rules">책임의 한계와 법적고지</a>
 					<!-- N=a:fot.disclaimer --></li>
-					<li><a
-						href="https://help.naver.com/support/service/main.nhn?serviceNo=800"
-						target="customer">영화 고객센터</a>
+					<li><a href="" target="customer">영화 고객센터</a>
 					<!-- N=a:fot.help --></li>
 				</ul>
 				<p class="info">본 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법
 					등에 따라 법적 책임을 질 수 있습니다.</p>
-				<p class="info">
-					사업자등록번호 : 220-81-62517<span>통신판매업 신고번호</span> : 경기성남 제 2006 - 692호<span>대표이사
-						: 한성숙</span><span><a
-						href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp">사업자등록정보
-							확인</a>
-					<!-- N=a:fot.bizinfo --></span><br> 주소 : 경기도 성남시 분당구 불정로 6 바코드 그린팩토리
-					<span>대표전화 : 1588-3820</span>
-				</p>
+				<p class="info"> 부산 <span>ME : 이성수 육동주 조성수</span></p>
 				<address>
-					<a href="http://www.navercorp.com/" target="_blank" class="logo"><img
-						src="./movie_list_files/logo_naver.png" width="63" height="11"
-						alt="NAVER"></a>
+					<a href="http://www.MeCorp.com/" target="_blank" class="logo"><img src="../img/barcode_logo__.png" width="63" alt="barcode"></a>
 					<!-- N=a:fot.nhn -->
-					<em>Copyright ©</em> <a href="http://www.navercorp.com/"
-						target="_blank">NAVER Corp.</a>
+					<em>Copyright ©</em> <a href="http://www.MeCorp.com/"
+						target="_blank">ME Corp.</a>
 					<!-- N=a:fot.corp -->
 					<span>All Rights Reserved.</span>
 				</address>

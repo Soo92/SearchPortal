@@ -320,7 +320,7 @@ $(document).ready(function () {
 				</div>
 				<div id="shopping" class="section_option">
 <%for(int i=0;i<(slist.size()>2?2:slist.size());i++) {%>
-					<a href="./product/details?index="<%=slist.get(i).getIndex() %>>
+					<a href="./product/detail.jsp?index=<%=slist.get(i).getIndex() %>">
 					<div id="shopping_<%=i+1%>">
 						<img src="./product/newShopImg/<%=slist.get(i).getMainImg() %>" width="150px" height="150px">
 						<div id="other_text">

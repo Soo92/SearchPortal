@@ -108,7 +108,7 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 										<div class="obj_off tab4">
 											<a href="./movie_home.jsp?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('commingTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('commingTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
 											<span class="ico_rating_12">12세 관람가</span> <span	class="mask"></span> 
-											<img src="../maingimg/<%=mvlist.get(i).getPic() %>"	alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179"	onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+											<img src="./mainimg/<%=mvlist.get(i).getPic() %>"	alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179"	onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 											<span class="baseplate r"> <strong class="l">
 										<%String a = (mvlist.get(i).getOpendate()+"");
 										for(int j=(mvlist.get(i).getOpendate()==null?0:5);j<a.length();j++) {%>
@@ -138,7 +138,7 @@ for(int i=0; i < (mvlist.size()>10?10:mvlist.size()); i++) {%>
 										<div class="obj_off tab4">
 											<a href="<%=request.getRequestURI()%>?index=<%=mvlist.get(i).getIdx() %>" onfocus="jindo.$Element('pointTooltip<%=i+1 %>').show();oTimer.abort();" onblur="jindo.$Element('pointTooltip<%=i+1 %>').hide();movieChart.restartTimer();">
 											<span class="rank"><em><%=i+1 %>위</em></span> <span class="ico_rating_all">전체 관람가</span> <span class="mask"></span> 
-											<img src="../mainimg/<%=mvlist.get(i).getPic() %>" alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
+											<img src="./mainimg/<%=mvlist.get(i).getPic() %>" alt="<%=mvlist.get(i).getTitle() %>" width="125" height="179" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'">
 												<span class="baseplate r"> <span class="rank_star l">
 												<span class="star_off"><em>별점 - 총 10점 중</em></span>
 												<span class="star_on" style="width:<%=Float.parseFloat(mvlist.get(i).getStar())*10%>%"><em><%=mvlist.get(i).getStar()%>점</em></span>

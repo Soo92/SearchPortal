@@ -102,7 +102,7 @@
 		<div id="header">
 			<div id="wrap2">
 				<div id="logo" onclick="location.href='../index.jsp'">
-					<img src="../img/movie/logo_ci.png" width=100% height=100%
+					<img src="../img/barcode_logo__.png" width=100% height=100%
 						alt="바코드">
 				</div>
 				<div id="subject">

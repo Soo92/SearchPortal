@@ -15,5 +15,5 @@
 
 <script>
 	alert("<%=str%>");
-	location.href = "<%=location%>";
+ 	location.href = "<%=location%>#detail_review";
 </script>

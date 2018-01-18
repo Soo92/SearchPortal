@@ -143,15 +143,16 @@ public class MovieMgr {
 		boolean flag=false;
 		try {
 			con = pool.getConnection();
-			sql = "insert movie_review(title,star,regdate,content,writer)";
-			sql +="values(?,?,now(),?,'?')";
+			sql = "insert movie_review(title,star,regdate,content,writer,idx)";
+			sql +="values(?,?,date_format(now(),'%Y.%m.%d'),?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getTitle());
 			pstmt.setFloat(2, bean.getStar());
-			pstmt.setString(3, bean.getRegdate());
-			pstmt.setString(4, bean.getContent());
-			pstmt.setString(5, bean.getWriter());
-			
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getWriter());
+			pstmt.setInt(5, bean.getIdx());
+			if(pstmt.executeUpdate()==1)
+				flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -199,7 +200,7 @@ public class MovieMgr {
 		Vector<ReviewBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from movie_review where idx=?";
+			sql = "select * from movie_review where idx=? order by regdate desc, reviewnum desc";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -299,13 +300,13 @@ public class MovieMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert movie_point(idx, star, redate, content)"
-					+"values(?,?,now(),?)";
+			sql = "insert movie_point(idx, star, redate, content,writer)"
+					+"values(?,?,now(),?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getIdx());
 			pstmt.setInt(2, bean.getStar());
 			pstmt.setString(3, bean.getContent());
-			
+			pstmt.setString(4, bean.getWriter());
 			if(pstmt.executeUpdate()==1)
 				flag = true;
 		} catch (Exception e) {
@@ -351,7 +352,7 @@ public class MovieMgr {
 	      Vector<PointBean> vlist = new Vector<>();
 	      try {
 	         con = pool.getConnection();
-	         sql = "select * from movie_point where idx=?";
+	         sql = "select * from movie_point where idx=? order by redate desc, pointnum desc";
 	         pstmt = con.prepareStatement(sql);
 	         pstmt.setInt(1, idx);
 	         rs = pstmt.executeQuery();

@@ -69,7 +69,7 @@ public class ReviewMgr {
 		Vector<ReviewBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from tblnewshop_board where idx = ? order by no;";
+			sql = "select * from tblnewshop_board where idx = ? order by date desc, no desc;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, index);
 			rs = pstmt.executeQuery();
@@ -110,20 +110,26 @@ public class ReviewMgr {
 					new MultipartRequest(req, UPLOAD, MAXSIZE, 
 							ENCTYPE, new DefaultFileRenamePolicy());
 			if(multi.getFilesystemName("img")==null) {//이미지 빼고 수정
-				sql = "insert tblnewshop_board (title,star,content)"
-						+ "values(?,?,?)";
+				sql = "insert tblnewshop_board (title,star,content,idx,name,pro_title,date)"
+						+ "values(?,?,?,?,?,?,date_format(now(),'%y.%m.%d'))";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, multi.getParameter("title"));
 				pstmt.setString(2, multi.getParameter("star"));
 				pstmt.setString(3, multi.getParameter("content"));
+				pstmt.setString(4, multi.getParameter("idx"));
+				pstmt.setString(5, multi.getParameter("name"));
+				pstmt.setString(6, multi.getParameter("pro_title"));
 			}else {
-				sql = "insert tblnewshop_board (title,star,img,content)"
-						+ "values(?,?,?,?)";
+				sql = "insert tblnewshop_board (title,star,img,content,idx,name,pro_title,date)"
+						+ "values(?,?,?,?,?,?,?,date_format(now(),'%y.%m.%d'))";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, multi.getParameter("title"));
 				pstmt.setString(2, multi.getParameter("star"));
 				pstmt.setString(3, multi.getParameter("img"));
 				pstmt.setString(4, multi.getParameter("content"));
+				pstmt.setString(5, multi.getParameter("idx"));
+				pstmt.setString(6, multi.getParameter("name"));
+				pstmt.setString(7, multi.getParameter("pro_title"));
 			}
 				if(pstmt.executeUpdate()==1)
 					flag = true;

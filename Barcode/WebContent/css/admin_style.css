@@ -56,7 +56,6 @@ a {
    height: 45px;
    float: left;
    margin-top: 5px;
-   background:#000
 }
 
 #subject {
@@ -148,7 +147,7 @@ a {
 #space_box{width:10px; height:45px; background:gray; float:left;}
 
 
-/*입력폼*/
+/*�엯�젰�뤌*/
 #admin_reg{width:867px; height:auto; margin:0 auto;}
 #admin_reg td{height:45px}
 #admin_reg input{height:30px; margin-right:10px; }
