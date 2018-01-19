@@ -92,7 +92,8 @@ function go_delete(){
     return;
   }else{
 	  $("#del").val(get_chked_values());
-	  document.delf.submit();
+	  if(confirm('모두 삭제할까요?'))
+	  	document.delf.submit();
   }
 }
 function get_chked_values(){
@@ -135,29 +136,6 @@ function get_chked_values(){
 					<%}%>
 					</div>
             </div>
-         </div>
-         
-         
-         <div id="nav">
-            <div id="wrap2">
-               <div id="navLeft">
-                  <ul>
-                     <li><a href="product_new.jsp">중고세상</a></li><li class="ulul" id="aaa">|</li>
-                     <li class="ulul"><a href="product_used.jsp">술집맛집</a></li><li class="ulul" id="aaa">|</li>
-                     <li class="ulul"><a href="product_review.jsp">영화나라</a></li><li class="ulul" id="aaa">|</li>
-                     <li class="ulul"><a href="product_notice.jsp">공지사항</a></li><li class="ulul" id="aaa">|</li>
-                     <li class="ulul"><a href="product_QnA.jsp">Q&A </a></li>
-                  </ul>
-               </div>
-               <div id="navRight">
-                  <table border="0">
-                     <tr>
-                        <td><a href="basket.jsp">장바구니</a></td>
-                     </tr>
-                  </table>
-               </div>
-            </div>
-            
          </div>
       </div>
 </div>
@@ -210,7 +188,7 @@ function get_chked_values(){
             <td><%=i+1 %></td>
             <td style="width:120px;">
             <div id="adminListImg">
-               <img src="../product/newShopImg/<%=mainImg %>" width="100px" height="100">
+               <img src="../product/newShopImg/<%=mainImg %>" width="100%">
             </div>
          </td>
          <td class="three">
@@ -227,9 +205,9 @@ function get_chked_values(){
                  <a href="admin_update.jsp?index=<%=idx%>">
                 <input type="button" value="수정" name="">
                 </a>
-                <a href="admin_delete.jsp?index=<%=idx%>">
+                <a href="admin_delete.jsp?index=<%=idx%>" onclick="return confirm('삭제할까요?')">
                  <input type="button" value="삭제" name="" style="margin-top:10px;">
-                 </a>
+                </a>
             </td>
          </tr>
          <%} %>

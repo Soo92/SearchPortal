@@ -19,14 +19,11 @@
 <title></title>
 <link rel="stylesheet" href="../css/admin_style.css" type="text/css">
 <link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
+<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 <script>
 $(document).ready(function(){
-  
   $("a").on('click', function(event) {
-
-  
     if (this.hash !== "") {
-  
       event.preventDefault();
       var hash = this.hash;
       $('html, body').animate({
@@ -40,7 +37,6 @@ $(document).ready(function(){
 </script>
 
 <script type="text/javascript">
-	
 	function mypage() {
 		if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
 			document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
@@ -69,6 +65,19 @@ $(document).ready(function(){
 	}
 	</script>
 <script type="text/javascript">
+	function imageURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	
+	        reader.onload = function(e) {
+	            $('#main_img').attr('src', e.target.result)
+	             .width(100)
+	             .height(100);
+	        }
+	
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
 	function proAddCheck() {
 		p = document.proAdd_;
 		
@@ -216,7 +225,7 @@ $(document).ready(function(){
 			<tr>
 				<td colspan="6" style="height:80px;">
 				<p>판매자 아이디</p>
-				<input type="text" name="Seller" value="" placeholder=" 판매자아이디" style="margin-left:10px; float:left;">
+				<input type="text" name="Seller" value="<%=id %>" placeholder=" 판매자아이디" style="margin-left:10px; float:left;" readonly="readonly">
 				<p style="float:right; margin-top:-15px; margin-right:30px; color:lightgray; font-size:18px;">
 				바코드를 이용해주셔서 항상 감사드립니다 :-)
 				</p>
@@ -304,11 +313,10 @@ $(document).ready(function(){
 				<td style="height:80px;">
 				<p>메인이미지</p>
 			
-				<input type="file" multiple id="orgFile" class="upload" name="mainImg" value="11" style="margin-left:20px;" >
+				<input type="file" multiple id="orgFile" class="upload" name="mainImg" value="11" style="margin-left:20px;" onchange="imageURL(this)">
 				<!-- 파일을 첨부하세요. (작업사이즈 : 400*400 px) -->
 				</td>
 			</tr>
-			
 			<tr>
 				<td style="height:450px;">
 					<div id="main_img">
@@ -340,7 +348,29 @@ $(document).ready(function(){
 				</td>
 			</tr>
 			</table>
-			
+<script>
+	var upload = $('#orgFile');
+	var holder = $('#main_img');
+	upload.change(function(e){
+	  e.preventDefault();
+	  var file = upload[0].files[0],
+	      reader = new FileReader();
+	  reader.onload = function (event) {
+	    var img = new Image();
+	    img.src = event.target.result;
+	    // note: no onload required since we've got the dataurl...I think! :)
+	    if (img.width > 560) { // holder width
+	      img.width = 560;
+	    }
+	    holder.empty();
+	    holder.width('560px');
+	    holder.height('100%');
+	    holder.append(img);
+	  };
+	  reader.readAsDataURL(file);
+	  return false;
+	});
+</script>						
 			<table width="867" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff; text-indent:10px; margin-top:10px;">
 				<tr>
 					<td style="height:80px;">

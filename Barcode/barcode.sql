@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `ea` int(11) NOT NULL,
   `userid` char(50) NOT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
--- 테이블 데이터 barcode.cart:~15 rows (대략적) 내보내기
+-- 테이블 데이터 barcode.cart:~10 rows (대략적) 내보내기
 DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 INSERT INTO `cart` (`idx`, `pronum`, `ea`, `userid`) VALUES
@@ -38,12 +38,7 @@ INSERT INTO `cart` (`idx`, `pronum`, `ea`, `userid`) VALUES
 	(14, 3, 0, '1'),
 	(15, 3, 0, '1'),
 	(16, 3, 118, '1'),
-	(17, 3, 3, '1'),
-	(18, 9, 1, 'bingo9127'),
-	(19, 9, 1, 'bingo9127'),
-	(20, 9, 1, 'bingo9127'),
-	(21, 9, 1, 'bingo9127'),
-	(22, 9, 1, 'bingo9127');
+	(17, 3, 3, '1');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
 -- 테이블 barcode.custom 구조 내보내기
@@ -88,7 +83,7 @@ INSERT INTO `custom_cate` (`cnum`, `idx`, `title`, `parent`, `pic`) VALUES
 	(8, '4', '변경/공지사항 안내', '0', './img/image7'),
 	(9, '4', '등록/수정/관리권한', '0', './img/image8'),
 	(10, '4', '검색 노출', '0', './img/image9'),
-	(11, '1', '네이버 회원 가입/탈퇴', '1', NULL),
+	(11, '1', '회원 가입/탈퇴', '1', NULL),
 	(12, '11', '회원 가입', '2', NULL),
 	(13, '11', '가입 오류', '2', NULL),
 	(14, '11', '회원 탈퇴', '2', NULL),
@@ -337,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `movie_review` (
   PRIMARY KEY (`reviewnum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8;
 
--- 테이블 데이터 barcode.movie_review:~32 rows (대략적) 내보내기
+-- 테이블 데이터 barcode.movie_review:~28 rows (대략적) 내보내기
 DELETE FROM `movie_review`;
 /*!40000 ALTER TABLE `movie_review` DISABLE KEYS */;
 INSERT INTO `movie_review` (`reviewnum`, `idx`, `star`, `title`, `regdate`, `views`, `good`, `content`, `writer`) VALUES
@@ -441,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `place_board` (
   FULLTEXT KEY `content` (`content`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
--- 테이블 데이터 barcode.place_board:~21 rows (대략적) 내보내기
+-- 테이블 데이터 barcode.place_board:~17 rows (대략적) 내보내기
 DELETE FROM `place_board`;
 /*!40000 ALTER TABLE `place_board` DISABLE KEYS */;
 INSERT INTO `place_board` (`idx`, `placenum`, `mainpic`, `place`, `enddate`, `title`, `writer`, `regdate`, `content`) VALUES
@@ -540,28 +535,28 @@ CREATE TABLE IF NOT EXISTS `tblnewshop` (
   `Seller` char(50) DEFAULT NULL,
   PRIMARY KEY (`idx`),
   FULLTEXT KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- 테이블 데이터 barcode.tblnewshop:~16 rows (대략적) 내보내기
 DELETE FROM `tblnewshop`;
 /*!40000 ALTER TABLE `tblnewshop` DISABLE KEYS */;
 INSERT INTO `tblnewshop` (`idx`, `title`, `account`, `stock`, `price`, `shipAccount`, `shipDate`, `s_adr`, `origin`, `opt`, `proAdd`, `maxBuy`, `mainImg`, `listImg`, `detailImg`, `proStar`, `reviewNum`, `likeNum`, `Seller`) VALUES
 	(1, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '01.jpg', '01_list.jpg', 'detail_01.png', 4.5, 14569, 78412, 'bingo9127'),
-	(8, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
+	(8, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
 	(9, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '01.jpg', '01_list.jpg', 'detail_01.png', 4.5, 14569, 78412, 'bingo9127'),
 	(10, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '02.jpg', '02_list.jpg', 'detail_02.png', 4.5, 14569, 78412, 'bingo9127'),
 	(11, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '03.jpg', '03_list.jpg', 'detail_03.png', 4.5, 14569, 78412, 'bingo9127'),
-	(12, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '04.jpg', '04_list.jpg', 'detail_04.png', 4.5, 14569, 78412, 'bingo9127'),
+	(12, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '03.jpg', '04_list.jpg', 'detail_04.png', 4.5, 14569, 78412, 'bingo9127'),
 	(13, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '01.jpg', '01_list.jpg', 'detail_01.png', 4.5, 14569, 78412, 'bingo9127'),
 	(14, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '02.jpg', '02_list.jpg', 'detail_02.png', 4.5, 14569, 78412, 'bingo9127'),
 	(15, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '03.jpg', '03_list.jpg', 'detail_03.png', 4.5, 14569, 78412, 'bingo9127'),
-	(16, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '04.jpg', '04_list.jpg', 'detail_04.png', 4.5, 14569, 78412, 'bingo9127'),
+	(16, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '03.jpg', '04_list.jpg', 'detail_04.png', 4.5, 14569, 78412, 'bingo9127'),
 	(17, '뿌띠뿌띠 블러셔', '가을의 느낌을 좀더 풍성하게', '1,321', '38,000', '2,500', '', '1', '', '주황이', '블러셔 브러쉬', 10, '01.jpg', '01_list.jpg', 'detail_01.png', 4.5, 14569, 78412, 'bingo9127'),
-	(18, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
-	(19, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
-	(20, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
-	(21, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
-	(22, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '04.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu');
+	(18, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
+	(19, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
+	(20, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
+	(21, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu'),
+	(22, 'df', '뱃', '1', '1', '1', 'week', 'df', 'japan', 'df', 'fd', 1, '03.jpg', '04_list.jpg', 'detail_04.png', NULL, NULL, NULL, 'imleeseongsu');
 /*!40000 ALTER TABLE `tblnewshop` ENABLE KEYS */;
 
 -- 테이블 barcode.tblnewshop_board 구조 내보내기

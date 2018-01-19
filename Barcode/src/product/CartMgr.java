@@ -65,4 +65,24 @@ public class CartMgr {
 		}
 		return flag;
 	}
+
+	public boolean deleteCart(int idx) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "delete from cart where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			if(pstmt.executeUpdate()==1)
+				flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 }

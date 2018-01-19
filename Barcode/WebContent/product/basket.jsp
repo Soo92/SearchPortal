@@ -178,7 +178,9 @@
 										<button class="delete_button">변경</button>
 									</td>
 									<td rowspan="2" height="36px">
+									<a href="./basket_del_proc.jsp?index=<%=cartlist.get(i).getIdx() %>" onclick="return confirm('삭제할까요?')">
 										<button class="delete_button">삭제하기</button>
+									</a>
 									</td>
 								</tr>
 								

@@ -13,7 +13,7 @@
 		String name = mgr.getMember(id).getName();
 		Vector<MovieBean> mlist = mmgr.getMemberList();
 		Vector<ShoppingBean> slist = smgr.getShoppingList();
-		Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList((int)(Math.random()*pmgr.getPlaceList().size())+"");
+		Vector<PlaceBoardBean> plist = pmgr.getPlaceBoardList((int)(Math.random()*(pmgr.getPlaceList().size()-1)+1)+"");
 %>
 <!doctype>
 <html>

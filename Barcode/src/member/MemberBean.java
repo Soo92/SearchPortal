@@ -13,7 +13,6 @@ public class MemberBean {
 	private String address;
 	private String seller;
 	
-	
 	public String getSeller() {
 		return seller;
 	}

@@ -12,7 +12,6 @@
 %>
 
 <script>
-	alert("<%=result%>");
 	alert("<%=str%>");
 	location.href = "<%=location%>";
 </script>

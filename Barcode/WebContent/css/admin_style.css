@@ -299,7 +299,7 @@ a {
    margin-right
    }
 
-   #adminListImg{width:100px; height:100px; background:gray; margin-left:10px;}
+   #adminListImg{width:100px; height:100px; margin-left:10px;display:flex; justify-content:center; align-items:center;}
 
 
 

@@ -205,7 +205,7 @@ public ShoppingBean getShopping(int idx) {
 		String mainImg = null;
 		String listImg = null;
 		String detailImg = null;
-		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		Upload = req.getServletContext().getRealPath("/product/newShopImg/");
 		File dir = new File(Upload);
 		if(!dir.exists())
 			dir.mkdirs();//폴더가 없으면 생성
@@ -278,7 +278,7 @@ public ShoppingBean getShopping(int idx) {
 		boolean flag = false;
 		ResultSet rs = null;
 		String sql = null;
-		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		Upload = req.getServletContext().getRealPath("/product/newShopImg/");
 		String[] index = req.getParameter("index").split(",");
 		try {
 			con = pool.getConnection();
@@ -321,7 +321,8 @@ public ShoppingBean getShopping(int idx) {
 		String mainImg = null;
 		String listImg = null;
 		String detailImg = null;
-		Upload = req.getServletContext().getRealPath("/prodcut/newShopImg/");
+		Upload = req.getServletContext().getRealPath("/product/newShopImg/");
+		System.out.println(Upload);
 		File dir = new File(Upload);
 		if(!dir.exists())
 			dir.mkdirs();//폴더가 없으면 생성
