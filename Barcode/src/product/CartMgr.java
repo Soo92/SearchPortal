@@ -23,7 +23,7 @@ public class CartMgr {
 		Vector<CartBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from cart where userid = ?;";
+			sql = "select * from tblnewshop_cart where userid = ?;";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
@@ -50,7 +50,7 @@ public class CartMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert cart(pronum,ea,userid)"
+			sql = "insert tblnewshop_cart(pronum,ea,userid)"
 					+ "values(?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bean.getPronum());
@@ -73,7 +73,7 @@ public class CartMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "delete from cart where idx=?";
+			sql = "delete from tblnewshop_cart where idx=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			if(pstmt.executeUpdate()==1)
