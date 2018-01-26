@@ -49,9 +49,9 @@ $(document).ready(function () {
     var latitude=35.198362;
     var longitude=129.053922;
 	$('#place').click(function(){
-		$('#map_window').toggle();
+		location.href="./NaverMap/map.jsp"
 	});
-    $("#location_btn").click(function() {        
+	$("#location_btn").click(function() {        
         // Geolocation API에 액세스할 수 있는지를 확인
         if (navigator.geolocation) {
             //위치 정보를 얻기
@@ -64,69 +64,10 @@ $(document).ready(function () {
             alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
         }
     });
-    function initialize() {
-    	  var mapOptions = { 
-    	    center: {lat: latitude, lng: longitude},
-    	    zoom: 13,
-    	    scrollwheel: false
-    	  };
-    	  var map = new google.maps.Map(document.getElementById('map_window'),
-    	    mapOptions);
-
-    	  var input = /** @type {HTMLInputElement} */(
-    	      document.getElementById('pac-input'));
-
-    	  // Create the autocomplete helper, and associate it with
-    	  // an HTML text input box.
-    	  var autocomplete = new google.maps.places.Autocomplete(input);
-    	  autocomplete.bindTo('bounds', map);
-
-    	  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    	  var infowindow = new google.maps.InfoWindow();
-    	  var marker = new google.maps.Marker({
-    	    map: map
-    	  });
-    	  google.maps.event.addListener(marker, 'click', function() {
-    	    infowindow.open(map, marker);
-    	  });
-
-    	  // Get the full place details when the user selects a place from the
-    	  // list of suggestions.
-    	  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    	    infowindow.close();
-    	    var place = autocomplete.getPlace();
-    	    if (!place.geometry) {
-    	      return;
-    	    }
-    	    if (place.geometry.viewport) {
-    	      map.fitBounds(place.geometry.viewport);
-    	    } else {
-    	      map.setCenter(place.geometry.location);
-    	      map.setZoom(17);
-    	    }
-    	    // Set the position of the marker using the place ID and location.
-    	    marker.setPlace(/** @type {!google.maps.Place} */ ({
-    	      placeId: place.place_id,
-    	      location: place.geometry.location
-    	    }));
-    	    marker.setVisible(true);
-    	    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-    	        'Place ID: ' + place.place_id + '<br>' +
-    	        place.formatted_address + '</div>');
-    	    infowindow.open(map, marker);
-    	  });
-    	    $('#map_window').css("display","none");
-    	}
-    	// Run the initialize function when the window has finished loading.
-    	google.maps.event.addDomListener(window, 'load', initialize);
 });
 </script>
 </head>
 <body>
-	<input type="text" id="pac-input">
-	<div id="map_window" style="position: absolute;width: 80%;height: 78%;top: 129px;margin: 0px 10%;z-index: 99;">
-	</div>
 	<div id="wrap">
 		<div id="header">
 			<div id="start">
@@ -271,12 +212,12 @@ $(document).ready(function () {
 						<table width="223px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
 							<tr>
 								<td height="35px">
-									<input type="text" name="id" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="아이디">
+									<input type="text" name="id" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="아이디" value="imleeseongsu">
 								</td>
 							</tr>
 							<tr>
 								<td height="35px">
-									<input type="password" name="pass" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="비밀번호">
+									<input type="password" name="pass" style="width:200px; height:20px; margin-left:5px; border:0px; font-size:12px; background:#f7ffdd;" align="center" placeholder="비밀번호" value="asdf">
 								</td>
 							</tr>
 						</table>

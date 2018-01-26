@@ -116,7 +116,7 @@ function fold(a){
 					<div id="login">
 <%if(id == null || id.equals("")){%>
 					<a href="../member/login.jsp">
-						<table width="70px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px #b73400 solid; background:background:#ff5b1b; margin-bottom:7px;">
+						<table width="70px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px #b73400 solid; background:#ff5b1b; margin-bottom:7px;">
 							<tr>
 								<td height="30px;"><p>로그인</p></td>
 							</tr>

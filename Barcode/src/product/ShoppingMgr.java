@@ -75,7 +75,7 @@ public ShoppingBean getShopping(int idx) {
 		Vector<ShoppingBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from tblnewshop order by idx;";
+			sql = "select * from tblnewshop order by idx desc;";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {

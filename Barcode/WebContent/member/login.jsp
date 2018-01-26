@@ -38,7 +38,7 @@
                <table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
                      <tr>
                         <td height="60px">
-							<input type="text" name="id" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" align="center" placeholder="아이디">
+							<input type="text" name="id" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" align="center" placeholder="아이디" value="imleeseongsu">
 					</td>
                      </tr>
                </table>
@@ -48,7 +48,7 @@
                <table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px  lightgray solid; background:#fff">
                      <tr>
                         <td height="60px">
-							<input type="password" name="pass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" placeholder="비밀번호">
+							<input type="password" name="pass" style="width:460px; height:40px; margin-left:20px; border:0px; font-size:16px; background:#f7ffdd;" placeholder="비밀번호" value="asdf">
 						   <input type="hidden" name="url" value=<%=url%>>
 					</td>
                      </tr>

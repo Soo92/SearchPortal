@@ -41,7 +41,7 @@
 						width="56" height="56" alt="<%=id%> 님">
 					</a>
 					<div class="private">
-						<span class="user_name"><a href="" target="_parent" onclick=""><strong id="user_name"><%=id%></strong>님</a></span> 
+						<p class="user_name"><a href="" target="_parent" onclick=""><strong id="user_name"><%=id%></strong>님</a></p> 
 								<a href="./mypage.jsp" target="_parent" class="link_myinfo" onclick="">내정보</a>
 					<%if(checkSell) {%>
 								<a href="../admin/admin_list.jsp" target="_parent" class="link_myinfo" onclick="">판매자 페이지</a>

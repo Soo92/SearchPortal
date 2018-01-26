@@ -179,7 +179,7 @@
 					String proAdd = bean.getProAdd();
 					int maxBuy = bean.getMaxBuy();
 					String mainImg = bean.getMainImg();
-					String listImg = bean.getListImg();
+					String listImg = bean.getListImg()==null?mainImg:bean.getListImg();
 					String detailImg = bean.getDetailImg();
 					double proStar = bean.getProStar();
 					int reviewNum = bean.getReviewNum();
@@ -198,8 +198,8 @@
 							style="border-collapse:collapse; border:1px lightgray solid; background:#fff;
 							margin-left:10px; margin-top:10px;">
 							<tr>
-								<td height="230px;">
-									<img src="./newShopImg/<%=listImg %>">
+								<td height="230px"style="text-align: center;">
+									<img src="./newShopImg/<%=listImg %>" style="max-width:100%;max-height:100%;">
 								 </td>
 							</tr>
 							<tr>
