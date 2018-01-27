@@ -135,9 +135,11 @@ public class SearchMgr {
 		Vector<MovieBean> vlist = new Vector<>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from movie where match(content) against(?  IN BOOLEAN MODE) limit 10;";
+			sql = "select * from movie where genre like ? or title like ? or match(content) against(? IN BOOLEAN MODE) limit 10;";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, search+"*");
+			pstmt.setString(1, "%"+search+"%");
+			pstmt.setString(2, "%"+search+"%");
+			pstmt.setString(3, search+"*");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				MovieBean regBean = new MovieBean();

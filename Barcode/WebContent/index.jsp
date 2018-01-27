@@ -133,7 +133,7 @@ $(document).ready(function () {
 					            	<div id="movie_sm<%if(j==1){%>_r<%}%>">
 					            		<div id="movie_title">
 					            			<div id="movie_img">
-					            				<img src="./movie/mainimg/<%=mlist.get((i-1)*2+j).getPic() %>" width="120" height="182">
+					            				<img src="<%=mlist.get((i-1)*2+j).getPic() %>" width="120" height="182">
 					            			</div>
 					            			<div id="movie_text">
 						            			<p class="movie_tit">[ <%=mlist.get((i-1)*2+j).getTitle() %> ]</p>

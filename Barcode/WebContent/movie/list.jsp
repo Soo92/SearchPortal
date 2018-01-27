@@ -1,3 +1,4 @@
+<%@page import="movie.Parsing"%>
 <%@page import="movie.MovieBean"%>
 <%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
@@ -40,7 +41,7 @@
 for(int i=0;i<mlist.size();i++){%>
 								<li>
 									<div class="thumb">
-										<a href="./movie_home.jsp?index=<%=mlist.get(i).getIdx()%>"><img width=100% src="./mainimg/<%=mlist.get(i).getPic() %>" alt="<%=mlist.get(i).getTitle() %>" onerror="this.src='http://static.naver.net/movie/2012/09/dft_img99x141.png'"></a>
+										<a href="./movie_home.jsp?index=<%=mlist.get(i).getIdx()%>"><img width=100% src="<%=mlist.get(i).getPic() %>" alt="<%=mlist.get(i).getTitle() %>" onerror="this.src='http://static.naver.net/movie/2012/09/dft_img99x141.png'"></a>
 										<!-- N=a:nol.img,r:1,i:85579 -->
 									</div>
 									<dl class="lst_dsc">
@@ -90,10 +91,15 @@ for(int i=0;i<mlist.size();i++){%>
 						<div class="lst_wrap">
 							<ul class="lst_detail_t1">
 <%Vector<MovieBean> mlist = mmgr1.getMemberList(2);
+if(mlist.size()<20) {
+	Parsing a = new Parsing();
+	a.getpremovie();
+	response.sendRedirect("./movie_home.jsp?cate=1&&pre=1");
+}
 for(int i=0;i<mlist.size();i++){%>								
 								<li>
 									<div class="thumb">
-										<a href="./movie_home.jsp?index=<%=mlist.get(i).getIdx()%>"><img width=100% src="./mainimg/<%=mlist.get(i).getPic() %>" alt="<%=mlist.get(i).getTitle() %>" onerror="this.src='http://static.naver.net/movie/2012/09/dft_img99x141.png'"></a>
+										<a href="./movie_home.jsp?index=<%=mlist.get(i).getIdx()%>"><img width=100% src="<%=mlist.get(i).getPic() %>" alt="<%=mlist.get(i).getTitle() %>" onerror="this.src='http://static.naver.net/movie/2012/09/dft_img99x141.png'"></a>
 									</div>
 									<dl class="lst_dsc">
 										<dt class="tit">

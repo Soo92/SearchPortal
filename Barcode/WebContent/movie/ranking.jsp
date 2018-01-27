@@ -69,10 +69,8 @@
 								<!-- 탭메뉴 -->
 								<div class="tab_type_6">
 									<ul>
-										<li><a
-											href="http://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&amp;date=20171225"><img
-												src="./ranking_files/tab_movie_3_off.gif" alt="평점순(모든영화)"
-												width="126" height="28"></a></li>
+										<li><a>
+										<img src="./ranking_files/tab_movie_3_off.gif" alt="평점순(모든영화)" width="126" height="28"></a></li>
 									</ul>
 								</div>
 								<!-- //탭메뉴 -->
@@ -97,7 +95,7 @@
 <%Vector<MovieBean> mlist= mmmgr1.getMemberList(3); 
 for(int i=0;i<(mlist.size()>50?50:mlist.size());i++){%>										
 										<tr>
-											<td class="ac"><img src="./ranking_files/bullet_r_<%=i<10?(i==9?"r10":"r0"+(i+1)):"g"+(i+1) %>.gif" alt="<%=(i+1) %>" width="14" height="13"></td>
+											<td class="ac"><img src="http://imgmovie.naver.net/2007/img/common/bullet_r_<%=i<10?(i==9?"r10":"r0"+(i+1)):"g"+(i+1) %>.gif" alt="<%=(i+1) %>" width="14" height="13"></td>
 											<td class="title">
 												<div class="tit3">
 													<a href="./movie_home.jsp?index=<%=mlist.get(i).getIdx() %>" title="<%=mlist.get(i).getTitle()%>"><%=mlist.get(i).getTitle()%></a>

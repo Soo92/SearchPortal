@@ -19,6 +19,74 @@ public class MovieMgr {
 		pool = DBConnectionMgr.getInstance();
 	}
 	
+	public boolean insertMember(MovieBean bean) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag=false;
+		try {
+			con = pool.getConnection();
+			sql = "insert movie(title,subtitle,star,genre,country,runtime,opendate,director,actor,age,`like`,content,pic) "
+				+ "values(?,?,?,?,?,?,?,?,?,?,?,?,?) "
+				+ "ON DUPLICATE KEY UPDATE title=?,subtitle=?,star=?,genre=?,country=?,runtime=?,opendate=?,director=?,actor=?,age=?,`like`=?,content=?,pic=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getTitle());
+			pstmt.setString(2, bean.getSubtitle());
+			pstmt.setString(3, bean.getStar());
+			pstmt.setString(4, bean.getGenre());
+			pstmt.setString(5, bean.getCountry());
+			pstmt.setString(6, bean.getRuntime());
+			pstmt.setString(7, bean.getOpendate());
+			pstmt.setString(8, bean.getDirector());
+			pstmt.setString(9, bean.getActor());
+			pstmt.setInt(10, bean.getAge());
+			pstmt.setInt(11, bean.getLike());
+			pstmt.setString(12, bean.getContent());
+			pstmt.setString(13, bean.getPic());
+			pstmt.setString(14, bean.getTitle());
+			pstmt.setString(15, bean.getSubtitle());
+			pstmt.setString(16, bean.getStar());
+			pstmt.setString(17, bean.getGenre());
+			pstmt.setString(18, bean.getCountry());
+			pstmt.setString(19, bean.getRuntime());
+			pstmt.setString(20, bean.getOpendate());
+			pstmt.setString(21, bean.getDirector());
+			pstmt.setString(22, bean.getActor());
+			pstmt.setInt(23, bean.getAge());
+			pstmt.setInt(24, bean.getLike());
+			pstmt.setString(25, bean.getContent());
+			pstmt.setString(26, bean.getPic());
+			if(pstmt.executeUpdate()==1)
+				flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
+	public int getIdx(String title) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int idx=0;
+		try {
+			con = pool.getConnection();
+			sql = "select idx from movie where title=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, title);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				idx=rs.getInt("idx");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con);
+		}
+		return idx;
+	}
 	public MovieBean getMember(int idx) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

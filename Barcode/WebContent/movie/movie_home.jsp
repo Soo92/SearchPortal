@@ -37,11 +37,12 @@
 		String runtime = mbean.getRuntime();
 		String opendate = mbean.getOpendate();
 		int count = 0;
-		if(opendate != null){
+		System.out.println(opendate);
+		if(opendate != null && !opendate.equals("")){
 			Calendar today = Calendar.getInstance();
 			Calendar dday = Calendar.getInstance();
 			String[] openda = opendate.split("\\.");
- 			dday.set(Integer.parseInt(openda[0]),Integer.parseInt(openda[1])-1,Integer.parseInt(openda[2]));
+ 			dday.set(Integer.parseInt(openda[0]),Integer.parseInt(openda[1])-1,Integer.parseInt(openda.length<3?"1":openda[2]));
 			long day = dday.getTimeInMillis()/86400000;
 			long tday = today.getTimeInMillis()/86400000;
 			count = (int) (day - tday);
@@ -51,56 +52,19 @@
 		int age = mbean.getAge();
 		int like = mbean.getLike();
 		String content = mbean.getContent();
+		String pic = mbean.getPic();
 %>
 <!DOCTYPE html>
 <!-- saved from url=(0080)file:///C:/Users/Soo/git/SearchPortal/Barcode/WebContent/movie/movie_home.html -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513590475617"></div><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513590336306"></div><script src="./movie_home_files/splugin.js(1).다운로드" charset="utf-8"></script><div style="display: none;"><input title="jindoCheck" type="input" name="jindo1513589908074"></div>
+<html lang="ko">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="imagetoolbar" content="no">
 <title><%=title==null?"home":title%> : 바코드 영화</title>
+</head>
+<body>
 <link rel="stylesheet" type="text/css" href="./movie_detail_files/movie.all.css">
 <link rel="stylesheet" type="text/css" href="../css/gnb_style.css">
-<script type="text/javascript">
-function logi(){
-	if (confirm("바코드 로그인 후 이용해주시기 바랍니다.") == true){    //확인
-		location.replace('../member/login.jsp'); 
-	}else{   //취소
-	    return;
-	}
-}
-function fold(id){
-	if(document.getElementById(id).style.display=='block')
-		document.getElementById(id).style.display='none';
-	else
-		document.getElementById(id).style.display='block';
-}
-function mypage() {
-	if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
-		document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
-	else
-		document.getElementById("gnb_my_layer").className = "gnb_my_li";
-}
-function alarm() {
-	if(document.getElementById("gnb_notice_layer").className===("gnb_notice_li"))
-		document.getElementById("gnb_notice_layer").className = "gnb_notice_li gnb_lyr_opened";
-	else
-		document.getElementById("gnb_notice_layer").className = "gnb_notice_li";
-}
-function service() {
-	if(document.getElementById("gnb_service_layer").className===("gnb_service_li"))
-		document.getElementById("gnb_service_layer").className = "gnb_service_li gnb_lyr_opened";
-	else
-		document.getElementById("gnb_service_layer").className = "gnb_service_li";
-}
-function delayed_submit(object) {
-	if (navigator.userAgent.indexOf('MSIE') == -1) {
-		var b = c = new Date();
-      	while ((b.getTime() - c.getTime()) < 100) {
-			b = new Date();
-      	}
-	} 
-}
-</script>
 <div id="wrap" class="basic">
 	<!-- GNB -->
 <div class="gnb_container">
@@ -115,6 +79,29 @@ function delayed_submit(object) {
 				</div>
 <%}%>
 			</div>
+			<form id="jSearchForm" action="#" method="get" style="margin: 0; display: none;">
+				<input type="text" name="query" maxlength="100" title="영화검색">
+				<input type="hidden" name="section" value="all"> 
+				<input type="hidden" name="ie" value="utf8">
+			</form>
+			<fieldset id="jSearchArea" class="srch_area">
+				<legend>
+					<span class="blind">영화검색 영역</span>
+				</legend>
+				<div class="srch_field_on _view">
+					<span class="ipt_srch"> 
+					<label for="ipt_tx_srch" id="search_placeholder" style="display: none;">영화검색</label>
+						<input type="text" id="ipt_tx_srch" class="ipt_tx_srch" name="query" maxlength="100" accesskey="s" style="ime-mode: active;" autocomplete="off">
+						<span class="align"></span> 
+						<span class="auto_tx"></span>
+					</span>
+					<button type="submit" title="검색" class="btn_srch" onclick="clickcr(this,'GNB.search','','',event); delayed_submit(this);">
+						<span class="blind">검색</span>
+					</button>
+					<!-- 자동 완성 영역임 #autocomplate_template-->
+					<div id="jAutoComplate" class="auto_tx_area" style="display: none;"></div>
+				</div>
+			</fieldset>
 		</div>
 	</div>
 </div>
@@ -136,8 +123,8 @@ function delayed_submit(object) {
                         <li>
                             <a href="<%=request.getRequestURI()%>?cate=1" title="상영작·예정작" class="menu02<%if(cate!=null&&cate.equals("1")||cate==null&&index!=null){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
                             <ul class="navi_sub" id="navi_movie" style="display:<%if(index==null&&cate==null||cate!=null&&cate.equals("2")){%>none<%}%>;">
-                            <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
-                            <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if(pre!=null&&pre.equals("1")){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
+                            <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null&&count<=0){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
+                            <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if(pre!=null&&pre.equals("1")||count>0){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
                             </ul>
                         </li>
                         <li>
@@ -167,7 +154,7 @@ function delayed_submit(object) {
 <div class="wide_info_area" style="display: none;">
 	<!-- 포스터 -->
 	<div class="poster">
-				<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#" onclick="javascript:common.iwopen('152385');clickcr(this,'ifo.img','','',event);return false;"><img src="./movie_home_files/movie_image.jpg" alt="<%=title%>" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img77x110_1.png'"><span>포스터 크게보기</span></a>
+				<a href="./movie_home.jspmovie/bi/mi/basic.nhn?code=152385#" onclick="javascript:common.iwopen('152385');clickcr(this,'ifo.img','','',event);return false;"><img src="<%=pic %>" alt="<%=title%>" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img77x110_1.png'"><span>포스터 크게보기</span></a>
 	</div>
 	<!-- //포스터 -->
 	<div class="mv_info">
@@ -274,7 +261,9 @@ function delayed_submit(object) {
 				<span>
 				<a><%=country %></a>
 				</span>
+	<%if(!runtime.equals("0")) {%>
 				<span><%=runtime %></span>
+	<%} %>
 				<span>
 						<a><%=opendate %></a> 개봉
 				</span>
@@ -400,7 +389,9 @@ function delayed_submit(object) {
 					<span>
 					<a><%=country %></a><!-- N=a:ifo.nation -->
 					</span>
+	<%if(!runtime.equals("0")) {%>
 					<span><%=runtime %>분 </span>
+	<%} %>
 					<span>
 						<a><%=opendate %></a><!-- N=a:ifo.day --> 개봉
 					</span>
@@ -431,7 +422,7 @@ function delayed_submit(object) {
 
 	<!-- 포스터 -->
 	<div class="poster">
-				<a><img width=100% src="./mainimg/movie_image<%=idx%>.jpg" alt="<%=title%>" onerror="this.src='http://static.barcode.net/movie/2012/06/dft_img203x290.png'"></a>
+				<a><img width=100% src="<%=pic%>" alt="<%=title%>" onerror="this.src='http://static.naver.net/movie/2012/06/dft_img203x290.png'"></a>
 	</div>
 	<!-- //포스터 -->
 </div>
@@ -695,14 +686,13 @@ String rwriter = rbean.getWriter();
 			<!-- <div class="ifr_module">
 				<iframe id="reviewCommentIframe" name="reviewCommentIframe" width="100%" frameborder="0" scrolling="no" class="ifr" height="300"></iframe>
 			</div> -->
-s
 			<div class="reple_btn_area">
 				<a href="<%if(id==null){ %>../member/login.jsp<%}else{ %><%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewrite=1<%}%>" class="go_btn_review"><em class="blind">리뷰쓰기</em></a><!-- N=a:rvi.write -->
 				<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3" class="go_btn_lst"><em class="blind">목록보기</em></a><!-- N=a:rvi.list -->
 			</div>
 			<div class="pre_reple_lst">
 				<ul>
-<%for(int i=0;i<(reviewlist.size()<5?reviewlist.size():5);i++) {
+<%for(int i=0;i<(reviewlist.size());i++) {
 	rbean = reviewlist.get(i);
 	int rnum = rbean.getReviewnum();
 	rstar = rbean.getStar();
@@ -713,9 +703,8 @@ s
 	rcontent = rbean.getContent();
 	rwriter = rbean.getWriter();%>
 					<li>
-<%if(i!=reviewlist.size()/2) {%>	<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=1&&reviewnum=<%=rnum %>" class="lst_tit"><%=rtitle %></a><!-- N=a:rvi.title -->
-<%}else {%>				<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=1&&reviewnum=<%=rnum %>" class="lst_tit_on"><%=rtitle %></a><!-- N=a:rvi.title -->
-<%} %>						<p class="reple_info"><span><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=1&&reviewnum=<%=rnum %>"><%=rwriter %></a><!-- N=a:rvi.uid --></span><span>추천</span><em><%=rgood %></em></p>
+						<a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>" class="lst_tit<%if(rnum==Integer.parseInt(reviewnum)) {%>_on<%} %>"><%=rtitle %></a><!-- N=a:rvi.title -->
+						<p class="reple_info"><span><a href="<%=request.getRequestURI()%>?index=<%=idx%>&&num=3&&reviewnum=<%=rnum %>"><%=rwriter %></a><!-- N=a:rvi.uid --></span><span>추천</span><em><%=rgood %></em></p>
 					</li>
 <%} %>
 				</ul>
@@ -764,3 +753,66 @@ s
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="./movie_home_files/movie.home.js"></script>
+<script src="./movie_home_files/clickcrD.js" id="gnb_clickcrD" charset="utf-8"></script>
+<script type="text/javascript">
+function logi(){
+	if (confirm("바코드 로그인 후 이용해주시기 바랍니다.") == true){    //확인
+		location.replace('../member/login.jsp'); 
+	}else{   //취소
+	    return;
+	}
+}
+function fold(id){
+	if(document.getElementById(id).style.display=='block')
+		document.getElementById(id).style.display='none';
+	else
+		document.getElementById(id).style.display='block';
+}
+function mypage() {
+	if(document.getElementById("gnb_my_layer").className===("gnb_my_li"))
+		document.getElementById("gnb_my_layer").className = "gnb_my_li gnb_lyr_opened";
+	else
+		document.getElementById("gnb_my_layer").className = "gnb_my_li";
+}
+function alarm() {
+	if(document.getElementById("gnb_notice_layer").className===("gnb_notice_li"))
+		document.getElementById("gnb_notice_layer").className = "gnb_notice_li gnb_lyr_opened";
+	else
+		document.getElementById("gnb_notice_layer").className = "gnb_notice_li";
+}
+function service() {
+	if(document.getElementById("gnb_service_layer").className===("gnb_service_li"))
+		document.getElementById("gnb_service_layer").className = "gnb_service_li gnb_lyr_opened";
+	else
+		document.getElementById("gnb_service_layer").className = "gnb_service_li";
+}
+function delayed_submit(object) {
+	if (navigator.userAgent.indexOf('MSIE') == -1) {
+		var b = c = new Date();
+      	while ((b.getTime() - c.getTime()) < 100) {
+			b = new Date();
+      	}
+	} 
+}
+jindo.$Fn(function (we) {
+	// 상단 검색영역
+	var oSearch = new nhn.movie.Search({
+		area : "jSearchArea",
+		autosearch : "http://auto.movie.naver.com/ac?q_enc=UTF-8&st=1&r_lt=1&n_ext=1&t_koreng=1&r_format=json&r_enc=UTF-8&r_unicode=0&r_escape=1&q=",
+		movelink : "movie_parse.jsp?code=",
+		peoplelink : "#"
+	});
+
+    // 좌측 LNB
+    var oLNB = new nhn.movie.LNB();
+	if( typeof oViewMode != "undefined") {
+		oViewMode.attach('change', jindo.$Fn(oLNB.update, oLNB).bind());
+	}
+
+    // LCS
+	try{ lcs_do(); } catch(e){}
+}).attach(document, 'domready');
+</script>
+</body>
+</html>

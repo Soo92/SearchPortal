@@ -79,7 +79,7 @@
 									<input type="hidden" name="idx" value="<%=index%>">
 									<input type="hidden" id="starval" name="star" value="">
 									<p class="tx_length"><em id="ment_cnt">0</em>/140</p>
-									<input type="hidden" name="writer" value="<%=id%>">
+									<input type="hidden" name="writer" value="<%=id==null?"손님":id%>">
 								</li>
 								<li>
 									<input type="image" id="pointAddButton" src="http://static.naver.net/movie/2012/06/score_btn_submit.png" alt="등록" onclick="submit1()" style="display:block;">								

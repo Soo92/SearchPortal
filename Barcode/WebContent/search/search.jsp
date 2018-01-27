@@ -229,7 +229,7 @@ function fold(a){
 							<div class="thumb">
 								<a href="<%=request.getRequestURI()%>../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx() %>"
 									class="sp_thmb" target="_blank"> 
-									<img src="../movie/mainimg/<%=mlist.get(0).getPic() %>" width="120" height="171" alt="<%=mlist.get(0).getTitle() %>"
+									<img src="<%=mlist.get(0).getPic() %>" width="120" height="171" alt="<%=mlist.get(0).getTitle() %>"
 									 onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'"> <span
 									class="thmb_v"></span>
 								</a>
