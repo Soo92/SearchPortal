@@ -162,7 +162,7 @@ function fold(a){
 		<%for(int i=0;i<(slist.size()>6?6:slist.size());i++) {%>
 										<li class="bx"><div class="bx_area">
 												<div class="thumb_area">
-													<a href="<%=request.getRequestURI()%>../product/detail?index=<%=slist.get(i).getIndex() %>"	
+													<a href="../product/detail?index=<%=slist.get(i).getIndex() %>"	
 													class="thumb" onclick="return goOtherCR(this,&#39;u=&#39;+urlencode(this.href)+&#39;&amp;r=1&amp;i=00000009_0002ee233fff&amp;a=shp_gui*a.outimg&#39;);" target="_blank">
 													<img src="../product/newShopImg/<%=slist.get(i).getMainImg() %>" onerror="on_noimage_shop(this);" width="133" height="133" alt="<%=slist.get(i).getTitle()%>"><span class="mask"></span></a>
 												</div>
@@ -170,7 +170,7 @@ function fold(a){
 													<div class="detail">
 														<div class="tit">
 															<span class="ico_txt">해외</span>
-															<a href="<%=request.getRequestURI()%>../product/detail?index=<%=slist.get(i).getIndex() %>"
+															<a href="../product/detail?index=<%=slist.get(i).getIndex() %>"
 																title="<%=slist.get(i).getTitle() %>"
 																onclick="return goOtherCR(this,&#39;u=&#39;+urlencode(this.href)+&#39;&amp;r=1&amp;i=00000009_0002ee233fff&amp;a=shp_gui*a.outtit&#39;);"
 																target="_blank"><%=slist.get(i).getTitle() %>
@@ -227,7 +227,7 @@ function fold(a){
 <%if(mlist.size()!=0) {%>
 						<div class="info_main">
 							<div class="thumb">
-								<a href="<%=request.getRequestURI()%>../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx() %>"
+								<a href="../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx() %>"
 									class="sp_thmb" target="_blank"> 
 									<img src="<%=mlist.get(0).getPic() %>" width="120" height="171" alt="<%=mlist.get(0).getTitle() %>"
 									 onerror="this.src='http://static.naver.net/movie/2012/06/dft_img125x179.png'"> <span
@@ -235,7 +235,7 @@ function fold(a){
 								</a>
 							</div>
 							<h3>
-								<a href="mlist.get(0).getStar()"
+								<a href="../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx() %>"
 									class="sh_movie_link" target="_blank"><strong><%=mlist.get(0).getTitle() %></strong>
 									(<%=mlist.get(0).getSubtitle() %>)</a> <span class="btn_state open"></span>
 							</h3>
@@ -249,7 +249,7 @@ function fold(a){
 								<dd class="bar"></dd>
 
 								<dd>
-									<a href="<%=request.getRequestURI()%>../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx()%>&&num=2"
+									<a href="../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx()%>&&num=2"
 										target="_blank" class="btn_rating">평점주기</a>
 								</dd>
 							</dl>
@@ -272,7 +272,7 @@ function fold(a){
 								<dt id="dss_h_movie_info_story_content">내용</dt>
 								<dd>
 									<p id="mcont"><%=mlist.get(0).getContent().replaceAll("\\<[^>]*>","") %> </p>
-									<a href="<%=request.getRequestURI()%>../product/detail?index=<%=mlist.get(0).getIdx()%>"
+									<a href="../movie/movie_home.jsp?index=<%=mlist.get(0).getIdx()%>"
 										class="cont_more" target="_blank"><span class="blind">줄거리</span>더보기</a>
 								</dd>
 							</dl>
@@ -290,7 +290,7 @@ function fold(a){
 		<%for(int i=0;i<plist.size();i++) {%>
 							<li class="sh_blog_top" id="sp_blog_<%=i+1%>">
 								<div class="thumb">
-									<a href="<%=request.getRequestURI()%>../reserve/place_board.jsp?index=<%=plist.get(i).getIdx() %>"
+									<a href="../reserve/place_board.jsp?index=<%=plist.get(i).getIdx() %>"
 										class="sp_thmb thmb80">
 										<img src="../reserve/img/<%=plist.get(i).getIdx()%>" width="82"
 										height="82" alt="바코드앱의 스마트렌즈" class="sh_blog_thumbnail"
@@ -301,7 +301,7 @@ function fold(a){
 								<dl>
 									<dt>
 										<a class="sh_blog_title _sp_each_url _sp_each_title"
-											href="<%=request.getRequestURI()%>../reserve/place_board.jsp?index=<%=plist.get(i).getIdx() %>" target="_blank"
+											href="../reserve/place_board.jsp?index=<%=plist.get(i).getIdx() %>" target="_blank"
 											title="<%=plist.get(i).getTitle()%>"
 											onclick="return goOtherCR(this,&#39;a=blg_1st*i.tit&amp;r=1&amp;i=90000003_00000000000000337CFC0800&amp;u=&#39;+urlencode(urlexpand(this.href)));">
 											<%=plist.get(i).getTitle()%>

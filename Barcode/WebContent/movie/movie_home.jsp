@@ -42,7 +42,7 @@
 			Calendar today = Calendar.getInstance();
 			Calendar dday = Calendar.getInstance();
 			String[] openda = opendate.split("\\.");
- 			dday.set(Integer.parseInt(openda[0]),Integer.parseInt(openda[1])-1,Integer.parseInt(openda.length<3?"1":openda[2]));
+ 			dday.set(Integer.parseInt(openda[0]),Integer.parseInt(openda.length<2?"1":openda[1])-1,Integer.parseInt(openda.length<3?"1":openda[2]));
 			long day = dday.getTimeInMillis()/86400000;
 			long tday = today.getTimeInMillis()/86400000;
 			count = (int) (day - tday);
@@ -79,9 +79,9 @@
 				</div>
 <%}%>
 			</div>
-			<form id="jSearchForm" action="#" method="get" style="margin: 0; display: none;">
+			<form id="jSearchForm" action="movie_home.jsp" method="get" style="margin: 0; display: none;">
 				<input type="text" name="query" maxlength="100" title="영화검색">
-				<input type="hidden" name="section" value="all"> 
+				<input type="hidden" name="section" value="movie"> 
 				<input type="hidden" name="ie" value="utf8">
 			</form>
 			<fieldset id="jSearchArea" class="srch_area">
@@ -123,8 +123,8 @@
                         <li>
                             <a href="<%=request.getRequestURI()%>?cate=1" title="상영작·예정작" class="menu02<%if(cate!=null&&cate.equals("1")||cate==null&&index!=null){%>_on<%}%>"><strong>상영작·예정작</strong></a><!-- N=a:LNB.movies -->
                             <ul class="navi_sub" id="navi_movie" style="display:<%if(index==null&&cate==null||cate!=null&&cate.equals("2")){%>none<%}%>;">
-                            <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null&&count<=0){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
-                            <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if(pre!=null&&pre.equals("1")||count>0){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
+                            <li><a href="<%=request.getRequestURI()%>?cate=1" title="현재 상영영화" class="sub2_1<%if(pre==null&&count<=0&&count>-30&&(index==null||!opendate.equals(""))){%>_on<%}%>"><em>현재 상영영화</em></a><!-- N=a:LNB.now --></li>
+                            <li><a href="<%=request.getRequestURI()%>?cate=1&&pre=1" title="개봉 예정영화" class="sub2_2<%if((index==null||!opendate.equals(""))&&pre!=null&&pre.equals("1")||count>0){%>_on<%}%>"><em>개봉 예정영화</em></a><!-- N=a:LNB.soon --></li>
                             </ul>
                         </li>
                         <li>
@@ -160,11 +160,11 @@
 	<div class="mv_info">
 		<h3 class="h_movie">
 			<a><%=title%></a>
-<%if(count<=0) {%>
+<%if(!opendate.equals("")&&count>-30){if(count<=0) {%>
 					<a class="opening"><em>상영중</em></a>
 <%}else{ %>
 					<a class="dday_box"><em class="blind">개봉예정 D-day</em><span><span class="day2"><em>2</em></span><span class="day2"><em>2</em></span></span></a>
-<%} %>
+<%}} %>
 			<strong class="h_movie2" title=<%=subtitle%>><%=subtitle%></strong>
 		</h3>
 		<div class="main_score">
@@ -264,12 +264,16 @@
 	<%if(!runtime.equals("0")) {%>
 				<span><%=runtime %></span>
 	<%} %>
+	<%if(!opendate.equals("")) {%>
 				<span>
 						<a><%=opendate %></a> 개봉
 				</span>
+	<%} %>
+	<%if(age!=1) {%>
 				<span>
-					<a><%=age %>세 관람가</a>
+					<a><%=age==0?"전체":age+"세" %> 관람가</a>
 				</span>
+	<%} %>
 		</p>
 		<div class="info_spec2">
 			<dl class="step1">
@@ -308,7 +312,7 @@
 		<h3 class="h_movie">
 		
 		<a><%=title%></a><!-- N=a:ifo.title --> 
-<%if(count<=0) {%>
+<%if(!opendate.equals("")&&count>-30){if(count<=0) {%>
 				<a class="opening"><em>상영중</em></a>
 <%}else{ %>
 				<a class="dday_box"><em class="blind">개봉예정 D-day</em><span>
@@ -316,7 +320,7 @@
 				<span class="day<%=(count+"").charAt(i)%>"><em>(count+"").charAt(i)</em></span>
 	<%} %>
 				</span></a>
-<%} %>
+<%}} %>
 		</h3>
 		<strong class="h_movie2" title="The Swindlers, 2017">The Swindlers, 2017</strong>
 		<div class="main_score">		
@@ -392,9 +396,9 @@
 	<%if(!runtime.equals("0")) {%>
 					<span><%=runtime %>분 </span>
 	<%} %>
-					<span>
-						<a><%=opendate %></a><!-- N=a:ifo.day --> 개봉
-					</span>
+	<%if(!opendate.equals("")) {%>
+					<span> <a><%=opendate %></a><!-- N=a:ifo.day --> 개봉 </span>
+	<%} %>
 				</p>
 			</dd>
 			
@@ -402,12 +406,14 @@
 				<dd><p><a><%=director %></a><!-- N=a:ifo.director --></p></dd>
 				<dt class="step3"><em>출연</em></dt>
 				<dd><p><a><%=actor %></a></p><a title="더보기" class="more">...</a><!-- N=a:ifo.actmore --></dd>
+	<%if(age!=1) {%>
 				<dt class="step4"><em>등급</em></dt>
 				<dd>
 					<p>
-						<a><%=age %>세 관람가</a><!-- N=a:ifo.filmrate -->
+						<a><%=age==0?"전체":age+"세" %> 관람가</a>
 					</p>
 				</dd>
+	<%} %>
 		</dl>
 		<div class="btn_sns">
 			<div class="end_btn_area">
@@ -713,6 +719,8 @@ String rwriter = rbean.getWriter();
 <%}}%>
 	</div>
 </div>
+<%}else if(request.getParameter("query")!=null){ %>
+<%@include file="movie_search.jsp"%>
 <%}else if(cate==null){ %>
 <%@include file="movie_list.jsp"%>
 <%}else if(cate.equals("1")){ %>
