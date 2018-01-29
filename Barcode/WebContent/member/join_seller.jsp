@@ -194,20 +194,20 @@
 				
 			<div id="third" style="margin-top:-15px;">
 			<table width="500px" cellpadding="5" cellspacing="0" border="1" align="center" style="border-collapse:collapse; border:1px lightgray solid; background:#fff">
-						 <tr>
-							<td height="65px">
-								<input name="zipcode" type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="사업장 우편번호">
-								<div id="click"><p>검색</p></div>
-							</td>
-							
-						 </tr>
-						 <tr>
-							<td height="65px">
-								<input name="address" type="text" style="width:460px; height:40px; margin-left:20px; border:0px;
-									font-size:16px;" align="center" placeholder="상세주소 ( 예시 : 연산3동 1811-146번지 101호 )">
-							</td>
-						 </tr>
-				   </table>
+				 <tr>
+					<td height="65px">
+						<input name="zipcode" class="postcodify_postcode5" type="text" style="width:350px; height:40px; margin-left:20px; border:0px; font-size:16px;" align="center" placeholder="사업장 우편번호">
+						<div id="click"><p id="postcodify_search_button">검색</p></div>
+					</td>
+					
+				 </tr>
+				 <tr>
+					<td height="65px">
+						<input name="address" class="postcodify_address" type="text" style="width:460px; height:40px; margin-left:20px; border:0px;
+							font-size:16px;" align="center" placeholder="상세주소 ( 예시 : 연산3동 1811-146번지 101호 )">
+					</td>
+				 </tr>
+		   </table>
 			</div>
 			
 			<div style="margin-top:35px;">
@@ -248,4 +248,7 @@
 		</div>
 	</div>
 </body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+<script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script>
 </html>
