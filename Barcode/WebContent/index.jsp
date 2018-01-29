@@ -21,27 +21,27 @@
 <head>
 	<title>바코드</title>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCukbnJcwWWQlXgllIh92sHbHW_8ah25e4&libraries=places"></script>
-	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
-	<script type="text/javascript" src="js/swiper.min.js"></script>
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link rel="stylesheet" href="css/swiper.min.css" type="text/css">
-	<script>
-	function loginCheck() {
-		if (document.loginFrm.id.value == "") {
-			alert("아이디를 입력해 주세요.");
-			document.loginFrm.id.focus();
-			return;
-		}
-		if (document.loginFrm.pass.value == "") {
-			alert("비밀번호를 입력해 주세요.");
-			document.loginFrm.pass.focus();
-			return;
-		}
-		document.loginFrm.submit();
+<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/swiper.min.css" type="text/css">
+<script>
+function loginCheck() {
+	if (document.loginFrm.id.value == "") {
+		alert("아이디를 입력해 주세요.");
+		document.loginFrm.id.focus();
+		return;
 	}
-	function removetag(html){
-		html.replaceAll("\\<[^>]*>","");
+	if (document.loginFrm.pass.value == "") {
+		alert("비밀번호를 입력해 주세요.");
+		document.loginFrm.pass.focus();
+		return;
 	}
+	document.loginFrm.submit();
+}
+function removetag(html){
+	html.replaceAll("\\<[^>]*>","");
+}
 </script>
 <script>
 $(document).ready(function () {

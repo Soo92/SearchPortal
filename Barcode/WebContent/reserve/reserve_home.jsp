@@ -35,7 +35,7 @@
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
 	<link rel="stylesheet" type="text/css"	href="./place_files/w_g17122108.css">
 	<link rel="stylesheet" type="text/css"	href="./place_files/e_g150402.css">
-	<script src="http://code.jquery.com/jquery-1.11.0.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.0.js"></script>
 	<script src="../js/clickcrd.js" id="gnb_clickcrD" charset="utf-8"></script>
 	<script type="text/javascript">
 	function mypage() {

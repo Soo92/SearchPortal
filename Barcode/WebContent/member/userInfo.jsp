@@ -12,7 +12,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="./userInfo_files/myarea.171214.css">
-<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
 <script type="text/javascript">
 	if("<%=id%>"=="null"){
 		location.href="../index.jsp";

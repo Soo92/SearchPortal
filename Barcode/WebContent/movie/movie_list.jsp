@@ -267,7 +267,7 @@
 			</div>
 		</div>
 		<!-- //content -->
-<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
 <script>
 	var page=0;
 	var wid = $('.flick-container').width();

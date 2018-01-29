@@ -38,7 +38,7 @@
 <title></title>
 <link rel="stylesheet" href="../css/admin_style.css" type="text/css">
 <link rel="stylesheet" href="../css/gnb_style.css" type="text/css">
-<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
 <script>
 $(document).ready(function(){
   $("a").on('click', function(event) {

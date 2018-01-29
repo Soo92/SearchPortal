@@ -31,7 +31,7 @@
 <script type="text/javascript" src="./바코드 시작페이지_files/common.js.다운로드"></script>
 <script type="text/javascript" src="./바코드 시작페이지_files/clickcr.js.다운로드"></script>
 <link rel="stylesheet" href="../css/swiper.min.css" type="text/css">
-	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
 	<script type="text/javascript" src="../js/swiper.min.js"></script>
 	<link rel="stylesheet" href="../css/product_style.css" type="text/css">
 	<link rel="stylesheet" href="../css/gnb_style.css" type="text/css">

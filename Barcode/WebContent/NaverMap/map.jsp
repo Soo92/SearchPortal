@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title><%=slist.size() %></title>
-	<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.7.0.min.js"></script>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=Hp1Zq1ougL5HhZPmKDbk&submodules=geocoder"></script>
 </head>
 <body>
